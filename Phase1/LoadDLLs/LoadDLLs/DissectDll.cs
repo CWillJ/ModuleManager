@@ -26,6 +26,9 @@
             Dll = fileName;
         }
 
+        /// <summary>
+        /// TODO need to get this method to sucessfully get info from a .dll
+        /// </summary>
         public void GetDllInfo()
         {
             Assembly a = typeof(DissectDll).Assembly;
