@@ -34,6 +34,8 @@
             MessageBox.Show(FileLocation);
 
             // Check the file location for any .dll's
+            DissectDll dll = new DissectDll();
+            dll.GetDllInfo();
 
             // Message prompt if no .dll's found
 
