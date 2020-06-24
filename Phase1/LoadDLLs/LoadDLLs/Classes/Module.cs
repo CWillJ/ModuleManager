@@ -99,11 +99,11 @@
         /// <returns>A desired format for the module name, description and all methods contained in module</returns>
         public override string ToString()
         {
-            string s = Name + @":\n" + Description;
+            string s = Name + @":" + "\n" + Description;
 
             foreach(ModuleMethod method in Methods)
             {
-                s += @"\n" + method.ToString();
+                s += "\n" + method.ToString();
             }
 
             return s;

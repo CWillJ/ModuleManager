@@ -89,9 +89,9 @@
         /// </summary>
         /// <param name="type">MethodParameter type</param>
         /// <param name="name">MethodParameter name</param>
-        public void AddMethodParameter(string type, string name)
+        public void AddMethodParameter(string type, string name, string description)
         {
-            AddMethodParameter(new MethodParameter(type, name));
+            AddMethodParameter(new MethodParameter(type, name, description));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@
         /// <returns>A desired format for the Method description, parameters and return type</returns>
         public override string ToString()
         {
-            string s = Name + @":\n" + Description;
+            string s = Name + @":" + "\n" + Description;
 
             foreach(MethodParameter parameter in Parameters)
             {
@@ -118,7 +118,7 @@
 
             if(ReturnType != string.Empty)
             {
-                s += @"\nReturn Type: " + ReturnType;
+                s += "\n" + "Return Type: " + ReturnType;
             }
 
             return s;

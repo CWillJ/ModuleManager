@@ -66,7 +66,7 @@ namespace LoadDLLs.Classes
         /// <returns>A desired format for the parameter type and name</returns>
         public override string ToString()
         {
-            return Type + @" " + Name + @"\n" + Description;
+            return Type + @" " + Name + "\n" + Description;
         }
     }
 }

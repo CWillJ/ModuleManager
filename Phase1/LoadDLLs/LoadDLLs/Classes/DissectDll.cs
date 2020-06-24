@@ -20,6 +20,8 @@
     {
         public DissectDll()
         {
+            Modules = new ObservableCollection<Module>();
+
             //// Dll = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
             Dll = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
                 @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
@@ -27,6 +29,7 @@
 
         public DissectDll(string fileName)
         {
+            Modules = new ObservableCollection<Module>();
             Dll = fileName;
         }
 
@@ -69,6 +72,8 @@
                     continue;
                 }
 
+                Module module;
+
                 methods.Clear();
                 MemberInfo[] members = type.GetMembers(BindingFlags.Public
                                                       | BindingFlags.Instance
@@ -99,9 +104,11 @@
                     methods.Add(new ModuleMethod(member.Name, GetSummaryFromXML(Dll, member), parameters, GetReturnFromXML(Dll, member)));
                 }
 
-                Modules.Add(new Module(type.Name, "Class Description", methods));
+                module = new Module(type.Name, "Class Description", methods);
 
-                MessageBox.Show(Modules.ToString());
+                Modules.Add(module);
+
+                MessageBox.Show(module.ToString());
             }
         }
 
