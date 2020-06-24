@@ -23,7 +23,7 @@ namespace LoadDLLs
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new LoadDLLs.LoadFile();
+            this.DataContext = new LoadDLLs.ViewModels.LoadDLLsViewModel();
         }
     }
 }
