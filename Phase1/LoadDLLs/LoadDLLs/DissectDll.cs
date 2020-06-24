@@ -70,13 +70,15 @@
                     foreach (ParameterInfo p in pars)
                     {
                         MessageBox.Show(
-                            "Class: " + type.Name + "\n" +                          // Class Name
-                            "Method: " + member.Name + "\n" +                       // Method Name
-                            "Param: " + p.Name.ToString() + "\n" +                  // Parameter Name
-                            "Type: " + p.ParameterType.ToString() + "\n" +          // Parameter Type
-                            "Return: " + method.ReturnParameter.ToString() + "\n" + // Return Parameter
-                            "Type: " + method.ReturnType.ToString() + "\n" +        // Return Type
-                            "Description: " + GetSummaryFromXML(Dll, member));      // Summary from xml
+                            "Class: " + type.Name + "\n" +                           // Class Name
+                            "Method: " + member.Name + "\n" +                        // Method Name
+                            "Param: " + p.Name.ToString() + "\n" +                   // Parameter Name
+                            "Type: " + p.ParameterType.ToString() + "\n" +           // Parameter Type
+                            "Return: " + method.ReturnParameter.ToString() + "\n" +  // Return Parameter
+                            "Type: " + method.ReturnType.ToString() + "\n" +         // Return Type
+                            "Description: " + GetSummaryFromXML(Dll, member) + "\n" +// Summary From xml
+                            "Returns: " + GetReturnFromXML(Dll, member) + "\n" +     // Return Comments From xml
+                            "Param: " + GetParamFromXML(Dll, member));               // Parameter Comments From xml
                     }
                 }
             }
@@ -84,8 +86,21 @@
 
         private string GetSummaryFromXML(string dllPath, MemberInfo member)
         {
-            string start = @"<summary>";
-            string end = @"</summary>";
+            return GetInfoFromXML(dllPath, member, @"<summary>", @"</summary>");
+        }
+
+        private string GetReturnFromXML(string dllPath, MemberInfo member)
+        {
+            return GetInfoFromXML(dllPath, member, @"<returns>", @"</returns>");
+        }
+
+        private string GetParamFromXML(string dllPath, MemberInfo member)
+        {
+            return GetInfoFromXML(dllPath, member, @"<param name=", @"></param>");
+        }
+
+        private string GetInfoFromXML(string dllPath, MemberInfo member, string start, string end)
+        {
             string xmlPath = dllPath.Substring(0, dllPath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
 
@@ -96,14 +111,19 @@
                 string path = @"M:" + member.DeclaringType.FullName + "." + member.Name;
 
                 XmlNode xmlDocuOfMethod = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
-                
+
                 // If the summary comments exist, return them
                 if (xmlDocuOfMethod != null)
                 {
                     string descript = Regex.Replace(xmlDocuOfMethod.InnerXml, @"\s+", " ");
 
-                    return descript.Substring(descript.IndexOf(start) + start.Length + 1,
-                        descript.IndexOf(end) - descript.IndexOf(start) - start.Length - 1);
+                    if (!descript.Contains(start) || !descript.Contains(end))
+                    {
+                        return null;
+                    }
+
+                    return descript.Substring(descript.IndexOf(start) + start.Length,
+                        descript.IndexOf(end) - descript.IndexOf(start) - start.Length);
                 }
             }
 
