@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClassLibrary1</name>
+    </assembly>
+    <members>
+        <member name="T:ClassLibrary1.Class1">
+            <summary>
+            Class1 only exists to test getting info from a .dll and the
+            related .xml files.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class1.#ctor">
+            <summary>
+            Constructor for Class1
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class1.Method1(System.String)">
+            <summary>
+            Comments for Method1
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:ClassLibrary1.Class1.Method2(System.String,System.Int32)">
+            <summary>
+            Adds the integer num to the passed in string, str.
+            Here is an extra line!
+            </summary>
+            <param name="str"></param>
+            <param name="num"></param>
+            <returns>str plus a string of the integer num</returns>
+        </member>
+    </members>
+</doc>

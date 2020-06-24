@@ -30,12 +30,13 @@
         private void FindDLLs()
         {
             // Bring up explorer to allow user to choose a file location
-            FileLocation = LookForFile();
-            MessageBox.Show(FileLocation);
+            //// FileLocation = LookForFile();
+            //// MessageBox.Show(FileLocation);
 
             // Check the file location for any .dll's
+            //// DissectDll dll = new DissectDll(FileLocation + @"\NextGen.dll");
             DissectDll dll = new DissectDll();
-            dll.GetDllInfo();
+            dll.GetInfoFromDll();
 
             // Message prompt if no .dll's found
 
