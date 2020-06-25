@@ -1,15 +1,10 @@
 ﻿namespace LoadDLLs.Classes
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
-    using System.Runtime.InteropServices;
-    using System.Text;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Xml;
 
@@ -27,6 +22,10 @@
                 @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
         }
 
+        /// <summary>
+        /// Constructor for DissectDll specifing a file name
+        /// </summary>
+        /// <param name="fileName">File name of the .dll file</param>
         public DissectDll(string fileName)
         {
             Modules = new ObservableCollection<Module>();
@@ -44,21 +43,36 @@
         public ObservableCollection<Module> Modules { get; set; }
 
         /// <summary>
-        /// TODO need to get this method to sucessfully get info from a .dll
+        /// GetInfoFromDll will create an ObservableCollection<Module> to organize
+        /// the information from the dll file and its related xml file.
+        /// From .dll
+        /// Class Name:                   type.Name
+        /// Method Name:                  member.Name
+        /// Method Parameter Name:        p.Name.ToString()
+        /// Method Parameter Type:        p.ParameterType.ToString()
+        /// Method Return Parameter:      method.ReturnParameter.ToString()
+        /// Method Return Parameter:      Type: method.ReturnType.ToString()
+        /// From .xml
+        /// Method Description:           GetSummaryFromXML(Dll, member)
+        /// Method Return Description:    GetReturnFromXML(Dll, member)
+        /// Method Parameter Description: GetParamFromXML(Dll, member)
+        /// Class Description:            GetModuleInfoFromXML(Dll, Type)
         /// </summary>
         public void GetInfoFromDll()
         {
-            MessageBox.Show(Dll);
+            //// MessageBox.Show(Dll);
             Assembly a;
             ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
             ObservableCollection<MethodParameter> parameters = new ObservableCollection<MethodParameter>();
 
+            // try to load the assembly from the .dll
             try
             {
                 a = Assembly.Load(File.ReadAllBytes(Dll));
             }
             catch (Exception e)
             {
+                // TODO need to catch each specific exception
                 MessageBox.Show(e.ToString());
                 return;
             }
@@ -73,7 +87,6 @@
                 }
 
                 Module module;
-
                 methods.Clear();
                 MemberInfo[] members = type.GetMembers(BindingFlags.Public
                                                       | BindingFlags.Instance
@@ -88,20 +101,6 @@
                     foreach (ParameterInfo p in pars)
                     {
                         parameters.Add(new MethodParameter(p.ParameterType.ToString(), p.Name.ToString(), GetParamFromXML(Dll, member)));
-
-                        //// MessageBox.Show(
-                        //       From dll
-                        ////     "Class Name: " + type.Name + "\n" +
-                        ////     "Method Name: " + member.Name + "\n" +
-                        ////     "Method Parameter Name: " + p.Name.ToString() + "\n" +
-                        ////     "Method Parameter Type: " + p.ParameterType.ToString() + "\n" +
-                        ////     "Method Return Param: " + method.ReturnParameter.ToString() + "\n" +
-                        ////     "Method Return Type: " + method.ReturnType.ToString() + "\n" +
-                        //       From xml
-                        ////     "Method Description: " + GetSummaryFromXML(Dll, member) + "\n" +
-                        ////     "Method Returns: " + GetReturnFromXML(Dll, member) + "\n" +
-                        ////     "Method Parameter Description: " + GetParamFromXML(Dll, member) + "\n" + 
-                        ////     "Class Description: " + GetModuleInfoFromXML(Dll, type));
                     }
 
                     methods.Add(new ModuleMethod(member.Name, GetSummaryFromXML(Dll, member), parameters, method.ReturnType.ToString()));
@@ -109,8 +108,6 @@
 
                 module = new Module(type.Name, GetModuleInfoFromXML(Dll, type), methods);
                 Modules.Add(module);
-
-                MessageBox.Show(module.ToString());
             }
         }
 

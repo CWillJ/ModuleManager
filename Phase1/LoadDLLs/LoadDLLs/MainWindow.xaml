@@ -5,14 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoadDLLs"
         xmlns:viewModel="clr-namespace:LoadDLLs.ViewModels"
+        xmlns:data="clr-namespace:LoadDLLs.Classes"
         mc:Ignorable="d"
         Title="Load dll's Demo" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        
         <Button
+            HorizontalAlignment="Left"
+            Grid.Row="0"
             Height="50"
             Width="100"
+            Margin="50,5,5,5"
             Command="{Binding LoadMyFileCommand}"
             Content="Find dll's"
             />
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <!--<ItemsControl ItemsSource="{Binding Path=OneModule}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>-->
+                        <StackPanel HorizontalAlignment="Left">
+                                <TextBox
+                                    Text="{Binding Path=OneModule.Name}"
+                                    Width="200"
+                                    Height="20"
+                                />
+
+                                <TextBox
+                                    Text="{Binding Path=OneModule.Description}"
+                                    TextWrapping="Wrap"
+                                    Width="200"
+                                    Height="50"
+                                />
+
+                                <TextBox
+                                    Text="{Binding Path=OneModule.MethodsString}"
+                                    TextWrapping="Wrap"
+                                    Width="200"
+                                    Height="200"
+                                />
+                        </StackPanel>
+                    <!--</DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>-->
+        </Grid>
     </Grid>
 </Window>

@@ -1,7 +1,7 @@
-﻿using System.Security.Cryptography;
-
-namespace LoadDLLs.Classes
+﻿namespace LoadDLLs.Classes
 {
+    using System.Security.Cryptography;
+
     /// <summary>
     /// An object designed to hold the type and name of a method's parameter
     /// </summary>

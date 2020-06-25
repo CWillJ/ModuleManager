@@ -1,45 +1,53 @@
 ﻿namespace LoadDLLs.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
+    using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
     using LoadDLLs.Classes;
 
+    /// <summary>
+    /// LoadDLLsViewModel will handle commands from the main view
+    /// </summary>
     public class LoadDLLsViewModel
     {
-        string _fileLocation;
-
-        public MyICommand LoadMyFileCommand { get; set; }
-
+        /// <summary>
+        /// Constructor for LoadDLLsViewModel that initializes FileLocation as an empty string
+        /// and initializes the LoadMyFileCommand
+        /// </summary>
         public LoadDLLsViewModel()
         {
             FileLocation = string.Empty;
-            LoadMyFileCommand = new MyICommand(FindDLLs, CanOpen);
+            OneModule = new Module();
+            LoadMyFileCommand = new MyICommand(FindDLLs);
         }
 
-        public string FileLocation
-        {
-            get { return _fileLocation; }
-            set { _fileLocation = value; }
-        }
+        /// <summary>
+        /// Gets and sets the LoadMyFileCommand as a MyICommand
+        /// </summary>
+        public MyICommand LoadMyFileCommand { get; set; }
+
+        /// <summary>
+        /// Gets and sets the file location as a string
+        /// </summary>
+        public string FileLocation { get; set; }
+
+        public Module OneModule { get; set; }
 
         private void FindDLLs()
         {
+            DissectDll dll = new DissectDll();
+
             // Bring up explorer to allow user to choose a file location
             //// FileLocation = LookForFile();
             //// MessageBox.Show(FileLocation);
 
             // Check the file location for any .dll's
-            DissectDll dll = new DissectDll();
             dll.GetInfoFromDll();
-
-            // Message prompt if no .dll's found
-
-            // Display all names of found .dll's
+            MessageBox.Show(dll.Modules.ElementAt(0).ToString());
+            //// OneModule = dll.Modules.ElementAt(0);
+            OneModule.Name = dll.Modules.ElementAt(0).Name;
+            OneModule.Description = dll.Modules.ElementAt(0).Description;
+            OneModule.MethodsString = dll.Modules.ElementAt(0).MethodsString;
         }
 
         private string LookForFile()

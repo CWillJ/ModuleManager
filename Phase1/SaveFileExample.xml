@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <members>
+        <member name="T:ClassLibrary1.Class1">
+            <enabled>
+            0
+            </enabled>
+        </member>
+        <member name="T:ClassLibrary1.Class2">
+            <enabled>
+            1
+            </enabled>
+        </member>
+    </members>
+</doc>

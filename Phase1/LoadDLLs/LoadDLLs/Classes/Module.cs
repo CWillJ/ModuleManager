@@ -1,16 +1,19 @@
 ﻿namespace LoadDLLs.Classes
 {
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
     using System.Security.Cryptography;
 
     /// <summary>
     /// Module object holds the name and description of a module
     /// </summary>
-    public class Module
+    public class Module : INotifyPropertyChanged
     {
         private string _moduleName;
         private string _moduleDescription;
+        private string _methodsString;
         private ObservableCollection<ModuleMethod> _moduleMethods;
 
         /// <summary>
@@ -20,6 +23,7 @@
         {
             Name = string.Empty;
             Description = string.Empty;
+            MethodsString = string.Empty;
             Methods = new ObservableCollection<ModuleMethod>();
         }
 
@@ -33,6 +37,7 @@
         {
             Name = name;
             Description = description;
+            MethodsString = MethodsToString(methods);
             Methods = methods;
         }
 
@@ -42,16 +47,46 @@
         public string Name
         {
             get { return _moduleName; }
-            set { _moduleName = value; }
+            set 
+            {
+                if (_moduleName != value)
+                {
+                    _moduleName = value;
+                    RaisePropertyChanged("Name");
+                }
+            }
         }
 
         /// <summary>
-        /// Property that gets or sets the description of the module
+        /// Gets or sets the description of the module
         /// </summary>
         public string Description
         {
             get { return _moduleDescription; }
-            set { _moduleDescription = value; }
+            set
+            {
+                if (_moduleDescription != value)
+                {
+                    _moduleDescription = value;
+                    RaisePropertyChanged("Description");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets and sets the methods as strings
+        /// </summary>
+        public string MethodsString
+        {
+            get { return _methodsString; }
+            set
+            {
+                if (_methodsString != value)
+                {
+                    _methodsString = value;
+                    RaisePropertyChanged("MethodsString");
+                }
+            }
         }
 
         /// <summary>
@@ -60,7 +95,14 @@
         public ObservableCollection<ModuleMethod> Methods
         {
             get { return _moduleMethods; }
-            set { _moduleMethods = value; }
+            set
+            {
+                if (_moduleMethods != value)
+                {
+                    _moduleMethods = value;
+                    RaisePropertyChanged("Methods");
+                }
+            }
         }
 
         /// <summary>
@@ -101,12 +143,28 @@
         {
             string s = Name + @":" + "\n" + Description;
 
-            foreach(ModuleMethod method in Methods)
+            s += "\n" + MethodsToString(Methods);
+
+            return s;
+        }
+
+        public string MethodsToString(ObservableCollection<ModuleMethod> methods)
+        {
+            string s = string.Empty;
+
+            foreach(ModuleMethod method in methods)
             {
-                s += "\n" + method.ToString();
+                s += method.ToString() + "\n";
             }
 
             return s;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
