@@ -1,6 +1,0 @@
-C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\bin\Debug\ClassLibrary1.dll
-C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
-C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.CoreCompileInputs.cache
-C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\obj\Debug\ClassLibrary1.dll
-C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
-C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\bin\Debug\ClassLibrary1.xml

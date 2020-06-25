@@ -90,22 +90,24 @@
                         parameters.Add(new MethodParameter(p.ParameterType.ToString(), p.Name.ToString(), GetParamFromXML(Dll, member)));
 
                         //// MessageBox.Show(
+                        //       From dll
                         ////     "Class Name: " + type.Name + "\n" +
                         ////     "Method Name: " + member.Name + "\n" +
                         ////     "Method Parameter Name: " + p.Name.ToString() + "\n" +
                         ////     "Method Parameter Type: " + p.ParameterType.ToString() + "\n" +
-                        ////     "Method Return Name: " + method.ReturnParameter.ToString() + "\n" +
+                        ////     "Method Return Param: " + method.ReturnParameter.ToString() + "\n" +
                         ////     "Method Return Type: " + method.ReturnType.ToString() + "\n" +
+                        //       From xml
                         ////     "Method Description: " + GetSummaryFromXML(Dll, member) + "\n" +
-                        ////     "Method Returns (from xml): " + GetReturnFromXML(Dll, member) + "\n" +
-                        ////     "Method Parameter Description: " + GetParamFromXML(Dll, member));
+                        ////     "Method Returns: " + GetReturnFromXML(Dll, member) + "\n" +
+                        ////     "Method Parameter Description: " + GetParamFromXML(Dll, member) + "\n" + 
+                        ////     "Class Description: " + GetModuleInfoFromXML(Dll, type));
                     }
 
-                    methods.Add(new ModuleMethod(member.Name, GetSummaryFromXML(Dll, member), parameters, GetReturnFromXML(Dll, member)));
+                    methods.Add(new ModuleMethod(member.Name, GetSummaryFromXML(Dll, member), parameters, method.ReturnType.ToString()));
                 }
 
-                module = new Module(type.Name, "Class Description", methods);
-
+                module = new Module(type.Name, GetModuleInfoFromXML(Dll, type), methods);
                 Modules.Add(module);
 
                 MessageBox.Show(module.ToString());
@@ -114,20 +116,20 @@
 
         private string GetSummaryFromXML(string dllPath, MemberInfo member)
         {
-            return GetInfoFromXML(dllPath, member, @"<summary>", @"</summary>");
+            return GetMethodInfoFromXML(dllPath, member, @"<summary>", @"</summary>");
         }
 
         private string GetReturnFromXML(string dllPath, MemberInfo member)
         {
-            return GetInfoFromXML(dllPath, member, @"<returns>", @"</returns>");
+            return GetMethodInfoFromXML(dllPath, member, @"<returns>", @"</returns>");
         }
 
         private string GetParamFromXML(string dllPath, MemberInfo member)
         {
-            return GetInfoFromXML(dllPath, member, @"<param name=", @"></param>");
+            return GetMethodInfoFromXML(dllPath, member, @"<param name=", @"></param>");
         }
 
-        private string GetInfoFromXML(string dllPath, MemberInfo member, string start, string end)
+        private string GetMethodInfoFromXML(string dllPath, MemberInfo member, string start, string end)
         {
             string xmlPath = dllPath.Substring(0, dllPath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
@@ -135,9 +137,38 @@
             if (File.Exists(xmlPath))
             {
                 xmlDoc.Load(xmlPath);
-
                 string path = @"M:" + member.DeclaringType.FullName + "." + member.Name;
+                XmlNode xmlDocuOfMethod = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
 
+                // If the summary comments exist, return them
+                if (xmlDocuOfMethod != null)
+                {
+                    string descript = Regex.Replace(xmlDocuOfMethod.InnerXml, @"\s+", " ");
+
+                    if (!descript.Contains(start) || !descript.Contains(end))
+                    {
+                        return null;
+                    }
+
+                    return descript.Substring(descript.IndexOf(start) + start.Length,
+                        descript.IndexOf(end) - descript.IndexOf(start) - start.Length);
+                }
+            }
+
+            return null;
+        }
+
+        private string GetModuleInfoFromXML(string dllPath, Type type)
+        {
+            string start = @"<summary>";
+            string end = @"</summary>";
+            string xmlPath = dllPath.Substring(0, dllPath.LastIndexOf(".")) + @".XML";
+            XmlDocument xmlDoc = new XmlDocument();
+
+            if (File.Exists(xmlPath))
+            {
+                xmlDoc.Load(xmlPath);
+                string path = @"T:" + type.FullName;
                 XmlNode xmlDocuOfMethod = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
 
                 // If the summary comments exist, return them
