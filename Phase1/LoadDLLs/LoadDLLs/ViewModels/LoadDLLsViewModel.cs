@@ -39,11 +39,9 @@
 
             // Bring up explorer to allow user to choose a file location
             //// FileLocation = LookForFile();
-            //// MessageBox.Show(FileLocation);
 
             // Check the file location for any .dll's
             dll.GetInfoFromDll();
-            MessageBox.Show(dll.Modules.ElementAt(0).ToString());
             //// OneModule = dll.Modules.ElementAt(0);
             OneModule.Name = dll.Modules.ElementAt(0).Name;
             OneModule.Description = dll.Modules.ElementAt(0).Description;

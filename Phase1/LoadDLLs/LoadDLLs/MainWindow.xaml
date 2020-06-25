@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LoadDLLs"
         xmlns:viewModel="clr-namespace:LoadDLLs.ViewModels"
         xmlns:data="clr-namespace:LoadDLLs.Classes"
+        xmlns:view="clr-namespace:LoadDLLs.Views"
         mc:Ignorable="d"
         Title="Load dll's Demo" Height="450" Width="800">
     <Grid>
@@ -17,7 +18,7 @@
         <Button
             HorizontalAlignment="Left"
             Grid.Row="0"
-            Height="50"
+            Height="30"
             Width="100"
             Margin="50,5,5,5"
             Command="{Binding LoadMyFileCommand}"
@@ -25,31 +26,32 @@
             />
 
         <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <view:ModuleView x:Name="ModuleViewControl"/>
             <!--<ItemsControl ItemsSource="{Binding Path=OneModule}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>-->
+                    <DataTemplate>
                         <StackPanel HorizontalAlignment="Left">
                                 <TextBox
-                                    Text="{Binding Path=OneModule.Name}"
+                                    Text="{Binding Path=OneModule.Name, Mode=OneWay}"
                                     Width="200"
                                     Height="20"
                                 />
 
                                 <TextBox
-                                    Text="{Binding Path=OneModule.Description}"
+                                    Text="{Binding Path=OneModule.Description, Mode=OneWay}"
                                     TextWrapping="Wrap"
                                     Width="200"
                                     Height="50"
                                 />
 
                                 <TextBox
-                                    Text="{Binding Path=OneModule.MethodsString}"
+                                    Text="{Binding Path=OneModule.MethodsString, Mode=OneWay}"
                                     TextWrapping="Wrap"
                                     Width="200"
                                     Height="200"
                                 />
                         </StackPanel>
-                    <!--</DataTemplate>
+                    </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>-->
         </Grid>

@@ -74,7 +74,7 @@
         }
 
         /// <summary>
-        /// Gets and sets the methods as strings
+        /// Gets and sets the methods as a string
         /// </summary>
         public string MethodsString
         {

@@ -14,3 +14,7 @@ C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\
 C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\LoadDLLs.exe
 C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\LoadDLLs.pdb
 C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\Views\ModuleView.g.cs
+C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\Views\MethodView.g.cs
+C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\Views\ModuleView.baml
+C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\Views\MethodView.baml
