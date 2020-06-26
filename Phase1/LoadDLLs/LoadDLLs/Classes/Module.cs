@@ -39,6 +39,7 @@
             Description = description;
             MethodsString = MethodsToString(methods);
             Methods = methods;
+            RaisePropertyChanged("Modules");
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ using System.Windows.Controls;
         public MethodView()
         {
             InitializeComponent();
+            this.DataContext = new LoadDLLs.ViewModels.LoadDLLsViewModel();
         }
     }
 }

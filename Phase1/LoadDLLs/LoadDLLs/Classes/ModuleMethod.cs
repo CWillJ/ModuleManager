@@ -116,7 +116,7 @@
                 s += parameter.ToString() + @", ";
             }
 
-            if(ReturnType != string.Empty)
+            if(ReturnType != string.Empty && ReturnType != null)
             {
                 s += "\n" + "Return Type: " + ReturnType;
             }

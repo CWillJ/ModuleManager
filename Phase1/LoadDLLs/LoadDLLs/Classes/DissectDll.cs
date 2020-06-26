@@ -15,8 +15,6 @@
     {
         public DissectDll()
         {
-            Modules = new ObservableCollection<Module>();
-
             //// Dll = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
             Dll = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
                 @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
@@ -28,7 +26,6 @@
         /// <param name="fileName">File name of the .dll file</param>
         public DissectDll(string fileName)
         {
-            Modules = new ObservableCollection<Module>();
             Dll = fileName;
         }
 
@@ -36,11 +33,6 @@
         /// Dll is the directory path of the .dll files
         /// </summary>
         public string Dll { get; set; }
-
-        /// <summary>
-        /// Modules is a collection of the .dll files (modules)
-        /// </summary>
-        public ObservableCollection<Module> Modules { get; set; }
 
         /// <summary>
         /// GetInfoFromDll will create an ObservableCollection<Module> to organize
@@ -51,19 +43,17 @@
         /// Method Parameter Name:        p.Name.ToString()
         /// Method Parameter Type:        p.ParameterType.ToString()
         /// Method Return Parameter:      method.ReturnParameter.ToString()
-        /// Method Return Parameter:      Type: method.ReturnType.ToString()
+        /// Method Return Parameter Type: method.ReturnType.ToString()
         /// From .xml
         /// Method Description:           GetSummaryFromXML(Dll, member)
         /// Method Return Description:    GetReturnFromXML(Dll, member)
         /// Method Parameter Description: GetParamFromXML(Dll, member)
         /// Class Description:            GetModuleInfoFromXML(Dll, Type)
         /// </summary>
-        public void GetInfoFromDll()
+        public ObservableCollection<Module> GetInfoFromDll()
         {
-            //// MessageBox.Show(Dll);
+            ObservableCollection<Module> modules = new ObservableCollection<Module>();
             Assembly a;
-            ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
-            ObservableCollection<MethodParameter> parameters = new ObservableCollection<MethodParameter>();
 
             // try to load the assembly from the .dll
             try
@@ -74,41 +64,82 @@
             {
                 // TODO need to catch each specific exception
                 MessageBox.Show(e.ToString());
-                return;
+                return null;
             }
 
+            // Loop through the types or classes
             Type[] types = a.GetTypes();
 
-            foreach (Type type in types)
+            foreach (var type in types)
             {
-                if (!type.IsPublic)
+                modules.Add(GetSingleModule(type));
+            }
+
+            return modules;
+        }
+
+        private Module GetSingleModule(Type type)
+        {
+            ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
+            ObservableCollection<MethodParameter> parameters = new ObservableCollection<MethodParameter>();
+
+            if (!type.IsPublic)
+            {
+                return null;
+            }
+
+            // start with empty method and parameter collections
+            methods.Clear();
+            parameters.Clear();
+
+            // get constructor information and loop through the class's public constructors
+            ConstructorInfo[] constructors = type.GetConstructors();
+
+            foreach (var constructor in constructors)
+            {
+                // loop through the constructor's parameters
+                ParameterInfo[] paramList = constructor.GetParameters();
+                foreach (var p in paramList)
+                {
+                    parameters.Add(new MethodParameter(p.ParameterType.ToString(),
+                        p.Name, "Constructor parameter description"));
+                }
+
+                methods.Add(new ModuleMethod("Constructor for " + type.Name,
+                    "Constructor description", parameters, null));
+            }
+
+            // get public methods from the class and loop through them
+            MemberInfo[] members = type.GetMembers(BindingFlags.Public
+                                                  | BindingFlags.Instance
+                                                  | BindingFlags.InvokeMethod);
+
+            foreach (var member in members)
+            {
+                // skip if the the member is the constructor
+                if (member.Name == ".ctor")
                 {
                     continue;
                 }
 
-                Module module;
-                methods.Clear();
-                MemberInfo[] members = type.GetMembers(BindingFlags.Public
-                                                      | BindingFlags.Instance
-                                                      | BindingFlags.InvokeMethod);
+                MethodInfo method = type.GetMethod(member.Name);
 
-                foreach (MemberInfo member in members)
+                // loop through the method's parameters
+                ParameterInfo[] paramList = method.GetParameters();
+                parameters.Clear();
+                foreach (var p in paramList)
                 {
-                    MethodInfo method = type.GetMethod(member.Name);
-                    ParameterInfo[] pars = method.GetParameters();
-                    parameters.Clear();
-
-                    foreach (ParameterInfo p in pars)
-                    {
-                        parameters.Add(new MethodParameter(p.ParameterType.ToString(), p.Name.ToString(), GetParamFromXML(Dll, member)));
-                    }
-
-                    methods.Add(new ModuleMethod(member.Name, GetSummaryFromXML(Dll, member), parameters, method.ReturnType.ToString()));
+                    parameters.Add(new MethodParameter(p.ParameterType.ToString(), p.Name,
+                        GetParamFromXML(Dll, member)));
                 }
 
-                module = new Module(type.Name, GetModuleInfoFromXML(Dll, type), methods);
-                Modules.Add(module);
+                methods.Add(new ModuleMethod(member.Name, GetSummaryFromXML(Dll, member),
+                    parameters, method.ReturnType.ToString()));
+
+                parameters.Clear();
             }
+
+            return new Module(type.Name, GetModuleInfoFromXML(Dll, type), methods);
         }
 
         private string GetSummaryFromXML(string dllPath, MemberInfo member)

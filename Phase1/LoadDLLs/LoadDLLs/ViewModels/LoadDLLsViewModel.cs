@@ -17,7 +17,7 @@
         public LoadDLLsViewModel()
         {
             FileLocation = string.Empty;
-            OneModule = new Module();
+            Modules = new ObservableCollection<Module>();
             LoadMyFileCommand = new MyICommand(FindDLLs);
         }
 
@@ -31,7 +31,7 @@
         /// </summary>
         public string FileLocation { get; set; }
 
-        public Module OneModule { get; set; }
+        public ObservableCollection<Module> Modules { get; set; }
 
         private void FindDLLs()
         {
@@ -41,11 +41,10 @@
             //// FileLocation = LookForFile();
 
             // Check the file location for any .dll's
-            dll.GetInfoFromDll();
-            //// OneModule = dll.Modules.ElementAt(0);
-            OneModule.Name = dll.Modules.ElementAt(0).Name;
-            OneModule.Description = dll.Modules.ElementAt(0).Description;
-            OneModule.MethodsString = dll.Modules.ElementAt(0).MethodsString;
+            foreach (var mod in dll.GetInfoFromDll())
+            {
+                Modules.Add(new Module(mod.Name, mod.Description, mod.Methods));
+            }
         }
 
         private string LookForFile()

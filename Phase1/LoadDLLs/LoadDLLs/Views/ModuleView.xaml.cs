@@ -23,7 +23,7 @@
         public ModuleView()
         {
             InitializeComponent();
-            this.DataContext = new LoadDLLs.ViewModels.ModuleViewModel();
+            this.DataContext = new LoadDLLs.ViewModels.LoadDLLsViewModel();
         }
     }
 }

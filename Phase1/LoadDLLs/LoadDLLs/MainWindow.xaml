@@ -25,35 +25,44 @@
             Content="Find dll's"
             />
 
-        <Grid Grid.Row="1" HorizontalAlignment="Center">
-            <view:ModuleView x:Name="ModuleViewControl"/>
-            <!--<ItemsControl ItemsSource="{Binding Path=OneModule}">
-                <ItemsControl.ItemTemplate>
+        <Grid Grid.Row="1" HorizontalAlignment="Center" Width="300" Height="300">
+
+            <!-- Module Template -->
+            <TreeView ItemsSource="{Binding Path=Modules}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Methods}">
+                        <TextBlock Text="{Binding Path=Name}"/>
+                        
+                        <!-- Method Template -->
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Path=Parameters}">
+                                <TextBlock Text="{Binding Path=Name}" />
+
+                                <!-- Parameters Template -->
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                                
+                            </HierarchicalDataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                        
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                
+            </TreeView>
+
+
+            <!--<muxc:TreeView Name="ModuleTree" ItemsSource="{Binding Path=Modules}">
+                <muxc:TreeView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel HorizontalAlignment="Left">
-                                <TextBox
-                                    Text="{Binding Path=OneModule.Name, Mode=OneWay}"
-                                    Width="200"
-                                    Height="20"
-                                />
-
-                                <TextBox
-                                    Text="{Binding Path=OneModule.Description, Mode=OneWay}"
-                                    TextWrapping="Wrap"
-                                    Width="200"
-                                    Height="50"
-                                />
-
-                                <TextBox
-                                    Text="{Binding Path=OneModule.MethodsString, Mode=OneWay}"
-                                    TextWrapping="Wrap"
-                                    Width="200"
-                                    Height="200"
-                                />
-                        </StackPanel>
+                        <TreeViewItem
+                            ItemsSource="{Binding Path=Methods}"
+                            
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>-->
+                </muxc:TreeView.ItemTemplate>
+            </muxc:TreeView>-->
         </Grid>
     </Grid>
 </Window>

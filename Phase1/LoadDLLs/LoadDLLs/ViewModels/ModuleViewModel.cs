@@ -11,6 +11,7 @@
     public class ModuleViewModel
     {
         /// <summary>
+        ///  (Future Implementation)
         /// Gets or sets the Methods from a module
         /// </summary>
         public ObservableCollection<Module> Modules { get; set; }
