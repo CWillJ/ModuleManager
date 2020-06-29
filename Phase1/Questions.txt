@@ -1,6 +1,0 @@
-Questions to ask:
-
-- What is a good example of a modules folder?
-
-- public methods are all accessed form the xml associated with the dll?
-
