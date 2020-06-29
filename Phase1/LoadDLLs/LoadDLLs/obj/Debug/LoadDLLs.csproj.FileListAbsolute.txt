@@ -17,3 +17,4 @@ C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\
 C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\LoadDLLs.csproj.CoreCompileInputs.cache
 C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\LoadDLLs.exe
 C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\LoadDLLs.pdb
+C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\LoadDLLs\obj\Debug\LoadDLLs.csprojAssemblyReference.cache

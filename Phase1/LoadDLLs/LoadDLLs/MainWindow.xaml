@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        
+
         <Button
             HorizontalAlignment="Left"
             Grid.Row="0"
@@ -32,7 +32,7 @@
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Methods}">
                         <TextBlock Text="{Binding Path=Name}"/>
-                        
+
                         <!-- Method Template -->
                         <HierarchicalDataTemplate.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding Path=Parameters}">
@@ -44,13 +44,13 @@
                                         <TextBlock Text="{Binding}" />
                                     </DataTemplate>
                                 </HierarchicalDataTemplate.ItemTemplate>
-                                
+
                             </HierarchicalDataTemplate>
                         </HierarchicalDataTemplate.ItemTemplate>
-                        
+
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
-                
+
             </TreeView>
 
 
