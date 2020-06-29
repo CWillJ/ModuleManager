@@ -117,6 +117,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\..\..\..\NextGen\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\..\..\NextGen\Lib\Analyzers\StyleCop.Analyzers.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

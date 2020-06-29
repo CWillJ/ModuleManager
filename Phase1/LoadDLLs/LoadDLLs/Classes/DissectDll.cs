@@ -9,46 +9,51 @@
     using System.Xml;
 
     /// <summary>
-    /// DissectDll is used to get information from a .dll file
+    /// DissectDll is used to get information from a .dll file.
     /// </summary>
     public class DissectDll
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DissectDll"/> class.
+        /// </summary>
         public DissectDll()
         {
             //// Dll = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\LoadDLLs\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
-            Dll = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
+            this.Dll = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
                 @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
         }
 
         /// <summary>
-        /// Constructor for DissectDll specifing a file name
+        /// Initializes a new instance of the <see cref="DissectDll"/> class.
         /// </summary>
-        /// <param name="fileName">File name of the .dll file</param>
+        /// <param name="fileName">File name of the .dll file.</param>
         public DissectDll(string fileName)
         {
-            Dll = fileName;
+            this.Dll = fileName;
         }
 
         /// <summary>
-        /// Dll is the directory path of the .dll files
+        /// Gets or sets Dll is the directory path of the .dll files.
         /// </summary>
         public string Dll { get; set; }
 
+        // Class Name:                   type.Name
+        // Method Name:                  member.Name
+        // Method Parameter Name:        p.Name.ToString()
+        // Method Parameter Type:        p.ParameterType.ToString()
+        // Method Return Parameter:      method.ReturnParameter.ToString()
+        // Method Return Parameter Type: method.ReturnType.ToString()
+        // From .xml
+        // Method Description:           GetSummaryFromXML(Dll, member)
+        // Method Return Description:    GetReturnFromXML(Dll, member)
+        // Method Parameter Description: GetParamFromXML(Dll, member)
+        // Class Description:            GetModuleInfoFromXML(Dll, Type)
+
+        /// <returns>Returns an collection of Module objects.</returns>
         /// <summary>
-        /// GetInfoFromDll will create an ObservableCollection<Module> to organize
+        /// GetInfoFromDll will create an ObservableCollection.<Module> to organize
         /// the information from the dll file and its related xml file.
         /// From .dll
-        /// Class Name:                   type.Name
-        /// Method Name:                  member.Name
-        /// Method Parameter Name:        p.Name.ToString()
-        /// Method Parameter Type:        p.ParameterType.ToString()
-        /// Method Return Parameter:      method.ReturnParameter.ToString()
-        /// Method Return Parameter Type: method.ReturnType.ToString()
-        /// From .xml
-        /// Method Description:           GetSummaryFromXML(Dll, member)
-        /// Method Return Description:    GetReturnFromXML(Dll, member)
-        /// Method Parameter Description: GetParamFromXML(Dll, member)
-        /// Class Description:            GetModuleInfoFromXML(Dll, Type)
         /// </summary>
         public ObservableCollection<Module> GetInfoFromDll()
         {
@@ -58,7 +63,7 @@
             // try to load the assembly from the .dll
             try
             {
-                a = Assembly.Load(File.ReadAllBytes(Dll));
+                a = Assembly.Load(File.ReadAllBytes(this.Dll));
             }
             catch (Exception e)
             {
@@ -72,7 +77,7 @@
 
             foreach (var type in types)
             {
-                modules.Add(GetSingleModule(type));
+                modules.Add(this.GetSingleModule(type));
             }
 
             return modules;
@@ -101,12 +106,17 @@
                 ParameterInfo[] paramList = constructor.GetParameters();
                 foreach (var p in paramList)
                 {
-                    parameters.Add(new MethodParameter(p.ParameterType.ToString(),
-                        p.Name, "Constructor parameter description"));
+                    parameters.Add(new MethodParameter(
+                        p.ParameterType.ToString(),
+                        p.Name,
+                        @"Constructor parameter description"));
                 }
 
-                methods.Add(new ModuleMethod("Constructor for " + type.Name,
-                    "Constructor description", parameters, null));
+                methods.Add(new ModuleMethod(
+                    @"Constructor for " + type.Name,
+                    @"Constructor description",
+                    parameters,
+                    null));
             }
 
             // get public methods from the class and loop through them
@@ -129,32 +139,37 @@
                 parameters.Clear();
                 foreach (var p in paramList)
                 {
-                    parameters.Add(new MethodParameter(p.ParameterType.ToString(), p.Name,
-                        GetParamFromXML(Dll, member)));
+                    parameters.Add(new MethodParameter(
+                        p.ParameterType.ToString(),
+                        p.Name,
+                        this.GetParamFromXML(this.Dll, member)));
                 }
 
-                methods.Add(new ModuleMethod(member.Name, GetSummaryFromXML(Dll, member),
-                    parameters, method.ReturnType.ToString()));
+                methods.Add(new ModuleMethod(
+                    member.Name,
+                    this.GetSummaryFromXML(this.Dll, member),
+                    parameters,
+                    method.ReturnType.ToString()));
 
                 parameters.Clear();
             }
 
-            return new Module(type.Name, GetModuleInfoFromXML(Dll, type), methods);
+            return new Module(type.Name, this.GetModuleInfoFromXML(this.Dll, type), methods);
         }
 
         private string GetSummaryFromXML(string dllPath, MemberInfo member)
         {
-            return GetMethodInfoFromXML(dllPath, member, @"<summary>", @"</summary>");
+            return this.GetMethodInfoFromXML(dllPath, member, @"<summary>", @"</summary>");
         }
 
         private string GetReturnFromXML(string dllPath, MemberInfo member)
         {
-            return GetMethodInfoFromXML(dllPath, member, @"<returns>", @"</returns>");
+            return this.GetMethodInfoFromXML(dllPath, member, @"<returns>", @"</returns>");
         }
 
         private string GetParamFromXML(string dllPath, MemberInfo member)
         {
-            return GetMethodInfoFromXML(dllPath, member, @"<param name=", @"></param>");
+            return this.GetMethodInfoFromXML(dllPath, member, @"<param name=", @"></param>");
         }
 
         private string GetMethodInfoFromXML(string dllPath, MemberInfo member, string start, string end)
@@ -178,7 +193,8 @@
                         return null;
                     }
 
-                    return descript.Substring(descript.IndexOf(start) + start.Length,
+                    return descript.Substring(
+                        descript.IndexOf(start) + start.Length,
                         descript.IndexOf(end) - descript.IndexOf(start) - start.Length);
                 }
             }
@@ -209,7 +225,8 @@
                         return null;
                     }
 
-                    return descript.Substring(descript.IndexOf(start) + start.Length,
+                    return descript.Substring(
+                        descript.IndexOf(start) + start.Length,
                         descript.IndexOf(end) - descript.IndexOf(start) - start.Length);
                 }
             }

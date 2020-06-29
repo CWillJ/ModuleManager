@@ -3,70 +3,73 @@
     using System.Security.Cryptography;
 
     /// <summary>
-    /// An object designed to hold the type and name of a method's parameter
+    /// An object designed to hold the type and name of a method's parameter.
     /// </summary>
     public class MethodParameter
     {
-        private string _parameterType;
-        private string _parameterName;
-        private string _parameterDescription;
+        private string parameterType;
+        private string parameterName;
+        private string parameterDescription;
 
         /// <summary>
-        /// Constuctor that initialize both name and type to empty strings
+        /// Initializes a new instance of the <see cref="MethodParameter"/> class
+        /// that sets both name and type to empty strings.
         /// </summary>
         public MethodParameter()
         {
-            Type = string.Empty;
-            Name = string.Empty;
-            Description = string.Empty;
+            this.Type = string.Empty;
+            this.Name = string.Empty;
+            this.Description = string.Empty;
         }
 
         /// <summary>
-        /// Constructor that defines the parameter type and name through parameters
+        /// Initializes a new instance of the <see cref="MethodParameter"/> class
+        /// that defines the parameter type and name through parameters.
         /// </summary>
-        /// <param name="type">MethodParameter type</param>
-        /// <param name="name">MethodParameter name</param>
+        /// <param name="type">MethodParameter type.</param>
+        /// <param name="name">MethodParameter name.</param>
+        /// <param name="description">MethodParameter description.</param>
         public MethodParameter(string type, string name, string description)
         {
-            Type = type;
-            Name = name;
-            Description = description;
+            this.Type = type;
+            this.Name = name;
+            this.Description = description;
         }
 
         /// <summary>
-        /// Property that gets or sets the parameter type
+        /// Gets or sets the parameter type.
         /// </summary>
         public string Type
         {
-            get { return _parameterType; }
-            set { _parameterType = value; }
+            get { return this.parameterType; }
+            set { this.parameterType = value; }
         }
 
         /// <summary>
-        /// Property that gets and sets the parameter name
+        /// Gets or sets the parameter name.
         /// </summary>
         public string Name
         {
-            get { return _parameterName; }
-            set { _parameterName = value; }
+            get { return this.parameterName; }
+            set { this.parameterName = value; }
         }
 
         /// <summary>
-        /// Property that gets and sets the parameter description
+        /// Gets or sets the parameter description.
         /// </summary>
         public string Description
         {
-            get { return _parameterDescription; }
-            set { _parameterDescription = value; }
+            get { return this.parameterDescription; }
+            set { this.parameterDescription = value; }
         }
 
         /// <summary>
-        /// Overrides the ToString method and formats the string output of parameter type and name
+        /// Overrides the ToString method and formats the string output of parameter type and name.
         /// </summary>
-        /// <returns>A desired format for the parameter type and name</returns>
+        /// <returns>A desired format for the parameter type and name.</returns>
         public override string ToString()
         {
-            return Type + @" " + Name + "\n" + Description;
+            return this.Type + @" " + this.Name + "\n" + this.Description;
         }
     }
 }
