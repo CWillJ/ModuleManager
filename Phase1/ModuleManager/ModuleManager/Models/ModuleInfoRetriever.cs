@@ -19,6 +19,7 @@
         /// </summary>
         public ModuleInfoRetriever()
         {
+            // TODO Only used for testing. Need to set some sort of default path here.
             //// Dll = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
             Dll = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
                 @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
@@ -30,14 +31,17 @@
         /// <param name="fileName">File name of the .dll file.</param>
         public ModuleInfoRetriever(string fileName)
         {
+            // TODO I need to look for dll files instead of just using a file name.
             Dll = fileName;
         }
 
         /// <summary>
         /// Gets or sets Dll is the directory path of the .dll files.
+        /// TODO should be renamed.
         /// </summary>
         public string Dll { get; set; }
 
+        // Where to Get Certain Information From:
         // Class Name:                   type.Name
         // Method Name:                  member.Name
         // Method Parameter Name:        p.Name.ToString()
@@ -53,8 +57,9 @@
         /// <returns>Returns an collection of Module objects.</returns>
         /// <summary>
         /// GetInfoFromDll will create an ObservableCollection of type Module to organize
-        /// the information from the dll file and its related xml file.
+        /// the information from the dll file and its related .xml file.
         /// From .dll.
+        /// TODO need to rename because it gets info from .dll and .xml.
         /// </summary>
         public ObservableCollection<Classes.Module> GetInfoFromDll()
         {
@@ -113,6 +118,8 @@
                         @"Constructor parameter description"));
                 }
 
+                // TODO need to actually get the constructor description. Will be similar to
+                // GetSummaryFromXML but with a ConstructorInfo type instead of a MemberInfo type
                 methods.Add(new ModuleMethod(
                     @"Constructor for " + type.Name,
                     @"Constructor description",
@@ -175,6 +182,8 @@
 
         private string GetMethodInfoFromXML(string dllPath, MemberInfo member, string start, string end)
         {
+            // TODO possible pass in two string instead of a MemberInfo type to get
+            // member.DeclaringType.FullName and member.Name
             string xmlPath = dllPath.Substring(0, dllPath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
 

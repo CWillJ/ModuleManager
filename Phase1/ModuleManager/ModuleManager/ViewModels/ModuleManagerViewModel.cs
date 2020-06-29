@@ -37,10 +37,13 @@
 
         private void FindDLLs()
         {
-            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
+            //// ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(LookForFile());
+            //// ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
 
             // Bring up explorer to allow user to choose a file location
-            //// FileLocation = LookForFile();
+            FileLocation = LookForFile();
+            MessageBox.Show(FileLocation);
+            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(FileLocation);
 
             // Check the file location for any .dll's
             foreach (var mod in infoRetriever.GetInfoFromDll())
