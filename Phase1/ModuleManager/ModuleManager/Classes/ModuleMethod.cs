@@ -32,7 +32,6 @@
         /// <param name="description">Method description.</param>
         /// <param name="parameters">Method parameters.</param>
         /// <param name="returnType">Method return type.</param>
-        /// <param name="type">Method type.</param>
         public ModuleMethod(string name, string description, ObservableCollection<MethodParameter> parameters, string returnType)
         {
             Name = name;

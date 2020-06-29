@@ -52,9 +52,9 @@
 
         /// <returns>Returns an collection of Module objects.</returns>
         /// <summary>
-        /// GetInfoFromDll will create an ObservableCollection.<Module> to organize
+        /// GetInfoFromDll will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related xml file.
-        /// From .dll
+        /// From .dll.
         /// </summary>
         public ObservableCollection<Classes.Module> GetInfoFromDll()
         {
