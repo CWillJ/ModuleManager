@@ -18,12 +18,18 @@
             FileLocation = string.Empty;
             Modules = new ObservableCollection<Module>();
             LoadMyFileCommand = new MyICommand(FindDLLs);
+            SaveConfigCommand = new MyICommand(SaveConfig);
         }
 
         /// <summary>
         /// Gets or sets the LoadMyFileCommand as a MyICommand.
         /// </summary>
         public MyICommand LoadMyFileCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SaveConfigCommand as a MyICommand.
+        /// </summary>
+        public MyICommand SaveConfigCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the file location as a string.
@@ -43,13 +49,23 @@
             // Bring up explorer to allow user to choose a file location
             FileLocation = LookForFile();
             MessageBox.Show(FileLocation);
-            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(FileLocation);
+            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
 
             // Check the file location for any .dll's
             foreach (var mod in infoRetriever.GetInfoFromDll())
             {
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Methods));
             }
+        }
+
+        private void SaveConfig()
+        {
+            MessageBox.Show(@"Configuration File Saved (not yet)");
+        }
+
+        private void LoadConfig()
+        {
+            return;
         }
 
         private string LookForFile()
@@ -63,11 +79,6 @@
             }
 
             return null;
-        }
-
-        private bool CanOpen()
-        {
-            return true;
         }
     }
 }

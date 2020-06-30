@@ -15,20 +15,32 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
-        <Button
+        <StackPanel Orientation="Horizontal">
+            <Button
             HorizontalAlignment="Left"
             Grid.Row="0"
             Height="30"
-            Width="100"
-            Margin="50,5,5,5"
+            Width="125"
+            Margin="30,5,5,5"
             Command="{Binding LoadMyFileCommand}"
-            Content="Find dll's"
+            Content="Load Modules"
             />
 
-        <Grid Grid.Row="1" HorizontalAlignment="Center" Width="300" Height="300">
+            <Button
+            HorizontalAlignment="Left"
+            Grid.Row="0"
+            Height="30"
+            Width="125"
+            Margin="30,5,5,5"
+            Command="{Binding SaveConfigCommand}"
+            Content="Save Configuration"
+            />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,20">
 
             <!-- Module Template -->
-            <TreeView ItemsSource="{Binding Path=Modules}">
+            <TreeView ItemsSource="{Binding Path=Modules}" Width="200">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Methods}">
                         <TextBlock Text="{Binding Path=Name}"/>
@@ -53,16 +65,8 @@
 
             </TreeView>
 
+            <TextBlock Text="{Binding Path=MethodText}" Width="550"/>
 
-            <!--<muxc:TreeView Name="ModuleTree" ItemsSource="{Binding Path=Modules}">
-                <muxc:TreeView.ItemTemplate>
-                    <DataTemplate>
-                        <TreeViewItem
-                            ItemsSource="{Binding Path=Methods}"
-                            
-                    </DataTemplate>
-                </muxc:TreeView.ItemTemplate>
-            </muxc:TreeView>-->
-        </Grid>
+        </StackPanel>
     </Grid>
 </Window>
