@@ -6,19 +6,19 @@
     using ModuleManager.Models;
 
     /// <summary>
-    /// LoadDLLsViewModel will handle commands from the main view.
+    /// ModuleManagerViewModel will handle commands from the main view.
     /// </summary>
     public class ModuleManagerViewModel
     {
-        private ModuleMethod _selectedModule;
+        private ModuleMember _selectedModule;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
         /// </summary>
         public ModuleManagerViewModel()
         {
-            FileLocation = string.Empty;
             _selectedModule = null;
+            FileLocation = string.Empty;
             Modules = new ObservableCollection<Module>();
             LoadMyFileCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
@@ -46,9 +46,9 @@
         public string FileLocation { get; set; }
 
         /// <summary>
-        /// Gets or sets the Method Text.
+        /// Gets or sets the member text.
         /// </summary>
-        public string MethodText { get; set; }
+        public string MemberText { get; set; }
 
         /// <summary>
         /// Gets or sets the collection of Modules.
@@ -58,7 +58,7 @@
         /// <summary>
         /// Gets or sets the SelectedModule.
         /// </summary>
-        public ModuleMethod SelectedModule
+        public ModuleMember SelectedModule
         {
             get
             {
@@ -74,7 +74,7 @@
 
         private void DisplayMethodData()
         {
-            MethodText = SelectedModule.ToString();
+            MemberText = SelectedModule.ToString();
         }
 
         private void FindDLLs()
@@ -84,13 +84,12 @@
 
             // Bring up explorer to allow user to choose a file location
             FileLocation = LookForFile();
-            MessageBox.Show(FileLocation);
             ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
 
             // Check the file location for any .dll's
             foreach (var mod in infoRetriever.GetInfoFromDll())
             {
-                Modules.Add(new Module(mod.Name, mod.Description, mod.Methods));
+                Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
         }
 

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ModuleManager.Views.MethodView"
+﻿<UserControl x:Class="ModuleManager.Views.MemberView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +8,7 @@
              d:DesignHeight="25" d:DesignWidth="100">
 
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type data:ModuleMethod}">
+        <DataTemplate DataType="{x:Type data:ModuleMember}">
             <StackPanel>
                 <TextBox 
                     Text="{Binding Path=Name, Mode=OneWay}" Height="25" Width="100"/>

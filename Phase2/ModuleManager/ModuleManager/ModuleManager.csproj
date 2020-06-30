@@ -58,16 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\MethodParameter.cs" />
+    <Compile Include="Classes\MemberParameter.cs" />
     <Compile Include="Classes\Module.cs" />
-    <Compile Include="Classes\ModuleMethod.cs" />
+    <Compile Include="Classes\ModuleMember.cs" />
     <Compile Include="Classes\MyICommand.cs" />
     <Compile Include="Models\ModuleInfoRetriever.cs" />
-    <Compile Include="ViewModels\MethodViewModel.cs" />
+    <Compile Include="ViewModels\MemberViewModel.cs" />
     <Compile Include="ViewModels\ModuleManagerViewModel.cs" />
     <Compile Include="ViewModels\ModuleViewModel.cs" />
-    <Compile Include="Views\MethodView.xaml.cs">
-      <DependentUpon>MethodView.xaml</DependentUpon>
+    <Compile Include="Views\MemberView.xaml.cs">
+      <DependentUpon>MemberView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ModuleView.xaml.cs">
       <DependentUpon>ModuleView.xaml</DependentUpon>
@@ -84,7 +84,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MethodView.xaml">
+    <Page Include="Views\MemberView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,12 +5,12 @@
     /// <summary>
     /// Interaction logic for ModuleView.xaml.
     /// </summary>
-    public partial class MethodView : UserControl
+    public partial class MemberView : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MethodView"/> class.
+        /// Initializes a new instance of the <see cref="MemberView"/> class.
         /// </summary>
-        public MethodView()
+        public MemberView()
         {
             InitializeComponent();
             DataContext = new ViewModels.ModuleManagerViewModel();

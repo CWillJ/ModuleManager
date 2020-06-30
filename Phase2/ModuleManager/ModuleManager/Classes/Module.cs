@@ -9,10 +9,10 @@
     /// </summary>
     public class Module : INotifyPropertyChanged
     {
-        private string _moduleName;
-        private string _moduleDescription;
-        private string _methodsString;
-        private ObservableCollection<ModuleMethod> _moduleMethods;
+        private string _name;
+        private string _description;
+        private string _membersString;
+        private ObservableCollection<ModuleMember> _members;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Module"/> class
@@ -20,10 +20,10 @@
         /// </summary>
         public Module()
         {
-            Name = string.Empty;
-            Description = string.Empty;
-            MethodsString = string.Empty;
-            Methods = new ObservableCollection<ModuleMethod>();
+            _name = string.Empty;
+            _description = string.Empty;
+            _membersString = string.Empty;
+            _members = new ObservableCollection<ModuleMember>();
         }
 
         /// <summary>
@@ -32,13 +32,13 @@
         /// </summary>
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>
-        /// <param name="methods">Module methods.</param>
-        public Module(string name, string description, ObservableCollection<ModuleMethod> methods)
+        /// <param name="members">Module methods.</param>
+        public Module(string name, string description, ObservableCollection<ModuleMember> members)
         {
-            Name = name;
-            Description = description;
-            MethodsString = MethodsToString(methods);
-            Methods = methods;
+            _name = name;
+            _description = description;
+            _membersString = MembersToString(members);
+            _members = members;
             RaisePropertyChanged("Modules");
         }
 
@@ -54,14 +54,14 @@
         {
             get
             {
-                return _moduleName;
+                return _name;
             }
 
             set
             {
-                if (_moduleName != value)
+                if (_name != value)
                 {
-                    _moduleName = value;
+                    _name = value;
                     RaisePropertyChanged("Name");
                 }
             }
@@ -74,55 +74,55 @@
         {
             get
             {
-                return _moduleDescription;
+                return _description;
             }
 
             set
             {
-                if (_moduleDescription != value)
+                if (_description != value)
                 {
-                    _moduleDescription = value;
+                    _description = value;
                     RaisePropertyChanged("Description");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the methods as a string.
+        /// Gets or sets the members as a string.
         /// </summary>
-        public string MethodsString
+        public string MembersString
         {
             get
             {
-                return _methodsString;
+                return _membersString;
             }
 
             set
             {
-                if (_methodsString != value)
+                if (_membersString != value)
                 {
-                    _methodsString = value;
-                    RaisePropertyChanged("MethodsString");
+                    _membersString = value;
+                    RaisePropertyChanged("MembersString");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the methods in the current module.
+        /// Gets or sets the members in the current module.
         /// </summary>
-        public ObservableCollection<ModuleMethod> Methods
+        public ObservableCollection<ModuleMember> Members
         {
             get
             {
-                return _moduleMethods;
+                return _members;
             }
 
             set
             {
-                if (_moduleMethods != value)
+                if (_members != value)
                 {
-                    _moduleMethods = value;
-                    RaisePropertyChanged("Methods");
+                    _members = value;
+                    RaisePropertyChanged("Members");
                 }
             }
         }
@@ -137,60 +137,60 @@
         }
 
         /// <summary>
-        /// AddMethod adds a method to the current module.
+        /// AddMember adds a member to the current module.
         /// </summary>
-        /// <param name="method">Specifiex module method.</param>
-        public void AddMethod(ModuleMethod method)
+        /// <param name="member">Specifies module member.</param>
+        public void AddMember(ModuleMember member)
         {
-            Methods.Add(method);
+            Members.Add(member);
         }
 
         /// <summary>
-        /// AddMethod adds a method to the current module with the specified properties.
+        /// AddMember adds a member to the current module with the specified properties.
         /// </summary>
-        /// <param name="name">Method name.</param>
-        /// <param name="description">Method description.</param>
-        /// <param name="parameters">Method parameters.</param>
-        /// <param name="returnType">Method return type.</param>
-        public void AddMethod(string name, string description, ObservableCollection<MethodParameter> parameters, string returnType)
+        /// <param name="name">Member name.</param>
+        /// <param name="description">Member description.</param>
+        /// <param name="parameters">Member parameters.</param>
+        /// <param name="returnType">Member return type.</param>
+        public void AddMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType)
         {
-            AddMethod(new ModuleMethod(name, description, parameters, returnType));
+            AddMember(new ModuleMember(name, description, parameters, returnType));
         }
 
         /// <summary>
-        /// MethodCount gets the number of methods in Methods.
+        /// MemberCount gets the number of members in Members.
         /// </summary>
-        /// <returns>Methods.Count().</returns>
-        public int MethodCount()
+        /// <returns>Members.Count().</returns>
+        public int MemberCount()
         {
-            return Methods.Count();
+            return Members.Count();
         }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.
         /// </summary>
-        /// <returns>A desired format for the module name, description and all methods contained in module.</returns>
+        /// <returns>A desired format for the module name, description and all members contained in module.</returns>
         public override string ToString()
         {
             string s = Name + @":" + "\n" + Description;
 
-            s += "\n" + MethodsToString(Methods);
+            s += "\n" + MembersToString(Members);
 
             return s;
         }
 
         /// <summary>
-        /// Returns a collection of ModuleMethod objects as a string.
+        /// Returns a collection of ModuleMember objects as a string.
         /// </summary>
-        /// <param name="methods">A collection of ModuleMethods.</param>
-        /// <returns>String of the ModuleMethods.</returns>
-        public string MethodsToString(ObservableCollection<ModuleMethod> methods)
+        /// <param name="members">A collection of ModuleMembers.</param>
+        /// <returns>String of the ModuleMembers.</returns>
+        public string MembersToString(ObservableCollection<ModuleMember> members)
         {
             string s = string.Empty;
 
-            foreach (ModuleMethod method in methods)
+            foreach (ModuleMember member in members)
             {
-                s += method.ToString() + "\n";
+                s += member.ToString() + "\n";
             }
 
             return s;

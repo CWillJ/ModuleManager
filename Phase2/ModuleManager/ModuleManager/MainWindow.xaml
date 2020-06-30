@@ -42,7 +42,7 @@
             <!-- Module Template -->
             <TreeView ItemsSource="{Binding Path=Modules}" Width="200">
                 <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Methods}">
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
                         <TextBlock Text="{Binding Path=Name}"/>
 
                         <!-- Method Template -->

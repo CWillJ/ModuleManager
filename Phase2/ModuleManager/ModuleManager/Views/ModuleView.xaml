@@ -21,7 +21,7 @@
                             <TextBox Text="{Binding Path=Name, Mode=OneWay}"
                                      Width="100" />
                             <Grid>
-                                <local:MethodView x:Name="MethodViewControl" />
+                                <local:MemberView x:Name="MemberViewControl" />
                             </Grid>
                         </StackPanel>
                     </DataTemplate>

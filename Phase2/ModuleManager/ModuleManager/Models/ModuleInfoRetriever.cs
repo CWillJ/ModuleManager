@@ -91,16 +91,16 @@
 
         private Classes.Module GetSingleModule(Type type)
         {
-            ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
-            ObservableCollection<MethodParameter> parameters = new ObservableCollection<MethodParameter>();
+            ObservableCollection<ModuleMember> members = new ObservableCollection<ModuleMember>();
+            ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
 
             if (!type.IsPublic)
             {
                 return null;
             }
 
-            // start with empty method and parameter collections
-            methods.Clear();
+            // start with empty member and parameter collections
+            members.Clear();
             parameters.Clear();
 
             // get constructor information and loop through the class's public constructors
@@ -112,7 +112,7 @@
                 ParameterInfo[] paramList = constructor.GetParameters();
                 foreach (var p in paramList)
                 {
-                    parameters.Add(new MethodParameter(
+                    parameters.Add(new MemberParameter(
                         p.ParameterType.ToString(),
                         p.Name,
                         @"Constructor parameter description"));
@@ -120,7 +120,7 @@
 
                 // TODO need to actually get the constructor description. Will be similar to
                 // GetSummaryFromXML but with a ConstructorInfo type instead of a MemberInfo type
-                methods.Add(new ModuleMethod(
+                members.Add(new ModuleMember(
                     @"Constructor for " + type.Name,
                     @"Constructor description",
                     parameters,
@@ -128,11 +128,11 @@
             }
 
             // get public methods from the class and loop through them
-            MemberInfo[] members = type.GetMembers(BindingFlags.Public
+            MemberInfo[] publicMembers = type.GetMembers(BindingFlags.Public
                                                   | BindingFlags.Instance
                                                   | BindingFlags.InvokeMethod);
 
-            foreach (var member in members)
+            foreach (var member in publicMembers)
             {
                 MethodInfo method = type.GetMethod(member.Name);
 
@@ -147,13 +147,13 @@
                 parameters.Clear();
                 foreach (var p in paramList)
                 {
-                    parameters.Add(new MethodParameter(
+                    parameters.Add(new MemberParameter(
                         p.ParameterType.ToString(),
                         p.Name,
                         GetParamFromXML(Dll, member)));
                 }
 
-                methods.Add(new ModuleMethod(
+                members.Add(new ModuleMember(
                     member.Name,
                     GetSummaryFromXML(Dll, member),
                     parameters,
@@ -162,7 +162,7 @@
                 parameters.Clear();
             }
 
-            return new Classes.Module(type.Name, GetModuleInfoFromXML(Dll, type), methods);
+            return new Classes.Module(type.Name, GetModuleInfoFromXML(Dll, type), members);
         }
 
         private string GetSummaryFromXML(string dllPath, MemberInfo member)

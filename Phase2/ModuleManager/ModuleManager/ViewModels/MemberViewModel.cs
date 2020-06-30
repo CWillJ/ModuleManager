@@ -6,12 +6,12 @@
     /// <summary>
     /// Method class view model.
     /// </summary>
-    public class MethodViewModel
+    public class MemberViewModel
     {
         /// <summary>
         /// Gets or sets the Methods from a module.
         /// </summary>
-        public ObservableCollection<ModuleMethod> Methods { get; set; }
+        public ObservableCollection<ModuleMember> Members { get; set; }
 
         /// <summary>
         /// Loads methods of the current module.
