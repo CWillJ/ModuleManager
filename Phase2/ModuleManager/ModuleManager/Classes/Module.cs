@@ -3,6 +3,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Security.Cryptography;
 
     /// <summary>
     /// Module object holds the name and description of a module.
@@ -172,9 +173,14 @@
         /// <returns>A desired format for the module name, description and all members contained in module.</returns>
         public override string ToString()
         {
-            string s = Name + @":" + "\n" + Description;
+            string s = Name + @":" + "\n";
 
-            s += "\n" + MembersToString(Members);
+            if (Description != null || Description != string.Empty)
+            {
+                s += Description + "\n\n";
+            }
+
+            s += MembersToString(Members);
 
             return s;
         }

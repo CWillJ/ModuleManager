@@ -111,19 +111,37 @@
         /// <returns>A desired format for the member description, parameters and return type.</returns>
         public override string ToString()
         {
-            string s = Name + @":" + "\n" + Description;
+            string s = Name + @":" + "\n";
 
-            foreach (MemberParameter parameter in Parameters)
+            if (Description != null || Description != string.Empty)
             {
-                s += parameter.ToString() + @", ";
+                s += Description + "\n\n";
+            }
+
+            if (Parameters.Count == 0)
+            {
+                s += @"Parameters: none" + "\n";
+            }
+            else
+            {
+                s += @"Parameters:" + "\n";
+
+                foreach (MemberParameter parameter in Parameters)
+                {
+                    s += parameter.ToString() + @", ";
+                }
             }
 
             if (ReturnType != string.Empty && ReturnType != null)
             {
-                s += "\n" + "Return Type: " + ReturnType;
+                s += "Return Type: " + ReturnType;
+            }
+            else
+            {
+                s += "Return Type: none";
             }
 
-            return s;
+            return s + "\n";
         }
     }
 }

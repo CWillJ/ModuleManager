@@ -8,11 +8,11 @@
         xmlns:data="clr-namespace:ModuleManager.Classes"
         xmlns:view="clr-namespace:ModuleManager.Views"
         mc:Ignorable="d"
-        Title="Load dll's Demo" Height="450" Width="800">
+        Title="Module Manager" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
@@ -40,7 +40,10 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,20">
 
             <!-- Module Template -->
-            <TreeView ItemsSource="{Binding Path=Modules}" Width="200">
+            <TreeView ItemsSource="{Binding Path=Modules}"
+                      Width="200"
+                      BorderThickness="1"
+                      BorderBrush="Black">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
                         <TextBlock Text="{Binding Path=Name}"/>
@@ -57,7 +60,11 @@
 
             </TreeView>
 
-            <TextBlock Text="{Binding Path=MethodText, Mode=TwoWay}" Width="550"/>
+            <Border BorderThickness="1" BorderBrush="Black" Margin="10,0">
+                <ScrollViewer>
+                    <TextBlock Text="{Binding Path=MemberText}" Width="500"/>
+                </ScrollViewer>
+            </Border>
 
         </StackPanel>
     </Grid>

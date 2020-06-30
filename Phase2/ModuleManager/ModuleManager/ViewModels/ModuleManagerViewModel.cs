@@ -1,6 +1,7 @@
 ﻿namespace ModuleManager.ViewModels
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Windows.Forms;
     using ModuleManager.Classes;
     using ModuleManager.Models;
@@ -8,9 +9,10 @@
     /// <summary>
     /// ModuleManagerViewModel will handle commands from the main view.
     /// </summary>
-    public class ModuleManagerViewModel
+    public class ModuleManagerViewModel : INotifyPropertyChanged
     {
-        private ModuleMember _selectedModule;
+        private object _selectedModule;
+        private string _memberText;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
@@ -18,12 +20,18 @@
         public ModuleManagerViewModel()
         {
             _selectedModule = null;
+            _memberText = string.Empty;
             FileLocation = string.Empty;
             Modules = new ObservableCollection<Module>();
             LoadMyFileCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
             DisplayCommand = new MyICommand(DisplayMethodData);
         }
+
+        /// <summary>
+        /// PropertyChanged event handler.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets or sets the LoadMyFileCommand as a MyICommand.
@@ -46,19 +54,26 @@
         public string FileLocation { get; set; }
 
         /// <summary>
-        /// Gets or sets the member text.
+        /// Gets or sets MemberText.
         /// </summary>
-        public string MemberText { get; set; }
+        public string MemberText
+        {
+            get
+            {
+                return _memberText;
+            }
+
+            set
+            {
+                _memberText = value;
+                RaisePropertyChanged("MemberText");
+            }
+        }
 
         /// <summary>
-        /// Gets or sets the collection of Modules.
+        /// Gets or sets the selected module from the TreeView.
         /// </summary>
-        public ObservableCollection<Module> Modules { get; set; }
-
-        /// <summary>
-        /// Gets or sets the SelectedModule.
-        /// </summary>
-        public ModuleMember SelectedModule
+        public object SelectedModule
         {
             get
             {
@@ -68,13 +83,28 @@
             set
             {
                 _selectedModule = value;
-                DisplayCommand.RaiseCanExecuteChanged();
+                MemberText = _selectedModule.ToString();
+                RaisePropertyChanged("SelectedModule");
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the collection of Modules.
+        /// </summary>
+        public ObservableCollection<Module> Modules { get; set; }
+
+        /// <summary>
+        /// Raise a property changed event.
+        /// </summary>
+        /// <param name="property">Property passed in as a string.</param>
+        public void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         private void DisplayMethodData()
         {
-            MemberText = SelectedModule.ToString();
+            return;
         }
 
         private void FindDLLs()
@@ -91,6 +121,8 @@
             {
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
+
+            MemberText = Modules[0].ToString();
         }
 
         private void SaveConfig()
