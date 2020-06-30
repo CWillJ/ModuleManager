@@ -47,17 +47,9 @@
 
                         <!-- Method Template -->
                         <HierarchicalDataTemplate.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Path=Parameters}">
+                            <DataTemplate>
                                 <TextBlock Text="{Binding Path=Name}" />
-
-                                <!-- Parameters Template -->
-                                <HierarchicalDataTemplate.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" />
-                                    </DataTemplate>
-                                </HierarchicalDataTemplate.ItemTemplate>
-
-                            </HierarchicalDataTemplate>
+                            </DataTemplate>
                         </HierarchicalDataTemplate.ItemTemplate>
 
                     </HierarchicalDataTemplate>
