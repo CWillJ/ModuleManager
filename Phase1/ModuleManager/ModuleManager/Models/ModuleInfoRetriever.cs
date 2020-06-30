@@ -134,13 +134,13 @@
 
             foreach (var member in members)
             {
-                // skip if the the member is the constructor
-                if (member.Name == ".ctor")
+                MethodInfo method = type.GetMethod(member.Name);
+
+                // skip if method is null (if the method is a constructor or property)
+                if (method == null)
                 {
                     continue;
                 }
-
-                MethodInfo method = type.GetMethod(member.Name);
 
                 // loop through the method's parameters
                 ParameterInfo[] paramList = method.GetParameters();

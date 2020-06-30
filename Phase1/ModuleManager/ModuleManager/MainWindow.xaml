@@ -57,7 +57,7 @@
 
             </TreeView>
 
-            <TextBlock Text="{Binding Path=MethodText}" Width="550"/>
+            <TextBlock Text="{Binding Path=MethodText, Mode=TwoWay}" Width="550"/>
 
         </StackPanel>
     </Grid>

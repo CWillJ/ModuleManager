@@ -10,15 +10,19 @@
     /// </summary>
     public class ModuleManagerViewModel
     {
+        private ModuleMethod _selectedModule;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
         /// </summary>
         public ModuleManagerViewModel()
         {
             FileLocation = string.Empty;
+            _selectedModule = null;
             Modules = new ObservableCollection<Module>();
             LoadMyFileCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
+            DisplayCommand = new MyICommand(DisplayMethodData);
         }
 
         /// <summary>
@@ -32,14 +36,46 @@
         public MyICommand SaveConfigCommand { get; set; }
 
         /// <summary>
+        /// Gets or sets the DisplayCommand as a MyICommand.
+        /// </summary>
+        public MyICommand DisplayCommand { get; set; }
+
+        /// <summary>
         /// Gets or sets the file location as a string.
         /// </summary>
         public string FileLocation { get; set; }
 
         /// <summary>
+        /// Gets or sets the Method Text.
+        /// </summary>
+        public string MethodText { get; set; }
+
+        /// <summary>
         /// Gets or sets the collection of Modules.
         /// </summary>
         public ObservableCollection<Module> Modules { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SelectedModule.
+        /// </summary>
+        public ModuleMethod SelectedModule
+        {
+            get
+            {
+                return _selectedModule;
+            }
+
+            set
+            {
+                _selectedModule = value;
+                DisplayCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private void DisplayMethodData()
+        {
+            MethodText = SelectedModule.ToString();
+        }
 
         private void FindDLLs()
         {
