@@ -8,6 +8,7 @@
     /// </summary>
     public class ModuleMember
     {
+        private bool _isSelected;
         private string _name;
         private string _description;
         private ObservableCollection<MemberParameter> _parameters;
@@ -18,6 +19,7 @@
         /// </summary>
         public ModuleMember()
         {
+            _isSelected = false;
             _name = string.Empty;
             _description = string.Empty;
             _parameters = new ObservableCollection<MemberParameter>();
@@ -34,10 +36,28 @@
         /// <param name="returnType">Member return type.</param>
         public ModuleMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType)
         {
-            Name = name;
-            Description = description;
-            Parameters = parameters;
-            ReturnType = returnType;
+            _isSelected = false;
+            _name = name;
+            _description = description;
+            _parameters = parameters;
+            _returnType = returnType;
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the member is selected.
+        /// </summary>
+        public bool IsSelected
+        {
+            get
+            {
+                return _isSelected;
+            }
+
+            set
+            {
+                _isSelected = value;
+                //// RaisePropertyChanged("IsSelected");
+            }
         }
 
         /// <summary>

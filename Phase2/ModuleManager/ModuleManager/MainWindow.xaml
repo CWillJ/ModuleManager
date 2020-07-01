@@ -7,6 +7,7 @@
         xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
         xmlns:data="clr-namespace:ModuleManager.Classes"
         xmlns:view="clr-namespace:ModuleManager.Views"
+        xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
         mc:Ignorable="d"
         Title="Module Manager" Height="450" Width="800">
     <Grid>
@@ -40,10 +41,18 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,20">
 
             <!-- Module Template -->
+            <!-- behaviors:SelectedTreeViewItemBehavior.TreeViewSelectedItem="{Binding SelectedModule}" -->
             <TreeView ItemsSource="{Binding Path=Modules}"
                       Width="200"
                       BorderThickness="1"
                       BorderBrush="Black">
+
+                <!--<TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected}" />
+                    </Style>
+                </TreeView.Resources>-->
+
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
                         <TextBlock Text="{Binding Path=Name}"/>
@@ -61,7 +70,7 @@
             </TreeView>
 
             <Border BorderThickness="1" BorderBrush="Black" Margin="10,0">
-                <ScrollViewer Margin="10,0,0,0">
+                <ScrollViewer Margin="10,5,0,0">
                     <TextBlock Text="{Binding Path=MemberText}" Width="480"/>
                 </ScrollViewer>
             </Border>

@@ -9,6 +9,7 @@
     /// </summary>
     public class Module : INotifyPropertyChanged
     {
+        private bool _isSelected;
         private string _name;
         private string _description;
         private string _membersString;
@@ -20,6 +21,7 @@
         /// </summary>
         public Module()
         {
+            _isSelected = false;
             _name = string.Empty;
             _description = string.Empty;
             _membersString = string.Empty;
@@ -35,6 +37,7 @@
         /// <param name="members">Module methods.</param>
         public Module(string name, string description, ObservableCollection<ModuleMember> members)
         {
+            _isSelected = false;
             _name = name;
             _description = description;
             _membersString = MembersToString(members);
@@ -46,6 +49,23 @@
         /// The event handler that handles a property change.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the member is selected.
+        /// </summary>
+        public bool IsSelected
+        {
+            get
+            {
+                return _isSelected;
+            }
+
+            set
+            {
+                _isSelected = value;
+                RaisePropertyChanged("IsSelected");
+            }
+        }
 
         /// <summary>
         /// Gets or sets the module name.

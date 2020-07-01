@@ -11,7 +11,6 @@
     /// </summary>
     public class ModuleManagerViewModel : INotifyPropertyChanged
     {
-        private object _selectedModule;
         private string _memberText;
 
         /// <summary>
@@ -19,7 +18,6 @@
         /// </summary>
         public ModuleManagerViewModel()
         {
-            _selectedModule = null;
             _memberText = string.Empty;
             FileLocation = string.Empty;
             Modules = new ObservableCollection<Module>();
@@ -71,24 +69,6 @@
         }
 
         /// <summary>
-        /// Gets or sets the selected module from the TreeView.
-        /// </summary>
-        public object SelectedModule
-        {
-            get
-            {
-                return _selectedModule;
-            }
-
-            set
-            {
-                _selectedModule = value;
-                MemberText = _selectedModule.ToString();
-                RaisePropertyChanged("SelectedModule");
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the collection of Modules.
         /// </summary>
         public ObservableCollection<Module> Modules { get; set; }
@@ -122,7 +102,10 @@
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
 
-            MemberText = Modules[0].Members[4].ToString();
+            MemberText = Modules[0].Members[2].ToString();
+
+            //// Modules[0].IsSelected = true;
+            //// MessageBox.Show(Modules[0].IsSelected.ToString());
         }
 
         private void SaveConfig()
