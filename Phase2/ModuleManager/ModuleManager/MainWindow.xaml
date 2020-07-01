@@ -61,8 +61,8 @@
             </TreeView>
 
             <Border BorderThickness="1" BorderBrush="Black" Margin="10,0">
-                <ScrollViewer>
-                    <TextBlock Text="{Binding Path=MemberText}" Width="500"/>
+                <ScrollViewer Margin="10,0,0,0">
+                    <TextBlock Text="{Binding Path=MemberText}" Width="480"/>
                 </ScrollViewer>
             </Border>
 

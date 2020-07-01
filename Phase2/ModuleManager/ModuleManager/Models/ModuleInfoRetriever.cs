@@ -92,77 +92,122 @@
         private Classes.Module GetSingleModule(Type type)
         {
             ObservableCollection<ModuleMember> members = new ObservableCollection<ModuleMember>();
-            ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
 
             if (!type.IsPublic)
             {
                 return null;
             }
 
-            // start with empty member and parameter collections
-            members.Clear();
-            parameters.Clear();
+            // Get Constructrors
+            members = AddConstructorsToCollection(members, type);
 
-            // get constructor information and loop through the class's public constructors
-            ConstructorInfo[] constructors = type.GetConstructors();
+            // Get Properties
+            members = AddPropertiesToCollection(members, type);
 
-            foreach (var constructor in constructors)
+            // get public methods from the class and loop through them
+            members = AddMethodsToCollection(members, type);
+
+            return new Classes.Module(type.Name, GetModuleInfoFromXML(Dll, type), members);
+        }
+
+        /// <summary>
+        /// AddConstructorsToCollection takes in an ObservableCollection of ModuleMember type and a
+        /// Type in order to get all constructors from that Type and add them to the collection.
+        /// </summary>
+        /// <param name="members">An ObservableCollection to append members to.</param>
+        /// <param name="type">The Type where the members are coming from.</param>
+        /// <returns>The original ObservableCollection with appened members from type.</returns>
+        private ObservableCollection<ModuleMember> AddConstructorsToCollection(
+            ObservableCollection<ModuleMember> members,
+            Type type)
+        {
+            foreach (var constructor in type.GetConstructors())
             {
-                // loop through the constructor's parameters
-                ParameterInfo[] paramList = constructor.GetParameters();
-                foreach (var p in paramList)
-                {
-                    parameters.Add(new MemberParameter(
-                        p.ParameterType.ToString(),
-                        p.Name,
-                        @"Constructor parameter description"));
-                }
-
                 // TODO need to actually get the constructor description. Will be similar to
                 // GetSummaryFromXML but with a ConstructorInfo type instead of a MemberInfo type
                 members.Add(new ModuleMember(
                     @"Constructor for " + type.Name,
                     @"Constructor description",
-                    parameters,
+                    GetParametersFromList(constructor.GetParameters()),
                     null));
             }
 
-            // get public methods from the class and loop through them
-            MemberInfo[] publicMembers = type.GetMembers(BindingFlags.Public
-                                                  | BindingFlags.Instance
-                                                  | BindingFlags.InvokeMethod);
+            return members;
+        }
 
-            foreach (var member in publicMembers)
+        /// <summary>
+        /// AddPropertiesToCollection takes in an ObservableCollection of ModuleMember type and a
+        /// Type in order to get all properties from that Type and add them to the collection.
+        /// </summary>
+        /// <param name="members">An ObservableCollection to append members to.</param>
+        /// <param name="type">The Type where the members are coming from.</param>
+        /// <returns>The original ObservableCollection with appened members from type.</returns>
+        private ObservableCollection<ModuleMember> AddPropertiesToCollection(
+            ObservableCollection<ModuleMember> members,
+            Type type)
+        {
+            foreach (var property in type.GetProperties())
             {
-                MethodInfo method = type.GetMethod(member.Name);
+                members.Add(new ModuleMember(
+                    property.Name,
+                    @"Property description",
+                    GetParametersFromList(property.GetIndexParameters()),
+                    null));
+            }
 
+            return members;
+        }
+
+        /// <summary>
+        /// AddMethodsToCollection takes in an ObservableCollection of ModuleMember type and a
+        /// Type in order to get all methods from that Type and add them to the collection.
+        /// </summary>
+        /// <param name="members">An ObservableCollection to append members to.</param>
+        /// <param name="type">The Type where the members are coming from.</param>
+        /// <returns>The original ObservableCollection with appened members from type.</returns>
+        private ObservableCollection<ModuleMember> AddMethodsToCollection(
+            ObservableCollection<ModuleMember> members,
+            Type type)
+        {
+            foreach (var method in type.GetMethods(BindingFlags.Public
+                                      | BindingFlags.Instance
+                                      | BindingFlags.InvokeMethod))
+            {
                 // skip if method is null (if the method is a constructor or property)
                 if (method == null)
                 {
                     continue;
                 }
 
-                // loop through the method's parameters
-                ParameterInfo[] paramList = method.GetParameters();
-                parameters.Clear();
-                foreach (var p in paramList)
-                {
-                    parameters.Add(new MemberParameter(
-                        p.ParameterType.ToString(),
-                        p.Name,
-                        GetParamFromXML(Dll, member)));
-                }
-
                 members.Add(new ModuleMember(
-                    member.Name,
-                    GetSummaryFromXML(Dll, member),
-                    parameters,
+                    method.Name,
+                    GetSummaryFromXML(Dll, method),
+                    GetParametersFromList(method.GetParameters()),
                     method.ReturnType.ToString()));
-
-                parameters.Clear();
             }
 
-            return new Classes.Module(type.Name, GetModuleInfoFromXML(Dll, type), members);
+            return members;
+        }
+
+        /// <summary>
+        /// GetParametersFromList will return an ObservableCollection of MemberParameter
+        /// type from a list of ParameterInfo type.
+        /// </summary>
+        /// <param name="paramList">A list of ParameterInfo type.</param>
+        /// <returns>An ObservableCollection of MemberParameter type.</returns>
+        private ObservableCollection<MemberParameter> GetParametersFromList(ParameterInfo[] paramList)
+        {
+            ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
+
+            foreach (var p in paramList)
+            {
+                parameters.Add(new MemberParameter(
+                    p.ParameterType.ToString(),
+                    p.Name,
+                    GetParamFromXML(Dll, p.Member)));
+            }
+
+            return parameters;
         }
 
         private string GetSummaryFromXML(string dllPath, MemberInfo member)

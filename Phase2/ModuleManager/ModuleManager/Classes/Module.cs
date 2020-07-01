@@ -3,7 +3,6 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
-    using System.Security.Cryptography;
 
     /// <summary>
     /// Module object holds the name and description of a module.

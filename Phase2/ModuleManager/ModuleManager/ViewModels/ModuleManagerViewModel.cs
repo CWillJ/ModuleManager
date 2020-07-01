@@ -122,7 +122,7 @@
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
 
-            MemberText = Modules[0].ToString();
+            MemberText = Modules[0].Members[4].ToString();
         }
 
         private void SaveConfig()

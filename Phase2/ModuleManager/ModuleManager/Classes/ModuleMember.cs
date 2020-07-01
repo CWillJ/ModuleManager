@@ -128,8 +128,10 @@
 
                 foreach (MemberParameter parameter in Parameters)
                 {
-                    s += parameter.ToString() + @", ";
+                    s += parameter.ToString();
                 }
+
+                s += "\n";
             }
 
             if (ReturnType != string.Empty && ReturnType != null)
