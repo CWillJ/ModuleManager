@@ -21,9 +21,9 @@
             _memberText = string.Empty;
             FileLocation = string.Empty;
             Modules = new ObservableCollection<Module>();
+            ConfigFileHandler = new ConfigFileManager("ConfigFile.xml");
             LoadMyFileCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
-            DisplayCommand = new MyICommand(DisplayMethodData);
         }
 
         /// <summary>
@@ -42,14 +42,14 @@
         public MyICommand SaveConfigCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the DisplayCommand as a MyICommand.
-        /// </summary>
-        public MyICommand DisplayCommand { get; set; }
-
-        /// <summary>
         /// Gets or sets the file location as a string.
         /// </summary>
         public string FileLocation { get; set; }
+
+        /// <summary>
+        /// Gets or sets a ConfigFileManager object.
+        /// </summary>
+        public ConfigFileManager ConfigFileHandler { get; set; }
 
         /// <summary>
         /// Gets or sets MemberText.
@@ -82,19 +82,16 @@
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        private void DisplayMethodData()
-        {
-            return;
-        }
-
         private void FindDLLs()
         {
-            //// ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(LookForFile());
+            //// ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(GetModuleDirectory());
             //// ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
 
             // Bring up explorer to allow user to choose a file location
-            FileLocation = LookForFile();
+            FileLocation = GetModuleDirectory();
             ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
+
+            Modules.Clear();
 
             // Check the file location for any .dll's
             foreach (var mod in infoRetriever.GetInfoFromDll())
@@ -102,7 +99,7 @@
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
 
-            MemberText = Modules[0].Members[2].ToString();
+            MemberText = Modules[0].ToString();
 
             //// Modules[0].IsSelected = true;
             //// MessageBox.Show(Modules[0].IsSelected.ToString());
@@ -110,15 +107,17 @@
 
         private void SaveConfig()
         {
-            MessageBox.Show(@"Configuration File Saved (not yet)");
+            ConfigFileHandler.Save(Modules);
+            MessageBox.Show(@"Configuration File Saved to " + ConfigFileHandler.ConfigFileLocation);
         }
 
         private void LoadConfig()
         {
-            return;
+            Modules = ConfigFileHandler.Load();
+            MessageBox.Show(@"Configuration File Loaded From " + ConfigFileHandler.ConfigFileLocation);
         }
 
-        private string LookForFile()
+        private string GetModuleDirectory()
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 

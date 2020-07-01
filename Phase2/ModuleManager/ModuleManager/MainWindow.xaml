@@ -13,7 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
@@ -22,7 +22,7 @@
             Grid.Row="0"
             Height="30"
             Width="125"
-            Margin="30,5,5,5"
+            Margin="30,15,5,5"
             Command="{Binding LoadMyFileCommand}"
             Content="Load Modules"
             />
@@ -32,7 +32,7 @@
             Grid.Row="0"
             Height="30"
             Width="125"
-            Margin="30,5,5,5"
+            Margin="30,15,5,5"
             Command="{Binding SaveConfigCommand}"
             Content="Save Configuration"
             />
@@ -40,40 +40,55 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,20">
 
-            <!-- Module Template -->
-            <!-- behaviors:SelectedTreeViewItemBehavior.TreeViewSelectedItem="{Binding SelectedModule}" -->
-            <TreeView ItemsSource="{Binding Path=Modules}"
-                      Width="200"
-                      BorderThickness="1"
-                      BorderBrush="Black">
+            <StackPanel>
+                <TextBlock Text="Modules" TextAlignment="Center"/>
 
-                <!--<TreeView.Resources>
-                    <Style TargetType="TreeViewItem">
-                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected}" />
-                    </Style>
-                </TreeView.Resources>-->
+                <!-- Module Template -->
+                <!-- behaviors:SelectedTreeViewItemBehavior.TreeViewSelectedItem="{Binding SelectedModule}" -->
+                <TreeView ItemsSource="{Binding Path=Modules}"
+                          SelectedItemChanged="TreeView_SelectedItemChanged"
+                          Width="200"
+                          Height="275"
+                          BorderThickness="1"
+                          BorderBrush="Black">
 
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
-                        <TextBlock Text="{Binding Path=Name}"/>
+                    <!--<TreeView.Resources>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="IsSelected" Value="{Binding Path=IsSelected}" />
+                        </Style>
+                    </TreeView.Resources>-->
 
-                        <!-- Method Template -->
-                        <HierarchicalDataTemplate.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=Name}" />
-                            </DataTemplate>
-                        </HierarchicalDataTemplate.ItemTemplate>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Path=Enabled}" Margin="5,0"/>
+                                <TextBlock Text="{Binding Path=Name}"/>
+                            </StackPanel>
 
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
+                            <!-- Method Template -->
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
 
-            </TreeView>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
 
-            <Border BorderThickness="1" BorderBrush="Black" Margin="10,0">
-                <ScrollViewer Margin="10,5,0,0">
-                    <TextBlock Text="{Binding Path=MemberText}" Width="480"/>
-                </ScrollViewer>
-            </Border>
+                </TreeView>
+            </StackPanel>
+
+            <!-- Text="{Binding Path=MemberText}" -->
+            
+            <StackPanel>
+                <TextBlock TextAlignment="Center" Text="Description" />
+
+                <Border BorderThickness="1" BorderBrush="Black" Margin="10,0" Height="275">
+                    <ScrollViewer Margin="10,5,0,0">
+                        <TextBlock x:Name="MemberText" Width="480"/>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
 
         </StackPanel>
     </Grid>

@@ -10,6 +10,7 @@
     public class Module : INotifyPropertyChanged
     {
         private bool _isSelected;
+        private bool _enabled;
         private string _name;
         private string _description;
         private string _membersString;
@@ -22,6 +23,7 @@
         public Module()
         {
             _isSelected = false;
+            _enabled = false;
             _name = string.Empty;
             _description = string.Empty;
             _membersString = string.Empty;
@@ -38,6 +40,7 @@
         public Module(string name, string description, ObservableCollection<ModuleMember> members)
         {
             _isSelected = false;
+            _enabled = false;
             _name = name;
             _description = description;
             _membersString = MembersToString(members);
@@ -64,6 +67,26 @@
             {
                 _isSelected = value;
                 RaisePropertyChanged("IsSelected");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the module is enabled or disabled.
+        /// </summary>
+        public bool Enabled
+        {
+            get
+            {
+                return _enabled;
+            }
+
+            set
+            {
+                if (_enabled != value)
+                {
+                    _enabled = value;
+                    RaisePropertyChanged("Enabled");
+                }
             }
         }
 
@@ -192,7 +215,8 @@
         /// <returns>A desired format for the module name, description and all members contained in module.</returns>
         public override string ToString()
         {
-            string s = Name + @":" + "\n";
+            string s = Enabled.ToString() + "\n";
+            s += Name + @":" + "\n";
 
             if (Description != null || Description != string.Empty)
             {
