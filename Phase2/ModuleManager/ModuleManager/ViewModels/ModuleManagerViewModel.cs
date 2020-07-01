@@ -2,7 +2,9 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.IO;
     using System.Windows.Forms;
+    using System.Xml.Serialization;
     using ModuleManager.Classes;
     using ModuleManager.Models;
 
@@ -19,17 +21,35 @@
         public ModuleManagerViewModel()
         {
             _memberText = string.Empty;
+            UseSaveFileDialog = true;
             FileLocation = string.Empty;
-            Modules = new ObservableCollection<Module>();
             ConfigFileHandler = new ConfigFileManager("ConfigFile.xml");
             LoadMyFileCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
+
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
+            {
+                Modules = LoadConfig();
+                if (Modules == null)
+                {
+                    Modules = new ObservableCollection<Module>();
+                }
+            }
+            else
+            {
+                Modules = new ObservableCollection<Module>();
+            }
         }
 
         /// <summary>
         /// PropertyChanged event handler.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether SaveFileDialog is used on save settings.
+        /// </summary>
+        public bool UseSaveFileDialog { get; set; }
 
         /// <summary>
         /// Gets or sets the LoadMyFileCommand as a MyICommand.
@@ -107,14 +127,51 @@
 
         private void SaveConfig()
         {
-            ConfigFileHandler.Save(Modules);
-            MessageBox.Show(@"Configuration File Saved to " + ConfigFileHandler.ConfigFileLocation);
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Module>));
+            string saveFile = string.Empty;
+
+            if (UseSaveFileDialog)
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                    saveFileDialog.Filter = "xml files (*.xml)|*.xml";
+                    saveFileDialog.Title = "Save Configuration File";
+                    saveFileDialog.RestoreDirectory = true;
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        saveFile = saveFileDialog.FileName;
+                    }
+
+                    if (saveFile == string.Empty)
+                    {
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                saveFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
+            }
+
+            using (StreamWriter wr = new StreamWriter(saveFile))
+            {
+                serializer.Serialize(wr, Modules);
+            }
         }
 
-        private void LoadConfig()
+        private ObservableCollection<Module> LoadConfig()
         {
-            Modules = ConfigFileHandler.Load();
-            MessageBox.Show(@"Configuration File Loaded From " + ConfigFileHandler.ConfigFileLocation);
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Module>));
+            ObservableCollection<Module> modules = new ObservableCollection<Module>();
+
+            using (StreamReader rd = new StreamReader(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
+            {
+                modules = serializer.Deserialize(rd) as ObservableCollection<Module>;
+            }
+
+            return modules;
         }
 
         private string GetModuleDirectory()

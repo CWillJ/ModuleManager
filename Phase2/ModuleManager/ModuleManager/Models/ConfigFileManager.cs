@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Windows.Forms;
     using System.Xml.Serialization;
     using ModuleManager.Classes;
 
@@ -47,21 +48,21 @@
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Module>));
 
-            using (StreamWriter wr = new StreamWriter(ConfigFileLocation))
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                serializer.Serialize(wr, modules);
-            }
-        }
+                saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                saveFileDialog.Filter = "xml files (*.xml)|*.xml";
+                saveFileDialog.Title = "Save Configuration File";
+                saveFileDialog.RestoreDirectory = true;
 
-        /// <summary>
-        /// Saves an ObservableCollection of type Module to an xml file.
-        /// </summary>
-        /// <param name="fileLocation">A string representing a file location.</param>
-        /// <param name="modules">ObservableCollection of type Module.</param>
-        public void Save(string fileLocation, ObservableCollection<Module> modules)
-        {
-            ConfigFileLocation = fileLocation;
-            Save(modules);
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter wr = new StreamWriter(saveFileDialog.FileName))
+                    {
+                        serializer.Serialize(wr, modules);
+                    }
+                }
+            }
         }
 
         /// <summary>
