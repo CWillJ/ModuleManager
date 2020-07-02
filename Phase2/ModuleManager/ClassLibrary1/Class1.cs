@@ -51,7 +51,7 @@
         {
             Property1 = str;
             Property2 = 21;
-            System.Console.WriteLine(Method2(Property1, Property2));
+            System.Console.WriteLine(Method1(Property1, Property2));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@
         /// <param name="str">This parameter is a string.</param>
         /// <param name="num">And this one is an integer.</param>
         /// <returns>str plus a string of the integer num.</returns>
-        public string Method2(string str, int num)
+        public string Method1(string str, int num)
         {
             return str + num.ToString();
         }

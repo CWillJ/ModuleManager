@@ -113,10 +113,8 @@
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
 
+            // Future TreeViewSelectedItem Binding
             MemberText = Modules[0].ToString();
-
-            //// Modules[0].IsSelected = true;
-            //// MessageBox.Show(Modules[0].IsSelected.ToString());
         }
 
         /// <summary>

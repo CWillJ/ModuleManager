@@ -10,31 +10,30 @@
         xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
         mc:Ignorable="d"
         Title="Module Manager" Height="450" Width="800">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Button
-            HorizontalAlignment="Left"
-            Grid.Row="0"
-            Height="30"
-            Width="125"
-            Margin="30,15,5,5"
-            Command="{Binding LoadMyFileCommand}"
-            Content="Load Modules"
+                HorizontalAlignment="Left"
+                Height="30"
+                Width="125"
+                Margin="30,15,5,5"
+                Command="{Binding LoadMyFileCommand}"
+                Content="Load Modules"
             />
 
             <Button
-            HorizontalAlignment="Left"
-            Grid.Row="0"
-            Height="30"
-            Width="125"
-            Margin="30,15,5,5"
-            Command="{Binding SaveConfigCommand}"
-            Content="Save Configuration"
+                HorizontalAlignment="Left"
+                Height="30"
+                Width="125"
+                Margin="30,15,5,5"
+                Command="{Binding SaveConfigCommand}"
+                Content="Save Configuration"
             />
         </StackPanel>
 

@@ -13,7 +13,6 @@
         private bool _enabled;
         private string _name;
         private string _description;
-        private string _membersString;
         private ObservableCollection<ModuleMember> _members;
 
         /// <summary>
@@ -26,7 +25,6 @@
             _enabled = false;
             _name = string.Empty;
             _description = string.Empty;
-            _membersString = string.Empty;
             _members = new ObservableCollection<ModuleMember>();
         }
 
@@ -43,7 +41,6 @@
             _enabled = false;
             _name = name;
             _description = description;
-            _membersString = MembersToString(members);
             _members = members;
             RaisePropertyChanged("Modules");
         }
@@ -131,26 +128,6 @@
         }
 
         /// <summary>
-        /// Gets or sets the members as a string.
-        /// </summary>
-        public string MembersString
-        {
-            get
-            {
-                return _membersString;
-            }
-
-            set
-            {
-                if (_membersString != value)
-                {
-                    _membersString = value;
-                    RaisePropertyChanged("MembersString");
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the members in the current module.
         /// </summary>
         public ObservableCollection<ModuleMember> Members
@@ -224,21 +201,7 @@
                 s += Description + "\n\n";
             }
 
-            s += MembersToString(Members);
-
-            return s;
-        }
-
-        /// <summary>
-        /// Returns a collection of ModuleMember objects as a string.
-        /// </summary>
-        /// <param name="members">A collection of ModuleMembers.</param>
-        /// <returns>String of the ModuleMembers.</returns>
-        public string MembersToString(ObservableCollection<ModuleMember> members)
-        {
-            string s = string.Empty;
-
-            foreach (ModuleMember member in members)
+            foreach (var member in Members)
             {
                 s += member.ToString() + "\n";
             }

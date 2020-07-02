@@ -21,8 +21,9 @@
         public ModuleInfoRetriever()
         {
             // TODO Only used for testing. Need to set some sort of default path here.
-            //// Dll = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
-            Dll = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
+            //// DllFileName = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
+            //// DllFileName = Directory.GetCurrentDirectory() + @"\" + Assembly.GetCallingAssembly().GetName().Name + @".dll";
+            DllFileName = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
                 @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
         }
 
@@ -33,36 +34,28 @@
         public ModuleInfoRetriever(string fileName)
         {
             // TODO I need to look for dll files instead of just using a file name.
-            Dll = fileName;
+            DllFileName = fileName;
         }
 
         /// <summary>
-        /// Gets or sets Dll is the directory path of the .dll files.
+        /// Gets or sets DllFileName is the directory path of the .dll files.
         /// TODO should be renamed.
         /// </summary>
-        public string Dll { get; set; }
+        public string DllFileName { get; set; }
 
-        // Where to Get Certain Information From:
-        // From .dll
-        // Class Name:                   type.Name
-        // Method Name:                  member.Name
-        // Method Parameter Name:        p.Name.ToString()
-        // Method Parameter Type:        p.ParameterType.ToString()
-        // Method Return Parameter:      method.ReturnParameter.ToString()
-        // Method Return Parameter Type: method.ReturnType.ToString()
-        // From .xml
-        // Method Description:           GetSummaryFromXML(Dll, member)
-        // Method Return Description:    GetReturnFromXML(Dll, member)
-        // Method Parameter Description: GetParamFromXML(Dll, member)
-        // Class Description:            GetModuleInfoFromXML(Dll, Type)
+        /// <summary>
+        /// Gets or sets DllDirectory is the directory path of the .dll files.
+        /// TODO should be renamed.
+        /// </summary>
+        public string DllDirectory { get; set; }
 
-        /// <returns>Returns an collection of Module objects.</returns>
         /// <summary>
         /// GetInfoFromDll will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// From .dll.
         /// TODO need to rename because it gets info from .dll and .xml.
         /// </summary>
+        /// <returns>Returns an collection of Module objects.</returns>
         public ObservableCollection<Classes.Module> GetInfoFromDll()
         {
             ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
@@ -71,7 +64,7 @@
             // try to load the assembly from the .dll
             try
             {
-                a = Assembly.Load(File.ReadAllBytes(Dll));
+                a = Assembly.Load(File.ReadAllBytes(DllFileName));
             }
             catch (Exception e)
             {
@@ -100,13 +93,13 @@
                 return null;
             }
 
-            // Get Constructrors
+            // Get Public Constructrors
             members = AddConstructorsToCollection(members, type);
 
-            // Get Properties
+            // Get Public Properties
             members = AddPropertiesToCollection(members, type);
 
-            // get public methods from the class and loop through them
+            // Get All Public Methods
             members = AddMethodsToCollection(members, type);
 
             return new Classes.Module(type.Name, GetModuleDescription(type), members);
@@ -125,11 +118,9 @@
         {
             foreach (var constructor in type.GetConstructors())
             {
-                // TODO need to actually get the constructor description. Will be similar to
-                // GetSummaryFromXML but with a ConstructorInfo type instead of a MemberInfo type
                 members.Add(new ModuleMember(
                     @"Constructor for " + type.Name,
-                    GetMethodDescription((MemberInfo)constructor),
+                    GetMethodDescription((MemberInfo)constructor, type.GetConstructors().IndexOf(constructor)),
                     GetParametersFromList(constructor.GetParameters()),
                     null,
                     null));
@@ -183,9 +174,13 @@
                     continue;
                 }
 
+                // TODO need to get this int to be the index of the method with the same name.
+                int whatever = type.GetMethods().IndexOf(method);
+                whatever = 0;
+
                 members.Add(new ModuleMember(
                     method.Name,
-                    GetMethodDescription((MemberInfo)method),
+                    GetMethodDescription((MemberInfo)method, whatever),
                     GetParametersFromList(method.GetParameters()),
                     method.ReturnType.Name.ToString(),
                     GetMemberReturnDescription((MemberInfo)method)));
@@ -238,10 +233,11 @@
         /// of the method description of the member.
         /// </summary>
         /// <param name="member">MemberInfo to get the string from.</param>
+        /// <param name="index">Index used for methods/constructors with same name.</param>
         /// <returns>String representation of the method description.</returns>
-        private string GetMethodDescription(MemberInfo member)
+        private string GetMethodDescription(MemberInfo member, int index = 0)
         {
-            XmlNode xmlNode = GetMemberXmlNode(member);
+            XmlNode xmlNode = GetMemberXmlNode(member, index);
 
             if (xmlNode == null)
             {
@@ -292,17 +288,35 @@
         /// GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
         /// </summary>
         /// <param name="member">The MemberInfo to get the XmlNode from.</param>
+        /// <param name="nodeIndex">The specified node index to handle members with the same name.</param>
         /// <returns>XmlNode.</returns>
-        private XmlNode GetMemberXmlNode(MemberInfo member)
+        private XmlNode GetMemberXmlNode(MemberInfo member, int nodeIndex = 0)
         {
-            string xmlPath = Dll.Substring(0, Dll.LastIndexOf(".")) + @".XML";
+            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(xmlPath);
 
-            string path = @"M:" + member.DeclaringType.FullName + "." + member.Name;
-            XmlNode xmlNode = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
+            try
+            {
+                xmlDoc.Load(xmlPath);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
 
-            return xmlNode;
+            string path;
+            if (member.Name == ".ctor")
+            {
+                path = @"M:" + member.DeclaringType.FullName + @".#" + member.Name.Substring(1);
+            }
+            else
+            {
+                path = @"M:" + member.DeclaringType.FullName + @"." + member.Name;
+            }
+
+            XmlNodeList xmlNodeList = xmlDoc.SelectNodes(@"//member[starts-with(@name, '" + path + @"')]");
+
+            return xmlNodeList[nodeIndex];
         }
 
         /// <summary>
@@ -312,9 +326,17 @@
         /// <returns>XmlNode.</returns>
         private XmlNode GetModuleXmlNode(Type type)
         {
-            string xmlPath = Dll.Substring(0, Dll.LastIndexOf(".")) + @".XML";
+            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(xmlPath);
+
+            try
+            {
+                xmlDoc.Load(xmlPath);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
 
             string path = @"T:" + type.FullName;
             XmlNode xmlNode = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");

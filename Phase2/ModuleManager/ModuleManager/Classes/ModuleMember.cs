@@ -152,15 +152,15 @@
 
             if (!string.IsNullOrEmpty(ReturnType))
             {
-                s += "Return: " + ReturnType + "\n";
+                s += @"Return: " + ReturnType + "\n";
                 s += ReturnDescription + "\n";
             }
             else
             {
-                s += "Return: none";
+                s += @"Return: none" + "\n";
             }
 
-            return s + "\n";
+            return s;
         }
     }
 }
