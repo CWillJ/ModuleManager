@@ -85,7 +85,7 @@
 
                 <Border BorderThickness="1" BorderBrush="Black" Margin="10,0" Height="275">
                     <ScrollViewer Margin="10,5,0,0">
-                        <TextBlock x:Name="MemberText" Width="480"/>
+                        <TextBlock x:Name="MemberText" Width="480" TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </Border>
             </StackPanel>

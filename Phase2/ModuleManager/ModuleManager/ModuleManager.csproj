@@ -76,7 +76,6 @@
     <Compile Include="Classes\Module.cs" />
     <Compile Include="Classes\ModuleMember.cs" />
     <Compile Include="Classes\MyICommand.cs" />
-    <Compile Include="Models\ConfigFileManager.cs" />
     <Compile Include="Models\ModuleInfoRetriever.cs" />
     <Compile Include="ViewModels\MemberViewModel.cs" />
     <Compile Include="ViewModels\ModuleManagerViewModel.cs" />

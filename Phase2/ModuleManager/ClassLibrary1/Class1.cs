@@ -46,7 +46,7 @@
         /// <summary>
         /// Comments for Method1
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="str">Description of only parameter.</param>
         public void Method1(string str)
         {
             Property1 = str;
@@ -58,9 +58,9 @@
         /// Adds the integer num to the passed in string, str.
         /// Here is an extra line!
         /// </summary>
-        /// <param name="str"></param>
-        /// <param name="num"></param>
-        /// <returns>str plus a string of the integer num</returns>
+        /// <param name="str">This parameter is a string.</param>
+        /// <param name="num">And this one is an integer.</param>
+        /// <returns>str plus a string of the integer num.</returns>
         public string Method2(string str, int num)
         {
             return str + num.ToString();

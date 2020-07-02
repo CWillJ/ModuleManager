@@ -8,56 +8,41 @@
     /// </summary>
     public class ModuleMember
     {
-        private bool _isSelected;
         private string _name;
         private string _description;
         private ObservableCollection<MemberParameter> _parameters;
         private string _returnType;
+        private string _returnDescription;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMember"/> class.
         /// </summary>
         public ModuleMember()
         {
-            _isSelected = false;
             _name = string.Empty;
             _description = string.Empty;
             _parameters = new ObservableCollection<MemberParameter>();
             _returnType = string.Empty;
+            _returnDescription = string.Empty;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMember"/> class
-        /// with specified name, description, parameters and type through passed in parameters.
+        /// with specified name, description, parameters return type and return
+        /// description through passed in parameters.
         /// </summary>
         /// <param name="name">Member name.</param>
         /// <param name="description">Member description.</param>
         /// <param name="parameters">Member parameters.</param>
         /// <param name="returnType">Member return type.</param>
-        public ModuleMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType)
+        /// <param name="returnDescription">Member return description.</param>
+        public ModuleMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
         {
-            _isSelected = false;
             _name = name;
             _description = description;
             _parameters = parameters;
             _returnType = returnType;
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the member is selected.
-        /// </summary>
-        public bool IsSelected
-        {
-            get
-            {
-                return _isSelected;
-            }
-
-            set
-            {
-                _isSelected = value;
-                //// RaisePropertyChanged("IsSelected");
-            }
+            _returnDescription = returnDescription;
         }
 
         /// <summary>
@@ -97,6 +82,15 @@
         }
 
         /// <summary>
+        /// Gets or sets the member return description.
+        /// </summary>
+        public string ReturnDescription
+        {
+            get { return _returnDescription; }
+            set { _returnDescription = value; }
+        }
+
+        /// <summary>
         /// AddMemberParameter adds a parameter to the Parameters collection.
         /// </summary>
         /// <param name="parameter">parameter of type MemberParameter.</param>
@@ -131,16 +125,18 @@
         /// <returns>A desired format for the member description, parameters and return type.</returns>
         public override string ToString()
         {
-            string s = Name + @":" + "\n";
+            string s = Name + "\n";
 
-            if (Description != null || Description != string.Empty)
+            if (!string.IsNullOrEmpty(Description))
             {
-                s += Description + "\n\n";
+                s += Description + "\n";
             }
+
+            s += "\n";
 
             if (Parameters.Count == 0)
             {
-                s += @"Parameters: none" + "\n";
+                s += @"Parameters: none" + "\n\n";
             }
             else
             {
@@ -154,13 +150,14 @@
                 s += "\n";
             }
 
-            if (ReturnType != string.Empty && ReturnType != null)
+            if (!string.IsNullOrEmpty(ReturnType))
             {
-                s += "Return Type: " + ReturnType;
+                s += "Return: " + ReturnType + "\n";
+                s += ReturnDescription + "\n";
             }
             else
             {
-                s += "Return Type: none";
+                s += "Return: none";
             }
 
             return s + "\n";

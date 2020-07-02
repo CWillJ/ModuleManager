@@ -195,9 +195,10 @@
         /// <param name="description">Member description.</param>
         /// <param name="parameters">Member parameters.</param>
         /// <param name="returnType">Member return type.</param>
-        public void AddMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType)
+        /// <param name="returnDescription">Member return description.</param>
+        public void AddMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
         {
-            AddMember(new ModuleMember(name, description, parameters, returnType));
+            AddMember(new ModuleMember(name, description, parameters, returnType, returnDescription));
         }
 
         /// <summary>
@@ -216,9 +217,9 @@
         public override string ToString()
         {
             string s = Enabled.ToString() + "\n";
-            s += Name + @":" + "\n";
+            s += Name + "\n";
 
-            if (Description != null || Description != string.Empty)
+            if (!string.IsNullOrEmpty(Description))
             {
                 s += Description + "\n\n";
             }

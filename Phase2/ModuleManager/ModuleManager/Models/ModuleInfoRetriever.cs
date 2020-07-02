@@ -8,6 +8,7 @@
     using System.Windows;
     using System.Xml;
     using ModuleManager.Classes;
+    using Xamarin.Forms.Internals;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -42,6 +43,7 @@
         public string Dll { get; set; }
 
         // Where to Get Certain Information From:
+        // From .dll
         // Class Name:                   type.Name
         // Method Name:                  member.Name
         // Method Parameter Name:        p.Name.ToString()
@@ -107,7 +109,7 @@
             // get public methods from the class and loop through them
             members = AddMethodsToCollection(members, type);
 
-            return new Classes.Module(type.Name, GetModuleInfoFromXML(Dll, type), members);
+            return new Classes.Module(type.Name, GetModuleDescription(type), members);
         }
 
         /// <summary>
@@ -127,8 +129,9 @@
                 // GetSummaryFromXML but with a ConstructorInfo type instead of a MemberInfo type
                 members.Add(new ModuleMember(
                     @"Constructor for " + type.Name,
-                    @"Constructor description",
+                    GetMethodDescription((MemberInfo)constructor),
                     GetParametersFromList(constructor.GetParameters()),
+                    null,
                     null));
             }
 
@@ -150,8 +153,9 @@
             {
                 members.Add(new ModuleMember(
                     property.Name,
-                    @"Property description",
+                    GetMethodDescription((MemberInfo)property),
                     GetParametersFromList(property.GetIndexParameters()),
+                    null,
                     null));
             }
 
@@ -181,9 +185,10 @@
 
                 members.Add(new ModuleMember(
                     method.Name,
-                    GetSummaryFromXML(Dll, method),
+                    GetMethodDescription((MemberInfo)method),
                     GetParametersFromList(method.GetParameters()),
-                    method.ReturnType.ToString()));
+                    method.ReturnType.Name.ToString(),
+                    GetMemberReturnDescription((MemberInfo)method)));
             }
 
             return members;
@@ -202,91 +207,151 @@
             foreach (var p in paramList)
             {
                 parameters.Add(new MemberParameter(
-                    p.ParameterType.ToString(),
+                    p.ParameterType.Name.ToString(),
                     p.Name,
-                    GetParamFromXML(Dll, p.Member)));
+                    GetMemberParameterDescription(p.Member, paramList.IndexOf(p))));
             }
 
             return parameters;
         }
 
-        private string GetSummaryFromXML(string dllPath, MemberInfo member)
+        /// <summary>
+        /// GetModuleDescription returns a clean string from the inner xml
+        /// of the class description of the Type.
+        /// </summary>
+        /// <param name="type">Type to get the string from.</param>
+        /// <returns>String representation of the class description.</returns>
+        private string GetModuleDescription(Type type)
         {
-            return GetMethodInfoFromXML(dllPath, member, @"<summary>", @"</summary>");
-        }
+            XmlNode xmlNode = GetModuleXmlNode(type);
 
-        private string GetReturnFromXML(string dllPath, MemberInfo member)
-        {
-            return GetMethodInfoFromXML(dllPath, member, @"<returns>", @"</returns>");
-        }
-
-        private string GetParamFromXML(string dllPath, MemberInfo member)
-        {
-            return GetMethodInfoFromXML(dllPath, member, @"<param name=", @"></param>");
-        }
-
-        private string GetMethodInfoFromXML(string dllPath, MemberInfo member, string start, string end)
-        {
-            // TODO possible pass in two string instead of a MemberInfo type to get
-            // member.DeclaringType.FullName and member.Name
-            string xmlPath = dllPath.Substring(0, dllPath.LastIndexOf(".")) + @".XML";
-            XmlDocument xmlDoc = new XmlDocument();
-
-            if (File.Exists(xmlPath))
+            if (xmlNode == null)
             {
-                xmlDoc.Load(xmlPath);
-                string path = @"M:" + member.DeclaringType.FullName + "." + member.Name;
-                XmlNode xmlDocuOfMethod = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
-
-                // If the summary comments exist, return them
-                if (xmlDocuOfMethod != null)
-                {
-                    string descript = Regex.Replace(xmlDocuOfMethod.InnerXml, @"\s+", " ");
-
-                    if (!descript.Contains(start) || !descript.Contains(end))
-                    {
-                        return null;
-                    }
-
-                    return descript.Substring(
-                        descript.IndexOf(start) + start.Length,
-                        descript.IndexOf(end) - descript.IndexOf(start) - start.Length);
-                }
+                return null;
             }
 
-            return null;
+            return GetXmlNodeString(xmlNode, "summary");
         }
 
-        private string GetModuleInfoFromXML(string dllPath, Type type)
+        /// <summary>
+        /// GetMethodDescription returns a clean string from the inner xml
+        /// of the method description of the member.
+        /// </summary>
+        /// <param name="member">MemberInfo to get the string from.</param>
+        /// <returns>String representation of the method description.</returns>
+        private string GetMethodDescription(MemberInfo member)
         {
-            string start = @"<summary>";
-            string end = @"</summary>";
-            string xmlPath = dllPath.Substring(0, dllPath.LastIndexOf(".")) + @".XML";
-            XmlDocument xmlDoc = new XmlDocument();
+            XmlNode xmlNode = GetMemberXmlNode(member);
 
-            if (File.Exists(xmlPath))
+            if (xmlNode == null)
             {
-                xmlDoc.Load(xmlPath);
-                string path = @"T:" + type.FullName;
-                XmlNode xmlDocuOfMethod = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
-
-                // If the summary comments exist, return them
-                if (xmlDocuOfMethod != null)
-                {
-                    string descript = Regex.Replace(xmlDocuOfMethod.InnerXml, @"\s+", " ");
-
-                    if (!descript.Contains(start) || !descript.Contains(end))
-                    {
-                        return null;
-                    }
-
-                    return descript.Substring(
-                        descript.IndexOf(start) + start.Length,
-                        descript.IndexOf(end) - descript.IndexOf(start) - start.Length);
-                }
+                return null;
             }
 
-            return null;
+            return GetXmlNodeString(xmlNode, "summary");
+        }
+
+        /// <summary>
+        /// GetMemberParameterDescription returns a clean string from the inner xml
+        /// of the parameter description of the member.
+        /// </summary>
+        /// <param name="member">MemberInfo to get the string from.</param>
+        /// <param name="parameterIndex">Integer index of parameter.</param>
+        /// <returns>String representation of the parameter description.</returns>
+        private string GetMemberParameterDescription(MemberInfo member, int parameterIndex)
+        {
+            XmlNode xmlNode = GetMemberXmlNode(member);
+
+            if (xmlNode == null)
+            {
+                return null;
+            }
+
+            return GetXmlNodeString(xmlNode, "param", parameterIndex);
+        }
+
+        /// <summary>
+        /// GetMemberReturnDescription returns a clean string from the inner xml
+        /// of the return description of the member.
+        /// </summary>
+        /// <param name="member">MemberInfo to get the string from.</param>
+        /// <returns>String representation of the return description.</returns>
+        private string GetMemberReturnDescription(MemberInfo member)
+        {
+            XmlNode xmlNode = GetMemberXmlNode(member);
+
+            if (xmlNode == null)
+            {
+                return null;
+            }
+
+            return GetXmlNodeString(xmlNode, "returns");
+        }
+
+        /// <summary>
+        /// GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
+        /// </summary>
+        /// <param name="member">The MemberInfo to get the XmlNode from.</param>
+        /// <returns>XmlNode.</returns>
+        private XmlNode GetMemberXmlNode(MemberInfo member)
+        {
+            string xmlPath = Dll.Substring(0, Dll.LastIndexOf(".")) + @".XML";
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(xmlPath);
+
+            string path = @"M:" + member.DeclaringType.FullName + "." + member.Name;
+            XmlNode xmlNode = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
+
+            return xmlNode;
+        }
+
+        /// <summary>
+        /// GetModuleXmlNode returns an XmlNode of the specified Type.
+        /// </summary>
+        /// <param name="type">The Type to get the XmlNode from.</param>
+        /// <returns>XmlNode.</returns>
+        private XmlNode GetModuleXmlNode(Type type)
+        {
+            string xmlPath = Dll.Substring(0, Dll.LastIndexOf(".")) + @".XML";
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(xmlPath);
+
+            string path = @"T:" + type.FullName;
+            XmlNode xmlNode = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
+
+            return xmlNode;
+        }
+
+        /// <summary>
+        /// GetXmlNodeString will take an XmlNode, string xml tag, and an index and return the inner xml.
+        /// </summary>
+        /// <param name="xmlNode">The member XmlNode.</param>
+        /// <param name="xmlTag">This is the string of the xml tag.</param>
+        /// <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
+        /// <returns>InnerXml of the XmlNode.</returns>
+        private string GetXmlNodeString(XmlNode xmlNode, string xmlTag, int index = 0)
+        {
+            string s = null;
+
+            XmlNodeList xmlNodeList = xmlNode.SelectNodes(xmlTag);
+            if (xmlNodeList[index] == null)
+            {
+                return s;
+            }
+
+            s = xmlNodeList[index].InnerXml;
+            if (string.IsNullOrEmpty(s))
+            {
+                return s;
+            }
+
+            s = Regex.Replace(s, @"\s+", " ");
+            if (string.IsNullOrEmpty(s))
+            {
+                return s;
+            }
+
+            return s;
         }
     }
 }

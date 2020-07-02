@@ -21,9 +21,8 @@
         public ModuleManagerViewModel()
         {
             _memberText = string.Empty;
-            UseSaveFileDialog = true;
+            UseSaveFileDialog = false;
             FileLocation = string.Empty;
-            ConfigFileHandler = new ConfigFileManager("ConfigFile.xml");
             LoadMyFileCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
 
@@ -65,11 +64,6 @@
         /// Gets or sets the file location as a string.
         /// </summary>
         public string FileLocation { get; set; }
-
-        /// <summary>
-        /// Gets or sets a ConfigFileManager object.
-        /// </summary>
-        public ConfigFileManager ConfigFileHandler { get; set; }
 
         /// <summary>
         /// Gets or sets MemberText.
@@ -125,10 +119,16 @@
             //// MessageBox.Show(Modules[0].IsSelected.ToString());
         }
 
+        /// <summary>
+        /// SaveConfig will save an ObservableCollection to an xml file.
+        /// The boolean, UseSaveFileDialog will be tested to see if the
+        /// SaveFileDialog will be used or if the hardcoded file location
+        /// will be used.
+        /// </summary>
         private void SaveConfig()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Module>));
-            string saveFile = string.Empty;
+            string saveFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
 
             if (UseSaveFileDialog)
             {
@@ -152,7 +152,7 @@
             }
             else
             {
-                saveFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
+                MessageBox.Show(@"Config File Saved at: " + saveFile);
             }
 
             using (StreamWriter wr = new StreamWriter(saveFile))
@@ -161,12 +161,38 @@
             }
         }
 
+        /// <summary>
+        /// LoadConfig will load an ObservableCollection of type Module from an xml file.
+        /// </summary>
+        /// <returns>ObservableCollection of type Module.</returns>
         private ObservableCollection<Module> LoadConfig()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Module>));
             ObservableCollection<Module> modules = new ObservableCollection<Module>();
+            string loadFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
 
-            using (StreamReader rd = new StreamReader(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
+            if (UseSaveFileDialog)
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                    openFileDialog.Filter = "xml files (*.xml)|*.xml";
+                    openFileDialog.Title = "Save Configuration File";
+                    openFileDialog.RestoreDirectory = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        loadFile = openFileDialog.FileName;
+                    }
+
+                    if (loadFile == string.Empty)
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            using (StreamReader rd = new StreamReader(loadFile))
             {
                 modules = serializer.Deserialize(rd) as ObservableCollection<Module>;
             }

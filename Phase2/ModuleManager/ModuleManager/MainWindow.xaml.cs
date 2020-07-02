@@ -18,7 +18,10 @@
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            MemberText.Text = e.NewValue.ToString();
+            if (e.NewValue != null)
+            {
+                MemberText.Text = e.NewValue.ToString();
+            }
         }
     }
 }
