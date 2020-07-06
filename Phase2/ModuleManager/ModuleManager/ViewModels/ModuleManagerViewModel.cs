@@ -22,8 +22,8 @@
         {
             _memberText = string.Empty;
             UseSaveFileDialog = false;
-            FileLocation = string.Empty;
-            LoadMyFileCommand = new MyICommand(FindDLLs);
+            ModuleDirectory = string.Empty;
+            LoadModulesCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
 
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
@@ -51,9 +51,9 @@
         public bool UseSaveFileDialog { get; set; }
 
         /// <summary>
-        /// Gets or sets the LoadMyFileCommand as a MyICommand.
+        /// Gets or sets the LoadModulesCommand as a MyICommand.
         /// </summary>
-        public MyICommand LoadMyFileCommand { get; set; }
+        public MyICommand LoadModulesCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the SaveConfigCommand as a MyICommand.
@@ -63,7 +63,7 @@
         /// <summary>
         /// Gets or sets the file location as a string.
         /// </summary>
-        public string FileLocation { get; set; }
+        public string ModuleDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets MemberText.
@@ -98,17 +98,14 @@
 
         private void FindDLLs()
         {
-            //// ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(GetModuleDirectory());
-            //// ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
-
             // Bring up explorer to allow user to choose a file location
-            FileLocation = GetModuleDirectory();
+            ModuleDirectory = GetModuleDirectory();
             ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
 
             Modules.Clear();
 
             // Check the file location for any .dll's
-            foreach (var mod in infoRetriever.GetInfoFromDll())
+            foreach (var mod in infoRetriever.GetModuleInfo(ModuleDirectory))
             {
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
@@ -140,10 +137,13 @@
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         saveFile = saveFileDialog.FileName;
+
+                        // store saveFile in the config file
                     }
 
                     if (saveFile == string.Empty)
                     {
+                        MessageBox.Show(@"Invalid File Path");
                         return;
                     }
                 }

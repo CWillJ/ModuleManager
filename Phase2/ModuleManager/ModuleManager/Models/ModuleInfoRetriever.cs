@@ -21,27 +21,27 @@
         public ModuleInfoRetriever()
         {
             // TODO Only used for testing. Need to set some sort of default path here.
-            //// DllFileName = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
-            //// DllFileName = Directory.GetCurrentDirectory() + @"\" + Assembly.GetCallingAssembly().GetName().Name + @".dll";
-            DllFileName = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
-                @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
+            //// FileNames = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
+            //// FileNames = Directory.GetCurrentDirectory() + @"\" + Assembly.GetCallingAssembly().GetName().Name + @".dll";
+            FileNames.Add(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
+                @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll");
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleInfoRetriever"/> class.
         /// </summary>
-        /// <param name="fileName">File name of the .dll file.</param>
-        public ModuleInfoRetriever(string fileName)
+        /// <param name="moduleDirectory">File name of the .dll file.</param>
+        public ModuleInfoRetriever(string moduleDirectory)
         {
             // TODO I need to look for dll files instead of just using a file name.
-            DllFileName = fileName;
+            FileNames.Add(moduleDirectory);
         }
 
         /// <summary>
-        /// Gets or sets DllFileName is the directory path of the .dll files.
+        /// Gets or sets FileNames is the directory path of the .dll files.
         /// TODO should be renamed.
         /// </summary>
-        public string DllFileName { get; set; }
+        public ObservableCollection<string> FileNames { get; set; }
 
         /// <summary>
         /// Gets or sets DllDirectory is the directory path of the .dll files.
@@ -50,35 +50,43 @@
         public string DllDirectory { get; set; }
 
         /// <summary>
-        /// GetInfoFromDll will create an ObservableCollection of type Module to organize
+        /// GetModuleInfo will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// From .dll.
         /// TODO need to rename because it gets info from .dll and .xml.
         /// </summary>
+        /// <param name="moduleDirectory">Directory path containing the dll/xml file(s).</param>
         /// <returns>Returns an collection of Module objects.</returns>
-        public ObservableCollection<Classes.Module> GetInfoFromDll()
+        public ObservableCollection<Classes.Module> GetModuleInfo(string moduleDirectory)
         {
             ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
-            Assembly a;
+            FileAssistant fileAssistant = new FileAssistant();
 
-            // try to load the assembly from the .dll
-            try
-            {
-                a = Assembly.Load(File.ReadAllBytes(DllFileName));
-            }
-            catch (Exception e)
-            {
-                // TODO need to catch each specific exception
-                MessageBox.Show(e.ToString());
-                return null;
-            }
+            fileAssistant.LoadFileNames(moduleDirectory);
 
-            // Loop through the types or classes
-            Type[] types = a.GetTypes();
-
-            foreach (var type in types)
+            foreach (var dllFile in fileAssistant.DllFiles)
             {
-                modules.Add(GetSingleModule(type));
+                Assembly assembly;
+
+                // try to load the assembly from the .dll
+                try
+                {
+                    assembly = Assembly.Load(File.ReadAllBytes(dllFile));
+                }
+                catch (Exception e)
+                {
+                    // TODO need to catch each specific exception
+                    MessageBox.Show(e.ToString());
+                    continue;
+                }
+
+                // Loop through the types or classes
+                Type[] types = assembly.GetTypes();
+
+                foreach (var type in types)
+                {
+                    modules.Add(GetSingleModule(type));
+                }
             }
 
             return modules;
@@ -292,7 +300,8 @@
         /// <returns>XmlNode.</returns>
         private XmlNode GetMemberXmlNode(MemberInfo member, int nodeIndex = 0)
         {
-            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
+            // Get the xml document from the file path.
+            string xmlPath = FileNames[0].Substring(0, FileNames[0].LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
 
             try
@@ -326,7 +335,7 @@
         /// <returns>XmlNode.</returns>
         private XmlNode GetModuleXmlNode(Type type)
         {
-            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
+            string xmlPath = FileNames[0].Substring(0, FileNames[0].LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
 
             try
