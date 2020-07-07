@@ -98,20 +98,21 @@
 
         private void FindDLLs()
         {
-            // Bring up explorer to allow user to choose a file location
-            ModuleDirectory = GetModuleDirectory();
-            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
-
             Modules.Clear();
 
+            // Bring up explorer to allow user to choose a file location
+            //// ModuleDirectory = GetModuleDirectory();
+            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(GetModuleDirectory());
+            ObservableCollection<Module> modules = infoRetriever.GetModules();
+
             // Check the file location for any .dll's
-            foreach (var mod in infoRetriever.GetModuleInfo(ModuleDirectory))
+            foreach (var mod in modules)
             {
                 Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
             }
 
             // Future TreeViewSelectedItem Binding
-            MemberText = Modules[0].ToString();
+            //// MemberText = Modules[0].ToString();
         }
 
         /// <summary>

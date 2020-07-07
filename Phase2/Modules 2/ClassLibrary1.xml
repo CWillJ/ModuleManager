@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClassLibrary1</name>
+    </assembly>
+    <members>
+        <member name="T:ClassLibrary1.Class1">
+            <summary>
+            Class1 only exists to test getting info from a .dll and the
+            related .xml files.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class1.#ctor">
+            <summary>
+            Constructor for Class1
+            </summary>
+        </member>
+        <member name="P:ClassLibrary1.Class1.Property1">
+            <summary>
+            Gets or sets Property1 as a string.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary1.Class1.Property2">
+            <summary>
+            Gets or sets Property2 as an integer.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class1.Method1(System.String)">
+            <summary>
+            Comments for Method1
+            </summary>
+            <param name="str">Description of only parameter.</param>
+        </member>
+        <member name="M:ClassLibrary1.Class1.Method1(System.String,System.Int32)">
+            <summary>
+            Adds the integer num to the passed in string, str.
+            Here is an extra line!
+            </summary>
+            <param name="str">This parameter is a string.</param>
+            <param name="num">And this one is an integer.</param>
+            <returns>str plus a string of the integer num.</returns>
+        </member>
+        <member name="T:ClassLibrary1.Class2">
+            <summary>
+            Class2 only exists to test getting info from a .dll and the
+            related .xml files.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class2.#ctor">
+            <summary>
+            Constructor for Class2
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class2.#ctor(System.Int32)">
+            <summary>
+            Constructor for Class2 that takes 1 parameter
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class2.Method1(System.String)">
+            <summary>
+            Comments for Method1
+            </summary>
+            <param name="str">Parameter description.</param>
+        </member>
+        <member name="M:ClassLibrary1.Class2.Method2(System.String,System.Int32)">
+            <summary>
+            Adds the integer num to the passed in string, str.
+            </summary>
+            <param name="str">String param description.</param>
+            <param name="num">Int param description.</param>
+            <returns>str plus a string of the integer num.</returns>
+        </member>
+        <member name="M:ClassLibrary1.Class2.Method3">
+            <summary>
+            This is a third class with no return and no parameters.
+            </summary>
+        </member>
+        <member name="T:ClassLibrary1.Class3">
+            <summary>
+            Class3 only exists to test getting info from a .dll and the
+            related .xml files.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class3.#ctor">
+            <summary>
+            Constructor for Class3.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class3.#ctor(System.Int32)">
+            <summary>
+            Constructor for Class3 that takes 1 parameter.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class3.#ctor(System.String)">
+            <summary>
+            Constructor for Class3 that takes 1 parameter.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class3.Method1(System.String)">
+            <summary>
+            Comments for Method1.
+            </summary>
+            <param name="str">String parameter for Method1.</param>
+        </member>
+        <member name="M:ClassLibrary1.Class3.Method2(System.String,System.Int32)">
+            <summary>
+            Adds the integer num to the passed in string, str.
+            </summary>
+            <param name="str">String parameter.</param>
+            <param name="num">Integer parameter.</param>
+            <returns>str plus a string of the integer num.</returns>
+        </member>
+        <member name="M:ClassLibrary1.Class3.Method3">
+            <summary>
+            This is a third class with no return and no parameters.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary1.Class3.Method4">
+            <summary>
+            Method 4 sets a default string.
+            </summary>
+        </member>
+    </members>
+</doc>

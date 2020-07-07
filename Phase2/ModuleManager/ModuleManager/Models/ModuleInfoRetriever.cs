@@ -21,10 +21,10 @@
         public ModuleInfoRetriever()
         {
             // TODO Only used for testing. Need to set some sort of default path here.
-            //// FileNames = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
-            //// FileNames = Directory.GetCurrentDirectory() + @"\" + Assembly.GetCallingAssembly().GetName().Name + @".dll";
-            FileNames.Add(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
-                @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll");
+            //// DllFileName = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
+            //// DllFileName = Directory.GetCurrentDirectory() + @"\" + Assembly.GetCallingAssembly().GetName().Name + @".dll";
+            //// DllFileName.Add(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
+            ////     @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll");
         }
 
         /// <summary>
@@ -34,14 +34,14 @@
         public ModuleInfoRetriever(string moduleDirectory)
         {
             // TODO I need to look for dll files instead of just using a file name.
-            FileNames.Add(moduleDirectory);
+            DllDirectory = moduleDirectory;
         }
 
         /// <summary>
-        /// Gets or sets FileNames is the directory path of the .dll files.
+        /// Gets or sets DllFileName is the directory path of the .dll files.
         /// TODO should be renamed.
         /// </summary>
-        public ObservableCollection<string> FileNames { get; set; }
+        public string DllFileName { get; set; }
 
         /// <summary>
         /// Gets or sets DllDirectory is the directory path of the .dll files.
@@ -50,28 +50,29 @@
         public string DllDirectory { get; set; }
 
         /// <summary>
-        /// GetModuleInfo will create an ObservableCollection of type Module to organize
+        /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// From .dll.
-        /// TODO need to rename because it gets info from .dll and .xml.
+        /// TODO remove the parameter if I'm going to use the property.
         /// </summary>
-        /// <param name="moduleDirectory">Directory path containing the dll/xml file(s).</param>
         /// <returns>Returns an collection of Module objects.</returns>
-        public ObservableCollection<Classes.Module> GetModuleInfo(string moduleDirectory)
+        public ObservableCollection<Classes.Module> GetModules()
         {
             ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
-            FileAssistant fileAssistant = new FileAssistant();
 
-            fileAssistant.LoadFileNames(moduleDirectory);
+            ////string[] moduleDlls = Directory.GetFiles(moduleDirectory, @"*.dll");
 
-            foreach (var dllFile in fileAssistant.DllFiles)
+            foreach (var dllFile in Directory.GetFiles(DllDirectory, @"*.dll"))
             {
+                DllFileName = dllFile;
+
                 Assembly assembly;
 
                 // try to load the assembly from the .dll
                 try
                 {
-                    assembly = Assembly.Load(File.ReadAllBytes(dllFile));
+                    //// assembly = Assembly.Load(File.ReadAllBytes(dllFile));
+                    assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
                 }
                 catch (Exception e)
                 {
@@ -80,12 +81,24 @@
                     continue;
                 }
 
+                Type[] types;
+
                 // Loop through the types or classes
-                Type[] types = assembly.GetTypes();
+                try
+                {
+                    types = assembly.GetTypes();
+                }
+                catch (ReflectionTypeLoadException ex)
+                {
+                    types = ex.Types;
+                }
 
                 foreach (var type in types)
                 {
-                    modules.Add(GetSingleModule(type));
+                    if (type != null)
+                    {
+                        modules.Add(GetSingleModule(type));
+                    }
                 }
             }
 
@@ -301,7 +314,7 @@
         private XmlNode GetMemberXmlNode(MemberInfo member, int nodeIndex = 0)
         {
             // Get the xml document from the file path.
-            string xmlPath = FileNames[0].Substring(0, FileNames[0].LastIndexOf(".")) + @".XML";
+            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
 
             try
@@ -309,6 +322,10 @@
                 xmlDoc.Load(xmlPath);
             }
             catch (FileNotFoundException)
+            {
+                return null;
+            }
+            catch (XmlException)
             {
                 return null;
             }
@@ -335,7 +352,7 @@
         /// <returns>XmlNode.</returns>
         private XmlNode GetModuleXmlNode(Type type)
         {
-            string xmlPath = FileNames[0].Substring(0, FileNames[0].LastIndexOf(".")) + @".XML";
+            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
 
             try
