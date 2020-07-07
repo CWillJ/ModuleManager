@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.Robot.ACSSPiiPlus</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus">
+            <summary>
+            The concrete implementation of <see cref="T:PVA.NextGen.Common.Interfaces.IRobot"/> for an ACS SPiiPlus controller.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.ImageSource">
+            <summary>
+            Gets the <see cref="T:System.Uri"/> location of the image associated with this device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.Index">
+            <summary>
+            Gets or sets the index of the object.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.IsConnected">
+            <summary>
+            Gets or sets a value indicating whether the device is connected.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.Connection">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> used to connect to the device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.ConnectsOnStartup">
+            <summary>
+            Gets or sets a value indicating whether this device will connect automatically on startup.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.AvailableConnectionTypes">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.List`1"/> of connection types this device supports.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.ConnectionType">
+            <summary>
+            Gets or sets a <see cref="T:System.String"/> representing the <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> type for this device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.SharedFunctions">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> objects provided by this object.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.DeviceAPI">
+            <summary>
+            Gets the dictionary of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> execute methods and outputs to expose to scripts.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.Configuration">
+            <summary>
+            Gets or sets the configuration object for this device.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.ChangeIndex(System.Int32)">
+            <summary>
+            Change the value of this object's unique Index.
+            </summary>
+            <param name="index">The unique <see cref="T:System.Int32"/> index to change this object to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.AttachExceptionHandler(PVA.NextGen.Common.Interfaces.IRecoverableExceptionService)">
+            <summary>
+            Attach an exception handler to this object.
+            </summary>
+            <param name="exceptionHandler">The <see cref="T:PVA.NextGen.Common.Interfaces.IRecoverableExceptionService"/> to be attached.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.ChangeDisplayName(System.String)">
+            <summary>
+            Change the display name of this object.
+            </summary>
+            <param name="displayName">The <see cref="T:System.String"/> name to be displayed in operator-facing interfaces.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.ChangeConnection(PVA.NextGen.Common.Interfaces.IConnection)">
+            <summary>
+            Change the <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> of this device.
+            </summary>
+            <param name="connection">The new <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> for the device.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.Connect">
+            <summary>
+            Connect to this <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.Disconnect">
+            <summary>
+            Disconnect from this <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.Shutdown">
+            <summary>
+            Perform any actions required for this device to shut down gracefully.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus.Initialize(PVA.NextGen.Common.Interfaces.IFunctionService)">
+            <summary>
+            Initialize this <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> object's configuration and function scripts.
+            </summary>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.Helpers.PacketFormattingOperations">
+            <summary>
+            Static class providing helper methods useful in operation of a <see cref="T:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.ACSSPiiPlus"/> Robot.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Robot.ACSSPiiPlus.Helpers.PacketFormattingOperations.BuildPacket(System.String)">
+            <summary>
+            Builds a packet for transmission to a device.
+            </summary>
+            <param name="command">The command to be sent.</param>
+            <returns>A fully built, ready-to-send packet.</returns>
+        </member>
+    </members>
+</doc>

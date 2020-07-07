@@ -25,6 +25,7 @@
             //// DllFileName = Directory.GetCurrentDirectory() + @"\" + Assembly.GetCallingAssembly().GetName().Name + @".dll";
             //// DllFileName.Add(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
             ////     @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll");
+            DllDirectory = string.Empty;
         }
 
         /// <summary>
@@ -58,6 +59,13 @@
         /// <returns>Returns an collection of Module objects.</returns>
         public ObservableCollection<Classes.Module> GetModules()
         {
+            // TODO throw an exception
+            if (string.IsNullOrEmpty(DllDirectory))
+            {
+                MessageBox.Show(@"The Directory Path Cannot Be Empty");
+                return null;
+            }
+
             ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
 
             ////string[] moduleDlls = Directory.GetFiles(moduleDirectory, @"*.dll");
@@ -109,7 +117,7 @@
         {
             ObservableCollection<ModuleMember> members = new ObservableCollection<ModuleMember>();
 
-            if (!type.IsPublic)
+            if (!type.IsPublic || type.IsInterface)
             {
                 return null;
             }
@@ -161,8 +169,11 @@
             ObservableCollection<ModuleMember> members,
             Type type)
         {
-            foreach (var property in type.GetProperties())
+            foreach (var property in type.GetProperties(BindingFlags.Public
+                                      | BindingFlags.Instance
+                                      | BindingFlags.DeclaredOnly))
             {
+                //// MessageBox.Show(property.Name);
                 members.Add(new ModuleMember(
                     property.Name,
                     GetMethodDescription((MemberInfo)property),

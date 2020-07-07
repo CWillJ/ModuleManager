@@ -106,9 +106,17 @@
             ObservableCollection<Module> modules = infoRetriever.GetModules();
 
             // Check the file location for any .dll's
-            foreach (var mod in modules)
+            if (modules != null)
             {
-                Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
+                foreach (var mod in modules)
+                {
+                    if (mod != null)
+                    {
+                        Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
+                    }
+                }
+
+                MessageBox.Show(@"Done Loading Modules");
             }
 
             // Future TreeViewSelectedItem Binding
