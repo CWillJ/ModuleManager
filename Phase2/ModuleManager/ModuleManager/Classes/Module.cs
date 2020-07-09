@@ -193,7 +193,9 @@
         /// <returns>A desired format for the module name, description and all members contained in module.</returns>
         public override string ToString()
         {
-            string s = Enabled.ToString() + "\n";
+            string s = string.Empty;
+
+            //// s += Enabled.ToString() + "\n";
             s += Name + "\n";
 
             if (!string.IsNullOrEmpty(Description))

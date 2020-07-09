@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
     using System.Windows;
@@ -20,11 +21,6 @@
         /// </summary>
         public ModuleInfoRetriever()
         {
-            // TODO Only used for testing. Need to set some sort of default path here.
-            //// DllFileName = @"C:\Users\wjohnson\source\repos\ModuleManager\Phase1\ModuleManager\ClassLibrary1\bin\Debug\ClassLibrary1.dll";
-            //// DllFileName = Directory.GetCurrentDirectory() + @"\" + Assembly.GetCallingAssembly().GetName().Name + @".dll";
-            //// DllFileName.Add(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
-            ////     @"\ClassLibrary1\bin\Debug\ClassLibrary1.dll");
             DllDirectory = string.Empty;
         }
 
@@ -34,7 +30,6 @@
         /// <param name="moduleDirectory">File name of the .dll file.</param>
         public ModuleInfoRetriever(string moduleDirectory)
         {
-            // TODO I need to look for dll files instead of just using a file name.
             DllDirectory = moduleDirectory;
         }
 
@@ -54,7 +49,6 @@
         /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// From .dll.
-        /// TODO remove the parameter if I'm going to use the property.
         /// </summary>
         /// <returns>Returns an collection of Module objects.</returns>
         public ObservableCollection<Classes.Module> GetModules()
@@ -68,30 +62,55 @@
 
             ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
 
-            ////string[] moduleDlls = Directory.GetFiles(moduleDirectory, @"*.dll");
-
             foreach (var dllFile in Directory.GetFiles(DllDirectory, @"*.dll"))
             {
                 DllFileName = dllFile;
 
                 Assembly assembly;
+                //// AssemblyName[] referencedAssemblies;
 
                 // try to load the assembly from the .dll
                 try
                 {
-                    //// assembly = Assembly.Load(File.ReadAllBytes(dllFile));
                     assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
+                    //// referencedAssemblies = assembly.GetReferencedAssemblies();
+                }
+                catch (ArgumentNullException nullException)
+                {
+                    MessageBox.Show("Argument Null Exception Caught \n" + nullException.ToString());
+                    continue;
+                }
+                catch (FileNotFoundException fileNotFound)
+                {
+                    MessageBox.Show("File Not Found Exception Caught \n" + fileNotFound.ToString());
+                    continue;
+                }
+                catch (FileLoadException fileLoad)
+                {
+                    MessageBox.Show("File Load Exception Caught \n" + fileLoad.ToString());
+                    continue;
                 }
                 catch (Exception e)
                 {
-                    // TODO need to catch each specific exception
-                    MessageBox.Show(e.ToString());
+                    MessageBox.Show("Exception Caught \n" + e.ToString());
                     continue;
                 }
 
+                // Load all referenced assemblies
+                //// foreach (AssemblyName an in referencedAssemblies)
+                //// {
+                ////     try
+                ////     {
+                ////         Assembly.ReflectionOnlyLoad(an.Name);
+                ////     }
+                ////     catch (FileNotFoundException)
+                ////     {
+                ////         continue;
+                ////     }
+                //// }
+
                 Type[] types;
 
-                // Loop through the types or classes
                 try
                 {
                     types = assembly.GetTypes();
@@ -105,19 +124,21 @@
                 {
                     if (type != null)
                     {
+                        // Here is where I should update the loading bar with names of current type names
                         modules.Add(GetSingleModule(type));
                     }
                 }
             }
 
-            return modules;
+            // Return an alphabetized collection of the found modules
+            return new ObservableCollection<Classes.Module>(modules.OrderBy(mod => mod.Name));
         }
 
         private Classes.Module GetSingleModule(Type type)
         {
             ObservableCollection<ModuleMember> members = new ObservableCollection<ModuleMember>();
 
-            if (!type.IsPublic || type.IsInterface)
+            if (!type.IsPublic)
             {
                 return null;
             }
@@ -128,7 +149,7 @@
             // Get Public Properties
             members = AddPropertiesToCollection(members, type);
 
-            // Get All Public Methods
+            // Get Public Methods
             members = AddMethodsToCollection(members, type);
 
             return new Classes.Module(type.Name, GetModuleDescription(type), members);
@@ -147,10 +168,18 @@
         {
             foreach (var constructor in type.GetConstructors())
             {
+                string name = @"Constructor for " + type.Name;
+
+                string description =
+                    GetMethodDescription((MemberInfo)constructor, type.GetConstructors().IndexOf(constructor));
+
+                ObservableCollection<MemberParameter> parameters =
+                    GetParametersFromList(constructor.GetParameters());
+
                 members.Add(new ModuleMember(
-                    @"Constructor for " + type.Name,
-                    GetMethodDescription((MemberInfo)constructor, type.GetConstructors().IndexOf(constructor)),
-                    GetParametersFromList(constructor.GetParameters()),
+                    name,
+                    description,
+                    parameters,
                     null,
                     null));
             }
@@ -173,11 +202,26 @@
                                       | BindingFlags.Instance
                                       | BindingFlags.DeclaredOnly))
             {
-                //// MessageBox.Show(property.Name);
+                string name = property.Name;
+                string description = GetPropertyDescription(property);
+
+                // There are no parameters to a property
+                ParameterInfo[] paramInfo;
+                ObservableCollection<MemberParameter> parameters;
+                try
+                {
+                    paramInfo = property.GetIndexParameters();
+                    parameters = GetParametersFromList(paramInfo);
+                }
+                catch (FileLoadException)
+                {
+                    parameters = null;
+                }
+
                 members.Add(new ModuleMember(
-                    property.Name,
-                    GetMethodDescription((MemberInfo)property),
-                    GetParametersFromList(property.GetIndexParameters()),
+                    name,
+                    description,
+                    parameters,
                     null,
                     null));
             }
@@ -196,9 +240,13 @@
             ObservableCollection<ModuleMember> members,
             Type type)
         {
+            string lastMethodName = string.Empty;
+            int methodIndex = 0;
+
             foreach (var method in type.GetMethods(BindingFlags.Public
                                       | BindingFlags.Instance
-                                      | BindingFlags.InvokeMethod))
+                                      | BindingFlags.InvokeMethod
+                                      | BindingFlags.DeclaredOnly))
             {
                 // skip if method is null (if the method is a constructor or property)
                 if (method == null)
@@ -206,16 +254,52 @@
                     continue;
                 }
 
-                // TODO need to get this int to be the index of the method with the same name.
-                int whatever = type.GetMethods().IndexOf(method);
-                whatever = 0;
+                // The index is used to get the correct description from methods with the same name.
+                string name = method.Name;
+                if (name == lastMethodName)
+                {
+                    methodIndex++;
+                }
+                else
+                {
+                    methodIndex = 0;
+                }
+
+                lastMethodName = name;
+
+                string description = GetMethodDescription((MemberInfo)method, methodIndex);
+
+                ParameterInfo[] paramInfo;
+                try
+                {
+                    paramInfo = method.GetParameters();
+                }
+                catch (FileLoadException)
+                {
+                    paramInfo = null;
+                }
+
+                ObservableCollection<MemberParameter> parameters =
+                    GetParametersFromList(paramInfo);
+
+                string returnType;
+                try
+                {
+                    returnType = method.ReturnType.Name.ToString();
+                }
+                catch (FileLoadException)
+                {
+                    returnType = string.Empty;
+                }
+
+                string returnDescription = GetMemberReturnDescription((MemberInfo)method);
 
                 members.Add(new ModuleMember(
-                    method.Name,
-                    GetMethodDescription((MemberInfo)method, whatever),
-                    GetParametersFromList(method.GetParameters()),
-                    method.ReturnType.Name.ToString(),
-                    GetMemberReturnDescription((MemberInfo)method)));
+                    name,
+                    description,
+                    parameters,
+                    returnType,
+                    returnDescription));
             }
 
             return members;
@@ -229,14 +313,24 @@
         /// <returns>An ObservableCollection of MemberParameter type.</returns>
         private ObservableCollection<MemberParameter> GetParametersFromList(ParameterInfo[] paramList)
         {
+            if (paramList == null)
+            {
+                return null;
+            }
+
             ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
 
             foreach (var p in paramList)
             {
+                string pType = p.ParameterType.Name.ToString();
+                string pName = p.Name;
+                string pDescription =
+                    GetMemberParameterDescription(p.Member, paramList.IndexOf(p));
+
                 parameters.Add(new MemberParameter(
-                    p.ParameterType.Name.ToString(),
-                    p.Name,
-                    GetMemberParameterDescription(p.Member, paramList.IndexOf(p))));
+                    pType,
+                    pName,
+                    pDescription));
             }
 
             return parameters;
@@ -270,6 +364,42 @@
         private string GetMethodDescription(MemberInfo member, int index = 0)
         {
             XmlNode xmlNode = GetMemberXmlNode(member, index);
+
+            if (xmlNode == null)
+            {
+                return null;
+            }
+
+            return GetXmlNodeString(xmlNode, "summary");
+        }
+
+        /// <summary>
+        /// GetProperyDescription will return a string from the inner xml of
+        /// the property desctiption.
+        /// </summary>
+        /// <param name="property">PropertyInfo to get the description from.</param>
+        /// <returns>String representation of the property description.</returns>
+        private string GetPropertyDescription(PropertyInfo property)
+        {
+            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
+            XmlDocument xmlDoc = new XmlDocument();
+
+            try
+            {
+                xmlDoc.Load(xmlPath);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
+            catch (XmlException)
+            {
+                return null;
+            }
+
+            string path = @"P:" + property.DeclaringType.FullName + @"." + property.Name;
+
+            XmlNode xmlNode = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
 
             if (xmlNode == null)
             {

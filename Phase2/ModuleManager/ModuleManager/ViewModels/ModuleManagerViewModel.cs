@@ -26,6 +26,7 @@
             LoadModulesCommand = new MyICommand(FindDLLs);
             SaveConfigCommand = new MyICommand(SaveConfig);
 
+            // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
                 Modules = LoadConfig();
@@ -105,7 +106,6 @@
             ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(GetModuleDirectory());
             ObservableCollection<Module> modules = infoRetriever.GetModules();
 
-            // Check the file location for any .dll's
             if (modules != null)
             {
                 foreach (var mod in modules)
@@ -116,6 +116,7 @@
                     }
                 }
 
+                // TODO in the future, possibly kill loading bar
                 MessageBox.Show(@"Done Loading Modules");
             }
 
@@ -146,8 +147,6 @@
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         saveFile = saveFileDialog.FileName;
-
-                        // store saveFile in the config file
                     }
 
                     if (saveFile == string.Empty)

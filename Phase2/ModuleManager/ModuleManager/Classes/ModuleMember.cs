@@ -134,7 +134,11 @@
 
             s += "\n";
 
-            if (Parameters.Count == 0)
+            if (Parameters == null)
+            {
+                s += @"Parameters: none" + "\n\n";
+            }
+            else if (Parameters.Count == 0)
             {
                 s += @"Parameters: none" + "\n\n";
             }
