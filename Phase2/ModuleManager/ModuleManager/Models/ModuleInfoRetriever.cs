@@ -1,6 +1,7 @@
 ﻿namespace ModuleManager.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
@@ -46,6 +47,52 @@
         public string DllDirectory { get; set; }
 
         /// <summary>
+        /// GetModules2 will build an ObservableCollection of type Module using CustomAttributeData.
+        /// </summary>
+        /// <returns>A Collection of Module type.</returns>
+        public ObservableCollection<Classes.Module> GetModules2()
+        {
+            if (string.IsNullOrEmpty(DllDirectory))
+            {
+                MessageBox.Show(@"The Directory Path Cannot Be Empty");
+                return null;
+            }
+
+            ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
+
+            foreach (var dllFile in Directory.GetFiles(DllDirectory, @"*.dll"))
+            {
+                DllFileName = dllFile;
+
+                Assembly assembly;
+
+                // get assembly
+                assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
+                IList<CustomAttributeData> assemblyData = CustomAttributeData.GetCustomAttributes(assembly);
+
+                // get type info from assembly
+                foreach (Type type in assembly.GetTypes())
+                {
+                    IList<CustomAttributeData> typeData = CustomAttributeData.GetCustomAttributes(type);
+
+                    // get method info from types
+                    foreach (MethodInfo method in type.GetMethods())
+                    {
+                        IList<CustomAttributeData> methodData = CustomAttributeData.GetCustomAttributes(method);
+
+                        // get parameter info from method info
+                        foreach (ParameterInfo parameter in method.GetParameters())
+                        {
+                            IList<CustomAttributeData> parameterData = CustomAttributeData.GetCustomAttributes(parameter);
+                        }
+                    }
+                }
+            }
+
+            return modules;
+        }
+
+        /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// From .dll.
@@ -67,47 +114,17 @@
                 DllFileName = dllFile;
 
                 Assembly assembly;
-                //// AssemblyName[] referencedAssemblies;
 
                 // try to load the assembly from the .dll
                 try
                 {
                     assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
-                    //// referencedAssemblies = assembly.GetReferencedAssemblies();
-                }
-                catch (ArgumentNullException nullException)
-                {
-                    MessageBox.Show("Argument Null Exception Caught \n" + nullException.ToString());
-                    continue;
-                }
-                catch (FileNotFoundException fileNotFound)
-                {
-                    MessageBox.Show("File Not Found Exception Caught \n" + fileNotFound.ToString());
-                    continue;
-                }
-                catch (FileLoadException fileLoad)
-                {
-                    MessageBox.Show("File Load Exception Caught \n" + fileLoad.ToString());
-                    continue;
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Exception Caught \n" + e.ToString());
+                    MessageBox.Show(e.ToString());
                     continue;
                 }
-
-                // Load all referenced assemblies
-                //// foreach (AssemblyName an in referencedAssemblies)
-                //// {
-                ////     try
-                ////     {
-                ////         Assembly.ReflectionOnlyLoad(an.Name);
-                ////     }
-                ////     catch (FileNotFoundException)
-                ////     {
-                ////         continue;
-                ////     }
-                //// }
 
                 Type[] types;
 
@@ -124,6 +141,13 @@
                 {
                     if (type != null)
                     {
+                        // maybe consider using this somehow. must check out the values of all of these
+                        // CustomAttributeData.GetCustomAttributes(Assembly)
+                        // CustomAttributeData.GetCustomAttributes(MemberInfo)
+                        // CustomAttributeData.GetCustomAttributes(Module)
+                        // CustomAttributeData.GetCustomAttributes(ParameterInfo)
+                        IList<CustomAttributeData> data = CustomAttributeData.GetCustomAttributes(type);
+
                         // Here is where I should update the loading bar with names of current type names
                         modules.Add(GetSingleModule(type));
                     }
