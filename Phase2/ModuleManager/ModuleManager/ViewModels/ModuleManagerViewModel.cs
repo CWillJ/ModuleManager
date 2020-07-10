@@ -117,7 +117,7 @@
                 }
 
                 // TODO in the future, possibly kill loading bar
-                MessageBox.Show(@"Done Loading Modules");
+                ////MessageBox.Show(@"Done Loading Modules");
             }
 
             // Future TreeViewSelectedItem Binding

@@ -157,7 +157,11 @@
             if (!string.IsNullOrEmpty(ReturnType))
             {
                 s += @"Return: " + ReturnType + "\n";
-                s += ReturnDescription + "\n";
+
+                if (!string.IsNullOrEmpty(ReturnDescription))
+                {
+                    s += ReturnDescription + "\n";
+                }
             }
             else
             {

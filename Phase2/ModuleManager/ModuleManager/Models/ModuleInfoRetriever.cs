@@ -1,11 +1,11 @@
 ﻿namespace ModuleManager.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Security;
     using System.Text.RegularExpressions;
     using System.Windows;
     using System.Xml;
@@ -23,6 +23,7 @@
         public ModuleInfoRetriever()
         {
             DllDirectory = string.Empty;
+            LoadedAssemblies = new ObservableCollection<string>();
         }
 
         /// <summary>
@@ -32,6 +33,7 @@
         public ModuleInfoRetriever(string moduleDirectory)
         {
             DllDirectory = moduleDirectory;
+            LoadedAssemblies = new ObservableCollection<string>();
         }
 
         /// <summary>
@@ -42,55 +44,13 @@
 
         /// <summary>
         /// Gets or sets DllDirectory is the directory path of the .dll files.
-        /// TODO should be renamed.
         /// </summary>
         public string DllDirectory { get; set; }
 
         /// <summary>
-        /// GetModules2 will build an ObservableCollection of type Module using CustomAttributeData.
+        /// Gets or sets LoadedAssemblies which stores all assemblies that have already been loaded.
         /// </summary>
-        /// <returns>A Collection of Module type.</returns>
-        public ObservableCollection<Classes.Module> GetModules2()
-        {
-            if (string.IsNullOrEmpty(DllDirectory))
-            {
-                MessageBox.Show(@"The Directory Path Cannot Be Empty");
-                return null;
-            }
-
-            ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
-
-            foreach (var dllFile in Directory.GetFiles(DllDirectory, @"*.dll"))
-            {
-                DllFileName = dllFile;
-
-                Assembly assembly;
-
-                // get assembly
-                assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
-                IList<CustomAttributeData> assemblyData = CustomAttributeData.GetCustomAttributes(assembly);
-
-                // get type info from assembly
-                foreach (Type type in assembly.GetTypes())
-                {
-                    IList<CustomAttributeData> typeData = CustomAttributeData.GetCustomAttributes(type);
-
-                    // get method info from types
-                    foreach (MethodInfo method in type.GetMethods())
-                    {
-                        IList<CustomAttributeData> methodData = CustomAttributeData.GetCustomAttributes(method);
-
-                        // get parameter info from method info
-                        foreach (ParameterInfo parameter in method.GetParameters())
-                        {
-                            IList<CustomAttributeData> parameterData = CustomAttributeData.GetCustomAttributes(parameter);
-                        }
-                    }
-                }
-            }
-
-            return modules;
-        }
+        public ObservableCollection<string> LoadedAssemblies { get; set; }
 
         /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize
@@ -112,21 +72,52 @@
             foreach (var dllFile in Directory.GetFiles(DllDirectory, @"*.dll"))
             {
                 DllFileName = dllFile;
-
                 Assembly assembly;
 
                 // try to load the assembly from the .dll
                 try
                 {
-                    assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
+                   assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
                 }
-                catch (Exception e)
+                catch (ArgumentNullException)
                 {
-                    MessageBox.Show(e.ToString());
+                    MessageBox.Show("Argument Null Exception Thrown While Trying To Load From " + dllFile);
+                    continue;
+                }
+                catch (FileNotFoundException)
+                {
+                    MessageBox.Show("File Not Found Exception Thrown While Trying To Load From " + dllFile);
+                    continue;
+                }
+                catch (FileLoadException)
+                {
+                    MessageBox.Show("File Load Exception Thrown While Trying To Load From " + dllFile);
+                    continue;
+                }
+                catch (BadImageFormatException)
+                {
+                    MessageBox.Show("Bad Image Format Exception Thrown While Trying To Load From " + dllFile);
+                    continue;
+                }
+                catch (SecurityException)
+                {
+                    MessageBox.Show("Security Exception Thrown While Trying To Load From " + dllFile);
+                    continue;
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("Argument Exception Thrown While Trying To Load From " + dllFile);
+                    continue;
+                }
+                catch (PathTooLongException)
+                {
+                    MessageBox.Show("Path Too Long Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
 
-                Type[] types;
+                LoadAllAssemblies(assembly);
+
+                Type[] types = null;
 
                 try
                 {
@@ -134,21 +125,13 @@
                 }
                 catch (ReflectionTypeLoadException ex)
                 {
-                    types = ex.Types;
+                    types = ex.Types.Where(t => t != null).ToArray();
                 }
 
                 foreach (var type in types)
                 {
                     if (type != null)
                     {
-                        // maybe consider using this somehow. must check out the values of all of these
-                        // CustomAttributeData.GetCustomAttributes(Assembly)
-                        // CustomAttributeData.GetCustomAttributes(MemberInfo)
-                        // CustomAttributeData.GetCustomAttributes(Module)
-                        // CustomAttributeData.GetCustomAttributes(ParameterInfo)
-                        IList<CustomAttributeData> data = CustomAttributeData.GetCustomAttributes(type);
-
-                        // Here is where I should update the loading bar with names of current type names
                         modules.Add(GetSingleModule(type));
                     }
                 }
@@ -156,6 +139,55 @@
 
             // Return an alphabetized collection of the found modules
             return new ObservableCollection<Classes.Module>(modules.OrderBy(mod => mod.Name));
+        }
+
+        private void LoadAllAssemblies(Assembly assembly)
+        {
+            AssemblyName[] names = assembly.GetReferencedAssemblies();
+            Assembly attemptToLoadAssembly;
+
+            foreach (AssemblyName name in names)
+            {
+                try
+                {
+                    if (!LoadedAssemblies.Contains(name.FullName))
+                    {
+                        attemptToLoadAssembly = Assembly.ReflectionOnlyLoad(name.FullName);
+                        LoadedAssemblies.Add(attemptToLoadAssembly.FullName);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                catch (ArgumentNullException)
+                {
+                    MessageBox.Show("Cannot Load\n " + name.Name + "\nDue to Argument Null Exception");
+                    continue;
+                }
+                catch (BadImageFormatException)
+                {
+                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to Bad Image Format Exception");
+                    continue;
+                }
+                catch (FileLoadException)
+                {
+                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Load Exception");
+                    continue;
+                }
+                catch (PlatformNotSupportedException)
+                {
+                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to Platform Not Supported Exception");
+                    continue;
+                }
+                catch (FileNotFoundException)
+                {
+                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Not Found Exception");
+                    continue;
+                }
+
+                LoadAllAssemblies(attemptToLoadAssembly);
+            }
         }
 
         private Classes.Module GetSingleModule(Type type)

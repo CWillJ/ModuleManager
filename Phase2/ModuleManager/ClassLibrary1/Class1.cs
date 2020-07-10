@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -10,7 +12,7 @@
     /// Class1 only exists to test getting info from a .dll and the
     /// related .xml files.
     /// </summary>
-    public class Class1
+    public class Class1 : INotifyCollectionChanged
     {
         private string _property1;
         private int _property2;
@@ -22,7 +24,7 @@
         {
             _property1 = string.Empty;
             _property2 = 0;
-            Method1("This is a fake class");
+            System.Console.WriteLine(Method1("This is a fake class").ToString());
         }
 
         /// <summary>
@@ -43,15 +45,31 @@
             set { _property2 = value; }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        /// <summary>
+        /// Raise a property changed event.
+        /// </summary>
+        /// <param name="property">Property passed in as a string.</param>
+        public void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
         /// <summary>
         /// Comments for Method1
         /// </summary>
         /// <param name="str">Description of only parameter.</param>
-        public void Method1(string str)
+        /// <returns>a SomeObject.</returns>
+        public SomeObject Method1(string str)
         {
-            Property1 = str;
+            SomeObject so = new SomeObject(str);
+            Property1 = so.Property;
             Property2 = 21;
-            System.Console.WriteLine(Method1(Property1, Property2));
+            System.Console.WriteLine(Method1(Property1, Property2).ToString());
+
+            return so;
         }
 
         /// <summary>
@@ -60,10 +78,11 @@
         /// </summary>
         /// <param name="str">This parameter is a string.</param>
         /// <param name="num">And this one is an integer.</param>
-        /// <returns>str plus a string of the integer num.</returns>
-        public string Method1(string str, int num)
+        /// <returns>SomeObject str plus a string of the integer num.</returns>
+        public SomeObject Method1(string str, int num)
         {
-            return str + num.ToString();
+            SomeObject so = new SomeObject(str + num.ToString());
+            return so;
         }
     }
 }
