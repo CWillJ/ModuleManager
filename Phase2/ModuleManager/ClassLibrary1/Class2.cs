@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Xml;
 
     /// <summary>
     /// Class2 only exists to test getting info from a .dll and the
@@ -35,12 +36,26 @@
         }
 
         /// <summary>
+        /// Gets or sets _num.
+        /// </summary>
+        public int Num
+        {
+            get { return _num; }
+            set { _num = value; }
+        }
+
+        /// <summary>
         /// Comments for Method1
         /// </summary>
         /// <param name="str">Parameter description.</param>
-        public void Method1(string str)
+        /// <returns>XmlDocument for testing.</returns>
+        public XmlDocument Method1(string str)
         {
-            System.Console.WriteLine(Method2(str, _num));
+            // bologna  XmlDocument for testing...
+            XmlDocument xmlDoc = new XmlDocument();
+            System.Console.WriteLine(Method2(str, Num));
+
+            return xmlDoc;
         }
 
         /// <summary>
@@ -59,7 +74,7 @@
         /// </summary>
         public void Method3()
         {
-            _num = _num + 21;
+            Num += 21;
         }
     }
 }
