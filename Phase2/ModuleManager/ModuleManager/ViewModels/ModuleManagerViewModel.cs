@@ -14,6 +14,9 @@
     public class ModuleManagerViewModel : INotifyPropertyChanged
     {
         private string _memberText;
+        private readonly BackgroundWorker _worker;
+        private double _currentProgress;
+        private string _currentProgressText;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
@@ -21,6 +24,9 @@
         public ModuleManagerViewModel()
         {
             _memberText = string.Empty;
+            _currentProgressText = string.Empty;
+            _currentProgress = 0;
+
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
             LoadModulesCommand = new MyICommand(FindDLLs);
@@ -67,6 +73,38 @@
         public string ModuleDirectory { get; set; }
 
         /// <summary>
+        /// Gets or sets the progress bar text.
+        /// </summary>
+        public string CurrentProgressText
+        {
+            get { return _currentProgressText; }
+            set
+            {
+                if (_currentProgressText != value)
+                {
+                    _currentProgressText = value;
+                    RaisePropertyChanged("CurrentProgressText");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the current progress of the status bar.
+        /// </summary>
+        public double CurrentProgress
+        {
+            get { return _currentProgress; }
+            private set
+            {
+                if (_currentProgress != value)
+                {
+                    _currentProgress = value;
+                    RaisePropertyChanged("CurrentProgress");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets MemberText.
         /// </summary>
         public string MemberText
@@ -99,6 +137,10 @@
 
         private void FindDLLs()
         {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += Worker_DoWork;
+
             Modules.Clear();
 
             // Bring up explorer to allow user to choose a file location
@@ -122,6 +164,11 @@
 
             // Future TreeViewSelectedItem Binding
             //// MemberText = Modules[0].ToString();
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>

@@ -35,6 +35,19 @@
                 Command="{Binding SaveConfigCommand}"
                 Content="Save Configuration"
             />
+
+            <Grid>
+                <ProgressBar Value="{Binding Path=CurrentProgress}"
+                             Width="300"
+                             Margin="10"
+                             Minimum="0"
+                             Maximum="100"/>
+
+                <TextBlock Text="{Binding Path=CurrentProgressText}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Grid>
+
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,20">
