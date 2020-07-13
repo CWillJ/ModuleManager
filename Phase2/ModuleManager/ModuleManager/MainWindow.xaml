@@ -39,7 +39,8 @@
             <Grid>
                 <ProgressBar Value="{Binding Path=CurrentProgress}"
                              Width="300"
-                             Margin="10"
+                             Height="30"
+                             Margin="30,15,5,5"
                              Minimum="0"
                              Maximum="100"/>
 

@@ -137,10 +137,6 @@
 
         private void FindDLLs()
         {
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.WorkerReportsProgress = true;
-            worker.DoWork += Worker_DoWork;
-
             Modules.Clear();
 
             // Bring up explorer to allow user to choose a file location
@@ -164,11 +160,6 @@
 
             // Future TreeViewSelectedItem Binding
             //// MemberText = Modules[0].ToString();
-        }
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
 
         /// <summary>
