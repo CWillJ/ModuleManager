@@ -45,7 +45,14 @@
             set { _property2 = value; }
         }
 
+        /// <summary>
+        /// Property handler for tests.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Property handler also for tests.
+        /// </summary>
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         /// <summary>

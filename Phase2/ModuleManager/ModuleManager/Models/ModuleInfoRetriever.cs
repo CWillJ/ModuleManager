@@ -7,6 +7,7 @@
     using System.Reflection;
     using System.Security;
     using System.Text.RegularExpressions;
+    using System.Threading;
     using System.Windows;
     using System.Xml;
     using ModuleManager.Classes;
@@ -68,53 +69,56 @@
             }
 
             ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
+            ObservableCollection<Assembly> assemblies = new ObservableCollection<Assembly>();
 
             foreach (var dllFile in Directory.GetFiles(DllDirectory, @"*.dll"))
             {
                 DllFileName = dllFile;
-                Assembly assembly;
 
                 // try to load the assembly from the .dll
                 try
                 {
-                   assembly = Assembly.ReflectionOnlyLoadFrom(dllFile);
+                    assemblies.Add(Assembly.ReflectionOnlyLoadFrom(dllFile));
                 }
                 catch (ArgumentNullException)
                 {
-                    MessageBox.Show("Argument Null Exception Thrown While Trying To Load From " + dllFile);
+                    ////MessageBox.Show("Argument Null Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
                 catch (FileNotFoundException)
                 {
-                    MessageBox.Show("File Not Found Exception Thrown While Trying To Load From " + dllFile);
+                    ////MessageBox.Show("File Not Found Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
                 catch (FileLoadException)
                 {
-                    MessageBox.Show("File Load Exception Thrown While Trying To Load From " + dllFile);
+                    ////MessageBox.Show("File Load Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
                 catch (BadImageFormatException)
                 {
-                    MessageBox.Show("Bad Image Format Exception Thrown While Trying To Load From " + dllFile);
+                    ////MessageBox.Show("Bad Image Format Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
                 catch (SecurityException)
                 {
-                    MessageBox.Show("Security Exception Thrown While Trying To Load From " + dllFile);
+                    ////MessageBox.Show("Security Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
                 catch (ArgumentException)
                 {
-                    MessageBox.Show("Argument Exception Thrown While Trying To Load From " + dllFile);
+                    ////MessageBox.Show("Argument Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
                 catch (PathTooLongException)
                 {
-                    MessageBox.Show("Path Too Long Exception Thrown While Trying To Load From " + dllFile);
+                    ////MessageBox.Show("Path Too Long Exception Thrown While Trying To Load From " + dllFile);
                     continue;
                 }
+            }
 
+            foreach (var assembly in assemblies)
+            {
                 LoadAllAssemblies(assembly);
 
                 Type[] types = null;
@@ -162,27 +166,27 @@
                 }
                 catch (ArgumentNullException)
                 {
-                    MessageBox.Show("Cannot Load\n " + name.Name + "\nDue to Argument Null Exception");
+                    ////MessageBox.Show("Cannot Load\n " + name.Name + "\nDue to Argument Null Exception");
                     continue;
                 }
                 catch (BadImageFormatException)
                 {
-                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to Bad Image Format Exception");
+                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to Bad Image Format Exception");
                     continue;
                 }
                 catch (FileLoadException)
                 {
-                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Load Exception");
+                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Load Exception");
                     continue;
                 }
                 catch (PlatformNotSupportedException)
                 {
-                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to Platform Not Supported Exception");
+                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to Platform Not Supported Exception");
                     continue;
                 }
                 catch (FileNotFoundException)
                 {
-                    MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Not Found Exception");
+                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Not Found Exception");
                     continue;
                 }
 

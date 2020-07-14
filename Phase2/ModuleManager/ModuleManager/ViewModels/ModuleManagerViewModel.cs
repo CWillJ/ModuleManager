@@ -1,8 +1,11 @@
 ﻿namespace ModuleManager.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
+    using System.Threading;
+    using System.Windows;
     using System.Windows.Forms;
     using System.Xml.Serialization;
     using ModuleManager.Classes;
@@ -13,19 +16,24 @@
     /// </summary>
     public class ModuleManagerViewModel : INotifyPropertyChanged
     {
+        private ObservableCollection<Module> _modules;
         private string _memberText;
-        private readonly BackgroundWorker _worker;
         private double _currentProgress;
         private string _currentProgressText;
+        private Visibility _currentProgressVisible;
+        private bool _gettingInfoFromDlls;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
         /// </summary>
         public ModuleManagerViewModel()
         {
+            _modules = new ObservableCollection<Module>();
             _memberText = string.Empty;
             _currentProgressText = string.Empty;
             _currentProgress = 0;
+            _currentProgressVisible = Visibility.Collapsed;
+            _gettingInfoFromDlls = false;
 
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
@@ -77,7 +85,11 @@
         /// </summary>
         public string CurrentProgressText
         {
-            get { return _currentProgressText; }
+            get
+            {
+                return _currentProgressText;
+            }
+
             set
             {
                 if (_currentProgressText != value)
@@ -89,17 +101,52 @@
         }
 
         /// <summary>
-        /// Gets or sets the current progress of the status bar.
+        /// Gets the current progress of the status bar.
         /// </summary>
         public double CurrentProgress
         {
-            get { return _currentProgress; }
+            get
+            {
+                return _currentProgress;
+            }
+
             private set
             {
                 if (_currentProgress != value)
                 {
                     _currentProgress = value;
                     RaisePropertyChanged("CurrentProgress");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the status of a progress bar's visability.
+        /// </summary>
+        public Visibility CurrentProgressVisible
+        {
+            get
+            {
+                return GettingInfoFromDlls ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the assemblies from the dlls are loading.
+        /// </summary>
+        public bool GettingInfoFromDlls
+        {
+            get
+            {
+                return _gettingInfoFromDlls;
+            }
+
+            set
+            {
+                if (_gettingInfoFromDlls != value)
+                {
+                    _gettingInfoFromDlls = value;
+                    RaisePropertyChanged("CurrentProgressVisible");
                 }
             }
         }
@@ -124,7 +171,19 @@
         /// <summary>
         /// Gets or sets the collection of Modules.
         /// </summary>
-        public ObservableCollection<Module> Modules { get; set; }
+        public ObservableCollection<Module> Modules
+        {
+            get
+            {
+                return _modules;
+            }
+
+            set
+            {
+                _modules = value;
+                RaisePropertyChanged("Modules");
+            }
+        }
 
         /// <summary>
         /// Raise a property changed event.
@@ -137,12 +196,16 @@
 
         private void FindDLLs()
         {
+            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
+            ObservableCollection<Module> modules;
+
+            infoRetriever.DllDirectory = GetModuleDirectory();
+
+            // These two things arent showing up on the UI
+            GettingInfoFromDlls = true;
             Modules.Clear();
 
-            // Bring up explorer to allow user to choose a file location
-            //// ModuleDirectory = GetModuleDirectory();
-            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(GetModuleDirectory());
-            ObservableCollection<Module> modules = infoRetriever.GetModules();
+            modules = infoRetriever.GetModules();
 
             if (modules != null)
             {
@@ -157,6 +220,8 @@
                 // TODO in the future, possibly kill loading bar
                 ////MessageBox.Show(@"Done Loading Modules");
             }
+
+            GettingInfoFromDlls = false;
 
             // Future TreeViewSelectedItem Binding
             //// MemberText = Modules[0].ToString();
@@ -189,14 +254,14 @@
 
                     if (saveFile == string.Empty)
                     {
-                        MessageBox.Show(@"Invalid File Path");
+                        System.Windows.MessageBox.Show(@"Invalid File Path");
                         return;
                     }
                 }
             }
             else
             {
-                MessageBox.Show(@"Config File Saved at: " + saveFile);
+                System.Windows.MessageBox.Show(@"Config File Saved at: " + saveFile);
             }
 
             using (StreamWriter wr = new StreamWriter(saveFile))
