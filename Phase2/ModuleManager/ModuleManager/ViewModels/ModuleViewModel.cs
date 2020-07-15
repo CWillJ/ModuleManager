@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.ViewModels
 {
-    using System.Collections.ObjectModel;
     using ModuleManager.Classes;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Module view model class.

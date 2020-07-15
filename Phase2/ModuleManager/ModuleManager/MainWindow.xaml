@@ -10,7 +10,11 @@
         xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
         mc:Ignorable="d"
         Title="Module Manager" Height="450" Width="800">
-    
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -36,16 +40,15 @@
                 Content="Save Configuration"
             />
 
-            <Grid>
+            <Grid Visibility="{Binding Path=ProgressBarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
-                             Visibility="{Binding Path=CurrentProgressVisible, Mode=OneWay}"
                              Width="300"
                              Height="30"
                              Margin="30,15,5,5"
                              Minimum="0"
                              Maximum="100"/>
 
-                <TextBlock Text="{Binding Path=CurrentProgressText, Mode=OneWay}"
+                <TextBlock Text="{Binding Path=ProgressBarText, Mode=OneWay}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -93,7 +96,7 @@
             </StackPanel>
 
             <!-- Text="{Binding Path=MemberText}" -->
-            
+
             <StackPanel>
                 <TextBlock TextAlignment="Center" Text="Description" />
 

@@ -1,12 +1,7 @@
 ﻿namespace ClassLibrary1
 {
-    using System;
-    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Class1 only exists to test getting info from a .dll and the

@@ -1,13 +1,10 @@
 ﻿namespace ModuleManager.ViewModels
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
-    using System.Threading;
-    using System.Windows;
-    using System.Windows.Forms;
     using System.Xml.Serialization;
+    using Microsoft.Win32;
     using ModuleManager.Classes;
     using ModuleManager.Models;
 
@@ -19,9 +16,8 @@
         private ObservableCollection<Module> _modules;
         private string _memberText;
         private double _currentProgress;
-        private string _currentProgressText;
-        private Visibility _currentProgressVisible;
-        private bool _gettingInfoFromDlls;
+        private string _progressBarText;
+        private bool _progressBarVisible;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
@@ -30,10 +26,9 @@
         {
             _modules = new ObservableCollection<Module>();
             _memberText = string.Empty;
-            _currentProgressText = string.Empty;
+            _progressBarText = string.Empty;
             _currentProgress = 0;
-            _currentProgressVisible = Visibility.Collapsed;
-            _gettingInfoFromDlls = false;
+            _progressBarVisible = false;
 
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
@@ -61,7 +56,7 @@
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Gets or sets a value indicating whether SaveFileDialog is used on save settings.
+        /// Gets or sets a value indicating whether SaveFileDialog is used on save settings
         /// </summary>
         public bool UseSaveFileDialog { get; set; }
 
@@ -83,19 +78,19 @@
         /// <summary>
         /// Gets or sets the progress bar text.
         /// </summary>
-        public string CurrentProgressText
+        public string ProgressBarText
         {
             get
             {
-                return _currentProgressText;
+                return _progressBarText;
             }
 
             set
             {
-                if (_currentProgressText != value)
+                if (_progressBarText != value)
                 {
-                    _currentProgressText = value;
-                    RaisePropertyChanged("CurrentProgressText");
+                    _progressBarText = value;
+                    RaisePropertyChanged("ProgressBarText");
                 }
             }
         }
@@ -116,38 +111,25 @@
                 {
                     _currentProgress = value;
                     RaisePropertyChanged("CurrentProgress");
+                    RaisePropertyChanged("ProgressBarVisible");
                 }
             }
         }
 
         /// <summary>
-        /// Gets the status of a progress bar's visability.
+        /// Gets or sets a value indicating whether a progress bar is visible.
         /// </summary>
-        public Visibility CurrentProgressVisible
+        public bool ProgressBarVisible
         {
             get
             {
-                return GettingInfoFromDlls ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the assemblies from the dlls are loading.
-        /// </summary>
-        public bool GettingInfoFromDlls
-        {
-            get
-            {
-                return _gettingInfoFromDlls;
+                return _progressBarVisible;
             }
 
             set
             {
-                if (_gettingInfoFromDlls != value)
-                {
-                    _gettingInfoFromDlls = value;
-                    RaisePropertyChanged("CurrentProgressVisible");
-                }
+                _progressBarVisible = value;
+                RaisePropertyChanged("ProgressBarVisible");
             }
         }
 
@@ -202,7 +184,9 @@
             infoRetriever.DllDirectory = GetModuleDirectory();
 
             // These two things arent showing up on the UI
-            GettingInfoFromDlls = true;
+            ProgressBarVisible = true;
+            ProgressBarText = "Loading Modules";
+            CurrentProgress = 25;
             Modules.Clear();
 
             modules = infoRetriever.GetModules();
@@ -221,7 +205,9 @@
                 ////MessageBox.Show(@"Done Loading Modules");
             }
 
-            GettingInfoFromDlls = false;
+            CurrentProgress = 100;
+            ProgressBarText = string.Empty;
+            ProgressBarVisible = false;
 
             // Future TreeViewSelectedItem Binding
             //// MemberText = Modules[0].ToString();
@@ -240,23 +226,23 @@
 
             if (UseSaveFileDialog)
             {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-                    saveFileDialog.Filter = "xml files (*.xml)|*.xml";
-                    saveFileDialog.Title = "Save Configuration File";
-                    saveFileDialog.RestoreDirectory = true;
+                    InitialDirectory = Directory.GetCurrentDirectory(),
+                    Filter = "xml files (*.xml)|*.xml",
+                    Title = "Save Configuration File",
+                    RestoreDirectory = true
+                };
 
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        saveFile = saveFileDialog.FileName;
-                    }
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    saveFile = saveFileDialog.FileName;
+                }
 
-                    if (saveFile == string.Empty)
-                    {
-                        System.Windows.MessageBox.Show(@"Invalid File Path");
-                        return;
-                    }
+                if (saveFile == string.Empty)
+                {
+                    System.Windows.MessageBox.Show(@"Invalid File Path");
+                    return;
                 }
             }
             else
@@ -271,7 +257,7 @@
         }
 
         /// <summary>
-        /// LoadConfig will load an ObservableCollection of type Module from an xml file.
+        /// LoadConfig will load an ObservableCollection of type Module from an xml file
         /// </summary>
         /// <returns>ObservableCollection of type Module.</returns>
         private ObservableCollection<Module> LoadConfig()
@@ -282,22 +268,22 @@
 
             if (UseSaveFileDialog)
             {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                OpenFileDialog openFileDialog = new OpenFileDialog
                 {
-                    openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-                    openFileDialog.Filter = "xml files (*.xml)|*.xml";
-                    openFileDialog.Title = "Save Configuration File";
-                    openFileDialog.RestoreDirectory = true;
+                    InitialDirectory = Directory.GetCurrentDirectory(),
+                    Filter = "xml files (*.xml)|*.xml",
+                    Title = "Save Configuration File",
+                    RestoreDirectory = true
+                };
 
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        loadFile = openFileDialog.FileName;
-                    }
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    loadFile = openFileDialog.FileName;
+                }
 
-                    if (loadFile == string.Empty)
-                    {
-                        return null;
-                    }
+                if (loadFile == string.Empty)
+                {
+                    return null;
                 }
             }
 
@@ -311,12 +297,17 @@
 
         private string GetModuleDirectory()
         {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK
-                && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                return folderBrowserDialog.SelectedPath;
+                ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = "Folder Selection"
+            };
+
+            if (openFileDialog.ShowDialog() == true && openFileDialog.CheckPathExists)
+            {
+                return openFileDialog.FileName;
             }
 
             return null;

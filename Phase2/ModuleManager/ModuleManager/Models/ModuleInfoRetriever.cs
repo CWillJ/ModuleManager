@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.Models
 {
+    using ModuleManager.Classes;
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -7,11 +8,8 @@
     using System.Reflection;
     using System.Security;
     using System.Text.RegularExpressions;
-    using System.Threading;
     using System.Windows;
     using System.Xml;
-    using ModuleManager.Classes;
-    using Xamarin.Forms.Internals;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -231,7 +229,7 @@
                 string name = @"Constructor for " + type.Name;
 
                 string description =
-                    GetMethodDescription((MemberInfo)constructor, type.GetConstructors().IndexOf(constructor));
+                    GetMethodDescription((MemberInfo)constructor, Array.IndexOf(type.GetConstructors(), constructor));
 
                 ObservableCollection<MemberParameter> parameters =
                     GetParametersFromList(constructor.GetParameters());
@@ -385,7 +383,7 @@
                 string pType = p.ParameterType.Name.ToString();
                 string pName = p.Name;
                 string pDescription =
-                    GetMemberParameterDescription(p.Member, paramList.IndexOf(p));
+                    GetMemberParameterDescription(p.Member, Array.IndexOf(paramList, p));
 
                 parameters.Add(new MemberParameter(
                     pType,
