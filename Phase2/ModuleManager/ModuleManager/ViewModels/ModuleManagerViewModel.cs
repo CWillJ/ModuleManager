@@ -179,33 +179,20 @@
 
         private void FindDLLs()
         {
-            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever();
-            ObservableCollection<Module> modules;
+            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever
+            {
+                DllDirectory = GetModuleDirectory()
+            };
 
-            infoRetriever.DllDirectory = GetModuleDirectory();
-
-            // These two things arent showing up on the UI
+            // Show progress bar (TODO Why isn't it showing up!?)
             ProgressBarVisible = true;
             ProgressBarText = "Loading Modules";
             CurrentProgress = 25;
             Modules.Clear();
 
-            modules = infoRetriever.GetModules();
+            Modules = infoRetriever.GetModules();
 
-            if (modules != null)
-            {
-                foreach (var mod in modules)
-                {
-                    if (mod != null)
-                    {
-                        Modules.Add(new Module(mod.Name, mod.Description, mod.Members));
-                    }
-                }
-
-                // TODO in the future, possibly kill loading bar
-                ////MessageBox.Show(@"Done Loading Modules");
-            }
-
+            // Kill progress bar
             CurrentProgress = 100;
             ProgressBarText = string.Empty;
             ProgressBarVisible = false;
@@ -300,6 +287,7 @@
         {
             return @"C:\Users\wjohnson\Desktop\Modules";
 
+            // TODO get directory from user
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 ValidateNames = false,

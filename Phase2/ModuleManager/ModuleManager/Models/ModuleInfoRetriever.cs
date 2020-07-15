@@ -7,10 +7,9 @@
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using System.Security;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using System.Windows;
-    using System.Windows.Documents;
     using System.Xml;
     using ModuleManager.Classes;
 
@@ -91,50 +90,10 @@
                 DllFileName = dllFile;
 
                 assemblies.Add(mlc.LoadFromAssemblyPath(dllFile));
-
-                // try to load the assembly from the .dll
-                ////try
-                ////{
-                ////    assemblies.Add(Assembly.ReflectionOnlyLoadFrom(dllFile));
-                ////}
-                ////catch (ArgumentNullException)
-                ////{
-                ////    ////MessageBox.Show("Argument Null Exception Thrown While Trying To Load From " + dllFile);
-                ////    continue;
-                ////}
-                ////catch (FileNotFoundException)
-                ////{
-                ////    ////MessageBox.Show("File Not Found Exception Thrown While Trying To Load From " + dllFile);
-                ////    continue;
-                ////}
-                ////catch (FileLoadException)
-                ////{
-                ////    ////MessageBox.Show("File Load Exception Thrown While Trying To Load From " + dllFile);
-                ////    continue;
-                ////}
-                ////catch (BadImageFormatException)
-                ////{
-                ////    ////MessageBox.Show("Bad Image Format Exception Thrown While Trying To Load From " + dllFile);
-                ////    continue;
-                ////}
-                ////catch (SecurityException)
-                ////{
-                ////    ////MessageBox.Show("Security Exception Thrown While Trying To Load From " + dllFile);
-                ////    continue;
-                ////}
-                ////catch (ArgumentException)
-                ////{
-                ////    ////MessageBox.Show("Argument Exception Thrown While Trying To Load From " + dllFile);
-                ////    continue;
-                ////}
-                ////catch (PathTooLongException)
-                ////{
-                ////    ////MessageBox.Show("Path Too Long Exception Thrown While Trying To Load From " + dllFile);
-                ////    continue;
-                ////}
             }
 
-            foreach (var assembly in assemblies)
+            // TODO Async this
+            Parallel.ForEach(assemblies, (assembly) =>
             {
                 LoadAllAssemblies(assembly);
 
@@ -156,7 +115,7 @@
                         modules.Add(GetSingleModule(type));
                     }
                 }
-            }
+            });
 
             // Return an alphabetized collection of the found non-null modules
             var noNullsList = modules.Where(x => x != null).ToList();
