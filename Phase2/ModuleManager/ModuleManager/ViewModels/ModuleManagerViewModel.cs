@@ -3,6 +3,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
+    using System.IO.Enumeration;
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleManager.Classes;
@@ -272,7 +273,7 @@
                 {
                     InitialDirectory = Directory.GetCurrentDirectory(),
                     Filter = "xml files (*.xml)|*.xml",
-                    Title = "Save Configuration File",
+                    Title = "Load Configuration File",
                     RestoreDirectory = true
                 };
 
@@ -297,6 +298,8 @@
 
         private string GetModuleDirectory()
         {
+            return @"C:\Users\wjohnson\Desktop\Modules";
+
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 ValidateNames = false,
@@ -307,7 +310,8 @@
 
             if (openFileDialog.ShowDialog() == true && openFileDialog.CheckPathExists)
             {
-                return openFileDialog.FileName;
+                string s = openFileDialog.FileName.Remove(openFileDialog.FileName.LastIndexOf(@"\Folder Selection"), openFileDialog.FileName.Length);
+                return s;
             }
 
             return null;

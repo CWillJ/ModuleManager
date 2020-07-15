@@ -1,15 +1,18 @@
 ﻿namespace ModuleManager.Models
 {
-    using ModuleManager.Classes;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Text.RegularExpressions;
     using System.Windows;
+    using System.Windows.Documents;
     using System.Xml;
+    using ModuleManager.Classes;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -69,50 +72,66 @@
             ObservableCollection<Classes.Module> modules = new ObservableCollection<Classes.Module>();
             ObservableCollection<Assembly> assemblies = new ObservableCollection<Assembly>();
 
-            foreach (var dllFile in Directory.GetFiles(DllDirectory, @"*.dll"))
+            // add all the possible referenced assemblies
+            string[] runtimeEnvirnmentFiles = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), @"*.dll");
+            string[] dllFiles = Directory.GetFiles(DllDirectory, @"*.dll");
+            var paths = new List<string>(runtimeEnvirnmentFiles);
+
+            // add all the files of the assemblies you actually want info from
+            foreach (var dllFile in dllFiles)
+            {
+                paths.Add(dllFile);
+            }
+
+            var resolver = new PathAssemblyResolver(paths);
+            var mlc = new MetadataLoadContext(resolver);
+
+            foreach (var dllFile in dllFiles)
             {
                 DllFileName = dllFile;
 
+                assemblies.Add(mlc.LoadFromAssemblyPath(dllFile));
+
                 // try to load the assembly from the .dll
-                try
-                {
-                    assemblies.Add(Assembly.ReflectionOnlyLoadFrom(dllFile));
-                }
-                catch (ArgumentNullException)
-                {
-                    ////MessageBox.Show("Argument Null Exception Thrown While Trying To Load From " + dllFile);
-                    continue;
-                }
-                catch (FileNotFoundException)
-                {
-                    ////MessageBox.Show("File Not Found Exception Thrown While Trying To Load From " + dllFile);
-                    continue;
-                }
-                catch (FileLoadException)
-                {
-                    ////MessageBox.Show("File Load Exception Thrown While Trying To Load From " + dllFile);
-                    continue;
-                }
-                catch (BadImageFormatException)
-                {
-                    ////MessageBox.Show("Bad Image Format Exception Thrown While Trying To Load From " + dllFile);
-                    continue;
-                }
-                catch (SecurityException)
-                {
-                    ////MessageBox.Show("Security Exception Thrown While Trying To Load From " + dllFile);
-                    continue;
-                }
-                catch (ArgumentException)
-                {
-                    ////MessageBox.Show("Argument Exception Thrown While Trying To Load From " + dllFile);
-                    continue;
-                }
-                catch (PathTooLongException)
-                {
-                    ////MessageBox.Show("Path Too Long Exception Thrown While Trying To Load From " + dllFile);
-                    continue;
-                }
+                ////try
+                ////{
+                ////    assemblies.Add(Assembly.ReflectionOnlyLoadFrom(dllFile));
+                ////}
+                ////catch (ArgumentNullException)
+                ////{
+                ////    ////MessageBox.Show("Argument Null Exception Thrown While Trying To Load From " + dllFile);
+                ////    continue;
+                ////}
+                ////catch (FileNotFoundException)
+                ////{
+                ////    ////MessageBox.Show("File Not Found Exception Thrown While Trying To Load From " + dllFile);
+                ////    continue;
+                ////}
+                ////catch (FileLoadException)
+                ////{
+                ////    ////MessageBox.Show("File Load Exception Thrown While Trying To Load From " + dllFile);
+                ////    continue;
+                ////}
+                ////catch (BadImageFormatException)
+                ////{
+                ////    ////MessageBox.Show("Bad Image Format Exception Thrown While Trying To Load From " + dllFile);
+                ////    continue;
+                ////}
+                ////catch (SecurityException)
+                ////{
+                ////    ////MessageBox.Show("Security Exception Thrown While Trying To Load From " + dllFile);
+                ////    continue;
+                ////}
+                ////catch (ArgumentException)
+                ////{
+                ////    ////MessageBox.Show("Argument Exception Thrown While Trying To Load From " + dllFile);
+                ////    continue;
+                ////}
+                ////catch (PathTooLongException)
+                ////{
+                ////    ////MessageBox.Show("Path Too Long Exception Thrown While Trying To Load From " + dllFile);
+                ////    continue;
+                ////}
             }
 
             foreach (var assembly in assemblies)
@@ -139,8 +158,9 @@
                 }
             }
 
-            // Return an alphabetized collection of the found modules
-            return new ObservableCollection<Classes.Module>(modules.OrderBy(mod => mod.Name));
+            // Return an alphabetized collection of the found non-null modules
+            var noNullsList = modules.Where(x => x != null).ToList();
+            return new ObservableCollection<Classes.Module>(noNullsList.OrderBy(mod => mod.Name));
         }
 
         private void LoadAllAssemblies(Assembly assembly)
@@ -271,7 +291,15 @@
                     paramInfo = property.GetIndexParameters();
                     parameters = GetParametersFromList(paramInfo);
                 }
+                catch (FileNotFoundException)
+                {
+                    parameters = null;
+                }
                 catch (FileLoadException)
+                {
+                    parameters = null;
+                }
+                catch (TypeLoadException)
                 {
                     parameters = null;
                 }
@@ -332,7 +360,15 @@
                 {
                     paramInfo = method.GetParameters();
                 }
+                catch (FileNotFoundException)
+                {
+                    paramInfo = null;
+                }
                 catch (FileLoadException)
+                {
+                    paramInfo = null;
+                }
+                catch (TypeLoadException)
                 {
                     paramInfo = null;
                 }
@@ -345,7 +381,15 @@
                 {
                     returnType = method.ReturnType.Name.ToString();
                 }
+                catch (FileNotFoundException)
+                {
+                    returnType = string.Empty;
+                }
                 catch (FileLoadException)
+                {
+                    returnType = string.Empty;
+                }
+                catch (TypeLoadException)
                 {
                     returnType = string.Empty;
                 }

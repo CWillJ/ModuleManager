@@ -18,10 +18,7 @@
             "TreeViewSelectedItem",
             typeof(object),
             typeof(SelectedTreeViewItemBehavior),
-            new FrameworkPropertyMetadata(
-                null,
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                new PropertyChangedCallback(TreeViewSelectedItemChanged)));
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(TreeViewSelectedItemChanged)));
 
         /// <summary>
         /// We need a Get method for our new property.

@@ -22,6 +22,31 @@
             Application Entry Point.
             </summary>
         </member>
+        <member name="T:ModuleManager.Behavoirs.BoolToVisibilityConverter">
+            <summary>
+            BoolToVisibilityConverter converts a Visibility object to a bool value.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Behavoirs.BoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts Visibility to bool.
+            </summary>
+            <param name="value">Object.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Object parameter.</param>
+            <param name="culture">Culture Info.</param>
+            <returns>True if visibility is visible, false if collapsed.</returns>
+        </member>
+        <member name="M:ModuleManager.Behavoirs.BoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts bool to Visibility object
+            </summary>
+            <param name="value">Object to convert.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Object parameter.</param>
+            <param name="culture">Culture Info.</param>
+            <returns>Visibility.Visible if true and Visibility.Collapsed if false.</returns>
+        </member>
         <member name="T:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior">
             <summary>
             SelectedTreeViewItemBehavior class used to allow selected
