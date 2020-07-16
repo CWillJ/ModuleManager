@@ -13,7 +13,7 @@
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModels.ModuleManagerViewModel();
+            ////DataContext = new ViewModels.ModuleManagerViewModel();
         }
 
         /// <summary>

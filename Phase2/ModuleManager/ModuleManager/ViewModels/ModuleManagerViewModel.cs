@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.IO;
     using System.IO.Enumeration;
+    using System.Threading.Tasks;
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleManager.Classes;
@@ -25,7 +26,7 @@
         /// </summary>
         public ModuleManagerViewModel()
         {
-            _modules = new ObservableCollection<Module>();
+            Modules = new ObservableCollection<Module>();
             _memberText = string.Empty;
             _progressBarText = string.Empty;
             _currentProgress = 0;
@@ -40,14 +41,6 @@
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
                 Modules = LoadConfig();
-                if (Modules == null)
-                {
-                    Modules = new ObservableCollection<Module>();
-                }
-            }
-            else
-            {
-                Modules = new ObservableCollection<Module>();
             }
         }
 
@@ -177,23 +170,23 @@
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        private void FindDLLs()
+        private async void FindDLLs()
         {
             ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever
             {
                 DllDirectory = GetModuleDirectory()
             };
 
-            // Show progress bar (TODO Why isn't it showing up!?)
+            // Show progress bar
             ProgressBarVisible = true;
             ProgressBarText = "Loading Modules";
-            CurrentProgress = 25;
+
             Modules.Clear();
 
-            Modules = infoRetriever.GetModules();
+            // Run async to allow UI thread to update UI with the property changes above.
+            Modules = await Task.Run(() => infoRetriever.GetModules());
 
             // Kill progress bar
-            CurrentProgress = 100;
             ProgressBarText = string.Empty;
             ProgressBarVisible = false;
 
@@ -271,7 +264,7 @@
 
                 if (loadFile == string.Empty)
                 {
-                    return null;
+                    return modules;
                 }
             }
 

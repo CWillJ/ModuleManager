@@ -20,24 +20,6 @@
         /// <returns>True if visibility is visible, false if collapsed.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return GetVisibility(value);
-        }
-
-        /// <summary>
-        /// Converts bool to Visibility object
-        /// </summary>
-        /// <param name="value">Object to convert.</param>
-        /// <param name="targetType">Target type.</param>
-        /// <param name="parameter">Object parameter.</param>
-        /// <param name="culture">Culture Info.</param>
-        /// <returns>Visibility.Visible if true and Visibility.Collapsed if false.</returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        private object GetVisibility(object value)
-        {
             if (!(value is bool))
             {
                 return Visibility.Collapsed;
@@ -51,6 +33,24 @@
             }
 
             return Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Converts bool to Visibility object
+        /// </summary>
+        /// <param name="value">Object to convert.</param>
+        /// <param name="targetType">Target type.</param>
+        /// <param name="parameter">Object parameter.</param>
+        /// <param name="culture">Culture Info.</param>
+        /// <returns>Visibility.Visible if true and Visibility.Collapsed if false.</returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((Visibility)value == Visibility.Visible)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

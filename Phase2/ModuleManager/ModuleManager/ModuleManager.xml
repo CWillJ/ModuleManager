@@ -633,6 +633,31 @@
             InitializeComponent
             </summary>
         </member>
+        <member name="T:ModuleManager.VML.ViewModelLocator">
+            <summary>
+            A ViewModelLocator class designed to hook up a view model to it's view.
+            </summary>
+        </member>
+        <member name="F:ModuleManager.VML.ViewModelLocator.AutoHookedUpViewModelProperty">
+            <summary>
+            Using a DependencyProperty as the backing store for AutoHookedUpViewModel.This
+            enables animation, styling, binding, etc...
+            </summary>
+        </member>
+        <member name="M:ModuleManager.VML.ViewModelLocator.GetAutoHookedUpViewModel(System.Windows.DependencyObject)">
+            <summary>
+            Gets view models associated with the view.
+            </summary>
+            <param name="obj">DependencyObject.</param>
+            <returns>Boolean value.</returns>
+        </member>
+        <member name="M:ModuleManager.VML.ViewModelLocator.SetAutoHookedUpViewModel(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the AutoHookedUpViewModel property.
+            </summary>
+            <param name="obj">DependencyObject</param>
+            <param name="value">Boolean value</param>
+        </member>
         <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
             <summary>
             GeneratedInternalTypeHelper

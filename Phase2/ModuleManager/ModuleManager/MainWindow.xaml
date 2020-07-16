@@ -11,8 +11,12 @@
         mc:Ignorable="d"
         Title="Module Manager" Height="450" Width="800">
 
+    <Window.DataContext>
+        <viewModel:ModuleManagerViewModel/>
+    </Window.DataContext>
+    
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
 
     <Grid>
@@ -40,13 +44,14 @@
                 Content="Save Configuration"
             />
 
-            <Grid Visibility="{Binding Path=ProgressBarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <!-- {Binding Path=ProgressBarVisible, Converter={StaticResource BoolToVisibilityConverter}} -->
+
+            <Grid Visibility="{Binding Path=ProgressBarVisible,  Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
                 <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
+                             IsIndeterminate="True"
                              Width="300"
                              Height="30"
-                             Margin="30,15,5,5"
-                             Minimum="0"
-                             Maximum="100"/>
+                             Margin="30,15,5,5"/>
 
                 <TextBlock Text="{Binding Path=ProgressBarText, Mode=OneWay}"
                            HorizontalAlignment="Center"
@@ -62,7 +67,7 @@
 
                 <!-- Module Template -->
                 <!-- behaviors:SelectedTreeViewItemBehavior.TreeViewSelectedItem="{Binding SelectedModule}" -->
-                <TreeView ItemsSource="{Binding Path=Modules}"
+                <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
                           SelectedItemChanged="TreeView_SelectedItemChanged"
                           Width="200"
                           Height="275"
