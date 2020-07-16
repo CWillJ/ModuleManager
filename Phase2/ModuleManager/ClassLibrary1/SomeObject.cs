@@ -8,7 +8,7 @@
         private string _property;
 
         /// <summary>
-        /// Constructor for some object.
+        /// Initializes a new instance of the <see cref="SomeObject"/> class.
         /// </summary>
         public SomeObject()
         {
@@ -16,9 +16,9 @@
         }
 
         /// <summary>
-        /// Second constructor for some object.
+        /// Initializes a new instance of the <see cref="SomeObject"/> class.
         /// </summary>
-        /// <param name="propertyString">string.</param>
+        /// <param name="propertyString">A string parameter for SomeObject.</param>
         public SomeObject(string propertyString)
         {
             _property = propertyString;

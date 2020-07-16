@@ -2,74 +2,67 @@
 {
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Interactivity;
 
     /// <summary>
     /// SelectedTreeViewItemBehavior class used to allow selected
-    /// items for TreeView controls.
+    /// items for TreeView controls. TODO make this v Work.
     /// </summary>
-    public class SelectedTreeViewItemBehavior
+    public class SelectedTreeViewItemBehavior : Behavior<TreeView>
     {
         /// <summary>
-        /// Declare our attached property, it needs to be a DependencyProperty so
-        /// we can bind to it from our ViewMode.
+        /// SelectedItemProperty.
         /// </summary>
-        public static readonly DependencyProperty TreeViewSelectedItemProperty =
-            DependencyProperty.RegisterAttached(
-            "TreeViewSelectedItem",
-            typeof(object),
-            typeof(SelectedTreeViewItemBehavior),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(TreeViewSelectedItemChanged)));
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register(
+                "SelectedItem",
+                typeof(object),
+                typeof(SelectedTreeViewItemBehavior),
+                new UIPropertyMetadata(null, OnSelectedItemChanged));
 
         /// <summary>
-        /// We need a Get method for our new property.
+        /// Gets or sets the selected item.
         /// </summary>
-        /// <param name="dependencyObject">DependencyObject.</param>
-        /// <returns>Object.</returns>
-        public static object GetTreeViewSelectedItem(DependencyObject dependencyObject)
+        public object SelectedItem
         {
-            return (object)dependencyObject.GetValue(TreeViewSelectedItemProperty);
+            get { return (object)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
         }
 
         /// <summary>
-        /// As well as a Set method for our new property.
+        /// OnAttached.
         /// </summary>
-        /// <param name="dependencyObject">DependencyObject.</param>
-        /// <param name="value">Object.</param>
-        public static void SetTreeViewSelectedItem(
-          DependencyObject dependencyObject, object value)
+        protected override void OnAttached()
         {
-            dependencyObject.SetValue(TreeViewSelectedItemProperty, value);
+            base.OnAttached();
+
+            AssociatedObject.SelectedItemChanged += OnTreeViewSelectedItemChanged;
         }
 
         /// <summary>
-        /// This is the handler for when our new property's value changes
-        /// When our property is set to a non null value we need to add an event handler
-        /// for the TreeView's SelectedItemChanged event.
+        /// OnDetaching.
         /// </summary>
-        /// <param name="dependencyObject">DependencyObject.</param>
-        /// <param name="e">DependencyPropertyChangedEventArgs.</param>
-        private static void TreeViewSelectedItemChanged(
-            DependencyObject dependencyObject,
-            DependencyPropertyChangedEventArgs e)
+        protected override void OnDetaching()
         {
-            TreeView tv = dependencyObject as TreeView;
+            base.OnDetaching();
 
-            if (e.NewValue == null && e.OldValue != null)
+            if (AssociatedObject != null)
             {
-                tv.SelectedItemChanged -=
-                    new RoutedPropertyChangedEventHandler<object>(TV_SelectedItemChanged);
-            }
-            else if (e.NewValue != null && e.OldValue == null)
-            {
-                tv.SelectedItemChanged +=
-                    new RoutedPropertyChangedEventHandler<object>(TV_SelectedItemChanged);
+                AssociatedObject.SelectedItemChanged -= OnTreeViewSelectedItemChanged;
             }
         }
 
-        // When TreeView.SelectedItemChanged fires, set our new property to the value
-        private static void TV_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            SetTreeViewSelectedItem((DependencyObject)sender, e.NewValue);
+            if (e.NewValue is TreeViewItem item)
+            {
+                item.SetValue(TreeViewItem.IsSelectedProperty, true);
+            }
+        }
+
+        private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            SelectedItem = e.NewValue;
         }
     }
 }

@@ -12,6 +12,7 @@
     using System.Windows;
     using System.Xml;
     using ModuleManager.Classes;
+    using System.Diagnostics;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -112,6 +113,7 @@
                 {
                     if (type != null)
                     {
+                        Debug.WriteLine("Adding Module: " + type.Name);
                         modules.Add(GetSingleModule(type));
                     }
                 }
@@ -143,27 +145,27 @@
                 }
                 catch (ArgumentNullException)
                 {
-                    ////MessageBox.Show("Cannot Load\n " + name.Name + "\nDue to Argument Null Exception");
+                    Debug.WriteLine("Cannot Load " + name.Name);
                     continue;
                 }
                 catch (BadImageFormatException)
                 {
-                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to Bad Image Format Exception");
+                    Debug.WriteLine("Cannot Load " + name.Name);
                     continue;
                 }
                 catch (FileLoadException)
                 {
-                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Load Exception");
+                    Debug.WriteLine("Cannot Load " + name.Name);
                     continue;
                 }
                 catch (PlatformNotSupportedException)
                 {
-                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to Platform Not Supported Exception");
+                    Debug.WriteLine("Cannot Load " + name.Name);
                     continue;
                 }
                 catch (FileNotFoundException)
                 {
-                    ////MessageBox.Show("Cannot Load " + name.Name + "\nDue to File Not Found Exception");
+                    Debug.WriteLine("Cannot Load " + name.Name);
                     continue;
                 }
 
@@ -175,7 +177,8 @@
         {
             ObservableCollection<ModuleMember> members = new ObservableCollection<ModuleMember>();
 
-            if (!type.IsPublic)
+            // Don't load non-public or interface classes
+            if (!type.IsPublic || type.IsInterface)
             {
                 return null;
             }
@@ -210,8 +213,17 @@
                 string description =
                     GetMethodDescription((MemberInfo)constructor, Array.IndexOf(type.GetConstructors(), constructor));
 
-                ObservableCollection<MemberParameter> parameters =
-                    GetParametersFromList(constructor.GetParameters());
+                ObservableCollection<MemberParameter> parameters;
+
+                try
+                {
+                    parameters = GetParametersFromList(constructor.GetParameters());
+                }
+                catch (FileNotFoundException)
+                {
+                    Debug.WriteLine("Cannot Load " + constructor.Name + " Constructor");
+                    parameters = null;
+                }
 
                 members.Add(new ModuleMember(
                     name,
@@ -252,14 +264,17 @@
                 }
                 catch (FileNotFoundException)
                 {
+                    Debug.WriteLine("Cannot Load Parameters For" + property.Name);
                     parameters = null;
                 }
                 catch (FileLoadException)
                 {
+                    Debug.WriteLine("Cannot Load Parameters For" + property.Name);
                     parameters = null;
                 }
                 catch (TypeLoadException)
                 {
+                    Debug.WriteLine("Cannot Load Parameters For" + property.Name);
                     parameters = null;
                 }
 
@@ -317,18 +332,22 @@
                 ParameterInfo[] paramInfo;
                 try
                 {
+                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
                     paramInfo = method.GetParameters();
                 }
                 catch (FileNotFoundException)
                 {
+                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
                     paramInfo = null;
                 }
                 catch (FileLoadException)
                 {
+                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
                     paramInfo = null;
                 }
                 catch (TypeLoadException)
                 {
+                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
                     paramInfo = null;
                 }
 
@@ -338,18 +357,22 @@
                 string returnType;
                 try
                 {
+                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
                     returnType = method.ReturnType.Name.ToString();
                 }
                 catch (FileNotFoundException)
                 {
+                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
                     returnType = string.Empty;
                 }
                 catch (FileLoadException)
                 {
+                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
                     returnType = string.Empty;
                 }
                 catch (TypeLoadException)
                 {
+                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
                     returnType = string.Empty;
                 }
 
@@ -451,10 +474,12 @@
             }
             catch (FileNotFoundException)
             {
+                Debug.WriteLine("Cannot Load Property Description For" + property.Name);
                 return null;
             }
             catch (XmlException)
             {
+                Debug.WriteLine("Cannot Load Property Description For" + property.Name);
                 return null;
             }
 
@@ -525,10 +550,12 @@
             }
             catch (FileNotFoundException)
             {
+                Debug.WriteLine("Cannot Load Member XML For" + member.Name);
                 return null;
             }
             catch (XmlException)
             {
+                Debug.WriteLine("Cannot Load Member XML For" + member.Name);
                 return null;
             }
 
@@ -563,6 +590,7 @@
             }
             catch (FileNotFoundException)
             {
+                Debug.WriteLine("Cannot Load Module XML For" + type.Name);
                 return null;
             }
 

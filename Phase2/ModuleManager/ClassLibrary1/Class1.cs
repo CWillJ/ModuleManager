@@ -13,22 +13,41 @@
         private int _property2;
 
         /// <summary>
-        /// Constructor for Class1
+        /// Initializes a new instance of the <see cref="Class1"/> class.
         /// </summary>
         public Class1()
         {
             _property1 = string.Empty;
             _property2 = 0;
             System.Console.WriteLine(Method1("This is a fake class").ToString());
+            _ = CollectionChanged;
         }
+
+        /// <summary>
+        /// Property handler for tests.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Document for CollectionChanged.
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         /// <summary>
         /// Gets or sets Property1 as a string.
         /// </summary>
         public string Property1
         {
-            get { return _property1; }
-            set { _property1 = value; }
+            get
+            {
+                return _property1;
+            }
+
+            set
+            {
+                _property1 = value;
+                RaisePropertyChanged("Property1");
+            }
         }
 
         /// <summary>
@@ -41,22 +60,20 @@
         }
 
         /// <summary>
-        /// Property handler for tests.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Property handler also for tests.
-        /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        /// <summary>
         /// Raise a property changed event.
         /// </summary>
         /// <param name="property">Property passed in as a string.</param>
         public void RaisePropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        /// <summary>
+        /// Needed to use CollectionChanged so here it is.
+        /// </summary>
+        public void RaiseCollectionChanged()
+        {
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(default));
         }
 
         /// <summary>

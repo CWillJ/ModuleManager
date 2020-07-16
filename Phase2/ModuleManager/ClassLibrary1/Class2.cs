@@ -8,10 +8,10 @@
     /// </summary>
     public class Class2
     {
-        int _num;
+        private int _num;
 
         /// <summary>
-        /// Constructor for Class2
+        /// Initializes a new instance of the <see cref="Class2"/> class.
         /// </summary>
         public Class2()
         {
@@ -21,8 +21,9 @@
         }
 
         /// <summary>
-        /// Constructor for Class2 that takes 1 parameter
+        /// Initializes a new instance of the <see cref="Class2"/> class.
         /// </summary>
+        /// <param name="constructorParameter">An int parameter for Class2.</param>
         public Class2(int constructorParameter)
         {
             _num = constructorParameter;

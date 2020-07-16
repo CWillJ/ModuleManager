@@ -6,11 +6,11 @@
     /// </summary>
     public class Class3
     {
-        int _num;
-        string _str;
+        private int _num;
+        private string _str;
 
         /// <summary>
-        /// Constructor for Class3.
+        /// Initializes a new instance of the <see cref="Class3"/> class.
         /// </summary>
         public Class3()
         {
@@ -20,8 +20,9 @@
         }
 
         /// <summary>
-        /// Constructor for Class3 that takes 1 parameter.
+        /// Initializes a new instance of the <see cref="Class3"/> class.
         /// </summary>
+        /// <param name="constructorParameter">An int parameter.</param>
         public Class3(int constructorParameter)
         {
             _num = constructorParameter;
@@ -30,8 +31,9 @@
         }
 
         /// <summary>
-        /// Constructor for Class3 that takes 1 parameter.
+        /// Initializes a new instance of the <see cref="Class3"/> class.
         /// </summary>
+        /// <param name="constructorStringParameter">A string parameter.</param>
         public Class3(string constructorStringParameter)
         {
             _str = constructorStringParameter;
@@ -64,7 +66,7 @@
         /// </summary>
         public void Method3()
         {
-            _num = _num + 21;
+            _num += 21;
         }
 
         /// <summary>

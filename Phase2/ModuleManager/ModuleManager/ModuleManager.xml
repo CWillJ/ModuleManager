@@ -50,37 +50,28 @@
         <member name="T:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior">
             <summary>
             SelectedTreeViewItemBehavior class used to allow selected
-            items for TreeView controls.
+            items for TreeView controls. TODO make this v Work.
             </summary>
         </member>
-        <member name="F:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.TreeViewSelectedItemProperty">
+        <member name="F:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.SelectedItemProperty">
             <summary>
-            Declare our attached property, it needs to be a DependencyProperty so
-            we can bind to it from our ViewMode.
+            SelectedItemProperty.
             </summary>
         </member>
-        <member name="M:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.GetTreeViewSelectedItem(System.Windows.DependencyObject)">
+        <member name="P:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.SelectedItem">
             <summary>
-            We need a Get method for our new property.
+            Gets or sets the selected item.
             </summary>
-            <param name="dependencyObject">DependencyObject.</param>
-            <returns>Object.</returns>
         </member>
-        <member name="M:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.SetTreeViewSelectedItem(System.Windows.DependencyObject,System.Object)">
+        <member name="M:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.OnAttached">
             <summary>
-            As well as a Set method for our new property.
+            OnAttached.
             </summary>
-            <param name="dependencyObject">DependencyObject.</param>
-            <param name="value">Object.</param>
         </member>
-        <member name="M:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.TreeViewSelectedItemChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.OnDetaching">
             <summary>
-            This is the handler for when our new property's value changes
-            When our property is set to a non null value we need to add an event handler
-            for the TreeView's SelectedItemChanged event.
+            OnDetaching.
             </summary>
-            <param name="dependencyObject">DependencyObject.</param>
-            <param name="e">DependencyPropertyChangedEventArgs.</param>
         </member>
         <member name="T:ModuleManager.Classes.MemberParameter">
             <summary>

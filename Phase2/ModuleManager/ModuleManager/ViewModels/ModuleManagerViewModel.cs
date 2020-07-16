@@ -3,12 +3,12 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
-    using System.IO.Enumeration;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleManager.Classes;
     using ModuleManager.Models;
+    using Ookii.Dialogs.Wpf;
 
     /// <summary>
     /// ModuleManagerViewModel will handle commands from the main view.
@@ -278,20 +278,16 @@
 
         private string GetModuleDirectory()
         {
-            return @"C:\Users\wjohnson\Desktop\Modules";
+            ////return @"C:\Users\wjohnson\Desktop\Modules";
 
-            // TODO get directory from user
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            VistaFolderBrowserDialog folderBrowserDialog = new VistaFolderBrowserDialog()
             {
-                ValidateNames = false,
-                CheckFileExists = false,
-                CheckPathExists = true,
-                FileName = "Folder Selection"
+                Description = @"Select a Folder That Contains .dll Files"
             };
 
-            if (openFileDialog.ShowDialog() == true && openFileDialog.CheckPathExists)
+            if (folderBrowserDialog.ShowDialog() == true)
             {
-                string s = openFileDialog.FileName.Remove(openFileDialog.FileName.LastIndexOf(@"\Folder Selection"), openFileDialog.FileName.Length);
+                string s = folderBrowserDialog.SelectedPath;
                 return s;
             }
 
