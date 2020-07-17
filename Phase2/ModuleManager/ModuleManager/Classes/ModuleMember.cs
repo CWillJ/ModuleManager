@@ -7,22 +7,16 @@
     /// </summary>
     public class ModuleMember
     {
-        private string _name;
-        private string _description;
-        private ObservableCollection<MemberParameter> _parameters;
-        private string _returnType;
-        private string _returnDescription;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMember"/> class.
         /// </summary>
         public ModuleMember()
         {
-            _name = string.Empty;
-            _description = string.Empty;
-            _parameters = new ObservableCollection<MemberParameter>();
-            _returnType = string.Empty;
-            _returnDescription = string.Empty;
+            Name = string.Empty;
+            Description = string.Empty;
+            Parameters = new ObservableCollection<MemberParameter>();
+            ReturnType = string.Empty;
+            ReturnDescription = string.Empty;
         }
 
         /// <summary>
@@ -37,62 +31,44 @@
         /// <param name="returnDescription">Member return description.</param>
         public ModuleMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
         {
-            _name = name;
-            _description = description;
-            _parameters = parameters;
-            _returnType = returnType;
-            _returnDescription = returnDescription;
+            Name = name;
+            Description = description;
+            Parameters = parameters;
+            ReturnType = returnType;
+            ReturnDescription = returnDescription;
         }
 
         /// <summary>
         /// Gets or sets the name of the member.
         /// </summary>
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the member.
         /// </summary>
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the member parameters.
         /// </summary>
-        public ObservableCollection<MemberParameter> Parameters
-        {
-            get { return _parameters; }
-            set { _parameters = value; }
-        }
+        public ObservableCollection<MemberParameter> Parameters { get; set; }
 
         /// <summary>
         /// Gets or sets the member return type.
         /// </summary>
-        public string ReturnType
-        {
-            get { return _returnType; }
-            set { _returnType = value; }
-        }
+        public string ReturnType { get; set; }
 
         /// <summary>
         /// Gets or sets the member return description.
         /// </summary>
-        public string ReturnDescription
-        {
-            get { return _returnDescription; }
-            set { _returnDescription = value; }
-        }
+        public string ReturnDescription { get; set; }
 
         /// <summary>
-        /// Overrides the ToString method and formats the string output.
+        /// Overrides the ToString method and formats the string output
+        /// for the UI.
         /// </summary>
-        /// <returns>A desired format for the member description, parameters and return type.</returns>
+        /// <returns>A desired format for the member description, parameters
+        /// and return type.</returns>
         public override string ToString()
         {
             string s = Name + "\n";

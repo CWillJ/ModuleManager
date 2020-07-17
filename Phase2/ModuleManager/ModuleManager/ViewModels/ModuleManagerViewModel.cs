@@ -7,7 +7,6 @@
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleManager.Classes;
-    using ModuleManager.Models;
     using Ookii.Dialogs.Wpf;
 
     /// <summary>
@@ -19,7 +18,7 @@
         private string _memberText;
         private double _currentProgress;
         private string _progressBarText;
-        private bool _progressBarVisible;
+        private bool _isVisible;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
@@ -30,7 +29,7 @@
             _memberText = string.Empty;
             _progressBarText = string.Empty;
             _currentProgress = 0;
-            _progressBarVisible = false;
+            _isVisible = false;
 
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
@@ -113,17 +112,17 @@
         /// <summary>
         /// Gets or sets a value indicating whether a progress bar is visible.
         /// </summary>
-        public bool ProgressBarVisible
+        public bool ProgressBarIsVisible
         {
             get
             {
-                return _progressBarVisible;
+                return _isVisible;
             }
 
             set
             {
-                _progressBarVisible = value;
-                RaisePropertyChanged("ProgressBarVisible");
+                _isVisible = value;
+                RaisePropertyChanged("ProgressBarIsVisible");
             }
         }
 
@@ -172,13 +171,12 @@
 
         private async void FindDLLs()
         {
-            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever
-            {
-                DllDirectory = GetModuleDirectory()
-            };
+            string moduleDirectory = GetModuleDirectory();
+
+            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(moduleDirectory);
 
             // Show progress bar
-            ProgressBarVisible = true;
+            ProgressBarIsVisible = true;
             ProgressBarText = "Loading Modules";
 
             Modules.Clear();
@@ -188,7 +186,7 @@
 
             // Kill progress bar
             ProgressBarText = string.Empty;
-            ProgressBarVisible = false;
+            ProgressBarIsVisible = false;
 
             // Future TreeViewSelectedItem Binding
             //// MemberText = Modules[0].ToString();
@@ -231,10 +229,8 @@
                 System.Windows.MessageBox.Show(@"Config File Saved at: " + saveFile);
             }
 
-            using (StreamWriter wr = new StreamWriter(saveFile))
-            {
-                serializer.Serialize(wr, Modules);
-            }
+            using StreamWriter wr = new StreamWriter(saveFile);
+            serializer.Serialize(wr, Modules);
         }
 
         /// <summary>
@@ -278,8 +274,6 @@
 
         private string GetModuleDirectory()
         {
-            ////return @"C:\Users\wjohnson\Desktop\Modules";
-
             VistaFolderBrowserDialog folderBrowserDialog = new VistaFolderBrowserDialog()
             {
                 Description = @"Select a Folder That Contains .dll Files"

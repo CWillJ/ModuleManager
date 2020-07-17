@@ -10,47 +10,53 @@
         xmlns:view="clr-namespace:ModuleManager.Views"
         xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
         mc:Ignorable="d"
-        Title="Module Manager" Height="450" Width="800">
+        Title="Module Manager" Height="450" Width="800" Background="LightGray">
 
     <Window.DataContext>
         <viewModel:ModuleManagerViewModel/>
     </Window.DataContext>
-    
+
     <Window.Resources>
         <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
             <Button
                 HorizontalAlignment="Left"
                 Height="30"
                 Width="125"
-                Margin="30,15,5,5"
+                Margin="25,10,5,5"
                 Command="{Binding LoadModulesCommand}"
                 Content="Load Modules"
-            />
+                FontWeight="Bold"
+                Background="IndianRed"/>
 
             <Button
                 HorizontalAlignment="Left"
                 Height="30"
                 Width="125"
-                Margin="30,15,5,5"
+                Margin="25,10,5,5"
                 Command="{Binding SaveConfigCommand}"
                 Content="Save Configuration"
-            />
+                FontWeight="Bold"
+                Background="IndianRed"/>
 
-            <Grid Visibility="{Binding Path=ProgressBarVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid Visibility="{Binding Path=ProgressBarIsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                  Width="300"
+                  Height="30"
+                  Margin="30,15,5,5">
                 <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
-                             IsIndeterminate="True"
-                             Width="300"
-                             Height="30"
-                             Margin="30,15,5,5"/>
+                             IsIndeterminate="True" />
 
                 <TextBlock Text="{Binding Path=ProgressBarText, Mode=OneWay}"
                            HorizontalAlignment="Center"
@@ -59,10 +65,18 @@
 
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,20">
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Margin="20,20,20,20"
+                    Grid.ColumnSpan="2">
 
             <StackPanel>
-                <TextBlock Text="Modules" TextAlignment="Center"/>
+                <Border BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="Modules"
+                               FontWeight="Bold"
+                               TextAlignment="Center"
+                               Background="LightSteelBlue"/>
+                </Border>
 
                 <!-- behaviors:SelectedTreeViewItemBehavior.TreeViewSelectedItem="{Binding SelectedModule}" -->
                 <!-- <e:Interaction.Behaviors>
@@ -79,7 +93,7 @@
                 <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
                           x:Name="TreeViewOfModules"
                           SelectedItemChanged="TreeView_SelectedItemChanged"
-                          Width="200"
+                          Width="210"
                           Height="275"
                           BorderThickness="1"
                           BorderBrush="Black">
@@ -87,7 +101,7 @@
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding Path=Enabled}" Margin="5,0"/>
+                                <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
                                 <TextBlock Text="{Binding Path=Name}"/>
                             </StackPanel>
 
@@ -106,12 +120,17 @@
 
             <!-- Text="{Binding Path=MemberText}" -->
 
-            <StackPanel>
-                <TextBlock TextAlignment="Center" Text="Description" />
+            <StackPanel Width="540">
+                <Border BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">
+                    <TextBlock TextAlignment="Center"
+                               FontWeight="Bold"
+                               Text="Description"
+                               Background="LightSteelBlue" />
+                </Border>
 
-                <Border BorderThickness="1" BorderBrush="Black" Margin="10,0" Height="275">
+                <Border BorderBrush="Black" BorderThickness="1" Margin="10,0" Height="275" Background="White">
                     <ScrollViewer Margin="10,5,0,0">
-                        <TextBlock x:Name="MemberText" Width="480" TextWrapping="Wrap" />
+                        <TextBlock x:Name="MemberText" TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </Border>
             </StackPanel>

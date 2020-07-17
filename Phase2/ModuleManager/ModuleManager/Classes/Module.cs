@@ -9,7 +9,7 @@
     public class Module : INotifyPropertyChanged
     {
         private bool _isSelected;
-        private bool _enabled;
+        private bool _isEnabled;
         private string _name;
         private string _description;
         private ObservableCollection<ModuleMember> _members;
@@ -21,7 +21,7 @@
         public Module()
         {
             _isSelected = false;
-            _enabled = false;
+            _isEnabled = false;
             _name = string.Empty;
             _description = string.Empty;
             _members = new ObservableCollection<ModuleMember>();
@@ -37,7 +37,7 @@
         public Module(string name, string description, ObservableCollection<ModuleMember> members)
         {
             _isSelected = false;
-            _enabled = false;
+            _isEnabled = false;
             _name = name;
             _description = description;
             _members = members;
@@ -69,19 +69,19 @@
         /// <summary>
         /// Gets or sets a value indicating whether the module is enabled or disabled.
         /// </summary>
-        public bool Enabled
+        public bool IsEnabled
         {
             get
             {
-                return _enabled;
+                return _isEnabled;
             }
 
             set
             {
-                if (_enabled != value)
+                if (_isEnabled != value)
                 {
-                    _enabled = value;
-                    RaisePropertyChanged("Enabled");
+                    _isEnabled = value;
+                    RaisePropertyChanged("IsEnabled");
                 }
             }
         }
@@ -161,10 +161,7 @@
         /// <returns>A desired format for the module name, description and all members contained in module.</returns>
         public override string ToString()
         {
-            string s = string.Empty;
-
-            //// s += Enabled.ToString() + "\n";
-            s += Name + "\n";
+            string s = Name + "\n";
 
             if (!string.IsNullOrEmpty(Description))
             {
