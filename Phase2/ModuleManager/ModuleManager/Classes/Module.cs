@@ -2,7 +2,6 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Linq;
 
     /// <summary>
     /// Module object holds the name and description of a module.
@@ -154,37 +153,6 @@
         public void RaisePropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-
-        /// <summary>
-        /// AddMember adds a member to the current module.
-        /// </summary>
-        /// <param name="member">Specifies module member.</param>
-        public void AddMember(ModuleMember member)
-        {
-            Members.Add(member);
-        }
-
-        /// <summary>
-        /// AddMember adds a member to the current module with the specified properties.
-        /// </summary>
-        /// <param name="name">Member name.</param>
-        /// <param name="description">Member description.</param>
-        /// <param name="parameters">Member parameters.</param>
-        /// <param name="returnType">Member return type.</param>
-        /// <param name="returnDescription">Member return description.</param>
-        public void AddMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
-        {
-            AddMember(new ModuleMember(name, description, parameters, returnType, returnDescription));
-        }
-
-        /// <summary>
-        /// MemberCount gets the number of members in Members.
-        /// </summary>
-        /// <returns>Members.Count().</returns>
-        public int MemberCount()
-        {
-            return Members.Count();
         }
 
         /// <summary>

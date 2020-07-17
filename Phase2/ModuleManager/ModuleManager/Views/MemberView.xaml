@@ -16,16 +16,13 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid>
-        <StackPanel Orientation="Horizontal">
+    <StackPanel>
+        <TextBlock TextAlignment="Center" Text="Description" />
 
-            <TextBox Height="25" Width="25"/>
-
-            <ListBox
-                Height="25" Width="75"
-                ItemsSource="{Binding Name}"
-            />
-        </StackPanel>
-
-    </Grid>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="10,0" Height="275">
+            <ScrollViewer Margin="10,5,0,0">
+                <TextBlock x:Name="MemberText" Width="480" TextWrapping="Wrap" />
+            </ScrollViewer>
+        </Border>
+    </StackPanel>
 </UserControl>

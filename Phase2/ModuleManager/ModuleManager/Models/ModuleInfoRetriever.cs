@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -12,7 +13,6 @@
     using System.Windows;
     using System.Xml;
     using ModuleManager.Classes;
-    using System.Diagnostics;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -113,7 +113,7 @@
                 {
                     if (type != null)
                     {
-                        Debug.WriteLine("Adding Module: " + type.Name);
+                        ////Debug.WriteLine("Adding Module: " + type.Name);
                         modules.Add(GetSingleModule(type));
                     }
                 }

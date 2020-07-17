@@ -45,7 +45,7 @@
                 Content="Save Configuration"
             />
 
-            <Grid Visibility="{Binding Path=ProgressBarVisible,  Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid Visibility="{Binding Path=ProgressBarVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
                 <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
                              IsIndeterminate="True"
                              Width="300"

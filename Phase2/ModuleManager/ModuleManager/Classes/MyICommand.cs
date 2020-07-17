@@ -70,10 +70,7 @@
         /// <param name="parameter">Object.</param>
         void ICommand.Execute(object parameter)
         {
-            if (_targetExecuteMethod != null)
-            {
-                _targetExecuteMethod();
-            }
+            _targetExecuteMethod?.Invoke();
         }
     }
 }

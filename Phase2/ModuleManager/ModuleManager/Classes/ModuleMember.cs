@@ -1,7 +1,6 @@
 ﻿namespace ModuleManager.Classes
 {
     using System.Collections.ObjectModel;
-    using System.Linq;
 
     /// <summary>
     /// ModuleMember object holds the description, the parameters and the return type of a member.
@@ -88,35 +87,6 @@
         {
             get { return _returnDescription; }
             set { _returnDescription = value; }
-        }
-
-        /// <summary>
-        /// AddMemberParameter adds a parameter to the Parameters collection.
-        /// </summary>
-        /// <param name="parameter">parameter of type MemberParameter.</param>
-        public void AddMemberParameter(MemberParameter parameter)
-        {
-            Parameters.Add(parameter);
-        }
-
-        /// <summary>
-        /// AddMemberParameter adds a parameter with specifiec type and name to the Parameters collection.
-        /// </summary>
-        /// <param name="type">MemberParameter type.</param>
-        /// <param name="name">MemberParameter name.</param>
-        /// <param name="description">MemberParameter description.</param>
-        public void AddMemberParameter(string type, string name, string description)
-        {
-            AddMemberParameter(new MemberParameter(type, name, description));
-        }
-
-        /// <summary>
-        /// ParameterCount gets the number of parameters in Parameters.
-        /// </summary>
-        /// <returns>Parameters.Count().</returns>
-        public int ParameterCount()
-        {
-            return Parameters.Count();
         }
 
         /// <summary>
