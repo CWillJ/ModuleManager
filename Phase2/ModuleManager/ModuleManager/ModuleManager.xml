@@ -73,6 +73,19 @@
             OnDetaching.
             </summary>
         </member>
+        <member name="T:ModuleManager.Behavoirs.TemplateSelector">
+            <summary>
+            Used to selected a DataTemplate in the view.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Behavoirs.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Used to select the DataTemplate used in the view.
+            </summary>
+            <param name="item">Object.</param>
+            <param name="container">Container.</param>
+            <returns>A DataTemplate depending on the object passed in.</returns>
+        </member>
         <member name="T:ModuleManager.Classes.MemberParameter">
             <summary>
             An object designed to hold the type and name of a member's parameter.

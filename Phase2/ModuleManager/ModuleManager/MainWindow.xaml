@@ -17,14 +17,24 @@
     </Window.DataContext>
 
     <Window.Resources>
-
         <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-
-        <DataTemplate DataType="{x:Type data:Module}">
+        <behaviors:TemplateSelector x:Key="myDataTemplateSelector"/>
+        
+        <DataTemplate x:Key="moduleMemberTemplate" DataType="{x:Type data:ModuleMember}">
             <StackPanel>
-                <TextBox Text="{Binding Path=Name}"/>
-                <TextBox Text="{Binding Path=Description}"/>
-                <TextBlock Text="{Binding Path=Members}"/>
+                <TextBox Text="{Binding Path=Name, Mode=OneWay}"/>
+                <TextBox Text="{Binding Path=Description, Mode=OneWay}"/>
+                <TextBlock Text="{Binding Path=Parameters, Mode=OneWay}"/>
+                <TextBox Text="{Binding Path=ReturnType, Mode=OneWay}"/>
+                <TextBox Text="{Binding Path=ReturnDescription, Mode=OneWay}"/>
+            </StackPanel>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="moduleTemplate" DataType="{x:Type data:Module}">
+            <StackPanel>
+                <TextBox Text="{Binding Path=Name, Mode=OneWay}"/>
+                <TextBox Text="{Binding Path=Description, Mode=OneWay}"/>
+                <ListBox ItemsSource="{Binding Path=Members, Mode=OneWay}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
@@ -98,9 +108,10 @@
                         </Style>
                     </TreeView.Resources> -->
 
-                <!-- Module Template SelectedItemChanged="TreeView_SelectedItemChanged" -->
+                <!-- Module Template -->
                 <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
-                          x:Name="TreeViewOfModules" 
+                          SelectedItemChanged="TreeView_SelectedItemChanged"
+                          x:Name="TreeViewOfModules"
                           Width="210"
                           Height="275"
                           BorderThickness="1"
@@ -127,11 +138,12 @@
             </StackPanel>
 
             <!-- Text="{Binding Path=MemberText}" -->
-            <!-- <TextBlock x:Name="MemberText" TextWrapping="Wrap"/> -->
+            <!-- <TextBlock x:Name="MemberText"/> -->
 
             <StackPanel Width="540">
                 <Border BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">
                     <TextBlock TextAlignment="Center"
+                               TextWrapping="Wrap"
                                FontWeight="Bold"
                                Text="Description"
                                Background="LightSteelBlue" />
@@ -139,7 +151,8 @@
 
                 <Border BorderBrush="Black" BorderThickness="1" Margin="10,0" Height="275" Background="White">
                     <ScrollViewer Margin="10,5,0,0">
-                        <ListBox ItemsSource="{Binding Path=Modules}"/>
+                        <ListBox ItemsSource="{Binding Path=Modules}"
+                                 ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
                     </ScrollViewer>
                 </Border>
             </StackPanel>
