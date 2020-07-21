@@ -414,32 +414,26 @@
             Initializes a new instance of the <see cref="T:ModuleManager.MainWindow"/> class.
             </summary>
         </member>
-        <member name="M:ModuleManager.MainWindow.TreeView_SelectedItemChanged(System.Object,System.Windows.RoutedPropertyChangedEventArgs{System.Object})">
-            <summary>
-            Bad bad bad.
-            </summary>
-            <param name="sender">Sender.</param>
-            <param name="e">e.</param>
-        </member>
         <member name="M:ModuleManager.MainWindow.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
         </member>
-        <member name="T:ModuleManager.ViewModels.MemberViewModel">
+        <member name="T:ModuleManager.ViewModels.MemberDescriptionViewModel">
             <summary>
-            Method class view model.
+            MemberDescription view model.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.MemberViewModel.Members">
+        <member name="M:ModuleManager.ViewModels.MemberDescriptionViewModel.#ctor">
             <summary>
-            Gets or sets the Methods from a module.
+            Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.MemberDescriptionViewModel"/> class.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.MemberViewModel.LoadMethods">
+        <member name="M:ModuleManager.ViewModels.MemberDescriptionViewModel.RaisePropertyChanged(System.String)">
             <summary>
-            Loads methods of the current module.
+            Raise a property changed event.
             </summary>
+            <param name="property">Property passed in as a string.</param>
         </member>
         <member name="T:ModuleManager.ViewModels.ModuleManagerViewModel">
             <summary>
@@ -521,53 +515,20 @@
             </summary>
             <returns>ObservableCollection of type Module.</returns>
         </member>
-        <member name="T:ModuleManager.ViewModels.ModuleViewModel">
+        <member name="T:ModuleManager.Views.MemberDescription">
             <summary>
-            Module view model class.
+            Interaction logic for MemberDescription.xaml
+            </summary>
+            <summary>
+            MemberDescription
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleViewModel.Modules">
+        <member name="M:ModuleManager.Views.MemberDescription.#ctor">
             <summary>
-            Gets or sets the Methods from a module.
+            Initializes a new instance of the <see cref="T:ModuleManager.Views.MemberDescription"/> class.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ModuleViewModel.LoadModules">
-            <summary>
-            Loads methods of the current module.
-            </summary>
-        </member>
-        <member name="T:ModuleManager.Views.MemberView">
-            <summary>
-            Interaction logic for ModuleView.xaml.
-            </summary>
-            <summary>
-            MemberView
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.MemberView.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Views.MemberView"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.MemberView.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:ModuleManager.Views.ModuleView">
-            <summary>
-            Interaction logic for MethodView.xaml.
-            </summary>
-            <summary>
-            ModuleView
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.ModuleView.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Views.ModuleView"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.ModuleView.InitializeComponent">
+        <member name="M:ModuleManager.Views.MemberDescription.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
