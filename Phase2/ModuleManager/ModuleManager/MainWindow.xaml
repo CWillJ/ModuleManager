@@ -39,25 +39,24 @@
         <DataTemplate x:Key="moduleMemberTemplate" DataType="{x:Type data:ModuleMember}">
             <StackPanel>
                 <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
-                           FontWeight="Bold"/>
+                           FontWeight="Bold"
+                           FontSize="14"/>
 
                 <TextBlock TextWrapping="Wrap">
                     <Run Text="{Binding Path=Description, Mode=OneWay}"/>
                     <LineBreak/>
                 </TextBlock>
 
-                <TextBlock>
-                    <TextBlock Text="Parameters:"/>
-                </TextBlock>
+                <TextBlock Text="Parameters:" FontWeight="Bold"/>
 
                 <ItemsControl ItemsSource="{Binding Path=Parameters, Mode=OneWay}"
                               ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
 
                 <TextBlock>
-                    <Run Text="Return: "/>
+                    <Run FontWeight="Bold" Text="Return: "/>
                     <Run Text="{Binding Path=ReturnType, Mode=OneWay}"/>
                 </TextBlock>
-                <TextBlock>
+                <TextBlock TextWrapping="Wrap">
                     <Run Text="{Binding Path=ReturnDescription, Mode=OneWay}"/>
                     <LineBreak/>
                 </TextBlock>

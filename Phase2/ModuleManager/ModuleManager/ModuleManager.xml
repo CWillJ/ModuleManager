@@ -133,14 +133,13 @@
         </member>
         <member name="M:ModuleManager.Classes.Module.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class. Default constructor.
             initializes properties to empty strings/empty collections.
             </summary>
         </member>
         <member name="M:ModuleManager.Classes.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMember})">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class
-            initializes a Module specifying the name, description and methods.
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class specifying the name, description and methods.
             </summary>
             <param name="name">Module name.</param>
             <param name="description">Module description.</param>
@@ -332,7 +331,7 @@
         </member>
         <member name="M:ModuleManager.Classes.ModuleMember.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMember"/> class.
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMember"/> class. Default constructor.
             </summary>
         </member>
         <member name="M:ModuleManager.Classes.ModuleMember.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.MemberParameter},System.String,System.String)">
@@ -454,6 +453,16 @@
         <member name="M:ModuleManager.ViewModels.MemberDescriptionViewModel.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.MemberDescriptionViewModel"/> class.
+            </summary>
+        </member>
+        <member name="E:ModuleManager.ViewModels.MemberDescriptionViewModel.PropertyChanged">
+            <summary>
+            PropertyChanged event handler.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ViewModels.MemberDescriptionViewModel.Modules">
+            <summary>
+            Gets or sets a collection of Module objects.
             </summary>
         </member>
         <member name="M:ModuleManager.ViewModels.MemberDescriptionViewModel.RaisePropertyChanged(System.String)">
@@ -590,6 +599,36 @@
             </summary>
             <param name="obj">DependencyObject</param>
             <param name="value">Boolean value</param>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
         </member>
     </members>
 </doc>

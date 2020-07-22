@@ -18,8 +18,14 @@
         {
         }
 
+        /// <summary>
+        /// PropertyChanged event handler.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Gets or sets a collection of Module objects.
+        /// </summary>
         public ObservableCollection<Module> Modules
         {
             get
