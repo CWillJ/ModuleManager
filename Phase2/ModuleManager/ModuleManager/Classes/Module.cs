@@ -15,7 +15,7 @@
         private ObservableCollection<ModuleMember> _members;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Module"/> class
+        /// Initializes a new instance of the <see cref="Module"/> class. Default constructor.
         /// initializes properties to empty strings/empty collections.
         /// </summary>
         public Module()
@@ -28,8 +28,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Module"/> class
-        /// initializes a Module specifying the name, description and methods.
+        /// Initializes a new instance of the <see cref="Module"/> class specifying the name, description and methods.
         /// </summary>
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>

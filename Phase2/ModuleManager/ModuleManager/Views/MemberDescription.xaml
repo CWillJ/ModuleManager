@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ModuleManager.Views"
              xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
              xmlns:data="clr-namespace:ModuleManager.Classes"
+             xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -14,20 +15,56 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type data:Module}">
+        <behaviors:TemplateSelector x:Key="myDataTemplateSelector"/>
+
+        <!-- Member Parameter Data Template -->
+        <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
             <StackPanel>
-                <TextBox Text="{Binding Path=Name}"/>
-                <TextBox Text="{Binding Path=Description}"/>
-                <TextBlock Text="{Binding Path=Members}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=Type, StringFormat='{}{0}\, ', Mode=OneWay}"/>
+                    <TextBlock Text="{Binding Path=Name, Mode=OneWay}"/>
+                </StackPanel>
+
+                <TextBlock TextWrapping="Wrap">
+                    <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                    <LineBreak/>
+                </TextBlock>
             </StackPanel>
         </DataTemplate>
 
-        <DataTemplate x:Key="methodTemplate">
+        <!-- Module Member Data Template -->
+        <DataTemplate x:Key="moduleMemberTemplate" DataType="{x:Type data:ModuleMember}">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
+                           FontWeight="Bold"/>
 
+                <TextBlock TextWrapping="Wrap">
+                    <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                    <LineBreak/>
+                </TextBlock>
+
+                <TextBlock>
+                    <TextBlock Text="Parameters:"/>
+                </TextBlock>
+
+                <ItemsControl ItemsSource="{Binding Path=Parameters, Mode=OneWay}"
+                              ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+
+                <TextBlock>
+                    <Run Text="Return: "/>
+                    <Run Text="{Binding Path=ReturnType, Mode=OneWay}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="{Binding Path=ReturnDescription, Mode=OneWay}"/>
+                    <LineBreak/>
+                </TextBlock>
+
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
     <Grid>
-        <ListBox ItemsSource="{Binding Path=Modules}"/>
+        <ItemsControl ItemsSource="{Binding Path=Modules, Mode=OneWay}"
+                      ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
     </Grid>
 </UserControl>

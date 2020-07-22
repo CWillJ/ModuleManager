@@ -28,6 +28,11 @@
                 {
                     return element.FindResource("moduleMemberTemplate") as DataTemplate;
                 }
+
+                if (item is MemberParameter)
+                {
+                    return element.FindResource("memberParameterTemplate") as DataTemplate;
+                }
             }
 
             return null;

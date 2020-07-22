@@ -81,7 +81,6 @@
                 assemblies.Add(mlc.LoadFromAssemblyPath(dllFile));
             }
 
-            // TODO Async this
             Parallel.ForEach(assemblies, (assembly) =>
             {
                 LoadAllAssemblies(assembly);
@@ -196,16 +195,14 @@
         {
             foreach (var constructor in type.GetConstructors())
             {
+                int constructorIndex = Array.IndexOf(type.GetConstructors(), constructor);
                 string name = @"Constructor for " + type.Name;
-
-                string description =
-                    GetMethodDescription(constructor, Array.IndexOf(type.GetConstructors(), constructor));
+                string description = GetMethodDescription(constructor, constructorIndex);
 
                 ObservableCollection<MemberParameter> parameters;
-
                 try
                 {
-                    parameters = GetParametersFromList(constructor.GetParameters());
+                    parameters = GetParametersFromList(constructor.GetParameters(), constructorIndex);
                 }
                 catch (FileNotFoundException)
                 {
@@ -320,7 +317,6 @@
                 ParameterInfo[] paramInfo;
                 try
                 {
-                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
                     paramInfo = method.GetParameters();
                 }
                 catch (FileNotFoundException)
@@ -340,7 +336,7 @@
                 }
 
                 ObservableCollection<MemberParameter> parameters =
-                    GetParametersFromList(paramInfo);
+                    GetParametersFromList(paramInfo, methodIndex);
 
                 string returnType;
                 try
@@ -382,8 +378,9 @@
         /// type from a list of ParameterInfo type.
         /// </summary>
         /// <param name="paramList">A list of ParameterInfo type.</param>
+        /// <param name="memberIndex">Integer index of member.</param>
         /// <returns>An ObservableCollection of MemberParameter type.</returns>
-        private ObservableCollection<MemberParameter> GetParametersFromList(ParameterInfo[] paramList)
+        private ObservableCollection<MemberParameter> GetParametersFromList(ParameterInfo[] paramList, int memberIndex = 0)
         {
             if (paramList == null)
             {
@@ -397,7 +394,7 @@
                 string pType = p.ParameterType.Name.ToString();
                 string pName = p.Name;
                 string pDescription =
-                    GetMemberParameterDescription(p.Member, Array.IndexOf(paramList, p));
+                    GetMemberParameterDescription(p.Member, Array.IndexOf(paramList, p), memberIndex);
 
                 parameters.Add(new MemberParameter(
                     pType,
@@ -489,10 +486,11 @@
         /// </summary>
         /// <param name="member">MemberInfo to get the string from.</param>
         /// <param name="parameterIndex">Integer index of parameter.</param>
+        /// <param name="memberIndex">Integer index of member.</param>
         /// <returns>String representation of the parameter description.</returns>
-        private string GetMemberParameterDescription(MemberInfo member, int parameterIndex)
+        private string GetMemberParameterDescription(MemberInfo member, int parameterIndex, int memberIndex = 0)
         {
-            XmlNode xmlNode = GetMemberXmlNode(member);
+            XmlNode xmlNode = GetMemberXmlNode(member, memberIndex);
 
             if (xmlNode == null)
             {

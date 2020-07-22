@@ -1,9 +1,11 @@
 ﻿namespace ModuleManager.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
     using System.Threading.Tasks;
+    using System.Windows;
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleManager.Classes;
@@ -15,7 +17,7 @@
     public class ModuleManagerViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Module> _modules;
-        private string _memberText;
+        private object _memberText;
         private double _currentProgress;
         private string _progressBarText;
         private bool _isVisible;
@@ -26,14 +28,14 @@
         public ModuleManagerViewModel()
         {
             Modules = new ObservableCollection<Module>();
-            _memberText = string.Empty;
+            ////_memberText = string.Empty;
             _progressBarText = string.Empty;
             _currentProgress = 0;
             _isVisible = false;
 
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
-            LoadModulesCommand = new MyICommand(FindDLLs);
+            LoadModulesCommand = new MyICommand(StoreModules);
             SaveConfigCommand = new MyICommand(SaveConfig);
 
             // Load previously saved module configuration if the ConfigFile exists
@@ -129,7 +131,7 @@
         /// <summary>
         /// Gets or sets MemberText.
         /// </summary>
-        public string MemberText
+        public object MemberText
         {
             get
             {
@@ -169,7 +171,11 @@
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        private async void FindDLLs()
+        /// <summary>
+        /// StoreModules will attempt to get all assemblies from a dll and store it
+        /// as a Module in the Modules collection.
+        /// </summary>
+        private async void StoreModules()
         {
             string moduleDirectory = GetModuleDirectory();
 
@@ -187,9 +193,6 @@
             // Kill progress bar
             ProgressBarText = string.Empty;
             ProgressBarIsVisible = false;
-
-            // Future TreeViewSelectedItem Binding
-            //// MemberText = Modules[0].ToString();
         }
 
         /// <summary>
@@ -200,7 +203,19 @@
         /// </summary>
         private void SaveConfig()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Module>));
+            Type mType = typeof(ObservableCollection<Module>);
+            XmlSerializer serializer;
+
+            try
+            {
+                serializer = new XmlSerializer(mType);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(@"Cannot Save Modules to xml File Due to:" + "\n" + e.ToString());
+                return;
+            }
+
             string saveFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
 
             if (UseSaveFileDialog)
@@ -231,6 +246,7 @@
 
             using StreamWriter wr = new StreamWriter(saveFile);
             serializer.Serialize(wr, Modules);
+            wr.Close();
         }
 
         /// <summary>

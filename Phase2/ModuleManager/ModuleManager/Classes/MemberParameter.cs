@@ -6,6 +6,16 @@
     public class MemberParameter
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="MemberParameter"/> class. Default constructor.
+        /// </summary>
+        public MemberParameter()
+        {
+            Type = string.Empty;
+            Name = string.Empty;
+            Description = string.Empty;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MemberParameter"/> class
         /// that defines the parameter type and name through parameters.
         /// </summary>

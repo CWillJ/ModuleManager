@@ -11,7 +11,7 @@
         private int _num;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Class2"/> class.
+        /// Initializes a new instance of the <see cref="Class2"/> class. First constructor.
         /// </summary>
         public Class2()
         {
@@ -21,7 +21,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Class2"/> class.
+        /// Initializes a new instance of the <see cref="Class2"/> class. Second constructor.
         /// </summary>
         /// <param name="constructorParameter">An int parameter for Class2.</param>
         public Class2(int constructorParameter)

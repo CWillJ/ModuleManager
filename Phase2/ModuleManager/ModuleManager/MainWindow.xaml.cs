@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager
 {
+    using System.Collections.ObjectModel;
     using System.Windows;
 
     /// <summary>
@@ -24,7 +25,7 @@
         {
             if (e.NewValue != null)
             {
-                MemberText.Text = e.NewValue.ToString();
+                MemberText.ItemsSource = new ObservableCollection<object> { e.NewValue };
             }
         }
     }

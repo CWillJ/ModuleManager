@@ -4,8 +4,8 @@
     using System.ComponentModel;
 
     /// <summary>
-    /// Class1 only exists to test getting info from a .dll and the
-    /// related .xml files.
+    /// Class1 only exists to test getting info from a .dll and the related .xml files.
+    /// Also, I'm going to try to get this to appear on a new line.
     /// </summary>
     public class Class1 : INotifyCollectionChanged
     {
@@ -13,7 +13,7 @@
         private int _property2;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Class1"/> class.
+        /// Initializes a new instance of the <see cref="Class1"/> class. Also trying to get this to appear on a new line... Trying, trying, trying... Maybe this will do it. Testing, 1, 2, 3.
         /// </summary>
         public Class1()
         {

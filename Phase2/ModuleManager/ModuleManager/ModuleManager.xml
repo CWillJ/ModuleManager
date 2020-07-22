@@ -91,6 +91,11 @@
             An object designed to hold the type and name of a member's parameter.
             </summary>
         </member>
+        <member name="M:ModuleManager.Classes.MemberParameter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.MemberParameter"/> class. Default constructor.
+            </summary>
+        </member>
         <member name="M:ModuleManager.Classes.MemberParameter.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Classes.MemberParameter"/> class
@@ -244,12 +249,13 @@
             <param name="type">The Type where the members are coming from.</param>
             <returns>The original ObservableCollection with appened members from type.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetParametersFromList(System.Reflection.ParameterInfo[])">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetParametersFromList(System.Reflection.ParameterInfo[],System.Int32)">
             <summary>
             GetParametersFromList will return an ObservableCollection of MemberParameter
             type from a list of ParameterInfo type.
             </summary>
             <param name="paramList">A list of ParameterInfo type.</param>
+            <param name="memberIndex">Integer index of member.</param>
             <returns>An ObservableCollection of MemberParameter type.</returns>
         </member>
         <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetModuleDescription(System.Type)">
@@ -277,13 +283,14 @@
             <param name="property">PropertyInfo to get the description from.</param>
             <returns>String representation of the property description.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetMemberParameterDescription(System.Reflection.MemberInfo,System.Int32)">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetMemberParameterDescription(System.Reflection.MemberInfo,System.Int32,System.Int32)">
             <summary>
             GetMemberParameterDescription returns a clean string from the inner xml
             of the parameter description of the member.
             </summary>
             <param name="member">MemberInfo to get the string from.</param>
             <param name="parameterIndex">Integer index of parameter.</param>
+            <param name="memberIndex">Integer index of member.</param>
             <returns>String representation of the parameter description.</returns>
         </member>
         <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetMemberReturnDescription(System.Reflection.MemberInfo)">
@@ -427,6 +434,13 @@
             Initializes a new instance of the <see cref="T:ModuleManager.MainWindow"/> class.
             </summary>
         </member>
+        <member name="M:ModuleManager.MainWindow.TreeView_SelectedItemChanged(System.Object,System.Windows.RoutedPropertyChangedEventArgs{System.Object})">
+            <summary>
+            Bad bad bad.
+            </summary>
+            <param name="sender">Sender.</param>
+            <param name="e">e.</param>
+        </member>
         <member name="M:ModuleManager.MainWindow.InitializeComponent">
             <summary>
             InitializeComponent
@@ -514,6 +528,12 @@
             </summary>
             <param name="property">Property passed in as a string.</param>
         </member>
+        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.StoreModules">
+            <summary>
+            StoreModules will attempt to get all assemblies from a dll and store it
+            as a Module in the Modules collection.
+            </summary>
+        </member>
         <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.SaveConfig">
             <summary>
             SaveConfig will save an ObservableCollection to an xml file.
@@ -570,36 +590,6 @@
             </summary>
             <param name="obj">DependencyObject</param>
             <param name="value">Boolean value</param>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
-            </summary>
         </member>
     </members>
 </doc>

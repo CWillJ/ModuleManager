@@ -8,7 +8,7 @@
     public class ModuleMember
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleMember"/> class.
+        /// Initializes a new instance of the <see cref="ModuleMember"/> class. Default constructor.
         /// </summary>
         public ModuleMember()
         {
