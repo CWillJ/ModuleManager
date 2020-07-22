@@ -15,7 +15,7 @@
             Name = string.Empty;
             Description = string.Empty;
             Parameters = new ObservableCollection<MemberParameter>();
-            ReturnType = @"void";
+            ReturnType = @"Void";
             ReturnDescription = string.Empty;
         }
 
@@ -37,7 +37,7 @@
 
             if (string.IsNullOrEmpty(returnType))
             {
-                ReturnType = @"void";
+                ReturnType = @"Void";
             }
             else
             {
@@ -91,11 +91,11 @@
 
             if (Parameters == null)
             {
-                s += @"Parameters: none" + "\n\n";
+                s += @"Parameters: None" + "\n\n";
             }
             else if (Parameters.Count == 0)
             {
-                s += @"Parameters: none" + "\n\n";
+                s += @"Parameters: None" + "\n\n";
             }
             else
             {
@@ -109,12 +109,12 @@
                 s += "\n";
             }
 
-            if (!string.IsNullOrEmpty(ReturnType))
+            if (string.IsNullOrEmpty(ReturnType))
             {
-                ReturnType = @"void";
+                ReturnType = @"Void";
             }
 
-            s += @"Return: " + ReturnType + "\n";
+            s += @"Return:" + "\n" + ReturnType + "\n";
 
             if (!string.IsNullOrEmpty(ReturnDescription))
             {

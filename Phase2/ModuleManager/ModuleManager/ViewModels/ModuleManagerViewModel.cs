@@ -17,7 +17,6 @@
     public class ModuleManagerViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Module> _modules;
-        private object _memberText;
         private double _currentProgress;
         private string _progressBarText;
         private bool _isVisible;
@@ -28,7 +27,6 @@
         public ModuleManagerViewModel()
         {
             Modules = new ObservableCollection<Module>();
-            ////_memberText = string.Empty;
             _progressBarText = string.Empty;
             _currentProgress = 0;
             _isVisible = false;
@@ -129,23 +127,6 @@
         }
 
         /// <summary>
-        /// Gets or sets MemberText.
-        /// </summary>
-        public object MemberText
-        {
-            get
-            {
-                return _memberText;
-            }
-
-            set
-            {
-                _memberText = value;
-                RaisePropertyChanged("MemberText");
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the collection of Modules.
         /// </summary>
         public ObservableCollection<Module> Modules
@@ -178,6 +159,12 @@
         private async void StoreModules()
         {
             string moduleDirectory = GetModuleDirectory();
+
+            // If directory selection was cancled, exit this method.
+            if (moduleDirectory == null)
+            {
+                return;
+            }
 
             ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(moduleDirectory);
 

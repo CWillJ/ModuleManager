@@ -11,7 +11,7 @@
         public MemberParameter()
         {
             Type = string.Empty;
-            Name = string.Empty;
+            Name = @"None";
             Description = string.Empty;
         }
 
@@ -50,6 +50,11 @@
         /// <returns>A desired format for the parameter type and name.</returns>
         public override string ToString()
         {
+            if (string.IsNullOrEmpty(Type) || string.IsNullOrEmpty(Name))
+            {
+                return @"None" + "\n";
+            }
+
             string s = Type + @" " + Name + "\n";
 
             if (!string.IsNullOrEmpty(Description))

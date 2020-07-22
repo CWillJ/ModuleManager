@@ -28,5 +28,12 @@
                 MemberText.ItemsSource = new ObservableCollection<object> { e.NewValue };
             }
         }
+
+        //// private void MemberViewControl_Loaded(object sender, RoutedEventArgs e)
+        //// {
+        ////     ModuleManager.ViewModels.ModuleManagerViewModel moduleManagerViewModel = new ViewModels.ModuleManagerViewModel();
+        ////
+        ////     MemberViewControl.DataContext = moduleManagerViewModel;
+        //// }
     }
 }

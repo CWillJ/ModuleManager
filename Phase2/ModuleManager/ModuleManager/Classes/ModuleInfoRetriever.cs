@@ -335,13 +335,11 @@
                     paramInfo = null;
                 }
 
-                ObservableCollection<MemberParameter> parameters =
-                    GetParametersFromList(paramInfo, methodIndex);
+                ObservableCollection<MemberParameter> parameters = GetParametersFromList(paramInfo, methodIndex);
 
                 string returnType;
                 try
                 {
-                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
                     returnType = method.ReturnType.Name.ToString();
                 }
                 catch (FileNotFoundException)
@@ -382,24 +380,26 @@
         /// <returns>An ObservableCollection of MemberParameter type.</returns>
         private ObservableCollection<MemberParameter> GetParametersFromList(ParameterInfo[] paramList, int memberIndex = 0)
         {
-            if (paramList == null)
-            {
-                return null;
-            }
-
             ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
 
-            foreach (var p in paramList)
+            if (paramList == null || paramList.Length == 0)
             {
-                string pType = p.ParameterType.Name.ToString();
-                string pName = p.Name;
-                string pDescription =
-                    GetMemberParameterDescription(p.Member, Array.IndexOf(paramList, p), memberIndex);
+                parameters.Add(new MemberParameter());
+            }
+            else
+            {
+                foreach (var p in paramList)
+                {
+                    string pType = p.ParameterType.Name.ToString();
+                    string pName = p.Name;
+                    string pDescription =
+                        GetMemberParameterDescription(p.Member, Array.IndexOf(paramList, p), memberIndex);
 
-                parameters.Add(new MemberParameter(
-                    pType,
-                    pName,
-                    pDescription));
+                    parameters.Add(new MemberParameter(
+                        pType,
+                        pName,
+                        pDescription));
+                }
             }
 
             return parameters;
@@ -615,7 +615,7 @@
                 return s;
             }
 
-            return s;
+            return s.Trim();
         }
     }
 }
