@@ -3,12 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:e="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:local="clr-namespace:ModuleManager"
         xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
-        xmlns:data="clr-namespace:ModuleManager.Classes"
-        xmlns:view="clr-namespace:ModuleManager.Views"
-        xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
         mc:Ignorable="d"
         Title="Module Manager" Height="450" Width="800" Background="LightGray">
 
@@ -17,63 +12,11 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <behaviors:TemplateSelector x:Key="myDataTemplateSelector"/>
-
-        <!-- Member Parameter Data Template -->
-        <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
-            <StackPanel>
-                <TextBlock Text="{Binding Mode=OneWay}"/>
-            </StackPanel>
-        </DataTemplate>
-
-        <!-- Module Member Data Template -->
-        <DataTemplate x:Key="moduleMemberTemplate" DataType="{x:Type data:ModuleMember}">
-            <StackPanel>
-                <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
-                           FontWeight="Bold"
-                           FontSize="14"/>
-
-                <TextBlock TextWrapping="Wrap">
-                    <Run Text="{Binding Path=Description, Mode=OneWay}"/>
-                    <LineBreak/>
-                </TextBlock>
-
-                <TextBlock Text="Parameters:" FontWeight="Bold"/>
-
-                <ItemsControl ItemsSource="{Binding Path=Parameters, Mode=OneWay}"
-                              ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
-
-                <TextBlock>
-                    <Run FontWeight="Bold" Text="Return: "/>
-                    <LineBreak/>
-                    <Run Text="{Binding Path=ReturnType, Mode=OneWay}"/>
-                </TextBlock>
-                <TextBlock TextWrapping="Wrap">
-                    <Run Text="{Binding Path=ReturnDescription, Mode=OneWay}"/>
-                </TextBlock>
-                
-            </StackPanel>
-        </DataTemplate>
-
-        <!-- Module Data Template -->
-        <DataTemplate x:Key="moduleTemplate" DataType="{x:Type data:Module}">
-            <StackPanel>
-                
-                <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
-                           FontWeight="Bold"
-                           FontSize="16"/>
-
-                <TextBlock TextWrapping="Wrap">
-                    <Run Text="{Binding Path=Description, Mode=OneWay}"/>
-                    <LineBreak/>
-                </TextBlock>
-
-                <ItemsControl ItemsSource="{Binding Path=Members, Mode=OneWay}"
-                              ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
-            </StackPanel>
-        </DataTemplate>
-        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\DataTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
@@ -162,11 +105,7 @@
                 </TreeView>
             </StackPanel>
 
-            <!-- Text="{Binding Path=MemberText}" -->
-            <!-- <TextBlock x:Name="MemberText"/> ItemsSource="{Binding Path=MemberText, Mode=OneWay}" -->
-
-            <!-- <ItemsControl x:Name="MemberText" ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>-->
-            
+            <!-- Description Template <ItemsControl x:Name="MemberText" ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>-->
             <StackPanel Width="540">
                 <Border BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">
                     <TextBlock TextAlignment="Center"

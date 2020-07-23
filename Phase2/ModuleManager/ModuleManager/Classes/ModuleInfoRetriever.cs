@@ -25,7 +25,7 @@
         public ModuleInfoRetriever(string moduleDirectory)
         {
             DllDirectory = moduleDirectory;
-            LoadedAssemblies = new ObservableCollection<string>();
+            LoadedAssemblies = new ObservableCollection<AssemblyName>();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@
         /// <summary>
         /// Gets or sets LoadedAssemblies which stores all assemblies that have already been loaded.
         /// </summary>
-        public ObservableCollection<string> LoadedAssemblies { get; set; }
+        public ObservableCollection<AssemblyName> LoadedAssemblies { get; set; }
 
         /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize
@@ -100,7 +100,7 @@
                 {
                     if (type != null)
                     {
-                        ////Debug.WriteLine("Adding Module: " + type.Name);
+                        Debug.WriteLine("Adding Module: " + type.Name + " From " + assembly.FullName);
                         modules.Add(GetSingleModule(type));
                     }
                 }
@@ -113,17 +113,17 @@
 
         private void LoadAllAssemblies(Assembly assembly)
         {
-            AssemblyName[] names = assembly.GetReferencedAssemblies();
+            AssemblyName[] assemblyNames = assembly.GetReferencedAssemblies();
             Assembly attemptToLoadAssembly;
 
-            foreach (AssemblyName name in names)
+            foreach (AssemblyName assemblyName in assemblyNames)
             {
                 try
                 {
-                    if (!LoadedAssemblies.Contains(name.FullName))
+                    if (!LoadedAssemblies.Contains(assemblyName))
                     {
-                        attemptToLoadAssembly = Assembly.ReflectionOnlyLoad(name.FullName);
-                        LoadedAssemblies.Add(attemptToLoadAssembly.FullName);
+                        attemptToLoadAssembly = Assembly.ReflectionOnlyLoad(assemblyName.FullName);
+                        LoadedAssemblies.Add(assemblyName);
                     }
                     else
                     {
@@ -132,27 +132,27 @@
                 }
                 catch (ArgumentNullException)
                 {
-                    Debug.WriteLine("Cannot Load " + name.Name);
+                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
                     continue;
                 }
                 catch (BadImageFormatException)
                 {
-                    Debug.WriteLine("Cannot Load " + name.Name);
+                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
                     continue;
                 }
                 catch (FileLoadException)
                 {
-                    Debug.WriteLine("Cannot Load " + name.Name);
+                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
                     continue;
                 }
                 catch (PlatformNotSupportedException)
                 {
-                    Debug.WriteLine("Cannot Load " + name.Name);
+                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
                     continue;
                 }
                 catch (FileNotFoundException)
                 {
-                    Debug.WriteLine("Cannot Load " + name.Name);
+                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
                     continue;
                 }
 
@@ -249,17 +249,17 @@
                 }
                 catch (FileNotFoundException)
                 {
-                    Debug.WriteLine("Cannot Load Parameters For" + property.Name);
+                    Debug.WriteLine("Cannot Load Parameters For " + property.Name);
                     parameters = null;
                 }
                 catch (FileLoadException)
                 {
-                    Debug.WriteLine("Cannot Load Parameters For" + property.Name);
+                    Debug.WriteLine("Cannot Load Parameters For " + property.Name);
                     parameters = null;
                 }
                 catch (TypeLoadException)
                 {
-                    Debug.WriteLine("Cannot Load Parameters For" + property.Name);
+                    Debug.WriteLine("Cannot Load Parameters For " + property.Name);
                     parameters = null;
                 }
 
@@ -321,17 +321,17 @@
                 }
                 catch (FileNotFoundException)
                 {
-                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
+                    Debug.WriteLine("Cannot Load Parameters For " + method.Name);
                     paramInfo = null;
                 }
                 catch (FileLoadException)
                 {
-                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
+                    Debug.WriteLine("Cannot Load Parameters For " + method.Name);
                     paramInfo = null;
                 }
                 catch (TypeLoadException)
                 {
-                    Debug.WriteLine("Cannot Load Parameters For" + method.Name);
+                    Debug.WriteLine("Cannot Load Parameters For " + method.Name);
                     paramInfo = null;
                 }
 
@@ -344,17 +344,17 @@
                 }
                 catch (FileNotFoundException)
                 {
-                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
+                    Debug.WriteLine("Cannot Load Return Type For " + method.Name);
                     returnType = string.Empty;
                 }
                 catch (FileLoadException)
                 {
-                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
+                    Debug.WriteLine("Cannot Load Return Type For " + method.Name);
                     returnType = string.Empty;
                 }
                 catch (TypeLoadException)
                 {
-                    Debug.WriteLine("Cannot Load Return Type For" + method.Name);
+                    Debug.WriteLine("Cannot Load Return Type For " + method.Name);
                     returnType = string.Empty;
                 }
 
@@ -459,12 +459,12 @@
             }
             catch (FileNotFoundException)
             {
-                Debug.WriteLine("Cannot Load Property Description For" + property.Name);
+                Debug.WriteLine("Cannot Load Property Description For " + property.Name);
                 return null;
             }
             catch (XmlException)
             {
-                Debug.WriteLine("Cannot Load Property Description For" + property.Name);
+                Debug.WriteLine("Cannot Load Property Description For " + property.Name);
                 return null;
             }
 
@@ -536,12 +536,12 @@
             }
             catch (FileNotFoundException)
             {
-                Debug.WriteLine("Cannot Load Member XML For" + member.Name);
+                Debug.WriteLine("Cannot Load Member XML For " + member.Name);
                 return null;
             }
             catch (XmlException)
             {
-                Debug.WriteLine("Cannot Load Member XML For" + member.Name);
+                Debug.WriteLine("Cannot Load Member XML For " + member.Name);
                 return null;
             }
 
@@ -576,7 +576,7 @@
             }
             catch (FileNotFoundException)
             {
-                Debug.WriteLine("Cannot Load Module XML For" + type.Name);
+                Debug.WriteLine("Cannot Load Module XML For " + type.Name);
                 return null;
             }
 

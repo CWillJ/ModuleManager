@@ -47,32 +47,6 @@
             <param name="culture">Culture Info.</param>
             <returns>Visibility.Visible if true and Visibility.Collapsed if false.</returns>
         </member>
-        <member name="T:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior">
-            <summary>
-            SelectedTreeViewItemBehavior class used to allow selected
-            items for TreeView controls. TODO make this v Work.
-            </summary>
-        </member>
-        <member name="F:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.SelectedItemProperty">
-            <summary>
-            SelectedItemProperty.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.SelectedItem">
-            <summary>
-            Gets or sets the selected item.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.OnAttached">
-            <summary>
-            OnAttached.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Behavoirs.SelectedTreeViewItemBehavior.OnDetaching">
-            <summary>
-            OnDetaching.
-            </summary>
-        </member>
         <member name="T:ModuleManager.Behavoirs.TemplateSelector">
             <summary>
             Used to selected a DataTemplate in the view.
@@ -211,6 +185,21 @@
         <member name="P:ModuleManager.Classes.ModuleInfoRetriever.LoadedAssemblies">
             <summary>
             Gets or sets LoadedAssemblies which stores all assemblies that have already been loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.NotLoadedMemberInfo">
+            <summary>
+            Gets or sets the NotLoadedMemberInfo which stores all MemberInfo types that could not be loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.NotLoadedType">
+            <summary>
+            Gets or sets the NotLoadedType which stores all Type types that could not be loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.NotLoadedPropertyInfo">
+            <summary>
+            Gets or sets the NotLoadedPropertyInfo which stores all PropertyInfo types that could not be loaded.
             </summary>
         </member>
         <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetModules">
@@ -445,32 +434,6 @@
             InitializeComponent
             </summary>
         </member>
-        <member name="T:ModuleManager.ViewModels.MemberDescriptionViewModel">
-            <summary>
-            MemberDescription view model.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ViewModels.MemberDescriptionViewModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.MemberDescriptionViewModel"/> class.
-            </summary>
-        </member>
-        <member name="E:ModuleManager.ViewModels.MemberDescriptionViewModel.PropertyChanged">
-            <summary>
-            PropertyChanged event handler.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.MemberDescriptionViewModel.Modules">
-            <summary>
-            Gets or sets a collection of Module objects.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ViewModels.MemberDescriptionViewModel.RaisePropertyChanged(System.String)">
-            <summary>
-            Raise a property changed event.
-            </summary>
-            <param name="property">Property passed in as a string.</param>
-        </member>
         <member name="T:ModuleManager.ViewModels.ModuleManagerViewModel">
             <summary>
             ModuleManagerViewModel will handle commands from the main view.
@@ -552,55 +515,35 @@
             </summary>
             <returns>ObservableCollection of type Module.</returns>
         </member>
-        <member name="T:ModuleManager.Views.MemberDescription">
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
             <summary>
-            Interaction logic for MemberDescription.xaml
-            </summary>
-            <summary>
-            MemberDescription
+            GeneratedInternalTypeHelper
             </summary>
         </member>
-        <member name="M:ModuleManager.Views.MemberDescription.#ctor">
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Views.MemberDescription"/> class.
+            CreateInstance
             </summary>
         </member>
-        <member name="M:ModuleManager.Views.MemberDescription.TreeView_SelectedItemChanged(System.Object,System.Windows.RoutedPropertyChangedEventArgs{System.Object})">
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            Bad bad bad.
-            </summary>
-            <param name="sender">Sender.</param>
-            <param name="e">e.</param>
-        </member>
-        <member name="M:ModuleManager.Views.MemberDescription.InitializeComponent">
-            <summary>
-            InitializeComponent
+            GetPropertyValue
             </summary>
         </member>
-        <member name="T:ModuleManager.VML.ViewModelLocator">
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            A ViewModelLocator class designed to hook up a view model to it's view.
+            SetPropertyValue
             </summary>
         </member>
-        <member name="F:ModuleManager.VML.ViewModelLocator.AutoHookedUpViewModelProperty">
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
             <summary>
-            Using a DependencyProperty as the backing store for AutoHookedUpViewModel.This
-            enables animation, styling, binding, etc...
+            CreateDelegate
             </summary>
         </member>
-        <member name="M:ModuleManager.VML.ViewModelLocator.GetAutoHookedUpViewModel(System.Windows.DependencyObject)">
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
             <summary>
-            Gets view models associated with the view.
+            AddEventHandler
             </summary>
-            <param name="obj">DependencyObject.</param>
-            <returns>Boolean value.</returns>
-        </member>
-        <member name="M:ModuleManager.VML.ViewModelLocator.SetAutoHookedUpViewModel(System.Windows.DependencyObject,System.Boolean)">
-            <summary>
-            Sets the AutoHookedUpViewModel property.
-            </summary>
-            <param name="obj">DependencyObject</param>
-            <param name="value">Boolean value</param>
         </member>
     </members>
 </doc>
