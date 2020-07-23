@@ -62,29 +62,25 @@
 
             // add all the possible referenced assemblies
             string[] runtimeEnvirnmentFiles = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), @"*.dll");
-            string[] dllFiles = Directory.GetFiles(DllDirectory, @"*.dll");
-            var paths = new List<string>(runtimeEnvirnmentFiles);
 
             // add all the files of the assemblies you actually want info from
-            foreach (var dllFile in dllFiles)
-            {
-                paths.Add(dllFile);
-            }
+            string[] dllFiles = Directory.GetFiles(DllDirectory, @"*.dll");
+
+            var paths = new List<string>(runtimeEnvirnmentFiles);
+            paths.AddRange(dllFiles);
 
             var resolver = new PathAssemblyResolver(paths);
-            var mlc = new MetadataLoadContext(resolver);
+            var metaDataLoader = new MetadataLoadContext(resolver);
 
             foreach (var dllFile in dllFiles)
             {
                 DllFileName = dllFile;
 
-                assemblies.Add(mlc.LoadFromAssemblyPath(dllFile));
+                assemblies.Add(metaDataLoader.LoadFromAssemblyPath(dllFile));
             }
 
             Parallel.ForEach(assemblies, (assembly) =>
             {
-                LoadAllAssemblies(assembly);
-
                 Type[] types = null;
 
                 try
@@ -101,65 +97,23 @@
                     if (type != null)
                     {
                         Debug.WriteLine("Adding Module: " + type.Name + " From " + assembly.FullName);
-                        modules.Add(GetSingleModule(type));
+                        Module tempModule = GetSingleModule(type);
+
+                         // Add all non-null modules
+                         if (tempModule != null)
+                         {
+                             modules.Add(tempModule);
+                         }
                     }
                 }
             });
 
-            // Return an alphabetized collection of the found non-null modules
-            var noNullsList = modules.Where(x => x != null).ToList();
-            return new ObservableCollection<Module>(noNullsList.OrderBy(mod => mod.Name));
+            // Return an alphabetized collection of the found modules.
+            return new ObservableCollection<Module>(modules.ToList().OrderBy(mod => mod.Name));
         }
 
-        private void LoadAllAssemblies(Assembly assembly)
-        {
-            AssemblyName[] assemblyNames = assembly.GetReferencedAssemblies();
-            Assembly attemptToLoadAssembly;
-
-            foreach (AssemblyName assemblyName in assemblyNames)
-            {
-                try
-                {
-                    if (!LoadedAssemblies.Contains(assemblyName))
-                    {
-                        attemptToLoadAssembly = Assembly.ReflectionOnlyLoad(assemblyName.FullName);
-                        LoadedAssemblies.Add(assemblyName);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                catch (ArgumentNullException)
-                {
-                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
-                    continue;
-                }
-                catch (BadImageFormatException)
-                {
-                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
-                    continue;
-                }
-                catch (FileLoadException)
-                {
-                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
-                    continue;
-                }
-                catch (PlatformNotSupportedException)
-                {
-                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
-                    continue;
-                }
-                catch (FileNotFoundException)
-                {
-                    Debug.WriteLine("Cannot Load Assembly " + assemblyName.Name);
-                    continue;
-                }
-
-                LoadAllAssemblies(attemptToLoadAssembly);
-            }
-        }
-
+        // Can be moved to the constructor of Module.
+        // Will need to include the dll file...
         private Module GetSingleModule(Type type)
         {
             ObservableCollection<ModuleMember> members = new ObservableCollection<ModuleMember>();
@@ -193,9 +147,11 @@
             ObservableCollection<ModuleMember> members,
             Type type)
         {
-            foreach (var constructor in type.GetConstructors())
+            ConstructorInfo[] constructors = type.GetConstructors();
+
+            foreach (var constructor in constructors)
             {
-                int constructorIndex = Array.IndexOf(type.GetConstructors(), constructor);
+                int constructorIndex = Array.IndexOf(constructors, constructor);
                 string name = @"Constructor for " + type.Name;
                 string description = GetMethodDescription(constructor, constructorIndex);
 
@@ -206,7 +162,7 @@
                 }
                 catch (FileNotFoundException)
                 {
-                    Debug.WriteLine("Cannot Load " + constructor.Name + " Constructor");
+                    Debug.WriteLine("Cannot Load Parameters For " + constructor.Name + " Constructor");
                     parameters = null;
                 }
 

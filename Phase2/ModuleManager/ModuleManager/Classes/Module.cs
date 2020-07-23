@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
 
@@ -40,6 +41,22 @@
             _name = name;
             _description = description;
             _members = members;
+            RaisePropertyChanged("Modules");
+        }
+
+        // TODO I may have to pass in a dll file name becuase I use that to get the descriptions of everything.
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Module"/> class specifing a Type.
+        /// </summary>
+        /// <param name="type">Type object found in an Assembly.</param>
+        public Module(Type type)
+        {
+            _isSelected = false;
+            _isEnabled = false;
+            _name = type.Name;
+            _description = string.Empty;
+            _members = new ObservableCollection<ModuleMember>();
             RaisePropertyChanged("Modules");
         }
 
@@ -153,6 +170,11 @@
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
+        ////public Type ToType()
+        ////{
+        ////    return null;
+        ////}
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.
