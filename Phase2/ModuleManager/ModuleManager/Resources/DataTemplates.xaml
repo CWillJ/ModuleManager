@@ -13,8 +13,47 @@
         </StackPanel>
     </DataTemplate>
 
-    <!-- Module Member Data Template -->
-    <DataTemplate x:Key="moduleMemberTemplate" DataType="{x:Type data:ModuleMember}">
+    <!-- Module Constructor Data Template -->
+    <DataTemplate x:Key="moduleConstructorTemplate" DataType="{x:Type data:ModuleConstructor}">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
+                           FontWeight="Bold"
+                           FontSize="14"/>
+
+            <TextBlock TextWrapping="Wrap">
+                    <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                    <LineBreak/>
+            </TextBlock>
+
+            <TextBlock Text="Parameters:" FontWeight="Bold"/>
+
+            <ItemsControl ItemsSource="{Binding Path=Parameters, Mode=OneWay}"
+                              ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Module Properties Data Template -->
+    <DataTemplate x:Key="modulePropertiesTemplate" DataType="{x:Type data:ModuleProperty}">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
+                           FontWeight="Bold"
+                           FontSize="14"/>
+
+            <TextBlock TextWrapping="Wrap">
+                    <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                    <LineBreak/>
+            </TextBlock>
+
+            <TextBlock>
+                    <Run FontWeight="Bold" Text="Data Type: "/>
+                    <LineBreak/>
+                    <Run Text="{Binding Path=DataType, Mode=OneWay}"/>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+    
+    <!-- Module Method Data Template -->
+    <DataTemplate x:Key="moduleMethodTemplate" DataType="{x:Type data:ModuleMethod}">
         <StackPanel>
             <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
                            FontWeight="Bold"
@@ -55,7 +94,7 @@
                     <LineBreak/>
             </TextBlock>
 
-            <ItemsControl ItemsSource="{Binding Path=Members, Mode=OneWay}"
+            <ItemsControl ItemsSource="{Binding Path=Methods, Mode=OneWay}"
                               ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
         </StackPanel>
     </DataTemplate>

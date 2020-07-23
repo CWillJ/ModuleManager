@@ -3,14 +3,14 @@
     using System.Collections.ObjectModel;
 
     /// <summary>
-    /// ModuleMember object holds the description, the parameters and the return type of a member.
+    /// ModuleMethod object holds the description, the parameters and the return type of a member.
     /// </summary>
-    public class ModuleMember
+    public class ModuleMethod
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleMember"/> class. Default constructor.
+        /// Initializes a new instance of the <see cref="ModuleMethod"/> class. Default constructor.
         /// </summary>
-        public ModuleMember()
+        public ModuleMethod()
         {
             Name = string.Empty;
             Description = string.Empty;
@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleMember"/> class
+        /// Initializes a new instance of the <see cref="ModuleMethod"/> class
         /// with specified name, description, parameters return type and return
         /// description through passed in parameters.
         /// </summary>
@@ -29,7 +29,7 @@
         /// <param name="parameters">Member parameters.</param>
         /// <param name="returnType">Member return type.</param>
         /// <param name="returnDescription">Member return description.</param>
-        public ModuleMember(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
+        public ModuleMethod(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
         {
             Name = name;
             Description = description;

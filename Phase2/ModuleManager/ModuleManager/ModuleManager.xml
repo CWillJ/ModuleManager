@@ -111,7 +111,7 @@
             initializes properties to empty strings/empty collections.
             </summary>
         </member>
-        <member name="M:ModuleManager.Classes.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMember})">
+        <member name="M:ModuleManager.Classes.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class specifying the name, description and methods.
             </summary>
@@ -119,11 +119,12 @@
             <param name="description">Module description.</param>
             <param name="members">Module methods.</param>
         </member>
-        <member name="M:ModuleManager.Classes.Module.#ctor(System.Type)">
+        <member name="M:ModuleManager.Classes.Module.#ctor(System.Type,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class specifing a Type.
             </summary>
             <param name="type">Type object found in an Assembly.</param>
+            <param name="dllFileName">File name of the dll file.</param>
         </member>
         <member name="E:ModuleManager.Classes.Module.PropertyChanged">
             <summary>
@@ -150,7 +151,17 @@
             Gets or sets the description of the module.
             </summary>
         </member>
-        <member name="P:ModuleManager.Classes.Module.Members">
+        <member name="P:ModuleManager.Classes.Module.Constructors">
+            <summary>
+            Gets or sets the constructors in the current module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.Module.Properties">
+            <summary>
+            Gets or sets the properties in the current module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.Module.Methods">
             <summary>
             Gets or sets the members in the current module.
             </summary>
@@ -241,27 +252,27 @@
             </summary>
             <returns>Returns an collection of Module objects.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddConstructorsToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMember},System.Type)">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddConstructorsToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod},System.Type)">
             <summary>
-            AddConstructorsToCollection takes in an ObservableCollection of ModuleMember type and a
+            AddConstructorsToCollection takes in an ObservableCollection of ModuleMethod type and a
             Type in order to get all constructors from that Type and add them to the collection.
             </summary>
             <param name="members">An ObservableCollection to append members to.</param>
             <param name="type">The Type where the members are coming from.</param>
             <returns>The original ObservableCollection with appened members from type.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddPropertiesToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMember},System.Type)">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddPropertiesToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod},System.Type)">
             <summary>
-            AddPropertiesToCollection takes in an ObservableCollection of ModuleMember type and a
+            AddPropertiesToCollection takes in an ObservableCollection of ModuleMethod type and a
             Type in order to get all properties from that Type and add them to the collection.
             </summary>
             <param name="members">An ObservableCollection to append members to.</param>
             <param name="type">The Type where the members are coming from.</param>
             <returns>The original ObservableCollection with appened members from type.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddMethodsToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMember},System.Type)">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddMethodsToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod},System.Type)">
             <summary>
-            AddMethodsToCollection takes in an ObservableCollection of ModuleMember type and a
+            AddMethodsToCollection takes in an ObservableCollection of ModuleMethod type and a
             Type in order to get all methods from that Type and add them to the collection.
             </summary>
             <param name="members">An ObservableCollection to append members to.</param>
@@ -344,19 +355,19 @@
             <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
             <returns>InnerXml of the XmlNode.</returns>
         </member>
-        <member name="T:ModuleManager.Classes.ModuleMember">
+        <member name="T:ModuleManager.Classes.ModuleMethod">
             <summary>
-            ModuleMember object holds the description, the parameters and the return type of a member.
+            ModuleMethod object holds the description, the parameters and the return type of a member.
             </summary>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleMember.#ctor">
+        <member name="M:ModuleManager.Classes.ModuleMethod.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMember"/> class. Default constructor.
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMethod"/> class. Default constructor.
             </summary>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleMember.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.MemberParameter},System.String,System.String)">
+        <member name="M:ModuleManager.Classes.ModuleMethod.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.MemberParameter},System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMember"/> class
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMethod"/> class
             with specified name, description, parameters return type and return
             description through passed in parameters.
             </summary>
@@ -366,32 +377,32 @@
             <param name="returnType">Member return type.</param>
             <param name="returnDescription">Member return description.</param>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleMember.Name">
+        <member name="P:ModuleManager.Classes.ModuleMethod.Name">
             <summary>
             Gets or sets the name of the member.
             </summary>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleMember.Description">
+        <member name="P:ModuleManager.Classes.ModuleMethod.Description">
             <summary>
             Gets or sets the description of the member.
             </summary>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleMember.Parameters">
+        <member name="P:ModuleManager.Classes.ModuleMethod.Parameters">
             <summary>
             Gets or sets the member parameters.
             </summary>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleMember.ReturnType">
+        <member name="P:ModuleManager.Classes.ModuleMethod.ReturnType">
             <summary>
             Gets or sets the member return type.
             </summary>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleMember.ReturnDescription">
+        <member name="P:ModuleManager.Classes.ModuleMethod.ReturnDescription">
             <summary>
             Gets or sets the member return description.
             </summary>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleMember.ToString">
+        <member name="M:ModuleManager.Classes.ModuleMethod.ToString">
             <summary>
             Overrides the ToString method and formats the string output
             for the UI.
@@ -597,36 +608,6 @@
             LoadConfig will load an ObservableCollection of type Module from an xml file
             </summary>
             <returns>ObservableCollection of type Module.</returns>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
-            </summary>
         </member>
     </members>
 </doc>

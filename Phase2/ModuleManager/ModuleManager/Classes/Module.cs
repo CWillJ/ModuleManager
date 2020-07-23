@@ -13,7 +13,9 @@
         private bool _isEnabled;
         private string _name;
         private string _description;
-        private ObservableCollection<ModuleMember> _members;
+        private ObservableCollection<ModuleConstructor> _constructors;
+        private ObservableCollection<ModuleProperty> _properties;
+        private ObservableCollection<ModuleMethod> _methods;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Module"/> class. Default constructor.
@@ -25,7 +27,9 @@
             _isEnabled = false;
             _name = string.Empty;
             _description = string.Empty;
-            _members = new ObservableCollection<ModuleMember>();
+            _constructors = new ObservableCollection<ModuleConstructor>();
+            _properties = new ObservableCollection<ModuleProperty>();
+            _methods = new ObservableCollection<ModuleMethod>();
         }
 
         /// <summary>
@@ -34,13 +38,13 @@
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>
         /// <param name="members">Module methods.</param>
-        public Module(string name, string description, ObservableCollection<ModuleMember> members)
+        public Module(string name, string description, ObservableCollection<ModuleMethod> members)
         {
             _isSelected = false;
             _isEnabled = false;
             _name = name;
             _description = description;
-            _members = members;
+            _methods = members;
             RaisePropertyChanged("Modules");
         }
 
@@ -50,13 +54,14 @@
         /// Initializes a new instance of the <see cref="Module"/> class specifing a Type.
         /// </summary>
         /// <param name="type">Type object found in an Assembly.</param>
-        public Module(Type type)
+        /// <param name="dllFileName">File name of the dll file.</param>
+        public Module(Type type, string dllFileName)
         {
             _isSelected = false;
             _isEnabled = false;
             _name = type.Name;
-            _description = string.Empty;
-            _members = new ObservableCollection<ModuleMember>();
+            _description = dllFileName; // TODO starts here
+            _methods = new ObservableCollection<ModuleMethod>();
             RaisePropertyChanged("Modules");
         }
 
@@ -143,21 +148,61 @@
         }
 
         /// <summary>
-        /// Gets or sets the members in the current module.
+        /// Gets or sets the constructors in the current module.
         /// </summary>
-        public ObservableCollection<ModuleMember> Members
+        public ObservableCollection<ModuleConstructor> Constructors
         {
             get
             {
-                return _members;
+                return _constructors;
             }
 
             set
             {
-                if (_members != value)
+                if (_constructors != value)
                 {
-                    _members = value;
-                    RaisePropertyChanged("Members");
+                    _constructors = value;
+                    RaisePropertyChanged("Constructors");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the properties in the current module.
+        /// </summary>
+        public ObservableCollection<ModuleProperty> Properties
+        {
+            get
+            {
+                return _properties;
+            }
+
+            set
+            {
+                if (_properties != value)
+                {
+                    _properties = value;
+                    RaisePropertyChanged("Properties");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the members in the current module.
+        /// </summary>
+        public ObservableCollection<ModuleMethod> Methods
+        {
+            get
+            {
+                return _methods;
+            }
+
+            set
+            {
+                if (_methods != value)
+                {
+                    _methods = value;
+                    RaisePropertyChanged("Methods");
                 }
             }
         }
@@ -170,11 +215,6 @@
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
-
-        ////public Type ToType()
-        ////{
-        ////    return null;
-        ////}
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.
@@ -189,9 +229,19 @@
                 s += Description + "\n\n";
             }
 
-            foreach (var member in Members)
+            foreach (var constructor in Constructors)
             {
-                s += member.ToString() + "\n";
+                s += constructor.ToString() + "\n";
+            }
+
+            foreach (var property in Properties)
+            {
+                s += property.ToString() + "\n";
+            }
+
+            foreach (var method in Methods)
+            {
+                s += method.ToString() + "\n";
             }
 
             return s;

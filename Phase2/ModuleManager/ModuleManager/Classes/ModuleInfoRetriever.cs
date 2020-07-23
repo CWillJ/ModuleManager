@@ -116,7 +116,7 @@
         // Will need to include the dll file...
         private Module GetSingleModule(Type type)
         {
-            ObservableCollection<ModuleMember> members = new ObservableCollection<ModuleMember>();
+            ObservableCollection<ModuleMethod> members = new ObservableCollection<ModuleMethod>();
 
             // Don't load non-public or interface classes
             if (!type.IsPublic || type.IsInterface)
@@ -137,14 +137,14 @@
         }
 
         /// <summary>
-        /// AddConstructorsToCollection takes in an ObservableCollection of ModuleMember type and a
+        /// AddConstructorsToCollection takes in an ObservableCollection of ModuleMethod type and a
         /// Type in order to get all constructors from that Type and add them to the collection.
         /// </summary>
         /// <param name="members">An ObservableCollection to append members to.</param>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>The original ObservableCollection with appened members from type.</returns>
-        private ObservableCollection<ModuleMember> AddConstructorsToCollection(
-            ObservableCollection<ModuleMember> members,
+        private ObservableCollection<ModuleMethod> AddConstructorsToCollection(
+            ObservableCollection<ModuleMethod> members,
             Type type)
         {
             ConstructorInfo[] constructors = type.GetConstructors();
@@ -166,7 +166,7 @@
                     parameters = null;
                 }
 
-                members.Add(new ModuleMember(
+                members.Add(new ModuleMethod(
                     name,
                     description,
                     parameters,
@@ -178,14 +178,14 @@
         }
 
         /// <summary>
-        /// AddPropertiesToCollection takes in an ObservableCollection of ModuleMember type and a
+        /// AddPropertiesToCollection takes in an ObservableCollection of ModuleMethod type and a
         /// Type in order to get all properties from that Type and add them to the collection.
         /// </summary>
         /// <param name="members">An ObservableCollection to append members to.</param>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>The original ObservableCollection with appened members from type.</returns>
-        private ObservableCollection<ModuleMember> AddPropertiesToCollection(
-            ObservableCollection<ModuleMember> members,
+        private ObservableCollection<ModuleMethod> AddPropertiesToCollection(
+            ObservableCollection<ModuleMethod> members,
             Type type)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public
@@ -219,7 +219,7 @@
                     parameters = null;
                 }
 
-                members.Add(new ModuleMember(
+                members.Add(new ModuleMethod(
                     name,
                     description,
                     parameters,
@@ -231,14 +231,14 @@
         }
 
         /// <summary>
-        /// AddMethodsToCollection takes in an ObservableCollection of ModuleMember type and a
+        /// AddMethodsToCollection takes in an ObservableCollection of ModuleMethod type and a
         /// Type in order to get all methods from that Type and add them to the collection.
         /// </summary>
         /// <param name="members">An ObservableCollection to append members to.</param>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>The original ObservableCollection with appened members from type.</returns>
-        private ObservableCollection<ModuleMember> AddMethodsToCollection(
-            ObservableCollection<ModuleMember> members,
+        private ObservableCollection<ModuleMethod> AddMethodsToCollection(
+            ObservableCollection<ModuleMethod> members,
             Type type)
         {
             string lastMethodName = string.Empty;
@@ -316,7 +316,7 @@
 
                 string returnDescription = GetMemberReturnDescription(method);
 
-                members.Add(new ModuleMember(
+                members.Add(new ModuleMethod(
                     name,
                     description,
                     parameters,

@@ -24,9 +24,19 @@
                     return element.FindResource("moduleTemplate") as DataTemplate;
                 }
 
-                if (item is ModuleMember)
+                if (item is ModuleConstructor)
                 {
-                    return element.FindResource("moduleMemberTemplate") as DataTemplate;
+                    return element.FindResource("moduleConstructorTemplate") as DataTemplate;
+                }
+
+                if (item is ModuleProperty)
+                {
+                    return element.FindResource("modulePropertyTemplate") as DataTemplate;
+                }
+
+                if (item is ModuleMethod)
+                {
+                    return element.FindResource("moduleMethodTemplate") as DataTemplate;
                 }
 
                 if (item is MemberParameter)

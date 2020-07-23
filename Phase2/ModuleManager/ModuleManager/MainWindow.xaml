@@ -86,7 +86,7 @@
                           BorderBrush="Black">
 
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Methods}">
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
                                 <TextBlock Text="{Binding Path=Name}"/>
