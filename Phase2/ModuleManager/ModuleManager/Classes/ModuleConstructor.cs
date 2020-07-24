@@ -1,11 +1,16 @@
 ﻿namespace ModuleManager.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+    using ModuleManager.Interfaces;
 
     /// <summary>
     /// ModuleConstructor object holds the class name, description and the parameters a constructor.
     /// </summary>
-    public class ModuleConstructor
+    public class ModuleConstructor : IModuleMember
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleConstructor"/> class. Default constructor.

@@ -5,6 +5,7 @@
     
     <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <behaviors:TemplateSelector x:Key="myDataTemplateSelector"/>
+    <behaviors:TreeViewItemSelector x:Key="myTreeViewItemSelector"/>
 
     <!-- Member Parameter Data Template -->
     <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
@@ -33,7 +34,7 @@
     </DataTemplate>
 
     <!-- Module Properties Data Template -->
-    <DataTemplate x:Key="modulePropertiesTemplate" DataType="{x:Type data:ModuleProperty}">
+    <DataTemplate x:Key="modulePropertyTemplate" DataType="{x:Type data:ModuleProperty}">
         <StackPanel>
             <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
                            FontWeight="Bold"
@@ -94,8 +95,72 @@
                     <LineBreak/>
             </TextBlock>
 
+            <ItemsControl ItemsSource="{Binding Path=Constructors, Mode=OneWay}"
+                              ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+
+            <ItemsControl ItemsSource="{Binding Path=Properties, Mode=OneWay}"
+                              ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+
             <ItemsControl ItemsSource="{Binding Path=Methods, Mode=OneWay}"
                               ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
         </StackPanel>
     </DataTemplate>
+
+    <TreeView x:Key="constructorTreeViewItem"
+              Width="210"
+              Height="275"
+              BorderThickness="1"
+              BorderBrush="Black">
+        <HierarchicalDataTemplate  DataType="{x:Type data:Module}" ItemsSource="{Binding Path=Constructors}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
+                <TextBlock Text="{Binding Path=Name}"/>
+            </StackPanel>
+
+            <HierarchicalDataTemplate.ItemTemplate>
+                <DataTemplate DataType="{x:Type data:ModuleConstructor}">
+                    <TextBlock Text="{Binding Path=Name}" />
+                </DataTemplate>
+            </HierarchicalDataTemplate.ItemTemplate>
+        </HierarchicalDataTemplate>
+    </TreeView>
+
+    <TreeView x:Key="propertyTreeViewItem"
+              Width="210"
+              Height="275"
+              BorderThickness="1"
+              BorderBrush="Black">
+        <HierarchicalDataTemplate  DataType="{x:Type data:Module}" ItemsSource="{Binding Path=Properties}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
+                <TextBlock Text="{Binding Path=Name}"/>
+            </StackPanel>
+
+            <HierarchicalDataTemplate.ItemTemplate>
+                <DataTemplate DataType="{x:Type data:ModuleProperty}">
+                    <TextBlock Text="{Binding Path=Name}" />
+                </DataTemplate>
+            </HierarchicalDataTemplate.ItemTemplate>
+        </HierarchicalDataTemplate>
+    </TreeView>
+
+    <TreeView x:Key="methodTreeViewItem"
+              Width="210"
+              Height="275"
+              BorderThickness="1"
+              BorderBrush="Black">
+        <HierarchicalDataTemplate  DataType="{x:Type data:Module}" ItemsSource="{Binding Path=Methods}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
+                <TextBlock Text="{Binding Path=Name}"/>
+            </StackPanel>
+
+            <HierarchicalDataTemplate.ItemTemplate>
+                <DataTemplate DataType="{x:Type data:ModuleMethod}">
+                    <TextBlock Text="{Binding Path=Name}" />
+                </DataTemplate>
+            </HierarchicalDataTemplate.ItemTemplate>
+        </HierarchicalDataTemplate>
+    </TreeView>
+
 </ResourceDictionary>

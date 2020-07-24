@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using ModuleManager.Interfaces;
 
     /// <summary>
     /// Module object holds the name and description of a module.
@@ -37,14 +38,23 @@
         /// </summary>
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>
-        /// <param name="members">Module methods.</param>
-        public Module(string name, string description, ObservableCollection<ModuleMethod> members)
+        /// <param name="constructors">Module constructors.</param>
+        /// <param name="properties">Module properties.</param>
+        /// <param name="methods">Module methods.</param>
+        public Module(
+            string name,
+            string description,
+            ObservableCollection<ModuleConstructor> constructors,
+            ObservableCollection<ModuleProperty> properties,
+            ObservableCollection<ModuleMethod> methods)
         {
             _isSelected = false;
             _isEnabled = false;
             _name = name;
             _description = description;
-            _methods = members;
+            _constructors = constructors;
+            _properties = properties;
+            _methods = methods;
             RaisePropertyChanged("Modules");
         }
 

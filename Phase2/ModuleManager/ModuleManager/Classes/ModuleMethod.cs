@@ -1,11 +1,12 @@
 ﻿namespace ModuleManager.Classes
 {
     using System.Collections.ObjectModel;
+    using ModuleManager.Interfaces;
 
     /// <summary>
     /// ModuleMethod object holds the description, the parameters and the return type of a member.
     /// </summary>
-    public class ModuleMethod
+    public class ModuleMethod : IModuleMember
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMethod"/> class. Default constructor.

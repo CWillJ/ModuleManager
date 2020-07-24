@@ -25,18 +25,19 @@
         public ModuleInfoRetriever(string moduleDirectory)
         {
             DllDirectory = moduleDirectory;
+            DescriptionRetriever = new XmlDescriptionRetriever();
             LoadedAssemblies = new ObservableCollection<AssemblyName>();
         }
-
-        /// <summary>
-        /// Gets or sets DllFileName is the directory path of the .dll files.
-        /// </summary>
-        public string DllFileName { get; set; }
 
         /// <summary>
         /// Gets or sets DllDirectory is the directory path of the .dll files.
         /// </summary>
         public string DllDirectory { get; set; }
+
+        /// <summary>
+        /// Gets or sets all xml descriptions.
+        /// </summary>
+        public XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
         /// <summary>
         /// Gets or sets LoadedAssemblies which stores all assemblies that have already been loaded.
@@ -74,7 +75,7 @@
 
             foreach (var dllFile in dllFiles)
             {
-                DllFileName = dllFile;
+                DescriptionRetriever.DllFilePath = dllFile;
 
                 assemblies.Add(metaDataLoader.LoadFromAssemblyPath(dllFile));
             }
@@ -116,49 +117,42 @@
         // Will need to include the dll file...
         private Module GetSingleModule(Type type)
         {
-            ObservableCollection<ModuleMethod> members = new ObservableCollection<ModuleMethod>();
-
             // Don't load non-public or interface classes
             if (!type.IsPublic || type.IsInterface)
             {
                 return null;
             }
 
-            // Get Public Constructrors
-            members = AddConstructorsToCollection(members, type);
-
-            // Get Public Properties
-            members = AddPropertiesToCollection(members, type);
-
-            // Get Public Methods
-            members = AddMethodsToCollection(members, type);
-
-            return new Module(type.Name, GetModuleDescription(type), members);
+            return new Module(
+                type.Name,
+                DescriptionRetriever.GetModuleDescription(type),
+                AddConstructorsToCollection(type),
+                AddPropertiesToCollection(type),
+                AddMethodsToCollection(type));
         }
 
         /// <summary>
-        /// AddConstructorsToCollection takes in an ObservableCollection of ModuleMethod type and a
-        /// Type in order to get all constructors from that Type and add them to the collection.
+        /// AddConstructorsToCollection get all constructors from the passed in Type.
         /// </summary>
-        /// <param name="members">An ObservableCollection to append members to.</param>
         /// <param name="type">The Type where the members are coming from.</param>
-        /// <returns>The original ObservableCollection with appened members from type.</returns>
-        private ObservableCollection<ModuleMethod> AddConstructorsToCollection(
-            ObservableCollection<ModuleMethod> members,
-            Type type)
+        /// <returns>An ObservableCollection of ModuleConstructor objects.</returns>
+        private ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type)
         {
-            ConstructorInfo[] constructors = type.GetConstructors();
+            ObservableCollection<ModuleConstructor> constructors = new ObservableCollection<ModuleConstructor>();
+            ConstructorInfo[] conInfo = type.GetConstructors();
 
-            foreach (var constructor in constructors)
+            foreach (var constructor in conInfo)
             {
-                int constructorIndex = Array.IndexOf(constructors, constructor);
-                string name = @"Constructor for " + type.Name;
-                string description = GetMethodDescription(constructor, constructorIndex);
+                int constructorIndex = Array.IndexOf(conInfo, constructor);
+                string name = type.Name;
+                string description =
+                    DescriptionRetriever.GetConstructorDescription(constructor, constructorIndex);
 
                 ObservableCollection<MemberParameter> parameters;
                 try
                 {
-                    parameters = GetParametersFromList(constructor.GetParameters(), constructorIndex);
+                    parameters =
+                        DescriptionRetriever.GetParametersFromList(constructor.GetParameters(), constructorIndex);
                 }
                 catch (FileNotFoundException)
                 {
@@ -166,81 +160,53 @@
                     parameters = null;
                 }
 
-                members.Add(new ModuleMethod(
+                constructors.Add(new ModuleConstructor(
                     name,
                     description,
-                    parameters,
-                    null,
-                    null));
+                    parameters));
             }
 
-            return members;
+            return constructors;
         }
 
         /// <summary>
-        /// AddPropertiesToCollection takes in an ObservableCollection of ModuleMethod type and a
-        /// Type in order to get all properties from that Type and add them to the collection.
+        /// AddPropertiesToCollection gets all properties from the passed in Type.
         /// </summary>
-        /// <param name="members">An ObservableCollection to append members to.</param>
         /// <param name="type">The Type where the members are coming from.</param>
-        /// <returns>The original ObservableCollection with appened members from type.</returns>
-        private ObservableCollection<ModuleMethod> AddPropertiesToCollection(
-            ObservableCollection<ModuleMethod> members,
-            Type type)
+        /// <returns>An ObservableCollection of ModulePropery objects.</returns>
+        private ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
         {
+            ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
             foreach (var property in type.GetProperties(BindingFlags.Public
                                       | BindingFlags.Instance
                                       | BindingFlags.DeclaredOnly))
             {
                 string name = property.Name;
-                string description = GetPropertyDescription(property);
+                string description =
+                    DescriptionRetriever.GetPropertyDescription(property);
+                string dataType = string.Empty;
+                bool canRead = false;
+                bool canWrite = false;
 
-                // There are no parameters to a property
-                ParameterInfo[] paramInfo;
-                ObservableCollection<MemberParameter> parameters;
-                try
-                {
-                    paramInfo = property.GetIndexParameters();
-                    parameters = GetParametersFromList(paramInfo);
-                }
-                catch (FileNotFoundException)
-                {
-                    Debug.WriteLine("Cannot Load Parameters For " + property.Name);
-                    parameters = null;
-                }
-                catch (FileLoadException)
-                {
-                    Debug.WriteLine("Cannot Load Parameters For " + property.Name);
-                    parameters = null;
-                }
-                catch (TypeLoadException)
-                {
-                    Debug.WriteLine("Cannot Load Parameters For " + property.Name);
-                    parameters = null;
-                }
-
-                members.Add(new ModuleMethod(
+                properties.Add(new ModuleProperty(
                     name,
                     description,
-                    parameters,
-                    null,
-                    null));
+                    dataType,
+                    canRead,
+                    canWrite));
             }
 
-            return members;
+            return properties;
         }
 
         /// <summary>
-        /// AddMethodsToCollection takes in an ObservableCollection of ModuleMethod type and a
-        /// Type in order to get all methods from that Type and add them to the collection.
+        /// AddMethodsToCollection gets all methods from the passed in Type.
         /// </summary>
-        /// <param name="members">An ObservableCollection to append members to.</param>
-        /// <param name="type">The Type where the members are coming from.</param>
-        /// <returns>The original ObservableCollection with appened members from type.</returns>
-        private ObservableCollection<ModuleMethod> AddMethodsToCollection(
-            ObservableCollection<ModuleMethod> members,
-            Type type)
+        /// <param name="type">The Type where the methods are coming from.</param>
+        /// <returns>An ObservableCollection of ModuleMethod objects.</returns>
+        private ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type)
         {
+            ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
             string lastMethodName = string.Empty;
             int methodIndex = 0;
 
@@ -268,7 +234,8 @@
 
                 lastMethodName = name;
 
-                string description = GetMethodDescription(method, methodIndex);
+                string description =
+                    DescriptionRetriever.GetMethodDescription(method, methodIndex);
 
                 ParameterInfo[] paramInfo;
                 try
@@ -291,7 +258,8 @@
                     paramInfo = null;
                 }
 
-                ObservableCollection<MemberParameter> parameters = GetParametersFromList(paramInfo, methodIndex);
+                ObservableCollection<MemberParameter> parameters =
+                    DescriptionRetriever.GetParametersFromList(paramInfo, methodIndex);
 
                 string returnType;
                 try
@@ -314,9 +282,10 @@
                     returnType = string.Empty;
                 }
 
-                string returnDescription = GetMemberReturnDescription(method);
+                string returnDescription =
+                    DescriptionRetriever.GetMemberReturnDescription(method);
 
-                members.Add(new ModuleMethod(
+                methods.Add(new ModuleMethod(
                     name,
                     description,
                     parameters,
@@ -324,254 +293,7 @@
                     returnDescription));
             }
 
-            return members;
-        }
-
-        /// <summary>
-        /// GetParametersFromList will return an ObservableCollection of MemberParameter
-        /// type from a list of ParameterInfo type.
-        /// </summary>
-        /// <param name="paramList">A list of ParameterInfo type.</param>
-        /// <param name="memberIndex">Integer index of member.</param>
-        /// <returns>An ObservableCollection of MemberParameter type.</returns>
-        private ObservableCollection<MemberParameter> GetParametersFromList(ParameterInfo[] paramList, int memberIndex = 0)
-        {
-            ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
-
-            if (paramList == null || paramList.Length == 0)
-            {
-                parameters.Add(new MemberParameter());
-            }
-            else
-            {
-                foreach (var p in paramList)
-                {
-                    string pType = p.ParameterType.Name.ToString();
-                    string pName = p.Name;
-                    string pDescription =
-                        GetMemberParameterDescription(p.Member, Array.IndexOf(paramList, p), memberIndex);
-
-                    parameters.Add(new MemberParameter(
-                        pType,
-                        pName,
-                        pDescription));
-                }
-            }
-
-            return parameters;
-        }
-
-        /// <summary>
-        /// GetModuleDescription returns a clean string from the inner xml
-        /// of the class description of the Type.
-        /// </summary>
-        /// <param name="type">Type to get the string from.</param>
-        /// <returns>String representation of the class description.</returns>
-        private string GetModuleDescription(Type type)
-        {
-            XmlNode xmlNode = GetModuleXmlNode(type);
-
-            if (xmlNode == null)
-            {
-                return null;
-            }
-
-            return GetXmlNodeString(xmlNode, "summary");
-        }
-
-        /// <summary>
-        /// GetMethodDescription returns a clean string from the inner xml
-        /// of the method description of the member.
-        /// </summary>
-        /// <param name="member">MemberInfo to get the string from.</param>
-        /// <param name="index">Index used for methods/constructors with same name.</param>
-        /// <returns>String representation of the method description.</returns>
-        private string GetMethodDescription(MemberInfo member, int index = 0)
-        {
-            XmlNode xmlNode = GetMemberXmlNode(member, index);
-
-            if (xmlNode == null)
-            {
-                return null;
-            }
-
-            return GetXmlNodeString(xmlNode, "summary");
-        }
-
-        /// <summary>
-        /// GetProperyDescription will return a string from the inner xml of
-        /// the property desctiption.
-        /// </summary>
-        /// <param name="property">PropertyInfo to get the description from.</param>
-        /// <returns>String representation of the property description.</returns>
-        private string GetPropertyDescription(PropertyInfo property)
-        {
-            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
-            XmlDocument xmlDoc = new XmlDocument();
-
-            try
-            {
-                xmlDoc.Load(xmlPath);
-            }
-            catch (FileNotFoundException)
-            {
-                Debug.WriteLine("Cannot Load Property Description For " + property.Name);
-                return null;
-            }
-            catch (XmlException)
-            {
-                Debug.WriteLine("Cannot Load Property Description For " + property.Name);
-                return null;
-            }
-
-            string path = @"P:" + property.DeclaringType.FullName + @"." + property.Name;
-
-            XmlNode xmlNode = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
-
-            if (xmlNode == null)
-            {
-                return null;
-            }
-
-            return GetXmlNodeString(xmlNode, "summary");
-        }
-
-        /// <summary>
-        /// GetMemberParameterDescription returns a clean string from the inner xml
-        /// of the parameter description of the member.
-        /// </summary>
-        /// <param name="member">MemberInfo to get the string from.</param>
-        /// <param name="parameterIndex">Integer index of parameter.</param>
-        /// <param name="memberIndex">Integer index of member.</param>
-        /// <returns>String representation of the parameter description.</returns>
-        private string GetMemberParameterDescription(MemberInfo member, int parameterIndex, int memberIndex = 0)
-        {
-            XmlNode xmlNode = GetMemberXmlNode(member, memberIndex);
-
-            if (xmlNode == null)
-            {
-                return null;
-            }
-
-            return GetXmlNodeString(xmlNode, "param", parameterIndex);
-        }
-
-        /// <summary>
-        /// GetMemberReturnDescription returns a clean string from the inner xml
-        /// of the return description of the member.
-        /// </summary>
-        /// <param name="member">MemberInfo to get the string from.</param>
-        /// <returns>String representation of the return description.</returns>
-        private string GetMemberReturnDescription(MemberInfo member)
-        {
-            XmlNode xmlNode = GetMemberXmlNode(member);
-
-            if (xmlNode == null)
-            {
-                return null;
-            }
-
-            return GetXmlNodeString(xmlNode, "returns");
-        }
-
-        /// <summary>
-        /// GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
-        /// </summary>
-        /// <param name="member">The MemberInfo to get the XmlNode from.</param>
-        /// <param name="nodeIndex">The specified node index to handle members with the same name.</param>
-        /// <returns>XmlNode.</returns>
-        private XmlNode GetMemberXmlNode(MemberInfo member, int nodeIndex = 0)
-        {
-            // Get the xml document from the file path.
-            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
-            XmlDocument xmlDoc = new XmlDocument();
-
-            try
-            {
-                xmlDoc.Load(xmlPath);
-            }
-            catch (FileNotFoundException)
-            {
-                Debug.WriteLine("Cannot Load Member XML For " + member.Name);
-                return null;
-            }
-            catch (XmlException)
-            {
-                Debug.WriteLine("Cannot Load Member XML For " + member.Name);
-                return null;
-            }
-
-            string path;
-            if (member.Name == ".ctor")
-            {
-                path = @"M:" + member.DeclaringType.FullName + @".#" + member.Name.Substring(1);
-            }
-            else
-            {
-                path = @"M:" + member.DeclaringType.FullName + @"." + member.Name;
-            }
-
-            XmlNodeList xmlNodeList = xmlDoc.SelectNodes(@"//member[starts-with(@name, '" + path + @"')]");
-
-            return xmlNodeList[nodeIndex];
-        }
-
-        /// <summary>
-        /// GetModuleXmlNode returns an XmlNode of the specified Type.
-        /// </summary>
-        /// <param name="type">The Type to get the XmlNode from.</param>
-        /// <returns>XmlNode.</returns>
-        private XmlNode GetModuleXmlNode(Type type)
-        {
-            string xmlPath = DllFileName.Substring(0, DllFileName.LastIndexOf(".")) + @".XML";
-            XmlDocument xmlDoc = new XmlDocument();
-
-            try
-            {
-                xmlDoc.Load(xmlPath);
-            }
-            catch (FileNotFoundException)
-            {
-                Debug.WriteLine("Cannot Load Module XML For " + type.Name);
-                return null;
-            }
-
-            string path = @"T:" + type.FullName;
-            XmlNode xmlNode = xmlDoc.SelectSingleNode(@"//member[starts-with(@name, '" + path + @"')]");
-
-            return xmlNode;
-        }
-
-        /// <summary>
-        /// GetXmlNodeString will take an XmlNode, string xml tag, and an index and return the inner xml.
-        /// </summary>
-        /// <param name="xmlNode">The member XmlNode.</param>
-        /// <param name="xmlTag">This is the string of the xml tag.</param>
-        /// <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
-        /// <returns>InnerXml of the XmlNode.</returns>
-        private string GetXmlNodeString(XmlNode xmlNode, string xmlTag, int index = 0)
-        {
-            string s = null;
-
-            XmlNodeList xmlNodeList = xmlNode.SelectNodes(xmlTag);
-            if (xmlNodeList[index] == null)
-            {
-                return s;
-            }
-
-            s = xmlNodeList[index].InnerXml;
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
-
-            s = Regex.Replace(s, @"\s+", " ");
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
-
-            return s.Trim();
+            return methods;
         }
     }
 }

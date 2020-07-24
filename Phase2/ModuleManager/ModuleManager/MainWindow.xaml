@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
+        xmlns:interface="clr-namespace:ModuleManager.Interfaces"
+        xmlns:data="clr-namespace:ModuleManager.Classes"
         mc:Ignorable="d"
         Title="Module Manager" Height="450" Width="800" Background="LightGray">
 
@@ -76,31 +78,11 @@
                                TextAlignment="Center"
                                Background="LightSteelBlue"/>
                 </Border>
-                
-                <!-- Module Template -->
+
+                <!-- Module Template ItemTemplateSelector="{StaticResource myTreeViewItemSelector}"-->
                 <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
                           SelectedItemChanged="TreeView_SelectedItemChanged"
-                          Width="210"
-                          Height="275"
-                          BorderThickness="1"
-                          BorderBrush="Black">
-
-                    <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Methods}">
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
-                                <TextBlock Text="{Binding Path=Name}"/>
-                            </StackPanel>
-
-                            <!-- Method Template -->
-                            <HierarchicalDataTemplate.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Name}" />
-                                </DataTemplate>
-                            </HierarchicalDataTemplate.ItemTemplate>
-
-                        </HierarchicalDataTemplate>
-                    </TreeView.ItemTemplate>
+                          ItemTemplateSelector="{StaticResource myTreeViewItemSelector}">
 
                 </TreeView>
             </StackPanel>

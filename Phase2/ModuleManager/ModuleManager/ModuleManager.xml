@@ -60,6 +60,19 @@
             <param name="container">Container.</param>
             <returns>A DataTemplate depending on the object passed in.</returns>
         </member>
+        <member name="T:ModuleManager.Behavoirs.TreeViewItemSelector">
+            <summary>
+            Used to selected a DataTemplate in the view.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Behavoirs.TreeViewItemSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Used to select the DataTemplate used in the view.
+            </summary>
+            <param name="item">Object.</param>
+            <param name="container">Container.</param>
+            <returns>A DataTemplate depending on the object passed in.</returns>
+        </member>
         <member name="T:ModuleManager.Classes.MemberParameter">
             <summary>
             An object designed to hold the type and name of a member's parameter.
@@ -111,13 +124,15 @@
             initializes properties to empty strings/empty collections.
             </summary>
         </member>
-        <member name="M:ModuleManager.Classes.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod})">
+        <member name="M:ModuleManager.Classes.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class specifying the name, description and methods.
             </summary>
             <param name="name">Module name.</param>
             <param name="description">Module description.</param>
-            <param name="members">Module methods.</param>
+            <param name="constructors">Module constructors.</param>
+            <param name="properties">Module properties.</param>
+            <param name="methods">Module methods.</param>
         </member>
         <member name="M:ModuleManager.Classes.Module.#ctor(System.Type,System.String)">
             <summary>
@@ -229,14 +244,14 @@
             </summary>
             <param name="moduleDirectory">File name of the .dll file.</param>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.DllFileName">
-            <summary>
-            Gets or sets DllFileName is the directory path of the .dll files.
-            </summary>
-        </member>
         <member name="P:ModuleManager.Classes.ModuleInfoRetriever.DllDirectory">
             <summary>
             Gets or sets DllDirectory is the directory path of the .dll files.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.DescriptionRetriever">
+            <summary>
+            Gets or sets all xml descriptions.
             </summary>
         </member>
         <member name="P:ModuleManager.Classes.ModuleInfoRetriever.LoadedAssemblies">
@@ -252,108 +267,26 @@
             </summary>
             <returns>Returns an collection of Module objects.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddConstructorsToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod},System.Type)">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddConstructorsToCollection(System.Type)">
             <summary>
-            AddConstructorsToCollection takes in an ObservableCollection of ModuleMethod type and a
-            Type in order to get all constructors from that Type and add them to the collection.
+            AddConstructorsToCollection get all constructors from the passed in Type.
             </summary>
-            <param name="members">An ObservableCollection to append members to.</param>
             <param name="type">The Type where the members are coming from.</param>
-            <returns>The original ObservableCollection with appened members from type.</returns>
+            <returns>An ObservableCollection of ModuleConstructor objects.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddPropertiesToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod},System.Type)">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddPropertiesToCollection(System.Type)">
             <summary>
-            AddPropertiesToCollection takes in an ObservableCollection of ModuleMethod type and a
-            Type in order to get all properties from that Type and add them to the collection.
+            AddPropertiesToCollection gets all properties from the passed in Type.
             </summary>
-            <param name="members">An ObservableCollection to append members to.</param>
             <param name="type">The Type where the members are coming from.</param>
-            <returns>The original ObservableCollection with appened members from type.</returns>
+            <returns>An ObservableCollection of ModulePropery objects.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddMethodsToCollection(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod},System.Type)">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddMethodsToCollection(System.Type)">
             <summary>
-            AddMethodsToCollection takes in an ObservableCollection of ModuleMethod type and a
-            Type in order to get all methods from that Type and add them to the collection.
+            AddMethodsToCollection gets all methods from the passed in Type.
             </summary>
-            <param name="members">An ObservableCollection to append members to.</param>
-            <param name="type">The Type where the members are coming from.</param>
-            <returns>The original ObservableCollection with appened members from type.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetParametersFromList(System.Reflection.ParameterInfo[],System.Int32)">
-            <summary>
-            GetParametersFromList will return an ObservableCollection of MemberParameter
-            type from a list of ParameterInfo type.
-            </summary>
-            <param name="paramList">A list of ParameterInfo type.</param>
-            <param name="memberIndex">Integer index of member.</param>
-            <returns>An ObservableCollection of MemberParameter type.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetModuleDescription(System.Type)">
-            <summary>
-            GetModuleDescription returns a clean string from the inner xml
-            of the class description of the Type.
-            </summary>
-            <param name="type">Type to get the string from.</param>
-            <returns>String representation of the class description.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetMethodDescription(System.Reflection.MemberInfo,System.Int32)">
-            <summary>
-            GetMethodDescription returns a clean string from the inner xml
-            of the method description of the member.
-            </summary>
-            <param name="member">MemberInfo to get the string from.</param>
-            <param name="index">Index used for methods/constructors with same name.</param>
-            <returns>String representation of the method description.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetPropertyDescription(System.Reflection.PropertyInfo)">
-            <summary>
-            GetProperyDescription will return a string from the inner xml of
-            the property desctiption.
-            </summary>
-            <param name="property">PropertyInfo to get the description from.</param>
-            <returns>String representation of the property description.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetMemberParameterDescription(System.Reflection.MemberInfo,System.Int32,System.Int32)">
-            <summary>
-            GetMemberParameterDescription returns a clean string from the inner xml
-            of the parameter description of the member.
-            </summary>
-            <param name="member">MemberInfo to get the string from.</param>
-            <param name="parameterIndex">Integer index of parameter.</param>
-            <param name="memberIndex">Integer index of member.</param>
-            <returns>String representation of the parameter description.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetMemberReturnDescription(System.Reflection.MemberInfo)">
-            <summary>
-            GetMemberReturnDescription returns a clean string from the inner xml
-            of the return description of the member.
-            </summary>
-            <param name="member">MemberInfo to get the string from.</param>
-            <returns>String representation of the return description.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetMemberXmlNode(System.Reflection.MemberInfo,System.Int32)">
-            <summary>
-            GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
-            </summary>
-            <param name="member">The MemberInfo to get the XmlNode from.</param>
-            <param name="nodeIndex">The specified node index to handle members with the same name.</param>
-            <returns>XmlNode.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetModuleXmlNode(System.Type)">
-            <summary>
-            GetModuleXmlNode returns an XmlNode of the specified Type.
-            </summary>
-            <param name="type">The Type to get the XmlNode from.</param>
-            <returns>XmlNode.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetXmlNodeString(System.Xml.XmlNode,System.String,System.Int32)">
-            <summary>
-            GetXmlNodeString will take an XmlNode, string xml tag, and an index and return the inner xml.
-            </summary>
-            <param name="xmlNode">The member XmlNode.</param>
-            <param name="xmlTag">This is the string of the xml tag.</param>
-            <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
-            <returns>InnerXml of the XmlNode.</returns>
+            <param name="type">The Type where the methods are coming from.</param>
+            <returns>An ObservableCollection of ModuleMethod objects.</returns>
         </member>
         <member name="T:ModuleManager.Classes.ModuleMethod">
             <summary>
@@ -503,6 +436,140 @@
             </summary>
             <param name="parameter">Object.</param>
         </member>
+        <member name="T:ModuleManager.Classes.XmlDescriptionRetriever">
+            <summary>
+            XmlDescriptionRetriever is used to get text form an xml file.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.XmlDescriptionRetriever"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.XmlDescriptionRetriever"/> class.
+            </summary>
+            <param name="dllFilePath">The path to the dll file.</param>
+        </member>
+        <member name="P:ModuleManager.Classes.XmlDescriptionRetriever.DllFilePath">
+            <summary>
+            Gets or sets the file path to the dll file.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetModuleDescription(System.Type)">
+            <summary>
+            GetModuleDescription returns a clean string from the inner xml
+            of the class description of the Type.
+            </summary>
+            <param name="type">Type to get the string from.</param>
+            <returns>String representation of the class description.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMethodDescription(System.Reflection.MethodInfo,System.Int32)">
+            <summary>
+            GetMethodDescription returns a clean string from the inner xml
+            of the method description of the member.
+            </summary>
+            <param name="method">MethodInfo to get the string from.</param>
+            <param name="index">Index used for methods/constructors with same name.</param>
+            <returns>String representation of the method description.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetConstructorDescription(System.Reflection.ConstructorInfo,System.Int32)">
+            <summary>
+            GetConstructorDescription returns a clean string from the inner xml
+            of the constructor description of the member.
+            </summary>
+            <param name="constructor">ConstructorInfo to get the string from.</param>
+            <param name="index">Index used for methods/constructors with same name.</param>
+            <returns>String representation of the method description.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetPropertyDescription(System.Reflection.PropertyInfo)">
+            <summary>
+            GetProperyDescription will return a string from the inner xml of
+            the property desctiption.
+            </summary>
+            <param name="property">PropertyInfo to get the description from.</param>
+            <returns>String representation of the property description.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberParameterDescription(System.Reflection.MemberInfo,System.Int32,System.Int32)">
+            <summary>
+            GetMemberParameterDescription returns a clean string from the inner xml
+            of the parameter description of the member.
+            </summary>
+            <param name="member">MemberInfo to get the string from.</param>
+            <param name="parameterIndex">Integer index of parameter.</param>
+            <param name="memberIndex">Integer index of member.</param>
+            <returns>String representation of the parameter description.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetParametersFromList(System.Reflection.ParameterInfo[],System.Int32)">
+            <summary>
+            GetParametersFromList will return an ObservableCollection of MemberParameter
+            type from a list of ParameterInfo type.
+            </summary>
+            <param name="paramList">A list of ParameterInfo type.</param>
+            <param name="memberIndex">Integer index of member.</param>
+            <returns>An ObservableCollection of MemberParameter type.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberReturnDescription(System.Reflection.MemberInfo)">
+            <summary>
+            GetMemberReturnDescription returns a clean string from the inner xml
+            of the return description of the member.
+            </summary>
+            <param name="member">MemberInfo to get the string from.</param>
+            <returns>String representation of the return description.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberXmlNode(System.Reflection.MemberInfo,System.Int32)">
+            <summary>
+            GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
+            </summary>
+            <param name="member">The MemberInfo to get the XmlNode from.</param>
+            <param name="nodeIndex">The specified node index to handle members with the same name.</param>
+            <returns>XmlNode.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetModuleXmlNode(System.Type)">
+            <summary>
+            GetModuleXmlNode returns an XmlNode of the specified Type.
+            </summary>
+            <param name="type">The Type to get the XmlNode from.</param>
+            <returns>XmlNode.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetPropertyXmlNode(System.Reflection.PropertyInfo)">
+            <summary>
+            GetPropertyXmlNode returns an XmlNode of the specified property.
+            </summary>
+            <param name="property">The property to get the XmlNode from.</param>
+            <returns>XmlNode.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetXmlNodeString(System.Xml.XmlNode,System.String,System.Int32)">
+            <summary>
+            GetXmlNodeString will take an XmlNode, string xml tag, and an index and return the inner xml.
+            </summary>
+            <param name="xmlNode">The member XmlNode.</param>
+            <param name="xmlTag">This is the string of the xml tag.</param>
+            <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
+            <returns>InnerXml of the XmlNode.</returns>
+        </member>
+        <member name="T:ModuleManager.Interfaces.IModuleMember">
+            <summary>
+            An interface for module members (constructors, properties, methods).
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Interfaces.IModuleMember.Name">
+            <summary>
+            Gets or sets the name of the member.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Interfaces.IModuleMember.Description">
+            <summary>
+            Gets or sets the Description of the member.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Interfaces.IModuleMember.ToString">
+            <summary>
+            Override the ToString method.
+            </summary>
+            <returns>String object.</returns>
+        </member>
         <member name="T:ModuleManager.MainWindow">
             <summary>
             Interaction logic for MainWindow.xaml.
@@ -608,6 +675,36 @@
             LoadConfig will load an ObservableCollection of type Module from an xml file
             </summary>
             <returns>ObservableCollection of type Module.</returns>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
         </member>
     </members>
 </doc>
