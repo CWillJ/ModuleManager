@@ -9,6 +9,7 @@
     public class Class2
     {
         private int _num;
+        private string _someString;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Class2"/> class. First constructor.
@@ -16,6 +17,7 @@
         public Class2()
         {
             _num = 21;
+            _someString = string.Empty;
             Method3();
             Method1("This is a another fake class");
         }
@@ -27,6 +29,7 @@
         public Class2(int constructorParameter)
         {
             _num = constructorParameter;
+            _someString = string.Empty;
             Method3();
             Method1("This is a another fake class");
         }
@@ -38,6 +41,14 @@
         {
             get { return _num; }
             set { _num = value; }
+        }
+
+        /// <summary>
+        /// Gets _someString. Only gets!
+        /// </summary>
+        public string SomeString
+        {
+            get { return _someString; }
         }
 
         /// <summary>

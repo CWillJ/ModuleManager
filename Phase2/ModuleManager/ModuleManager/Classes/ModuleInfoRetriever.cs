@@ -180,11 +180,10 @@
                                       | BindingFlags.DeclaredOnly))
             {
                 string name = property.Name;
-                string description =
-                    DescriptionRetriever.GetPropertyDescription(property);
-                string dataType = string.Empty;
-                bool canRead = false;
-                bool canWrite = false;
+                string description = DescriptionRetriever.GetPropertyDescription(property);
+                string dataType = property.PropertyType.ToString();
+                bool canRead = property.CanRead;
+                bool canWrite = property.CanWrite;
 
                 properties.Add(new ModuleProperty(
                     name,
