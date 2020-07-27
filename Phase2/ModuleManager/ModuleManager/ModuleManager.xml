@@ -166,6 +166,11 @@
             Gets or sets the description of the module.
             </summary>
         </member>
+        <member name="P:ModuleManager.Classes.Module.Members">
+            <summary>
+            Gets or sets all of the module members.
+            </summary>
+        </member>
         <member name="P:ModuleManager.Classes.Module.Constructors">
             <summary>
             Gets or sets the constructors in the current module.
@@ -211,16 +216,6 @@
             <param name="className">Class name.</param>
             <param name="description">Constructor description.</param>
             <param name="parameters">Constructor parameters.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleConstructor.Name">
-            <summary>
-            Gets or sets the name of the member.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleConstructor.Description">
-            <summary>
-            Gets or sets the description of the member.
-            </summary>
         </member>
         <member name="P:ModuleManager.Classes.ModuleConstructor.Parameters">
             <summary>
@@ -310,16 +305,6 @@
             <param name="returnType">Member return type.</param>
             <param name="returnDescription">Member return description.</param>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleMethod.Name">
-            <summary>
-            Gets or sets the name of the member.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleMethod.Description">
-            <summary>
-            Gets or sets the description of the member.
-            </summary>
-        </member>
         <member name="P:ModuleManager.Classes.ModuleMethod.Parameters">
             <summary>
             Gets or sets the member parameters.
@@ -363,16 +348,6 @@
             <param name="dataType">Property data type.</param>
             <param name="canRead">Property has a 'get' accessor.</param>
             <param name="canWrite">Property has a 'set' accessor.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleProperty.Name">
-            <summary>
-            Gets or sets the name of the property.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleProperty.Description">
-            <summary>
-            Gets or sets the description of the property.
-            </summary>
         </member>
         <member name="P:ModuleManager.Classes.ModuleProperty.DataType">
             <summary>
@@ -549,26 +524,25 @@
             <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
             <returns>InnerXml of the XmlNode.</returns>
         </member>
-        <member name="T:ModuleManager.Interfaces.IModuleMember">
+        <member name="T:ModuleManager.ModuleMember">
             <summary>
-            An interface for module members (constructors, properties, methods).
+            The base class for ModuleConstructor, ModuleProperty, and ModuleMethod.
             </summary>
         </member>
-        <member name="P:ModuleManager.Interfaces.IModuleMember.Name">
+        <member name="M:ModuleManager.ModuleMember.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleMember"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleMember.Name">
             <summary>
             Gets or sets the name of the member.
             </summary>
         </member>
-        <member name="P:ModuleManager.Interfaces.IModuleMember.Description">
+        <member name="P:ModuleManager.ModuleMember.Description">
             <summary>
-            Gets or sets the Description of the member.
+            Gets or sets the description of the member.
             </summary>
-        </member>
-        <member name="M:ModuleManager.Interfaces.IModuleMember.ToString">
-            <summary>
-            Override the ToString method.
-            </summary>
-            <returns>String object.</returns>
         </member>
         <member name="T:ModuleManager.MainWindow">
             <summary>
@@ -675,36 +649,6 @@
             LoadConfig will load an ObservableCollection of type Module from an xml file
             </summary>
             <returns>ObservableCollection of type Module.</returns>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
-            </summary>
         </member>
     </members>
 </doc>

@@ -1,11 +1,9 @@
 ﻿namespace ModuleManager.Classes
 {
-    using ModuleManager.Interfaces;
-
     /// <summary>
     /// ModuleProperty object holds the name, description, data type and accessor level of a property.
     /// </summary>
-    public class ModuleProperty : IModuleMember
+    public class ModuleProperty : ModuleMember
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleProperty"/> class. Default constructor.
@@ -36,16 +34,6 @@
             CanRead = canRead;
             CanWrite = canWrite;
         }
-
-        /// <summary>
-        /// Gets or sets the name of the property.
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description of the property.
-        /// </summary>
-        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the property.

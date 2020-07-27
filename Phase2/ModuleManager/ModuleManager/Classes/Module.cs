@@ -3,7 +3,6 @@
     using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using ModuleManager.Interfaces;
 
     /// <summary>
     /// Module object holds the name and description of a module.
@@ -14,6 +13,7 @@
         private bool _isEnabled;
         private string _name;
         private string _description;
+        private ObservableCollection<ModuleMember> _members;
         private ObservableCollection<ModuleConstructor> _constructors;
         private ObservableCollection<ModuleProperty> _properties;
         private ObservableCollection<ModuleMethod> _methods;
@@ -28,6 +28,7 @@
             _isEnabled = false;
             _name = string.Empty;
             _description = string.Empty;
+            _members = new ObservableCollection<ModuleMember>();
             _constructors = new ObservableCollection<ModuleConstructor>();
             _properties = new ObservableCollection<ModuleProperty>();
             _methods = new ObservableCollection<ModuleMethod>();
@@ -52,9 +53,27 @@
             _isEnabled = false;
             _name = name;
             _description = description;
+            _members = new ObservableCollection<ModuleMember>();
+
             _constructors = constructors;
             _properties = properties;
             _methods = methods;
+
+            foreach (var constructor in _constructors)
+            {
+                _members.Add((ModuleMember)constructor);
+            }
+
+            foreach (var property in _properties)
+            {
+                _members.Add((ModuleMember)property);
+            }
+
+            foreach (var method in _methods)
+            {
+                _members.Add((ModuleMember)method);
+            }
+
             RaisePropertyChanged("Modules");
         }
 
@@ -155,6 +174,15 @@
                     RaisePropertyChanged("Description");
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets or sets all of the module members.
+        /// </summary>
+        public ObservableCollection<ModuleMember> Members
+        {
+            get { return _members; }
+            set { _members = value; }
         }
 
         /// <summary>
