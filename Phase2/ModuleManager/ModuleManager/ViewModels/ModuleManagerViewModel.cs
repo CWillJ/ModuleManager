@@ -19,7 +19,7 @@
         private ObservableCollection<Module> _modules;
         private double _currentProgress;
         private string _progressBarText;
-        private bool _isVisible;
+        private bool _progressBarIsVisible;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
@@ -29,7 +29,7 @@
             Modules = new ObservableCollection<Module>();
             _progressBarText = string.Empty;
             _currentProgress = 0;
-            _isVisible = false;
+            _progressBarIsVisible = false;
 
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
@@ -49,7 +49,7 @@
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Gets or sets a value indicating whether SaveFileDialog is used on save settings
+        /// Gets or sets a value indicating whether SaveFileDialog is used on save settings.
         /// </summary>
         public bool UseSaveFileDialog { get; set; }
 
@@ -116,12 +116,12 @@
         {
             get
             {
-                return _isVisible;
+                return _progressBarIsVisible;
             }
 
             set
             {
-                _isVisible = value;
+                _progressBarIsVisible = value;
                 RaisePropertyChanged("ProgressBarIsVisible");
             }
         }
@@ -222,13 +222,13 @@
 
                 if (saveFile == string.Empty)
                 {
-                    System.Windows.MessageBox.Show(@"Invalid File Path");
+                    MessageBox.Show(@"Invalid File Path");
                     return;
                 }
             }
             else
             {
-                System.Windows.MessageBox.Show(@"Config File Saved at: " + saveFile);
+                MessageBox.Show(@"Config File Saved at: " + saveFile);
             }
 
             using StreamWriter wr = new StreamWriter(saveFile);
@@ -237,7 +237,7 @@
         }
 
         /// <summary>
-        /// LoadConfig will load an ObservableCollection of type Module from an xml file
+        /// LoadConfig will load an ObservableCollection of type Module from an xml file.
         /// </summary>
         /// <returns>ObservableCollection of type Module.</returns>
         private ObservableCollection<Module> LoadConfig()

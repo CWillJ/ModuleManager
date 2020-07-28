@@ -11,7 +11,7 @@
     public class BoolToVisibilityConverter : IValueConverter
     {
         /// <summary>
-        /// Converts Visibility to bool.
+        /// Converts bool to Visibility.
         /// </summary>
         /// <param name="value">Object.</param>
         /// <param name="targetType">Target type.</param>
@@ -36,7 +36,7 @@
         }
 
         /// <summary>
-        /// Converts bool to Visibility object
+        /// Converts Visibility to bool.
         /// </summary>
         /// <param name="value">Object to convert.</param>
         /// <param name="targetType">Target type.</param>

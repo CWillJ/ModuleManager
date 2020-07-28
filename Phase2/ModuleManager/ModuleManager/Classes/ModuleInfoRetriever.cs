@@ -45,7 +45,6 @@
         /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
-        /// From .dll.
         /// </summary>
         /// <returns>Returns an collection of Module objects.</returns>
         public ObservableCollection<Module> GetModules()
@@ -111,8 +110,6 @@
             return new ObservableCollection<Module>(modules.ToList().OrderBy(mod => mod.Name));
         }
 
-        // Can be moved to the constructor of Module.
-        // Will need to include the dll file...
         private Module GetSingleModule(Type type)
         {
             // Don't load non-public or interface classes

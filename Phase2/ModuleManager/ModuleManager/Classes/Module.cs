@@ -13,6 +13,7 @@
         private bool _isEnabled;
         private string _name;
         private string _description;
+
         private ObservableCollection<ModuleMember> _members;
         private ObservableCollection<ModuleConstructor> _constructors;
         private ObservableCollection<ModuleProperty> _properties;
@@ -28,6 +29,7 @@
             _isEnabled = false;
             _name = string.Empty;
             _description = string.Empty;
+
             _members = new ObservableCollection<ModuleMember>();
             _constructors = new ObservableCollection<ModuleConstructor>();
             _properties = new ObservableCollection<ModuleProperty>();
@@ -77,8 +79,6 @@
             RaisePropertyChanged("Modules");
         }
 
-        // TODO I may have to pass in a dll file name becuase I use that to get the descriptions of everything.
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Module"/> class specifing a Type.
         /// </summary>
@@ -89,7 +89,7 @@
             _isSelected = false;
             _isEnabled = false;
             _name = type.Name;
-            _description = dllFileName; // TODO starts here
+            _description = dllFileName;
             _methods = new ObservableCollection<ModuleMethod>();
             RaisePropertyChanged("Modules");
         }

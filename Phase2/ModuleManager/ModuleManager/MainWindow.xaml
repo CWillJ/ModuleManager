@@ -79,6 +79,7 @@
 
                 <!-- TreeView of Module Objects -->
                 <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
+                          SelectedValuePath="Name"
                           SelectedItemChanged="TreeView_SelectedItemChanged"
                           Width="210"
                           Height="275"

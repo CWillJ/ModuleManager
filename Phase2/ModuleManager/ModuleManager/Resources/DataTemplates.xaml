@@ -5,7 +5,6 @@
     
     <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <behaviors:TemplateSelector x:Key="myDataTemplateSelector"/>
-    <behaviors:TreeViewItemSelector x:Key="myTreeViewItemSelector"/>
 
     <!-- Member Parameter Data Template -->
     <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">

@@ -29,7 +29,7 @@
         </member>
         <member name="M:ModuleManager.Behavoirs.BoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            Converts Visibility to bool.
+            Converts bool to Visibility.
             </summary>
             <param name="value">Object.</param>
             <param name="targetType">Target type.</param>
@@ -39,7 +39,7 @@
         </member>
         <member name="M:ModuleManager.Behavoirs.BoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            Converts bool to Visibility object
+            Converts Visibility to bool.
             </summary>
             <param name="value">Object to convert.</param>
             <param name="targetType">Target type.</param>
@@ -53,19 +53,6 @@
             </summary>
         </member>
         <member name="M:ModuleManager.Behavoirs.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
-            <summary>
-            Used to select the DataTemplate used in the view.
-            </summary>
-            <param name="item">Object.</param>
-            <param name="container">Container.</param>
-            <returns>A DataTemplate depending on the object passed in.</returns>
-        </member>
-        <member name="T:ModuleManager.Behavoirs.TreeViewItemSelector">
-            <summary>
-            Used to selected a DataTemplate in the view.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Behavoirs.TreeViewItemSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
             <summary>
             Used to select the DataTemplate used in the view.
             </summary>
@@ -258,7 +245,6 @@
             <summary>
             GetModules will create an ObservableCollection of type Module to organize
             the information from the dll file and its related .xml file.
-            From .dll.
             </summary>
             <returns>Returns an collection of Module objects.</returns>
         </member>
@@ -442,8 +428,8 @@
         </member>
         <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMethodDescription(System.Reflection.MethodInfo,System.Int32)">
             <summary>
-            GetMethodDescription returns a clean string from the inner xml
-            of the method description of the member.
+            GetMethodDescription returns a string from the inner xml of the method
+            description of the member.
             </summary>
             <param name="method">MethodInfo to get the string from.</param>
             <param name="index">Index used for methods/constructors with same name.</param>
@@ -451,8 +437,8 @@
         </member>
         <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetConstructorDescription(System.Reflection.ConstructorInfo,System.Int32)">
             <summary>
-            GetConstructorDescription returns a clean string from the inner xml
-            of the constructor description of the member.
+            GetConstructorDescription returns a string from the inner xml of the
+            constructor description of the member.
             </summary>
             <param name="constructor">ConstructorInfo to get the string from.</param>
             <param name="index">Index used for methods/constructors with same name.</param>
@@ -468,8 +454,8 @@
         </member>
         <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberParameterDescription(System.Reflection.MemberInfo,System.Int32,System.Int32)">
             <summary>
-            GetMemberParameterDescription returns a clean string from the inner xml
-            of the parameter description of the member.
+            GetMemberParameterDescription returns a string from the inner xml of the
+            parameter description of the member.
             </summary>
             <param name="member">MemberInfo to get the string from.</param>
             <param name="parameterIndex">Integer index of parameter.</param>
@@ -487,8 +473,8 @@
         </member>
         <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberReturnDescription(System.Reflection.MemberInfo)">
             <summary>
-            GetMemberReturnDescription returns a clean string from the inner xml
-            of the return description of the member.
+            GetMemberReturnDescription returns a string from the inner xml of the
+            return description of the member.
             </summary>
             <param name="member">MemberInfo to get the string from.</param>
             <returns>String representation of the return description.</returns>
@@ -586,7 +572,7 @@
         </member>
         <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.UseSaveFileDialog">
             <summary>
-            Gets or sets a value indicating whether SaveFileDialog is used on save settings
+            Gets or sets a value indicating whether SaveFileDialog is used on save settings.
             </summary>
         </member>
         <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.LoadModulesCommand">
@@ -646,39 +632,9 @@
         </member>
         <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.LoadConfig">
             <summary>
-            LoadConfig will load an ObservableCollection of type Module from an xml file
+            LoadConfig will load an ObservableCollection of type Module from an xml file.
             </summary>
             <returns>ObservableCollection of type Module.</returns>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
-            </summary>
         </member>
     </members>
 </doc>

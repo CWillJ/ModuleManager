@@ -60,8 +60,8 @@
         }
 
         /// <summary>
-        /// GetMethodDescription returns a clean string from the inner xml
-        /// of the method description of the member.
+        /// GetMethodDescription returns a string from the inner xml of the method
+        /// description of the member.
         /// </summary>
         /// <param name="method">MethodInfo to get the string from.</param>
         /// <param name="index">Index used for methods/constructors with same name.</param>
@@ -79,8 +79,8 @@
         }
 
         /// <summary>
-        /// GetConstructorDescription returns a clean string from the inner xml
-        /// of the constructor description of the member.
+        /// GetConstructorDescription returns a string from the inner xml of the
+        /// constructor description of the member.
         /// </summary>
         /// <param name="constructor">ConstructorInfo to get the string from.</param>
         /// <param name="index">Index used for methods/constructors with same name.</param>
@@ -116,8 +116,8 @@
         }
 
         /// <summary>
-        /// GetMemberParameterDescription returns a clean string from the inner xml
-        /// of the parameter description of the member.
+        /// GetMemberParameterDescription returns a string from the inner xml of the
+        /// parameter description of the member.
         /// </summary>
         /// <param name="member">MemberInfo to get the string from.</param>
         /// <param name="parameterIndex">Integer index of parameter.</param>
@@ -170,8 +170,8 @@
         }
 
         /// <summary>
-        /// GetMemberReturnDescription returns a clean string from the inner xml
-        /// of the return description of the member.
+        /// GetMemberReturnDescription returns a string from the inner xml of the
+        /// return description of the member.
         /// </summary>
         /// <param name="member">MemberInfo to get the string from.</param>
         /// <returns>String representation of the return description.</returns>
@@ -195,7 +195,6 @@
         /// <returns>XmlNode.</returns>
         private XmlNode GetMemberXmlNode(MemberInfo member, int nodeIndex = 0)
         {
-            // Get the xml document from the file path.
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
 
