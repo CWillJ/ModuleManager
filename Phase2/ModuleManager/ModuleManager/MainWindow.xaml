@@ -50,12 +50,13 @@
                 FontWeight="Bold"
                 Background="IndianRed"/>
 
-            <Grid Visibility="{Binding Path=ProgressBarIsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+            <Grid Visibility="{Binding Path=ProgressBarIsVisible,
+                Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                   Width="300"
                   Height="30"
                   Margin="30,15,5,5">
                 <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
-                             IsIndeterminate="True" />
+                             IsIndeterminate="True"/>
 
                 <TextBlock Text="{Binding Path=ProgressBarText, Mode=OneWay}"
                            HorizontalAlignment="Center"
@@ -77,10 +78,9 @@
                                Background="LightSteelBlue"/>
                 </Border>
 
-                <!-- TreeView of Module Objects -->
+                <!-- TreeView of Module Objects SelectedItemChanged="TreeView_SelectedItemChanged"-->
                 <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
-                          SelectedValuePath="Name"
-                          SelectedItemChanged="TreeView_SelectedItemChanged"
+                          x:Name="myTreeView"
                           Width="210"
                           Height="275"
                           BorderThickness="1"
@@ -95,7 +95,7 @@
 
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Name}" />
+                                    <TextBlock Text="{Binding Path=Name}"/>
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
 
@@ -105,22 +105,44 @@
                 </TreeView>
             </StackPanel>
 
-            <!-- Description Template <ItemsControl x:Name="MemberText" ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>-->
+            <!-- Description -->
             <StackPanel Width="540">
-                <Border BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">
+                <Border BorderBrush="Black"
+                        BorderThickness="2"
+                        Margin="10,0,10,0">
                     <TextBlock TextAlignment="Center"
                                TextWrapping="Wrap"
                                FontWeight="Bold"
                                Text="Description"
-                               Background="LightSteelBlue" />
+                               Background="LightSteelBlue"/>
                 </Border>
 
-                <Border BorderBrush="Black" BorderThickness="1" Margin="10,0" Height="275" Background="White">
+                <Border BorderBrush="Black"
+                        BorderThickness="1"
+                        Margin="10,0"
+                        Height="275"
+                        Background="White">
                     <ScrollViewer Margin="10,5,0,0">
                         <ItemsControl x:Name="MemberText"
+                                      ItemsSource="{Binding ElementName=myTreeView, Path=SelectedItem}"
                                       ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
                     </ScrollViewer>
                 </Border>
+
+                <!-- This is how you get selected item from treeview
+                <Border BorderBrush="Black"
+                        BorderThickness="1"
+                        Margin="10,0"
+                        Height="75"
+                        Background="White">
+
+                    <StackPanel>
+                        <TextBlock Margin="10,0,0,0" 
+                                   Text="{Binding ElementName=myTreeView,
+                            Path=SelectedItem}"
+                                   Foreground="Blue"/>
+                    </StackPanel>
+                </Border> -->
             </StackPanel>
 
         </StackPanel>
