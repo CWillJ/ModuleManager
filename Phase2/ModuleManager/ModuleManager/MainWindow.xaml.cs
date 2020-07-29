@@ -15,18 +15,5 @@
         {
             InitializeComponent();
         }
-
-        //// /// <summary>
-        //// /// Bad bad bad.
-        //// /// </summary>
-        //// /// <param name="sender">Sender.</param>
-        //// /// <param name="e">e.</param>
-        //// private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        //// {
-        ////     if (e.NewValue != null)
-        ////     {
-        ////         MemberText.ItemsSource = new ObservableCollection<object> { e.NewValue };
-        ////     }
-        //// }
     }
 }

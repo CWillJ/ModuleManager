@@ -78,7 +78,7 @@
                                Background="LightSteelBlue"/>
                 </Border>
 
-                <!-- TreeView of Module Objects SelectedItemChanged="TreeView_SelectedItemChanged"-->
+                <!-- TreeView of Module Objects -->
                 <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
                           x:Name="myTreeView"
                           Width="210"
@@ -123,26 +123,11 @@
                         Height="275"
                         Background="White">
                     <ScrollViewer Margin="10,5,0,0">
-                        <ItemsControl x:Name="MemberText"
-                                      ItemsSource="{Binding ElementName=myTreeView, Path=SelectedItem}"
-                                      ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+                        <ContentControl x:Name="MemberText"
+                                      Content="{Binding ElementName=myTreeView, Path=SelectedItem}"
+                                      ContentTemplateSelector="{StaticResource myDataTemplateSelector}"/>
                     </ScrollViewer>
                 </Border>
-
-                <!-- This is how you get selected item from treeview
-                <Border BorderBrush="Black"
-                        BorderThickness="1"
-                        Margin="10,0"
-                        Height="75"
-                        Background="White">
-
-                    <StackPanel>
-                        <TextBlock Margin="10,0,0,0" 
-                                   Text="{Binding ElementName=myTreeView,
-                            Path=SelectedItem}"
-                                   Foreground="Blue"/>
-                    </StackPanel>
-                </Border> -->
             </StackPanel>
 
         </StackPanel>
