@@ -23,6 +23,9 @@
         public ModuleInfoRetriever(string moduleDirectory)
         {
             DllDirectory = moduleDirectory;
+            DllFilePath = string.Empty;
+            CurrentTypeName = string.Empty;
+            PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
             LoadedAssemblies = new ObservableCollection<AssemblyName>();
         }
@@ -31,6 +34,21 @@
         /// Gets or sets DllDirectory is the directory path of the .dll files.
         /// </summary>
         public string DllDirectory { get; set; }
+
+        /// <summary>
+        /// Gets or sets DllFilePath is the path of the .dll file.
+        /// </summary>
+        public string DllFilePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets CurrentTypeName is the name of the type being loaded.
+        /// </summary>
+        public string CurrentTypeName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current percentage of load compleation of the current assembly.
+        /// </summary>
+        public double PercentOfAssemblyLoaded { get; set; }
 
         /// <summary>
         /// Gets or sets all xml descriptions.
@@ -72,6 +90,7 @@
 
             foreach (var dllFile in dllFiles)
             {
+                DllFilePath = dllFile;
                 DescriptionRetriever.DllFilePath = dllFile;
 
                 assemblies.Add(metaDataLoader.LoadFromAssemblyPath(dllFile));
@@ -90,11 +109,17 @@
                     types = ex.Types.Where(t => t != null).ToArray();
                 }
 
+                int someNum = 0;
                 foreach (var type in types)
                 {
+                    someNum++;
+
                     if (type != null)
                     {
-                        Debug.WriteLine("Adding Module: " + type.Name + " From " + assembly.FullName);
+                        CurrentTypeName = type.Name;
+                        PercentOfAssemblyLoaded = ((double)someNum / (double)types.Length) * 100;
+
+                        Debug.WriteLine(PercentOfAssemblyLoaded.ToString() + @" % " + "Adding Module: " + type.Name + " From " + assembly.FullName);
                         Module tempModule = GetSingleModule(type);
 
                          // Add all non-null modules

@@ -56,7 +56,9 @@
                   Height="30"
                   Margin="30,15,5,5">
                 <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
-                             IsIndeterminate="True"/>
+                             IsIndeterminate="False"
+                             Minimum="0"
+                             Maximum="100"/>
 
                 <TextBlock Text="{Binding Path=ProgressBarText, Mode=OneWay}"
                            HorizontalAlignment="Center"

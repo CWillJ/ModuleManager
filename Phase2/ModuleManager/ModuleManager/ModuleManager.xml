@@ -231,6 +231,21 @@
             Gets or sets DllDirectory is the directory path of the .dll files.
             </summary>
         </member>
+        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.DllFilePath">
+            <summary>
+            Gets or sets DllFilePath is the path of the .dll file.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.CurrentTypeName">
+            <summary>
+            Gets or sets CurrentTypeName is the name of the type being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.PercentOfAssemblyLoaded">
+            <summary>
+            Gets or sets the current percentage of load compleation of the current assembly.
+            </summary>
+        </member>
         <member name="P:ModuleManager.Classes.ModuleInfoRetriever.DescriptionRetriever">
             <summary>
             Gets or sets all xml descriptions.
@@ -581,6 +596,16 @@
         <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.ModuleDirectory">
             <summary>
             Gets or sets the file location as a string.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.InfoRetriever">
+            <summary>
+            Gets or sets a ModuleInfoRetriever.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.LoadingModules">
+            <summary>
+            Gets or sets a value indicating whether the application is currently loading modules.
             </summary>
         </member>
         <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.ProgressBarText">

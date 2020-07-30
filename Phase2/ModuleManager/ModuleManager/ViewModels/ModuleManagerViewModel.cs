@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Xml.Serialization;
@@ -30,6 +31,8 @@
             _progressBarText = string.Empty;
             _currentProgress = 0;
             _progressBarIsVisible = false;
+
+            LoadingModules = false;
 
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
@@ -69,6 +72,16 @@
         public string ModuleDirectory { get; set; }
 
         /// <summary>
+        /// Gets or sets a ModuleInfoRetriever.
+        /// </summary>
+        public ModuleInfoRetriever InfoRetriever { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the application is currently loading modules.
+        /// </summary>
+        public bool LoadingModules { get; set; }
+
+        /// <summary>
         /// Gets or sets the progress bar text.
         /// </summary>
         public string ProgressBarText
@@ -104,7 +117,6 @@
                 {
                     _currentProgress = value;
                     RaisePropertyChanged("CurrentProgress");
-                    RaisePropertyChanged("ProgressBarVisible");
                 }
             }
         }
@@ -166,20 +178,36 @@
                 return;
             }
 
-            ModuleInfoRetriever infoRetriever = new ModuleInfoRetriever(moduleDirectory);
+            InfoRetriever = new ModuleInfoRetriever(moduleDirectory);
 
             // Show progress bar
+            CurrentProgress = 0;
+            ProgressBarText = string.Empty;
             ProgressBarIsVisible = true;
-            ProgressBarText = "Loading Modules";
 
             Modules.Clear();
 
+            LoadingModules = true;
+            Thread thread = new Thread(new ThreadStart(UpdateProgressBarText));
+            thread.IsBackground = true;
+            thread.Start();
+
             // Run async to allow UI thread to update UI with the property changes above.
-            Modules = await Task.Run(() => infoRetriever.GetModules());
+            Modules = await Task.Run(() => InfoRetriever.GetModules());
 
             // Kill progress bar
+            LoadingModules = false;
             ProgressBarText = string.Empty;
             ProgressBarIsVisible = false;
+        }
+
+        private void UpdateProgressBarText()
+        {
+            while (LoadingModules)
+            {
+                CurrentProgress = InfoRetriever.PercentOfAssemblyLoaded;
+                ProgressBarText = @"Loading Module: " + InfoRetriever.CurrentTypeName;
+            }
         }
 
         /// <summary>
