@@ -6,7 +6,6 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleManager.Classes;
@@ -21,9 +20,6 @@
         private double _currentProgress;
         private string _progressBarText;
         private bool _progressBarIsVisible;
-
-        ////private TreeView tv = new TreeView();
-        ////var something = tv.SelectedItem.
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
