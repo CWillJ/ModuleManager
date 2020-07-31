@@ -119,7 +119,7 @@
                         CurrentTypeName = type.Name;
                         PercentOfAssemblyLoaded = ((double)someNum / (double)types.Length) * 100;
 
-                        Debug.WriteLine(PercentOfAssemblyLoaded.ToString() + @" % " + "Adding Module: " + type.Name + " From " + assembly.FullName);
+                        Debug.WriteLine("Adding Module: " + type.Name + " From " + assembly.FullName);
                         Module tempModule = GetSingleModule(type);
 
                          // Add all non-null modules
@@ -135,6 +135,11 @@
             return new ObservableCollection<Module>(modules.ToList().OrderBy(mod => mod.Name));
         }
 
+        /// <summary>
+        /// Builds a singls module from the given Type.
+        /// </summary>
+        /// <param name="type">Type from an assembly.</param>
+        /// <returns>A Module type.</returns>
         private Module GetSingleModule(Type type)
         {
             // Don't load non-public or interface classes
@@ -203,9 +208,32 @@
             {
                 string name = property.Name;
                 string description = DescriptionRetriever.GetPropertyDescription(property);
-                string dataType = property.PropertyType.ToString();
+                string dataType;
                 bool canRead = property.CanRead;
                 bool canWrite = property.CanWrite;
+
+                try
+                {
+                    dataType = property.PropertyType.Name.ToString();
+                }
+                catch (FileNotFoundException)
+                {
+                    int start = description.IndexOf(@"cref=");
+                    int end = description.IndexOf(@"/>");
+                    int index = end - start;
+
+                    if (start >= 0)
+                    {
+                        string typeFromXml = description.Substring(start, index);
+
+                        dataType = typeFromXml.Substring(typeFromXml.LastIndexOf(@".") + 1);
+                        dataType = dataType[0..^2];
+                    }
+                    else
+                    {
+                        dataType = string.Empty;
+                    }
+                }
 
                 properties.Add(new ModuleProperty(
                     name,

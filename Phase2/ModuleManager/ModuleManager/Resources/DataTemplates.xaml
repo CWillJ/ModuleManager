@@ -36,15 +36,15 @@
     <DataTemplate x:Key="modulePropertyTemplate" DataType="{x:Type data:ModuleProperty}">
         <StackPanel>
             <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
-                           FontWeight="Bold"
-                           FontSize="14"/>
+                       FontWeight="Bold"
+                       FontSize="14"/>
 
             <TextBlock TextWrapping="Wrap">
                 <Run Text="{Binding Path=Description, Mode=OneWay}"/>
                 <LineBreak/>
             </TextBlock>
 
-            <TextBlock>
+            <TextBlock TextWrapping="Wrap">
                 <Run FontWeight="Bold" Text="Data Type: "/>
                 <Run Text="{Binding Path=DataType, Mode=OneWay}"/>
                 <LineBreak/>

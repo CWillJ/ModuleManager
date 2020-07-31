@@ -263,6 +263,13 @@
             </summary>
             <returns>Returns an collection of Module objects.</returns>
         </member>
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetSingleModule(System.Type)">
+            <summary>
+            Builds a singls module from the given Type.
+            </summary>
+            <param name="type">Type from an assembly.</param>
+            <returns>A Module type.</returns>
+        </member>
         <member name="M:ModuleManager.Classes.ModuleInfoRetriever.AddConstructorsToCollection(System.Type)">
             <summary>
             AddConstructorsToCollection get all constructors from the passed in Type.
