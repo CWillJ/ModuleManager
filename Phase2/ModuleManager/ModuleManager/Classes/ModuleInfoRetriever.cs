@@ -252,7 +252,8 @@
                                       | BindingFlags.DeclaredOnly))
             {
                 // skip if method is null (if the method is a constructor or property)
-                if (method == null)
+                // or if the method starts with the get_, set_, add_ or remove_
+                if (method == null || method.IsSpecialName)
                 {
                     continue;
                 }

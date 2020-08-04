@@ -177,8 +177,10 @@
                 {
                     string pType = p.ParameterType.Name.ToString();
                     string pName = p.Name;
-                    string pDescription =
-                        GetMemberParameterDescription(method, Array.IndexOf(paramList, p), memberIndex);
+                    string pDescription = GetMemberParameterDescription(
+                        method,
+                        Array.IndexOf(paramList, p),
+                        memberIndex);
 
                     parameters.Add(new MemberParameter(
                         pType,
