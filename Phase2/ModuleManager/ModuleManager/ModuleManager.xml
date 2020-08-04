@@ -501,6 +501,14 @@
             <param name="method">MethodBase to get the string from.</param>
             <returns>String representation of the return description.</returns>
         </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetParametersFromXml(System.Reflection.MethodBase,System.Int32)">
+            <summary>
+            GetParametersFromXml will return an ObservableCollection of MemberParameters.
+            </summary>
+            <param name="method">The MethodBase to get parameters from.</param>
+            <param name="memberIndex">Member index.</param>
+            <returns>An ObservableCollection of MemberParameters.</returns>
+        </member>
         <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberXmlNode(System.Reflection.MethodBase,System.Int32)">
             <summary>
             GetMemberXmlNode returns an XmlNode of the specified MemberInfo.

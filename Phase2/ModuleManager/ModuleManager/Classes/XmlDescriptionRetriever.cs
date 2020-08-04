@@ -154,17 +154,17 @@
             catch (FileNotFoundException)
             {
                 Debug.WriteLine("Cannot Load Parameters For " + method.Name);
-                return null;
+                return GetParametersFromXml(method, memberIndex);
             }
             catch (FileLoadException)
             {
                 Debug.WriteLine("Cannot Load Parameters For " + method.Name);
-                return null;
+                return GetParametersFromXml(method, memberIndex);
             }
             catch (TypeLoadException)
             {
                 Debug.WriteLine("Cannot Load Parameters For " + method.Name);
-                return null;
+                return GetParametersFromXml(method, memberIndex);
             }
 
             if (paramList == null || paramList.Length == 0)
@@ -208,6 +208,48 @@
             }
 
             return GetXmlNodeString(xmlNode, "returns");
+        }
+
+        /// <summary>
+        /// GetParametersFromXml will return an ObservableCollection of MemberParameters.
+        /// </summary>
+        /// <param name="method">The MethodBase to get parameters from.</param>
+        /// <param name="memberIndex">Member index.</param>
+        /// <returns>An ObservableCollection of MemberParameters.</returns>
+        private ObservableCollection<MemberParameter> GetParametersFromXml(MethodBase method, int memberIndex = 0)
+        {
+            XmlNode xmlNode = GetMemberXmlNode(method, memberIndex);
+            int parameterIndex = 0;
+            string outerXml;
+            string innerXml;
+
+            if (xmlNode == null)
+            {
+                return null;
+            }
+
+            foreach (XmlNode xmlParamNode in xmlNode.SelectNodes("param"))
+            {
+                if (xmlParamNode == null)
+                {
+                    return null;
+                }
+
+                innerXml = xmlParamNode.InnerXml;
+                outerXml = xmlParamNode.OuterXml;
+
+                if (string.IsNullOrEmpty(innerXml))
+                {
+                    return null;
+                }
+
+                innerXml = Regex.Replace(innerXml, @"\s+", " ").Trim();
+            }
+
+            // TODO make this work
+            string xmlParameter = GetXmlNodeString(xmlNode, "param", parameterIndex);
+
+            return null;
         }
 
         /// <summary>
