@@ -119,13 +119,13 @@
         /// GetMemberParameterDescription returns a string from the inner xml of the
         /// parameter description of the member.
         /// </summary>
-        /// <param name="member">MemberInfo to get the string from.</param>
+        /// <param name="method">MemberInfo to get the string from.</param>
         /// <param name="parameterIndex">Integer index of parameter.</param>
         /// <param name="memberIndex">Integer index of member.</param>
         /// <returns>String representation of the parameter description.</returns>
-        public string GetMemberParameterDescription(MemberInfo member, int parameterIndex, int memberIndex = 0)
+        public string GetMemberParameterDescription(MethodBase method, int parameterIndex, int memberIndex = 0)
         {
-            XmlNode xmlNode = GetMemberXmlNode(member, memberIndex);
+            XmlNode xmlNode = GetMemberXmlNode(method, memberIndex);
 
             if (xmlNode == null)
             {
@@ -139,12 +139,33 @@
         /// GetParametersFromList will return an ObservableCollection of MemberParameter
         /// type from a list of ParameterInfo type.
         /// </summary>
-        /// <param name="paramList">A list of ParameterInfo type.</param>
+        /// <param name="method">The method to get the parameters from.</param>
         /// <param name="memberIndex">Integer index of member.</param>
         /// <returns>An ObservableCollection of MemberParameter type.</returns>
-        public ObservableCollection<MemberParameter> GetParametersFromList(ParameterInfo[] paramList, int memberIndex = 0)
+        public ObservableCollection<MemberParameter> GetParametersFromList(MethodBase method, int memberIndex = 0)
         {
             ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
+            ParameterInfo[] paramList;
+
+            try
+            {
+                paramList = method.GetParameters();
+            }
+            catch (FileNotFoundException)
+            {
+                Debug.WriteLine("Cannot Load Parameters For " + method.Name);
+                return null;
+            }
+            catch (FileLoadException)
+            {
+                Debug.WriteLine("Cannot Load Parameters For " + method.Name);
+                return null;
+            }
+            catch (TypeLoadException)
+            {
+                Debug.WriteLine("Cannot Load Parameters For " + method.Name);
+                return null;
+            }
 
             if (paramList == null || paramList.Length == 0)
             {
@@ -157,7 +178,7 @@
                     string pType = p.ParameterType.Name.ToString();
                     string pName = p.Name;
                     string pDescription =
-                        GetMemberParameterDescription(p.Member, Array.IndexOf(paramList, p), memberIndex);
+                        GetMemberParameterDescription(method, Array.IndexOf(paramList, p), memberIndex);
 
                     parameters.Add(new MemberParameter(
                         pType,
@@ -173,11 +194,11 @@
         /// GetMemberReturnDescription returns a string from the inner xml of the
         /// return description of the member.
         /// </summary>
-        /// <param name="member">MemberInfo to get the string from.</param>
+        /// <param name="method">MethodBase to get the string from.</param>
         /// <returns>String representation of the return description.</returns>
-        public string GetMemberReturnDescription(MemberInfo member)
+        public string GetMemberReturnDescription(MethodBase method)
         {
-            XmlNode xmlNode = GetMemberXmlNode(member);
+            XmlNode xmlNode = GetMemberXmlNode(method);
 
             if (xmlNode == null)
             {
@@ -190,13 +211,15 @@
         /// <summary>
         /// GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
         /// </summary>
-        /// <param name="member">The MemberInfo to get the XmlNode from.</param>
+        /// <param name="method">The MethodBase to get the XmlNode from.</param>
         /// <param name="nodeIndex">The specified node index to handle members with the same name.</param>
         /// <returns>XmlNode.</returns>
-        private XmlNode GetMemberXmlNode(MemberInfo member, int nodeIndex = 0)
+        private XmlNode GetMemberXmlNode(MethodBase method, int nodeIndex = 0)
         {
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
+            XmlNodeList xmlNodeList;
+            string path;
 
             try
             {
@@ -204,26 +227,25 @@
             }
             catch (FileNotFoundException)
             {
-                Debug.WriteLine("Cannot Load Member XML For " + member.Name);
+                Debug.WriteLine("Cannot Load Member XML For " + method.Name);
                 return null;
             }
             catch (XmlException)
             {
-                Debug.WriteLine("Cannot Load Member XML For " + member.Name);
+                Debug.WriteLine("Cannot Load Member XML For " + method.Name);
                 return null;
             }
 
-            string path;
-            if (member.Name == ".ctor")
+            if (method.Name == ".ctor")
             {
-                path = @"M:" + member.DeclaringType.FullName + @".#" + member.Name.Substring(1);
+                path = @"M:" + method.DeclaringType.FullName + @".#" + method.Name.Substring(1);
             }
             else
             {
-                path = @"M:" + member.DeclaringType.FullName + @"." + member.Name;
+                path = @"M:" + method.DeclaringType.FullName + @"." + method.Name;
             }
 
-            XmlNodeList xmlNodeList = xmlDoc.SelectNodes(@"//member[starts-with(@name, '" + path + @"')]");
+            xmlNodeList = xmlDoc.SelectNodes(@"//member[starts-with(@name, '" + path + @"')]");
 
             return xmlNodeList[nodeIndex];
         }

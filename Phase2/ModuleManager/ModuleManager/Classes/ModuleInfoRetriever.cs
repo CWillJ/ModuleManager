@@ -74,7 +74,7 @@
             }
 
             ObservableCollection<Module> modules = new ObservableCollection<Module>();
-            ObservableCollection<Assembly> assemblies = new ObservableCollection<Assembly>();
+            Assembly assembly;
 
             // add all the possible referenced assemblies
             string[] runtimeEnvirnmentFiles = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), @"*.dll");
@@ -92,12 +92,8 @@
             {
                 DllFilePath = dllFile;
                 DescriptionRetriever.DllFilePath = dllFile;
+                assembly = metaDataLoader.LoadFromAssemblyPath(dllFile);
 
-                assemblies.Add(metaDataLoader.LoadFromAssemblyPath(dllFile));
-            }
-
-            Parallel.ForEach(assemblies, (assembly) =>
-            {
                 Type[] types = null;
 
                 try
@@ -125,11 +121,11 @@
                          // Add all non-null modules
                          if (tempModule != null)
                          {
-                             modules.Add(tempModule);
+                            modules.Add(tempModule);
                          }
                     }
                 }
-            });
+            }
 
             // Return an alphabetized collection of the found modules.
             return new ObservableCollection<Module>(modules.ToList().OrderBy(mod => mod.Name));
@@ -174,16 +170,9 @@
                     DescriptionRetriever.GetConstructorDescription(constructor, constructorIndex);
 
                 ObservableCollection<MemberParameter> parameters;
-                try
-                {
-                    parameters =
-                        DescriptionRetriever.GetParametersFromList(constructor.GetParameters(), constructorIndex);
-                }
-                catch (FileNotFoundException)
-                {
-                    Debug.WriteLine("Cannot Load Parameters For " + constructor.Name + " Constructor");
-                    parameters = null;
-                }
+
+                parameters =
+                    DescriptionRetriever.GetParametersFromList(constructor, constructorIndex);
 
                 constructors.Add(new ModuleConstructor(
                     name,
@@ -284,29 +273,8 @@
                 string description =
                     DescriptionRetriever.GetMethodDescription(method, methodIndex);
 
-                ParameterInfo[] paramInfo;
-                try
-                {
-                    paramInfo = method.GetParameters();
-                }
-                catch (FileNotFoundException)
-                {
-                    Debug.WriteLine("Cannot Load Parameters For " + method.Name);
-                    paramInfo = null;
-                }
-                catch (FileLoadException)
-                {
-                    Debug.WriteLine("Cannot Load Parameters For " + method.Name);
-                    paramInfo = null;
-                }
-                catch (TypeLoadException)
-                {
-                    Debug.WriteLine("Cannot Load Parameters For " + method.Name);
-                    paramInfo = null;
-                }
-
                 ObservableCollection<MemberParameter> parameters =
-                    DescriptionRetriever.GetParametersFromList(paramInfo, methodIndex);
+                    DescriptionRetriever.GetParametersFromList(method, methodIndex);
 
                 string returnType;
                 try

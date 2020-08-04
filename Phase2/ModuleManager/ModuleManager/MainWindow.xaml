@@ -83,7 +83,7 @@
                 <!-- TreeView of Module Objects -->
                 <TreeView ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
                           x:Name="myTreeView"
-                          Width="210"
+                          Width="250"
                           Height="275"
                           BorderThickness="1"
                           BorderBrush="Black">
@@ -108,7 +108,7 @@
             </StackPanel>
 
             <!-- Description -->
-            <StackPanel Width="540">
+            <StackPanel Width="510">
                 <Border BorderBrush="Black"
                         BorderThickness="2"
                         Margin="10,0,10,0">

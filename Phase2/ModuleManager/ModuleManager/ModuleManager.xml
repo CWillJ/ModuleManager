@@ -474,38 +474,38 @@
             <param name="property">PropertyInfo to get the description from.</param>
             <returns>String representation of the property description.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberParameterDescription(System.Reflection.MemberInfo,System.Int32,System.Int32)">
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberParameterDescription(System.Reflection.MethodBase,System.Int32,System.Int32)">
             <summary>
             GetMemberParameterDescription returns a string from the inner xml of the
             parameter description of the member.
             </summary>
-            <param name="member">MemberInfo to get the string from.</param>
+            <param name="method">MemberInfo to get the string from.</param>
             <param name="parameterIndex">Integer index of parameter.</param>
             <param name="memberIndex">Integer index of member.</param>
             <returns>String representation of the parameter description.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetParametersFromList(System.Reflection.ParameterInfo[],System.Int32)">
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetParametersFromList(System.Reflection.MethodBase,System.Int32)">
             <summary>
             GetParametersFromList will return an ObservableCollection of MemberParameter
             type from a list of ParameterInfo type.
             </summary>
-            <param name="paramList">A list of ParameterInfo type.</param>
+            <param name="method">The method to get the parameters from.</param>
             <param name="memberIndex">Integer index of member.</param>
             <returns>An ObservableCollection of MemberParameter type.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberReturnDescription(System.Reflection.MemberInfo)">
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberReturnDescription(System.Reflection.MethodBase)">
             <summary>
             GetMemberReturnDescription returns a string from the inner xml of the
             return description of the member.
             </summary>
-            <param name="member">MemberInfo to get the string from.</param>
+            <param name="method">MethodBase to get the string from.</param>
             <returns>String representation of the return description.</returns>
         </member>
-        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberXmlNode(System.Reflection.MemberInfo,System.Int32)">
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetMemberXmlNode(System.Reflection.MethodBase,System.Int32)">
             <summary>
             GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
             </summary>
-            <param name="member">The MemberInfo to get the XmlNode from.</param>
+            <param name="method">The MethodBase to get the XmlNode from.</param>
             <param name="nodeIndex">The specified node index to handle members with the same name.</param>
             <returns>XmlNode.</returns>
         </member>
