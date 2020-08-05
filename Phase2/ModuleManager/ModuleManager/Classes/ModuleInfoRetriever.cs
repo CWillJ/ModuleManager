@@ -191,9 +191,7 @@
         private ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
         {
             ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
-            foreach (var property in type.GetProperties(BindingFlags.Public
-                                      | BindingFlags.Instance
-                                      | BindingFlags.DeclaredOnly))
+            foreach (var property in type.GetProperties(BindingFlags.Public))
             {
                 string name = property.Name;
                 string description = DescriptionRetriever.GetPropertyDescription(property);
@@ -207,6 +205,8 @@
                 }
                 catch (FileNotFoundException)
                 {
+                    // TODO change this to get the element from xml instead
+                    // of mess with the string
                     int start = description.IndexOf(@"cref=");
                     int end = description.IndexOf(@"/>");
                     int index = end - start;

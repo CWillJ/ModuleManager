@@ -218,10 +218,14 @@
         /// <returns>An ObservableCollection of MemberParameters.</returns>
         private ObservableCollection<MemberParameter> GetParametersFromXml(MethodBase method, int memberIndex = 0)
         {
+            ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
             XmlNode xmlNode = GetMemberXmlNode(method, memberIndex);
-            int parameterIndex = 0;
-            string outerXml;
+            XmlAttributeCollection attributeCollection;
             string innerXml;
+
+            string paramName = string.Empty;
+            string paramDescription = string.Empty;
+            string paramType = string.Empty;
 
             if (xmlNode == null)
             {
@@ -236,20 +240,34 @@
                 }
 
                 innerXml = xmlParamNode.InnerXml;
-                outerXml = xmlParamNode.OuterXml;
 
                 if (string.IsNullOrEmpty(innerXml))
                 {
-                    return null;
+                    paramDescription = string.Empty;
+                }
+                else
+                {
+                    innerXml = Regex.Replace(innerXml, @"\s+", " ").Trim();
+                    paramDescription = xmlNode.InnerText.Trim();
                 }
 
-                innerXml = Regex.Replace(innerXml, @"\s+", " ").Trim();
+                attributeCollection = xmlParamNode.Attributes;
+
+                //// XmlNodeList bull1 = null;
+                //// XmlNode bull2 = null;
+                //// XmlAttributeCollection bull3 = null;
+                //// XmlNode bull4 = null;
+                //// string bull5 = string.Empty;
+
+                // TODO get this to not throw exception
+                paramType = xmlParamNode.ChildNodes.Item(0).Attributes.GetNamedItem("cref").InnerText;
+
+                paramName = attributeCollection.GetNamedItem("name").Value;
+
+                parameters.Add(new MemberParameter(paramType, paramName, paramDescription));
             }
 
-            // TODO make this work
-            string xmlParameter = GetXmlNodeString(xmlNode, "param", parameterIndex);
-
-            return null;
+            return parameters;
         }
 
         /// <summary>
