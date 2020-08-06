@@ -1,6 +1,7 @@
 ﻿namespace ModuleManager.Classes
 {
     using System.Collections.ObjectModel;
+    using System.Security.Cryptography;
 
     /// <summary>
     /// ModuleConstructor object holds the class name, description and the parameters a constructor.
@@ -42,6 +43,11 @@
         /// <returns>A desired format for the constructor name, description, and parameters.</returns>
         public override string ToString()
         {
+            if (string.IsNullOrEmpty(Description) && Parameters.Count == 0)
+            {
+                return string.Empty;
+            }
+
             string s = Name + "\n";
 
             if (!string.IsNullOrEmpty(Description))

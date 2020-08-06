@@ -202,7 +202,7 @@
 
                 try
                 {
-                    dataType = property.PropertyType.Name;
+                    dataType = property.PropertyType.FullName;
                 }
                 catch (FileNotFoundException)
                 {
