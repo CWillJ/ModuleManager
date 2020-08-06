@@ -85,6 +85,7 @@
             </TextBlock>
             <TextBlock TextWrapping="Wrap">
                 <Run Text="{Binding Path=ReturnDescription, Mode=OneWay}"/>
+                <LineBreak/>
             </TextBlock>
 
         </StackPanel>

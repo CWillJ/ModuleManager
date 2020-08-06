@@ -8,7 +8,6 @@
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using System.Threading.Tasks;
     using System.Windows;
 
     /// <summary>
@@ -191,7 +190,9 @@
         private ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
         {
             ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
-            foreach (var property in type.GetProperties(BindingFlags.Public))
+            foreach (var property in type.GetProperties(BindingFlags.Public
+                                      | BindingFlags.Instance
+                                      | BindingFlags.DeclaredOnly))
             {
                 string name = property.Name;
                 string description = DescriptionRetriever.GetPropertyDescription(property);
@@ -201,27 +202,12 @@
 
                 try
                 {
-                    dataType = property.PropertyType.Name.ToString();
+                    dataType = property.PropertyType.Name;
                 }
                 catch (FileNotFoundException)
                 {
-                    // TODO change this to get the element from xml instead
-                    // of mess with the string
-                    int start = description.IndexOf(@"cref=");
-                    int end = description.IndexOf(@"/>");
-                    int index = end - start;
-
-                    if (start >= 0)
-                    {
-                        string typeFromXml = description.Substring(start, index);
-
-                        dataType = typeFromXml.Substring(typeFromXml.LastIndexOf(@".") + 1);
-                        dataType = dataType[0..^2];
-                    }
-                    else
-                    {
-                        dataType = string.Empty;
-                    }
+                    string propertyString = property.ToString();
+                    dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
                 }
 
                 properties.Add(new ModuleProperty(
@@ -280,22 +266,28 @@
                 string returnType;
                 try
                 {
-                    returnType = method.ReturnType.Name.ToString();
+                    returnType = method.ReturnType.FullName;
                 }
                 catch (FileNotFoundException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
-                    returnType = string.Empty;
+
+                    string methodString = method.ToString();
+                    returnType = methodString.Substring(0, methodString.IndexOf(@" "));
                 }
                 catch (FileLoadException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
-                    returnType = string.Empty;
+
+                    string methodString = method.ToString();
+                    returnType = methodString.Substring(0, methodString.IndexOf(@" "));
                 }
                 catch (TypeLoadException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
-                    returnType = string.Empty;
+
+                    string methodString = method.ToString();
+                    returnType = methodString.Substring(0, methodString.IndexOf(@" "));
                 }
 
                 string returnDescription =

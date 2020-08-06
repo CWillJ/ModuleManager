@@ -216,53 +216,43 @@
         /// <param name="method">The MethodBase to get parameters from.</param>
         /// <param name="memberIndex">Member index.</param>
         /// <returns>An ObservableCollection of MemberParameters.</returns>
-        private ObservableCollection<MemberParameter> GetParametersFromXml(MethodBase method, int memberIndex = 0)
+        public ObservableCollection<MemberParameter> GetParametersFromXml(MethodBase method, int memberIndex = 0)
         {
             ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
             XmlNode xmlNode = GetMemberXmlNode(method, memberIndex);
             XmlAttributeCollection attributeCollection;
-            string innerXml;
 
-            string paramName = string.Empty;
-            string paramDescription = string.Empty;
-            string paramType = string.Empty;
+            string paramName;
+            string paramDescription;
+            string paramType;
 
             if (xmlNode == null)
             {
                 return null;
             }
 
-            foreach (XmlNode xmlParamNode in xmlNode.SelectNodes("param"))
+            foreach (XmlNode xmlParamNode in xmlNode.SelectNodes(@"param"))
             {
                 if (xmlParamNode == null)
                 {
-                    return null;
+                    continue;
                 }
 
-                innerXml = xmlParamNode.InnerXml;
+                paramDescription = GetXmlNodeText(xmlParamNode);
 
-                if (string.IsNullOrEmpty(innerXml))
+                XmlNode tempNode = xmlParamNode.SelectSingleNode(@"see");
+                if (tempNode == null)
                 {
-                    paramDescription = string.Empty;
+                    paramType = string.Empty;
                 }
                 else
                 {
-                    innerXml = Regex.Replace(innerXml, @"\s+", " ").Trim();
-                    paramDescription = xmlNode.InnerText.Trim();
+                    attributeCollection = tempNode.Attributes;
+                    paramType = attributeCollection.GetNamedItem(@"cref").Value;
                 }
 
                 attributeCollection = xmlParamNode.Attributes;
-
-                //// XmlNodeList bull1 = null;
-                //// XmlNode bull2 = null;
-                //// XmlAttributeCollection bull3 = null;
-                //// XmlNode bull4 = null;
-                //// string bull5 = string.Empty;
-
-                // TODO get this to not throw exception
-                paramType = xmlParamNode.ChildNodes.Item(0).Attributes.GetNamedItem("cref").InnerText;
-
-                paramName = attributeCollection.GetNamedItem("name").Value;
+                paramName = attributeCollection.GetNamedItem(@"name").Value;
 
                 parameters.Add(new MemberParameter(paramType, paramName, paramDescription));
             }
@@ -276,7 +266,7 @@
         /// <param name="method">The MethodBase to get the XmlNode from.</param>
         /// <param name="nodeIndex">The specified node index to handle members with the same name.</param>
         /// <returns>XmlNode.</returns>
-        private XmlNode GetMemberXmlNode(MethodBase method, int nodeIndex = 0)
+        public XmlNode GetMemberXmlNode(MethodBase method, int nodeIndex = 0)
         {
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
@@ -317,7 +307,7 @@
         /// </summary>
         /// <param name="type">The Type to get the XmlNode from.</param>
         /// <returns>XmlNode.</returns>
-        private XmlNode GetModuleXmlNode(Type type)
+        public XmlNode GetModuleXmlNode(Type type)
         {
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
@@ -343,7 +333,7 @@
         /// </summary>
         /// <param name="property">The property to get the XmlNode from.</param>
         /// <returns>XmlNode.</returns>
-        private XmlNode GetPropertyXmlNode(PropertyInfo property)
+        public XmlNode GetPropertyXmlNode(PropertyInfo property)
         {
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
             XmlDocument xmlDoc = new XmlDocument();
@@ -376,29 +366,30 @@
         /// <param name="xmlTag">This is the string of the xml tag.</param>
         /// <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
         /// <returns>InnerXml of the XmlNode.</returns>
-        private string GetXmlNodeString(XmlNode xmlNode, string xmlTag, int index = 0)
+        public string GetXmlNodeString(XmlNode xmlNode, string xmlTag, int index = 0)
+        {
+            XmlNodeList xmlNodeList = xmlNode.SelectNodes(xmlTag);
+
+            return GetXmlNodeText(xmlNodeList[index]);
+        }
+
+        /// <summary>
+        /// Returns the formatted text of the inner xml.
+        /// </summary>
+        /// <param name="xmlNode">XmlNode to get text from.</param>
+        /// <returns>Formatted string of the XmlNode.InnerXml.</returns>
+        public string GetXmlNodeText(XmlNode xmlNode)
         {
             string s = null;
 
-            XmlNodeList xmlNodeList = xmlNode.SelectNodes(xmlTag);
-            if (xmlNodeList[index] == null)
+            if (xmlNode != null)
             {
-                return s;
+                s = xmlNode.InnerXml;
+                s = Regex.Replace(s, @"\s+", " ");
+                s = s.Trim();
             }
 
-            s = xmlNodeList[index].InnerXml;
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
-
-            s = Regex.Replace(s, @"\s+", " ");
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
-
-            return s.Trim();
+            return s;
         }
     }
 }

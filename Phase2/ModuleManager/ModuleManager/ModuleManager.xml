@@ -540,6 +540,13 @@
             <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
             <returns>InnerXml of the XmlNode.</returns>
         </member>
+        <member name="M:ModuleManager.Classes.XmlDescriptionRetriever.GetXmlNodeText(System.Xml.XmlNode)">
+            <summary>
+            Returns the formatted text of the inner xml.
+            </summary>
+            <param name="xmlNode">XmlNode to get text from.</param>
+            <returns>Formatted string of the XmlNode.InnerXml.</returns>
+        </member>
         <member name="T:ModuleManager.ModuleMember">
             <summary>
             The base class for ModuleConstructor, ModuleProperty, and ModuleMethod.

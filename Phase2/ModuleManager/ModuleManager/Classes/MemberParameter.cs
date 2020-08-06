@@ -55,7 +55,7 @@
                 return @"None" + "\n";
             }
 
-            string s = Type + @" " + Name + "\n";
+            string s = Type + @", " + Name + "\n";
 
             if (!string.IsNullOrEmpty(Description))
             {
