@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
+        xmlns:views="clr-namespace:ModuleManager.Views"
         mc:Ignorable="d"
         Title="Module Manager" Height="550" Width="1000" Background="LightGray">
 
@@ -38,6 +39,18 @@
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
+            <Grid Grid.Column="0">
+                <views:LoadSaveButtons/>
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  Margin="0,10,30,5"
+                  MinWidth="300"
+                  Height="30">
+                <views:ProgressBar/>
+            </Grid>
+            
+            <!--
             <StackPanel Orientation="Horizontal"
                         Grid.Column="0">
                 <Button
@@ -60,7 +73,7 @@
                 FontWeight="Bold"
                 Background="IndianRed"/>
             </StackPanel>
-
+            
             <Grid Grid.Column="1"
                   Visibility="{Binding Path=ProgressBarIsVisible,
                 Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
@@ -76,6 +89,7 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
             </Grid>
+            -->
 
         </Grid>
 

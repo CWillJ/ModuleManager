@@ -676,5 +676,59 @@
             </summary>
             <returns>ObservableCollection of type Module.</returns>
         </member>
+        <member name="T:ModuleManager.Views.LoadSaveButtons">
+            <summary>
+            Interaction logic for LoadSaveButtons.xaml
+            </summary>
+            <summary>
+            LoadSaveButtons
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.LoadSaveButtons.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Views.LoadSaveButtons"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.LoadSaveButtons.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Views.ModuleView">
+            <summary>
+            Interaction logic for ModuleView.xaml
+            </summary>
+            <summary>
+            ModuleView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ModuleView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Views.ModuleView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ModuleView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Views.ProgressBar">
+            <summary>
+            Interaction logic for ProgressBar.xaml
+            </summary>
+            <summary>
+            ProgressBar
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ProgressBar.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Views.ProgressBar"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ProgressBar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
     </members>
 </doc>

@@ -209,6 +209,11 @@
                     string propertyString = property.ToString();
                     dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
                 }
+                catch (TypeLoadException)
+                {
+                    string propertyString = property.ToString();
+                    dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
+                }
 
                 properties.Add(new ModuleProperty(
                     name,

@@ -27,7 +27,7 @@
         /// </summary>
         public ModuleManagerViewModel()
         {
-            Modules = new ObservableCollection<Module>();
+            _modules = new ObservableCollection<Module>();
             _progressBarText = string.Empty;
             _currentProgress = 0;
             _progressBarIsVisible = false;
@@ -42,7 +42,7 @@
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
-                Modules = LoadConfig();
+                _modules = LoadConfig();
             }
         }
 

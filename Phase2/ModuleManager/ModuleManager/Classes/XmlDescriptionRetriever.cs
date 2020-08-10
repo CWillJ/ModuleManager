@@ -147,6 +147,7 @@
             ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
             ParameterInfo[] paramList;
 
+            // TODO this isn't the most reliable way to get parameter type
             try
             {
                 paramList = method.GetParameters();

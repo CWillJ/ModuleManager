@@ -3,7 +3,7 @@
                     xmlns:data="clr-namespace:ModuleManager.Classes"
                     xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs">
     
-    <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <behaviors:TemplateSelector x:Key="myDataTemplateSelector"/>
 
     <!-- Member Parameter Data Template -->
