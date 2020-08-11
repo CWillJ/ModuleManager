@@ -4,28 +4,28 @@
     using System.Windows.Input;
 
     /// <summary>
-    /// MyICommand implements the ICommand.
+    /// ModuleManagerICommand implements the ICommand.
     /// </summary>
-    public class MyICommand : ICommand
+    public class ModuleManagerICommand : ICommand
     {
-        private Action _targetExecuteMethod;
-        private Func<bool> _targetCanExecuteMethod;
+        private readonly Action _targetExecuteMethod;
+        private readonly Func<bool> _targetCanExecuteMethod;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MyICommand"/> class.
+        /// Initializes a new instance of the <see cref="ModuleManagerICommand"/> class.
         /// </summary>
         /// <param name="executeMethod">Method to execute.</param>
-        public MyICommand(Action executeMethod)
+        public ModuleManagerICommand(Action executeMethod)
         {
             _targetExecuteMethod = executeMethod;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MyICommand"/> class.
+        /// Initializes a new instance of the <see cref="ModuleManagerICommand"/> class.
         /// </summary>
         /// <param name="executeMethod">Method to execute.</param>
         /// <param name="canExecuteMethod">Returns boolean value on if a method can be executed.</param>
-        public MyICommand(Action executeMethod, Func<bool> canExecuteMethod)
+        public ModuleManagerICommand(Action executeMethod, Func<bool> canExecuteMethod)
         {
             _targetExecuteMethod = executeMethod;
             _targetCanExecuteMethod = canExecuteMethod;

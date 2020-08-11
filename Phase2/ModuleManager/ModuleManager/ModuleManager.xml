@@ -128,11 +128,6 @@
             <param name="type">Type object found in an Assembly.</param>
             <param name="dllFileName">File name of the dll file.</param>
         </member>
-        <member name="E:ModuleManager.Classes.Module.PropertyChanged">
-            <summary>
-            The event handler that handles a property change.
-            </summary>
-        </member>
         <member name="P:ModuleManager.Classes.Module.IsSelected">
             <summary>
             Gets or sets a value indicating whether the member is selected.
@@ -172,12 +167,6 @@
             <summary>
             Gets or sets the members in the current module.
             </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.Module.RaisePropertyChanged(System.String)">
-            <summary>
-            Raise a property changed event.
-            </summary>
-            <param name="property">Property passed in as a string.</param>
         </member>
         <member name="M:ModuleManager.Classes.Module.ToString">
             <summary>
@@ -251,11 +240,6 @@
             Gets or sets all xml descriptions.
             </summary>
         </member>
-        <member name="P:ModuleManager.Classes.ModuleInfoRetriever.LoadedAssemblies">
-            <summary>
-            Gets or sets LoadedAssemblies which stores all assemblies that have already been loaded.
-            </summary>
-        </member>
         <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetModules">
             <summary>
             GetModules will create an ObservableCollection of type Module to organize
@@ -290,6 +274,47 @@
             </summary>
             <param name="type">The Type where the methods are coming from.</param>
             <returns>An ObservableCollection of ModuleMethod objects.</returns>
+        </member>
+        <member name="T:ModuleManager.Classes.ModuleManagerICommand">
+            <summary>
+            ModuleManagerICommand implements the ICommand.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.ModuleManagerICommand.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleManagerICommand"/> class.
+            </summary>
+            <param name="executeMethod">Method to execute.</param>
+        </member>
+        <member name="M:ModuleManager.Classes.ModuleManagerICommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleManagerICommand"/> class.
+            </summary>
+            <param name="executeMethod">Method to execute.</param>
+            <param name="canExecuteMethod">Returns boolean value on if a method can be executed.</param>
+        </member>
+        <member name="E:ModuleManager.Classes.ModuleManagerICommand.CanExecuteChanged">
+            <summary>
+            Delegate event handler.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.ModuleManagerICommand.RaiseCanExecuteChanged">
+            <summary>
+            Raise an event where the can execute a method has changed.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.ModuleManagerICommand.System#Windows#Input#ICommand#CanExecute(System.Object)">
+            <summary>
+            Returns boolean value stating whether the object can be executed on.
+            </summary>
+            <param name="parameter">Object.</param>
+            <returns>Boolean.</returns>
+        </member>
+        <member name="M:ModuleManager.Classes.ModuleManagerICommand.System#Windows#Input#ICommand#Execute(System.Object)">
+            <summary>
+            Executes on the passed in object.
+            </summary>
+            <param name="parameter">Object.</param>
         </member>
         <member name="T:ModuleManager.Classes.ModuleMethod">
             <summary>
@@ -377,47 +402,6 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the member description.</returns>
-        </member>
-        <member name="T:ModuleManager.Classes.MyICommand">
-            <summary>
-            MyICommand implements the ICommand.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.MyICommand.#ctor(System.Action)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.MyICommand"/> class.
-            </summary>
-            <param name="executeMethod">Method to execute.</param>
-        </member>
-        <member name="M:ModuleManager.Classes.MyICommand.#ctor(System.Action,System.Func{System.Boolean})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.MyICommand"/> class.
-            </summary>
-            <param name="executeMethod">Method to execute.</param>
-            <param name="canExecuteMethod">Returns boolean value on if a method can be executed.</param>
-        </member>
-        <member name="E:ModuleManager.Classes.MyICommand.CanExecuteChanged">
-            <summary>
-            Delegate event handler.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.MyICommand.RaiseCanExecuteChanged">
-            <summary>
-            Raise an event where the can execute a method has changed.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.MyICommand.System#Windows#Input#ICommand#CanExecute(System.Object)">
-            <summary>
-            Returns boolean value stating whether the object can be executed on.
-            </summary>
-            <param name="parameter">Object.</param>
-            <returns>Boolean.</returns>
-        </member>
-        <member name="M:ModuleManager.Classes.MyICommand.System#Windows#Input#ICommand#Execute(System.Object)">
-            <summary>
-            Executes on the passed in object.
-            </summary>
-            <param name="parameter">Object.</param>
         </member>
         <member name="T:ModuleManager.Classes.XmlDescriptionRetriever">
             <summary>
@@ -552,11 +536,6 @@
             The base class for ModuleConstructor, ModuleProperty, and ModuleMethod.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleMember.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleMember"/> class.
-            </summary>
-        </member>
         <member name="P:ModuleManager.ModuleMember.Name">
             <summary>
             Gets or sets the name of the member.
@@ -607,12 +586,12 @@
         </member>
         <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.LoadModulesCommand">
             <summary>
-            Gets or sets the LoadModulesCommand as a MyICommand.
+            Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
             </summary>
         </member>
         <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.SaveConfigCommand">
             <summary>
-            Gets or sets the SaveConfigCommand as a MyICommand.
+            Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
             </summary>
         </member>
         <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.ModuleDirectory">

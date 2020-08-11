@@ -1,7 +1,6 @@
 ﻿namespace ModuleManager.Classes
 {
     using System.Collections.ObjectModel;
-    using System.Security.Cryptography;
 
     /// <summary>
     /// ModuleConstructor object holds the class name, description and the parameters a constructor.

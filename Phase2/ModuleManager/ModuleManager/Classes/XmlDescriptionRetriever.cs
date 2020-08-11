@@ -13,14 +13,12 @@
     /// </summary>
     public class XmlDescriptionRetriever
     {
-        private string _dllFilePath;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlDescriptionRetriever"/> class.
         /// </summary>
         public XmlDescriptionRetriever()
         {
-            _dllFilePath = string.Empty;
+            DllFilePath = string.Empty;
         }
 
         /// <summary>
@@ -29,17 +27,13 @@
         /// <param name="dllFilePath">The path to the dll file.</param>
         public XmlDescriptionRetriever(string dllFilePath)
         {
-            _dllFilePath = dllFilePath;
+            DllFilePath = dllFilePath;
         }
 
         /// <summary>
         /// Gets or sets the file path to the dll file.
         /// </summary>
-        public string DllFilePath
-        {
-            get { return _dllFilePath; }
-            set { _dllFilePath = value; }
-        }
+        public string DllFilePath { get; set; }
 
         /// <summary>
         /// GetModuleDescription returns a clean string from the inner xml
@@ -147,7 +141,8 @@
             ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
             ParameterInfo[] paramList;
 
-            // TODO this isn't the most reliable way to get parameter type
+            // If the parameter cannot be loaded because the assembly isn't loaded,
+            // attempt to get the parameter type from the xml comments.
             try
             {
                 paramList = method.GetParameters();

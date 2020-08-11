@@ -63,8 +63,8 @@
                 s += Description + "\n";
             }
 
-            s += @"Has Get Accessor: " + CanRead.ToString() + "\n";
-            s += @"Has Set Accessor: " + CanWrite.ToString() + "\n";
+            s += @"Can Read: " + CanRead.ToString() + "\n";
+            s += @"Can Write: " + CanWrite.ToString() + "\n";
 
             return s;
         }

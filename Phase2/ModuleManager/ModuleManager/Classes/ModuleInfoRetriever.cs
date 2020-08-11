@@ -26,7 +26,6 @@
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
-            LoadedAssemblies = new ObservableCollection<AssemblyName>();
         }
 
         /// <summary>
@@ -53,11 +52,6 @@
         /// Gets or sets all xml descriptions.
         /// </summary>
         public XmlDescriptionRetriever DescriptionRetriever { get; set; }
-
-        /// <summary>
-        /// Gets or sets LoadedAssemblies which stores all assemblies that have already been loaded.
-        /// </summary>
-        public ObservableCollection<AssemblyName> LoadedAssemblies { get; set; }
 
         /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize

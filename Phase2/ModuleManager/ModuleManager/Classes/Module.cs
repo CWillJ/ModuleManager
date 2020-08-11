@@ -2,38 +2,27 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
 
     /// <summary>
     /// Module object holds the name and description of a module.
     /// </summary>
-    public class Module : INotifyPropertyChanged
+    public class Module
     {
-        private bool _isSelected;
-        private bool _isEnabled;
-        private string _name;
-        private string _description;
-
-        private ObservableCollection<ModuleMember> _members;
-        private ObservableCollection<ModuleConstructor> _constructors;
-        private ObservableCollection<ModuleProperty> _properties;
-        private ObservableCollection<ModuleMethod> _methods;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Module"/> class. Default constructor.
         /// initializes properties to empty strings/empty collections.
         /// </summary>
         public Module()
         {
-            _isSelected = false;
-            _isEnabled = false;
-            _name = string.Empty;
-            _description = string.Empty;
+            IsSelected = false;
+            IsEnabled = false;
+            Name = string.Empty;
+            Description = string.Empty;
 
-            _members = new ObservableCollection<ModuleMember>();
-            _constructors = new ObservableCollection<ModuleConstructor>();
-            _properties = new ObservableCollection<ModuleProperty>();
-            _methods = new ObservableCollection<ModuleMethod>();
+            Members = new ObservableCollection<ModuleMember>();
+            Constructors = new ObservableCollection<ModuleConstructor>();
+            Properties = new ObservableCollection<ModuleProperty>();
+            Methods = new ObservableCollection<ModuleMethod>();
         }
 
         /// <summary>
@@ -51,32 +40,30 @@
             ObservableCollection<ModuleProperty> properties,
             ObservableCollection<ModuleMethod> methods)
         {
-            _isSelected = false;
-            _isEnabled = false;
-            _name = name;
-            _description = description;
-            _members = new ObservableCollection<ModuleMember>();
+            IsSelected = false;
+            IsEnabled = false;
+            Name = name;
+            Description = description;
+            Members = new ObservableCollection<ModuleMember>();
 
-            _constructors = constructors;
-            _properties = properties;
-            _methods = methods;
+            Constructors = constructors;
+            Properties = properties;
+            Methods = methods;
 
-            foreach (var constructor in _constructors)
+            foreach (var constructor in Constructors)
             {
-                _members.Add((ModuleMember)constructor);
+                Members.Add(constructor);
             }
 
-            foreach (var property in _properties)
+            foreach (var property in Properties)
             {
-                _members.Add((ModuleMember)property);
+                Members.Add(property);
             }
 
-            foreach (var method in _methods)
+            foreach (var method in Methods)
             {
-                _members.Add((ModuleMember)method);
+                Members.Add(method);
             }
-
-            RaisePropertyChanged("Modules");
         }
 
         /// <summary>
@@ -86,173 +73,52 @@
         /// <param name="dllFileName">File name of the dll file.</param>
         public Module(Type type, string dllFileName)
         {
-            _isSelected = false;
-            _isEnabled = false;
-            _name = type.Name;
-            _description = dllFileName;
-            _methods = new ObservableCollection<ModuleMethod>();
-            RaisePropertyChanged("Modules");
+            IsSelected = false;
+            IsEnabled = false;
+            Name = type.Name;
+            Description = dllFileName;
+            Methods = new ObservableCollection<ModuleMethod>();
         }
-
-        /// <summary>
-        /// The event handler that handles a property change.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets or sets a value indicating whether the member is selected.
         /// </summary>
-        public bool IsSelected
-        {
-            get
-            {
-                return _isSelected;
-            }
-
-            set
-            {
-                _isSelected = value;
-                RaisePropertyChanged("IsSelected");
-            }
-        }
+        public bool IsSelected { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the module is enabled or disabled.
         /// </summary>
-        public bool IsEnabled
-        {
-            get
-            {
-                return _isEnabled;
-            }
-
-            set
-            {
-                if (_isEnabled != value)
-                {
-                    _isEnabled = value;
-                    RaisePropertyChanged("IsEnabled");
-                }
-            }
-        }
+        public bool IsEnabled { get; set; }
 
         /// <summary>
         /// Gets or sets the module name.
         /// </summary>
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    RaisePropertyChanged("Name");
-                }
-            }
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the module.
         /// </summary>
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-
-            set
-            {
-                if (_description != value)
-                {
-                    _description = value;
-                    RaisePropertyChanged("Description");
-                }
-            }
-        }
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets all of the module members.
         /// </summary>
-        public ObservableCollection<ModuleMember> Members
-        {
-            get { return _members; }
-            set { _members = value; }
-        }
+        public ObservableCollection<ModuleMember> Members { get; set; }
 
         /// <summary>
         /// Gets or sets the constructors in the current module.
         /// </summary>
-        public ObservableCollection<ModuleConstructor> Constructors
-        {
-            get
-            {
-                return _constructors;
-            }
-
-            set
-            {
-                if (_constructors != value)
-                {
-                    _constructors = value;
-                    RaisePropertyChanged("Constructors");
-                }
-            }
-        }
+        public ObservableCollection<ModuleConstructor> Constructors { get; set; }
 
         /// <summary>
         /// Gets or sets the properties in the current module.
         /// </summary>
-        public ObservableCollection<ModuleProperty> Properties
-        {
-            get
-            {
-                return _properties;
-            }
-
-            set
-            {
-                if (_properties != value)
-                {
-                    _properties = value;
-                    RaisePropertyChanged("Properties");
-                }
-            }
-        }
+        public ObservableCollection<ModuleProperty> Properties { get; set; }
 
         /// <summary>
         /// Gets or sets the members in the current module.
         /// </summary>
-        public ObservableCollection<ModuleMethod> Methods
-        {
-            get
-            {
-                return _methods;
-            }
-
-            set
-            {
-                if (_methods != value)
-                {
-                    _methods = value;
-                    RaisePropertyChanged("Methods");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Raise a property changed event.
-        /// </summary>
-        /// <param name="property">Property passed in as a string.</param>
-        public void RaisePropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
+        public ObservableCollection<ModuleMethod> Methods { get; set; }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

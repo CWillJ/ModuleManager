@@ -36,8 +36,8 @@
 
             UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
-            LoadModulesCommand = new MyICommand(StoreModules);
-            SaveConfigCommand = new MyICommand(SaveConfig);
+            LoadModulesCommand = new ModuleManagerICommand(StoreModules);
+            SaveConfigCommand = new ModuleManagerICommand(SaveConfig);
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
@@ -57,14 +57,14 @@
         public bool UseSaveFileDialog { get; set; }
 
         /// <summary>
-        /// Gets or sets the LoadModulesCommand as a MyICommand.
+        /// Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
         /// </summary>
-        public MyICommand LoadModulesCommand { get; set; }
+        public ModuleManagerICommand LoadModulesCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the SaveConfigCommand as a MyICommand.
+        /// Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
         /// </summary>
-        public MyICommand SaveConfigCommand { get; set; }
+        public ModuleManagerICommand SaveConfigCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the file location as a string.
