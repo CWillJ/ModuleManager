@@ -25,7 +25,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="6*"/>
@@ -49,48 +49,6 @@
                   Height="30">
                 <views:ProgressBar/>
             </Grid>
-            
-            <!--
-            <StackPanel Orientation="Horizontal"
-                        Grid.Column="0">
-                <Button
-                HorizontalAlignment="Left"
-                Height="30"
-                Width="125"
-                Margin="25,10,5,5"
-                Command="{Binding LoadModulesCommand}"
-                Content="Load Modules"
-                FontWeight="Bold"
-                Background="IndianRed"/>
-
-                <Button
-                HorizontalAlignment="Left"
-                Height="30"
-                Width="125"
-                Margin="25,10,5,5"
-                Command="{Binding SaveConfigCommand}"
-                Content="Save Configuration"
-                FontWeight="Bold"
-                Background="IndianRed"/>
-            </StackPanel>
-            
-            <Grid Grid.Column="1"
-                  Visibility="{Binding Path=ProgressBarIsVisible,
-                Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
-                  MinWidth="300"
-                  Height="30"
-                  Margin="30,10,30,5">
-                <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
-                             IsIndeterminate="False"
-                             Minimum="0"
-                             Maximum="100"/>
-
-                <TextBlock Text="{Binding Path=ProgressBarText, Mode=OneWay}"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-            </Grid>
-            -->
-
         </Grid>
 
         <Grid Grid.Row="1"
@@ -102,12 +60,23 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
+            <!--
+            <Grid Grid.Column="0">
+                <views:ModuleView/>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <views:DescriptionView/>
+            </Grid>
+            -->
+
+            <!-- Modules Grid -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="15*"/>
                 </Grid.RowDefinitions>
-                
+
                 <Border Grid.Row="0"
                         BorderBrush="Black"
                         BorderThickness="2">
@@ -146,7 +115,7 @@
                 </TreeView>
             </Grid>
 
-            <!-- Description -->
+            <!-- Description Grid -->
             <Grid  Grid.Column="1"
                    MinWidth="550">
 
@@ -174,12 +143,11 @@
                         Background="White">
                     <ScrollViewer Margin="10,5,0,0">
                         <ContentControl x:Name="MemberText"
-                                      Content="{Binding ElementName=myTreeView, Path=SelectedItem}"
-                                      ContentTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+                                        Content="{Binding ElementName=myTreeView, Path=SelectedItem}"
+                                        ContentTemplateSelector="{StaticResource myDataTemplateSelector}"/>
                     </ScrollViewer>
                 </Border>
             </Grid>
-
         </Grid>
     </Grid>
 </Window>

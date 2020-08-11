@@ -14,38 +14,30 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Views\DataTemplates.xaml"/>
+                <ResourceDictionary Source="DataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Grid.Row="1"
-              Margin="20,20,20,20"
-              Grid.ColumnSpan="2">
+    <!-- Modules Grid -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="2">
+            <TextBlock Text="Modules"
+                       MinHeight="20"
+                       FontWeight="Bold"
+                       TextAlignment="Center"
+                       Background="LightSteelBlue"/>
+        </Border>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="15*"/>
-            </Grid.RowDefinitions>
-
-            <Border Grid.Row="0"
-                        BorderBrush="Black"
-                        BorderThickness="2">
-                <TextBlock Text="Modules"
-                               MinHeight="20"
-                               FontWeight="Bold"
-                               TextAlignment="Center"
-                               Background="LightSteelBlue"/>
-            </Border>
-
-            <!-- TreeView of Module Objects -->
-            <TreeView Grid.Row="1"
+        <!-- TreeView of Module Objects -->
+        <TreeView Grid.Row="1"
                   ItemsSource="{Binding Path=Modules, Mode=TwoWay}"
                   x:Name="myTreeView"
                   MinHeight="275"
@@ -53,57 +45,22 @@
                   BorderThickness="1"
                   BorderBrush="Black">
 
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding Path=IsEnabled}" Margin="5,0"/>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </StackPanel>
+
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
                             <TextBlock Text="{Binding Path=Name}"/>
-                        </StackPanel>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
 
-                        <HierarchicalDataTemplate.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=Name}"/>
-                            </DataTemplate>
-                        </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
 
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-
-            </TreeView>
-        </Grid>
-
-        <!-- Description -->
-        <Grid Grid.Column="1"
-              MinWidth="550">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="15*"/>
-            </Grid.RowDefinitions>
-
-            <Border Grid.Row="0"
-                        BorderBrush="Black"
-                        BorderThickness="2"
-                        Margin="10,0,10,0">
-                <TextBlock TextAlignment="Center"
-                               MinHeight="20"
-                               FontWeight="Bold"
-                               Text="Description"
-                               Background="LightSteelBlue"/>
-            </Border>
-
-            <Border Grid.Row="1"
-                        BorderBrush="Black"
-                        BorderThickness="1"
-                        Margin="10,0"
-                        MinHeight="275"
-                        Background="White">
-                <ScrollViewer Margin="10,5,0,0">
-                    <ContentControl x:Name="MemberText"
-                                      Content="{Binding ElementName=myTreeView, Path=SelectedItem}"
-                                      ContentTemplateSelector="{StaticResource myDataTemplateSelector}"/>
-                </ScrollViewer>
-            </Border>
-        </Grid>
+        </TreeView>
     </Grid>
 </UserControl>

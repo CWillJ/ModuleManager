@@ -676,6 +676,24 @@
             </summary>
             <returns>ObservableCollection of type Module.</returns>
         </member>
+        <member name="T:ModuleManager.Views.DescriptionView">
+            <summary>
+            Interaction logic for DescriptionView.xaml
+            </summary>
+            <summary>
+            DescriptionView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.DescriptionView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Views.DescriptionView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.DescriptionView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:ModuleManager.Views.LoadSaveButtons">
             <summary>
             Interaction logic for LoadSaveButtons.xaml
@@ -728,6 +746,36 @@
         <member name="M:ModuleManager.Views.ProgressBar.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>
