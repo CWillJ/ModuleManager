@@ -210,9 +210,12 @@
         /// <param name="method">The MethodBase to get parameters from.</param>
         /// <param name="memberIndex">Member index.</param>
         /// <returns>An ObservableCollection of MemberParameters.</returns>
-        public ObservableCollection<MemberParameter> GetParametersFromXml(MethodBase method, int memberIndex = 0)
+        public ObservableCollection<MemberParameter> GetParametersFromXml(
+            MethodBase method,
+            int memberIndex = 0)
         {
-            ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
+            ObservableCollection<MemberParameter> parameters =
+                new ObservableCollection<MemberParameter>();
             XmlNode xmlNode = GetMemberXmlNode(method, memberIndex);
             XmlAttributeCollection attributeCollection;
 
