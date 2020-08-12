@@ -60,150 +60,6 @@
             <param name="container">Container.</param>
             <returns>A DataTemplate depending on the object passed in.</returns>
         </member>
-        <member name="T:ModuleManager.Classes.MemberParameter">
-            <summary>
-            An object designed to hold the type and name of a member's parameter.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.MemberParameter.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.MemberParameter"/> class. Default constructor.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.MemberParameter.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.MemberParameter"/> class
-            that defines the parameter type and name through parameters.
-            </summary>
-            <param name="type">MemberParameter type.</param>
-            <param name="name">MemberParameter name.</param>
-            <param name="description">MemberParameter description.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.MemberParameter.Type">
-            <summary>
-            Gets or sets the parameter type.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.MemberParameter.Name">
-            <summary>
-            Gets or sets the parameter name.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.MemberParameter.Description">
-            <summary>
-            Gets or sets the parameter description.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.MemberParameter.ToString">
-            <summary>
-            Overrides the ToString method and formats the string output of parameter type and name.
-            </summary>
-            <returns>A desired format for the parameter type and name.</returns>
-        </member>
-        <member name="T:ModuleManager.Classes.Module">
-            <summary>
-            Module object holds the name and description of a module.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.Module.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class. Default constructor.
-            initializes properties to empty strings/empty collections.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.ModuleMethod})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class specifying the name, description and methods.
-            </summary>
-            <param name="name">Module name.</param>
-            <param name="description">Module description.</param>
-            <param name="constructors">Module constructors.</param>
-            <param name="properties">Module properties.</param>
-            <param name="methods">Module methods.</param>
-        </member>
-        <member name="M:ModuleManager.Classes.Module.#ctor(System.Type,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.Module"/> class specifing a Type.
-            </summary>
-            <param name="type">Type object found in an Assembly.</param>
-            <param name="dllFileName">File name of the dll file.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.IsSelected">
-            <summary>
-            Gets or sets a value indicating whether the member is selected.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.IsEnabled">
-            <summary>
-            Gets or sets a value indicating whether the module is enabled or disabled.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.Name">
-            <summary>
-            Gets or sets the module name.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.Description">
-            <summary>
-            Gets or sets the description of the module.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.Members">
-            <summary>
-            Gets or sets all of the module members.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.Constructors">
-            <summary>
-            Gets or sets the constructors in the current module.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.Properties">
-            <summary>
-            Gets or sets the properties in the current module.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.Module.Methods">
-            <summary>
-            Gets or sets the members in the current module.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.Module.ToString">
-            <summary>
-            Overrides the ToString method and formats the string output.
-            </summary>
-            <returns>A desired format for the module name, description and all members contained in module.</returns>
-        </member>
-        <member name="T:ModuleManager.Classes.ModuleConstructor">
-            <summary>
-            ModuleConstructor object holds the class name, description and the parameters a constructor.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleConstructor.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleConstructor"/> class. Default constructor.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleConstructor.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.MemberParameter})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleConstructor"/> class
-            with specified name, description, and parameters.
-            </summary>
-            <param name="className">Class name.</param>
-            <param name="description">Constructor description.</param>
-            <param name="parameters">Constructor parameters.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleConstructor.Parameters">
-            <summary>
-            Gets or sets the member parameters.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleConstructor.ToString">
-            <summary>
-            Overrides the ToString method and formats the string output.
-            </summary>
-            <returns>A desired format for the constructor name, description, and parameters.</returns>
-        </member>
         <member name="T:ModuleManager.Classes.ModuleInfoRetriever">
             <summary>
             ModuleInfoRetriever is used to get information from a .dll file.
@@ -315,93 +171,6 @@
             Executes on the passed in object.
             </summary>
             <param name="parameter">Object.</param>
-        </member>
-        <member name="T:ModuleManager.Classes.ModuleMethod">
-            <summary>
-            ModuleMethod object holds the description, the parameters and the return type of a member.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleMethod.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMethod"/> class. Default constructor.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleMethod.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Classes.MemberParameter},System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleMethod"/> class
-            with specified name, description, parameters return type and return
-            description through passed in parameters.
-            </summary>
-            <param name="name">Member name.</param>
-            <param name="description">Member description.</param>
-            <param name="parameters">Member parameters.</param>
-            <param name="returnType">Member return type.</param>
-            <param name="returnDescription">Member return description.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleMethod.Parameters">
-            <summary>
-            Gets or sets the member parameters.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleMethod.ReturnType">
-            <summary>
-            Gets or sets the member return type.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleMethod.ReturnDescription">
-            <summary>
-            Gets or sets the member return description.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleMethod.ToString">
-            <summary>
-            Overrides the ToString method and formats the string output
-            for the UI.
-            </summary>
-            <returns>A desired format for the member description, parameters
-            and return type.</returns>
-        </member>
-        <member name="T:ModuleManager.Classes.ModuleProperty">
-            <summary>
-            ModuleProperty object holds the name, description, data type and accessor level of a property.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleProperty.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleProperty"/> class. Default constructor.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleProperty.#ctor(System.String,System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.ModuleProperty"/> class
-            with specified name, description, type and accessors
-            </summary>
-            <param name="name">Property name.</param>
-            <param name="description">Property description.</param>
-            <param name="dataType">Property data type.</param>
-            <param name="canRead">Property has a 'get' accessor.</param>
-            <param name="canWrite">Property has a 'set' accessor.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleProperty.DataType">
-            <summary>
-            Gets or sets the type of the property.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleProperty.CanRead">
-            <summary>
-            Gets or sets a value indicating whether this property has a get accessor.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.ModuleProperty.CanWrite">
-            <summary>
-            Gets or sets a value indicating whether this property has a set accessor.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.ModuleProperty.ToString">
-            <summary>
-            Overrides the ToString method and formats the string output.
-            </summary>
-            <returns>A desired format for the member description.</returns>
         </member>
         <member name="T:ModuleManager.Classes.XmlDescriptionRetriever">
             <summary>
@@ -531,20 +300,257 @@
             <param name="xmlNode">XmlNode to get text from.</param>
             <returns>Formatted string of the XmlNode.InnerXml.</returns>
         </member>
-        <member name="T:ModuleManager.ModuleMember">
+        <member name="T:ModuleManager.DataObjects.MemberParameter">
+            <summary>
+            An object designed to hold the type and name of a member's parameter.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.MemberParameter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.MemberParameter"/> class. Default constructor.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.MemberParameter.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.MemberParameter"/> class
+            that defines the parameter type and name through parameters.
+            </summary>
+            <param name="type">MemberParameter type.</param>
+            <param name="name">MemberParameter name.</param>
+            <param name="description">MemberParameter description.</param>
+        </member>
+        <member name="P:ModuleManager.DataObjects.MemberParameter.Type">
+            <summary>
+            Gets or sets the parameter type.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.MemberParameter.Name">
+            <summary>
+            Gets or sets the parameter name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.MemberParameter.Description">
+            <summary>
+            Gets or sets the parameter description.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.MemberParameter.IsEmpty">
+            <summary>
+            Check to see if the MemberParameter is empty.
+            </summary>
+            <returns>Returns true if the name is not an empty string or null.</returns>
+        </member>
+        <member name="M:ModuleManager.DataObjects.MemberParameter.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output of parameter type and name.
+            </summary>
+            <returns>A desired format for the parameter type and name.</returns>
+        </member>
+        <member name="T:ModuleManager.DataObjects.Module">
+            <summary>
+            Module object holds the name and description of a module.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.Module.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.Module"/> class. Default constructor.
+            initializes properties to empty strings/empty collections.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.DataObjects.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.DataObjects.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.DataObjects.ModuleMethod})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.Module"/> class specifying the name, description and methods.
+            </summary>
+            <param name="name">Module name.</param>
+            <param name="description">Module description.</param>
+            <param name="constructors">Module constructors.</param>
+            <param name="properties">Module properties.</param>
+            <param name="methods">Module methods.</param>
+        </member>
+        <member name="M:ModuleManager.DataObjects.Module.#ctor(System.Type,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.Module"/> class specifing a Type.
+            </summary>
+            <param name="type">Type object found in an Assembly.</param>
+            <param name="dllFileName">File name of the dll file.</param>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.IsSelected">
+            <summary>
+            Gets or sets a value indicating whether the member is selected.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether the module is enabled or disabled.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.Name">
+            <summary>
+            Gets or sets the module name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.Description">
+            <summary>
+            Gets or sets the description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.Members">
+            <summary>
+            Gets or sets all of the module members.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.Constructors">
+            <summary>
+            Gets or sets the constructors in the current module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.Properties">
+            <summary>
+            Gets or sets the properties in the current module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.Module.Methods">
+            <summary>
+            Gets or sets the members in the current module.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.Module.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the module name, description and all members contained in module.</returns>
+        </member>
+        <member name="T:ModuleManager.DataObjects.ModuleConstructor">
+            <summary>
+            ModuleConstructor object holds the class name, description and the parameters a constructor.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleConstructor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.ModuleConstructor"/> class. Default constructor.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleConstructor.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.DataObjects.MemberParameter})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.ModuleConstructor"/> class
+            with specified name, description, and parameters.
+            </summary>
+            <param name="className">Class name.</param>
+            <param name="description">Constructor description.</param>
+            <param name="parameters">Constructor parameters.</param>
+        </member>
+        <member name="P:ModuleManager.DataObjects.ModuleConstructor.Parameters">
+            <summary>
+            Gets or sets the member parameters.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleConstructor.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the constructor name, description, and parameters.</returns>
+        </member>
+        <member name="T:ModuleManager.DataObjects.ModuleMember">
             <summary>
             The base class for ModuleConstructor, ModuleProperty, and ModuleMethod.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleMember.Name">
+        <member name="P:ModuleManager.DataObjects.ModuleMember.Name">
             <summary>
             Gets or sets the name of the member.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleMember.Description">
+        <member name="P:ModuleManager.DataObjects.ModuleMember.Description">
             <summary>
             Gets or sets the description of the member.
             </summary>
+        </member>
+        <member name="T:ModuleManager.DataObjects.ModuleMethod">
+            <summary>
+            ModuleMethod object holds the description, the parameters and the return type of a member.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleMethod.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.ModuleMethod"/> class. Default constructor.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleMethod.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.DataObjects.MemberParameter},System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.ModuleMethod"/> class
+            with specified name, description, parameters return type and return
+            description through passed in parameters.
+            </summary>
+            <param name="name">Member name.</param>
+            <param name="description">Member description.</param>
+            <param name="parameters">Member parameters.</param>
+            <param name="returnType">Member return type.</param>
+            <param name="returnDescription">Member return description.</param>
+        </member>
+        <member name="P:ModuleManager.DataObjects.ModuleMethod.Parameters">
+            <summary>
+            Gets or sets the member parameters.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.ModuleMethod.ReturnType">
+            <summary>
+            Gets or sets the member return type.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.ModuleMethod.ReturnDescription">
+            <summary>
+            Gets or sets the member return description.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleMethod.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output
+            for the UI.
+            </summary>
+            <returns>A desired format for the member description, parameters
+            and return type.</returns>
+        </member>
+        <member name="T:ModuleManager.DataObjects.ModuleProperty">
+            <summary>
+            ModuleProperty object holds the name, description, data type and accessor level of a property.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleProperty.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.ModuleProperty"/> class. Default constructor.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleProperty.#ctor(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.DataObjects.ModuleProperty"/> class
+            with specified name, description, type and accessors
+            </summary>
+            <param name="name">Property name.</param>
+            <param name="description">Property description.</param>
+            <param name="dataType">Property data type.</param>
+            <param name="canRead">Property has a 'get' accessor.</param>
+            <param name="canWrite">Property has a 'set' accessor.</param>
+        </member>
+        <member name="P:ModuleManager.DataObjects.ModuleProperty.DataType">
+            <summary>
+            Gets or sets the type of the property.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.ModuleProperty.CanRead">
+            <summary>
+            Gets or sets a value indicating whether this property has a get accessor.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.DataObjects.ModuleProperty.CanWrite">
+            <summary>
+            Gets or sets a value indicating whether this property has a set accessor.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.DataObjects.ModuleProperty.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the member description.</returns>
         </member>
         <member name="T:ModuleManager.MainWindow">
             <summary>
@@ -655,6 +661,12 @@
             </summary>
             <returns>ObservableCollection of type Module.</returns>
         </member>
+        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.GetModuleDirectory">
+            <summary>
+            Gets the directory selected by the user that should contain dll files.
+            </summary>
+            <returns>String of the directory path.</returns>
+        </member>
         <member name="T:ModuleManager.Views.DescriptionView">
             <summary>
             Interaction logic for DescriptionView.xaml
@@ -725,36 +737,6 @@
         <member name="M:ModuleManager.Views.ProgressBar.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

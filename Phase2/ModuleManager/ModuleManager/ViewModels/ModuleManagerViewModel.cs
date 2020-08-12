@@ -10,6 +10,7 @@
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleManager.Classes;
+    using ModuleManager.DataObjects;
     using Ookii.Dialogs.Wpf;
 
     /// <summary>
@@ -188,8 +189,10 @@
             Modules.Clear();
 
             LoadingModules = true;
-            Thread thread = new Thread(new ThreadStart(UpdateProgressBarText));
-            thread.IsBackground = true;
+            Thread thread = new Thread(new ThreadStart(UpdateProgressBarText))
+            {
+                IsBackground = true
+            };
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
@@ -303,6 +306,10 @@
             return modules;
         }
 
+        /// <summary>
+        /// Gets the directory selected by the user that should contain dll files.
+        /// </summary>
+        /// <returns>String of the directory path.</returns>
         private string GetModuleDirectory()
         {
             VistaFolderBrowserDialog folderBrowserDialog = new VistaFolderBrowserDialog()

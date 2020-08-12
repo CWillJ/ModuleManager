@@ -2,7 +2,7 @@
 {
     using System.Windows;
     using System.Windows.Controls;
-    using ModuleManager.Classes;
+    using ModuleManager.DataObjects;
 
     /// <summary>
     /// Used to selected a DataTemplate in the view.

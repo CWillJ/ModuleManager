@@ -7,6 +7,7 @@
     using System.Reflection;
     using System.Text.RegularExpressions;
     using System.Xml;
+    using ModuleManager.DataObjects;
 
     /// <summary>
     /// XmlDescriptionRetriever is used to get text form an xml file.
@@ -149,17 +150,14 @@
             }
             catch (FileNotFoundException)
             {
-                Debug.WriteLine("Cannot Load Parameters For " + method.Name);
                 return GetParametersFromXml(method, memberIndex);
             }
             catch (FileLoadException)
             {
-                Debug.WriteLine("Cannot Load Parameters For " + method.Name);
                 return GetParametersFromXml(method, memberIndex);
             }
             catch (TypeLoadException)
             {
-                Debug.WriteLine("Cannot Load Parameters For " + method.Name);
                 return GetParametersFromXml(method, memberIndex);
             }
 
@@ -222,9 +220,12 @@
             string paramDescription;
             string paramType;
 
+            Debug.WriteLine("Cannot Load Parameters For " + method.Name);
+
             if (xmlNode == null)
             {
-                return null;
+                parameters.Add(new MemberParameter());
+                return parameters;
             }
 
             foreach (XmlNode xmlParamNode in xmlNode.SelectNodes(@"param"))

@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Classes
+﻿namespace ModuleManager.DataObjects
 {
     /// <summary>
     /// An object designed to hold the type and name of a member's parameter.
@@ -43,6 +43,15 @@
         /// Gets or sets the parameter description.
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Check to see if the MemberParameter is empty.
+        /// </summary>
+        /// <returns>Returns true if the name is not an empty string or null.</returns>
+        public bool IsEmpty()
+        {
+            return string.IsNullOrEmpty(Description) && string.IsNullOrEmpty(Type) && Name == @"None";
+        }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output of parameter type and name.

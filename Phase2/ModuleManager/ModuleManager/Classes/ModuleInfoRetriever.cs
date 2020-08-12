@@ -9,6 +9,7 @@
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Windows;
+    using ModuleManager.DataObjects;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -58,7 +59,7 @@
         /// the information from the dll file and its related .xml file.
         /// </summary>
         /// <returns>Returns an collection of Module objects.</returns>
-        public ObservableCollection<Module> GetModules()
+        public ObservableCollection<DataObjects.Module> GetModules()
         {
             if (string.IsNullOrEmpty(DllDirectory))
             {
@@ -66,7 +67,8 @@
                 return null;
             }
 
-            ObservableCollection<Module> modules = new ObservableCollection<Module>();
+            ObservableCollection<DataObjects.Module> modules =
+                new ObservableCollection<DataObjects.Module>();
             Assembly assembly;
 
             // add all the possible referenced assemblies
@@ -109,7 +111,7 @@
                         PercentOfAssemblyLoaded = ((double)someNum / (double)types.Length) * 100;
 
                         Debug.WriteLine("Adding Module: " + type.Name + " From " + assembly.FullName);
-                        Module tempModule = GetSingleModule(type);
+                        DataObjects.Module tempModule = GetSingleModule(type);
 
                          // Add all non-null modules
                          if (tempModule != null)
@@ -121,7 +123,8 @@
             }
 
             // Return an alphabetized collection of the found modules.
-            return new ObservableCollection<Module>(modules.ToList().OrderBy(mod => mod.Name));
+            return new ObservableCollection<DataObjects.Module>(
+                modules.ToList().OrderBy(mod => mod.Name));
         }
 
         /// <summary>
@@ -129,7 +132,7 @@
         /// </summary>
         /// <param name="type">Type from an assembly.</param>
         /// <returns>A Module type.</returns>
-        private Module GetSingleModule(Type type)
+        private DataObjects.Module GetSingleModule(Type type)
         {
             // Don't load non-public or interface classes
             if (!type.IsPublic || type.IsInterface)
@@ -137,7 +140,7 @@
                 return null;
             }
 
-            return new Module(
+            return new DataObjects.Module(
                 type.Name,
                 DescriptionRetriever.GetModuleDescription(type),
                 AddConstructorsToCollection(type),

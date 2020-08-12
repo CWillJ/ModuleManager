@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Classes
+﻿namespace ModuleManager.DataObjects
 {
     using System.Collections.ObjectModel;
 

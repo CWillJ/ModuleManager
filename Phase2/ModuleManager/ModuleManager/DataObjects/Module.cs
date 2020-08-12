@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Classes
+﻿namespace ModuleManager.DataObjects
 {
     using System;
     using System.Collections.ObjectModel;
@@ -45,14 +45,18 @@
             Name = name;
             Description = description;
             Members = new ObservableCollection<ModuleMember>();
-
-            Constructors = constructors;
+            Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = properties;
             Methods = methods;
 
-            foreach (var constructor in Constructors)
+            foreach (var constructor in constructors)
             {
-                Members.Add(constructor);
+                if (!string.IsNullOrEmpty(constructor.Description) ||
+                    !constructor.Parameters[0].IsEmpty())
+                {
+                    Constructors.Add(constructor);
+                    Members.Add(constructor);
+                }
             }
 
             foreach (var property in Properties)

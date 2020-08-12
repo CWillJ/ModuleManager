@@ -60,7 +60,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <!--
+            <!-- Future Implementation of Individual UserControls
             <Grid Grid.Column="0">
                 <views:ModuleView/>
             </Grid>
@@ -128,7 +128,8 @@
                         BorderBrush="Black"
                         BorderThickness="2"
                         Margin="10,0,10,0">
-                    <TextBlock TextAlignment="Center"
+                    <TextBlock
+                        TextAlignment="Center"
                                MinHeight="20"
                                FontWeight="Bold"
                                Text="Description"
