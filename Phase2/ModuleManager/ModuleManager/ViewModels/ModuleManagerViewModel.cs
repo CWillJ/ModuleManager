@@ -189,10 +189,12 @@
             Modules.Clear();
 
             LoadingModules = true;
+
             Thread thread = new Thread(new ThreadStart(UpdateProgressBarText))
             {
                 IsBackground = true
             };
+
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
