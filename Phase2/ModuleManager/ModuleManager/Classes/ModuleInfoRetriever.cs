@@ -58,8 +58,9 @@
         /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// </summary>
+        /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
         /// <returns>Returns an collection of Module objects.</returns>
-        public ObservableCollection<DataObjects.Module> GetModules()
+        public ObservableCollection<DataObjects.Module> GetModules(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
             {
@@ -73,9 +74,6 @@
 
             // add all the possible referenced assemblies
             string[] runtimeEnvirnmentFiles = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), @"*.dll");
-
-            // add all the files of the assemblies you actually want info from
-            string[] dllFiles = Directory.GetFiles(DllDirectory, @"*.dll");
 
             var paths = new List<string>(runtimeEnvirnmentFiles);
             paths.AddRange(dllFiles);

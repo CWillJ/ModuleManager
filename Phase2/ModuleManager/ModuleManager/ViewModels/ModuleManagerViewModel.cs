@@ -179,6 +179,15 @@
                 return;
             }
 
+            // add all the files of the assemblies you actually want info from
+            string[] dllFiles = Directory.GetFiles(moduleDirectory, @"*.dll");
+
+            if (dllFiles.Length == 0)
+            {
+                MessageBox.Show("No .dll Files Found In " + moduleDirectory);
+                return;
+            }
+
             InfoRetriever = new ModuleInfoRetriever(moduleDirectory);
 
             // Show progress bar
@@ -198,7 +207,7 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            Modules = await Task.Run(() => InfoRetriever.GetModules());
+            Modules = await Task.Run(() => InfoRetriever.GetModules(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;

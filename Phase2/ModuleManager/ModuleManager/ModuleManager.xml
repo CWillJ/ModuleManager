@@ -96,11 +96,12 @@
             Gets or sets all xml descriptions.
             </summary>
         </member>
-        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetModules">
+        <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetModules(System.String[])">
             <summary>
             GetModules will create an ObservableCollection of type Module to organize
             the information from the dll file and its related .xml file.
             </summary>
+            <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
             <returns>Returns an collection of Module objects.</returns>
         </member>
         <member name="M:ModuleManager.Classes.ModuleInfoRetriever.GetSingleModule(System.Type)">
@@ -737,6 +738,36 @@
         <member name="M:ModuleManager.Views.ProgressBar.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>
