@@ -1,0 +1,118 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:data="clr-namespace:ModuleManager.DataObjects"
+                    xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs">
+    
+    <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <behaviors:TemplateSelector x:Key="myDataTemplateSelector"/>
+
+    <!-- Member Parameter Data Template -->
+    <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
+        <StackPanel>
+            <TextBlock Text="{Binding Mode=OneWay}"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Module Constructor Data Template -->
+    <DataTemplate x:Key="moduleConstructorTemplate" DataType="{x:Type data:ModuleConstructor}">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
+                       FontWeight="Bold"
+                       FontSize="14"/>
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                <LineBreak/>
+            </TextBlock>
+
+            <TextBlock Text="Parameters:" FontWeight="Bold"/>
+
+            <ItemsControl ItemsSource="{Binding Path=Parameters, Mode=OneWay}"
+                          ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Module Properties Data Template -->
+    <DataTemplate x:Key="modulePropertyTemplate" DataType="{x:Type data:ModuleProperty}">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
+                       FontWeight="Bold"
+                       FontSize="14"/>
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                <LineBreak/>
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap">
+                <Run FontWeight="Bold" Text="Data Type: "/>
+                <Run Text="{Binding Path=DataType, Mode=OneWay}"/>
+                <LineBreak/>
+            </TextBlock>
+
+            <TextBlock>
+                <Run FontWeight="Bold" Text="Can  Read: "/>
+                <Run Text="{Binding Path=CanRead, Mode=OneWay}"/>
+                <LineBreak/>
+                <Run FontWeight="Bold" Text="Can Write: "/>
+                <Run Text="{Binding Path=CanWrite, Mode=OneWay}"/>
+                <LineBreak/>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+    
+    <!-- Module Method Data Template -->
+    <DataTemplate x:Key="moduleMethodTemplate" DataType="{x:Type data:ModuleMethod}">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
+                       FontWeight="Bold"
+                       FontSize="14"/>
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                <LineBreak/>
+            </TextBlock>
+
+            <TextBlock Text="Parameters:" FontWeight="Bold"/>
+
+            <ItemsControl ItemsSource="{Binding Path=Parameters, Mode=OneWay}"
+                          ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+
+            <TextBlock>
+                <Run FontWeight="Bold" Text="Return: "/>
+                <LineBreak/>
+                <Run Text="{Binding Path=ReturnType, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=ReturnDescription, Mode=OneWay}"/>
+                <LineBreak/>
+            </TextBlock>
+
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Module Data Template -->
+    <DataTemplate x:Key="moduleTemplate" DataType="{x:Type data:Module}">
+        <StackPanel>
+
+            <TextBlock Text="{Binding Path=Name, Mode=OneWay}"
+                       FontWeight="Bold"
+                       FontSize="16"/>
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}"/>
+                <LineBreak/>
+            </TextBlock>
+
+            <ItemsControl ItemsSource="{Binding Path=Constructors, Mode=OneWay}"
+                          ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+
+            <ItemsControl ItemsSource="{Binding Path=Properties, Mode=OneWay}"
+                          ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+
+            <ItemsControl ItemsSource="{Binding Path=Methods, Mode=OneWay}"
+                          ItemTemplateSelector="{StaticResource myDataTemplateSelector}"/>
+        </StackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>
