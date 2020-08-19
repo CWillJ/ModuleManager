@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.DataObjects
+﻿namespace ModuleObjects
 {
     /// <summary>
     /// The base class for ModuleConstructor, ModuleProperty, and ModuleMethod.

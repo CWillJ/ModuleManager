@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Classes
+﻿namespace ModuleRetriever
 {
     using System;
     using System.Windows.Input;

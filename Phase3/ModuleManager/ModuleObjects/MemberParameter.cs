@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.DataObjects
+﻿namespace ModuleObjects
 {
     /// <summary>
     /// An object designed to hold the type and name of a member's parameter.

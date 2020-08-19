@@ -26,6 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
+    <ProjectReference Include="..\ModuleRetriever\ModuleRetriever.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Prism">
       <HintPath>..\Lib\Prism.dll</HintPath>
     </Reference>
@@ -34,6 +39,12 @@
     </Reference>
     <Reference Include="Prism.Wpf">
       <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.Analyzers">
+      <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.Analyzers.CodeFixes">
+      <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Cloud">
       <HintPath>..\Lib\Telerik.Windows.Cloud.dll</HintPath>

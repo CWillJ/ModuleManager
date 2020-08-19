@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="StyleCop.Analyzers">
+      <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.Analyzers.CodeFixes">
+      <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

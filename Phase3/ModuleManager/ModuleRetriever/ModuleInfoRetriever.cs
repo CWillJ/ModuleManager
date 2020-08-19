@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Classes
+﻿namespace ModuleRetriever
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,8 @@
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using System.Windows;
-    using ModuleManager.DataObjects;
+    ////using System.Windows;
+    using ModuleObjects;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -60,16 +60,16 @@
         /// </summary>
         /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
         /// <returns>Returns an collection of Module objects.</returns>
-        public ObservableCollection<DataObjects.Module> GetModules(string[] dllFiles)
+        public ObservableCollection<ModuleObjects.Module> GetModules(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
             {
-                MessageBox.Show(@"The Directory Path Cannot Be Empty");
+                ////MessageBox.Show(@"The Directory Path Cannot Be Empty");
                 return null;
             }
 
-            ObservableCollection<DataObjects.Module> modules =
-                new ObservableCollection<DataObjects.Module>();
+            ObservableCollection<ModuleObjects.Module> modules =
+                new ObservableCollection<ModuleObjects.Module>();
             Assembly assembly;
 
             // add all the possible referenced assemblies
@@ -109,7 +109,7 @@
                         PercentOfAssemblyLoaded = ((double)someNum / (double)types.Length) * 100;
 
                         Debug.WriteLine("Adding Module: " + type.Name + " From " + assembly.FullName);
-                        DataObjects.Module tempModule = GetSingleModule(type);
+                        ModuleObjects.Module tempModule = GetSingleModule(type);
 
                          // Add all non-null modules
                          if (tempModule != null)
@@ -121,7 +121,7 @@
             }
 
             // Return an alphabetized collection of the found modules.
-            return new ObservableCollection<DataObjects.Module>(
+            return new ObservableCollection<ModuleObjects.Module>(
                 modules.ToList().OrderBy(mod => mod.Name));
         }
 
@@ -130,7 +130,7 @@
         /// </summary>
         /// <param name="type">Type from an assembly.</param>
         /// <returns>A Module type.</returns>
-        private DataObjects.Module GetSingleModule(Type type)
+        private ModuleObjects.Module GetSingleModule(Type type)
         {
             // Don't load non-public or interface classes
             if (!type.IsPublic || type.IsInterface)
@@ -138,7 +138,7 @@
                 return null;
             }
 
-            return new DataObjects.Module(
+            return new ModuleObjects.Module(
                 type.Name,
                 DescriptionRetriever.GetModuleDescription(type),
                 AddConstructorsToCollection(type),

@@ -9,8 +9,8 @@
     using System.Windows;
     using System.Xml.Serialization;
     using Microsoft.Win32;
-    using ModuleManager.Classes;
-    using ModuleManager.DataObjects;
+    using ModuleObjects;
+    using ModuleRetriever;
     using Ookii.Dialogs.Wpf;
 
     /// <summary>
