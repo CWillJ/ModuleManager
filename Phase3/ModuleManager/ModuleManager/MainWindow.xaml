@@ -1,4 +1,4 @@
-﻿<telerik:RadWindow x:Class="ModuleManager.MainWindow"
+﻿<Window x:Class="ModuleManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,24 +7,24 @@
         xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
         xmlns:views="clr-namespace:ModuleManager.Views"
         mc:Ignorable="d"
-        Header="Module Manager"
+        Title="Module Manager"
         Height="550"
         Width="1000"
         MinHeight="500"
         MinWidth="800"
         Background="LightGray">
 
-    <telerik:RadWindow.DataContext>
+    <Window.DataContext>
         <viewModel:ModuleManagerViewModel/>
-    </telerik:RadWindow.DataContext>
+    </Window.DataContext>
 
-    <telerik:RadWindow.Resources>
+    <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views\DataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </telerik:RadWindow.Resources>
+    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -161,4 +161,4 @@
             </Grid>
         </Grid>
     </Grid>
-</telerik:RadWindow>
+</Window>
