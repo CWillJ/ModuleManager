@@ -4,12 +4,34 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleObjects\ModuleObjects.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Reference Include="Prism">
+      <HintPath>..\Lib\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf">
+      <HintPath>..\Lib\Prism.Unity.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="StyleCop.Analyzers">
       <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.dll</HintPath>
     </Reference>
     <Reference Include="StyleCop.Analyzers.CodeFixes">
       <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\Lib\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\Lib\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\Lib\Telerik.Windows.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
 

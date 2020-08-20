@@ -1,26 +1,29 @@
-﻿<UserControl x:Class="ModuleManager.Views.ProgressBar"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
-             mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="360">
-    
+﻿<UserControl
+    x:Class="ModuleManager.Views.ProgressBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:behaviors="clr-namespace:ModuleManager.Behavoirs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="50"
+    d:DesignWidth="360"
+    mc:Ignorable="d">
+
     <UserControl.Resources>
-        <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <behaviors:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
 
-    <Grid Visibility="{Binding Path=ProgressBarIsVisible,
-        Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-        
-        <ProgressBar Value="{Binding Path=CurrentProgress, Mode=OneWay}"
-                     IsIndeterminate="False"
-                     Minimum="0"
-                     Maximum="100"/>
+    <Grid Visibility="{Binding Path=ProgressBarIsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
 
-        <TextBlock Text="{Binding Path=ProgressBarText, Mode=OneWay}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <ProgressBar
+            IsIndeterminate="False"
+            Maximum="100"
+            Minimum="0"
+            Value="{Binding Path=CurrentProgress, Mode=OneWay}" />
+
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding Path=ProgressBarText, Mode=OneWay}" />
     </Grid>
 </UserControl>
