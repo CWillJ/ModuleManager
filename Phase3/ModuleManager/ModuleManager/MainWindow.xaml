@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
     xmlns:views="clr-namespace:ModuleManager.Views"
@@ -11,6 +12,7 @@
     Height="550"
     MinWidth="800"
     MinHeight="500"
+    navigation:RadWindowInteropHelper.AllowTransparency="True"
     Background="LightGray"
     Header="Module Manager"
     mc:Ignorable="d">
@@ -23,10 +25,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views\DataTemplates.xaml" />
-                <ResourceDictionary Source="Themes\System.Windows.xaml" />
                 <ResourceDictionary Source="Themes\Telerik.Windows.Controls.xaml" />
                 <ResourceDictionary Source="Themes\Telerik.Windows.Controls.Navigation.xaml" />
-                <ResourceDictionary Source="Themes\Telerik.Windows.Data.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </telerik:RadWindow.Resources>

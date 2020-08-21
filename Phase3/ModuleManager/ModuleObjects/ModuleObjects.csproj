@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -23,15 +24,6 @@
     </Reference>
     <Reference Include="StyleCop.Analyzers.CodeFixes">
       <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls">
-      <HintPath>..\Lib\Telerik.Windows.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Navigation">
-      <HintPath>..\Lib\Telerik.Windows.Controls.Navigation.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Data">
-      <HintPath>..\Lib\Telerik.Windows.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
 
