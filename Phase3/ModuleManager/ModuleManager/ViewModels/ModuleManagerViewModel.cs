@@ -11,7 +11,6 @@
     using Microsoft.Win32;
     using ModuleObjects;
     using ModuleRetriever;
-    using Ookii.Dialogs.Wpf;
     using Telerik.Windows.Controls;
 
     /// <summary>
@@ -324,11 +323,6 @@
         /// <returns>String of the directory path.</returns>
         private string GetModuleDirectory()
         {
-            ////VistaFolderBrowserDialog folderBrowserDialog = new VistaFolderBrowserDialog()
-            ////{
-            ////    Description = @"Select a Folder That Contains .dll Files"
-            ////};
-
             RadOpenFolderDialog folderBrowserDialog = new RadOpenFolderDialog();
 
             folderBrowserDialog.ShowDialog();

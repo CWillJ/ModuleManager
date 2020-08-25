@@ -33,6 +33,12 @@
     <Reference Include="StyleCop.Analyzers.CodeFixes">
       <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Abstractions">
+      <HintPath>..\Lib\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container">
+      <HintPath>..\Lib\Unity.Container.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
