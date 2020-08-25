@@ -44,6 +44,18 @@
     <Reference Include="Telerik.Windows.Controls">
       <HintPath>..\Lib\Telerik.Windows.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data">
+      <HintPath>..\Lib\Telerik.Windows.Controls.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.FileDialogs">
+      <HintPath>..\Lib\Telerik.Windows.Controls.FileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView">
+      <HintPath>..\Lib\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\Lib\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Windows.Controls.Navigation">
       <HintPath>..\Lib\Telerik.Windows.Controls.Navigation.dll</HintPath>
     </Reference>

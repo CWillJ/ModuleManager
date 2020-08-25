@@ -12,6 +12,7 @@
     using ModuleObjects;
     using ModuleRetriever;
     using Ookii.Dialogs.Wpf;
+    using Telerik.Windows.Controls;
 
     /// <summary>
     /// ModuleManagerViewModel will handle commands from the main view.
@@ -323,15 +324,18 @@
         /// <returns>String of the directory path.</returns>
         private string GetModuleDirectory()
         {
-            VistaFolderBrowserDialog folderBrowserDialog = new VistaFolderBrowserDialog()
-            {
-                Description = @"Select a Folder That Contains .dll Files"
-            };
+            ////VistaFolderBrowserDialog folderBrowserDialog = new VistaFolderBrowserDialog()
+            ////{
+            ////    Description = @"Select a Folder That Contains .dll Files"
+            ////};
 
-            if (folderBrowserDialog.ShowDialog() == true)
+            RadOpenFolderDialog folderBrowserDialog = new RadOpenFolderDialog();
+
+            folderBrowserDialog.ShowDialog();
+
+            if (folderBrowserDialog.DialogResult == true)
             {
-                string s = folderBrowserDialog.SelectedPath;
-                return s;
+                return folderBrowserDialog.FileName;
             }
 
             return null;

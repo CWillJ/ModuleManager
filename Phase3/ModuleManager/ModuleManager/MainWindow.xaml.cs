@@ -1,6 +1,5 @@
 ﻿namespace ModuleManager
 {
-    ////using System.Windows;
     using Telerik.Windows.Controls;
 
     /// <summary>
