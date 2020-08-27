@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="4.7.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
   </ItemGroup>
 
@@ -32,6 +28,9 @@
     </Reference>
     <Reference Include="StyleCop.Analyzers.CodeFixes">
       <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.MetadataLoadContext">
+      <HintPath>..\Lib\System.Reflection.MetadataLoadContext.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Abstractions">
       <HintPath>..\Lib\Unity.Abstractions.dll</HintPath>

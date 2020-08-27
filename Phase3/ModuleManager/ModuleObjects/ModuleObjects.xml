@@ -78,11 +78,6 @@
             <param name="type">Type object found in an Assembly.</param>
             <param name="dllFileName">File name of the dll file.</param>
         </member>
-        <member name="P:ModuleObjects.Module.IsSelected">
-            <summary>
-            Gets or sets a value indicating whether the member is selected.
-            </summary>
-        </member>
         <member name="P:ModuleObjects.Module.IsEnabled">
             <summary>
             Gets or sets a value indicating whether the module is enabled or disabled.

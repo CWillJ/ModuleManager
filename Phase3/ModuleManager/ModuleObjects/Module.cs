@@ -14,7 +14,6 @@
         /// </summary>
         public Module()
         {
-            IsSelected = false;
             IsEnabled = false;
             Name = string.Empty;
             Description = string.Empty;
@@ -40,7 +39,6 @@
             ObservableCollection<ModuleProperty> properties,
             ObservableCollection<ModuleMethod> methods)
         {
-            IsSelected = false;
             IsEnabled = false;
             Name = name;
             Description = description;
@@ -77,17 +75,11 @@
         /// <param name="dllFileName">File name of the dll file.</param>
         public Module(Type type, string dllFileName)
         {
-            IsSelected = false;
             IsEnabled = false;
             Name = type.Name;
             Description = dllFileName;
             Methods = new ObservableCollection<ModuleMethod>();
         }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the member is selected.
-        /// </summary>
-        public bool IsSelected { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the module is enabled or disabled.
