@@ -28,19 +28,6 @@
             Application Entry Point.
             </summary>
         </member>
-        <member name="T:ModuleManager.Behavoirs.TemplateSelector">
-            <summary>
-            Used to selected a DataTemplate in the view.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Behavoirs.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
-            <summary>
-            Used to select the DataTemplate used in the view.
-            </summary>
-            <param name="item">Object.</param>
-            <param name="container">Container.</param>
-            <returns>A DataTemplate depending on the object passed in.</returns>
-        </member>
         <member name="T:ModuleManager.MainWindow">
             <summary>
             Interaction logic for MainWindow.xaml.
@@ -58,6 +45,32 @@
             <summary>
             InitializeComponent
             </summary>
+        </member>
+        <member name="T:ModuleManager.TemplateSelectors.TemplateSelector">
+            <summary>
+            Used to selected a DataTemplate in the view.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TemplateSelectors.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Used to select the DataTemplate for the description.
+            </summary>
+            <param name="item">Object.</param>
+            <param name="container">Container.</param>
+            <returns>A DataTemplate depending on the object passed in.</returns>
+        </member>
+        <member name="T:ModuleManager.TemplateSelectors.TreeViewItemTemplateSelector">
+            <summary>
+            Used to selected a DataTemplate in the view.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TemplateSelectors.TreeViewItemTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Used to select the DataTemplate for tree view items.
+            </summary>
+            <param name="item">Object.</param>
+            <param name="container">Container.</param>
+            <returns>A DataTemplate depending on the object passed in.</returns>
         </member>
         <member name="T:ModuleManager.ViewModels.ModuleManagerViewModel">
             <summary>

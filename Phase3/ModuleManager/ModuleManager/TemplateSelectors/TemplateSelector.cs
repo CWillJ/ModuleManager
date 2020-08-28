@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Behavoirs
+﻿namespace ModuleManager.TemplateSelectors
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -10,7 +10,7 @@
     public class TemplateSelector : DataTemplateSelector
     {
         /// <summary>
-        /// Used to select the DataTemplate used in the view.
+        /// Used to select the DataTemplate for the description.
         /// </summary>
         /// <param name="item">Object.</param>
         /// <param name="container">Container.</param>

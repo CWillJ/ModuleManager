@@ -126,7 +126,7 @@
 
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="14" Text="{Binding Path=Name}" />
+                                    <ItemsControl ItemTemplateSelector="{StaticResource TreeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
 
