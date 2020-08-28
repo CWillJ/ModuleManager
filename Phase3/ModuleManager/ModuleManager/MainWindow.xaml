@@ -9,7 +9,7 @@
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
     xmlns:views="clr-namespace:ModuleManager.Views"
-    Width="1000"
+    Width="1500"
     Height="750"
     MinWidth="800"
     MinHeight="500"
@@ -71,7 +71,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2.5*" />
             </Grid.ColumnDefinitions>
 
             <!-- Future Implementation of Individual UserControls
@@ -105,7 +105,7 @@
 
                 <!--  TreeView of Module Objects  -->
                 <telerik:RadTreeView
-                    x:Name="myTreeView"
+                    x:Name="moduleTreeView"
                     Grid.Row="1"
                     MinWidth="100"
                     MinHeight="275"
@@ -117,13 +117,16 @@
                     <telerik:RadTreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox Margin="5,0" IsChecked="{Binding Path=IsEnabled}" />
-                                <TextBlock FontSize="11" Text="{Binding Path=Name}" />
+                                <CheckBox IsChecked="{Binding Path=IsEnabled}" />
+                                <TextBlock
+                                    Margin="0,8,0,0"
+                                    FontSize="16"
+                                    Text="{Binding Path=Name}" />
                             </StackPanel>
 
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="11" Text="{Binding Path=Name}" />
+                                    <TextBlock FontSize="14" Text="{Binding Path=Name}" />
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
 
@@ -161,11 +164,11 @@
                     Background="White"
                     BorderBrush="Black"
                     BorderThickness="1">
-                    <ScrollViewer Margin="10,5,0,0">
+                    <ScrollViewer Margin="10,5,0,0" HorizontalScrollBarVisibility="Auto">
                         <ContentControl
                             x:Name="MemberText"
-                            Content="{Binding ElementName=myTreeView, Path=SelectedItem}"
-                            ContentTemplateSelector="{StaticResource myDataTemplateSelector}" />
+                            Content="{Binding ElementName=moduleTreeView, Path=SelectedItem}"
+                            ContentTemplateSelector="{StaticResource ModuleDataTemplateSelector}" />
                     </ScrollViewer>
                 </Border>
             </Grid>
