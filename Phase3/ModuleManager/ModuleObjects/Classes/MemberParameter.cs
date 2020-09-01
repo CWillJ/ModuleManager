@@ -1,4 +1,4 @@
-﻿namespace ModuleObjects
+﻿namespace ModuleObjects.Classes
 {
     /// <summary>
     /// An object designed to hold the type and name of a member's parameter.

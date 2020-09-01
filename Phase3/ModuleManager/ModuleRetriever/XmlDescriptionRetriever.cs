@@ -7,7 +7,7 @@
     using System.Reflection;
     using System.Text.RegularExpressions;
     using System.Xml;
-    using ModuleObjects;
+    using ModuleObjects.Classes;
 
     /// <summary>
     /// XmlDescriptionRetriever is used to get text form an xml file.

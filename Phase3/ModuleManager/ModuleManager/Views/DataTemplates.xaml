@@ -1,13 +1,14 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:data="clr-namespace:ModuleObjects;assembly=ModuleObjects"
+    xmlns:data="clr-namespace:ModuleObjects.Classes;assembly=ModuleObjects"
+    xmlns:interface="clr-namespace:ModuleObjects.Interfaces;assembly=ModuleObjects"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:templateSelectors="clr-namespace:ModuleManager.TemplateSelectors">
 
     <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <templateSelectors:TemplateSelector x:Key="ModuleDataTemplateSelector" />
-    <templateSelectors:TreeViewItemTemplateSelector x:Key="TreeViewItemTemplateSelector" />
+    <templateSelectors:TreeViewItemTemplateSelector x:Key="treeViewItemTemplateSelector" />
 
     <!--  Member Parameter Data Template  -->
     <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
@@ -122,8 +123,8 @@
     </DataTemplate>
 
     <!--  Data Template For Tree Items  -->
-    <DataTemplate x:Key="moduleMemberTreeItem" DataType="{x:Type data:ModuleMember}">
-        <ItemsControl ItemTemplateSelector="{StaticResource TreeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
+    <DataTemplate x:Key="moduleMemberTreeItem" DataType="{x:Type interface:IModuleMember}">
+        <ItemsControl ItemTemplateSelector="{StaticResource treeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
     </DataTemplate>
 
     <!--  Constructor Name  -->

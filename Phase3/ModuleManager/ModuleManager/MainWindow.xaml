@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:ModuleManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+    xmlns:prism="http://prismlibrary.com/"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:viewModel="clr-namespace:ModuleManager.ViewModels"
     xmlns:views="clr-namespace:ModuleManager.Views"
@@ -126,7 +127,7 @@
 
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <ItemsControl ItemTemplateSelector="{StaticResource TreeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
+                                    <ItemsControl ItemTemplateSelector="{StaticResource treeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
 

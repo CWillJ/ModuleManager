@@ -2,7 +2,7 @@
 {
     using System.Windows;
     using System.Windows.Controls;
-    using ModuleObjects;
+    using ModuleObjects.Classes;
     using Unity.Injection;
 
     /// <summary>
@@ -28,13 +28,11 @@
                 {
                     return element.FindResource("moduleMemberTreeItemConstructor") as DataTemplate;
                 }
-
-                if (mp.DataType != null)
+                else if (mp.DataType != null)
                 {
                     return element.FindResource("moduleMemberTreeItemProperty") as DataTemplate;
                 }
-
-                if (!string.IsNullOrEmpty(mm.ReturnType))
+                else if (!string.IsNullOrEmpty(mm.ReturnType))
                 {
                     return element.FindResource("moduleMemberTreeItemMethod") as DataTemplate;
                 }

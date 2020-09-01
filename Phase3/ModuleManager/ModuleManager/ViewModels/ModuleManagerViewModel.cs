@@ -9,8 +9,9 @@
     using System.Windows;
     using System.Xml.Serialization;
     using Microsoft.Win32;
-    using ModuleObjects;
+    using ModuleObjects.Classes;
     using ModuleRetriever;
+    using ModuleRetriever.Interfaces;
     using Telerik.Windows.Controls;
 
     /// <summary>
@@ -75,7 +76,7 @@
         /// <summary>
         /// Gets or sets a ModuleInfoRetriever.
         /// </summary>
-        public ModuleInfoRetriever InfoRetriever { get; set; }
+        public IModuleInfoRetriever InfoRetriever { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the application is currently loading modules.
