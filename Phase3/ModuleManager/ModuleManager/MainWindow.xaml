@@ -127,7 +127,7 @@
 
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <ItemsControl ItemTemplateSelector="{StaticResource treeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
+                                    <ItemsControl ItemsSource="{StaticResource moduleMemberTreeItemConstructor}" />
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
 

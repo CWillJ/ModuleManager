@@ -19,6 +19,11 @@
             Gets or sets the current percentage of load compleation of the current assembly.
             </summary>
         </member>
+        <member name="P:ModuleRetriever.Interfaces.IModuleInfoRetriever.DllDirectory">
+            <summary>
+            Gets or sets DllDirectory is the directory path of the .dll files.
+            </summary>
+        </member>
         <member name="M:ModuleRetriever.Interfaces.IModuleInfoRetriever.GetModules(System.String[])">
             <summary>
             GetModules will create an ObservableCollection of type Module to organize

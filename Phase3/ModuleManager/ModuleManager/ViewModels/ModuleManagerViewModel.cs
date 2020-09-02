@@ -40,6 +40,7 @@
             ModuleDirectory = string.Empty;
             LoadModulesCommand = new ModuleManagerICommand(StoreModules);
             SaveConfigCommand = new ModuleManagerICommand(SaveConfig);
+            InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
@@ -189,7 +190,7 @@
                 return;
             }
 
-            InfoRetriever = new ModuleInfoRetriever(moduleDirectory);
+            InfoRetriever.DllDirectory = moduleDirectory;
 
             // Show progress bar
             CurrentProgress = 0;
@@ -202,7 +203,7 @@
 
             Thread thread = new Thread(new ThreadStart(UpdateProgressBarText))
             {
-                IsBackground = true
+                IsBackground = true,
             };
 
             thread.Start();
@@ -255,7 +256,7 @@
                     InitialDirectory = Directory.GetCurrentDirectory(),
                     Filter = "xml files (*.xml)|*.xml",
                     Title = "Save Configuration File",
-                    RestoreDirectory = true
+                    RestoreDirectory = true,
                 };
 
                 if (saveFileDialog.ShowDialog() == true)
@@ -296,7 +297,7 @@
                     InitialDirectory = Directory.GetCurrentDirectory(),
                     Filter = "xml files (*.xml)|*.xml",
                     Title = "Load Configuration File",
-                    RestoreDirectory = true
+                    RestoreDirectory = true,
                 };
 
                 if (openFileDialog.ShowDialog() == true)

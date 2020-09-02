@@ -19,6 +19,11 @@
         double PercentOfAssemblyLoaded { get; set; }
 
         /// <summary>
+        /// Gets or sets DllDirectory is the directory path of the .dll files.
+        /// </summary>
+        string DllDirectory { get; set; }
+
+        /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// </summary>

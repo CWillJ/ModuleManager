@@ -1,8 +1,8 @@
 ﻿namespace ModuleObjects.Classes
 {
-    using ModuleObjects.Interfaces;
     using System;
     using System.Collections.ObjectModel;
+    using ModuleObjects.Interfaces;
 
     /// <summary>
     /// Module object holds the name and description of a module.

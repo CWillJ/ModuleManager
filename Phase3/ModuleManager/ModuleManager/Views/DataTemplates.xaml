@@ -128,7 +128,7 @@
     </DataTemplate>
 
     <!--  Constructor Name  -->
-    <DataTemplate x:Key="moduleMemberTreeItemConstructor" DataType="{x:Type data:ModuleConstructor}">
+    <DataTemplate x:Key="moduleMemberTreeItemConstructor">
         <StackPanel Orientation="Horizontal">
             <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Constructor Icon.png" />
             <TextBlock FontSize="14" Text="{Binding Path=Name}" />

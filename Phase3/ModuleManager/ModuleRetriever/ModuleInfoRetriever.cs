@@ -9,7 +9,7 @@
     using System.Reflection;
     using System.Runtime.InteropServices;
     using ModuleObjects.Classes;
-    using Interfaces;
+    using ModuleRetriever.Interfaces;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -112,10 +112,10 @@
                         ModuleObjects.Classes.Module tempModule = GetSingleModule(type);
 
                          // Add all non-null modules
-                         if (tempModule != null)
-                         {
+                        if (tempModule != null)
+                        {
                             modules.Add(tempModule);
-                         }
+                        }
                     }
                 }
             }

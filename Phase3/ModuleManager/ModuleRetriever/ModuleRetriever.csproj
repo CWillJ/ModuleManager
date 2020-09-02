@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+  	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
+  	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
   </ItemGroup>
 
@@ -22,12 +27,6 @@
     </Reference>
     <Reference Include="Prism.Wpf">
       <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="StyleCop.Analyzers">
-      <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.dll</HintPath>
-    </Reference>
-    <Reference Include="StyleCop.Analyzers.CodeFixes">
-      <HintPath>..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll</HintPath>
     </Reference>
     <Reference Include="System.Reflection.MetadataLoadContext">
       <HintPath>..\Lib\System.Reflection.MetadataLoadContext.dll</HintPath>
