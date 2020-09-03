@@ -3,7 +3,7 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for ProgressBar.xaml
+    /// Interaction logic for ProgressBar.xaml.
     /// </summary>
     public partial class ProgressBar : UserControl
     {

@@ -127,7 +127,13 @@
 
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <ItemsControl ItemsSource="{StaticResource moduleMemberTreeItemConstructor}" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Property Icon.png" />
+                                        <TextBlock
+                                            Margin="0,18,0,0"
+                                            FontSize="14"
+                                            Text="{Binding Path=Name}" />
+                                    </StackPanel>
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
 

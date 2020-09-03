@@ -2,6 +2,9 @@
 {
     using System.Collections.ObjectModel;
 
+    /// <summary>
+    /// Module object interface.
+    /// </summary>
     public interface IModule
     {
         /// <summary>
@@ -17,6 +20,6 @@
         /// <summary>
         /// Gets or sets all of the module members.
         /// </summary>
-        ObservableCollection<IModuleMember> Members { set; get; }
+        ObservableCollection<IModuleMember> Members { get; set; }
     }
 }

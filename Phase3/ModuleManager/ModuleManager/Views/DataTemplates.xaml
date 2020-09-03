@@ -123,7 +123,7 @@
     </DataTemplate>
 
     <!--  Data Template For Tree Items  -->
-    <DataTemplate x:Key="moduleMemberTreeItem" DataType="{x:Type interface:IModuleMember}">
+    <DataTemplate x:Key="moduleMemberTreeItem" DataType="{x:Type data:ModuleMember}">
         <ItemsControl ItemTemplateSelector="{StaticResource treeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
     </DataTemplate>
 
@@ -131,7 +131,6 @@
     <DataTemplate x:Key="moduleMemberTreeItemConstructor">
         <StackPanel Orientation="Horizontal">
             <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Constructor Icon.png" />
-            <TextBlock FontSize="14" Text="{Binding Path=Name}" />
         </StackPanel>
     </DataTemplate>
 
@@ -139,7 +138,6 @@
     <DataTemplate x:Key="moduleMemberTreeItemProperty" DataType="{x:Type data:ModuleProperty}">
         <StackPanel Orientation="Horizontal">
             <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Property Icon.png" />
-            <TextBlock FontSize="14" Text="{Binding Path=Name}" />
         </StackPanel>
     </DataTemplate>
 
@@ -147,7 +145,6 @@
     <DataTemplate x:Key="moduleMemberTreeItemMethod" DataType="{x:Type data:ModuleMethod}">
         <StackPanel Orientation="Horizontal">
             <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Method Icon.png" />
-            <TextBlock FontSize="14" Text="{Binding Path=Name}" />
         </StackPanel>
     </DataTemplate>
 

@@ -3,7 +3,7 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for LoadSaveButtons.xaml
+    /// Interaction logic for LoadSaveButtons.xaml.
     /// </summary>
     public partial class LoadSaveButtons : UserControl
     {

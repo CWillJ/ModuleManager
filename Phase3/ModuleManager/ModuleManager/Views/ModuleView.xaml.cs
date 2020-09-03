@@ -3,7 +3,7 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for ModuleView.xaml
+    /// Interaction logic for ModuleView.xaml.
     /// </summary>
     public partial class ModuleView : UserControl
     {
