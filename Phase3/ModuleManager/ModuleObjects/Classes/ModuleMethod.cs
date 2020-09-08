@@ -1,12 +1,12 @@
 ﻿namespace ModuleObjects.Classes
 {
     using System.Collections.ObjectModel;
-    ////using ModuleObjects.Interfaces;
+    using ModuleObjects.Interfaces;
 
     /// <summary>
     /// ModuleMethod object holds the description, the parameters and the return type of a member.
     /// </summary>
-    public class ModuleMethod : ModuleMember
+    public class ModuleMethod : IModuleMember
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMethod"/> class. Default constructor.
@@ -47,6 +47,16 @@
 
             ReturnDescription = returnDescription;
         }
+
+        /// <summary>
+        /// Gets or sets the name of the module.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description of the module.
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the member parameters.

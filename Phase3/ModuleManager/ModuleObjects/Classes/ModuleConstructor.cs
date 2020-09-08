@@ -1,12 +1,12 @@
 ﻿namespace ModuleObjects.Classes
 {
     using System.Collections.ObjectModel;
-    ////using ModuleObjects.Interfaces;
+    using ModuleObjects.Interfaces;
 
     /// <summary>
     /// ModuleConstructor object holds the class name, description and the parameters a constructor.
     /// </summary>
-    public class ModuleConstructor : ModuleMember
+    public class ModuleConstructor : IModuleMember
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleConstructor"/> class. Default constructor.
@@ -31,6 +31,16 @@
             Description = description;
             Parameters = parameters;
         }
+
+        /// <summary>
+        /// Gets or sets the name of the module.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description of the module.
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the member parameters.

@@ -19,7 +19,7 @@
             Description = string.Empty;
 
             IsEnabled = false;
-            Members = new ObservableCollection<ModuleMember>();
+            Members = new ObservableCollection<IModuleMember>();
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = new ObservableCollection<ModuleProperty>();
             Methods = new ObservableCollection<ModuleMethod>();
@@ -43,7 +43,7 @@
             IsEnabled = false;
             Name = name;
             Description = description;
-            Members = new ObservableCollection<ModuleMember>();
+            Members = new ObservableCollection<IModuleMember>();
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = properties;
             Methods = methods;
@@ -100,7 +100,7 @@
         /// <summary>
         /// Gets or sets all of the module members.
         /// </summary>
-        public ObservableCollection<ModuleMember> Members { get; set; }
+        public ObservableCollection<IModuleMember> Members { get; set; }
 
         /// <summary>
         /// Gets or sets the constructors in the current module.

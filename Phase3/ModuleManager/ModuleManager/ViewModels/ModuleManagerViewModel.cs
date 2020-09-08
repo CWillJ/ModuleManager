@@ -43,10 +43,10 @@
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
             // Load previously saved module configuration if the ConfigFile exists
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
-            {
-                _modules = LoadConfig();
-            }
+            ////if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
+            ////{
+            ////    _modules = LoadConfig();
+            ////}
         }
 
         /// <summary>

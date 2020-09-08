@@ -12,11 +12,23 @@
             App
             </summary>
         </member>
+        <member name="M:ModuleManager.App.CreateShell">
+            <summary>
+            Creates the shell or main window of the application.
+            </summary>
+            <returns>The shell of the application.</returns>
+        </member>
         <member name="M:ModuleManager.App.OnStartup(System.Windows.StartupEventArgs)">
             <summary>
             Overrides the OnStartup method.
             </summary>
             <param name="e">StartupEvenArgs.</param>
+        </member>
+        <member name="M:ModuleManager.App.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Used to register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for container type registration.</param>
         </member>
         <member name="M:ModuleManager.App.InitializeComponent">
             <summary>

@@ -138,6 +138,16 @@
             <param name="description">Constructor description.</param>
             <param name="parameters">Constructor parameters.</param>
         </member>
+        <member name="P:ModuleObjects.Classes.ModuleConstructor.Name">
+            <summary>
+            Gets or sets the name of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleObjects.Classes.ModuleConstructor.Description">
+            <summary>
+            Gets or sets the description of the module.
+            </summary>
+        </member>
         <member name="P:ModuleObjects.Classes.ModuleConstructor.Parameters">
             <summary>
             Gets or sets the member parameters.
@@ -186,6 +196,16 @@
             <param name="returnType">Member return type.</param>
             <param name="returnDescription">Member return description.</param>
         </member>
+        <member name="P:ModuleObjects.Classes.ModuleMethod.Name">
+            <summary>
+            Gets or sets the name of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleObjects.Classes.ModuleMethod.Description">
+            <summary>
+            Gets or sets the description of the module.
+            </summary>
+        </member>
         <member name="P:ModuleObjects.Classes.ModuleMethod.Parameters">
             <summary>
             Gets or sets the member parameters.
@@ -229,6 +249,16 @@
             <param name="dataType">Property data type.</param>
             <param name="canRead">Property has a 'get' accessor.</param>
             <param name="canWrite">Property has a 'set' accessor.</param>
+        </member>
+        <member name="P:ModuleObjects.Classes.ModuleProperty.Name">
+            <summary>
+            Gets or sets the name of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleObjects.Classes.ModuleProperty.Description">
+            <summary>
+            Gets or sets the description of the module.
+            </summary>
         </member>
         <member name="P:ModuleObjects.Classes.ModuleProperty.DataType">
             <summary>
