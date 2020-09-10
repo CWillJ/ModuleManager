@@ -7,9 +7,11 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Xml;
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleObjects.Classes;
+    using ModuleObjects.Interfaces;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
     using Telerik.Windows.Controls;
@@ -43,10 +45,10 @@
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
             // Load previously saved module configuration if the ConfigFile exists
-            ////if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
-            ////{
-            ////    _modules = LoadConfig();
-            ////}
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
+            {
+                _modules = LoadConfig();
+            }
         }
 
         /// <summary>

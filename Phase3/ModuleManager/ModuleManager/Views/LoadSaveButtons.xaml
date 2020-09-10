@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     d:DesignHeight="100"
-    d:DesignWidth="500"
+    d:DesignWidth="450"
     mc:Ignorable="d">
 
     <StackPanel Orientation="Horizontal">

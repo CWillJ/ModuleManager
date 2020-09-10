@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager
 {
+    using ModuleManager.ViewModels;
     using Telerik.Windows.Controls;
 
     /// <summary>

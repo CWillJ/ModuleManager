@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="CommonServiceLocator">
+      <HintPath>..\Lib\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="Prism">
       <HintPath>..\Lib\Prism.dll</HintPath>
     </Reference>

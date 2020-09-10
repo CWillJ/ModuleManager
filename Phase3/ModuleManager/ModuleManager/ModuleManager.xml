@@ -12,23 +12,39 @@
             App
             </summary>
         </member>
+        <member name="M:ModuleManager.App.OnStartup(System.Windows.StartupEventArgs)">
+            <summary>
+            Startup logic of the application. Raises the Startup event.
+            </summary>
+            <param name="args">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:ModuleManager.App.OnInitialized">
+            <summary>
+            Contains actions that should occur last.
+            </summary>
+        </member>
         <member name="M:ModuleManager.App.CreateShell">
             <summary>
             Creates the shell or main window of the application.
             </summary>
             <returns>The shell of the application.</returns>
         </member>
-        <member name="M:ModuleManager.App.OnStartup(System.Windows.StartupEventArgs)">
+        <member name="M:ModuleManager.App.InitializeModules">
             <summary>
-            Overrides the OnStartup method.
+            Initializes the modules in the module catalog.
             </summary>
-            <param name="e">StartupEvenArgs.</param>
         </member>
         <member name="M:ModuleManager.App.RegisterTypes(Prism.Ioc.IContainerRegistry)">
             <summary>
             Used to register types with the container that will be used by the application.
             </summary>
             <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for container type registration.</param>
+        </member>
+        <member name="M:ModuleManager.App.CreateModuleCatalog">
+            <summary>
+            Creates the module catalog.
+            </summary>
+            <returns>New module catalog.</returns>
         </member>
         <member name="M:ModuleManager.App.InitializeComponent">
             <summary>
@@ -160,6 +176,20 @@
             StoreModules will attempt to get all assemblies from a dll and store it
             as a Module in the Modules collection.
             </summary>
+        </member>
+        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.SaveConfig1">
+            <summary>
+            SaveConfig will save an ObservableCollection to an xml file.
+            The boolean, UseSaveFileDialog will be tested to see if the
+            SaveFileDialog will be used or if the hardcoded file location
+            will be used.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.LoadConfig1">
+            <summary>
+            LoadConfig will load an ObservableCollection of type Module from an xml file.
+            </summary>
+            <returns>ObservableCollection of type Module.</returns>
         </member>
         <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.SaveConfig">
             <summary>

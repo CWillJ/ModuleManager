@@ -2,12 +2,13 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
     using ModuleObjects.Interfaces;
 
     /// <summary>
     /// Module object holds the name and description of a module.
     /// </summary>
-    public class Module
+    public class Module : IModule
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Module"/> class. Default constructor.
@@ -19,7 +20,7 @@
             Description = string.Empty;
 
             IsEnabled = false;
-            Members = new ObservableCollection<IModuleMember>();
+            Members = new ObservableCollection<ModuleMember>();
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = new ObservableCollection<ModuleProperty>();
             Methods = new ObservableCollection<ModuleMethod>();
@@ -43,7 +44,7 @@
             IsEnabled = false;
             Name = name;
             Description = description;
-            Members = new ObservableCollection<IModuleMember>();
+            Members = new ObservableCollection<ModuleMember>();
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = properties;
             Methods = methods;
@@ -100,7 +101,7 @@
         /// <summary>
         /// Gets or sets all of the module members.
         /// </summary>
-        public ObservableCollection<IModuleMember> Members { get; set; }
+        public ObservableCollection<ModuleMember> Members { get; set; }
 
         /// <summary>
         /// Gets or sets the constructors in the current module.
@@ -146,6 +147,17 @@
             }
 
             return s;
+        }
+
+        /// <summary>
+        /// Implemented from ISerializable.
+        /// </summary>
+        /// <param name="info">Info to serialize.</param>
+        /// <param name="context">Context to serialize.</param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Name", Name);
+            info.AddValue("Description", Description);
         }
     }
 }

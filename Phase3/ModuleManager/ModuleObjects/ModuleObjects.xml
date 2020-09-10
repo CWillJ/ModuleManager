@@ -119,6 +119,13 @@
             </summary>
             <returns>A desired format for the module name, description and all members contained in module.</returns>
         </member>
+        <member name="M:ModuleObjects.Classes.Module.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Implemented from ISerializable.
+            </summary>
+            <param name="info">Info to serialize.</param>
+            <param name="context">Context to serialize.</param>
+        </member>
         <member name="T:ModuleObjects.Classes.ModuleConstructor">
             <summary>
             ModuleConstructor object holds the class name, description and the parameters a constructor.
@@ -137,16 +144,6 @@
             <param name="className">Class name.</param>
             <param name="description">Constructor description.</param>
             <param name="parameters">Constructor parameters.</param>
-        </member>
-        <member name="P:ModuleObjects.Classes.ModuleConstructor.Name">
-            <summary>
-            Gets or sets the name of the module.
-            </summary>
-        </member>
-        <member name="P:ModuleObjects.Classes.ModuleConstructor.Description">
-            <summary>
-            Gets or sets the description of the module.
-            </summary>
         </member>
         <member name="P:ModuleObjects.Classes.ModuleConstructor.Parameters">
             <summary>
@@ -196,16 +193,6 @@
             <param name="returnType">Member return type.</param>
             <param name="returnDescription">Member return description.</param>
         </member>
-        <member name="P:ModuleObjects.Classes.ModuleMethod.Name">
-            <summary>
-            Gets or sets the name of the module.
-            </summary>
-        </member>
-        <member name="P:ModuleObjects.Classes.ModuleMethod.Description">
-            <summary>
-            Gets or sets the description of the module.
-            </summary>
-        </member>
         <member name="P:ModuleObjects.Classes.ModuleMethod.Parameters">
             <summary>
             Gets or sets the member parameters.
@@ -249,16 +236,6 @@
             <param name="dataType">Property data type.</param>
             <param name="canRead">Property has a 'get' accessor.</param>
             <param name="canWrite">Property has a 'set' accessor.</param>
-        </member>
-        <member name="P:ModuleObjects.Classes.ModuleProperty.Name">
-            <summary>
-            Gets or sets the name of the module.
-            </summary>
-        </member>
-        <member name="P:ModuleObjects.Classes.ModuleProperty.Description">
-            <summary>
-            Gets or sets the description of the module.
-            </summary>
         </member>
         <member name="P:ModuleObjects.Classes.ModuleProperty.DataType">
             <summary>

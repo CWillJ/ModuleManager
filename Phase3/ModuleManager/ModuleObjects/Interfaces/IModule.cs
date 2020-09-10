@@ -1,11 +1,13 @@
 ﻿namespace ModuleObjects.Interfaces
 {
     using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
+    using ModuleObjects.Classes;
 
     /// <summary>
     /// Module object interface.
     /// </summary>
-    public interface IModule
+    public interface IModule : ISerializable
     {
         /// <summary>
         /// Gets or sets the name of the module.
@@ -20,6 +22,6 @@
         /// <summary>
         /// Gets or sets all of the module members.
         /// </summary>
-        ObservableCollection<IModuleMember> Members { get; set; }
+        ObservableCollection<ModuleMember> Members { get; set; }
     }
 }

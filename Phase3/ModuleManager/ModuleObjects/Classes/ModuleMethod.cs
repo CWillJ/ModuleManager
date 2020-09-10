@@ -1,12 +1,13 @@
 ﻿namespace ModuleObjects.Classes
 {
     using System.Collections.ObjectModel;
-    using ModuleObjects.Interfaces;
+    ////using System.Runtime.Serialization;
+    ////using ModuleObjects.Interfaces;
 
     /// <summary>
     /// ModuleMethod object holds the description, the parameters and the return type of a member.
     /// </summary>
-    public class ModuleMethod : IModuleMember
+    public class ModuleMethod : ModuleMember
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMethod"/> class. Default constructor.
@@ -48,15 +49,15 @@
             ReturnDescription = returnDescription;
         }
 
-        /// <summary>
-        /// Gets or sets the name of the module.
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description of the module.
-        /// </summary>
-        public string Description { get; set; }
+        /////// <summary>
+        /////// Gets or sets the name of the module.
+        /////// </summary>
+        ////public string Name { get; set; }
+        ////
+        /////// <summary>
+        /////// Gets or sets the description of the module.
+        /////// </summary>
+        ////public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the member parameters.
@@ -72,6 +73,17 @@
         /// Gets or sets the member return description.
         /// </summary>
         public string ReturnDescription { get; set; }
+
+        /////// <summary>
+        /////// Implemented from ISerializable.
+        /////// </summary>
+        /////// <param name="info">Info to serialize.</param>
+        /////// <param name="context">Context to serialize.</param>
+        ////public void GetObjectData(SerializationInfo info, StreamingContext context)
+        ////{
+        ////    info.AddValue("Name", Name);
+        ////    info.AddValue("Description", Description);
+        ////}
 
         /// <summary>
         /// Overrides the ToString method and formats the string output
