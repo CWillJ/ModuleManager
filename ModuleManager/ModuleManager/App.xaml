@@ -1,0 +1,22 @@
+﻿<prism:PrismApplication
+    x:Class="ModuleManager.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ModuleManager"
+    xmlns:prism="http://prismlibrary.com/">
+
+    <prism:PrismApplication.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Telerik.Windows.Controls.xaml" />
+                <ResourceDictionary Source="Themes\Telerik.Windows.Controls.Navigation.xaml" />
+                <ResourceDictionary Source="Themes\Telerik.Windows.Controls.FileDialogs.xaml" />
+                <ResourceDictionary Source="Themes\Telerik.Windows.Controls.Data.xaml" />
+                <ResourceDictionary Source="Themes\Telerik.Windows.Controls.Input.xaml" />
+                <ResourceDictionary Source="Themes\Telerik.Windows.Controls.GridView.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
+
+    <!--  StartupUri="MainWindow.xaml"  -->
+</prism:PrismApplication>
