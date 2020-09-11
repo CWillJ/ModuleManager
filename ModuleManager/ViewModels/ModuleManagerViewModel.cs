@@ -7,11 +7,9 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
-    using System.Xml;
     using System.Xml.Serialization;
     using Microsoft.Win32;
     using ModuleObjects.Classes;
-    using ModuleObjects.Interfaces;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
     using Telerik.Windows.Controls;
