@@ -1,3 +1,0 @@
-- Phase 3 due Oct. 19th
-- Provide some kind of visual ID for constructors, properties and methods
-- Add additional functionality that will load/execute/unload selected/deselected modules
