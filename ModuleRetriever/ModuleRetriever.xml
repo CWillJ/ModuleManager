@@ -273,45 +273,5 @@
             <param name="xmlNode">XmlNode to get text from.</param>
             <returns>Formatted string of the XmlNode.InnerXml.</returns>
         </member>
-        <member name="T:ModuleRetriever.XmlSerializeAnything`1">
-            <summary>
-            A class used to serialize interfaces as well as objects.
-            </summary>
-            <typeparam name="T">Type of what you want to serialize.</typeparam>
-        </member>
-        <member name="M:ModuleRetriever.XmlSerializeAnything`1.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleRetriever.XmlSerializeAnything`1"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleRetriever.XmlSerializeAnything`1.#ctor(`0)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleRetriever.XmlSerializeAnything`1"/> class.
-            </summary>
-            <param name="t">Type of what you want to serialize.</param>
-        </member>
-        <member name="P:ModuleRetriever.XmlSerializeAnything`1.Value">
-            <summary>
-            Gets or sets the value.
-            </summary>
-        </member>
-        <member name="M:ModuleRetriever.XmlSerializeAnything`1.WriteXml(System.Xml.XmlWriter)">
-            <summary>
-            Writes to an xml file using the passed in XmlWriter.
-            </summary>
-            <param name="writer">XmlWriter used to write to an xml file.</param>
-        </member>
-        <member name="M:ModuleRetriever.XmlSerializeAnything`1.ReadXml(System.Xml.XmlReader)">
-            <summary>
-            Reads from an xml file using the passed in XmlReader.
-            </summary>
-            <param name="reader">XmlReader used to read from an xml file.</param>
-        </member>
-        <member name="M:ModuleRetriever.XmlSerializeAnything`1.GetSchema">
-            <summary>
-            Implements the GetSchema method from IXmlSerializable interface.
-            </summary>
-            <returns>null by default.</returns>
-        </member>
     </members>
 </doc>

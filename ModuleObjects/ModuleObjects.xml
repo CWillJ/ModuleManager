@@ -278,20 +278,5 @@
             Gets or sets all of the module members.
             </summary>
         </member>
-        <member name="T:ModuleObjects.Interfaces.IModuleMember">
-            <summary>
-            Interface for module members such as constructors, properties and methods.
-            </summary>
-        </member>
-        <member name="P:ModuleObjects.Interfaces.IModuleMember.Name">
-            <summary>
-            Gets or sets the name of the member.
-            </summary>
-        </member>
-        <member name="P:ModuleObjects.Interfaces.IModuleMember.Description">
-            <summary>
-            Gets or sets the description of the member.
-            </summary>
-        </member>
     </members>
 </doc>
