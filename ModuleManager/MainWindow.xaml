@@ -127,7 +127,7 @@
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="Images\Property Icon.png" />
+                                        <Image Source="{Binding Path=TypeName, Converter={StaticResource StringToIconConverter}}" />
                                         <TextBlock
                                             Margin="0,18,0,0"
                                             FontSize="14"

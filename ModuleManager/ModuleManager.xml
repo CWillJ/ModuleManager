@@ -100,6 +100,31 @@
             <param name="container">Container.</param>
             <returns>A DataTemplate depending on the object passed in.</returns>
         </member>
+        <member name="T:ModuleManager.TemplateSelectors.TypeNameToIconConverter">
+            <summary>
+            Converter to convert the string name of a member type to an icon.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TemplateSelectors.TypeNameToIconConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convery string name of a member type to an icon.
+            </summary>
+            <param name="value">Object passed in.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Parameter object.</param>
+            <param name="culture">Culture.</param>
+            <returns>String path to an image icon.</returns>
+        </member>
+        <member name="M:ModuleManager.TemplateSelectors.TypeNameToIconConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">Object passed in.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Parameter object.</param>
+            <param name="culture">Culture.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:ModuleManager.ViewModels.ModuleManagerViewModel">
             <summary>
             ModuleManagerViewModel will handle commands from the main view.

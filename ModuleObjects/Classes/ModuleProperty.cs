@@ -1,8 +1,5 @@
 ﻿namespace ModuleObjects.Classes
 {
-    ////using System.Runtime.Serialization;
-    ////using ModuleObjects.Interfaces;
-
     /// <summary>
     /// ModuleProperty object holds the name, description, data type and accessor level of a property.
     /// </summary>
@@ -18,6 +15,7 @@
             DataType = string.Empty;
             CanRead = false;
             CanWrite = false;
+            TypeName = GetType().Name;
         }
 
         /// <summary>
@@ -36,17 +34,8 @@
             DataType = dataType;
             CanRead = canRead;
             CanWrite = canWrite;
+            TypeName = GetType().Name;
         }
-
-        /////// <summary>
-        /////// Gets or sets the name of the module.
-        /////// </summary>
-        ////public string Name { get; set; }
-        ////
-        /////// <summary>
-        /////// Gets or sets the description of the module.
-        /////// </summary>
-        ////public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the property.
@@ -62,17 +51,6 @@
         /// Gets or sets a value indicating whether this property has a set accessor.
         /// </summary>
         public bool CanWrite { get; set; }
-
-        /////// <summary>
-        /////// Implemented from ISerializable.
-        /////// </summary>
-        /////// <param name="info">Info to serialize.</param>
-        /////// <param name="context">Context to serialize.</param>
-        ////public void GetObjectData(SerializationInfo info, StreamingContext context)
-        ////{
-        ////    info.AddValue("Name", Name);
-        ////    info.AddValue("Description", Description);
-        ////}
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

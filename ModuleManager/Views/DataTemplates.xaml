@@ -2,11 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:data="clr-namespace:ModuleObjects.Classes;assembly=ModuleObjects"
-    xmlns:interface="clr-namespace:ModuleObjects.Interfaces;assembly=ModuleObjects"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:templateSelectors="clr-namespace:ModuleManager.TemplateSelectors">
 
     <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <templateSelectors:TypeNameToIconConverter x:Key="StringToIconConverter" />
+
     <templateSelectors:TemplateSelector x:Key="ModuleDataTemplateSelector" />
     <templateSelectors:TreeViewItemTemplateSelector x:Key="treeViewItemTemplateSelector" />
 
@@ -122,30 +123,19 @@
         </StackPanel>
     </DataTemplate>
 
-    <!--  Data Template For Tree Items  -->
-    <DataTemplate x:Key="moduleMemberTreeItem" DataType="{x:Type data:ModuleMember}">
-        <ItemsControl ItemTemplateSelector="{StaticResource treeViewItemTemplateSelector}" ItemsSource="{Binding Path=Name, Mode=OneWay}" />
-    </DataTemplate>
-
     <!--  Constructor Name  -->
     <DataTemplate x:Key="moduleMemberTreeItemConstructor">
-        <StackPanel Orientation="Horizontal">
-            <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Constructor Icon.png" />
-        </StackPanel>
+        <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Constructor Icon.png" />
     </DataTemplate>
 
     <!--  Property Name  -->
-    <DataTemplate x:Key="moduleMemberTreeItemProperty" DataType="{x:Type data:ModuleProperty}">
-        <StackPanel Orientation="Horizontal">
-            <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Property Icon.png" />
-        </StackPanel>
+    <DataTemplate x:Key="moduleMemberTreeItemProperty">
+        <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Property Icon.png" />
     </DataTemplate>
 
     <!--  Method Name  -->
-    <DataTemplate x:Key="moduleMemberTreeItemMethod" DataType="{x:Type data:ModuleMethod}">
-        <StackPanel Orientation="Horizontal">
-            <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Method Icon.png" />
-        </StackPanel>
+    <DataTemplate x:Key="moduleMemberTreeItemMethod">
+        <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Method Icon.png" />
     </DataTemplate>
 
 </ResourceDictionary>

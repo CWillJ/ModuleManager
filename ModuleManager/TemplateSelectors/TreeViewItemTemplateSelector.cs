@@ -3,7 +3,6 @@
     using System.Windows;
     using System.Windows.Controls;
     using ModuleObjects.Classes;
-    using Unity.Injection;
 
     /// <summary>
     /// Used to selected a DataTemplate in the view.
@@ -20,19 +19,15 @@
         {
             if (container is FrameworkElement element && container != null && item != null)
             {
-                ModuleConstructor mc = (ModuleConstructor)item;
-                ModuleProperty mp = (ModuleProperty)item;
-                ModuleMethod mm = (ModuleMethod)item;
-
-                if (mc.Name.Contains("Constructor"))
+                if (item.ToString().Equals("ModuleConstructor"))
                 {
                     return element.FindResource("moduleMemberTreeItemConstructor") as DataTemplate;
                 }
-                else if (mp.DataType != null)
+                else if (item.ToString().Equals("ModuleProperty"))
                 {
                     return element.FindResource("moduleMemberTreeItemProperty") as DataTemplate;
                 }
-                else if (!string.IsNullOrEmpty(mm.ReturnType))
+                else if (item.ToString().Equals("ModuleMethod"))
                 {
                     return element.FindResource("moduleMemberTreeItemMethod") as DataTemplate;
                 }

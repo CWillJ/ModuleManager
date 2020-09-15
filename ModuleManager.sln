@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleManager", "ModuleManager\ModuleManager.csproj", "{5C5A5AF2-8D65-4C4D-884A-6883FF7861B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleRetriever", "ModuleRetriever\ModuleRetriever.csproj", "{D36A1E8A-1EB7-493B-B78F-16A54360AEFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleRetriever", "ModuleRetriever\ModuleRetriever.csproj", "{D36A1E8A-1EB7-493B-B78F-16A54360AEFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleObjects", "ModuleObjects\ModuleObjects.csproj", "{0516D37A-BA9C-4A6F-AA5A-599EB8E40959}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleObjects", "ModuleObjects\ModuleObjects.csproj", "{0516D37A-BA9C-4A6F-AA5A-599EB8E40959}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

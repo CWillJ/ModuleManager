@@ -1,8 +1,6 @@
 ﻿namespace ModuleObjects.Classes
 {
     using System.Collections.ObjectModel;
-    ////using System.Runtime.Serialization;
-    ////using ModuleObjects.Interfaces;
 
     /// <summary>
     /// ModuleConstructor object holds the class name, description and the parameters a constructor.
@@ -17,6 +15,7 @@
             Name = string.Empty;
             Description = string.Empty;
             Parameters = new ObservableCollection<MemberParameter>();
+            TypeName = GetType().Name;
         }
 
         /// <summary>
@@ -31,33 +30,13 @@
             Name = @"Constructor For " + className;
             Description = description;
             Parameters = parameters;
+            TypeName = GetType().Name;
         }
-
-        /////// <summary>
-        /////// Gets or sets the name of the module.
-        /////// </summary>
-        ////public string Name { get; set; }
-        ////
-        /////// <summary>
-        /////// Gets or sets the description of the module.
-        /////// </summary>
-        ////public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the member parameters.
         /// </summary>
         public ObservableCollection<MemberParameter> Parameters { get; set; }
-
-        /////// <summary>
-        /////// Implemented from ISerializable.
-        /////// </summary>
-        /////// <param name="info">Info to serialize.</param>
-        /////// <param name="context">Context to serialize.</param>
-        ////public void GetObjectData(SerializationInfo info, StreamingContext context)
-        ////{
-        ////    info.AddValue("Name", Name);
-        ////    info.AddValue("Description", Description);
-        ////}
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

@@ -171,6 +171,11 @@
             Gets or sets the description of the module.
             </summary>
         </member>
+        <member name="P:ModuleObjects.Classes.ModuleMember.TypeName">
+            <summary>
+            Gets or sets the Type of module.
+            </summary>
+        </member>
         <member name="T:ModuleObjects.Classes.ModuleMethod">
             <summary>
             ModuleMethod object holds the description, the parameters and the return type of a member.

@@ -8,7 +8,6 @@
     using System.Threading.Tasks;
     using System.Windows;
     using System.Xml.Serialization;
-    using Microsoft.Win32;
     using ModuleObjects.Classes;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
@@ -36,10 +35,10 @@
 
             LoadingModules = false;
 
-            UseSaveFileDialog = false;
             ModuleDirectory = string.Empty;
             LoadModulesCommand = new ModuleManagerICommand(StoreModules);
             SaveConfigCommand = new ModuleManagerICommand(SaveConfig);
+
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
             // Load previously saved module configuration if the ConfigFile exists
@@ -251,15 +250,17 @@
 
             if (UseSaveFileDialog)
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog
+                RadSaveFileDialog saveFileDialog = new RadSaveFileDialog
                 {
                     InitialDirectory = Directory.GetCurrentDirectory(),
                     Filter = "xml files (*.xml)|*.xml",
-                    Title = "Save Configuration File",
+                    Header = "Save Configuration File",
                     RestoreDirectory = true,
                 };
 
-                if (saveFileDialog.ShowDialog() == true)
+                saveFileDialog.ShowDialog();
+
+                if (saveFileDialog.DialogResult == true)
                 {
                     saveFile = saveFileDialog.FileName;
                 }
@@ -270,14 +271,12 @@
                     return;
                 }
             }
-            else
-            {
-                MessageBox.Show(@"Config File Saved at: " + saveFile);
-            }
 
             using StreamWriter wr = new StreamWriter(saveFile);
             serializer.Serialize(wr, Modules);
             wr.Close();
+
+            MessageBox.Show(@"Config File Saved at: " + saveFile);
         }
 
         /// <summary>
@@ -292,15 +291,17 @@
 
             if (UseSaveFileDialog)
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog
+                RadOpenFileDialog openFileDialog = new RadOpenFileDialog
                 {
                     InitialDirectory = Directory.GetCurrentDirectory(),
                     Filter = "xml files (*.xml)|*.xml",
-                    Title = "Load Configuration File",
+                    Header = "Load Configuration File",
                     RestoreDirectory = true,
                 };
 
-                if (openFileDialog.ShowDialog() == true)
+                openFileDialog.ShowDialog();
+
+                if (openFileDialog.DialogResult == true)
                 {
                     loadFile = openFileDialog.FileName;
                 }
