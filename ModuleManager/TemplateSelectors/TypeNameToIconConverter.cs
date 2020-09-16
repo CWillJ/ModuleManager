@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.IO;
     using System.Windows.Data;
 
     /// <summary>
@@ -19,11 +20,13 @@
         /// <returns>String path to an image icon.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            string iconDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName + @"\Images\";
+
             return value.ToString() switch
             {
-                @"ModuleConstructor" => @"C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Constructor Icon.png",
-                @"ModuleProperty" => @"C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Property Icon.png",
-                @"ModuleMethod" => @"C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Method Icon.png",
+                @"ModuleConstructor" => iconDirectory + @"Constructor Icon.png",
+                @"ModuleProperty" => iconDirectory + @"Property Icon.png",
+                @"ModuleMethod" => iconDirectory + @"Method Icon.png",
                 _ => null,
             };
         }
