@@ -16,6 +16,7 @@
         /// </summary>
         public Module()
         {
+            Type = null;
             Name = string.Empty;
             Description = string.Empty;
 
@@ -27,20 +28,24 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Module"/> class specifying the name, description and methods.
+        /// Initializes a new instance of the <see cref="Module"/> class specifying the name,
+        /// description and methods.
         /// </summary>
+        /// <param name="type">Module Type.</param>
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>
         /// <param name="constructors">Module constructors.</param>
         /// <param name="properties">Module properties.</param>
         /// <param name="methods">Module methods.</param>
         public Module(
+            Type type,
             string name,
             string description,
             ObservableCollection<ModuleConstructor> constructors,
             ObservableCollection<ModuleProperty> properties,
             ObservableCollection<ModuleMethod> methods)
         {
+            Type = type;
             IsEnabled = false;
             Name = name;
             Description = description;
@@ -77,11 +82,17 @@
         /// <param name="dllFileName">File name of the dll file.</param>
         public Module(Type type, string dllFileName)
         {
+            Type = type;
             IsEnabled = false;
             Name = type.Name;
             Description = dllFileName;
             Methods = new ObservableCollection<ModuleMethod>();
         }
+
+        /// <summary>
+        /// Gets or sets the Type of the module.
+        /// </summary>
+        public Type Type { get; set; }
 
         /// <summary>
         /// Gets or sets the module name.

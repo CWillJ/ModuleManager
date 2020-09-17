@@ -117,7 +117,17 @@
                     <telerik:RadTreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding Path=IsEnabled}" />
+                                <CheckBox
+                                    Name="moduleCheckBox"
+                                    Command="{Binding LoadUnloadModule}"
+                                    IsChecked="{Binding Path=IsEnabled}">
+                                    <CheckBox.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource ModuleCheckBoxConverter}">
+                                            <Binding ElementName="moduleCheckBox" Path="Content" />
+                                            <Binding ElementName="moduleCheckBox" Path="IsChecked" />
+                                        </MultiBinding>
+                                    </CheckBox.CommandParameter>
+                                </CheckBox>
                                 <TextBlock
                                     Margin="0,8,0,0"
                                     FontSize="16"

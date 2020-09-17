@@ -61,10 +61,12 @@
             initializes properties to empty strings/empty collections.
             </summary>
         </member>
-        <member name="M:ModuleObjects.Classes.Module.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleObjects.Classes.ModuleMethod})">
+        <member name="M:ModuleObjects.Classes.Module.#ctor(System.Type,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleObjects.Classes.ModuleMethod})">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleObjects.Classes.Module"/> class specifying the name, description and methods.
+            Initializes a new instance of the <see cref="T:ModuleObjects.Classes.Module"/> class specifying the name,
+            description and methods.
             </summary>
+            <param name="type">Module Type.</param>
             <param name="name">Module name.</param>
             <param name="description">Module description.</param>
             <param name="constructors">Module constructors.</param>
@@ -77,6 +79,11 @@
             </summary>
             <param name="type">Type object found in an Assembly.</param>
             <param name="dllFileName">File name of the dll file.</param>
+        </member>
+        <member name="P:ModuleObjects.Classes.Module.Type">
+            <summary>
+            Gets or sets the Type of the module.
+            </summary>
         </member>
         <member name="P:ModuleObjects.Classes.Module.Name">
             <summary>

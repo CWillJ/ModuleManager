@@ -75,11 +75,11 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)..\Modules\&quot;&#xD;&#xA;del * /q" />
+    <Exec Command="cd &quot;$(ProjectDir)..\bin\&quot;&#xD;&#xA;del * /q" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetDir)*$(TargetExt)&quot; &quot;$(ProjectDir)..\Modules\&quot;" />
+    <Exec Command="copy &quot;$(TargetDir)*$(TargetExt)&quot; &quot;$(ProjectDir)..\bin\&quot;" />
   </Target>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.TemplateSelectors
+﻿namespace ModuleManager.Converters
 {
     using System;
     using System.Globalization;
@@ -27,7 +27,7 @@
                 @"ModuleConstructor" => iconDirectory + @"Constructor Icon.png",
                 @"ModuleProperty" => iconDirectory + @"Property Icon.png",
                 @"ModuleMethod" => iconDirectory + @"Method Icon.png",
-                _ => null,
+                _ => null
             };
         }
 

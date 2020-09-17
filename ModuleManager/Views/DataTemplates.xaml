@@ -1,12 +1,14 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ModuleManager.Converters"
     xmlns:data="clr-namespace:ModuleObjects.Classes;assembly=ModuleObjects"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:templateSelectors="clr-namespace:ModuleManager.TemplateSelectors">
 
     <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-    <templateSelectors:TypeNameToIconConverter x:Key="StringToIconConverter" />
+    <converters:TypeNameToIconConverter x:Key="StringToIconConverter" />
+    <converters:CheckBoxConverter x:Key="ModuleCheckBoxConverter" />
 
     <templateSelectors:TemplateSelector x:Key="ModuleDataTemplateSelector" />
     <templateSelectors:TreeViewItemTemplateSelector x:Key="treeViewItemTemplateSelector" />

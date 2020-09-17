@@ -38,6 +38,7 @@
             ModuleDirectory = string.Empty;
             LoadModulesCommand = new ModuleManagerICommand(StoreModules);
             SaveConfigCommand = new ModuleManagerICommand(SaveConfig);
+            ////LoadUnloadModule = new ModuleManagerICommand(ModuleLoadHandler);
 
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
