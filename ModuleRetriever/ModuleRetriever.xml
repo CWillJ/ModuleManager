@@ -68,6 +68,12 @@
             Gets or sets all xml descriptions.
             </summary>
         </member>
+        <member name="M:ModuleRetriever.ModuleInfoRetriever.LoadModule(System.Reflection.Assembly)">
+            <summary>
+            Load an assembly into memory.
+            </summary>
+            <param name="assembly">The assembly that will be loaded.</param>
+        </member>
         <member name="M:ModuleRetriever.ModuleInfoRetriever.ModuleRetriever#Interfaces#IModuleInfoRetriever#GetModules(System.String[])">
             <summary>
             GetModules will create an ObservableCollection of type Module to organize

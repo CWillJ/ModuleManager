@@ -56,6 +56,24 @@
         public XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
         /// <summary>
+        /// Load an assembly into memory.
+        /// </summary>
+        /// <param name="assembly">The assembly that will be loaded.</param>
+        public void LoadModule(Assembly assembly)
+        {
+            Assembly.Load(assembly);
+        }
+
+        /// <summary>
+        /// Unload an assembly from memory if it exists.
+        /// </summary>
+        /// <param name="assembly">The assembly that will be unloaded.</param>
+        public void UnloadModule(Assembly assembly)
+        {
+            return;
+        }
+
+        /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// </summary>
@@ -65,7 +83,6 @@
         {
             if (string.IsNullOrEmpty(DllDirectory))
             {
-                ////MessageBox.Show(@"The Directory Path Cannot Be Empty");
                 return null;
             }
 

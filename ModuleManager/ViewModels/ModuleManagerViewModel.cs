@@ -38,7 +38,7 @@
             ModuleDirectory = string.Empty;
             LoadModulesCommand = new ModuleManagerICommand(StoreModules);
             SaveConfigCommand = new ModuleManagerICommand(SaveConfig);
-            ////LoadUnloadModule = new ModuleManagerICommand(ModuleLoadHandler);
+            LoadUnloadCommand = new ModuleManagerICommand(LoadUnload);
 
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
@@ -68,6 +68,11 @@
         /// Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
         /// </summary>
         public ModuleManagerICommand SaveConfigCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
+        /// </summary>
+        public ModuleManagerICommand LoadUnloadCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the file location as a string.
@@ -319,6 +324,19 @@
             }
 
             return modules;
+        }
+
+        private void LoadUnload()
+        {
+            foreach (var module in Modules)
+            {
+                if (module.IsEnabled)
+                {
+                    InfoRetriever.LoadModule(module.Type.Assembly);
+                }
+            }
+
+            MessageBox.Show("Command Worked!");
         }
 
         /// <summary>
