@@ -22,18 +22,13 @@
         /// <param name="args">A <see cref="StartupEventArgs"/> that contains the event data.</param>
         protected override void OnStartup(StartupEventArgs args)
         {
-            ////try
-            ////{
-            ////    base.OnStartup(args);
-            ////}
-            ////catch (ApplicationException)
-            ////{
-            ////}
-
-            base.OnStartup(args);
-
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Run();
+            try
+            {
+                base.OnStartup(args);
+            }
+            catch (ApplicationException)
+            {
+            }
         }
 
         /// <summary>
