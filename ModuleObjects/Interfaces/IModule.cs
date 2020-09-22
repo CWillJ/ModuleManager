@@ -12,16 +12,16 @@
         /// <summary>
         /// Gets or sets the name of the module.
         /// </summary>
-        string Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the module.
         /// </summary>
-        string Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets all of the module members.
         /// </summary>
-        ObservableCollection<ModuleMember> Members { get; set; }
+        public ObservableCollection<ModuleMember> Members { get; set; }
     }
 }

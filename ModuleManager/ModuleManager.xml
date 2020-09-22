@@ -56,6 +56,22 @@
             Application Entry Point.
             </summary>
         </member>
+        <member name="T:ModuleManager.Bootstrapper">
+            <summary>
+            A bootstrapper for ModuleManager application.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Bootstrapper.CreateShell">
+            <summary>
+            Overrides the CreateShell method.
+            </summary>
+            <returns>Returns the resolved shell.</returns>
+        </member>
+        <member name="M:ModuleManager.Bootstrapper.InitializeShell">
+            <summary>
+            Overrides the InitializeShell method.
+            </summary>
+        </member>
         <member name="T:ModuleManager.Converters.CheckBoxConverter">
             <summary>
             CheckBoxConverter is used to tell if a module is enabled or disabled.
@@ -106,24 +122,6 @@
             <param name="culture">Culture.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="T:ModuleManager.MainWindow">
-            <summary>
-            Interaction logic for MainWindow.xaml.
-            </summary>
-            <summary>
-            MainWindow
-            </summary>
-        </member>
-        <member name="M:ModuleManager.MainWindow.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.MainWindow"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.MainWindow.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
         <member name="T:ModuleManager.TemplateSelectors.TemplateSelector">
             <summary>
             Used to selected a DataTemplate in the view.
@@ -150,89 +148,83 @@
             <param name="container">Container.</param>
             <returns>A DataTemplate depending on the object passed in.</returns>
         </member>
-        <member name="T:ModuleManager.ViewModels.ModuleManagerViewModel">
+        <member name="T:ModuleManager.ViewModels.ShellViewModel">
             <summary>
             ModuleManagerViewModel will handle commands from the main view.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.#ctor">
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ModuleManagerViewModel"/> class.
+            Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> class.
             </summary>
         </member>
-        <member name="E:ModuleManager.ViewModels.ModuleManagerViewModel.PropertyChanged">
-            <summary>
-            PropertyChanged event handler.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.UseSaveFileDialog">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.UseSaveFileDialog">
             <summary>
             Gets or sets a value indicating whether SaveFileDialog is used on save settings.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.LoadModulesCommand">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.LoadModulesCommand">
             <summary>
             Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.SaveConfigCommand">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.SaveConfigCommand">
             <summary>
             Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.LoadUnloadCommand">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.LoadUnloadCommand">
             <summary>
             Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.ModuleDirectory">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.ModuleDirectory">
             <summary>
             Gets or sets the file location as a string.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.InfoRetriever">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.InfoRetriever">
             <summary>
             Gets or sets a ModuleInfoRetriever.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.LoadingModules">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.LoadingModules">
             <summary>
             Gets or sets a value indicating whether the application is currently loading modules.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.ProgressBarText">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.ProgressBarText">
             <summary>
             Gets or sets the progress bar text.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.CurrentProgress">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.CurrentProgress">
             <summary>
             Gets the current progress of the status bar.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.ProgressBarIsVisible">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.ProgressBarIsVisible">
             <summary>
             Gets or sets a value indicating whether a progress bar is visible.
             </summary>
         </member>
-        <member name="P:ModuleManager.ViewModels.ModuleManagerViewModel.Modules">
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.Modules">
             <summary>
             Gets or sets the collection of Modules.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.RaisePropertyChanged(System.String)">
-            <summary>
-            Raise a property changed event.
-            </summary>
-            <param name="property">Property passed in as a string.</param>
-        </member>
-        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.StoreModules">
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.StoreModules">
             <summary>
             StoreModules will attempt to get all assemblies from a dll and store it
             as a Module in the Modules collection.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.SaveConfig">
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.UpdateProgressBarText">
+            <summary>
+            Runs async to update the progress bar with current module text.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.SaveConfig">
             <summary>
             SaveConfig will save an ObservableCollection to an xml file.
             The boolean, UseSaveFileDialog will be tested to see if the
@@ -240,13 +232,13 @@
             will be used.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.LoadConfig">
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.LoadConfig">
             <summary>
             LoadConfig will load an ObservableCollection of type Module from an xml file.
             </summary>
             <returns>ObservableCollection of type Module.</returns>
         </member>
-        <member name="M:ModuleManager.ViewModels.ModuleManagerViewModel.GetModuleDirectory">
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.GetModuleDirectory">
             <summary>
             Gets the directory selected by the user that should contain dll files.
             </summary>
@@ -320,6 +312,24 @@
             </summary>
         </member>
         <member name="M:ModuleManager.Views.ProgressBar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Views.ShellView">
+            <summary>
+            Interaction logic for MainWindow.xaml.
+            </summary>
+            <summary>
+            ShellView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ShellView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Views.ShellView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ShellView.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>

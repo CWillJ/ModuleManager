@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
@@ -11,12 +10,14 @@
     using ModuleObjects.Classes;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
+    using Prism.Commands;
+    using Prism.Mvvm;
     using Telerik.Windows.Controls;
 
     /// <summary>
     /// ModuleManagerViewModel will handle commands from the main view.
     /// </summary>
-    public class ModuleManagerViewModel : INotifyPropertyChanged
+    public class ShellViewModel : BindableBase
     {
         private ObservableCollection<Module> _modules;
         private double _currentProgress;
@@ -24,9 +25,9 @@
         private bool _progressBarIsVisible;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleManagerViewModel"/> class.
+        /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
         /// </summary>
-        public ModuleManagerViewModel()
+        public ShellViewModel()
         {
             _modules = new ObservableCollection<Module>();
             _progressBarText = string.Empty;
@@ -36,9 +37,9 @@
             LoadingModules = false;
 
             ModuleDirectory = string.Empty;
-            LoadModulesCommand = new ModuleManagerICommand(StoreModules);
-            SaveConfigCommand = new ModuleManagerICommand(SaveConfig);
-            LoadUnloadCommand = new ModuleManagerICommand(LoadUnload);
+            LoadModulesCommand = new Prism.Commands.DelegateCommand(StoreModules, CanExecute);
+            SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
+            LoadUnloadCommand = new Prism.Commands.DelegateCommand(LoadUnload, CanExecute);
 
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
@@ -50,11 +51,6 @@
         }
 
         /// <summary>
-        /// PropertyChanged event handler.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
         /// Gets or sets a value indicating whether SaveFileDialog is used on save settings.
         /// </summary>
         public bool UseSaveFileDialog { get; set; }
@@ -62,17 +58,17 @@
         /// <summary>
         /// Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
         /// </summary>
-        public ModuleManagerICommand LoadModulesCommand { get; set; }
+        public Prism.Commands.DelegateCommand LoadModulesCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
         /// </summary>
-        public ModuleManagerICommand SaveConfigCommand { get; set; }
+        public Prism.Commands.DelegateCommand SaveConfigCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
         /// </summary>
-        public ModuleManagerICommand LoadUnloadCommand { get; set; }
+        public Prism.Commands.DelegateCommand LoadUnloadCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the file location as a string.
@@ -103,8 +99,7 @@
             {
                 if (_progressBarText != value)
                 {
-                    _progressBarText = value;
-                    RaisePropertyChanged("ProgressBarText");
+                    SetProperty(ref _progressBarText, value);
                 }
             }
         }
@@ -123,8 +118,7 @@
             {
                 if (_currentProgress != value)
                 {
-                    _currentProgress = value;
-                    RaisePropertyChanged("CurrentProgress");
+                    SetProperty(ref _currentProgress, value);
                 }
             }
         }
@@ -141,8 +135,7 @@
 
             set
             {
-                _progressBarIsVisible = value;
-                RaisePropertyChanged("ProgressBarIsVisible");
+                SetProperty(ref _progressBarIsVisible, value);
             }
         }
 
@@ -158,18 +151,8 @@
 
             set
             {
-                _modules = value;
-                RaisePropertyChanged("Modules");
+                SetProperty(ref _modules, value);
             }
-        }
-
-        /// <summary>
-        /// Raise a property changed event.
-        /// </summary>
-        /// <param name="property">Property passed in as a string.</param>
-        public void RaisePropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         /// <summary>
@@ -222,6 +205,9 @@
             ProgressBarIsVisible = false;
         }
 
+        /// <summary>
+        /// Runs async to update the progress bar with current module text.
+        /// </summary>
         private void UpdateProgressBarText()
         {
             while (LoadingModules)
@@ -320,10 +306,24 @@
 
             using (StreamReader rd = new StreamReader(loadFile))
             {
-                modules = serializer.Deserialize(rd) as ObservableCollection<Module>;
+                try
+                {
+                    modules = serializer.Deserialize(rd) as ObservableCollection<Module>;
+                }
+                catch (InvalidOperationException)
+                {
+                    // There is something wrong with the xml file.
+                    // Return an empty collection of modules.
+                    return modules;
+                }
             }
 
             return modules;
+        }
+
+        private bool CanExecute()
+        {
+            return true;
         }
 
         private void LoadUnload()

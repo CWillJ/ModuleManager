@@ -24,6 +24,12 @@
             Gets or sets DllDirectory is the directory path of the .dll files.
             </summary>
         </member>
+        <member name="M:ModuleRetriever.Interfaces.IModuleInfoRetriever.LoadModule(System.Reflection.Assembly)">
+            <summary>
+            Load an assembly into memory.
+            </summary>
+            <param name="assembly">The assembly that will be loaded.</param>
+        </member>
         <member name="M:ModuleRetriever.Interfaces.IModuleInfoRetriever.GetModules(System.String[])">
             <summary>
             GetModules will create an ObservableCollection of type Module to organize
@@ -74,6 +80,12 @@
             </summary>
             <param name="assembly">The assembly that will be loaded.</param>
         </member>
+        <member name="M:ModuleRetriever.ModuleInfoRetriever.UnloadModule(System.Reflection.Assembly)">
+            <summary>
+            Unload an assembly from memory if it exists.
+            </summary>
+            <param name="assembly">The assembly that will be unloaded.</param>
+        </member>
         <member name="M:ModuleRetriever.ModuleInfoRetriever.ModuleRetriever#Interfaces#IModuleInfoRetriever#GetModules(System.String[])">
             <summary>
             GetModules will create an ObservableCollection of type Module to organize
@@ -109,47 +121,6 @@
             </summary>
             <param name="type">The Type where the methods are coming from.</param>
             <returns>An ObservableCollection of ModuleMethod objects.</returns>
-        </member>
-        <member name="T:ModuleRetriever.ModuleManagerICommand">
-            <summary>
-            ModuleManagerICommand implements the ICommand.
-            </summary>
-        </member>
-        <member name="M:ModuleRetriever.ModuleManagerICommand.#ctor(System.Action)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleRetriever.ModuleManagerICommand"/> class.
-            </summary>
-            <param name="executeMethod">Method to execute.</param>
-        </member>
-        <member name="M:ModuleRetriever.ModuleManagerICommand.#ctor(System.Action,System.Func{System.Boolean})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleRetriever.ModuleManagerICommand"/> class.
-            </summary>
-            <param name="executeMethod">Method to execute.</param>
-            <param name="canExecuteMethod">Returns boolean value on if a method can be executed.</param>
-        </member>
-        <member name="E:ModuleRetriever.ModuleManagerICommand.CanExecuteChanged">
-            <summary>
-            Delegate event handler.
-            </summary>
-        </member>
-        <member name="M:ModuleRetriever.ModuleManagerICommand.RaiseCanExecuteChanged">
-            <summary>
-            Raise an event where the can execute a method has changed.
-            </summary>
-        </member>
-        <member name="M:ModuleRetriever.ModuleManagerICommand.System#Windows#Input#ICommand#CanExecute(System.Object)">
-            <summary>
-            Returns boolean value stating whether the object can be executed on.
-            </summary>
-            <param name="parameter">Object.</param>
-            <returns>Boolean.</returns>
-        </member>
-        <member name="M:ModuleRetriever.ModuleManagerICommand.System#Windows#Input#ICommand#Execute(System.Object)">
-            <summary>
-            Executes on the passed in object.
-            </summary>
-            <param name="parameter">Object.</param>
         </member>
         <member name="T:ModuleRetriever.XmlDescriptionRetriever">
             <summary>

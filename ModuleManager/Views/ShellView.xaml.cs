@@ -1,17 +1,16 @@
-﻿namespace ModuleManager
+﻿namespace ModuleManager.Views
 {
-    using ModuleManager.ViewModels;
     using Telerik.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml.
     /// </summary>
-    public partial class MainWindow : RadWindow
+    public partial class ShellView : RadWindow
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// Initializes a new instance of the <see cref="ShellView"/> class.
         /// </summary>
-        public MainWindow()
+        public ShellView()
         {
             InitializeComponent();
         }

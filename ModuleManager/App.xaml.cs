@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows;
+    using ModuleManager.Views;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
     using Prism.Ioc;
@@ -21,13 +22,18 @@
         /// <param name="args">A <see cref="StartupEventArgs"/> that contains the event data.</param>
         protected override void OnStartup(StartupEventArgs args)
         {
-            try
-            {
-                base.OnStartup(args);
-            }
-            catch (ApplicationException)
-            {
-            }
+            ////try
+            ////{
+            ////    base.OnStartup(args);
+            ////}
+            ////catch (ApplicationException)
+            ////{
+            ////}
+
+            base.OnStartup(args);
+
+            var bootstrapper = new Bootstrapper();
+            bootstrapper.Run();
         }
 
         /// <summary>
@@ -37,7 +43,7 @@
         {
             RadWindow shell;
 
-            shell = Container.Resolve<MainWindow>();
+            shell = Container.Resolve<ShellView>();
 
             shell.Width = SystemParameters.PrimaryScreenWidth / 2;
             shell.Height = SystemParameters.PrimaryScreenHeight / 2;

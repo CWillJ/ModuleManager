@@ -61,7 +61,8 @@
         /// <param name="assembly">The assembly that will be loaded.</param>
         public void LoadModule(Assembly assembly)
         {
-            Assembly.Load(assembly);
+            ////Assembly.Load(assembly);
+            return;
         }
 
         /// <summary>
@@ -86,9 +87,9 @@
                 return null;
             }
 
+            Assembly assembly;
             ObservableCollection<ModuleObjects.Classes.Module> modules =
                 new ObservableCollection<ModuleObjects.Classes.Module>();
-            Assembly assembly;
 
             // add all the possible referenced assemblies
             string[] runtimeEnvirnmentFiles = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), @"*.dll");
