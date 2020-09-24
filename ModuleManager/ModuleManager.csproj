@@ -12,10 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="TemplateSelectors\SelectedTreeViewItemBehavior.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
   	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
   	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
   </ItemGroup>

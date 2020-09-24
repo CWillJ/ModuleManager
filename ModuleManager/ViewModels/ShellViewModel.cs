@@ -12,6 +12,7 @@
     using ModuleRetriever.Interfaces;
     using Prism.Commands;
     using Prism.Mvvm;
+    using Prism.Regions;
     using Telerik.Windows.Controls;
 
     /// <summary>
@@ -23,6 +24,7 @@
         private double _currentProgress;
         private string _progressBarText;
         private bool _progressBarIsVisible;
+        private IRegionManager _region;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
