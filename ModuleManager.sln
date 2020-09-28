@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleRetriever", "ModuleRe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleObjects", "ModuleObjects\ModuleObjects.csproj", "{0516D37A-BA9C-4A6F-AA5A-599EB8E40959}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{7AD78CA8-EE4E-4A42-B844-EB6A61ADC947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{7AD78CA8-EE4E-4A42-B844-EB6A61ADC947}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

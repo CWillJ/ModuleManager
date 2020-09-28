@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Images\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <None Remove="Images\**" />
+    <Page Remove="Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
   	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
   	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
   </ItemGroup>
@@ -19,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
     <ProjectReference Include="..\ModuleRetriever\ModuleRetriever.csproj" />
+    <ProjectReference Include="..\UI\UI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,10 +72,6 @@
     <Reference Include="Unity.Container">
       <HintPath>..\Lib\Unity.Container.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

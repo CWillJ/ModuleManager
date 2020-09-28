@@ -96,7 +96,7 @@
         /// <returns>New module catalog.</returns>
         protected override IModuleCatalog CreateModuleCatalog()
         {
-            return new ConfigurationModuleCatalog();
+            return ModuleCatalog.CreateFromXaml(new Uri("/ModuleManager;component/ModuleCatalog.xaml", UriKind.Relative));
         }
     }
 }

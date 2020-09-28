@@ -24,7 +24,6 @@
         private double _currentProgress;
         private string _progressBarText;
         private bool _progressBarIsVisible;
-        private IRegionManager _region;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
@@ -51,6 +50,11 @@
                 _modules = LoadConfig();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the Navigation command for the view.
+        /// </summary>
+        public DelegateCommand<string> NavigateCommand { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether SaveFileDialog is used on save settings.

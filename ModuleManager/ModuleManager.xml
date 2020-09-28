@@ -56,82 +56,6 @@
             Application Entry Point.
             </summary>
         </member>
-        <member name="T:ModuleManager.Converters.CheckBoxConverter">
-            <summary>
-            CheckBoxConverter is used to tell if a module is enabled or disabled.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Converters.CheckBoxConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            CheckBox converter.
-            </summary>
-            <param name="values">CheckBox values.</param>
-            <param name="targetType">Target type of values.</param>
-            <param name="parameter">Parameters.</param>
-            <param name="culture">CultureInfo.</param>
-            <returns>A clone of the object array values.</returns>
-        </member>
-        <member name="M:ModuleManager.Converters.CheckBoxConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="value">CheckBox values.</param>
-            <param name="targetTypes">Target type of values.</param>
-            <param name="parameter">Parameters.</param>
-            <param name="culture">CultureInfo.</param>
-            <returns>Not implenemted.</returns>
-        </member>
-        <member name="T:ModuleManager.Converters.TypeNameToIconConverter">
-            <summary>
-            Converter to convert the string name of a member type to an icon.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Converters.TypeNameToIconConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Convery string name of a member type to an icon.
-            </summary>
-            <param name="value">Object passed in.</param>
-            <param name="targetType">Target type.</param>
-            <param name="parameter">Parameter object.</param>
-            <param name="culture">Culture.</param>
-            <returns>String path to an image icon.</returns>
-        </member>
-        <member name="M:ModuleManager.Converters.TypeNameToIconConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="value">Object passed in.</param>
-            <param name="targetType">Target type.</param>
-            <param name="parameter">Parameter object.</param>
-            <param name="culture">Culture.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="T:ModuleManager.TemplateSelectors.TemplateSelector">
-            <summary>
-            Used to selected a DataTemplate in the view.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.TemplateSelectors.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
-            <summary>
-            Used to select the DataTemplate for the description.
-            </summary>
-            <param name="item">Object.</param>
-            <param name="container">Container.</param>
-            <returns>A DataTemplate depending on the object passed in.</returns>
-        </member>
-        <member name="T:ModuleManager.TemplateSelectors.TreeViewItemTemplateSelector">
-            <summary>
-            Used to selected a DataTemplate in the view.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.TemplateSelectors.TreeViewItemTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
-            <summary>
-            Used to select the DataTemplate for tree view items.
-            </summary>
-            <param name="item">Object.</param>
-            <param name="container">Container.</param>
-            <returns>A DataTemplate depending on the object passed in.</returns>
-        </member>
         <member name="T:ModuleManager.ViewModels.ShellViewModel">
             <summary>
             ModuleManagerViewModel will handle commands from the main view.
@@ -140,6 +64,11 @@
         <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ViewModels.ShellViewModel.NavigateCommand">
+            <summary>
+            Gets or sets the Navigation command for the view.
             </summary>
         </member>
         <member name="P:ModuleManager.ViewModels.ShellViewModel.UseSaveFileDialog">
@@ -227,78 +156,6 @@
             Gets the directory selected by the user that should contain dll files.
             </summary>
             <returns>String of the directory path.</returns>
-        </member>
-        <member name="T:ModuleManager.Views.DescriptionView">
-            <summary>
-            Interaction logic for DescriptionView.xaml.
-            </summary>
-            <summary>
-            DescriptionView
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.DescriptionView.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Views.DescriptionView"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.DescriptionView.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:ModuleManager.Views.LoadSaveButtons">
-            <summary>
-            Interaction logic for LoadSaveButtons.xaml.
-            </summary>
-            <summary>
-            LoadSaveButtons
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.LoadSaveButtons.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Views.LoadSaveButtons"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.LoadSaveButtons.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:ModuleManager.Views.ModuleView">
-            <summary>
-            Interaction logic for ModuleView.xaml.
-            </summary>
-            <summary>
-            ModuleView
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.ModuleView.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Views.ModuleView"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.ModuleView.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:ModuleManager.Views.ProgressBar">
-            <summary>
-            Interaction logic for ProgressBar.xaml.
-            </summary>
-            <summary>
-            ProgressBar
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.ProgressBar.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Views.ProgressBar"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Views.ProgressBar.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
         </member>
         <member name="T:ModuleManager.Views.ShellView">
             <summary>
