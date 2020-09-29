@@ -18,5 +18,4 @@
         </ResourceDictionary>
     </prism:PrismApplication.Resources>
 
-    <!--  StartupUri="MainWindow.xaml"  -->
 </prism:PrismApplication>
