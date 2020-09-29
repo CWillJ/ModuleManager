@@ -7,10 +7,12 @@
     using System.Threading.Tasks;
     using System.Windows;
     using System.Xml.Serialization;
+    using ModuleManager.UI.Events;
     using ModuleObjects.Classes;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
     using Prism.Commands;
+    using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using Telerik.Windows.Controls;
@@ -24,16 +26,20 @@
         private double _currentProgress;
         private string _progressBarText;
         private bool _progressBarIsVisible;
+        private IEventAggregator _eventAggregator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
         /// </summary>
-        public ShellViewModel()
+        /// <param name="eventAggregator">Event aggregator.</param>
+        public ShellViewModel(IEventAggregator eventAggregator)
         {
             _modules = new ObservableCollection<Module>();
             _progressBarText = string.Empty;
             _currentProgress = 0;
             _progressBarIsVisible = false;
+
+            _eventAggregator = eventAggregator;
 
             LoadingModules = false;
 
@@ -92,60 +98,6 @@
         public bool LoadingModules { get; set; }
 
         /// <summary>
-        /// Gets or sets the progress bar text.
-        /// </summary>
-        public string ProgressBarText
-        {
-            get
-            {
-                return _progressBarText;
-            }
-
-            set
-            {
-                if (_progressBarText != value)
-                {
-                    SetProperty(ref _progressBarText, value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the current progress of the status bar.
-        /// </summary>
-        public double CurrentProgress
-        {
-            get
-            {
-                return _currentProgress;
-            }
-
-            private set
-            {
-                if (_currentProgress != value)
-                {
-                    SetProperty(ref _currentProgress, value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether a progress bar is visible.
-        /// </summary>
-        public bool ProgressBarIsVisible
-        {
-            get
-            {
-                return _progressBarIsVisible;
-            }
-
-            set
-            {
-                SetProperty(ref _progressBarIsVisible, value);
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the collection of Modules.
         /// </summary>
         public ObservableCollection<Module> Modules
@@ -187,9 +139,9 @@
             InfoRetriever.DllDirectory = moduleDirectory;
 
             // Show progress bar
-            CurrentProgress = 0;
-            ProgressBarText = string.Empty;
-            ProgressBarIsVisible = true;
+            _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(0.0);
+            _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
+            _eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(true);
 
             Modules.Clear();
 
@@ -207,8 +159,8 @@
 
             // Kill progress bar
             LoadingModules = false;
-            ProgressBarText = string.Empty;
-            ProgressBarIsVisible = false;
+            _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
+            _eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(false);
         }
 
         /// <summary>
@@ -218,8 +170,8 @@
         {
             while (LoadingModules)
             {
-                CurrentProgress = InfoRetriever.PercentOfAssemblyLoaded;
-                ProgressBarText = @"Loading Module: " + InfoRetriever.CurrentTypeName;
+                _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(InfoRetriever.PercentOfAssemblyLoaded);
+                _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(@"Loading Module: " + InfoRetriever.CurrentTypeName);
             }
         }
 

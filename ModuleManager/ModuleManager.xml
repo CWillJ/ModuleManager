@@ -61,10 +61,11 @@
             ModuleManagerViewModel will handle commands from the main view.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor">
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor(Prism.Events.IEventAggregator)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> class.
             </summary>
+            <param name="eventAggregator">Event aggregator.</param>
         </member>
         <member name="P:ModuleManager.ViewModels.ShellViewModel.NavigateCommand">
             <summary>
@@ -104,21 +105,6 @@
         <member name="P:ModuleManager.ViewModels.ShellViewModel.LoadingModules">
             <summary>
             Gets or sets a value indicating whether the application is currently loading modules.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.ProgressBarText">
-            <summary>
-            Gets or sets the progress bar text.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.CurrentProgress">
-            <summary>
-            Gets the current progress of the status bar.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.ProgressBarIsVisible">
-            <summary>
-            Gets or sets a value indicating whether a progress bar is visible.
             </summary>
         </member>
         <member name="P:ModuleManager.ViewModels.ShellViewModel.Modules">
@@ -173,6 +159,36 @@
         <member name="M:ModuleManager.Views.ShellView.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

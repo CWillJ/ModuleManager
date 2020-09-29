@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows;
+    using ModuleManager.UI;
     using ModuleManager.Views;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
@@ -96,7 +97,13 @@
         /// <returns>New module catalog.</returns>
         protected override IModuleCatalog CreateModuleCatalog()
         {
-            return ModuleCatalog.CreateFromXaml(new Uri("/ModuleManager;component/ModuleCatalog.xaml", UriKind.Relative));
+            ModuleCatalog moduleCatalog = new ModuleCatalog();
+
+            moduleCatalog.AddModule<UIModule>();
+
+            return moduleCatalog;
+
+            ////return ModuleCatalog.CreateFromXaml(new Uri("/ModuleManager;component/ModuleCatalog.xaml", UriKind.Relative));
         }
     }
 }
