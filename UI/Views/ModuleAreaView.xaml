@@ -126,7 +126,7 @@
                 Background="White"
                 BorderBrush="Black"
                 BorderThickness="1">
-                <ScrollViewer Margin="10,5,0,0" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer Margin="10,5,0,0" HorizontalScrollBarVisibility="Disabled">
                     <ContentControl
                         x:Name="MemberText"
                         Content="{Binding ElementName=moduleTreeView, Path=SelectedItem}"

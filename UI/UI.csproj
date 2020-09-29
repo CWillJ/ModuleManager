@@ -60,5 +60,6 @@
 	
 	<ItemGroup>
 	  <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
+	  <ProjectReference Include="..\ModuleRetriever\ModuleRetriever.csproj" />
 	</ItemGroup>
 </Project>

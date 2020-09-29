@@ -20,7 +20,11 @@
         /// <returns>String path to an image icon.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string iconDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName + @"\Images\";
+            string iconDirectory = Directory.GetParent(
+                Directory.GetParent(
+                    Directory.GetParent(
+                        Directory.GetParent(
+                            Directory.GetCurrentDirectory()).FullName).FullName).FullName).FullName + @"\UI\Images\";
 
             return value.ToString() switch
             {

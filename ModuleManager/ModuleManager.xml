@@ -65,70 +65,11 @@
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> class.
             </summary>
-            <param name="eventAggregator">Event aggregator.</param>
+            <param name="eventAggregator" >Event aggregator.</param>
         </member>
         <member name="P:ModuleManager.ViewModels.ShellViewModel.NavigateCommand">
             <summary>
             Gets or sets the Navigation command for the view.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.UseSaveFileDialog">
-            <summary>
-            Gets or sets a value indicating whether SaveFileDialog is used on save settings.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.LoadModulesCommand">
-            <summary>
-            Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.SaveConfigCommand">
-            <summary>
-            Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.LoadUnloadCommand">
-            <summary>
-            Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.ModuleDirectory">
-            <summary>
-            Gets or sets the file location as a string.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.InfoRetriever">
-            <summary>
-            Gets or sets a ModuleInfoRetriever.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.LoadingModules">
-            <summary>
-            Gets or sets a value indicating whether the application is currently loading modules.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.Modules">
-            <summary>
-            Gets or sets the collection of Modules.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.StoreModules">
-            <summary>
-            StoreModules will attempt to get all assemblies from a dll and store it
-            as a Module in the Modules collection.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.UpdateProgressBarText">
-            <summary>
-            Runs async to update the progress bar with current module text.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.SaveConfig">
-            <summary>
-            SaveConfig will save an ObservableCollection to an xml file.
-            The boolean, UseSaveFileDialog will be tested to see if the
-            SaveFileDialog will be used or if the hardcoded file location
-            will be used.
             </summary>
         </member>
         <member name="M:ModuleManager.ViewModels.ShellViewModel.LoadConfig">
@@ -136,12 +77,6 @@
             LoadConfig will load an ObservableCollection of type Module from an xml file.
             </summary>
             <returns>ObservableCollection of type Module.</returns>
-        </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.GetModuleDirectory">
-            <summary>
-            Gets the directory selected by the user that should contain dll files.
-            </summary>
-            <returns>String of the directory path.</returns>
         </member>
         <member name="T:ModuleManager.Views.ShellView">
             <summary>
