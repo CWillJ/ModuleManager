@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
@@ -29,9 +30,11 @@
         public ButtonsViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            InfoRetriever = new ModuleInfoRetriever(string.Empty);
+
             eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Subscribe(ModuleCollectionUpdated);
 
-            InfoRetriever = new ModuleInfoRetriever(string.Empty);
+            // Boolean value for testing.
             UseSaveFileDialog = false;
 
             // Load modules from a folder location.
@@ -166,12 +169,12 @@
         /// </summary>
         private void SaveConfig()
         {
-            Type mType = typeof(ObservableCollection<Module>);
+            Type moduleType = typeof(ObservableCollection<Module>);
             XmlSerializer serializer;
 
             try
             {
-                serializer = new XmlSerializer(mType);
+                serializer = new XmlSerializer(moduleType);
             }
             catch (Exception e)
             {

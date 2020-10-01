@@ -7,7 +7,7 @@
     /// <summary>
     /// Module object interface.
     /// </summary>
-    public interface IModule : ISerializable
+    public interface IModule
     {
         /// <summary>
         /// Gets or sets the name of the module.

@@ -61,22 +61,15 @@
             ModuleManagerViewModel will handle commands from the main view.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor(Prism.Events.IEventAggregator)">
+        <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> class.
             </summary>
-            <param name="eventAggregator" >Event aggregator.</param>
         </member>
         <member name="P:ModuleManager.ViewModels.ShellViewModel.NavigateCommand">
             <summary>
             Gets or sets the Navigation command for the view.
             </summary>
-        </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.LoadConfig">
-            <summary>
-            LoadConfig will load an ObservableCollection of type Module from an xml file.
-            </summary>
-            <returns>ObservableCollection of type Module.</returns>
         </member>
         <member name="T:ModuleManager.Views.ShellView">
             <summary>

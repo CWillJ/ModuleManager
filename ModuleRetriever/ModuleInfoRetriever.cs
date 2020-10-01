@@ -158,7 +158,6 @@
             }
 
             return new ModuleObjects.Classes.Module(
-                type,
                 type.Name,
                 DescriptionRetriever.GetModuleDescription(type),
                 AddConstructorsToCollection(type),
