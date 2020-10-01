@@ -277,5 +277,22 @@
             Gets or sets all of the module members.
             </summary>
         </member>
+        <member name="T:ModuleObjects.ModuleObjectsModule">
+            <summary>
+            ModuleObjects module holds the objects the modules are stored in.
+            </summary>
+        </member>
+        <member name="M:ModuleObjects.ModuleObjectsModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform required initialization methods for this Module.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="M:ModuleObjects.ModuleObjectsModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
     </members>
 </doc>

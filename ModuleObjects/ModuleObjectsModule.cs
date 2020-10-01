@@ -1,13 +1,12 @@
-﻿namespace ModuleManager.UI
+﻿namespace ModuleObjects
 {
     using Prism.Ioc;
     using Prism.Modularity;
-    using Prism.Regions;
 
     /// <summary>
-    /// The UI Module Class.
+    /// ModuleObjects module holds the objects the modules are stored in.
     /// </summary>
-    public class UIModule : IModule
+    public class ModuleObjectsModule : IModule
     {
         /// <summary>
         /// Perform required initialization methods for this Module.
@@ -23,6 +22,7 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for program-wide type registration.</param>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<Interfaces.IModule, Classes.Module>();
         }
     }
 }

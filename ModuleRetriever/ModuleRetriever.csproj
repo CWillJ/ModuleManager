@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\wjohnson\source\repos\ModuleManager\ModuleRetriever\ModuleRetriever.xml</DocumentationFile>
+    <DocumentationFile>ModuleRetriever.xml</DocumentationFile>
+    <OutputPath>C:\Users\wjohnson\source\repos\ModuleManager\bin\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

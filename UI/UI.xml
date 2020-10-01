@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UI</name>
+    </assembly>
+    <members>
+        <member name="T:ModuleManager.UI.Converters.CheckBoxConverter">
+            <summary>
+            CheckBoxConverter is used to tell if a module is enabled or disabled.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Converters.CheckBoxConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            CheckBox converter.
+            </summary>
+            <param name="values">CheckBox values.</param>
+            <param name="targetType">Target type of values.</param>
+            <param name="parameter">Parameters.</param>
+            <param name="culture">CultureInfo.</param>
+            <returns>A clone of the object array values.</returns>
+        </member>
+        <member name="M:ModuleManager.UI.Converters.CheckBoxConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">CheckBox values.</param>
+            <param name="targetTypes">Target type of values.</param>
+            <param name="parameter">Parameters.</param>
+            <param name="culture">CultureInfo.</param>
+            <returns>Not implenemted.</returns>
+        </member>
+        <member name="T:ModuleManager.UI.Converters.TypeNameToIconConverter">
+            <summary>
+            Converter to convert the string name of a member type to an icon.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Converters.TypeNameToIconConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convery string name of a member type to an icon.
+            </summary>
+            <param name="value">Object passed in.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Parameter object.</param>
+            <param name="culture">Culture.</param>
+            <returns>String path to an image icon.</returns>
+        </member>
+        <member name="M:ModuleManager.UI.Converters.TypeNameToIconConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">Object passed in.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Parameter object.</param>
+            <param name="culture">Culture.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="T:ModuleManager.UI.Events.UpdateModuleCollectionEvent">
+            <summary>
+            Event for updating the collection of Module objects.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Events.UpdateProgressBarCurrentProgressEvent">
+            <summary>
+            Event for progress bar current progress.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Events.UpdateProgressBarTextEvent">
+            <summary>
+            Event that updates the progress bar text.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Events.UpdateProgressBarVisibilityEvent">
+            <summary>
+            Event for progress bar visibility.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.TemplateSelectors.TemplateSelector">
+            <summary>
+            Used to selected a DataTemplate in the view.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.TemplateSelectors.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Used to select the DataTemplate for the description.
+            </summary>
+            <param name="item">Object.</param>
+            <param name="container">Container.</param>
+            <returns>A DataTemplate depending on the object passed in.</returns>
+        </member>
+        <member name="T:ModuleManager.UI.TemplateSelectors.TreeViewItemTemplateSelector">
+            <summary>
+            Used to selected a DataTemplate in the view.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.TemplateSelectors.TreeViewItemTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Used to select the DataTemplate for tree view items.
+            </summary>
+            <param name="item">Object.</param>
+            <param name="container">Container.</param>
+            <returns>A DataTemplate depending on the object passed in.</returns>
+        </member>
+        <member name="T:ModuleManager.UI.UIModule">
+            <summary>
+            The UI Module Class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform required initialization methods for this Module.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="M:ModuleManager.UI.UIModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="T:ModuleManager.UI.ViewModels.ButtonsViewModel">
+            <summary>
+            View model for the buttons area.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ButtonsViewModel"/> class.
+            </summary>
+            <param name="eventAggregator">Event aggregator.</param>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
+            <summary>
+            Gets or sets a value indicating whether SaveFileDialog is used on save settings.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.LoadingModules">
+            <summary>
+            Gets or sets a value indicating whether the application is currently loading modules.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.Modules">
+            <summary>
+            Gets or sets the collection of Modules.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.InfoRetriever">
+            <summary>
+            Gets or sets a ModuleInfoRetriever.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.LoadModulesCommand">
+            <summary>
+            Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.SaveConfigCommand">
+            <summary>
+            Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.LoadUnloadCommand">
+            <summary>
+            Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.StoreModules">
+            <summary>
+            StoreModules will attempt to get all assemblies from a dll and store it
+            as a Module in the Modules collection.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.UpdateProgressBarText">
+            <summary>
+            Runs async to update the progress bar with current module text.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.GetModuleDirectory">
+            <summary>
+            Gets the directory selected by the user that should contain dll files.
+            </summary>
+            <returns>String of the directory path.</returns>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.SaveConfig">
+            <summary>
+            SaveConfig will save an ObservableCollection to an xml file.
+            The boolean, UseSaveFileDialog will be tested to see if the
+            SaveFileDialog will be used or if the hardcoded file location
+            will be used.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.ViewModels.ModuleAreaViewModel">
+            <summary>
+            View model for module area.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.#ctor(Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ModuleAreaViewModel"/> class.
+            </summary>
+            <param name="eventAggregator">Event aggregator.</param>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ModuleAreaViewModel.Modules">
+            <summary>
+            Gets or sets a collection of ModuleManager.ModuleObjects.Classes.Module.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.LoadConfig">
+            <summary>
+            LoadConfig will load an ObservableCollection of type Module from an xml file.
+            </summary>
+            <returns>ObservableCollection of type Module.</returns>
+        </member>
+        <member name="T:ModuleManager.UI.ViewModels.ProgressBarViewModel">
+            <summary>
+            View model for progress bar view.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ProgressBarViewModel.#ctor(Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ProgressBarViewModel"/> class.
+            </summary>
+            <param name="eventAggregator">Event aggregator.</param>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.ProgressBarText">
+            <summary>
+            Gets or sets the progress bar text.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.CurrentProgress">
+            <summary>
+            Gets the current progress of the status bar.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.ProgressBarIsVisible">
+            <summary>
+            Gets or sets a value indicating whether a progress bar is visible.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Views.ButtonsView">
+            <summary>
+            Interaction logic for LoadSaveButtons.xaml.
+            </summary>
+            <summary>
+            ButtonsView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ButtonsView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.Views.ButtonsView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ButtonsView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Views.ModuleAreaView">
+            <summary>
+            Interaction logic for ModuleView.xaml.
+            </summary>
+            <summary>
+            ModuleAreaView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ModuleAreaView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.Views.ModuleAreaView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ModuleAreaView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Views.ProgressBarView">
+            <summary>
+            Interaction logic for ProgressBar.xaml.
+            </summary>
+            <summary>
+            ProgressBarView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ProgressBarView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.Views.ProgressBarView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

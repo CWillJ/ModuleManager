@@ -6,6 +6,11 @@
     <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>UI.xml</DocumentationFile>
+    <OutputPath>C:\Users\wjohnson\source\repos\ModuleManager\bin\</OutputPath>
+  </PropertyGroup>
+
 	<ItemGroup>
 		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
 		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />

@@ -4,8 +4,6 @@
     using System.Windows;
     using ModuleManager.UI;
     using ModuleManager.Views;
-    using ModuleRetriever;
-    using ModuleRetriever.Interfaces;
     using Prism.Ioc;
     using Prism.Modularity;
     using Prism.Regions;
@@ -77,7 +75,6 @@
         protected override void InitializeModules()
         {
             base.InitializeModules();
-            ////AttachExceptionHandler();
         }
 
         /// <summary>
@@ -86,9 +83,6 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for container type registration.</param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IModuleInfoRetriever, ModuleInfoRetriever>();
-
-            containerRegistry.Register<ModuleObjects.Interfaces.IModule, ModuleObjects.Classes.Module>();
         }
 
         /// <summary>
@@ -102,8 +96,6 @@
             moduleCatalog.AddModule<UIModule>();
 
             return moduleCatalog;
-
-            ////return ModuleCatalog.CreateFromXaml(new Uri("/ModuleManager;component/ModuleCatalog.xaml", UriKind.Relative));
         }
     }
 }

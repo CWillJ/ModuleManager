@@ -1,7 +1,6 @@
 ﻿namespace ModuleManager.ViewModels
 {
     using Prism.Commands;
-    using Prism.Events;
     using Prism.Mvvm;
 
     /// <summary>

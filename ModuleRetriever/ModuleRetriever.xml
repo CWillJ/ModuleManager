@@ -4,40 +4,6 @@
         <name>ModuleRetriever</name>
     </assembly>
     <members>
-        <member name="T:ModuleRetriever.Interfaces.IModuleInfoRetriever">
-            <summary>
-            Service designed to abstract calls to retrieve modules from dll files.
-            </summary>
-        </member>
-        <member name="P:ModuleRetriever.Interfaces.IModuleInfoRetriever.CurrentTypeName">
-            <summary>
-            Gets or sets CurrentTypeName is the name of the type being loaded.
-            </summary>
-        </member>
-        <member name="P:ModuleRetriever.Interfaces.IModuleInfoRetriever.PercentOfAssemblyLoaded">
-            <summary>
-            Gets or sets the current percentage of load compleation of the current assembly.
-            </summary>
-        </member>
-        <member name="P:ModuleRetriever.Interfaces.IModuleInfoRetriever.DllDirectory">
-            <summary>
-            Gets or sets DllDirectory is the directory path of the .dll files.
-            </summary>
-        </member>
-        <member name="M:ModuleRetriever.Interfaces.IModuleInfoRetriever.LoadModule(System.Reflection.Assembly)">
-            <summary>
-            Load an assembly into memory.
-            </summary>
-            <param name="assembly">The assembly that will be loaded.</param>
-        </member>
-        <member name="M:ModuleRetriever.Interfaces.IModuleInfoRetriever.GetModules(System.String[])">
-            <summary>
-            GetModules will create an ObservableCollection of type Module to organize
-            the information from the dll file and its related .xml file.
-            </summary>
-            <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-            <returns>Returns an collection of Module objects.</returns>
-        </member>
         <member name="T:ModuleRetriever.ModuleInfoRetriever">
             <summary>
             ModuleInfoRetriever is used to get information from a .dll file.
@@ -249,6 +215,57 @@
             </summary>
             <param name="xmlNode">XmlNode to get text from.</param>
             <returns>Formatted string of the XmlNode.InnerXml.</returns>
+        </member>
+        <member name="T:ModuleRetriever.Interfaces.IModuleInfoRetriever">
+            <summary>
+            Service designed to abstract calls to retrieve modules from dll files.
+            </summary>
+        </member>
+        <member name="P:ModuleRetriever.Interfaces.IModuleInfoRetriever.CurrentTypeName">
+            <summary>
+            Gets or sets CurrentTypeName is the name of the type being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleRetriever.Interfaces.IModuleInfoRetriever.PercentOfAssemblyLoaded">
+            <summary>
+            Gets or sets the current percentage of load compleation of the current assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleRetriever.Interfaces.IModuleInfoRetriever.DllDirectory">
+            <summary>
+            Gets or sets DllDirectory is the directory path of the .dll files.
+            </summary>
+        </member>
+        <member name="M:ModuleRetriever.Interfaces.IModuleInfoRetriever.LoadModule(System.Reflection.Assembly)">
+            <summary>
+            Load an assembly into memory.
+            </summary>
+            <param name="assembly">The assembly that will be loaded.</param>
+        </member>
+        <member name="M:ModuleRetriever.Interfaces.IModuleInfoRetriever.GetModules(System.String[])">
+            <summary>
+            GetModules will create an ObservableCollection of type Module to organize
+            the information from the dll file and its related .xml file.
+            </summary>
+            <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
+            <returns>Returns an collection of Module objects.</returns>
+        </member>
+        <member name="T:ModuleRetriever.ModuleRetrieverModule">
+            <summary>
+            ModuleRetriever Module is used to get information from modules and store them.
+            </summary>
+        </member>
+        <member name="M:ModuleRetriever.ModuleRetrieverModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform required initialization methods for this Module.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="M:ModuleRetriever.ModuleRetrieverModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
         </member>
     </members>
 </doc>
