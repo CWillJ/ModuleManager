@@ -10,7 +10,6 @@
     using System.Runtime.InteropServices;
     using ModuleObjects.Classes;
     using ModuleRetriever.Interfaces;
-    using Prism.Modularity;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
