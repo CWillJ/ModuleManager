@@ -27,14 +27,14 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2.5*" />
+            <ColumnDefinition Width="2.25*" />
         </Grid.ColumnDefinitions>
 
         <!--  Modules Grid  -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
-                <RowDefinition Height="15*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Border
@@ -76,7 +76,7 @@
                             </CheckBox>
                             <TextBlock
                                 Margin="0,8,0,0"
-                                FontSize="16"
+                                FontSize="14"
                                 Text="{Binding Path=Name}" />
                         </StackPanel>
 
@@ -85,8 +85,8 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="{Binding Path=TypeName, Converter={StaticResource StringToIconConverter}}" />
                                     <TextBlock
-                                        Margin="0,18,0,0"
-                                        FontSize="14"
+                                        Margin="10,10,0,0"
+                                        FontSize="12"
                                         Text="{Binding Path=Name}" />
                                 </StackPanel>
                             </DataTemplate>

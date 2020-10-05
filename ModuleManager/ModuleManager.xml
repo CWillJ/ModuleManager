@@ -61,16 +61,6 @@
             ModuleManagerViewModel will handle commands from the main view.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> class.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ViewModels.ShellViewModel.NavigateCommand">
-            <summary>
-            Gets or sets the Navigation command for the view.
-            </summary>
-        </member>
         <member name="T:ModuleManager.Views.ShellView">
             <summary>
             Interaction logic for MainWindow.xaml.

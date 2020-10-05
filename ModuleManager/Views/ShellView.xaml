@@ -9,14 +9,19 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:views="clr-namespace:ModuleManager.Views"
-    Width="1500"
-    Height="750"
     MinWidth="900"
     MinHeight="500"
     navigation:RadWindowInteropHelper.AllowTransparency="True"
+    navigation:RadWindowInteropHelper.ShowInTaskbar="True"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="LightGray"
+    CanMove="True"
     Header="Module Manager"
+    IsRestricted="True"
+    IsTopmost="False"
+    Style="{DynamicResource RadWindowStyle}"
+    TextOptions.TextFormattingMode="Ideal"
+    WindowState="Maximized"
     mc:Ignorable="d">
 
     <telerik:RadWindow.Resources>
@@ -26,33 +31,6 @@
     </telerik:RadWindow.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75" />
-            <RowDefinition Height="6*" />
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-
-            <!--  Load Save Buttons  -->
-            <Grid Grid.Column="0">
-                <UIViews:ButtonsView />
-            </Grid>
-
-            <!--  Progress Bar  -->
-            <Grid Grid.Column="1" Margin="0,20,40,20">
-                <UIViews:ProgressBarView />
-            </Grid>
-        </Grid>
-
-        <!--  Module View Area  -->
-        <Grid Grid.Row="1">
-            <UIViews:ModuleAreaView />
-        </Grid>
-
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
     </Grid>
 </telerik:RadWindow>

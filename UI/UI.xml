@@ -105,6 +105,12 @@
             The UI Module Class.
             </summary>
         </member>
+        <member name="M:ModuleManager.UI.UIModule.#ctor(Prism.Regions.IRegionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.UIModule"/> class.
+            </summary>
+            <param name="regionManager">Region manager.</param>
+        </member>
         <member name="M:ModuleManager.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
             <summary>
             Perform required initialization methods for this Module.
@@ -122,11 +128,12 @@
             View model for the buttons area.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Events.IEventAggregator)">
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Events.IEventAggregator,Prism.Regions.IRegionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
             <param name="eventAggregator">Event aggregator.</param>
+            <param name="regionManager">Region manager.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
             <summary>
@@ -146,6 +153,11 @@
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.InfoRetriever">
             <summary>
             Gets or sets a ModuleInfoRetriever.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.NavigateCommand">
+            <summary>
+            Gets the Navigate command.
             </summary>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.LoadModulesCommand">
@@ -272,6 +284,24 @@
             InitializeComponent
             </summary>
         </member>
+        <member name="T:ModuleManager.UI.Views.ModuleManagerView">
+            <summary>
+            Interaction logic for MainView.xaml.
+            </summary>
+            <summary>
+            ModuleManagerView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ModuleManagerView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.Views.ModuleManagerView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.ModuleManagerView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:ModuleManager.UI.Views.ProgressBarView">
             <summary>
             Interaction logic for ProgressBar.xaml.
@@ -288,6 +318,47 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UI.ViewModels.ModuleManagerViewModel">
+            <summary>
+            MainView view model.
+            </summary>
+        </member>
+        <member name="M:UI.ViewModels.ModuleManagerViewModel.#ctor(Prism.Regions.IRegionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UI.ViewModels.ModuleManagerViewModel"/> class.
+            </summary>
+            <param name="regionManager">Region manager.</param>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

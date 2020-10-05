@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     d:DesignHeight="100"
@@ -14,25 +13,25 @@
 
     <StackPanel Orientation="Horizontal">
         <telerik:RadButton
-            Width="100"
+            Width="120"
             Height="40"
             Margin="25,10,5,5"
             HorizontalAlignment="Left"
             Background="IndianRed"
             Command="{Binding LoadModulesCommand}"
             Content="Load Modules"
-            FontSize="8"
+            FontSize="10"
             FontWeight="Bold" />
 
         <telerik:RadButton
-            Width="100"
+            Width="120"
             Height="40"
             Margin="25,10,5,5"
             HorizontalAlignment="Left"
             Background="IndianRed"
             Command="{Binding SaveConfigCommand}"
             Content="Save Configuration"
-            FontSize="8"
+            FontSize="10"
             FontWeight="Bold" />
     </StackPanel>
 </UserControl>

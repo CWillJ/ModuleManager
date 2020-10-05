@@ -3,7 +3,6 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
@@ -11,9 +10,9 @@
     using ModuleObjects.Classes;
     using ModuleRetriever;
     using ModuleRetriever.Interfaces;
-    using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
+    using Prism.Regions;
     using Telerik.Windows.Controls;
 
     /// <summary>
@@ -22,20 +21,26 @@
     public class ButtonsViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IRegionManager _regionManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
         /// <param name="eventAggregator">Event aggregator.</param>
-        public ButtonsViewModel(IEventAggregator eventAggregator)
+        /// <param name="regionManager">Region manager.</param>
+        public ButtonsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
+            _regionManager = regionManager;
+
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
             eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Subscribe(ModuleCollectionUpdated);
 
             // Boolean value for testing.
             UseSaveFileDialog = false;
+
+            NavigateCommand = new Prism.Commands.DelegateCommand<string>(Navigate);
 
             // Load modules from a folder location.
             LoadModulesCommand = new Prism.Commands.DelegateCommand(StoreModules, CanExecute);
@@ -63,6 +68,11 @@
         /// Gets or sets a ModuleInfoRetriever.
         /// </summary>
         public IModuleInfoRetriever InfoRetriever { get; set; }
+
+        /// <summary>
+        /// Gets the Navigate command.
+        /// </summary>
+        public Prism.Commands.DelegateCommand<string> NavigateCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
@@ -109,8 +119,11 @@
             // Show progress bar
             _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(0.0);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(true);
             _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
+
+            // This needs to navigate to the ProgressBar View.
+            NavigateCommand.Execute("ProgressBarView");
+            ////_eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(true);
 
             LoadingModules = true;
 
@@ -128,7 +141,10 @@
             LoadingModules = false;
             _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(false);
+
+            // This needs to navigate back to the MainView View.
+            NavigateCommand.Execute("ModuleManagerView");
+            ////_eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(false);
         }
 
         /// <summary>
@@ -212,7 +228,15 @@
             serializer.Serialize(wr, Modules);
             wr.Close();
 
-            RadWindow.Alert(@"Config File Saved at: " + saveFile);
+            RadWindow.Alert(@"Configuration Saved");
+        }
+
+        private void Navigate(string navigatePath)
+        {
+            if (navigatePath != null)
+            {
+                _regionManager.RequestNavigate("ContentRegion", navigatePath);
+            }
         }
 
         private void ModuleCollectionUpdated(ObservableCollection<Module> modules)

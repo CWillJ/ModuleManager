@@ -11,6 +11,12 @@
     <OutputPath>C:\Users\wjohnson\source\repos\ModuleManager\bin\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\Constructor Icon.png" />
+    <None Remove="Images\Method Icon.png" />
+    <None Remove="Images\Property Icon.png" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
 		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
@@ -59,12 +65,13 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	  <Folder Include="Views\" />
+	  <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
+	  <ProjectReference Include="..\ModuleRetriever\ModuleRetriever.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
-	  <ProjectReference Include="..\ModuleRetriever\ModuleRetriever.csproj" />
+	  <Resource Include="Images\Constructor Icon.png" />
+	  <Resource Include="Images\Method Icon.png" />
+	  <Resource Include="Images\Property Icon.png" />
 	</ItemGroup>
 </Project>

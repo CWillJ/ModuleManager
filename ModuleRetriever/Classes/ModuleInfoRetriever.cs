@@ -103,7 +103,7 @@
             {
                 DllFilePath = dllFile;
                 DescriptionRetriever.DllFilePath = dllFile;
-                assembly = metaDataLoader.LoadFromAssemblyPath(dllFile);
+                assembly = metaDataLoader.LoadFromAssemblyPath(DllFilePath);
 
                 Type[] types = null;
 
@@ -157,6 +157,7 @@
             }
 
             return new ModuleObjects.Classes.Module(
+                DllFilePath,
                 type.Name,
                 DescriptionRetriever.GetModuleDescription(type),
                 AddConstructorsToCollection(type),
