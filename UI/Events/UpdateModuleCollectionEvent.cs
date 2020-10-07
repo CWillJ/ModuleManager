@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.UI.Events
 {
     using System.Collections.ObjectModel;
-    using ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Classes;
     using Prism.Events;
 
     /// <summary>

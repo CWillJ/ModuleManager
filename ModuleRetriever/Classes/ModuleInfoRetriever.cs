@@ -1,4 +1,4 @@
-﻿namespace ModuleRetriever
+﻿namespace ModuleManager.ModuleRetriever.Classes
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,8 @@
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using ModuleObjects.Classes;
-    using ModuleRetriever.Interfaces;
+    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleRetriever.Interfaces;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -283,6 +283,7 @@
                     DescriptionRetriever.GetParametersFromList(method, methodIndex);
 
                 string returnType;
+
                 try
                 {
                     returnType = method.ReturnType.FullName;

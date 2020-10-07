@@ -1,4 +1,4 @@
-﻿namespace ModuleObjects.Classes
+﻿namespace ModuleManager.ModuleObjects.Classes
 {
     /// <summary>
     /// The base class for module members.

@@ -4,8 +4,8 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Xml.Serialization;
+    using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Events;
-    using ModuleObjects.Classes;
     using Prism.Events;
     using Prism.Mvvm;
 

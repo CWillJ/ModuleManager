@@ -1,4 +1,4 @@
-﻿namespace ModuleObjects
+﻿namespace ModuleManager.ModuleObjects
 {
     using Prism.Ioc;
     using Prism.Modularity;

@@ -1,9 +1,8 @@
-﻿namespace ModuleObjects.Classes
+﻿namespace ModuleManager.ModuleObjects.Classes
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
-    using ModuleObjects.Interfaces;
+    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// Module object holds the name and description of a module.

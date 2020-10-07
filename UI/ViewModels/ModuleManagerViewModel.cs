@@ -1,6 +1,5 @@
-﻿namespace UI.ViewModels
+﻿namespace ModuleManager.UI.ViewModels
 {
-    using ModuleManager.UI.Views;
     using Prism.Commands;
     using Prism.Mvvm;
     using Prism.Regions;

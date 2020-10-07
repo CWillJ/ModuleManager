@@ -1,6 +1,6 @@
-﻿namespace ModuleRetriever
+﻿namespace ModuleManager.ModuleRetriever.Classes
 {
-    using ModuleRetriever.Interfaces;
+    using ModuleManager.ModuleRetriever.Interfaces;
     using Prism.Ioc;
     using Prism.Modularity;
 

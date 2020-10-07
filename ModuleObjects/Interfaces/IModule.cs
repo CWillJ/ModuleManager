@@ -1,8 +1,7 @@
-﻿namespace ModuleObjects.Interfaces
+﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
     using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Classes;
 
     /// <summary>
     /// Module object interface.

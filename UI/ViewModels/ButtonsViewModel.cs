@@ -6,10 +6,10 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
+    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleRetriever.Classes;
+    using ModuleManager.ModuleRetriever.Interfaces;
     using ModuleManager.UI.Events;
-    using ModuleObjects.Classes;
-    using ModuleRetriever;
-    using ModuleRetriever.Interfaces;
     using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;

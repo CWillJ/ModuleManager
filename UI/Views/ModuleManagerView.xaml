@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:ModuleManager.UI.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
@@ -24,47 +25,6 @@
 
             <local:ButtonsView Grid.Column="0" />
 
-            <Grid
-                Grid.Column="1"
-                Margin="0,20,0,20"
-                VerticalAlignment="Center">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="0" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Grid.Column="0" Source="../Images/Constructor Icon.png" />
-                    <TextBlock Grid.Column="1" Text=" = Constructor" />
-                </Grid>
-
-                <Grid Grid.Column="1" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Grid.Column="0" Source="../Images/Property Icon.png" />
-                    <TextBlock Grid.Column="1" Text=" = Property" />
-                </Grid>
-
-                <Grid Grid.Column="2" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Grid.Column="0" Source="../Images/Method Icon.png" />
-                    <TextBlock Grid.Column="1" Text=" = Method" />
-                </Grid>
-            </Grid>
         </Grid>
 
         <!--  Module View Area  -->

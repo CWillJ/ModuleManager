@@ -1,4 +1,4 @@
-﻿namespace ModuleRetriever
+﻿namespace ModuleManager.ModuleRetriever.Classes
 {
     using System;
     using System.Collections.ObjectModel;
@@ -7,7 +7,7 @@
     using System.Reflection;
     using System.Text.RegularExpressions;
     using System.Xml;
-    using ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Classes;
 
     /// <summary>
     /// XmlDescriptionRetriever is used to get text form an xml file.

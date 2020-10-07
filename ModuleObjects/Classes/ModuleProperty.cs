@@ -1,4 +1,4 @@
-﻿namespace ModuleObjects.Classes
+﻿namespace ModuleManager.ModuleObjects.Classes
 {
     /// <summary>
     /// ModuleProperty object holds the name, description, data type and accessor level of a property.
