@@ -344,6 +344,29 @@
             Gets or sets all of the module members.
             </summary>
         </member>
+        <member name="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoader">
+            <summary>
+            The class that loads and unloads assemblies.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoader.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoader"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoader.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoader"/> class.
+            </summary>
+            <param name="mainAssemblyToLoadPath">The path to the assembly.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoader.Load(System.Reflection.AssemblyName)">
+            <summary>
+            Overrides the Load method.
+            </summary>
+            <param name="name">The assembly name.</param>
+            <returns>A loaded assembly.</returns>
+        </member>
         <member name="T:ModuleManager.ModuleObjects.ModuleObjectsModule">
             <summary>
             ModuleObjects module holds the objects the modules are stored in.
@@ -360,29 +383,6 @@
             Register types with the container that will be used by the application.
             </summary>
             <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
-        </member>
-        <member name="T:ModuleManager.ModuleRetriever.Classes.AssemblyLoader">
-            <summary>
-            The class that loads and unloads assemblies.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleRetriever.Classes.AssemblyLoader.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleRetriever.Classes.AssemblyLoader"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleRetriever.Classes.AssemblyLoader.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleRetriever.Classes.AssemblyLoader"/> class.
-            </summary>
-            <param name="mainAssemblyToLoadPath">The path to the assembly.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleRetriever.Classes.AssemblyLoader.Load(System.Reflection.AssemblyName)">
-            <summary>
-            Overrides the Load method.
-            </summary>
-            <param name="name">The assembly name.</param>
-            <returns>A loaded assembly.</returns>
         </member>
     </members>
 </doc>

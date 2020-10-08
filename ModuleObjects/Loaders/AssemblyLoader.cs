@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.ModuleRetriever.Classes
+﻿namespace ModuleManager.ModuleObjects.Loaders
 {
     using System.Reflection;
     using System.Runtime.Loader;

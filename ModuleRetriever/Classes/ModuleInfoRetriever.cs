@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Reflection;
     using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Loaders;
     using ModuleManager.ModuleRetriever.Interfaces;
 
     /// <summary>

@@ -2,7 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.Xml.Serialization;
-    using ModuleManager.ModuleRetriever.Classes;
+    using ModuleManager.ModuleObjects.Loaders;
 
     /// <summary>
     /// AssemblyData holds the file path to the assembly so it can be loaded and
