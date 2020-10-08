@@ -7,7 +7,7 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     d:DesignHeight="100"
-    d:DesignWidth="425"
+    d:DesignWidth="600"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
@@ -31,6 +31,17 @@
             Background="IndianRed"
             Command="{Binding SaveConfigCommand}"
             Content="Save Configuration"
+            FontSize="10"
+            FontWeight="Bold" />
+
+        <telerik:RadButton
+            Width="120"
+            Height="40"
+            Margin="25,10,5,5"
+            HorizontalAlignment="Left"
+            Background="IndianRed"
+            Command="{Binding LoadUnloadCommand}"
+            Content="Load/Unload"
             FontSize="10"
             FontWeight="Bold" />
     </StackPanel>

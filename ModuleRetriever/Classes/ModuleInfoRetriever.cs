@@ -81,7 +81,6 @@
                 DllFilePath = dllFile;
                 DescriptionRetriever.DllFilePath = DllFilePath;
 
-                // testing assembly loader
                 assemblyLoader = new AssemblyLoader(DllFilePath);
                 assembly = assemblyLoader.LoadFromAssemblyPath(DllFilePath);
 
@@ -124,9 +123,6 @@
 
                 assemblyLoader.Unload();
             }
-
-            // Return an alphabetized collection of the found modules.
-            ////return new ObservableCollection<ModuleData>(modules.ToList().OrderBy(mod => mod.Name));
 
             return assemblies;
         }

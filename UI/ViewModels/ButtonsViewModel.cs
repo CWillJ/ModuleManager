@@ -47,6 +47,9 @@
 
             // Save the current module setup, checkboxes and all, to an xml file.
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
+
+            // Load/unload the current assembly/module selection base on the checkboxes.
+            LoadUnloadCommand = new Prism.Commands.DelegateCommand(LoadUnload, CanExecute);
         }
 
         /// <summary>
@@ -228,6 +231,20 @@
             RadWindow.Alert(@"Configuration Saved");
         }
 
+        /// <summary>
+        /// Loads all assemblies with checked boxes and
+        /// unloads the unchecked ones.
+        /// </summary>
+        private void LoadUnload()
+        {
+            foreach (var assembly in Assemblies)
+            {
+                assembly.LoadUnload();
+            }
+
+            RadWindow.Alert(@"Load/Unload Button Was Pressed");
+        }
+
         private void Navigate(string navigatePath)
         {
             if (navigatePath != null)
@@ -236,11 +253,19 @@
             }
         }
 
+        /// <summary>
+        /// Sets the local property Assemblies to the published ObservableCollection of AssemblyData.
+        /// </summary>
+        /// <param name="assemblies">Published ObservableCollection of AssemblyData.</param>
         private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
         {
             Assemblies = assemblies;
         }
 
+        /// <summary>
+        /// Can always execute.
+        /// </summary>
+        /// <returns>True.</returns>
         private bool CanExecute()
         {
             return true;

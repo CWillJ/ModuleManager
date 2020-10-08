@@ -206,6 +206,24 @@
             will be used.
             </summary>
         </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.LoadUnload">
+            <summary>
+            Loads all assemblies with checked boxes and
+            unloads the unchecked ones.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.AssemblyCollectionUpdated(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData})">
+            <summary>
+            Sets the local property Assemblies to the published ObservableCollection of AssemblyData.
+            </summary>
+            <param name="assemblies">Published ObservableCollection of AssemblyData.</param>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.CanExecute">
+            <summary>
+            Can always execute.
+            </summary>
+            <returns>True.</returns>
+        </member>
         <member name="T:ModuleManager.UI.ViewModels.ModuleAreaViewModel">
             <summary>
             View model for module area.
@@ -220,11 +238,6 @@
         <member name="P:ModuleManager.UI.ViewModels.ModuleAreaViewModel.Assemblies">
             <summary>
             Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.UI.ViewModels.ModuleAreaViewModel.Modules">
-            <summary>
-            Gets or sets a collection of ModuleManager.ModuleObjects.Classes.ModuleData.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.LoadConfig">
@@ -345,36 +358,6 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

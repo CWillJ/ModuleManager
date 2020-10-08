@@ -1,6 +1,8 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
     using System.Collections.ObjectModel;
+    using System.Xml.Serialization;
+    using ModuleManager.ModuleRetriever.Classes;
 
     /// <summary>
     /// AssemblyData holds the file path to the assembly so it can be loaded and
@@ -17,6 +19,7 @@
             IsEnabled = false;
             FilePath = string.Empty;
             Modules = new ObservableCollection<ModuleData>();
+            Loader = null;
         }
 
         /// <summary>
@@ -32,6 +35,7 @@
             IsEnabled = false;
             FilePath = filePath;
             Modules = modules;
+            Loader = null;
         }
 
         /// <summary>
@@ -53,6 +57,69 @@
         /// Gets or sets a collection of modules contained in the assembly.
         /// </summary>
         public ObservableCollection<ModuleData> Modules { get; set; }
+
+        /// <summary>
+        /// Gets the AssemblyLoader to load/unload this assembly.
+        /// Ignored by the XmlSerializer when saving the configuration.
+        /// </summary>
+        [XmlIgnore]
+        public AssemblyLoader Loader { get; private set; }
+
+        /// <summary>
+        /// Load this assembly.
+        /// </summary>
+        public void Load()
+        {
+            Loader = new AssemblyLoader(FilePath);
+            Loader.LoadFromAssemblyPath(FilePath);
+        }
+
+        /// <summary>
+        /// Unload this assembly.
+        /// </summary>
+        public void Unload()
+        {
+            if (Loader == null)
+            {
+                return;
+            }
+
+            Loader.Unload();
+            Loader = null;
+        }
+
+        /// <summary>
+        /// Loads all assemblies with checked boxes and
+        /// unloads the unchecked ones.
+        /// </summary>
+        public void LoadUnload()
+        {
+            if (IsEnabled || AreAnyModulesChecked())
+            {
+                Load();
+            }
+            else
+            {
+                Unload();
+            }
+        }
+
+        /// <summary>
+        /// Checks to see if any modules in the assembly are checked or enabled.
+        /// </summary>
+        /// <returns>True if any ModuleData's are checked, false otherwise.</returns>
+        public bool AreAnyModulesChecked()
+        {
+            foreach (var module in Modules)
+            {
+                if (module.IsEnabled)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

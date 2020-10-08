@@ -16,7 +16,6 @@
     {
         private readonly IEventAggregator _eventAggregator;
         private ObservableCollection<AssemblyData> _assemblies;
-        private ObservableCollection<ModuleData> _modules;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleAreaViewModel"/> class.
@@ -42,20 +41,6 @@
         {
             get { return _assemblies; }
             set { SetProperty(ref _assemblies, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets a collection of ModuleManager.ModuleObjects.Classes.ModuleData.
-        /// </summary>
-        public ObservableCollection<ModuleData> Modules
-        {
-            get { return _modules; }
-            set { SetProperty(ref _modules, value); }
-        }
-
-        private void ModuleCollectionUpdated(ObservableCollection<ModuleData> modules)
-        {
-            Modules = modules;
         }
 
         private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
@@ -105,6 +90,12 @@
                     // Return an empty collection of modules.
                     return assemblies;
                 }
+            }
+
+            // Load any assemblies that are checked.
+            foreach (var assembly in assemblies)
+            {
+                assembly.LoadUnload();
             }
 
             return assemblies;
