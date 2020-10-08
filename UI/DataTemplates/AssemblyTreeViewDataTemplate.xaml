@@ -1,0 +1,66 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ModuleManager.UI.Converters"
+    xmlns:data="clr-namespace:ModuleManager.ModuleObjects.Classes;assembly=ModuleObjects"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:templateSelectors="clr-namespace:ModuleManager.UI.TemplateSelectors">
+
+    <converters:CheckBoxConverter x:Key="ModuleCheckBoxConverter" />
+    <converters:TypeNameToIconConverter x:Key="StringToIconConverter" />
+
+    <!--  Member Level  -->
+    <DataTemplate x:Key="memberLevel">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="{Binding Path=TypeName, Converter={StaticResource StringToIconConverter}}" />
+            <TextBlock
+                Margin="10,10,0,0"
+                FontSize="12"
+                Text="{Binding Path=Name}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <!--  ModuleData Level  -->
+    <HierarchicalDataTemplate
+        x:Key="moduleLevel"
+        ItemTemplate="{StaticResource memberLevel}"
+        ItemsSource="{Binding Path=Members}">
+
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Name="moduleCheckBox" IsChecked="{Binding Path=IsEnabled, Mode=TwoWay}">
+                <CheckBox.CommandParameter>
+                    <MultiBinding Converter="{StaticResource ModuleCheckBoxConverter}">
+                        <Binding ElementName="moduleCheckBox" Path="Content" />
+                        <Binding ElementName="moduleCheckBox" Path="IsChecked" />
+                    </MultiBinding>
+                </CheckBox.CommandParameter>
+            </CheckBox>
+            <TextBlock
+                Margin="0,8,0,0"
+                FontSize="14"
+                Text="{Binding Path=Name}" />
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <!--  AssemblyData Level  -->
+    <HierarchicalDataTemplate
+        x:Key="assemblyLevel"
+        ItemTemplate="{StaticResource moduleLevel}"
+        ItemsSource="{Binding Path=Modules}">
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Name="assemblyCheckBox" IsChecked="{Binding Path=IsEnabled, Mode=TwoWay}">
+                <CheckBox.CommandParameter>
+                    <MultiBinding Converter="{StaticResource ModuleCheckBoxConverter}">
+                        <Binding ElementName="assemblyCheckBox" Path="Content" />
+                        <Binding ElementName="assemblyCheckBox" Path="IsChecked" />
+                    </MultiBinding>
+                </CheckBox.CommandParameter>
+            </CheckBox>
+            <TextBlock
+                Margin="0,8,0,0"
+                FontSize="14"
+                Text="{Binding Path=Name}" />
+        </StackPanel>
+    </HierarchicalDataTemplate>
+</ResourceDictionary>

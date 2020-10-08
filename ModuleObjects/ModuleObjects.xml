@@ -4,6 +4,52 @@
         <name>ModuleObjects</name>
     </assembly>
     <members>
+        <member name="T:ModuleManager.ModuleObjects.Classes.AssemblyData">
+            <summary>
+            AssemblyData holds the file path to the assembly so it can be loaded and
+            the collection of modules in the assembly.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleData})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> class.
+            Specify the path to the assembly and the collection of modules.
+            </summary>
+            <param name="name">Name of the assembly.</param>
+            <param name="filePath">File path to the assembly.</param>
+            <param name="modules">Collection of modules contained in the assembly.</param>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Name">
+            <summary>
+            Gets or sets the name of the assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether the assembly is enabled or disabled.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.FilePath">
+            <summary>
+            Gets or sets the file path to assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Modules">
+            <summary>
+            Gets or sets a collection of modules contained in the assembly.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the assembly.</returns>
+        </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.MemberParameter">
             <summary>
             An object designed to hold the type and name of a member's parameter.
@@ -50,82 +96,6 @@
             </summary>
             <returns>A desired format for the parameter type and name.</returns>
         </member>
-        <member name="T:ModuleManager.ModuleObjects.Classes.Module">
-            <summary>
-            Module object holds the name and description of a module.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.Module.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.Module"/> class. Default constructor.
-            initializes properties to empty strings/empty collections.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.Module.#ctor(System.String,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.Module"/> class specifying the name,
-            description and methods.
-            </summary>
-            <param name="dllFilePath">Path to assembly that the module comes from.</param>
-            <param name="name">Module name.</param>
-            <param name="description">Module description.</param>
-            <param name="constructors">Module constructors.</param>
-            <param name="properties">Module properties.</param>
-            <param name="methods">Module methods.</param>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.Name">
-            <summary>
-            Gets or sets the module name.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.Description">
-            <summary>
-            Gets or sets the description of the module.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.DllFilePath">
-            <summary>
-            Gets or sets the file path to the assembly that the module comes from.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.IsEnabled">
-            <summary>
-            Gets or sets a value indicating whether the module is enabled or disabled.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.Members">
-            <summary>
-            Gets or sets all of the module members.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.Constructors">
-            <summary>
-            Gets or sets the constructors in the current module.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.Properties">
-            <summary>
-            Gets or sets the properties in the current module.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.Methods">
-            <summary>
-            Gets or sets the members in the current module.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.Module.ToString">
-            <summary>
-            Overrides the ToString method and formats the string output.
-            </summary>
-            <returns>A desired format for the module name, description and all members contained in module.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.Module.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Implemented from ISerializable.
-            </summary>
-            <param name="info">Info to serialize.</param>
-            <param name="context">Context to serialize.</param>
-        </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor">
             <summary>
             ModuleConstructor object holds the class name, description and the parameters a constructor.
@@ -155,6 +125,69 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the constructor name, description, and parameters.</returns>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Classes.ModuleData">
+            <summary>
+            Module object holds the name and description of a module.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleData"/> class. Default constructor.
+            initializes properties to empty strings/empty collections.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleData"/> class specifying the name,
+            description and methods.
+            </summary>
+            <param name="name">Module name.</param>
+            <param name="description">Module description.</param>
+            <param name="constructors">Module constructors.</param>
+            <param name="properties">Module properties.</param>
+            <param name="methods">Module methods.</param>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Name">
+            <summary>
+            Gets or sets the module name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Description">
+            <summary>
+            Gets or sets the description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether the module is enabled or disabled.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Members">
+            <summary>
+            Gets or sets all of the module members.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Constructors">
+            <summary>
+            Gets or sets the constructors in the current module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Properties">
+            <summary>
+            Gets or sets the properties in the current module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Methods">
+            <summary>
+            Gets or sets the members in the current module.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the module name, description and all members contained in module.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMember">
             <summary>
@@ -263,22 +296,22 @@
             </summary>
             <returns>A desired format for the member description.</returns>
         </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModule">
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
             <summary>
             Module object interface.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModule.Name">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Name">
             <summary>
             Gets or sets the name of the module.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModule.Description">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Description">
             <summary>
             Gets or sets the description of the module.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModule.Members">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Members">
             <summary>
             Gets or sets all of the module members.
             </summary>

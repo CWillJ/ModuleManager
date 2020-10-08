@@ -8,8 +8,6 @@
     xmlns:templateSelectors="clr-namespace:ModuleManager.UI.TemplateSelectors">
 
     <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-    <converters:TypeNameToIconConverter x:Key="StringToIconConverter" />
-    <converters:CheckBoxConverter x:Key="ModuleCheckBoxConverter" />
 
     <templateSelectors:TemplateSelector x:Key="ModuleDataTemplateSelector" />
     <templateSelectors:TreeViewItemTemplateSelector x:Key="treeViewItemTemplateSelector" />
@@ -104,7 +102,7 @@
     </DataTemplate>
 
     <!--  Module Data Template  -->
-    <DataTemplate x:Key="moduleTemplate" DataType="{x:Type data:Module}">
+    <DataTemplate x:Key="moduleTemplate" DataType="{x:Type data:ModuleData}">
         <StackPanel>
 
             <TextBlock
@@ -126,19 +124,23 @@
         </StackPanel>
     </DataTemplate>
 
-    <!--  Constructor Name  -->
-    <DataTemplate x:Key="moduleMemberTreeItemConstructor">
-        <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Constructor Icon.png" />
-    </DataTemplate>
+    <!--  Assembly Data Template  -->
+    <DataTemplate x:Key="assemblyTemplate" DataType="{x:Type data:AssemblyData}">
+        <StackPanel>
+            <TextBlock
+                FontSize="16"
+                FontWeight="Bold"
+                Text="{Binding Path=Name, Mode=OneWay}"
+                TextWrapping="Wrap" />
 
-    <!--  Property Name  -->
-    <DataTemplate x:Key="moduleMemberTreeItemProperty">
-        <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Property Icon.png" />
-    </DataTemplate>
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=FilePath, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
 
-    <!--  Method Name  -->
-    <DataTemplate x:Key="moduleMemberTreeItemMethod">
-        <Image Source="C:\Users\wjohnson\source\repos\ModuleManager\Phase3\ModuleManager\ModuleManager\Images\Method Icon.png" />
+            <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Modules, Mode=OneWay}" />
+        </StackPanel>
+
     </DataTemplate>
 
 </ResourceDictionary>

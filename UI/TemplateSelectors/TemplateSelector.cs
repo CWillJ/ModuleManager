@@ -19,7 +19,12 @@
         {
             if (container is FrameworkElement element && container != null && item != null)
             {
-                if (item is Module)
+                if (item is AssemblyData)
+                {
+                    return element.FindResource("assemblyTemplate") as DataTemplate;
+                }
+
+                if (item is ModuleData)
                 {
                     return element.FindResource("moduleTemplate") as DataTemplate;
                 }

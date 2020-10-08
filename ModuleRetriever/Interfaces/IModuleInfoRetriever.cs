@@ -1,6 +1,7 @@
 ﻿namespace ModuleManager.ModuleRetriever.Interfaces
 {
     using System.Collections.ObjectModel;
+    using ModuleManager.ModuleObjects.Classes;
 
     /// <summary>
     /// Service designed to abstract calls to retrieve modules from dll files.
@@ -33,6 +34,6 @@
         /// </summary>
         /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
         /// <returns>Returns an collection of Module objects.</returns>
-        ObservableCollection<ModuleObjects.Classes.Module> GetModules(string[] dllFiles);
+        ObservableCollection<AssemblyData> GetModules(string[] dllFiles);
     }
 }

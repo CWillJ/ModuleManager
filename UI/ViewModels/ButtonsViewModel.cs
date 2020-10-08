@@ -35,7 +35,7 @@
 
             InfoRetriever = new ModuleInfoRetriever(string.Empty);
 
-            eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Subscribe(ModuleCollectionUpdated);
+            eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 
             // Boolean value for testing.
             UseSaveFileDialog = false;
@@ -62,7 +62,7 @@
         /// <summary>
         /// Gets or sets the collection of Modules.
         /// </summary>
-        public ObservableCollection<Module> Modules { get; set; }
+        public ObservableCollection<AssemblyData> Assemblies { get; set; }
 
         /// <summary>
         /// Gets or sets a ModuleInfoRetriever.
@@ -112,7 +112,7 @@
                 return;
             }
 
-            ObservableCollection<Module> modules = new ObservableCollection<Module>();
+            ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
 
             InfoRetriever.DllDirectory = moduleDirectory;
 
@@ -120,10 +120,8 @@
             _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(0.0);
             _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
-
+            _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
             NavigateCommand.Execute("ProgressBarView");
-
             LoadingModules = true;
 
             Thread thread = new Thread(new ThreadStart(UpdateProgressBarText))
@@ -134,15 +132,14 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            modules = await Task.Run(() => InfoRetriever.GetModules(dllFiles));
+            assemblies = await Task.Run(() => InfoRetriever.GetModules(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
+            NavigateCommand.Execute("ModuleManagerView");
             _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
-
-            NavigateCommand.Execute("ModuleManagerView");
+            _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
         }
 
         /// <summary>
@@ -177,19 +174,20 @@
         }
 
         /// <summary>
-        /// SaveConfig will save an ObservableCollection to an xml file.
+        /// SaveConfig will save an ObservableCollection of AssemblyData
+        /// to an xml file.
         /// The boolean, UseSaveFileDialog will be tested to see if the
         /// SaveFileDialog will be used or if the hardcoded file location
         /// will be used.
         /// </summary>
         private void SaveConfig()
         {
-            Type moduleType = typeof(ObservableCollection<Module>);
+            Type assemblyType = typeof(ObservableCollection<AssemblyData>);
             XmlSerializer serializer;
 
             try
             {
-                serializer = new XmlSerializer(moduleType);
+                serializer = new XmlSerializer(assemblyType);
             }
             catch (Exception e)
             {
@@ -224,7 +222,7 @@
             }
 
             using StreamWriter wr = new StreamWriter(saveFile);
-            serializer.Serialize(wr, Modules);
+            serializer.Serialize(wr, Assemblies);
             wr.Close();
 
             RadWindow.Alert(@"Configuration Saved");
@@ -238,9 +236,9 @@
             }
         }
 
-        private void ModuleCollectionUpdated(ObservableCollection<Module> modules)
+        private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
         {
-            Modules = modules;
+            Assemblies = assemblies;
         }
 
         private bool CanExecute()

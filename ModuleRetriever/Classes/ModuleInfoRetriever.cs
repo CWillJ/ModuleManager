@@ -64,15 +64,14 @@
         /// </summary>
         /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
         /// <returns>Returns an collection of Module objects.</returns>
-        ObservableCollection<ModuleObjects.Classes.Module> IModuleInfoRetriever.GetModules(string[] dllFiles)
+        ObservableCollection<AssemblyData> IModuleInfoRetriever.GetModules(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
             {
                 return null;
             }
 
-            ObservableCollection<ModuleObjects.Classes.Module> modules =
-                new ObservableCollection<ModuleObjects.Classes.Module>();
+            ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
 
             AssemblyLoader assemblyLoader;
             Assembly assembly;
@@ -97,6 +96,8 @@
                     types = ex.Types.Where(t => t != null).ToArray();
                 }
 
+                ObservableCollection<ModuleData> modules = new ObservableCollection<ModuleData>();
+
                 int someNum = 0;
                 foreach (var type in types)
                 {
@@ -109,7 +110,7 @@
                         PercentOfAssemblyLoaded = ((double)someNum / (double)types.Length) * 100;
 
                         Debug.WriteLine("Adding Module: " + CurrentTypeName + " From " + CurrentAssemblyName);
-                        ModuleObjects.Classes.Module tempModule = GetSingleModule(type);
+                        ModuleData tempModule = GetSingleModule(type);
 
                          // Add all non-null modules
                         if (tempModule != null)
@@ -119,12 +120,15 @@
                     }
                 }
 
+                assemblies.Add(new AssemblyData(CurrentAssemblyName, DllFilePath, modules));
+
                 assemblyLoader.Unload();
             }
 
             // Return an alphabetized collection of the found modules.
-            return new ObservableCollection<ModuleObjects.Classes.Module>(
-                modules.ToList().OrderBy(mod => mod.Name));
+            ////return new ObservableCollection<ModuleData>(modules.ToList().OrderBy(mod => mod.Name));
+
+            return assemblies;
         }
 
         /// <summary>
@@ -132,7 +136,7 @@
         /// </summary>
         /// <param name="type">Type from an assembly.</param>
         /// <returns>A Module type.</returns>
-        private ModuleObjects.Classes.Module GetSingleModule(Type type)
+        private ModuleData GetSingleModule(Type type)
         {
             // Don't load non-public or interface classes
             if (!type.IsPublic || type.IsInterface)
@@ -140,8 +144,7 @@
                 return null;
             }
 
-            return new ModuleObjects.Classes.Module(
-                DllFilePath,
+            return new ModuleData(
                 type.Name,
                 DescriptionRetriever.GetModuleDescription(type),
                 AddConstructorsToCollection(type),

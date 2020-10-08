@@ -15,7 +15,8 @@
     public class ModuleAreaViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private ObservableCollection<Module> _modules;
+        private ObservableCollection<AssemblyData> _assemblies;
+        private ObservableCollection<ModuleData> _modules;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleAreaViewModel"/> class.
@@ -24,38 +25,52 @@
         public ModuleAreaViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Subscribe(ModuleCollectionUpdated);
+            eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
-                ObservableCollection<Module> modules = LoadConfig();
-                _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
+                ObservableCollection<AssemblyData> assemblies = LoadConfig();
+                _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
             }
         }
 
         /// <summary>
-        /// Gets or sets a collection of ModuleManager.ModuleObjects.Classes.Module.
+        /// Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
         /// </summary>
-        public ObservableCollection<Module> Modules
+        public ObservableCollection<AssemblyData> Assemblies
+        {
+            get { return _assemblies; }
+            set { SetProperty(ref _assemblies, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a collection of ModuleManager.ModuleObjects.Classes.ModuleData.
+        /// </summary>
+        public ObservableCollection<ModuleData> Modules
         {
             get { return _modules; }
             set { SetProperty(ref _modules, value); }
         }
 
-        private void ModuleCollectionUpdated(ObservableCollection<Module> modules)
+        private void ModuleCollectionUpdated(ObservableCollection<ModuleData> modules)
         {
             Modules = modules;
+        }
+
+        private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
+        {
+            Assemblies = assemblies;
         }
 
         /// <summary>
         /// LoadConfig will load an ObservableCollection of type Module from an xml file.
         /// </summary>
-        /// <returns>ObservableCollection of type Module.</returns>
-        private ObservableCollection<Module> LoadConfig()
+        /// <returns>A collection of AssemblyData objects.</returns>
+        private ObservableCollection<AssemblyData> LoadConfig()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Module>));
-            ObservableCollection<Module> modules = new ObservableCollection<Module>();
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
+            ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
             string loadFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
 
             ////RadOpenFileDialog openFileDialog = new RadOpenFileDialog
@@ -82,17 +97,17 @@
             {
                 try
                 {
-                    modules = serializer.Deserialize(rd) as ObservableCollection<Module>;
+                    assemblies = serializer.Deserialize(rd) as ObservableCollection<AssemblyData>;
                 }
                 catch (InvalidOperationException)
                 {
                     // There is something wrong with the xml file.
                     // Return an empty collection of modules.
-                    return modules;
+                    return assemblies;
                 }
             }
 
-            return modules;
+            return assemblies;
         }
     }
 }

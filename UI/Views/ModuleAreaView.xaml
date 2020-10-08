@@ -16,6 +16,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="..\DataTemplates\DataTemplates.xaml" />
+                <ResourceDictionary Source="..\DataTemplates\AssemblyTreeViewDataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -51,51 +52,15 @@
 
             <!--  TreeView of Module Objects  -->
             <telerik:RadTreeView
-                x:Name="moduleTreeView"
+                x:Name="assemblyTreeView"
                 Grid.Row="1"
                 MinWidth="100"
                 MinHeight="275"
                 Background="White"
                 BorderBrush="Black"
                 BorderThickness="1"
-                ItemsSource="{Binding Path=Modules, Mode=OneWay}">
-
-                <telerik:RadTreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox
-                                Name="moduleCheckBox"
-                                Command="{Binding LoadUnloadModule}"
-                                IsChecked="{Binding Path=IsEnabled, Mode=TwoWay}">
-                                <CheckBox.CommandParameter>
-                                    <MultiBinding Converter="{StaticResource ModuleCheckBoxConverter}">
-                                        <Binding ElementName="moduleCheckBox" Path="Content" />
-                                        <Binding ElementName="moduleCheckBox" Path="IsChecked" />
-                                    </MultiBinding>
-                                </CheckBox.CommandParameter>
-                            </CheckBox>
-                            <TextBlock
-                                Margin="0,8,0,0"
-                                FontSize="14"
-                                Text="{Binding Path=Name}" />
-                        </StackPanel>
-
-                        <HierarchicalDataTemplate.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding Path=TypeName, Converter={StaticResource StringToIconConverter}}" />
-                                    <TextBlock
-                                        Margin="10,10,0,0"
-                                        FontSize="12"
-                                        Text="{Binding Path=Name}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </HierarchicalDataTemplate.ItemTemplate>
-
-                    </HierarchicalDataTemplate>
-                </telerik:RadTreeView.ItemTemplate>
-
-            </telerik:RadTreeView>
+                ItemTemplate="{StaticResource assemblyLevel}"
+                ItemsSource="{Binding Path=Assemblies, Mode=OneWay}" />
         </Grid>
 
         <!--  Description Grid  -->
@@ -129,7 +94,7 @@
                 <ScrollViewer Margin="10,5,0,0" HorizontalScrollBarVisibility="Disabled">
                     <ContentControl
                         x:Name="MemberText"
-                        Content="{Binding ElementName=moduleTreeView, Path=SelectedItem}"
+                        Content="{Binding ElementName=assemblyTreeView, Path=SelectedItem}"
                         ContentTemplateSelector="{StaticResource ModuleDataTemplateSelector}" />
                 </ScrollViewer>
             </Border>
