@@ -9,16 +9,30 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
-    <Grid Height="75" Margin="75">
+    <Grid Height="125" Margin="75">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding Path=ProgressBarAssemblyName, Mode=OneWay}" />
+
+        <TextBlock
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding Path=ProgressBarText, Mode=OneWay}" />
+
         <telerik:RadProgressBar
+            Grid.Row="2"
             IsIndeterminate="False"
             Maximum="100"
             Minimum="0"
             Value="{Binding Path=CurrentProgress, Mode=OneWay}" />
-
-        <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Text="{Binding Path=ProgressBarText, Mode=OneWay}" />
     </Grid>
 </UserControl>

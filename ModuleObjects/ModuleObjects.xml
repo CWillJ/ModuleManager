@@ -66,7 +66,7 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.Module"/> class specifying the name,
             description and methods.
             </summary>
-            <param name="assemblyFilePath">Path to assembly that the module comes from.</param>
+            <param name="dllFilePath">Path to assembly that the module comes from.</param>
             <param name="name">Module name.</param>
             <param name="description">Module description.</param>
             <param name="constructors">Module constructors.</param>
@@ -83,7 +83,7 @@
             Gets or sets the description of the module.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.Module.PathToAssembly">
+        <member name="P:ModuleManager.ModuleObjects.Classes.Module.DllFilePath">
             <summary>
             Gets or sets the file path to the assembly that the module comes from.
             </summary>

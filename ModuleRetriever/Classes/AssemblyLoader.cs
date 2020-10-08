@@ -13,6 +13,14 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoader"/> class.
         /// </summary>
+        public AssemblyLoader()
+            : base(isCollectible: true)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssemblyLoader"/> class.
+        /// </summary>
         /// <param name="mainAssemblyToLoadPath">The path to the assembly.</param>
         public AssemblyLoader(string mainAssemblyToLoadPath)
             : base(isCollectible: true)
@@ -27,11 +35,11 @@
         /// <returns>A loaded assembly.</returns>
         protected override Assembly Load(AssemblyName name)
         {
-            string assemblyPath = _resolver.ResolveAssemblyToPath(name);
-            if (assemblyPath != null)
-            {
-                return LoadFromAssemblyPath(assemblyPath);
-            }
+            ////string assemblyPath = _resolver.ResolveAssemblyToPath(name);
+            ////if (assemblyPath != null)
+            ////{
+            ////    return LoadFromAssemblyPath(assemblyPath);
+            ////}
 
             return null;
         }

@@ -9,6 +9,7 @@
     /// </summary>
     public class ProgressBarViewModel : BindableBase
     {
+        private string _progressBarAssemblyName;
         private string _progressBarText;
         private bool _progressBarIsVisible;
         private double _currentProgress;
@@ -19,13 +20,24 @@
         /// <param name="eventAggregator">Event aggregator.</param>
         public ProgressBarViewModel(IEventAggregator eventAggregator)
         {
+            eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Subscribe(ProgressBarAssemblyNameUpdated);
             eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Subscribe(ProgressBarTextUpdated);
             eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Subscribe(ProgressBarVisibilityUpdated);
             eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Subscribe(ProgressBarCurrentProgressUpdated);
 
+            _progressBarAssemblyName = string.Empty;
             _progressBarText = string.Empty;
             _currentProgress = 0;
             _progressBarIsVisible = false;
+        }
+
+        /// <summary>
+        /// Gets or sets the assembly name.
+        /// </summary>
+        public string ProgressBarAssemblyName
+        {
+            get { return _progressBarAssemblyName; }
+            set { SetProperty(ref _progressBarAssemblyName, value); }
         }
 
         /// <summary>
@@ -53,6 +65,11 @@
         {
             get { return _progressBarIsVisible; }
             set { SetProperty(ref _progressBarIsVisible, value); }
+        }
+
+        private void ProgressBarAssemblyNameUpdated(string obj)
+        {
+            ProgressBarAssemblyName = obj;
         }
 
         private void ProgressBarTextUpdated(string obj)

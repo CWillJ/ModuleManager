@@ -15,7 +15,7 @@
         /// </summary>
         public Module()
         {
-            PathToAssembly = string.Empty;
+            DllFilePath = string.Empty;
 
             Name = string.Empty;
             Description = string.Empty;
@@ -31,21 +31,21 @@
         /// Initializes a new instance of the <see cref="Module"/> class specifying the name,
         /// description and methods.
         /// </summary>
-        /// <param name="assemblyFilePath">Path to assembly that the module comes from.</param>
+        /// <param name="dllFilePath">Path to assembly that the module comes from.</param>
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>
         /// <param name="constructors">Module constructors.</param>
         /// <param name="properties">Module properties.</param>
         /// <param name="methods">Module methods.</param>
         public Module(
-            string assemblyFilePath,
+            string dllFilePath,
             string name,
             string description,
             ObservableCollection<ModuleConstructor> constructors,
             ObservableCollection<ModuleProperty> properties,
             ObservableCollection<ModuleMethod> methods)
         {
-            PathToAssembly = assemblyFilePath;
+            DllFilePath = dllFilePath;
 
             Name = name;
             Description = description;
@@ -90,7 +90,7 @@
         /// <summary>
         /// Gets or sets the file path to the assembly that the module comes from.
         /// </summary>
-        public string PathToAssembly { get; set; }
+        public string DllFilePath { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the module is enabled or disabled.

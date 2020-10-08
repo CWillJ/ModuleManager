@@ -43,9 +43,6 @@
     <Reference Include="Prism.Wpf">
       <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reflection.MetadataLoadContext">
-      <HintPath>..\Lib\System.Reflection.MetadataLoadContext.dll</HintPath>
-    </Reference>
     <Reference Include="Telerik.Windows.Controls">
       <HintPath>..\Lib\Telerik.Windows.Controls.dll</HintPath>
     </Reference>

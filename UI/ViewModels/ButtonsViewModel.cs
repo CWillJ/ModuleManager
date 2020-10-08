@@ -118,12 +118,11 @@
 
             // Show progress bar
             _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(0.0);
+            _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
 
-            // This needs to navigate to the ProgressBar View.
             NavigateCommand.Execute("ProgressBarView");
-            ////_eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(true);
 
             LoadingModules = true;
 
@@ -139,12 +138,11 @@
 
             // Kill progress bar
             LoadingModules = false;
-            _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
+            _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
+            _eventAggregator.GetEvent<UpdateModuleCollectionEvent>().Publish(modules);
 
-            // This needs to navigate back to the MainView View.
             NavigateCommand.Execute("ModuleManagerView");
-            ////_eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Publish(false);
         }
 
         /// <summary>
@@ -154,6 +152,7 @@
         {
             while (LoadingModules)
             {
+                _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(InfoRetriever.CurrentAssemblyName);
                 _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(InfoRetriever.PercentOfAssemblyLoaded);
                 _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(@"Loading Module: " + InfoRetriever.CurrentTypeName);
             }

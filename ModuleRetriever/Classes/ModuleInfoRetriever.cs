@@ -1,13 +1,11 @@
 ﻿namespace ModuleManager.ModuleRetriever.Classes
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleRetriever.Interfaces;
 
@@ -24,6 +22,7 @@
         {
             DllDirectory = moduleDirectory;
             DllFilePath = string.Empty;
+            CurrentAssemblyName = string.Empty;
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
@@ -38,6 +37,11 @@
         /// Gets or sets DllFilePath is the path of the .dll file.
         /// </summary>
         public string DllFilePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets CurrentAssemblyName is the name of the type being loaded.
+        /// </summary>
+        public string CurrentAssemblyName { get; set; }
 
         /// <summary>
         /// Gets or sets CurrentTypeName is the name of the type being loaded.
@@ -55,25 +59,6 @@
         public XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
         /// <summary>
-        /// Load an assembly into memory.
-        /// </summary>
-        /// <param name="assembly">The assembly that will be loaded.</param>
-        public void LoadModule(Assembly assembly)
-        {
-            ////Assembly.Load(assembly);
-            return;
-        }
-
-        /// <summary>
-        /// Unload an assembly from memory if it exists.
-        /// </summary>
-        /// <param name="assembly">The assembly that will be unloaded.</param>
-        public void UnloadModule(Assembly assembly)
-        {
-            return;
-        }
-
-        /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize
         /// the information from the dll file and its related .xml file.
         /// </summary>
@@ -86,24 +71,20 @@
                 return null;
             }
 
-            Assembly assembly;
             ObservableCollection<ModuleObjects.Classes.Module> modules =
                 new ObservableCollection<ModuleObjects.Classes.Module>();
 
-            // add all the possible referenced assemblies
-            string[] runtimeEnvirnmentFiles = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), @"*.dll");
-
-            var paths = new List<string>(runtimeEnvirnmentFiles);
-            paths.AddRange(dllFiles);
-
-            var resolver = new PathAssemblyResolver(paths);
-            var metaDataLoader = new MetadataLoadContext(resolver);
+            AssemblyLoader assemblyLoader;
+            Assembly assembly;
 
             foreach (var dllFile in dllFiles)
             {
                 DllFilePath = dllFile;
-                DescriptionRetriever.DllFilePath = dllFile;
-                assembly = metaDataLoader.LoadFromAssemblyPath(DllFilePath);
+                DescriptionRetriever.DllFilePath = DllFilePath;
+
+                // testing assembly loader
+                assemblyLoader = new AssemblyLoader(DllFilePath);
+                assembly = assemblyLoader.LoadFromAssemblyPath(DllFilePath);
 
                 Type[] types = null;
 
@@ -123,10 +104,11 @@
 
                     if (type != null)
                     {
+                        CurrentAssemblyName = assembly.GetName().Name;
                         CurrentTypeName = type.Name;
                         PercentOfAssemblyLoaded = ((double)someNum / (double)types.Length) * 100;
 
-                        Debug.WriteLine("Adding Module: " + type.Name + " From " + assembly.FullName);
+                        Debug.WriteLine("Adding Module: " + CurrentTypeName + " From " + CurrentAssemblyName);
                         ModuleObjects.Classes.Module tempModule = GetSingleModule(type);
 
                          // Add all non-null modules
@@ -136,6 +118,8 @@
                         }
                     }
                 }
+
+                assemblyLoader.Unload();
             }
 
             // Return an alphabetized collection of the found modules.

@@ -1,13 +1,17 @@
 ﻿namespace ModuleManager.ModuleRetriever.Interfaces
 {
     using System.Collections.ObjectModel;
-    using System.Reflection;
 
     /// <summary>
     /// Service designed to abstract calls to retrieve modules from dll files.
     /// </summary>
     public interface IModuleInfoRetriever
     {
+        /// <summary>
+        /// Gets or sets CurrentAssemblyName is the name of the assembly being loaded.
+        /// </summary>
+        string CurrentAssemblyName { get; set; }
+
         /// <summary>
         /// Gets or sets CurrentTypeName is the name of the type being loaded.
         /// </summary>
@@ -22,12 +26,6 @@
         /// Gets or sets DllDirectory is the directory path of the .dll files.
         /// </summary>
         string DllDirectory { get; set; }
-
-        /// <summary>
-        /// Load an assembly into memory.
-        /// </summary>
-        /// <param name="assembly">The assembly that will be loaded.</param>
-        public void LoadModule(Assembly assembly);
 
         /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize

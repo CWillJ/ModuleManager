@@ -9,6 +9,11 @@
             The class that loads and unloads assemblies.
             </summary>
         </member>
+        <member name="M:ModuleManager.ModuleRetriever.Classes.AssemblyLoader.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleRetriever.Classes.AssemblyLoader"/> class.
+            </summary>
+        </member>
         <member name="M:ModuleManager.ModuleRetriever.Classes.AssemblyLoader.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleRetriever.Classes.AssemblyLoader"/> class.
@@ -43,6 +48,11 @@
             Gets or sets DllFilePath is the path of the .dll file.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleRetriever.Classes.ModuleInfoRetriever.CurrentAssemblyName">
+            <summary>
+            Gets or sets CurrentAssemblyName is the name of the type being loaded.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleRetriever.Classes.ModuleInfoRetriever.CurrentTypeName">
             <summary>
             Gets or sets CurrentTypeName is the name of the type being loaded.
@@ -57,18 +67,6 @@
             <summary>
             Gets or sets all xml descriptions.
             </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleRetriever.Classes.ModuleInfoRetriever.LoadModule(System.Reflection.Assembly)">
-            <summary>
-            Load an assembly into memory.
-            </summary>
-            <param name="assembly">The assembly that will be loaded.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleRetriever.Classes.ModuleInfoRetriever.UnloadModule(System.Reflection.Assembly)">
-            <summary>
-            Unload an assembly from memory if it exists.
-            </summary>
-            <param name="assembly">The assembly that will be unloaded.</param>
         </member>
         <member name="M:ModuleManager.ModuleRetriever.Classes.ModuleInfoRetriever.ModuleManager#ModuleRetriever#Interfaces#IModuleInfoRetriever#GetModules(System.String[])">
             <summary>
@@ -256,6 +254,11 @@
             Service designed to abstract calls to retrieve modules from dll files.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleRetriever.Interfaces.IModuleInfoRetriever.CurrentAssemblyName">
+            <summary>
+            Gets or sets CurrentAssemblyName is the name of the assembly being loaded.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleRetriever.Interfaces.IModuleInfoRetriever.CurrentTypeName">
             <summary>
             Gets or sets CurrentTypeName is the name of the type being loaded.
@@ -270,12 +273,6 @@
             <summary>
             Gets or sets DllDirectory is the directory path of the .dll files.
             </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleRetriever.Interfaces.IModuleInfoRetriever.LoadModule(System.Reflection.Assembly)">
-            <summary>
-            Load an assembly into memory.
-            </summary>
-            <param name="assembly">The assembly that will be loaded.</param>
         </member>
         <member name="M:ModuleManager.ModuleRetriever.Interfaces.IModuleInfoRetriever.GetModules(System.String[])">
             <summary>
