@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:ModuleManager.UI.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
@@ -17,19 +16,9 @@
         </Grid.RowDefinitions>
 
         <!--  Load Save Buttons  -->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-
-            <local:ButtonsView Grid.Column="0" />
-
-        </Grid>
+        <local:ButtonsView Grid.Row="0" />
 
         <!--  Module View Area  -->
-        <Grid Grid.Row="1">
-            <local:ModuleAreaView />
-        </Grid>
+        <local:ModuleAreaView Grid.Row="1" />
     </Grid>
 </UserControl>

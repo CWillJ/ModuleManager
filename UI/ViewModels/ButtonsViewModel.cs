@@ -124,7 +124,9 @@
             _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
+
             NavigateCommand.Execute("ProgressBarView");
+
             LoadingModules = true;
 
             Thread thread = new Thread(new ThreadStart(UpdateProgressBarText))
@@ -139,7 +141,9 @@
 
             // Kill progress bar
             LoadingModules = false;
+
             NavigateCommand.Execute("ModuleManagerView");
+
             _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
             _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
@@ -251,6 +255,26 @@
             {
                 _regionManager.RequestNavigate("ContentRegion", navigatePath);
             }
+        }
+
+        private void AssemblyDataChecked()
+        {
+            RadWindow.Alert(@"AssemblyData Has Been Checked");
+        }
+
+        private void AssemblyDataUnchecked()
+        {
+            RadWindow.Alert(@"AssemblyData Has Been Unchecked");
+        }
+
+        private void ModuleDataChecked()
+        {
+            RadWindow.Alert(@"ModuleData Has Been Checked");
+        }
+
+        private void ModuleDataUnchecked()
+        {
+            RadWindow.Alert(@"ModuleData Has Been Unchecked");
         }
 
         /// <summary>

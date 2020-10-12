@@ -45,8 +45,9 @@
 
         /// <summary>
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
+        /// Nullable to handle three state checkbox.
         /// </summary>
-        public bool IsEnabled { get; set; }
+        public bool? IsEnabled { get; set; }
 
         /// <summary>
         /// Gets or sets the file path to assembly.
@@ -94,7 +95,7 @@
         /// </summary>
         public void LoadUnload()
         {
-            if (IsEnabled || AreAnyModulesChecked())
+            if ((IsEnabled == true) || AreAnyModulesChecked())
             {
                 Load();
             }
@@ -119,6 +120,23 @@
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Checks to see if all modules in the assembly are checked or enabled.
+        /// </summary>
+        /// <returns>True if all ModuleData's are checked, false otherwise.</returns>
+        public bool AreAllModulesChecked()
+        {
+            foreach (var module in Modules)
+            {
+                if (!module.IsEnabled)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>

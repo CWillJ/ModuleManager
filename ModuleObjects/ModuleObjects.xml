@@ -32,6 +32,7 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.IsEnabled">
             <summary>
             Gets or sets a value indicating whether the assembly is enabled or disabled.
+            Nullable to handle three state checkbox.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.FilePath">
@@ -71,6 +72,12 @@
             Checks to see if any modules in the assembly are checked or enabled.
             </summary>
             <returns>True if any ModuleData's are checked, false otherwise.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.AreAllModulesChecked">
+            <summary>
+            Checks to see if all modules in the assembly are checked or enabled.
+            </summary>
+            <returns>True if all ModuleData's are checked, false otherwise.</returns>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
             <summary>
