@@ -1,6 +1,9 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Loaders;
 
@@ -20,6 +23,7 @@
             FilePath = string.Empty;
             Modules = new ObservableCollection<ModuleData>();
             Loader = null;
+            Assembly = null;
         }
 
         /// <summary>
@@ -36,6 +40,7 @@
             FilePath = filePath;
             Modules = modules;
             Loader = null;
+            Assembly = null;
         }
 
         /// <summary>
@@ -47,7 +52,7 @@
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
         /// Nullable to handle three state checkbox.
         /// </summary>
-        public bool? IsEnabled { get; set; }
+        public bool IsEnabled { get; set; }
 
         /// <summary>
         /// Gets or sets the file path to assembly.
@@ -67,12 +72,56 @@
         public AssemblyLoader Loader { get; private set; }
 
         /// <summary>
+        /// Gets or sets the actual Assembly of this AssemblyData.
+        /// </summary>
+        [XmlIgnore]
+        public Assembly Assembly { get; set; }
+
+        /// <summary>
         /// Load this assembly.
         /// </summary>
         public void Load()
         {
             Loader = new AssemblyLoader(FilePath);
-            Loader.LoadFromAssemblyPath(FilePath);
+            Assembly = Loader.LoadFromAssemblyPath(FilePath);
+
+            // Store Types in ModuleData
+            foreach (var module in Modules)
+            {
+                module.Type = Assembly.GetType(module.Name);
+
+                // Get constructor information
+                foreach (var constructor in module.Constructors)
+                {
+                    ObservableCollection<Type> paramTypes = new ObservableCollection<Type>();
+
+                    foreach (var parameter in constructor.Parameters)
+                    {
+                        paramTypes.Add(parameter.Type);
+                    }
+
+                    constructor.ConstructorInfo = module.Type.GetConstructor(paramTypes.ToList().ToArray());
+                }
+
+                // Get property information
+                foreach (var property in module.Properties)
+                {
+                    property.PropertyInfo = module.Type.GetProperty(property.Name);
+                }
+
+                // Get method information
+                foreach (var method in module.Methods)
+                {
+                    ObservableCollection<Type> paramTypes = new ObservableCollection<Type>();
+
+                    foreach (var parameter in method.Parameters)
+                    {
+                        paramTypes.Add(parameter.Type);
+                    }
+
+                    method.MethodInfo = module.Type.GetMethod(method.Name, paramTypes.ToList().ToArray());
+                }
+            }
         }
 
         /// <summary>
@@ -87,6 +136,7 @@
 
             Loader.Unload();
             Loader = null;
+            Assembly = null;
         }
 
         /// <summary>
@@ -95,7 +145,7 @@
         /// </summary>
         public void LoadUnload()
         {
-            if ((IsEnabled == true) || AreAnyModulesChecked())
+            if (IsEnabled || AreAnyModulesChecked())
             {
                 Load();
             }

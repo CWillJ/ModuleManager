@@ -1,6 +1,8 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
+    using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
@@ -22,6 +24,7 @@
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = new ObservableCollection<ModuleProperty>();
             Methods = new ObservableCollection<ModuleMethod>();
+            Type = null;
         }
 
         /// <summary>
@@ -48,6 +51,7 @@
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = properties;
             Methods = methods;
+            Type = null;
 
             foreach (var constructor in constructors)
             {
@@ -104,6 +108,12 @@
         /// Gets or sets the members in the current module.
         /// </summary>
         public ObservableCollection<ModuleMethod> Methods { get; set; }
+
+        /// <summary>
+        /// Gets or sets the actual Type of the ModuleData.
+        /// </summary>
+        [XmlIgnore]
+        public Type Type { get; set; }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

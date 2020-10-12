@@ -169,7 +169,7 @@
             {
                 foreach (var p in paramList)
                 {
-                    string pType = p.ParameterType.Name.ToString();
+                    Type pType = p.ParameterType;
                     string pName = p.Name;
                     string pDescription = GetMemberParameterDescription(
                         method,
@@ -221,7 +221,7 @@
 
             string paramName;
             string paramDescription;
-            string paramType;
+            string paramTypeName;
 
             Debug.WriteLine("Cannot Load Parameters For " + method.Name);
 
@@ -243,18 +243,18 @@
                 XmlNode tempNode = xmlParamNode.SelectSingleNode(@"see");
                 if (tempNode == null)
                 {
-                    paramType = string.Empty;
+                    paramTypeName = string.Empty;
                 }
                 else
                 {
                     attributeCollection = tempNode.Attributes;
-                    paramType = attributeCollection.GetNamedItem(@"cref").Value;
+                    paramTypeName = attributeCollection.GetNamedItem(@"cref").Value;
                 }
 
                 attributeCollection = xmlParamNode.Attributes;
                 paramName = attributeCollection.GetNamedItem(@"name").Value;
 
-                parameters.Add(new MemberParameter(paramType, paramName, paramDescription));
+                parameters.Add(new MemberParameter(paramTypeName, paramName, paramDescription));
             }
 
             return parameters;

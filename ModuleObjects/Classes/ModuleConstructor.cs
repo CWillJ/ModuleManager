@@ -1,6 +1,8 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
     using System.Collections.ObjectModel;
+    using System.Reflection;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// ModuleConstructor object holds the class name, description and the parameters a constructor.
@@ -12,6 +14,7 @@
         /// </summary>
         public ModuleConstructor()
         {
+            ConstructorInfo = null;
             Name = string.Empty;
             Description = string.Empty;
             Parameters = new ObservableCollection<MemberParameter>();
@@ -22,11 +25,13 @@
         /// Initializes a new instance of the <see cref="ModuleConstructor"/> class
         /// with specified name, description, and parameters.
         /// </summary>
+        /// <param name="constructorInfo">ConstructorInfo for this ModuleConstructor.</param>
         /// <param name="className">Class name.</param>
         /// <param name="description">Constructor description.</param>
         /// <param name="parameters">Constructor parameters.</param>
-        public ModuleConstructor(string className, string description, ObservableCollection<MemberParameter> parameters)
+        public ModuleConstructor(ConstructorInfo constructorInfo, string className, string description, ObservableCollection<MemberParameter> parameters)
         {
+            ConstructorInfo = constructorInfo;
             Name = @"Constructor For " + className;
             Description = description;
             Parameters = parameters;
@@ -37,6 +42,12 @@
         /// Gets or sets the member parameters.
         /// </summary>
         public ObservableCollection<MemberParameter> Parameters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the actuall ConstructorInfo for this ModuleConstructor.
+        /// </summary>
+        [XmlIgnore]
+        public ConstructorInfo ConstructorInfo { get; set; }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

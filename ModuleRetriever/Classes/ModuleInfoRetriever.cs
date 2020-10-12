@@ -172,6 +172,7 @@
                     DescriptionRetriever.GetParametersFromList(constructor, constructorIndex);
 
                 constructors.Add(new ModuleConstructor(
+                    constructor,
                     name,
                     description,
                     parameters));
@@ -214,6 +215,7 @@
                 }
 
                 properties.Add(new ModuleProperty(
+                    property,
                     name,
                     description,
                     dataType,
@@ -298,6 +300,7 @@
                     DescriptionRetriever.GetMemberReturnDescription(method);
 
                 methods.Add(new ModuleMethod(
+                    method,
                     name,
                     description,
                     parameters,

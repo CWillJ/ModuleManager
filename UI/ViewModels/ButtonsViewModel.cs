@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
@@ -50,6 +51,9 @@
 
             // Load/unload the current assembly/module selection base on the checkboxes.
             LoadUnloadCommand = new Prism.Commands.DelegateCommand(LoadUnload, CanExecute);
+
+            // Load/unload the current assembly/module selection base on the checkboxes.
+            TestCommand = new Prism.Commands.DelegateCommand(TestMethod, CanExecute);
         }
 
         /// <summary>
@@ -91,6 +95,11 @@
         /// Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
         /// </summary>
         public Prism.Commands.DelegateCommand LoadUnloadCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the TestCommand.
+        /// </summary>
+        public Prism.Commands.DelegateCommand TestCommand { get; set; }
 
         /// <summary>
         /// StoreModules will attempt to get all assemblies from a dll and store it
@@ -246,7 +255,7 @@
                 assembly.LoadUnload();
             }
 
-            RadWindow.Alert(@"Load/Unload Button Was Pressed");
+            RadWindow.Alert(@"Checked Modules Have Been Loaded" + "\n" + @"Unchecked Modules Have Been Unloaded");
         }
 
         private void Navigate(string navigatePath)
@@ -257,24 +266,36 @@
             }
         }
 
-        private void AssemblyDataChecked()
+        private void TestMethod()
         {
-            RadWindow.Alert(@"AssemblyData Has Been Checked");
-        }
+            bool test = false;
 
-        private void AssemblyDataUnchecked()
-        {
-            RadWindow.Alert(@"AssemblyData Has Been Unchecked");
-        }
+            foreach (var assembly in Assemblies)
+            {
+                if (assembly.AreAnyModulesChecked())
+                {
+                    test = true;
 
-        private void ModuleDataChecked()
-        {
-            RadWindow.Alert(@"ModuleData Has Been Checked");
-        }
+                    var whatever = assembly.Assembly.DefinedTypes;
 
-        private void ModuleDataUnchecked()
-        {
-            RadWindow.Alert(@"ModuleData Has Been Unchecked");
+                    var type = whatever.ElementAt(1);
+
+                    var method = type.GetMethod("Method2", new[] { typeof(string), typeof(int) });
+
+                    var funcs = Activator.CreateInstance(type);
+
+                    object[] args = { "First Argument", 1 };
+
+                    var bologna = method.Invoke(funcs, args);
+
+                    RadWindow.Alert(bologna.ToString());
+                }
+            }
+
+            if (!test)
+            {
+                RadWindow.Alert(@"No Modules Are Checked");
+            }
         }
 
         /// <summary>

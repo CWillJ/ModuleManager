@@ -1,6 +1,8 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
     using System.Collections.ObjectModel;
+    using System.Reflection;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// ModuleMethod object holds the description, the parameters and the return type of a member.
@@ -12,6 +14,7 @@
         /// </summary>
         public ModuleMethod()
         {
+            MethodInfo = null;
             Name = string.Empty;
             Description = string.Empty;
             Parameters = new ObservableCollection<MemberParameter>();
@@ -25,13 +28,15 @@
         /// with specified name, description, parameters return type and return
         /// description through passed in parameters.
         /// </summary>
+        /// <param name="methodInfo">MethodInfo for this ModuleMethod.</param>
         /// <param name="name">Member name.</param>
         /// <param name="description">Member description.</param>
         /// <param name="parameters">Member parameters.</param>
         /// <param name="returnType">Member return type.</param>
         /// <param name="returnDescription">Member return description.</param>
-        public ModuleMethod(string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
+        public ModuleMethod(MethodInfo methodInfo, string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
         {
+            MethodInfo = methodInfo;
             Name = name;
             Description = description;
             Parameters = parameters;
@@ -64,6 +69,12 @@
         /// Gets or sets the member return description.
         /// </summary>
         public string ReturnDescription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the actual MethodInfo of the ModuleMethod.
+        /// </summary>
+        [XmlIgnore]
+        public MethodInfo MethodInfo { get; set; }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output

@@ -51,6 +51,11 @@
             Ignored by the XmlSerializer when saving the configuration.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Assembly">
+            <summary>
+            Gets or sets the actual Assembly of this AssemblyData.
+            </summary>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Load">
             <summary>
             Load this assembly.
@@ -92,19 +97,29 @@
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class. Default constructor.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class.
+            Default constructor.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.#ctor(System.String,System.String,System.String)">
+        <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.#ctor(System.Type,System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class
-            that defines the parameter type and name through parameters.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class.
+            Used when the parameter Type is available.
             </summary>
             <param name="type">MemberParameter type.</param>
             <param name="name">MemberParameter name.</param>
             <param name="description">MemberParameter description.</param>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.MemberParameter.Type">
+        <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class.
+            Used when the actual Type cannot be reached.
+            </summary>
+            <param name="typeName">MemberParameter type.</param>
+            <param name="name">MemberParameter name.</param>
+            <param name="description">MemberParameter description.</param>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.MemberParameter.TypeName">
             <summary>
             Gets or sets the parameter type.
             </summary>
@@ -117,6 +132,11 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.MemberParameter.Description">
             <summary>
             Gets or sets the parameter description.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.MemberParameter.Type">
+            <summary>
+            Gets or sets the actuall Type of the MemberParameter.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.IsEmpty">
@@ -141,11 +161,12 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/> class. Default constructor.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleConstructor.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.MemberParameter})">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleConstructor.#ctor(System.Reflection.ConstructorInfo,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.MemberParameter})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/> class
             with specified name, description, and parameters.
             </summary>
+            <param name="constructorInfo">ConstructorInfo for this ModuleConstructor.</param>
             <param name="className">Class name.</param>
             <param name="description">Constructor description.</param>
             <param name="parameters">Constructor parameters.</param>
@@ -153,6 +174,11 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.Parameters">
             <summary>
             Gets or sets the member parameters.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ConstructorInfo">
+            <summary>
+            Gets or sets the actuall ConstructorInfo for this ModuleConstructor.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ToString">
@@ -218,6 +244,11 @@
             Gets or sets the members in the current module.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Type">
+            <summary>
+            Gets or sets the actual Type of the ModuleData.
+            </summary>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.ToString">
             <summary>
             Overrides the ToString method and formats the string output.
@@ -254,12 +285,13 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleMethod"/> class. Default constructor.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.MemberParameter},System.String,System.String)">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.#ctor(System.Reflection.MethodInfo,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.MemberParameter},System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleMethod"/> class
             with specified name, description, parameters return type and return
             description through passed in parameters.
             </summary>
+            <param name="methodInfo">MethodInfo for this ModuleMethod.</param>
             <param name="name">Member name.</param>
             <param name="description">Member description.</param>
             <param name="parameters">Member parameters.</param>
@@ -281,6 +313,11 @@
             Gets or sets the member return description.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMethod.MethodInfo">
+            <summary>
+            Gets or sets the actual MethodInfo of the ModuleMethod.
+            </summary>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.ToString">
             <summary>
             Overrides the ToString method and formats the string output
@@ -299,11 +336,12 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleProperty"/> class. Default constructor.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleProperty.#ctor(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleProperty.#ctor(System.Reflection.PropertyInfo,System.String,System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleProperty"/> class
             with specified name, description, type and accessors.
             </summary>
+            <param name="propertyInfo">PropertyInfo for this ModuleProperty.</param>
             <param name="name">Property name.</param>
             <param name="description">Property description.</param>
             <param name="dataType">Property data type.</param>
@@ -323,6 +361,11 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleProperty.CanWrite">
             <summary>
             Gets or sets a value indicating whether this property has a set accessor.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleProperty.PropertyInfo">
+            <summary>
+            Gets or sets the actual PropertyInfo for this ModuleProperty.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleProperty.ToString">
