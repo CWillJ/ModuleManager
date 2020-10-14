@@ -198,11 +198,12 @@
             initializes properties to empty strings/empty collections.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.#ctor(System.Type,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleData"/> class specifying the name,
             description and methods.
             </summary>
+            <param name="type">Module type.</param>
             <param name="name">Module name.</param>
             <param name="description">Module description.</param>
             <param name="constructors">Module constructors.</param>
@@ -212,6 +213,11 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Name">
             <summary>
             Gets or sets the module name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.FullName">
+            <summary>
+            Gets or sets this Module's Type's FullName.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Description">
@@ -247,6 +253,11 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Type">
             <summary>
             Gets or sets the actual Type of the ModuleData.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.StoreModuleMembers">
+            <summary>
+            Store module constructors, properties and methods in the Members property.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.ToString">

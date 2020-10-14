@@ -17,6 +17,7 @@
         public ModuleData()
         {
             Name = string.Empty;
+            FullName = string.Empty;
             Description = string.Empty;
 
             IsEnabled = false;
@@ -31,19 +32,23 @@
         /// Initializes a new instance of the <see cref="ModuleData"/> class specifying the name,
         /// description and methods.
         /// </summary>
+        /// <param name="type">Module type.</param>
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>
         /// <param name="constructors">Module constructors.</param>
         /// <param name="properties">Module properties.</param>
         /// <param name="methods">Module methods.</param>
         public ModuleData(
+            Type type,
             string name,
             string description,
             ObservableCollection<ModuleConstructor> constructors,
             ObservableCollection<ModuleProperty> properties,
             ObservableCollection<ModuleMethod> methods)
         {
+            Type = type;
             Name = name;
+            FullName = type.FullName;
             Description = description;
 
             IsEnabled = false;
@@ -51,7 +56,6 @@
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = properties;
             Methods = methods;
-            Type = null;
 
             foreach (var constructor in constructors)
             {
@@ -78,6 +82,11 @@
         /// Gets or sets the module name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets this Module's Type's FullName.
+        /// </summary>
+        public string FullName { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the module.
@@ -114,6 +123,29 @@
         /// </summary>
         [XmlIgnore]
         public Type Type { get; set; }
+
+        /// <summary>
+        /// Store module constructors, properties and methods in the Members property.
+        /// </summary>
+        public void StoreModuleMembers()
+        {
+            Members.Clear();
+
+            foreach (var constructor in Constructors)
+            {
+                Members.Add(constructor);
+            }
+
+            foreach (var property in Properties)
+            {
+                Members.Add(property);
+            }
+
+            foreach (var method in Methods)
+            {
+                Members.Add(method);
+            }
+        }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

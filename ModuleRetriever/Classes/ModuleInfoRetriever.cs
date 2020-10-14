@@ -142,6 +142,7 @@
             }
 
             return new ModuleData(
+                type,
                 type.Name,
                 DescriptionRetriever.GetModuleDescription(type),
                 AddConstructorsToCollection(type),

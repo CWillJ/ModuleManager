@@ -85,10 +85,11 @@
             Loader = new AssemblyLoader(FilePath);
             Assembly = Loader.LoadFromAssemblyPath(FilePath);
 
+            // TODO ONLY NEED TO DO THIS IF LOADED FROM XML!!!
             // Store Types in ModuleData
             foreach (var module in Modules)
             {
-                module.Type = Assembly.GetType(module.Name);
+                module.Type = Assembly.GetType(module.FullName);
 
                 // Get constructor information
                 foreach (var constructor in module.Constructors)
@@ -97,7 +98,10 @@
 
                     foreach (var parameter in constructor.Parameters)
                     {
-                        paramTypes.Add(parameter.Type);
+                        if ((parameter != null) && (parameter.Name != @"None") && (parameter.Type != null))
+                        {
+                            paramTypes.Add(parameter.Type);
+                        }
                     }
 
                     constructor.ConstructorInfo = module.Type.GetConstructor(paramTypes.ToList().ToArray());
@@ -116,7 +120,10 @@
 
                     foreach (var parameter in method.Parameters)
                     {
-                        paramTypes.Add(parameter.Type);
+                        if ((parameter != null) && (parameter.Name != @"None") && (parameter.Type != null))
+                        {
+                            paramTypes.Add(parameter.Type);
+                        }
                     }
 
                     method.MethodInfo = module.Type.GetMethod(method.Name, paramTypes.ToList().ToArray());
