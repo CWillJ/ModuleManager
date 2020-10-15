@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
@@ -248,11 +249,11 @@
         /// Loads all assemblies with checked boxes and
         /// unloads the unchecked ones.
         /// </summary>
-        private void LoadUnload()
+        private async void LoadUnload()
         {
             foreach (var assembly in Assemblies)
             {
-                assembly.LoadUnload();
+                await Task.Run(assembly.LoadUnload);
             }
 
             RadWindow.Alert(@"Checked Modules Have Been Loaded" + "\n" + @"Unchecked Modules Have Been Unloaded");
@@ -266,7 +267,7 @@
             }
         }
 
-        private void TestMethod()
+        private async void TestMethod()
         {
             bool test = false;
 
@@ -276,19 +277,11 @@
                 {
                     test = true;
 
-                    var whatever = assembly.Assembly.DefinedTypes;
+                    string[] s = { "BullShit" };
 
-                    var type = whatever.ElementAt(1);
+                    var some = await Task.Run(() => assembly.Modules[0].Methods[2].Invoke(s).ToString());
 
-                    var method = type.GetMethod("Method2", new[] { typeof(string), typeof(int) });
-
-                    var funcs = Activator.CreateInstance(type);
-
-                    object[] args = { "First Argument", 1 };
-
-                    var bologna = method.Invoke(funcs, args);
-
-                    RadWindow.Alert(bologna.ToString());
+                    RadWindow.Alert(some);
                 }
             }
 

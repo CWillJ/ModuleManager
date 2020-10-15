@@ -329,6 +329,13 @@
             Gets or sets the actual MethodInfo of the ModuleMethod.
             </summary>
         </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.Invoke(System.Object[])">
+            <summary>
+            Invokes this method.
+            </summary>
+            <param name="args">The arguments needed to invoke this method.</param>
+            <returns>An object that this method should return.</returns>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.ToString">
             <summary>
             Overrides the ToString method and formats the string output
@@ -336,6 +343,13 @@
             </summary>
             <returns>A desired format for the member description, parameters
             and return type.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.TestParameters(System.Object[])">
+            <summary>
+            Used to test if the passed in object array matches this method's parameter types.
+            </summary>
+            <param name="args">An array of objects that represent method parameters.</param>
+            <returns>True if the object array matches the method's parameter types.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleProperty">
             <summary>

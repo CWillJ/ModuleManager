@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
     using System.Xml.Serialization;
@@ -77,6 +78,25 @@
         public MethodInfo MethodInfo { get; set; }
 
         /// <summary>
+        /// Invokes this method.
+        /// </summary>
+        /// <param name="args">The arguments needed to invoke this method.</param>
+        /// <returns>An object that this method should return.</returns>
+        public object Invoke(object[] args)
+        {
+            if (!TestParameters(args))
+            {
+                return null;
+            }
+
+            Type moduleType = MethodInfo.DeclaringType;
+
+            var typeInstance = Activator.CreateInstance(moduleType);
+
+            return MethodInfo.Invoke(typeInstance, args);
+        }
+
+        /// <summary>
         /// Overrides the ToString method and formats the string output
         /// for the UI.
         /// </summary>
@@ -126,6 +146,29 @@
             }
 
             return s;
+        }
+
+        /// <summary>
+        /// Used to test if the passed in object array matches this method's parameter types.
+        /// </summary>
+        /// <param name="args">An array of objects that represent method parameters.</param>
+        /// <returns>True if the object array matches the method's parameter types.</returns>
+        private bool TestParameters(object[] args)
+        {
+            if (args.Length != Parameters.Count)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i].GetType() != Parameters[i].Type)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
