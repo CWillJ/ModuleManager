@@ -133,7 +133,7 @@
             View model for the buttons area.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Events.IEventAggregator,Prism.Regions.IRegionManager)">
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Events.IEventAggregator,Prism.Regions.IRegionManager,ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
@@ -153,11 +153,6 @@
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.Assemblies">
             <summary>
             Gets or sets the collection of Modules.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.InfoRetriever">
-            <summary>
-            Gets or sets a ModuleInfoRetriever.
             </summary>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.NavigateCommand">
@@ -234,11 +229,12 @@
             View model for module area.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.#ctor(Prism.Events.IEventAggregator)">
+        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.#ctor(Prism.Events.IEventAggregator,ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ModuleAreaViewModel"/> class.
             </summary>
             <param name="eventAggregator">Event aggregator.</param>
+            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ModuleAreaViewModel.Assemblies">
             <summary>

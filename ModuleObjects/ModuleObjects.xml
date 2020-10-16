@@ -56,21 +56,23 @@
             Gets or sets the actual Assembly of this AssemblyData.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Load">
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Load(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
             <summary>
             Load this assembly.
             </summary>
+            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Unload">
             <summary>
             Unload this assembly.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.LoadUnload">
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
             <summary>
             Loads all assemblies with checked boxes and
             unloads the unchecked ones.
             </summary>
+            <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.AreAnyModulesChecked">
             <summary>
@@ -399,25 +401,60 @@
             </summary>
             <returns>A desired format for the member description.</returns>
         </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData">
             <summary>
             Module object interface.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Name">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Name">
             <summary>
-            Gets or sets the name of the module.
+            Gets or sets the name of the assembly.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Description">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.IsEnabled">
             <summary>
-            Gets or sets the description of the module.
+            Gets or sets a value indicating whether the assembly is enabled or disabled.
+            Nullable to handle three state checkbox.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Members">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.FilePath">
             <summary>
-            Gets or sets all of the module members.
+            Gets or sets the file path to assembly.
             </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Modules">
+            <summary>
+            Gets or sets a collection of modules contained in the assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Loader">
+            <summary>
+            Gets the AssemblyLoader to load/unload this assembly.
+            Ignored by the XmlSerializer when saving the configuration.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Assembly">
+            <summary>
+            Gets or sets the actual Assembly of this AssemblyData.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Load(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
+            <summary>
+            Load this assembly.
+            </summary>
+            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Unload">
+            <summary>
+            Unload this assembly.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
+            <summary>
+            Loads all assemblies that are enabled and
+            unloads the ones that are not.
+            </summary>
+            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever">
             <summary>
@@ -452,6 +489,34 @@
             <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
             <returns>Returns an collection of Module objects.</returns>
         </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.Initialize(System.String,System.String)">
+            <summary>
+            Initialized ModuleInfoRetriever's properties.
+            </summary>
+            <param name="moduleDirectory">Directory containing dll files.</param>
+            <param name="moduleFilePath">Name of the specific dll file.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.AddConstructorsToCollection(System.Type)">
+            <summary>
+            AddConstructorsToCollection get all constructors from the passed in Type.
+            </summary>
+            <param name="type">The Type where the members are coming from.</param>
+            <returns>An ObservableCollection of ModuleConstructor objects.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.AddPropertiesToCollection(System.Type)">
+            <summary>
+            AddPropertiesToCollection gets all properties from the passed in Type.
+            </summary>
+            <param name="type">The Type where the members are coming from.</param>
+            <returns>An ObservableCollection of ModulePropery objects.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.AddMethodsToCollection(System.Type)">
+            <summary>
+            AddMethodsToCollection gets all methods from the passed in Type.
+            </summary>
+            <param name="type">The Type where the methods are coming from.</param>
+            <returns>An ObservableCollection of ModuleMethod objects.</returns>
+        </member>
         <member name="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoader">
             <summary>
             The class that loads and unloads assemblies.
@@ -480,18 +545,10 @@
             ModuleInfoRetriever is used to get information from a .dll file.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.#ctor(System.String)">
+        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever"/> class.
             </summary>
-            <param name="moduleDirectory">File name of the .dll file.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever"/> class.
-            </summary>
-            <param name="moduleDirectory">Directory where the dll files exist.</param>
-            <param name="moduleFilePath">Name of the specific dll file.</param>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.DllDirectory">
             <summary>
@@ -522,6 +579,13 @@
             <summary>
             Gets or sets all xml descriptions.
             </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.Initialize(System.String,System.String)">
+            <summary>
+            Initialized ModuleInfoRetriever's properties.
+            </summary>
+            <param name="moduleDirectory">Directory containing dll files.</param>
+            <param name="moduleFilePath">Name of the specific dll file.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.ModuleManager#ModuleObjects#Interfaces#IModuleInfoRetriever#GetModules(System.String[])">
             <summary>

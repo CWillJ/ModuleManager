@@ -17,30 +17,14 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleInfoRetriever"/> class.
         /// </summary>
-        /// <param name="moduleDirectory">File name of the .dll file.</param>
-        public ModuleInfoRetriever(string moduleDirectory)
+        public ModuleInfoRetriever()
         {
-            DllDirectory = moduleDirectory;
+            DllDirectory = string.Empty;
             DllFilePath = string.Empty;
             CurrentAssemblyName = string.Empty;
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleInfoRetriever"/> class.
-        /// </summary>
-        /// <param name="moduleDirectory">Directory where the dll files exist.</param>
-        /// <param name="moduleFilePath">Name of the specific dll file.</param>
-        public ModuleInfoRetriever(string moduleDirectory, string moduleFilePath)
-        {
-            DllDirectory = moduleDirectory;
-            DllFilePath = string.Empty;
-            CurrentAssemblyName = string.Empty;
-            CurrentTypeName = string.Empty;
-            PercentOfAssemblyLoaded = 0;
-            DescriptionRetriever = new XmlDescriptionRetriever(moduleFilePath);
         }
 
         /// <summary>
@@ -72,6 +56,17 @@
         /// Gets or sets all xml descriptions.
         /// </summary>
         public XmlDescriptionRetriever DescriptionRetriever { get; set; }
+
+        /// <summary>
+        /// Initialized ModuleInfoRetriever's properties.
+        /// </summary>
+        /// <param name="moduleDirectory">Directory containing dll files.</param>
+        /// <param name="moduleFilePath">Name of the specific dll file.</param>
+        public void Initialize(string moduleDirectory, string moduleFilePath)
+        {
+            DllDirectory = moduleDirectory;
+            DescriptionRetriever = new XmlDescriptionRetriever(moduleFilePath);
+        }
 
         /// <summary>
         /// GetModules will create an ObservableCollection of type Module to organize

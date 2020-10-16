@@ -1,5 +1,7 @@
 ﻿namespace ModuleManager.UI
 {
+    using ModuleManager.ModuleObjects.Interfaces;
+    using ModuleManager.ModuleObjects.Loaders;
     using ModuleManager.UI.Views;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -36,6 +38,8 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for program-wide type registration.</param>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IModuleInfoRetriever, ModuleInfoRetriever>();
+
             containerRegistry.RegisterForNavigation<ModuleManagerView>();
             containerRegistry.RegisterForNavigation<ProgressBarView>();
         }

@@ -3,13 +3,11 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.ModuleObjects.Loaders;
     using ModuleManager.UI.Events;
     using Prism.Events;
     using Prism.Mvvm;
@@ -23,18 +21,18 @@
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
+        private readonly IModuleInfoRetriever _moduleInfoRetriever;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
         /// <param name="eventAggregator">Event aggregator.</param>
         /// <param name="regionManager">Region manager.</param>
-        public ButtonsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
+        public ButtonsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IModuleInfoRetriever moduleInfoRetriever)
         {
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
-
-            InfoRetriever = new ModuleInfoRetriever(string.Empty);
+            _moduleInfoRetriever = moduleInfoRetriever;
 
             eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 
@@ -70,11 +68,6 @@
         /// Gets or sets the collection of Modules.
         /// </summary>
         public ObservableCollection<AssemblyData> Assemblies { get; set; }
-
-        /// <summary>
-        /// Gets or sets a ModuleInfoRetriever.
-        /// </summary>
-        public IModuleInfoRetriever InfoRetriever { get; set; }
 
         /// <summary>
         /// Gets the Navigate command.
@@ -126,7 +119,7 @@
 
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
 
-            InfoRetriever.DllDirectory = moduleDirectory;
+            _moduleInfoRetriever.DllDirectory = moduleDirectory;
 
             // Show progress bar
             _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(0.0);
@@ -146,7 +139,7 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            assemblies = await Task.Run(() => InfoRetriever.GetModules(dllFiles));
+            assemblies = await Task.Run(() => _moduleInfoRetriever.GetModules(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
@@ -165,9 +158,9 @@
         {
             while (LoadingModules)
             {
-                _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(InfoRetriever.CurrentAssemblyName);
-                _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(InfoRetriever.PercentOfAssemblyLoaded);
-                _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(@"Loading Module: " + InfoRetriever.CurrentTypeName);
+                _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(_moduleInfoRetriever.CurrentAssemblyName);
+                _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(_moduleInfoRetriever.PercentOfAssemblyLoaded);
+                _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(@"Loading Module: " + _moduleInfoRetriever.CurrentTypeName);
             }
         }
 
@@ -252,7 +245,7 @@
         {
             foreach (var assembly in Assemblies)
             {
-                await Task.Run(assembly.LoadUnload);
+                await Task.Run(() => assembly.LoadUnload(_moduleInfoRetriever));
             }
 
             RadWindow.Alert(@"Checked Modules Have Been Loaded" + "\n" + @"Unchecked Modules Have Been Unloaded");
@@ -272,13 +265,14 @@
 
             foreach (var assembly in Assemblies)
             {
-                if (assembly.AreAnyModulesChecked() && (assembly.Assembly != null))
+                if (assembly.IsEnabled && (assembly.Assembly != null))
                 {
                     test = true;
 
-                    string[] s = { @"This string written twice. " };
+                    // parameters for ClassLibrary1.Class2.Method2
+                    object[] s = { @"A string and the number ", (int)21 };
 
-                    string some = await Task.Run(() => assembly.Modules[0].Methods[2].Invoke(s).ToString());
+                    string some = await Task.Run(() => assembly.Modules[1].Methods[1].Invoke(s).ToString());
 
                     RadWindow.Alert(some);
                 }
@@ -286,7 +280,7 @@
 
             if (!test)
             {
-                RadWindow.Alert(@"No Modules Are Loaded");
+                RadWindow.Alert(@"No Assemblies Are Loaded");
             }
         }
 

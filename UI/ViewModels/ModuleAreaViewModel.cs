@@ -5,6 +5,7 @@
     using System.IO;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI.Events;
     using Prism.Events;
     using Prism.Mvvm;
@@ -15,16 +16,20 @@
     public class ModuleAreaViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IModuleInfoRetriever _moduleInfoRetriever;
         private ObservableCollection<AssemblyData> _assemblies;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleAreaViewModel"/> class.
         /// </summary>
         /// <param name="eventAggregator">Event aggregator.</param>
-        public ModuleAreaViewModel(IEventAggregator eventAggregator)
+        /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+        public ModuleAreaViewModel(IEventAggregator eventAggregator, IModuleInfoRetriever moduleInfoRetriever)
         {
             _eventAggregator = eventAggregator;
             eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
+
+            _moduleInfoRetriever = moduleInfoRetriever;
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
@@ -95,7 +100,7 @@
             // Load any assemblies that are checked.
             foreach (var assembly in assemblies)
             {
-                assembly.LoadUnload();
+                assembly.LoadUnload(_moduleInfoRetriever);
             }
 
             return assemblies;

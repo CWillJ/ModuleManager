@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
+    using System;
     using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
 
@@ -35,5 +36,33 @@
         /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
         /// <returns>Returns an collection of Module objects.</returns>
         ObservableCollection<AssemblyData> GetModules(string[] dllFiles);
+
+        /// <summary>
+        /// Initialized ModuleInfoRetriever's properties.
+        /// </summary>
+        /// <param name="moduleDirectory">Directory containing dll files.</param>
+        /// <param name="moduleFilePath">Name of the specific dll file.</param>
+        public void Initialize(string moduleDirectory, string moduleFilePath);
+
+        /// <summary>
+        /// AddConstructorsToCollection get all constructors from the passed in Type.
+        /// </summary>
+        /// <param name="type">The Type where the members are coming from.</param>
+        /// <returns>An ObservableCollection of ModuleConstructor objects.</returns>
+        public ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type);
+
+        /// <summary>
+        /// AddPropertiesToCollection gets all properties from the passed in Type.
+        /// </summary>
+        /// <param name="type">The Type where the members are coming from.</param>
+        /// <returns>An ObservableCollection of ModulePropery objects.</returns>
+        public ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type);
+
+        /// <summary>
+        /// AddMethodsToCollection gets all methods from the passed in Type.
+        /// </summary>
+        /// <param name="type">The Type where the methods are coming from.</param>
+        /// <returns>An ObservableCollection of ModuleMethod objects.</returns>
+        public ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type);
     }
 }

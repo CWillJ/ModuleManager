@@ -1,18 +1,17 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
-    using System;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
+    using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.ModuleObjects.Loaders;
 
     /// <summary>
     /// AssemblyData holds the file path to the assembly so it can be loaded and
     /// the collection of modules in the assembly.
     /// </summary>
-    public class AssemblyData
+    public class AssemblyData : IAssemblyData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
@@ -81,14 +80,15 @@
         /// <summary>
         /// Load this assembly.
         /// </summary>
-        public async void Load()
+        /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+        public async void Load(IModuleInfoRetriever moduleInfoRetriever)
         {
             Loader = await Task.Run(() => new AssemblyLoader(FilePath));
             Assembly = await Task.Run(() => Loader.LoadFromAssemblyPath(FilePath));
 
             string fileDirectory = FilePath.Substring(0, FilePath.LastIndexOf("."));
 
-            ModuleInfoRetriever moduleInfoRetriever = new ModuleInfoRetriever(fileDirectory, FilePath);
+            moduleInfoRetriever.Initialize(fileDirectory, FilePath);
 
             // Store Types in ModuleData
             foreach (var module in Modules)
@@ -123,11 +123,12 @@
         /// Loads all assemblies with checked boxes and
         /// unloads the unchecked ones.
         /// </summary>
-        public void LoadUnload()
+        /// <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
+        public void LoadUnload(IModuleInfoRetriever moduleInfoRetriever)
         {
             if (IsEnabled || AreAnyModulesChecked())
             {
-                Load();
+                Load(moduleInfoRetriever);
             }
             else
             {

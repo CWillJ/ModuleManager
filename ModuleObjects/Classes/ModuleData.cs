@@ -3,12 +3,11 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Xml.Serialization;
-    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// Module object holds the name and description of a module.
     /// </summary>
-    public class ModuleData : IModuleData
+    public class ModuleData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleData"/> class. Default constructor.
