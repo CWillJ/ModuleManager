@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.ModuleRetriever.Classes
+﻿namespace ModuleManager.ModuleObjects.Loaders
 {
     using System;
     using System.Collections.ObjectModel;
@@ -7,8 +7,7 @@
     using System.Linq;
     using System.Reflection;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Loaders;
-    using ModuleManager.ModuleRetriever.Interfaces;
+    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// ModuleInfoRetriever is used to get information from a .dll file.
@@ -27,6 +26,21 @@
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModuleInfoRetriever"/> class.
+        /// </summary>
+        /// <param name="moduleDirectory">Directory where the dll files exist.</param>
+        /// <param name="moduleFilePath">Name of the specific dll file.</param>
+        public ModuleInfoRetriever(string moduleDirectory, string moduleFilePath)
+        {
+            DllDirectory = moduleDirectory;
+            DllFilePath = string.Empty;
+            CurrentAssemblyName = string.Empty;
+            CurrentTypeName = string.Empty;
+            PercentOfAssemblyLoaded = 0;
+            DescriptionRetriever = new XmlDescriptionRetriever(moduleFilePath);
         }
 
         /// <summary>
@@ -133,7 +147,7 @@
         /// </summary>
         /// <param name="type">Type from an assembly.</param>
         /// <returns>A Module type.</returns>
-        private ModuleData GetSingleModule(Type type)
+        public ModuleData GetSingleModule(Type type)
         {
             // Don't load non-public or interface classes
             if (!type.IsPublic || type.IsInterface)
@@ -155,7 +169,7 @@
         /// </summary>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>An ObservableCollection of ModuleConstructor objects.</returns>
-        private ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type)
+        public ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type)
         {
             ObservableCollection<ModuleConstructor> constructors = new ObservableCollection<ModuleConstructor>();
             ConstructorInfo[] conInfo = type.GetConstructors();
@@ -187,7 +201,7 @@
         /// </summary>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>An ObservableCollection of ModulePropery objects.</returns>
-        private ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
+        public ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
         {
             ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
             foreach (var property in type.GetProperties(BindingFlags.Public
@@ -232,7 +246,7 @@
         /// </summary>
         /// <param name="type">The Type where the methods are coming from.</param>
         /// <returns>An ObservableCollection of ModuleMethod objects.</returns>
-        private ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type)
+        public ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type)
         {
             ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
             string lastMethodName = string.Empty;

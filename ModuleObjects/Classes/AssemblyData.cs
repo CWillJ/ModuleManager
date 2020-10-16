@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Reflection;
+    using System.Threading.Tasks;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Loaders;
 
@@ -80,54 +81,26 @@
         /// <summary>
         /// Load this assembly.
         /// </summary>
-        public void Load()
+        public async void Load()
         {
-            Loader = new AssemblyLoader(FilePath);
-            Assembly = Loader.LoadFromAssemblyPath(FilePath);
+            Loader = await Task.Run(() => new AssemblyLoader(FilePath));
+            Assembly = await Task.Run(() => Loader.LoadFromAssemblyPath(FilePath));
 
-            // TODO ONLY NEED TO DO THIS IF LOADED FROM XML!!!
+            string fileDirectory = FilePath.Substring(0, FilePath.LastIndexOf("."));
+
+            ModuleInfoRetriever moduleInfoRetriever = new ModuleInfoRetriever(fileDirectory, FilePath);
+
             // Store Types in ModuleData
             foreach (var module in Modules)
             {
-                module.Type = Assembly.GetType(module.FullName);
-
-                // Get constructor information
-                foreach (var constructor in module.Constructors)
+                if (module.Type == null)
                 {
-                    ObservableCollection<Type> paramTypes = new ObservableCollection<Type>();
-
-                    foreach (var parameter in constructor.Parameters)
-                    {
-                        if ((parameter != null) && (parameter.Name != @"None") && (parameter.Type != null))
-                        {
-                            paramTypes.Add(parameter.Type);
-                        }
-                    }
-
-                    constructor.ConstructorInfo = module.Type.GetConstructor(paramTypes.ToList().ToArray());
+                    module.Type = Assembly.GetType(module.FullName);
                 }
 
-                // Get property information
-                foreach (var property in module.Properties)
-                {
-                    property.PropertyInfo = module.Type.GetProperty(property.Name);
-                }
-
-                // Get method information
-                foreach (var method in module.Methods)
-                {
-                    ObservableCollection<Type> paramTypes = new ObservableCollection<Type>();
-
-                    foreach (var parameter in method.Parameters)
-                    {
-                        if ((parameter != null) && (parameter.Name != @"None") && (parameter.Type != null))
-                        {
-                            paramTypes.Add(parameter.Type);
-                        }
-                    }
-
-                    method.MethodInfo = module.Type.GetMethod(method.Name, paramTypes.ToList().ToArray());
-                }
+                module.Constructors = moduleInfoRetriever.AddConstructorsToCollection(module.Type);
+                module.Properties = moduleInfoRetriever.AddPropertiesToCollection(module.Type);
+                module.Methods = moduleInfoRetriever.AddMethodsToCollection(module.Type);
             }
         }
 

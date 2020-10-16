@@ -1,6 +1,7 @@
 ﻿namespace ModuleManager.ModuleObjects
 {
     using ModuleManager.ModuleObjects.Interfaces;
+    using ModuleManager.ModuleObjects.Loaders;
     using Prism.Ioc;
     using Prism.Modularity;
 
@@ -24,6 +25,7 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IModuleData, Classes.ModuleData>();
+            containerRegistry.RegisterSingleton<IModuleInfoRetriever, ModuleInfoRetriever>();
         }
     }
 }

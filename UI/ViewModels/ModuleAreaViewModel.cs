@@ -75,7 +75,7 @@
 
             ////if (loadFile == string.Empty)
             ////{
-            ////    return modules;
+            ////    return assemblies;
             ////}
 
             using (StreamReader rd = new StreamReader(loadFile))

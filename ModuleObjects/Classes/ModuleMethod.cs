@@ -90,7 +90,6 @@
             }
 
             Type moduleType = MethodInfo.DeclaringType;
-
             var typeInstance = Activator.CreateInstance(moduleType);
 
             return MethodInfo.Invoke(typeInstance, args);

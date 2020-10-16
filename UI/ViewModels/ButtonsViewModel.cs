@@ -3,14 +3,13 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleRetriever.Classes;
-    using ModuleManager.ModuleRetriever.Interfaces;
+    using ModuleManager.ModuleObjects.Interfaces;
+    using ModuleManager.ModuleObjects.Loaders;
     using ModuleManager.UI.Events;
     using Prism.Events;
     using Prism.Mvvm;
@@ -273,13 +272,13 @@
 
             foreach (var assembly in Assemblies)
             {
-                if (assembly.AreAnyModulesChecked())
+                if (assembly.AreAnyModulesChecked() && (assembly.Assembly != null))
                 {
                     test = true;
 
                     string[] s = { "BullShit" };
 
-                    var some = await Task.Run(() => assembly.Modules[0].Methods[2].Invoke(s).ToString());
+                    string some = await Task.Run(() => assembly.Modules[0].Methods[2].Invoke(s).ToString());
 
                     RadWindow.Alert(some);
                 }
@@ -287,7 +286,7 @@
 
             if (!test)
             {
-                RadWindow.Alert(@"No Modules Are Checked");
+                RadWindow.Alert(@"No Modules Are Loaded");
             }
         }
 

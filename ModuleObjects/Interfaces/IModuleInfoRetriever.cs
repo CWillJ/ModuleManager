@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.ModuleRetriever.Interfaces
+﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
     using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
