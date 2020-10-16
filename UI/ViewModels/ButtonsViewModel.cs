@@ -276,7 +276,7 @@
                 {
                     test = true;
 
-                    string[] s = { "BullShit" };
+                    string[] s = { @"This string written twice. " };
 
                     string some = await Task.Run(() => assembly.Modules[0].Methods[2].Invoke(s).ToString());
 
