@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
@@ -26,6 +28,8 @@
         /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
         public ModuleAreaViewModel(IEventAggregator eventAggregator, IModuleInfoRetriever moduleInfoRetriever)
         {
+            _assemblies = new ObservableCollection<AssemblyData>();
+
             _eventAggregator = eventAggregator;
             eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 
@@ -48,6 +52,10 @@
             set { SetProperty(ref _assemblies, value); }
         }
 
+        /// <summary>
+        /// Updates the local collection of AssemblyData with the subscribed to data.
+        /// </summary>
+        /// <param name="assemblies">The collection of AssemblyData.</param>
         private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
         {
             Assemblies = assemblies;

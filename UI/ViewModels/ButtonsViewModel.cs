@@ -28,6 +28,7 @@
         /// </summary>
         /// <param name="eventAggregator">Event aggregator.</param>
         /// <param name="regionManager">Region manager.</param>
+        /// <param name="moduleInfoRetriever">The IModuleInfoRetriever.</param>
         public ButtonsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IModuleInfoRetriever moduleInfoRetriever)
         {
             _eventAggregator = eventAggregator;
@@ -46,9 +47,6 @@
 
             // Save the current module setup, checkboxes and all, to an xml file.
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
-
-            // Load/unload the current assembly/module selection base on the checkboxes.
-            LoadUnloadCommand = new Prism.Commands.DelegateCommand(LoadUnload, CanExecute);
 
             // Load/unload the current assembly/module selection base on the checkboxes.
             TestCommand = new Prism.Commands.DelegateCommand(TestMethod, CanExecute);
@@ -83,11 +81,6 @@
         /// Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
         /// </summary>
         public Prism.Commands.DelegateCommand SaveConfigCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
-        /// </summary>
-        public Prism.Commands.DelegateCommand LoadUnloadCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the TestCommand.
@@ -237,20 +230,6 @@
             RadWindow.Alert(@"Configuration Saved");
         }
 
-        /// <summary>
-        /// Loads all assemblies with checked boxes and
-        /// unloads the unchecked ones.
-        /// </summary>
-        private async void LoadUnload()
-        {
-            foreach (var assembly in Assemblies)
-            {
-                await Task.Run(() => assembly.LoadUnload(_moduleInfoRetriever));
-            }
-
-            RadWindow.Alert(@"Checked Modules Have Been Loaded" + "\n" + @"Unchecked Modules Have Been Unloaded");
-        }
-
         private void Navigate(string navigatePath)
         {
             if (navigatePath != null)
@@ -291,6 +270,11 @@
         private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
         {
             Assemblies = assemblies;
+
+            ////if (Assemblies.Count > 0)
+            ////{
+            ////    LoadUnload();
+            ////}
         }
 
         /// <summary>

@@ -62,6 +62,7 @@
         /// Creates the shell or main window of the application.
         /// </summary>
         /// <returns>The shell of the application.</returns>
+        #nullable enable
         protected override Window? CreateShell()
         {
             // because RadWindow is not Window, cannot create here.

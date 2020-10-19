@@ -129,7 +129,7 @@
                     }
                 }
 
-                assemblies.Add(new AssemblyData(CurrentAssemblyName, DllFilePath, modules));
+                assemblies.Add(new AssemblyData(this, CurrentAssemblyName, DllFilePath, modules));
 
                 assemblyLoader.Unload();
             }

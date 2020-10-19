@@ -241,6 +241,12 @@
             Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
             </summary>
         </member>
+        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.AssemblyCollectionUpdated(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData})">
+            <summary>
+            Updates the local collection of AssemblyData with the subscribed to data.
+            </summary>
+            <param name="assemblies">The collection of AssemblyData.</param>
+        </member>
         <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.LoadConfig">
             <summary>
             LoadConfig will load an ObservableCollection of type Module from an xml file.

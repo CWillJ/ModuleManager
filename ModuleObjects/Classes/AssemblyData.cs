@@ -13,11 +13,15 @@
     /// </summary>
     public class AssemblyData : IAssemblyData
     {
+        private readonly IModuleInfoRetriever _moduleInfoRetriever;
+        private bool _isEnabled;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
         /// </summary>
         public AssemblyData()
         {
+            _moduleInfoRetriever = null;
             Name = string.Empty;
             IsEnabled = false;
             FilePath = string.Empty;
@@ -30,11 +34,13 @@
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
         /// Specify the path to the assembly and the collection of modules.
         /// </summary>
+        /// <param name="moduleInfoRetriever">The IModuleInfoRetriever creating this AssemblyData.</param>
         /// <param name="name">Name of the assembly.</param>
         /// <param name="filePath">File path to the assembly.</param>
         /// <param name="modules">Collection of modules contained in the assembly.</param>
-        public AssemblyData(string name, string filePath, ObservableCollection<ModuleData> modules)
+        public AssemblyData(IModuleInfoRetriever moduleInfoRetriever, string name, string filePath, ObservableCollection<ModuleData> modules)
         {
+            _moduleInfoRetriever = moduleInfoRetriever;
             Name = name;
             IsEnabled = false;
             FilePath = filePath;
@@ -52,7 +58,22 @@
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
         /// Nullable to handle three state checkbox.
         /// </summary>
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled
+        {
+            get
+            {
+                return _isEnabled;
+            }
+
+            set
+            {
+                if (_isEnabled != value)
+                {
+                    _isEnabled = value;
+                    LoadUnload(_moduleInfoRetriever);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the file path to assembly.

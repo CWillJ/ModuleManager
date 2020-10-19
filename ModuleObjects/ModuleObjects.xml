@@ -15,11 +15,12 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> class.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleData})">
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleData})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> class.
             Specify the path to the assembly and the collection of modules.
             </summary>
+            <param name="moduleInfoRetriever">The IModuleInfoRetriever creating this AssemblyData.</param>
             <param name="name">Name of the assembly.</param>
             <param name="filePath">File path to the assembly.</param>
             <param name="modules">Collection of modules contained in the assembly.</param>

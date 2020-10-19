@@ -3,12 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:ModuleManager.UI.Converters">
 
-    <converters:TypeNameToIconConverter x:Key="StringToIconConverter" />
+    <converters:TypeNameToIconConverter x:Key="typeNameToIconConverter" />
 
     <!--  Member Level  -->
     <DataTemplate x:Key="memberLevel">
         <StackPanel Orientation="Horizontal">
-            <Image Source="{Binding Path=TypeName, Converter={StaticResource StringToIconConverter}}" />
+            <Image Source="{Binding Path=TypeName, Converter={StaticResource typeNameToIconConverter}}" />
             <TextBlock
                 Margin="10,10,0,0"
                 FontSize="12"
