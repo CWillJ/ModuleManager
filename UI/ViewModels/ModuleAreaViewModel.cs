@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Collections.Specialized;
     using System.IO;
-    using System.Threading.Tasks;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
@@ -62,7 +60,7 @@
         }
 
         /// <summary>
-        /// LoadConfig will load an ObservableCollection of type Module from an xml file.
+        /// LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
         /// </summary>
         /// <returns>A collection of AssemblyData objects.</returns>
         private ObservableCollection<AssemblyData> LoadConfig()

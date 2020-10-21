@@ -4,13 +4,12 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// An object designed to hold the type and name of a member's parameter.
+    /// An object designed to hold the type, name and string description of a member's parameter.
     /// </summary>
     public class MemberParameter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberParameter"/> class.
-        /// Default constructor.
         /// </summary>
         public MemberParameter()
         {
@@ -22,7 +21,6 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberParameter"/> class.
-        /// Used when the parameter Type is available.
         /// </summary>
         /// <param name="type">MemberParameter type.</param>
         /// <param name="name">MemberParameter name.</param>
@@ -51,7 +49,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the parameter type.
+        /// Gets or sets the parameter type name.
         /// </summary>
         public string TypeName { get; set; }
 

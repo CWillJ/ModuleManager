@@ -8,8 +8,7 @@
     using ModuleManager.ModuleObjects.Loaders;
 
     /// <summary>
-    /// AssemblyData holds the file path to the assembly so it can be loaded and
-    /// the collection of modules in the assembly.
+    /// AssemblyData will load and unload an assembly and stores data about an assembly.
     /// </summary>
     public class AssemblyData : IAssemblyData
     {
@@ -32,7 +31,6 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
-        /// Specify the path to the assembly and the collection of modules.
         /// </summary>
         /// <param name="moduleInfoRetriever">The IModuleInfoRetriever creating this AssemblyData.</param>
         /// <param name="name">Name of the assembly.</param>
@@ -57,7 +55,7 @@
 
         /// <summary>
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
-        /// Nullable to handle three state checkbox.
+        /// Will load or unload this assembly if the IModuleInfoRetriever is not null.
         /// </summary>
         public bool IsEnabled
         {
@@ -86,7 +84,7 @@
         public string FilePath { get; set; }
 
         /// <summary>
-        /// Gets or sets a collection of modules contained in the assembly.
+        /// Gets or sets the collection of modules contained in the assembly.
         /// </summary>
         public ObservableCollection<ModuleData> Modules { get; set; }
 
@@ -98,7 +96,6 @@
 
         /// <summary>
         /// Gets the AssemblyLoader to load/unload this assembly.
-        /// Ignored by the XmlSerializer when saving the configuration.
         /// </summary>
         [XmlIgnore]
         public AssemblyLoader Loader { get; private set; }
@@ -110,8 +107,7 @@
         public Assembly Assembly { get; set; }
 
         /// <summary>
-        /// Loads all assemblies with checked boxes and
-        /// unloads the unchecked ones.
+        /// Loads all enabled assemblies and unloads the disabled ones.
         /// </summary>
         /// <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
         public void LoadUnload(IModuleInfoRetriever moduleInfoRetriever)
@@ -134,7 +130,7 @@
         /// <summary>
         /// Load this assembly.
         /// </summary>
-        /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+        /// <param name="moduleInfoRetriever">IModuleInfoRetriever used to load this assembly.</param>
         public async void Load(IModuleInfoRetriever moduleInfoRetriever)
         {
             Loader = await Task.Run(() => new AssemblyLoader(FilePath));

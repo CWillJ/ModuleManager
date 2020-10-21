@@ -15,7 +15,7 @@
     using Telerik.Windows.Controls;
 
     /// <summary>
-    /// View model for the buttons area.
+    /// View model for the header buttons.
     /// </summary>
     public class ButtonsViewModel : BindableBase
     {
@@ -89,7 +89,7 @@
 
         /// <summary>
         /// StoreModules will attempt to get all assemblies from a dll and store it
-        /// as a Module in the Modules collection.
+        /// as an AssemblyData in the AssemblyData collection.
         /// </summary>
         private async void StoreModules()
         {
@@ -132,7 +132,7 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            assemblies = await Task.Run(() => _moduleInfoRetriever.GetModules(dllFiles));
+            assemblies = await Task.Run(() => _moduleInfoRetriever.GetAssemblies(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
@@ -186,6 +186,7 @@
         {
             Type assemblyType = typeof(ObservableCollection<AssemblyData>);
             XmlSerializer serializer;
+            string saveFile;
 
             try
             {
@@ -197,7 +198,7 @@
                 return;
             }
 
-            string saveFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
+            saveFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
 
             if (UseSaveFileDialog)
             {
@@ -230,6 +231,10 @@
             RadWindow.Alert(@"Configuration Saved");
         }
 
+        /// <summary>
+        /// View navigation method.
+        /// </summary>
+        /// <param name="navigatePath">The path of the view to navigate to.</param>
         private void Navigate(string navigatePath)
         {
             if (navigatePath != null)
@@ -270,11 +275,6 @@
         private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
         {
             Assemblies = assemblies;
-
-            ////if (Assemblies.Count > 0)
-            ////{
-            ////    LoadUnload();
-            ////}
         }
 
         /// <summary>

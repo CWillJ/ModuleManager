@@ -10,7 +10,7 @@
     using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
-    /// ModuleInfoRetriever is used to get information from a .dll file.
+    /// Retrieves assemblies from dll files.
     /// </summary>
     public class ModuleInfoRetriever : IModuleInfoRetriever
     {
@@ -69,12 +69,12 @@
         }
 
         /// <summary>
-        /// GetModules will create an ObservableCollection of type Module to organize
-        /// the information from the dll file and its related .xml file.
+        /// Creates an ObservableCollection of AssemblyData to organize
+        /// the information from the dll file and its related xml file.
         /// </summary>
         /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-        /// <returns>Returns an collection of Module objects.</returns>
-        ObservableCollection<AssemblyData> IModuleInfoRetriever.GetModules(string[] dllFiles)
+        /// <returns>Returns an collection of AssemblyData objects.</returns>
+        public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
             {
@@ -82,6 +82,7 @@
             }
 
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
+            ObservableCollection<ModuleData> modules;
 
             AssemblyLoader assemblyLoader;
             Assembly assembly;
@@ -105,7 +106,7 @@
                     types = ex.Types.Where(t => t != null).ToArray();
                 }
 
-                ObservableCollection<ModuleData> modules = new ObservableCollection<ModuleData>();
+                modules = new ObservableCollection<ModuleData>();
 
                 int someNum = 0;
                 foreach (var type in types)
@@ -121,7 +122,6 @@
                         Debug.WriteLine("Adding Module: " + CurrentTypeName + " From " + CurrentAssemblyName);
                         ModuleData tempModule = GetSingleModule(type);
 
-                         // Add all non-null modules
                         if (tempModule != null)
                         {
                             modules.Add(tempModule);
@@ -144,7 +144,6 @@
         /// <returns>A Module type.</returns>
         public ModuleData GetSingleModule(Type type)
         {
-            // Don't load non-public or interface classes
             if (!type.IsPublic || type.IsInterface)
             {
                 return null;
@@ -160,7 +159,7 @@
         }
 
         /// <summary>
-        /// AddConstructorsToCollection get all constructors from the passed in Type.
+        /// AddConstructorsToCollection get all constructors from a Type.
         /// </summary>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>An ObservableCollection of ModuleConstructor objects.</returns>
@@ -168,15 +167,15 @@
         {
             ObservableCollection<ModuleConstructor> constructors = new ObservableCollection<ModuleConstructor>();
             ConstructorInfo[] conInfo = type.GetConstructors();
+            ObservableCollection<MemberParameter> parameters;
+            int constructorIndex;
+            string name, description;
 
             foreach (var constructor in conInfo)
             {
-                int constructorIndex = Array.IndexOf(conInfo, constructor);
-                string name = type.Name;
-                string description =
-                    DescriptionRetriever.GetConstructorDescription(constructor, constructorIndex);
-
-                ObservableCollection<MemberParameter> parameters;
+                constructorIndex = Array.IndexOf(conInfo, constructor);
+                name = type.Name;
+                description = DescriptionRetriever.GetConstructorDescription(constructor, constructorIndex);
 
                 parameters =
                     DescriptionRetriever.GetParametersFromList(constructor, constructorIndex);
@@ -199,15 +198,17 @@
         public ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
         {
             ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
+            string name, description, dataType, propertyString;
+            bool canRead, canWrite;
+
             foreach (var property in type.GetProperties(BindingFlags.Public
                                       | BindingFlags.Instance
                                       | BindingFlags.DeclaredOnly))
             {
-                string name = property.Name;
-                string description = DescriptionRetriever.GetPropertyDescription(property);
-                string dataType;
-                bool canRead = property.CanRead;
-                bool canWrite = property.CanWrite;
+                name = property.Name;
+                description = DescriptionRetriever.GetPropertyDescription(property);
+                canRead = property.CanRead;
+                canWrite = property.CanWrite;
 
                 try
                 {
@@ -215,12 +216,12 @@
                 }
                 catch (FileNotFoundException)
                 {
-                    string propertyString = property.ToString();
+                    propertyString = property.ToString();
                     dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
                 }
                 catch (TypeLoadException)
                 {
-                    string propertyString = property.ToString();
+                    propertyString = property.ToString();
                     dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
                 }
 
@@ -244,7 +245,9 @@
         public ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type)
         {
             ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
+            ObservableCollection<MemberParameter> parameters;
             string lastMethodName = string.Empty;
+            string description, returnType, returnDescription, methodString;
             int methodIndex = 0;
 
             foreach (var method in type.GetMethods(BindingFlags.Public
@@ -272,13 +275,9 @@
 
                 lastMethodName = name;
 
-                string description =
-                    DescriptionRetriever.GetMethodDescription(method, methodIndex);
+                description = DescriptionRetriever.GetMethodDescription(method, methodIndex);
 
-                ObservableCollection<MemberParameter> parameters =
-                    DescriptionRetriever.GetParametersFromList(method, methodIndex);
-
-                string returnType;
+                parameters = DescriptionRetriever.GetParametersFromList(method, methodIndex);
 
                 try
                 {
@@ -288,26 +287,25 @@
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
 
-                    string methodString = method.ToString();
+                    methodString = method.ToString();
                     returnType = methodString.Substring(0, methodString.IndexOf(@" "));
                 }
                 catch (FileLoadException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
 
-                    string methodString = method.ToString();
+                    methodString = method.ToString();
                     returnType = methodString.Substring(0, methodString.IndexOf(@" "));
                 }
                 catch (TypeLoadException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
 
-                    string methodString = method.ToString();
+                    methodString = method.ToString();
                     returnType = methodString.Substring(0, methodString.IndexOf(@" "));
                 }
 
-                string returnDescription =
-                    DescriptionRetriever.GetMemberReturnDescription(method);
+                returnDescription = DescriptionRetriever.GetMemberReturnDescription(method);
 
                 methods.Add(new ModuleMethod(
                     method,

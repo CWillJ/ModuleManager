@@ -16,7 +16,7 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the Type of module.
+        /// Gets or sets the name of the Type.
         /// </summary>
         public string TypeName { get; set; }
     }

@@ -138,7 +138,5 @@
 
             <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Modules, Mode=OneWay}" />
         </StackPanel>
-
     </DataTemplate>
-
 </ResourceDictionary>

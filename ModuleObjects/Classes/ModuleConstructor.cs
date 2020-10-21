@@ -5,12 +5,12 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// ModuleConstructor object holds the class name, description and the parameters a constructor.
+    /// ModuleConstructor object holds the ConstructorInfo, class name, description and the parameters a constructor.
     /// </summary>
     public class ModuleConstructor : ModuleMember
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleConstructor"/> class. Default constructor.
+        /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.
         /// </summary>
         public ModuleConstructor()
         {
@@ -22,8 +22,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleConstructor"/> class
-        /// with specified name, description, and parameters.
+        /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.
         /// </summary>
         /// <param name="constructorInfo">ConstructorInfo for this ModuleConstructor.</param>
         /// <param name="className">Class name.</param>
@@ -39,7 +38,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the member parameters.
+        /// Gets or sets the constructor parameters.
         /// </summary>
         public ObservableCollection<MemberParameter> Parameters { get; set; }
 

@@ -6,12 +6,12 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// ModuleMethod object holds the description, the parameters and the return type of a member.
+    /// ModuleMethod object holds the MethodInfo, name, description, the parameters and the return type of a member.
     /// </summary>
     public class ModuleMethod : ModuleMember
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleMethod"/> class. Default constructor.
+        /// Initializes a new instance of the <see cref="ModuleMethod"/> class.
         /// </summary>
         public ModuleMethod()
         {
@@ -25,16 +25,14 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleMethod"/> class
-        /// with specified name, description, parameters return type and return
-        /// description through passed in parameters.
+        /// Initializes a new instance of the <see cref="ModuleMethod"/> class.
         /// </summary>
         /// <param name="methodInfo">MethodInfo for this ModuleMethod.</param>
-        /// <param name="name">Member name.</param>
-        /// <param name="description">Member description.</param>
-        /// <param name="parameters">Member parameters.</param>
-        /// <param name="returnType">Member return type.</param>
-        /// <param name="returnDescription">Member return description.</param>
+        /// <param name="name">Method name.</param>
+        /// <param name="description">Method description.</param>
+        /// <param name="parameters">Method parameters.</param>
+        /// <param name="returnType">Method return type.</param>
+        /// <param name="returnDescription">Method return description.</param>
         public ModuleMethod(MethodInfo methodInfo, string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
         {
             MethodInfo = methodInfo;
@@ -57,17 +55,17 @@
         }
 
         /// <summary>
-        /// Gets or sets the member parameters.
+        /// Gets or sets the method parameters.
         /// </summary>
         public ObservableCollection<MemberParameter> Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the member return type.
+        /// Gets or sets the method return type.
         /// </summary>
         public string ReturnType { get; set; }
 
         /// <summary>
-        /// Gets or sets the member return description.
+        /// Gets or sets the method return description.
         /// </summary>
         public string ReturnDescription { get; set; }
 

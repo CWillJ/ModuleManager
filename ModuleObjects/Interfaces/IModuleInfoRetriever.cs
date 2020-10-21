@@ -5,7 +5,7 @@
     using ModuleManager.ModuleObjects.Classes;
 
     /// <summary>
-    /// Service designed to abstract calls to retrieve modules from dll files.
+    /// Retrieves assemblies from dll files.
     /// </summary>
     public interface IModuleInfoRetriever
     {
@@ -30,12 +30,12 @@
         string DllDirectory { get; set; }
 
         /// <summary>
-        /// GetModules will create an ObservableCollection of type Module to organize
-        /// the information from the dll file and its related .xml file.
+        /// Creates an ObservableCollection of AssemblyData to organize
+        /// the information from the dll file and its related xml file.
         /// </summary>
         /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-        /// <returns>Returns an collection of Module objects.</returns>
-        ObservableCollection<AssemblyData> GetModules(string[] dllFiles);
+        /// <returns>Returns an collection of AssemblyData objects.</returns>
+        ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles);
 
         /// <summary>
         /// Initialized ModuleInfoRetriever's properties.

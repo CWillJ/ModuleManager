@@ -5,13 +5,12 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// Module object holds the name and description of a module.
+    /// Module object holds the name, description, members, methods, constructors and properties of a module.
     /// </summary>
     public class ModuleData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleData"/> class. Default constructor.
-        /// initializes properties to empty strings/empty collections.
+        /// Initializes a new instance of the <see cref="ModuleData"/> class.
         /// </summary>
         public ModuleData()
         {
@@ -34,9 +33,9 @@
         /// <param name="type">Module type.</param>
         /// <param name="name">Module name.</param>
         /// <param name="description">Module description.</param>
-        /// <param name="constructors">Module constructors.</param>
-        /// <param name="properties">Module properties.</param>
-        /// <param name="methods">Module methods.</param>
+        /// <param name="constructors">A collection of module constructors.</param>
+        /// <param name="properties">A collection of module properties.</param>
+        /// <param name="methods">A collection of module methods.</param>
         public ModuleData(
             Type type,
             string name,
@@ -103,17 +102,17 @@
         public ObservableCollection<ModuleMember> Members { get; set; }
 
         /// <summary>
-        /// Gets or sets the constructors in the current module.
+        /// Gets or sets the module constructors.
         /// </summary>
         public ObservableCollection<ModuleConstructor> Constructors { get; set; }
 
         /// <summary>
-        /// Gets or sets the properties in the current module.
+        /// Gets or sets the module properties.
         /// </summary>
         public ObservableCollection<ModuleProperty> Properties { get; set; }
 
         /// <summary>
-        /// Gets or sets the members in the current module.
+        /// Gets or sets the module methods.
         /// </summary>
         public ObservableCollection<ModuleMethod> Methods { get; set; }
 

@@ -5,7 +5,7 @@
     using ModuleManager.ModuleObjects.Classes;
 
     /// <summary>
-    /// Used to selected a DataTemplate in the view.
+    /// Used to selected a DataTemplate in the description.
     /// </summary>
     public class TemplateSelector : DataTemplateSelector
     {

@@ -4,12 +4,12 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// ModuleProperty object holds the name, description, data type and accessor level of a property.
+    /// ModuleProperty object holds the PropertyInfo, name, description, data type and accessor level of a property.
     /// </summary>
     public class ModuleProperty : ModuleMember
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleProperty"/> class. Default constructor.
+        /// Initializes a new instance of the <see cref="ModuleProperty"/> class.
         /// </summary>
         public ModuleProperty()
         {
@@ -24,7 +24,6 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleProperty"/> class
-        /// with specified name, description, type and accessors.
         /// </summary>
         /// <param name="propertyInfo">PropertyInfo for this ModuleProperty.</param>
         /// <param name="name">Property name.</param>

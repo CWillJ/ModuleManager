@@ -18,7 +18,6 @@
 
         /// <summary>
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
-        /// Nullable to handle three state checkbox.
         /// </summary>
         public bool IsEnabled { get; set; }
 
@@ -34,7 +33,6 @@
 
         /// <summary>
         /// Gets the AssemblyLoader to load/unload this assembly.
-        /// Ignored by the XmlSerializer when saving the configuration.
         /// </summary>
         [XmlIgnore]
         public AssemblyLoader Loader { get; }
