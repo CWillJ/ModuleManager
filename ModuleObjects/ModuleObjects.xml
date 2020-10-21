@@ -46,6 +46,11 @@
             Gets or sets a collection of modules contained in the assembly.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.InfoGetter">
+            <summary>
+            Gets the IModuleInfoRetriever.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Loader">
             <summary>
             Gets the AssemblyLoader to load/unload this assembly.
@@ -57,6 +62,13 @@
             Gets or sets the actual Assembly of this AssemblyData.
             </summary>
         </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
+            <summary>
+            Loads all assemblies with checked boxes and
+            unloads the unchecked ones.
+            </summary>
+            <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Load(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
             <summary>
             Load this assembly.
@@ -67,25 +79,6 @@
             <summary>
             Unload this assembly.
             </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
-            <summary>
-            Loads all assemblies with checked boxes and
-            unloads the unchecked ones.
-            </summary>
-            <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.AreAnyModulesChecked">
-            <summary>
-            Checks to see if any modules in the assembly are checked or enabled.
-            </summary>
-            <returns>True if any ModuleData's are checked, false otherwise.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.AreAllModulesChecked">
-            <summary>
-            Checks to see if all modules in the assembly are checked or enabled.
-            </summary>
-            <returns>True if all ModuleData's are checked, false otherwise.</returns>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
             <summary>

@@ -249,9 +249,9 @@
                     test = true;
 
                     // parameters for ClassLibrary1.Class2.Method2
-                    object[] s = { @"A string and the number ", (int)21 };
+                    object[] parameters = { @"A string and the number ", (int)21 };
 
-                    string some = await Task.Run(() => assembly.Modules[1].Methods[1].Invoke(s).ToString());
+                    string some = await Task.Run(() => assembly.Modules[1].Methods[1].Invoke(parameters).ToString());
 
                     RadWindow.Alert(some);
                 }

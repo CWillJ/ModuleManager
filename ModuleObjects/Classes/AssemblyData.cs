@@ -13,7 +13,6 @@
     /// </summary>
     public class AssemblyData : IAssemblyData
     {
-        private readonly IModuleInfoRetriever _moduleInfoRetriever;
         private bool _isEnabled;
 
         /// <summary>
@@ -21,7 +20,8 @@
         /// </summary>
         public AssemblyData()
         {
-            _moduleInfoRetriever = null;
+            InfoGetter = null;
+
             Name = string.Empty;
             IsEnabled = false;
             FilePath = string.Empty;
@@ -40,7 +40,8 @@
         /// <param name="modules">Collection of modules contained in the assembly.</param>
         public AssemblyData(IModuleInfoRetriever moduleInfoRetriever, string name, string filePath, ObservableCollection<ModuleData> modules)
         {
-            _moduleInfoRetriever = moduleInfoRetriever;
+            InfoGetter = moduleInfoRetriever;
+
             Name = name;
             IsEnabled = false;
             FilePath = filePath;
@@ -70,7 +71,11 @@
                 if (_isEnabled != value)
                 {
                     _isEnabled = value;
-                    LoadUnload(_moduleInfoRetriever);
+
+                    if (InfoGetter != null)
+                    {
+                        LoadUnload(InfoGetter);
+                    }
                 }
             }
         }
@@ -86,6 +91,12 @@
         public ObservableCollection<ModuleData> Modules { get; set; }
 
         /// <summary>
+        /// Gets the IModuleInfoRetriever.
+        /// </summary>
+        [XmlIgnore]
+        public IModuleInfoRetriever InfoGetter { get; private set; }
+
+        /// <summary>
         /// Gets the AssemblyLoader to load/unload this assembly.
         /// Ignored by the XmlSerializer when saving the configuration.
         /// </summary>
@@ -99,6 +110,28 @@
         public Assembly Assembly { get; set; }
 
         /// <summary>
+        /// Loads all assemblies with checked boxes and
+        /// unloads the unchecked ones.
+        /// </summary>
+        /// <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
+        public void LoadUnload(IModuleInfoRetriever moduleInfoRetriever)
+        {
+            if (InfoGetter == null)
+            {
+                InfoGetter = moduleInfoRetriever;
+            }
+
+            if (IsEnabled)
+            {
+                Load(moduleInfoRetriever);
+            }
+            else
+            {
+                Unload();
+            }
+        }
+
+        /// <summary>
         /// Load this assembly.
         /// </summary>
         /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
@@ -107,9 +140,7 @@
             Loader = await Task.Run(() => new AssemblyLoader(FilePath));
             Assembly = await Task.Run(() => Loader.LoadFromAssemblyPath(FilePath));
 
-            string fileDirectory = FilePath.Substring(0, FilePath.LastIndexOf("."));
-
-            moduleInfoRetriever.Initialize(fileDirectory, FilePath);
+            moduleInfoRetriever.Initialize(FilePath.Substring(0, FilePath.LastIndexOf(".")), FilePath);
 
             // Store Types in ModuleData
             foreach (var module in Modules)
@@ -119,6 +150,8 @@
                     module.Type = Assembly.GetType(module.FullName);
                 }
 
+                // Restore each constructor, property and method so that they each have their
+                // ConstructorInfo, PropertyInfo, and MethodInfo.
                 module.Constructors = moduleInfoRetriever.AddConstructorsToCollection(module.Type);
                 module.Properties = moduleInfoRetriever.AddPropertiesToCollection(module.Type);
                 module.Methods = moduleInfoRetriever.AddMethodsToCollection(module.Type);
@@ -138,57 +171,6 @@
             Loader.Unload();
             Loader = null;
             Assembly = null;
-        }
-
-        /// <summary>
-        /// Loads all assemblies with checked boxes and
-        /// unloads the unchecked ones.
-        /// </summary>
-        /// <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
-        public void LoadUnload(IModuleInfoRetriever moduleInfoRetriever)
-        {
-            if (IsEnabled || AreAnyModulesChecked())
-            {
-                Load(moduleInfoRetriever);
-            }
-            else
-            {
-                Unload();
-            }
-        }
-
-        /// <summary>
-        /// Checks to see if any modules in the assembly are checked or enabled.
-        /// </summary>
-        /// <returns>True if any ModuleData's are checked, false otherwise.</returns>
-        public bool AreAnyModulesChecked()
-        {
-            foreach (var module in Modules)
-            {
-                if (module.IsEnabled)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Checks to see if all modules in the assembly are checked or enabled.
-        /// </summary>
-        /// <returns>True if all ModuleData's are checked, false otherwise.</returns>
-        public bool AreAllModulesChecked()
-        {
-            foreach (var module in Modules)
-            {
-                if (!module.IsEnabled)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         /// <summary>

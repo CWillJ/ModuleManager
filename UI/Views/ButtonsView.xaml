@@ -34,6 +34,7 @@
             FontSize="10"
             FontWeight="Bold" />
 
+        <!--  For Testing ONLY  -->
         <telerik:RadButton
             Width="120"
             Height="40"

@@ -4,31 +4,6 @@
         <name>UI</name>
     </assembly>
     <members>
-        <member name="T:ModuleManager.UI.Converters.CheckBoxConverter">
-            <summary>
-            CheckBoxConverter is used to tell if a module is enabled or disabled.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Converters.CheckBoxConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            CheckBox converter.
-            </summary>
-            <param name="values">CheckBox values.</param>
-            <param name="targetType">Target type of values.</param>
-            <param name="parameter">Parameters.</param>
-            <param name="culture">CultureInfo.</param>
-            <returns>A clone of the object array values.</returns>
-        </member>
-        <member name="M:ModuleManager.UI.Converters.CheckBoxConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="value">CheckBox values.</param>
-            <param name="targetTypes">Target type of values.</param>
-            <param name="parameter">Parameters.</param>
-            <param name="culture">CultureInfo.</param>
-            <returns>Not implenemted.</returns>
-        </member>
         <member name="T:ModuleManager.UI.Converters.TypeNameToIconConverter">
             <summary>
             Converter to convert the string name of a member type to an icon.
@@ -139,6 +114,7 @@
             </summary>
             <param name="eventAggregator">Event aggregator.</param>
             <param name="regionManager">Region manager.</param>
+            <param name="moduleInfoRetriever">The IModuleInfoRetriever.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
             <summary>
@@ -170,11 +146,6 @@
             Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
             </summary>
         </member>
-        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.LoadUnloadCommand">
-            <summary>
-            Gets or sets the LoadUnloadCommand as a ModuleManagerICommand.
-            </summary>
-        </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.TestCommand">
             <summary>
             Gets or sets the TestCommand.
@@ -204,12 +175,6 @@
             The boolean, UseSaveFileDialog will be tested to see if the
             SaveFileDialog will be used or if the hardcoded file location
             will be used.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.LoadUnload">
-            <summary>
-            Loads all assemblies with checked boxes and
-            unloads the unchecked ones.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.AssemblyCollectionUpdated(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData})">

@@ -100,12 +100,11 @@
                 catch (InvalidOperationException)
                 {
                     // There is something wrong with the xml file.
-                    // Return an empty collection of modules.
+                    // Return an empty collection of assemblies.
                     return assemblies;
                 }
             }
 
-            // Load any assemblies that are checked.
             foreach (var assembly in assemblies)
             {
                 assembly.LoadUnload(_moduleInfoRetriever);
