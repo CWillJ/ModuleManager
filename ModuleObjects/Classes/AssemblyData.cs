@@ -12,6 +12,7 @@
     /// </summary>
     public class AssemblyData : IAssemblyData
     {
+        private IModuleInfoRetriever _moduleInfoRetriever;
         private bool _isEnabled;
 
         /// <summary>
@@ -19,7 +20,7 @@
         /// </summary>
         public AssemblyData()
         {
-            InfoGetter = null;
+            _moduleInfoRetriever = null;
 
             Name = string.Empty;
             IsEnabled = false;
@@ -38,7 +39,7 @@
         /// <param name="modules">Collection of modules contained in the assembly.</param>
         public AssemblyData(IModuleInfoRetriever moduleInfoRetriever, string name, string filePath, ObservableCollection<ModuleData> modules)
         {
-            InfoGetter = moduleInfoRetriever;
+            _moduleInfoRetriever = moduleInfoRetriever;
 
             Name = name;
             IsEnabled = false;
@@ -70,9 +71,9 @@
                 {
                     _isEnabled = value;
 
-                    if (InfoGetter != null)
+                    if (_moduleInfoRetriever != null)
                     {
-                        LoadUnload(InfoGetter);
+                        LoadUnload(_moduleInfoRetriever);
                     }
                 }
             }
@@ -87,12 +88,6 @@
         /// Gets or sets the collection of modules contained in the assembly.
         /// </summary>
         public ObservableCollection<ModuleData> Modules { get; set; }
-
-        /// <summary>
-        /// Gets the IModuleInfoRetriever.
-        /// </summary>
-        [XmlIgnore]
-        public IModuleInfoRetriever InfoGetter { get; private set; }
 
         /// <summary>
         /// Gets the AssemblyLoader to load/unload this assembly.
@@ -112,9 +107,9 @@
         /// <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
         public void LoadUnload(IModuleInfoRetriever moduleInfoRetriever)
         {
-            if (InfoGetter == null)
+            if (_moduleInfoRetriever == null)
             {
-                InfoGetter = moduleInfoRetriever;
+                _moduleInfoRetriever = moduleInfoRetriever;
             }
 
             if (IsEnabled)

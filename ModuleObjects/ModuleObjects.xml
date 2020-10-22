@@ -6,8 +6,7 @@
     <members>
         <member name="T:ModuleManager.ModuleObjects.Classes.AssemblyData">
             <summary>
-            AssemblyData holds the file path to the assembly so it can be loaded and
-            the collection of modules in the assembly.
+            AssemblyData will load and unload an assembly and stores data about an assembly.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor">
@@ -18,7 +17,6 @@
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleData})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> class.
-            Specify the path to the assembly and the collection of modules.
             </summary>
             <param name="moduleInfoRetriever">The IModuleInfoRetriever creating this AssemblyData.</param>
             <param name="name">Name of the assembly.</param>
@@ -33,7 +31,7 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.IsEnabled">
             <summary>
             Gets or sets a value indicating whether the assembly is enabled or disabled.
-            Nullable to handle three state checkbox.
+            Will load or unload this assembly if the IModuleInfoRetriever is not null.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.FilePath">
@@ -43,7 +41,7 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Modules">
             <summary>
-            Gets or sets a collection of modules contained in the assembly.
+            Gets or sets the collection of modules contained in the assembly.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.InfoGetter">
@@ -54,7 +52,6 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Loader">
             <summary>
             Gets the AssemblyLoader to load/unload this assembly.
-            Ignored by the XmlSerializer when saving the configuration.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Assembly">
@@ -64,8 +61,7 @@
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
             <summary>
-            Loads all assemblies with checked boxes and
-            unloads the unchecked ones.
+            Loads all enabled assemblies and unloads the disabled ones.
             </summary>
             <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
         </member>
@@ -73,7 +69,7 @@
             <summary>
             Load this assembly.
             </summary>
-            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+            <param name="moduleInfoRetriever">IModuleInfoRetriever used to load this assembly.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Unload">
             <summary>
@@ -88,19 +84,17 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.MemberParameter">
             <summary>
-            An object designed to hold the type and name of a member's parameter.
+            An object designed to hold the type, name and string description of a member's parameter.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class.
-            Default constructor.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.#ctor(System.Type,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class.
-            Used when the parameter Type is available.
             </summary>
             <param name="type">MemberParameter type.</param>
             <param name="name">MemberParameter name.</param>
@@ -117,7 +111,7 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.MemberParameter.TypeName">
             <summary>
-            Gets or sets the parameter type.
+            Gets or sets the parameter type name.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.MemberParameter.Name">
@@ -149,18 +143,17 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor">
             <summary>
-            ModuleConstructor object holds the class name, description and the parameters a constructor.
+            ModuleConstructor object holds the ConstructorInfo, class name, description and the parameters a constructor.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleConstructor.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/> class. Default constructor.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/> class.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleConstructor.#ctor(System.Reflection.ConstructorInfo,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.MemberParameter})">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/> class
-            with specified name, description, and parameters.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/> class.
             </summary>
             <param name="constructorInfo">ConstructorInfo for this ModuleConstructor.</param>
             <param name="className">Class name.</param>
@@ -169,7 +162,7 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.Parameters">
             <summary>
-            Gets or sets the member parameters.
+            Gets or sets the constructor parameters.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ConstructorInfo">
@@ -185,13 +178,12 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleData">
             <summary>
-            Module object holds the name and description of a module.
+            Module object holds the name, description, members, methods, constructors and properties of a module.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleData"/> class. Default constructor.
-            initializes properties to empty strings/empty collections.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleData"/> class.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.#ctor(System.Type,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
@@ -202,9 +194,9 @@
             <param name="type">Module type.</param>
             <param name="name">Module name.</param>
             <param name="description">Module description.</param>
-            <param name="constructors">Module constructors.</param>
-            <param name="properties">Module properties.</param>
-            <param name="methods">Module methods.</param>
+            <param name="constructors">A collection of module constructors.</param>
+            <param name="properties">A collection of module properties.</param>
+            <param name="methods">A collection of module methods.</param>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Name">
             <summary>
@@ -233,17 +225,17 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Constructors">
             <summary>
-            Gets or sets the constructors in the current module.
+            Gets or sets the module constructors.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Properties">
             <summary>
-            Gets or sets the properties in the current module.
+            Gets or sets the module properties.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Methods">
             <summary>
-            Gets or sets the members in the current module.
+            Gets or sets the module methods.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Type">
@@ -279,45 +271,43 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMember.TypeName">
             <summary>
-            Gets or sets the Type of module.
+            Gets or sets the name of the Type.
             </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMethod">
             <summary>
-            ModuleMethod object holds the description, the parameters and the return type of a member.
+            ModuleMethod object holds the MethodInfo, name, description, the parameters and the return type of a member.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleMethod"/> class. Default constructor.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleMethod"/> class.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleMethod.#ctor(System.Reflection.MethodInfo,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.MemberParameter},System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleMethod"/> class
-            with specified name, description, parameters return type and return
-            description through passed in parameters.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleMethod"/> class.
             </summary>
             <param name="methodInfo">MethodInfo for this ModuleMethod.</param>
-            <param name="name">Member name.</param>
-            <param name="description">Member description.</param>
-            <param name="parameters">Member parameters.</param>
-            <param name="returnType">Member return type.</param>
-            <param name="returnDescription">Member return description.</param>
+            <param name="name">Method name.</param>
+            <param name="description">Method description.</param>
+            <param name="parameters">Method parameters.</param>
+            <param name="returnType">Method return type.</param>
+            <param name="returnDescription">Method return description.</param>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMethod.Parameters">
             <summary>
-            Gets or sets the member parameters.
+            Gets or sets the method parameters.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMethod.ReturnType">
             <summary>
-            Gets or sets the member return type.
+            Gets or sets the method return type.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMethod.ReturnDescription">
             <summary>
-            Gets or sets the member return description.
+            Gets or sets the method return description.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMethod.MethodInfo">
@@ -349,18 +339,17 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleProperty">
             <summary>
-            ModuleProperty object holds the name, description, data type and accessor level of a property.
+            ModuleProperty object holds the PropertyInfo, name, description, data type and accessor level of a property.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleProperty.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleProperty"/> class. Default constructor.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleProperty"/> class.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleProperty.#ctor(System.Reflection.PropertyInfo,System.String,System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleProperty"/> class
-            with specified name, description, type and accessors.
             </summary>
             <param name="propertyInfo">PropertyInfo for this ModuleProperty.</param>
             <param name="name">Property name.</param>
@@ -408,7 +397,6 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.IsEnabled">
             <summary>
             Gets or sets a value indicating whether the assembly is enabled or disabled.
-            Nullable to handle three state checkbox.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.FilePath">
@@ -424,7 +412,6 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Loader">
             <summary>
             Gets the AssemblyLoader to load/unload this assembly.
-            Ignored by the XmlSerializer when saving the configuration.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Assembly">
@@ -452,7 +439,7 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever">
             <summary>
-            Service designed to abstract calls to retrieve modules from dll files.
+            Retrieves assemblies from dll files.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.CurrentAssemblyName">
@@ -475,13 +462,13 @@
             Gets or sets DllDirectory is the directory path of the .dll files.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.GetModules(System.String[])">
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.GetAssemblies(System.String[])">
             <summary>
-            GetModules will create an ObservableCollection of type Module to organize
-            the information from the dll file and its related .xml file.
+            Creates an ObservableCollection of AssemblyData to organize
+            the information from the dll file and its related xml file.
             </summary>
             <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-            <returns>Returns an collection of Module objects.</returns>
+            <returns>Returns an collection of AssemblyData objects.</returns>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.Initialize(System.String,System.String)">
             <summary>
@@ -536,7 +523,7 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever">
             <summary>
-            ModuleInfoRetriever is used to get information from a .dll file.
+            Retrieves assemblies from dll files.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.#ctor">
@@ -581,13 +568,13 @@
             <param name="moduleDirectory">Directory containing dll files.</param>
             <param name="moduleFilePath">Name of the specific dll file.</param>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.ModuleManager#ModuleObjects#Interfaces#IModuleInfoRetriever#GetModules(System.String[])">
+        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.GetAssemblies(System.String[])">
             <summary>
-            GetModules will create an ObservableCollection of type Module to organize
-            the information from the dll file and its related .xml file.
+            Creates an ObservableCollection of AssemblyData to organize
+            the information from the dll file and its related xml file.
             </summary>
             <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-            <returns>Returns an collection of Module objects.</returns>
+            <returns>Returns an collection of AssemblyData objects.</returns>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.GetSingleModule(System.Type)">
             <summary>
@@ -598,7 +585,7 @@
         </member>
         <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.AddConstructorsToCollection(System.Type)">
             <summary>
-            AddConstructorsToCollection get all constructors from the passed in Type.
+            AddConstructorsToCollection get all constructors from a Type.
             </summary>
             <param name="type">The Type where the members are coming from.</param>
             <returns>An ObservableCollection of ModuleConstructor objects.</returns>

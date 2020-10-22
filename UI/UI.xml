@@ -31,7 +31,7 @@
         </member>
         <member name="T:ModuleManager.UI.Events.UpdateAssemblyCollectionEvent">
             <summary>
-            Event for updating the collection of Module objects.
+            Event for updating the collection of AssemblyData objects.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.Events.UpdateProgressBarAssemblyNameEvent">
@@ -56,7 +56,7 @@
         </member>
         <member name="T:ModuleManager.UI.TemplateSelectors.TemplateSelector">
             <summary>
-            Used to selected a DataTemplate in the view.
+            Used to selected a DataTemplate in the description.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.TemplateSelectors.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
@@ -105,7 +105,7 @@
         </member>
         <member name="T:ModuleManager.UI.ViewModels.ButtonsViewModel">
             <summary>
-            View model for the buttons area.
+            View model for the header buttons.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Events.IEventAggregator,Prism.Regions.IRegionManager,ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
@@ -154,7 +154,7 @@
         <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.StoreModules">
             <summary>
             StoreModules will attempt to get all assemblies from a dll and store it
-            as a Module in the Modules collection.
+            as an AssemblyData in the AssemblyData collection.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.UpdateProgressBarText">
@@ -176,6 +176,12 @@
             SaveFileDialog will be used or if the hardcoded file location
             will be used.
             </summary>
+        </member>
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.Navigate(System.String)">
+            <summary>
+            View navigation method.
+            </summary>
+            <param name="navigatePath">The path of the view to navigate to.</param>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.AssemblyCollectionUpdated(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData})">
             <summary>
@@ -214,7 +220,7 @@
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.LoadConfig">
             <summary>
-            LoadConfig will load an ObservableCollection of type Module from an xml file.
+            LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
             </summary>
             <returns>A collection of AssemblyData objects.</returns>
         </member>
