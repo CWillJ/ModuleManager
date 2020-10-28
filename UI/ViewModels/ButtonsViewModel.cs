@@ -31,9 +31,9 @@
         /// <param name="moduleInfoRetriever">The IModuleInfoRetriever.</param>
         public ButtonsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IModuleInfoRetriever moduleInfoRetriever)
         {
-            _eventAggregator = eventAggregator;
-            _regionManager = regionManager;
-            _moduleInfoRetriever = moduleInfoRetriever;
+            _eventAggregator = eventAggregator ?? throw new ArgumentNullException("EventAggregator");
+            _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
+            _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 

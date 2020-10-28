@@ -28,10 +28,10 @@
         {
             _assemblies = new ObservableCollection<AssemblyData>();
 
-            _eventAggregator = eventAggregator;
-            eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
+            _eventAggregator = eventAggregator ?? throw new ArgumentNullException("EventAggregator");
+            _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
-            _moduleInfoRetriever = moduleInfoRetriever;
+            eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))

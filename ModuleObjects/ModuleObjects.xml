@@ -44,11 +44,6 @@
             Gets or sets the collection of modules contained in the assembly.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.InfoGetter">
-            <summary>
-            Gets the IModuleInfoRetriever.
-            </summary>
-        </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Loader">
             <summary>
             Gets the AssemblyLoader to load/unload this assembly.

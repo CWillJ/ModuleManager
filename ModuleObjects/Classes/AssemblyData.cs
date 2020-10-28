@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
     using System.Threading.Tasks;
@@ -39,7 +40,7 @@
         /// <param name="modules">Collection of modules contained in the assembly.</param>
         public AssemblyData(IModuleInfoRetriever moduleInfoRetriever, string name, string filePath, ObservableCollection<ModuleData> modules)
         {
-            _moduleInfoRetriever = moduleInfoRetriever;
+            _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             Name = name;
             IsEnabled = false;
@@ -109,7 +110,7 @@
         {
             if (_moduleInfoRetriever == null)
             {
-                _moduleInfoRetriever = moduleInfoRetriever;
+                _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
             }
 
             if (IsEnabled)

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows;
+    using ModuleManager.ModuleObjects;
     using ModuleManager.UI;
     using ModuleManager.Views;
     using Prism.Ioc;
@@ -95,6 +96,7 @@
             ModuleCatalog moduleCatalog = new ModuleCatalog();
 
             moduleCatalog.AddModule<UIModule>();
+            moduleCatalog.AddModule<ModuleObjectsModule>();
 
             return moduleCatalog;
         }
