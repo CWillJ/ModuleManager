@@ -103,6 +103,22 @@
         public Assembly Assembly { get; set; }
 
         /// <summary>
+        /// Overrides the ToString method and formats the string output.
+        /// </summary>
+        /// <returns>A desired format for the assembly.</returns>
+        public override string ToString()
+        {
+            string s = Name + @" located: " + FilePath + "\n\n";
+
+            foreach (var module in Modules)
+            {
+                s += module.ToString() + "\n";
+            }
+
+            return s;
+        }
+
+        /// <summary>
         /// Loads all enabled assemblies and unloads the disabled ones.
         /// </summary>
         /// <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
@@ -127,7 +143,7 @@
         /// Load this assembly.
         /// </summary>
         /// <param name="moduleInfoRetriever">IModuleInfoRetriever used to load this assembly.</param>
-        public async void Load(IModuleInfoRetriever moduleInfoRetriever)
+        private async void Load(IModuleInfoRetriever moduleInfoRetriever)
         {
             Loader = await Task.Run(() => new AssemblyLoader(FilePath));
             Assembly = await Task.Run(() => Loader.LoadFromAssemblyPath(FilePath));
@@ -153,7 +169,7 @@
         /// <summary>
         /// Unload this assembly.
         /// </summary>
-        public void Unload()
+        private void Unload()
         {
             if (Loader == null)
             {
@@ -163,22 +179,6 @@
             Loader.Unload();
             Loader = null;
             Assembly = null;
-        }
-
-        /// <summary>
-        /// Overrides the ToString method and formats the string output.
-        /// </summary>
-        /// <returns>A desired format for the assembly.</returns>
-        public override string ToString()
-        {
-            string s = Name + @" located: " + FilePath + "\n\n";
-
-            foreach (var module in Modules)
-            {
-                s += module.ToString() + "\n";
-            }
-
-            return s;
         }
     }
 }

@@ -21,7 +21,7 @@
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string iconDirectory = Directory.GetParent(
-                Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName + @"\UI\Images\";
+                Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName + @"\UI\Icons\";
 
             return value.ToString() switch
             {

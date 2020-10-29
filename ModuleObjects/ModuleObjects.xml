@@ -54,6 +54,12 @@
             Gets or sets the actual Assembly of this AssemblyData.
             </summary>
         </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the assembly.</returns>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
             <summary>
             Loads all enabled assemblies and unloads the disabled ones.
@@ -70,12 +76,6 @@
             <summary>
             Unload this assembly.
             </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
-            <summary>
-            Overrides the ToString method and formats the string output.
-            </summary>
-            <returns>A desired format for the assembly.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.MemberParameter">
             <summary>
@@ -412,17 +412,6 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Assembly">
             <summary>
             Gets or sets the actual Assembly of this AssemblyData.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Load(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
-            <summary>
-            Load this assembly.
-            </summary>
-            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Unload">
-            <summary>
-            Unload this assembly.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">

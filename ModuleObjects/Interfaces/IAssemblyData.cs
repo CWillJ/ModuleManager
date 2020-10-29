@@ -44,17 +44,6 @@
         public Assembly Assembly { get; set; }
 
         /// <summary>
-        /// Load this assembly.
-        /// </summary>
-        /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
-        public void Load(IModuleInfoRetriever moduleInfoRetriever);
-
-        /// <summary>
-        /// Unload this assembly.
-        /// </summary>
-        public void Unload();
-
-        /// <summary>
         /// Loads all assemblies that are enabled and
         /// unloads the ones that are not.
         /// </summary>

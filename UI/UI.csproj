@@ -12,9 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Constructor Icon.png" />
-    <None Remove="Images\Method Icon.png" />
-    <None Remove="Images\Property Icon.png" />
+    <None Remove="Icons\Constructor Icon.png" />
+    <None Remove="Icons\Method Icon.png" />
+    <None Remove="Icons\Property Icon.png" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -69,8 +69,8 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Resource Include="Images\Constructor Icon.png" />
-	  <Resource Include="Images\Method Icon.png" />
-	  <Resource Include="Images\Property Icon.png" />
+	  <Resource Include="Icons\Constructor Icon.png" />
+	  <Resource Include="Icons\Method Icon.png" />
+	  <Resource Include="Icons\Property Icon.png" />
 	</ItemGroup>
 </Project>
