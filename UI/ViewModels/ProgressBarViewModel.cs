@@ -1,7 +1,6 @@
 ﻿namespace ModuleManager.UI.ViewModels
 {
-    using ModuleManager.UI.Events;
-    using Prism.Events;
+    using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
 
     /// <summary>
@@ -9,82 +8,24 @@
     /// </summary>
     public class ProgressBarViewModel : BindableBase
     {
-        private string _progressBarAssemblyName;
-        private string _progressBarText;
-        private bool _progressBarIsVisible;
-        private double _currentProgress;
+        private IProgressBarService _progressBarService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgressBarViewModel"/> class.
         /// </summary>
-        /// <param name="eventAggregator">Event aggregator.</param>
-        public ProgressBarViewModel(IEventAggregator eventAggregator)
+        /// <param name="progressBarService">Progress bar service.</param>
+        public ProgressBarViewModel(IProgressBarService progressBarService)
         {
-            eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Subscribe(ProgressBarAssemblyNameUpdated);
-            eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Subscribe(ProgressBarTextUpdated);
-            eventAggregator.GetEvent<UpdateProgressBarVisibilityEvent>().Subscribe(ProgressBarVisibilityUpdated);
-            eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Subscribe(ProgressBarCurrentProgressUpdated);
-
-            _progressBarAssemblyName = string.Empty;
-            _progressBarText = string.Empty;
-            _currentProgress = 0;
-            _progressBarIsVisible = false;
+            _progressBarService = progressBarService;
         }
 
         /// <summary>
-        /// Gets or sets the assembly name.
+        /// Gets or sets the IProgressBarService.
         /// </summary>
-        public string ProgressBarAssemblyName
+        public IProgressBarService ProgressBarService
         {
-            get { return _progressBarAssemblyName; }
-            set { SetProperty(ref _progressBarAssemblyName, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the progress bar text.
-        /// </summary>
-        public string ProgressBarText
-        {
-            get { return _progressBarText; }
-            set { SetProperty(ref _progressBarText, value); }
-        }
-
-        /// <summary>
-        /// Gets the current progress of the status bar.
-        /// </summary>
-        public double CurrentProgress
-        {
-            get { return _currentProgress; }
-            private set { SetProperty(ref _currentProgress, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether a progress bar is visible.
-        /// </summary>
-        public bool ProgressBarIsVisible
-        {
-            get { return _progressBarIsVisible; }
-            set { SetProperty(ref _progressBarIsVisible, value); }
-        }
-
-        private void ProgressBarAssemblyNameUpdated(string obj)
-        {
-            ProgressBarAssemblyName = obj;
-        }
-
-        private void ProgressBarTextUpdated(string obj)
-        {
-            ProgressBarText = obj;
-        }
-
-        private void ProgressBarVisibilityUpdated(bool visible)
-        {
-            ProgressBarIsVisible = visible;
-        }
-
-        private void ProgressBarCurrentProgressUpdated(double progress)
-        {
-            CurrentProgress = progress;
+            get { return _progressBarService; }
+            set { _progressBarService = value; }
         }
     }
 }

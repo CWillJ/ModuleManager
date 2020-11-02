@@ -8,8 +8,7 @@
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.UI.Events;
-    using Prism.Events;
+    using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
     using Prism.Regions;
     using Telerik.Windows.Controls;
@@ -19,23 +18,29 @@
     /// </summary>
     public class ButtonsViewModel : BindableBase
     {
-        private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
         private readonly IModuleInfoRetriever _moduleInfoRetriever;
+        private IProgressBarService _progressBarService;
+        private IAssemblyCollectionService _assemblyCollectionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
-        /// <param name="eventAggregator">Event aggregator.</param>
         /// <param name="regionManager">Region manager.</param>
         /// <param name="moduleInfoRetriever">The IModuleInfoRetriever.</param>
-        public ButtonsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IModuleInfoRetriever moduleInfoRetriever)
+        /// <param name="progressBarService">IProgressBarService.</param>
+        /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
+        public ButtonsViewModel(
+            IRegionManager regionManager,
+            IModuleInfoRetriever moduleInfoRetriever,
+            IProgressBarService progressBarService,
+            IAssemblyCollectionService assemblyCollectionService)
         {
-            _eventAggregator = eventAggregator ?? throw new ArgumentNullException("EventAggregator");
+            _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
+            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
             _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
-
-            eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 
             // Boolean value for testing.
             UseSaveFileDialog = false;
@@ -63,9 +68,22 @@
         public bool LoadingModules { get; set; }
 
         /// <summary>
-        /// Gets or sets the collection of Modules.
+        /// Gets or sets the IProgressBarService.
         /// </summary>
-        public ObservableCollection<AssemblyData> Assemblies { get; set; }
+        public IProgressBarService ProgressBarService
+        {
+            get { return _progressBarService; }
+            set { _progressBarService = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the IAssemblyCollectionService.
+        /// </summary>
+        public IAssemblyCollectionService AssemblyCollectionService
+        {
+            get { return _assemblyCollectionService; }
+            set { _assemblyCollectionService = value; }
+        }
 
         /// <summary>
         /// Gets the Navigate command.
@@ -110,15 +128,13 @@
                 return;
             }
 
-            ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
-
             _moduleInfoRetriever.DllDirectory = moduleDirectory;
 
             // Show progress bar
-            _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(0.0);
-            _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
+            AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
+            ProgressBarService.CurrentProgress = 0.0;
+            ProgressBarService.AssemblyName = string.Empty;
+            ProgressBarService.Text = string.Empty;
 
             NavigateCommand.Execute("ProgressBarView");
 
@@ -132,16 +148,15 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            assemblies = await Task.Run(() => _moduleInfoRetriever.GetAssemblies(dllFiles));
+            AssemblyCollectionService.Assemblies = await Task.Run(() => _moduleInfoRetriever.GetAssemblies(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
 
             NavigateCommand.Execute("ModuleManagerView");
 
-            _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(string.Empty);
-            _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
+            ProgressBarService.AssemblyName = string.Empty;
+            ProgressBarService.Text = string.Empty;
         }
 
         /// <summary>
@@ -151,9 +166,9 @@
         {
             while (LoadingModules)
             {
-                _eventAggregator.GetEvent<UpdateProgressBarAssemblyNameEvent>().Publish(_moduleInfoRetriever.CurrentAssemblyName);
-                _eventAggregator.GetEvent<UpdateProgressBarCurrentProgressEvent>().Publish(_moduleInfoRetriever.PercentOfAssemblyLoaded);
-                _eventAggregator.GetEvent<UpdateProgressBarTextEvent>().Publish(@"Loading Module: " + _moduleInfoRetriever.CurrentTypeName);
+                ProgressBarService.AssemblyName = _moduleInfoRetriever.CurrentAssemblyName;
+                ProgressBarService.CurrentProgress = _moduleInfoRetriever.PercentOfAssemblyLoaded;
+                ProgressBarService.Text = @"Loading Module: " + _moduleInfoRetriever.CurrentTypeName;
             }
         }
 
@@ -225,7 +240,7 @@
             }
 
             using StreamWriter wr = new StreamWriter(saveFile);
-            serializer.Serialize(wr, Assemblies);
+            serializer.Serialize(wr, AssemblyCollectionService.Assemblies);
             wr.Close();
 
             RadWindow.Alert(@"Configuration Saved");
@@ -247,7 +262,7 @@
         {
             bool test = false;
 
-            foreach (var assembly in Assemblies)
+            foreach (var assembly in AssemblyCollectionService.Assemblies)
             {
                 if (assembly.IsEnabled && (assembly.Assembly != null))
                 {
@@ -266,15 +281,6 @@
             {
                 RadWindow.Alert(@"No Assemblies Are Loaded");
             }
-        }
-
-        /// <summary>
-        /// Sets the local property Assemblies to the published ObservableCollection of AssemblyData.
-        /// </summary>
-        /// <param name="assemblies">Published ObservableCollection of AssemblyData.</param>
-        private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
-        {
-            Assemblies = assemblies;
         }
 
         /// <summary>

@@ -60,7 +60,7 @@
                 BorderBrush="Black"
                 BorderThickness="1"
                 ItemTemplate="{StaticResource assemblyLevel}"
-                ItemsSource="{Binding Path=Assemblies, Mode=OneWay}" />
+                ItemsSource="{Binding AssemblyCollectionService.Assemblies, Mode=OneWay}" />
         </Grid>
 
         <!--  Description Grid  -->

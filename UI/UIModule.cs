@@ -2,6 +2,8 @@
 {
     using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.ModuleObjects.Loaders;
+    using ModuleManager.UI.Interfaces;
+    using ModuleManager.UI.Services;
     using ModuleManager.UI.Views;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -39,6 +41,8 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IModuleInfoRetriever, ModuleInfoRetriever>();
+            containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
+            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
 
             containerRegistry.RegisterForNavigation<ModuleManagerView>();
             containerRegistry.RegisterForNavigation<ProgressBarView>();

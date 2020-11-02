@@ -29,29 +29,74 @@
             <param name="culture">Culture.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="T:ModuleManager.UI.Events.UpdateAssemblyCollectionEvent">
+        <member name="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService">
             <summary>
-            Event for updating the collection of AssemblyData objects.
+            An Assembly Collection.
             </summary>
         </member>
-        <member name="T:ModuleManager.UI.Events.UpdateProgressBarAssemblyNameEvent">
+        <member name="P:ModuleManager.UI.Interfaces.IAssemblyCollectionService.Assemblies">
             <summary>
-            Event for updating the assembly name of the progress bar.
+            Gets or sets a collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.
             </summary>
         </member>
-        <member name="T:ModuleManager.UI.Events.UpdateProgressBarCurrentProgressEvent">
+        <member name="T:ModuleManager.UI.Interfaces.IProgressBarService">
             <summary>
-            Event for progress bar current progress.
+            A progress bar service.
             </summary>
         </member>
-        <member name="T:ModuleManager.UI.Events.UpdateProgressBarTextEvent">
+        <member name="P:ModuleManager.UI.Interfaces.IProgressBarService.AssemblyName">
             <summary>
-            Event that updates the progress bar text.
+            Gets or sets the name of the assembly currently being loaded.
             </summary>
         </member>
-        <member name="T:ModuleManager.UI.Events.UpdateProgressBarVisibilityEvent">
+        <member name="P:ModuleManager.UI.Interfaces.IProgressBarService.CurrentProgress">
             <summary>
-            Event for progress bar visibility.
+            Gets or sets the current progress of a progress bar.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.Interfaces.IProgressBarService.Text">
+            <summary>
+            Gets or sets the text of a progress bar.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Services.AssemblyCollectionService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/> implementations.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.AssemblyCollectionService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
+            <summary>
+            Gets or sets a collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.UI.Services.ProgressBarService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IProgressBarService"/> implementations.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Services.ProgressBarService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.ProgressBarService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.Services.ProgressBarService.AssemblyName">
+            <summary>
+            Gets or sets the name of the assembly currently being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.Services.ProgressBarService.Text">
+            <summary>
+            Gets or sets the text of the progress bar.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.Services.ProgressBarService.CurrentProgress">
+            <summary>
+            Gets or sets the current progress of the progress bar.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.TemplateSelectors.TemplateSelector">
@@ -108,13 +153,14 @@
             View model for the header buttons.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Events.IEventAggregator,Prism.Regions.IRegionManager,ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever,ModuleManager.UI.Interfaces.IProgressBarService,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
-            <param name="eventAggregator">Event aggregator.</param>
             <param name="regionManager">Region manager.</param>
             <param name="moduleInfoRetriever">The IModuleInfoRetriever.</param>
+            <param name="progressBarService">IProgressBarService.</param>
+            <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
             <summary>
@@ -126,9 +172,14 @@
             Gets or sets a value indicating whether the application is currently loading modules.
             </summary>
         </member>
-        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.Assemblies">
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.ProgressBarService">
             <summary>
-            Gets or sets the collection of Modules.
+            Gets or sets the IProgressBarService.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.AssemblyCollectionService">
+            <summary>
+            Gets or sets the IAssemblyCollectionService.
             </summary>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.NavigateCommand">
@@ -183,12 +234,6 @@
             </summary>
             <param name="navigatePath">The path of the view to navigate to.</param>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.AssemblyCollectionUpdated(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData})">
-            <summary>
-            Sets the local property Assemblies to the published ObservableCollection of AssemblyData.
-            </summary>
-            <param name="assemblies">Published ObservableCollection of AssemblyData.</param>
-        </member>
         <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.CanExecute">
             <summary>
             Can always execute.
@@ -200,23 +245,17 @@
             View model for module area.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.#ctor(Prism.Events.IEventAggregator,ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
+        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ModuleAreaViewModel"/> class.
             </summary>
-            <param name="eventAggregator">Event aggregator.</param>
             <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+            <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
         </member>
-        <member name="P:ModuleManager.UI.ViewModels.ModuleAreaViewModel.Assemblies">
+        <member name="P:ModuleManager.UI.ViewModels.ModuleAreaViewModel.AssemblyCollectionService">
             <summary>
             Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
             </summary>
-        </member>
-        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.AssemblyCollectionUpdated(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData})">
-            <summary>
-            Updates the local collection of AssemblyData with the subscribed to data.
-            </summary>
-            <param name="assemblies">The collection of AssemblyData.</param>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.LoadConfig">
             <summary>
@@ -239,30 +278,15 @@
             View model for progress bar view.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ProgressBarViewModel.#ctor(Prism.Events.IEventAggregator)">
+        <member name="M:ModuleManager.UI.ViewModels.ProgressBarViewModel.#ctor(ModuleManager.UI.Interfaces.IProgressBarService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ProgressBarViewModel"/> class.
             </summary>
-            <param name="eventAggregator">Event aggregator.</param>
+            <param name="progressBarService">Progress bar service.</param>
         </member>
-        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.ProgressBarAssemblyName">
+        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.ProgressBarService">
             <summary>
-            Gets or sets the assembly name.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.ProgressBarText">
-            <summary>
-            Gets or sets the progress bar text.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.CurrentProgress">
-            <summary>
-            Gets the current progress of the status bar.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.UI.ViewModels.ProgressBarViewModel.ProgressBarIsVisible">
-            <summary>
-            Gets or sets a value indicating whether a progress bar is visible.
+            Gets or sets the IProgressBarService.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.Views.ButtonsView">
@@ -335,6 +359,36 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

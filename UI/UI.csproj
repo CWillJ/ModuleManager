@@ -73,8 +73,4 @@
 	  <Resource Include="Icons\Method Icon.png" />
 	  <Resource Include="Icons\Property Icon.png" />
 	</ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="Services\" />
-	</ItemGroup>
 </Project>

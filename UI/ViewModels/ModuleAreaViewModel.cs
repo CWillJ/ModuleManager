@@ -6,8 +6,7 @@
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.UI.Events;
-    using Prism.Events;
+    using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
 
     /// <summary>
@@ -15,48 +14,33 @@
     /// </summary>
     public class ModuleAreaViewModel : BindableBase
     {
-        private readonly IEventAggregator _eventAggregator;
         private readonly IModuleInfoRetriever _moduleInfoRetriever;
-        private ObservableCollection<AssemblyData> _assemblies;
+        private IAssemblyCollectionService _assemblyCollectionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleAreaViewModel"/> class.
         /// </summary>
-        /// <param name="eventAggregator">Event aggregator.</param>
         /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
-        public ModuleAreaViewModel(IEventAggregator eventAggregator, IModuleInfoRetriever moduleInfoRetriever)
+        /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
+        public ModuleAreaViewModel(IModuleInfoRetriever moduleInfoRetriever, IAssemblyCollectionService assemblyCollectionService)
         {
-            _assemblies = new ObservableCollection<AssemblyData>();
-
-            _eventAggregator = eventAggregator ?? throw new ArgumentNullException("EventAggregator");
+            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
-
-            eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Subscribe(AssemblyCollectionUpdated);
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
-                ObservableCollection<AssemblyData> assemblies = LoadConfig();
-                _eventAggregator.GetEvent<UpdateAssemblyCollectionEvent>().Publish(assemblies);
+                AssemblyCollectionService.Assemblies = LoadConfig();
             }
         }
 
         /// <summary>
         /// Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
         /// </summary>
-        public ObservableCollection<AssemblyData> Assemblies
+        public IAssemblyCollectionService AssemblyCollectionService
         {
-            get { return _assemblies; }
-            set { SetProperty(ref _assemblies, value); }
-        }
-
-        /// <summary>
-        /// Updates the local collection of AssemblyData with the subscribed to data.
-        /// </summary>
-        /// <param name="assemblies">The collection of AssemblyData.</param>
-        private void AssemblyCollectionUpdated(ObservableCollection<AssemblyData> assemblies)
-        {
-            Assemblies = assemblies;
+            get { return _assemblyCollectionService; }
+            set { _assemblyCollectionService = value; }
         }
 
         /// <summary>
