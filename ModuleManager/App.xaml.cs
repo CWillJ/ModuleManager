@@ -49,12 +49,6 @@
 
             RegionManager.SetRegionManager(MainWindow, Container.Resolve<IRegionManager>());
             RegionManager.UpdateRegions();
-            ////shell.Visibility = Visibility.Hidden;
-
-            ////Container.Resolve<CommonParameterFactory>();
-
-            ////LoadCore();
-            ////LoadModules();
 
             shell.Visibility = Visibility.Visible;
         }
