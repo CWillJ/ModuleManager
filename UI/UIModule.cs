@@ -14,6 +14,7 @@
     {
         private readonly IRegionManager _regionManager;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UIModule"/> class.
         /// </summary>
