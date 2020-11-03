@@ -7,7 +7,7 @@
     /// <summary>
     /// Retrieves assemblies from dll files.
     /// </summary>
-    public interface IModuleInfoRetriever
+    public interface IAssemblyLoaderService
     {
         /// <summary>
         /// Gets or sets CurrentAssemblyName is the name of the assembly being loaded.
@@ -30,14 +30,6 @@
         string DllDirectory { get; set; }
 
         /// <summary>
-        /// Creates an ObservableCollection of AssemblyData to organize
-        /// the information from the dll file and its related xml file.
-        /// </summary>
-        /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-        /// <returns>Returns an collection of AssemblyData objects.</returns>
-        ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles);
-
-        /// <summary>
         /// Initialized ModuleInfoRetriever's properties.
         /// </summary>
         /// <param name="moduleDirectory">Directory containing dll files.</param>
@@ -45,24 +37,35 @@
         public void Initialize(string moduleDirectory, string moduleFilePath);
 
         /// <summary>
-        /// AddConstructorsToCollection get all constructors from the passed in Type.
+        /// Creates an ObservableCollection of AssemblyData to organize
+        /// the information from the dll file and its related xml file.
         /// </summary>
-        /// <param name="type">The Type where the members are coming from.</param>
-        /// <returns>An ObservableCollection of ModuleConstructor objects.</returns>
-        public ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type);
+        /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
+        /// <returns>Returns an collection of AssemblyData objects.</returns>
+        public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles);
 
         /// <summary>
-        /// AddPropertiesToCollection gets all properties from the passed in Type.
+        /// Loads all enabled assemblies and unloads the disabled ones.
         /// </summary>
-        /// <param name="type">The Type where the members are coming from.</param>
-        /// <returns>An ObservableCollection of ModulePropery objects.</returns>
-        public ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type);
+        /// <param name="assembly">An <see cref="AssemblyData"/> object passed by reference.</param>
+        public void LoadUnload(ref AssemblyData assembly);
 
         /// <summary>
-        /// AddMethodsToCollection gets all methods from the passed in Type.
+        /// Loads all enabled assemblies and unloads the disabled ones.
         /// </summary>
-        /// <param name="type">The Type where the methods are coming from.</param>
-        /// <returns>An ObservableCollection of ModuleMethod objects.</returns>
-        public ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type);
+        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects passed by reference.</param>
+        public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies);
+
+        /// <summary>
+        /// Load an assembly.
+        /// </summary>
+        /// <param name="assembly">Assembly to load passed by reference.</param>
+        public void Load(ref AssemblyData assembly);
+
+        /// <summary>
+        /// Unload an assembly.
+        /// </summary>
+        /// <param name="assembly">Assembly to unload passed by reference.</param>
+        public void Unload(ref AssemblyData assembly);
     }
 }

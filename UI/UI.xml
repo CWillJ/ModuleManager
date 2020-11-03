@@ -153,12 +153,12 @@
             View model for the header buttons.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever,ModuleManager.UI.Interfaces.IProgressBarService,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IProgressBarService,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
             <param name="regionManager">Region manager.</param>
-            <param name="moduleInfoRetriever">The IModuleInfoRetriever.</param>
+            <param name="assemblyLoaderService">The IModuleInfoRetriever.</param>
             <param name="progressBarService">IProgressBarService.</param>
             <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
         </member>
@@ -245,11 +245,11 @@
             View model for module area.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
+        <member name="M:ModuleManager.UI.ViewModels.ModuleAreaViewModel.#ctor(ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ModuleAreaViewModel"/> class.
             </summary>
-            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+            <param name="assemblyLoaderService">ModuleInfoRetriever.</param>
             <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ModuleAreaViewModel.AssemblyCollectionService">
@@ -359,36 +359,6 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

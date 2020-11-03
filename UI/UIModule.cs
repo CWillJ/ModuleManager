@@ -40,7 +40,6 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for program-wide type registration.</param>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IModuleInfoRetriever, ModuleInfoRetriever>();
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
 

@@ -12,12 +12,12 @@
     /// <summary>
     /// Retrieves assemblies from dll files.
     /// </summary>
-    public class ModuleInfoRetriever : IModuleInfoRetriever
+    public class AssemblyLoaderService : IAssemblyLoaderService
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleInfoRetriever"/> class.
+        /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        public ModuleInfoRetriever()
+        public AssemblyLoaderService()
         {
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
@@ -65,6 +65,7 @@
         public void Initialize(string moduleDirectory, string moduleFilePath)
         {
             DllDirectory = moduleDirectory;
+            DllFilePath = moduleFilePath;
             DescriptionRetriever = new XmlDescriptionRetriever(moduleFilePath);
         }
 
@@ -82,59 +83,122 @@
             }
 
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
-            ObservableCollection<ModuleData> modules;
-
-            AssemblyLoader assemblyLoader;
-            Assembly assembly;
+            AssemblyData assembly;
 
             foreach (var dllFile in dllFiles)
             {
-                DllFilePath = dllFile;
-                DescriptionRetriever.DllFilePath = DllFilePath;
+                assembly = new AssemblyData();
 
-                assemblyLoader = new AssemblyLoader(DllFilePath);
-                assembly = assemblyLoader.LoadFromAssemblyPath(DllFilePath);
+                Initialize(dllFile.Substring(0, dllFile.LastIndexOf(".")), dllFile);
 
-                Type[] types = null;
+                Load(ref assembly);
+                Unload(ref assembly);
 
-                try
-                {
-                    types = assembly.GetTypes();
-                }
-                catch (ReflectionTypeLoadException ex)
-                {
-                    types = ex.Types.Where(t => t != null).ToArray();
-                }
-
-                modules = new ObservableCollection<ModuleData>();
-
-                int someNum = 0;
-                foreach (var type in types)
-                {
-                    someNum++;
-
-                    if (type != null)
-                    {
-                        CurrentAssemblyName = assembly.GetName().Name;
-                        CurrentTypeName = type.Name;
-                        PercentOfAssemblyLoaded = ((double)someNum / (double)types.Length) * 100;
-
-                        Debug.WriteLine("Adding Module: " + CurrentTypeName + " From " + CurrentAssemblyName);
-                        ModuleData tempModule = GetSingleModule(type);
-
-                        if (tempModule != null)
-                        {
-                            modules.Add(tempModule);
-                        }
-                    }
-                }
-
-                assemblies.Add(new AssemblyData(this, CurrentAssemblyName, DllFilePath, modules));
-
-                assemblyLoader.Unload();
+                assemblies.Add(assembly);
             }
 
             return assemblies;
+        }
+
+        /// <summary>
+        /// Loads all enabled assemblies and unloads the disabled ones.
+        /// </summary>
+        /// <param name="assembly">Assembly to load/unload passed by reference.</param>
+        public void LoadUnload(ref AssemblyData assembly)
+        {
+            if (assembly.IsEnabled)
+            {
+                Load(ref assembly);
+            }
+            else
+            {
+                Unload(ref assembly);
+            }
+        }
+
+        /// <summary>
+        /// Loads all enabled assemblies and unloads the disabled ones.
+        /// </summary>
+        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects passed by reference.</param>
+        public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
+        {
+            AssemblyData assembly;
+
+            for (int i = 0; i < assemblies.Count; i++)
+            {
+                assembly = assemblies[i];
+
+                if (assembly.IsEnabled)
+                {
+                    Load(ref assembly);
+                }
+                else
+                {
+                    Unload(ref assembly);
+                }
+
+                assemblies[i] = assembly;
+            }
+        }
+
+        /// <summary>
+        /// Loads an assembly.
+        /// </summary>
+        /// <param name="assembly">Assembly to load passed by reference.</param>
+        public void Load(ref AssemblyData assembly)
+        {
+            assembly.Loader = new AssemblyLoader(DllFilePath);
+            assembly.Assembly = assembly.Loader.LoadFromAssemblyPath(DllFilePath);
+            assembly.Name = assembly.Assembly.GetName().Name;
+            assembly.FilePath = DllFilePath;
+
+            Type[] types = null;
+
+            try
+            {
+                types = assembly.Assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                types = ex.Types.Where(t => t != null).ToArray();
+            }
+
+            int typeNumber = 0;
+            foreach (var type in types)
+            {
+                typeNumber++;
+
+                if (type != null)
+                {
+                    CurrentAssemblyName = assembly.Name;
+                    CurrentTypeName = type.Name;
+                    PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
+
+                    Debug.WriteLine("Adding Module: " + CurrentTypeName + " From " + CurrentAssemblyName);
+                    ModuleData tempModule = GetSingleModule(type);
+
+                    if (tempModule != null)
+                    {
+                        assembly.Modules.Add(tempModule);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Unloads an assembly.
+        /// </summary>
+        /// <param name="assembly">Assembly to unload passed by reference.</param>
+        public void Unload(ref AssemblyData assembly)
+        {
+            if (assembly.Loader == null)
+            {
+                return;
+            }
+
+            assembly.Loader.Unload();
+            assembly.Loader = null;
+            assembly.Assembly = null;
         }
 
         /// <summary>
@@ -142,7 +206,7 @@
         /// </summary>
         /// <param name="type">Type from an assembly.</param>
         /// <returns>A Module type.</returns>
-        public ModuleData GetSingleModule(Type type)
+        private ModuleData GetSingleModule(Type type)
         {
             if (!type.IsPublic || type.IsInterface)
             {
@@ -163,7 +227,7 @@
         /// </summary>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>An ObservableCollection of ModuleConstructor objects.</returns>
-        public ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type)
+        private ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type)
         {
             ObservableCollection<ModuleConstructor> constructors = new ObservableCollection<ModuleConstructor>();
             ConstructorInfo[] conInfo = type.GetConstructors();
@@ -195,7 +259,7 @@
         /// </summary>
         /// <param name="type">The Type where the members are coming from.</param>
         /// <returns>An ObservableCollection of ModulePropery objects.</returns>
-        public ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
+        private ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
         {
             ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
             string name, description, dataType, propertyString;
@@ -242,7 +306,7 @@
         /// </summary>
         /// <param name="type">The Type where the methods are coming from.</param>
         /// <returns>An ObservableCollection of ModuleMethod objects.</returns>
-        public ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type)
+        private ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type)
         {
             ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
             ObservableCollection<MemberParameter> parameters;

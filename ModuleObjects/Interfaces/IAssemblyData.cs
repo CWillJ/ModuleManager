@@ -42,12 +42,5 @@
         /// </summary>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
-
-        /// <summary>
-        /// Loads all assemblies that are enabled and
-        /// unloads the ones that are not.
-        /// </summary>
-        /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
-        public void LoadUnload(IModuleInfoRetriever moduleInfoRetriever);
     }
 }

@@ -14,11 +14,10 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> class.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleData})">
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleData})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> class.
             </summary>
-            <param name="moduleInfoRetriever">The IModuleInfoRetriever creating this AssemblyData.</param>
             <param name="name">Name of the assembly.</param>
             <param name="filePath">File path to the assembly.</param>
             <param name="modules">Collection of modules contained in the assembly.</param>
@@ -46,7 +45,7 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Loader">
             <summary>
-            Gets the AssemblyLoader to load/unload this assembly.
+            Gets or sets the AssemblyLoader to load/unload this assembly.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Assembly">
@@ -59,23 +58,6 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the assembly.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
-            <summary>
-            Loads all enabled assemblies and unloads the disabled ones.
-            </summary>
-            <param name="moduleInfoRetriever">IModuleInfoRetriever.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Load(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
-            <summary>
-            Load this assembly.
-            </summary>
-            <param name="moduleInfoRetriever">IModuleInfoRetriever used to load this assembly.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.Unload">
-            <summary>
-            Unload this assembly.
-            </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.MemberParameter">
             <summary>
@@ -414,39 +396,39 @@
             Gets or sets the actual Assembly of this AssemblyData.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.LoadUnload(ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever)">
-            <summary>
-            Loads all assemblies that are enabled and
-            unloads the ones that are not.
-            </summary>
-            <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever">
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService">
             <summary>
             Retrieves assemblies from dll files.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.CurrentAssemblyName">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.CurrentAssemblyName">
             <summary>
             Gets or sets CurrentAssemblyName is the name of the assembly being loaded.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.CurrentTypeName">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.CurrentTypeName">
             <summary>
             Gets or sets CurrentTypeName is the name of the type being loaded.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.PercentOfAssemblyLoaded">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.PercentOfAssemblyLoaded">
             <summary>
             Gets or sets the current percentage of load compleation of the current assembly.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.DllDirectory">
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.DllDirectory">
             <summary>
             Gets or sets DllDirectory is the directory path of the .dll files.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.GetAssemblies(System.String[])">
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.Initialize(System.String,System.String)">
+            <summary>
+            Initialized ModuleInfoRetriever's properties.
+            </summary>
+            <param name="moduleDirectory">Directory containing dll files.</param>
+            <param name="moduleFilePath">Name of the specific dll file.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.GetAssemblies(System.String[])">
             <summary>
             Creates an ObservableCollection of AssemblyData to organize
             the information from the dll file and its related xml file.
@@ -454,33 +436,29 @@
             <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
             <returns>Returns an collection of AssemblyData objects.</returns>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.Initialize(System.String,System.String)">
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.LoadUnload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Initialized ModuleInfoRetriever's properties.
+            Loads all enabled assemblies and unloads the disabled ones.
             </summary>
-            <param name="moduleDirectory">Directory containing dll files.</param>
-            <param name="moduleFilePath">Name of the specific dll file.</param>
+            <param name="assembly">An <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> object passed by reference.</param>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.AddConstructorsToCollection(System.Type)">
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
-            AddConstructorsToCollection get all constructors from the passed in Type.
+            Loads all enabled assemblies and unloads the disabled ones.
             </summary>
-            <param name="type">The Type where the members are coming from.</param>
-            <returns>An ObservableCollection of ModuleConstructor objects.</returns>
+            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.AddPropertiesToCollection(System.Type)">
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            AddPropertiesToCollection gets all properties from the passed in Type.
+            Load an assembly.
             </summary>
-            <param name="type">The Type where the members are coming from.</param>
-            <returns>An ObservableCollection of ModulePropery objects.</returns>
+            <param name="assembly">Assembly to load passed by reference.</param>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleInfoRetriever.AddMethodsToCollection(System.Type)">
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            AddMethodsToCollection gets all methods from the passed in Type.
+            Unload an assembly.
             </summary>
-            <param name="type">The Type where the methods are coming from.</param>
-            <returns>An ObservableCollection of ModuleMethod objects.</returns>
+            <param name="assembly">Assembly to unload passed by reference.</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoader">
             <summary>
@@ -504,89 +482,6 @@
             </summary>
             <param name="name">The assembly name.</param>
             <returns>A loaded assembly.</returns>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever">
-            <summary>
-            Retrieves assemblies from dll files.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever"/> class.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.DllDirectory">
-            <summary>
-            Gets or sets DllDirectory is the directory path of the .dll files.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.DllFilePath">
-            <summary>
-            Gets or sets DllFilePath is the path of the .dll file.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.CurrentAssemblyName">
-            <summary>
-            Gets or sets CurrentAssemblyName is the name of the type being loaded.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.CurrentTypeName">
-            <summary>
-            Gets or sets CurrentTypeName is the name of the type being loaded.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.PercentOfAssemblyLoaded">
-            <summary>
-            Gets or sets the current percentage of load compleation of the current assembly.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.DescriptionRetriever">
-            <summary>
-            Gets or sets all xml descriptions.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.Initialize(System.String,System.String)">
-            <summary>
-            Initialized ModuleInfoRetriever's properties.
-            </summary>
-            <param name="moduleDirectory">Directory containing dll files.</param>
-            <param name="moduleFilePath">Name of the specific dll file.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.GetAssemblies(System.String[])">
-            <summary>
-            Creates an ObservableCollection of AssemblyData to organize
-            the information from the dll file and its related xml file.
-            </summary>
-            <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-            <returns>Returns an collection of AssemblyData objects.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.GetSingleModule(System.Type)">
-            <summary>
-            Builds a singls module from the given Type.
-            </summary>
-            <param name="type">Type from an assembly.</param>
-            <returns>A Module type.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.AddConstructorsToCollection(System.Type)">
-            <summary>
-            AddConstructorsToCollection get all constructors from a Type.
-            </summary>
-            <param name="type">The Type where the members are coming from.</param>
-            <returns>An ObservableCollection of ModuleConstructor objects.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.AddPropertiesToCollection(System.Type)">
-            <summary>
-            AddPropertiesToCollection gets all properties from the passed in Type.
-            </summary>
-            <param name="type">The Type where the members are coming from.</param>
-            <returns>An ObservableCollection of ModulePropery objects.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Loaders.ModuleInfoRetriever.AddMethodsToCollection(System.Type)">
-            <summary>
-            AddMethodsToCollection gets all methods from the passed in Type.
-            </summary>
-            <param name="type">The Type where the methods are coming from.</param>
-            <returns>An ObservableCollection of ModuleMethod objects.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Loaders.XmlDescriptionRetriever">
             <summary>
@@ -715,6 +610,113 @@
             </summary>
             <param name="xmlNode">XmlNode to get text from.</param>
             <returns>Formatted string of the XmlNode.InnerXml.</returns>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService">
+            <summary>
+            Retrieves assemblies from dll files.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.DllDirectory">
+            <summary>
+            Gets or sets DllDirectory is the directory path of the .dll files.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.DllFilePath">
+            <summary>
+            Gets or sets DllFilePath is the path of the .dll file.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.CurrentAssemblyName">
+            <summary>
+            Gets or sets CurrentAssemblyName is the name of the type being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.CurrentTypeName">
+            <summary>
+            Gets or sets CurrentTypeName is the name of the type being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.PercentOfAssemblyLoaded">
+            <summary>
+            Gets or sets the current percentage of load compleation of the current assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.DescriptionRetriever">
+            <summary>
+            Gets or sets all xml descriptions.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.Initialize(System.String,System.String)">
+            <summary>
+            Initialized ModuleInfoRetriever's properties.
+            </summary>
+            <param name="moduleDirectory">Directory containing dll files.</param>
+            <param name="moduleFilePath">Name of the specific dll file.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.GetAssemblies(System.String[])">
+            <summary>
+            Creates an ObservableCollection of AssemblyData to organize
+            the information from the dll file and its related xml file.
+            </summary>
+            <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
+            <returns>Returns an collection of AssemblyData objects.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.LoadUnload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
+            <summary>
+            Loads all enabled assemblies and unloads the disabled ones.
+            </summary>
+            <param name="assembly">Assembly to load/unload passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
+            <summary>
+            Loads all enabled assemblies and unloads the disabled ones.
+            </summary>
+            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
+            <summary>
+            Loads an assembly.
+            </summary>
+            <param name="assembly">Assembly to load passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
+            <summary>
+            Unloads an assembly.
+            </summary>
+            <param name="assembly">Assembly to unload passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.GetSingleModule(System.Type)">
+            <summary>
+            Builds a singls module from the given Type.
+            </summary>
+            <param name="type">Type from an assembly.</param>
+            <returns>A Module type.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.AddConstructorsToCollection(System.Type)">
+            <summary>
+            AddConstructorsToCollection get all constructors from a Type.
+            </summary>
+            <param name="type">The Type where the members are coming from.</param>
+            <returns>An ObservableCollection of ModuleConstructor objects.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.AddPropertiesToCollection(System.Type)">
+            <summary>
+            AddPropertiesToCollection gets all properties from the passed in Type.
+            </summary>
+            <param name="type">The Type where the members are coming from.</param>
+            <returns>An ObservableCollection of ModulePropery objects.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.AddMethodsToCollection(System.Type)">
+            <summary>
+            AddMethodsToCollection gets all methods from the passed in Type.
+            </summary>
+            <param name="type">The Type where the methods are coming from.</param>
+            <returns>An ObservableCollection of ModuleMethod objects.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.ModuleObjectsModule">
             <summary>

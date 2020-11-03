@@ -1,5 +1,7 @@
 ﻿namespace ModuleManager.ModuleObjects
 {
+    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Interfaces;
     using Prism.Ioc;
     using Prism.Modularity;
 
@@ -22,7 +24,7 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for program-wide type registration.</param>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            ////containerRegistry.Register<IAssemblyData, AssemblyData>();
+            containerRegistry.Register<IAssemblyData, AssemblyData>();
         }
     }
 }

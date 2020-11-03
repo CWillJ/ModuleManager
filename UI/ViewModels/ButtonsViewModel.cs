@@ -19,7 +19,7 @@
     public class ButtonsViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IModuleInfoRetriever _moduleInfoRetriever;
+        private readonly IAssemblyLoaderService _assemblyLoaderService;
         private IProgressBarService _progressBarService;
         private IAssemblyCollectionService _assemblyCollectionService;
 
@@ -27,22 +27,21 @@
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
         /// <param name="regionManager">Region manager.</param>
-        /// <param name="moduleInfoRetriever">The IModuleInfoRetriever.</param>
+        /// <param name="assemblyLoaderService">The IModuleInfoRetriever.</param>
         /// <param name="progressBarService">IProgressBarService.</param>
         /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
         public ButtonsViewModel(
             IRegionManager regionManager,
-            IModuleInfoRetriever moduleInfoRetriever,
+            IAssemblyLoaderService assemblyLoaderService,
             IProgressBarService progressBarService,
             IAssemblyCollectionService assemblyCollectionService)
         {
+            _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
+            _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
+
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
 
-            _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
-            _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
-
-            // Boolean value for testing.
             UseSaveFileDialog = false;
 
             NavigateCommand = new Prism.Commands.DelegateCommand<string>(Navigate);
@@ -128,7 +127,7 @@
                 return;
             }
 
-            _moduleInfoRetriever.DllDirectory = moduleDirectory;
+            _assemblyLoaderService.DllDirectory = moduleDirectory;
 
             // Show progress bar
             AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
@@ -148,7 +147,7 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            AssemblyCollectionService.Assemblies = await Task.Run(() => _moduleInfoRetriever.GetAssemblies(dllFiles));
+            AssemblyCollectionService.Assemblies = await Task.Run(() => _assemblyLoaderService.GetAssemblies(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
@@ -166,9 +165,9 @@
         {
             while (LoadingModules)
             {
-                ProgressBarService.AssemblyName = _moduleInfoRetriever.CurrentAssemblyName;
-                ProgressBarService.CurrentProgress = _moduleInfoRetriever.PercentOfAssemblyLoaded;
-                ProgressBarService.Text = @"Loading Module: " + _moduleInfoRetriever.CurrentTypeName;
+                ProgressBarService.AssemblyName = _assemblyLoaderService.CurrentAssemblyName;
+                ProgressBarService.CurrentProgress = _assemblyLoaderService.PercentOfAssemblyLoaded;
+                ProgressBarService.Text = @"Loading Module: " + _assemblyLoaderService.CurrentTypeName;
             }
         }
 

@@ -14,18 +14,18 @@
     /// </summary>
     public class ModuleAreaViewModel : BindableBase
     {
-        private readonly IModuleInfoRetriever _moduleInfoRetriever;
+        private readonly IAssemblyLoaderService _assemblyLoaderService;
         private IAssemblyCollectionService _assemblyCollectionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleAreaViewModel"/> class.
         /// </summary>
-        /// <param name="moduleInfoRetriever">ModuleInfoRetriever.</param>
+        /// <param name="assemblyLoaderService">ModuleInfoRetriever.</param>
         /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
-        public ModuleAreaViewModel(IModuleInfoRetriever moduleInfoRetriever, IAssemblyCollectionService assemblyCollectionService)
+        public ModuleAreaViewModel(IAssemblyLoaderService assemblyLoaderService, IAssemblyCollectionService assemblyCollectionService)
         {
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
-            _moduleInfoRetriever = moduleInfoRetriever ?? throw new ArgumentNullException("ModuleInfoRetriever");
+            _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
@@ -87,10 +87,7 @@
                 }
             }
 
-            foreach (var assembly in assemblies)
-            {
-                assembly.LoadUnload(_moduleInfoRetriever);
-            }
+            _assemblyLoaderService.LoadUnload(ref assemblies);
 
             return assemblies;
         }
