@@ -3,11 +3,12 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Xml.Serialization;
+    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// Module object holds the name, description, members, methods, constructors and properties of a module.
     /// </summary>
-    public class ModuleData
+    public class ModuleData : IModuleData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleData"/> class.
@@ -18,8 +19,7 @@
             FullName = string.Empty;
             Description = string.Empty;
 
-            IsEnabled = false;
-            Members = new ObservableCollection<ModuleMember>();
+            Members = new ObservableCollection<ModuleMemberData>();
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = new ObservableCollection<ModuleProperty>();
             Methods = new ObservableCollection<ModuleMethod>();
@@ -49,8 +49,7 @@
             FullName = type.FullName;
             Description = description;
 
-            IsEnabled = false;
-            Members = new ObservableCollection<ModuleMember>();
+            Members = new ObservableCollection<ModuleMemberData>();
             Constructors = new ObservableCollection<ModuleConstructor>();
             Properties = properties;
             Methods = methods;
@@ -92,14 +91,9 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the module is enabled or disabled.
-        /// </summary>
-        public bool IsEnabled { get; set; }
-
-        /// <summary>
         /// Gets or sets all of the module members.
         /// </summary>
-        public ObservableCollection<ModuleMember> Members { get; set; }
+        public ObservableCollection<ModuleMemberData> Members { get; set; }
 
         /// <summary>
         /// Gets or sets the module constructors.

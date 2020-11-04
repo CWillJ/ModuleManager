@@ -7,7 +7,7 @@
     /// <summary>
     /// ModuleConstructor object holds the ConstructorInfo, class name, description and the parameters a constructor.
     /// </summary>
-    public class ModuleConstructor : ModuleMember
+    public class ModuleConstructor : ModuleMemberData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.

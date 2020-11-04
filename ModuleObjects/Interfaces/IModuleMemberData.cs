@@ -1,15 +1,10 @@
-﻿namespace ModuleManager.ModuleObjects.Classes
+﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
     /// <summary>
-    /// The base class for module members.
+    /// Module object interface.
     /// </summary>
-    public class ModuleMember
+    public interface IModuleMemberData : ITreeViewData
     {
-        /// <summary>
-        /// Gets or sets the name of the module.
-        /// </summary>
-        public string Name { get; set; }
-
         /// <summary>
         /// Gets or sets the description of the module.
         /// </summary>

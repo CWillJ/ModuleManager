@@ -6,7 +6,7 @@
     /// <summary>
     /// ModuleProperty object holds the PropertyInfo, name, description, data type and accessor level of a property.
     /// </summary>
-    public class ModuleProperty : ModuleMember
+    public class ModuleProperty : ModuleMemberData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleProperty"/> class.
@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleProperty"/> class
+        /// Initializes a new instance of the <see cref="ModuleProperty"/> class.
         /// </summary>
         /// <param name="propertyInfo">PropertyInfo for this ModuleProperty.</param>
         /// <param name="name">Property name.</param>

@@ -25,6 +25,8 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IAssemblyData, AssemblyData>();
+            containerRegistry.Register<IModuleData, ModuleData>();
+            containerRegistry.Register<IModuleMemberData, ModuleMemberData>();
         }
     }
 }

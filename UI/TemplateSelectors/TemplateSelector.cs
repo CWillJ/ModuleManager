@@ -3,6 +3,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// Used to selected a DataTemplate in the description.

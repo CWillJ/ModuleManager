@@ -268,7 +268,7 @@
                     test = true;
 
                     // parameters for ClassLibrary1.Class2.Method2
-                    object[] parameters = { @"A string and the number ", (int)21 };
+                    object[] parameters = { @"Here to test", (int)21 };
 
                     string some = await Task.Run(() => assembly.Modules[1].Methods[1].Invoke(parameters).ToString());
 

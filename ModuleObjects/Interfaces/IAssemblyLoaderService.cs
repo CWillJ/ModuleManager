@@ -1,6 +1,5 @@
 ﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
-    using System;
     using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
 
@@ -55,6 +54,12 @@
         /// </summary>
         /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects passed by reference.</param>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies);
+
+        /// <summary>
+        /// Loads all assemblies in a collection.
+        /// </summary>
+        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects.</param>
+        public void LoadAll(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
         /// Load an assembly.

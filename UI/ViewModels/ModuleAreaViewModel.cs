@@ -87,6 +87,7 @@
                 }
             }
 
+            _assemblyLoaderService.LoadAll(ref assemblies);
             _assemblyLoaderService.LoadUnload(ref assemblies);
 
             return assemblies;

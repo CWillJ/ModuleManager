@@ -87,9 +87,12 @@
 
             foreach (var dllFile in dllFiles)
             {
-                assembly = new AssemblyData();
-
                 Initialize(dllFile.Substring(0, dllFile.LastIndexOf(".")), dllFile);
+
+                assembly = new AssemblyData
+                {
+                    FilePath = dllFile,
+                };
 
                 Load(ref assembly);
                 Unload(ref assembly);
@@ -142,13 +145,35 @@
         }
 
         /// <summary>
+        /// Loads all assemblies in a collection.
+        /// </summary>
+        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects.</param>
+        public void LoadAll(ref ObservableCollection<AssemblyData> assemblies)
+        {
+            AssemblyData assembly;
+
+            for (int i = 0; i < assemblies.Count; i++)
+            {
+                assembly = assemblies[i];
+                Load(ref assembly);
+                assemblies[i] = assembly;
+            }
+        }
+
+        /// <summary>
         /// Loads an assembly.
         /// </summary>
         /// <param name="assembly">Assembly to load passed by reference.</param>
         public void Load(ref AssemblyData assembly)
         {
+            if (!string.IsNullOrEmpty(assembly.FilePath))
+            {
+                Initialize(assembly.FilePath.Substring(0, assembly.FilePath.LastIndexOf(".")), assembly.FilePath);
+            }
+
             assembly.Loader = new AssemblyLoader(DllFilePath);
             assembly.Assembly = assembly.Loader.LoadFromAssemblyPath(DllFilePath);
+
             assembly.Name = assembly.Assembly.GetName().Name;
             assembly.FilePath = DllFilePath;
 
@@ -162,6 +187,8 @@
             {
                 types = ex.Types.Where(t => t != null).ToArray();
             }
+
+            assembly.Modules.Clear();
 
             int typeNumber = 0;
             foreach (var type in types)

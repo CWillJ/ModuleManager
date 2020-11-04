@@ -4,6 +4,31 @@
         <name>UI</name>
     </assembly>
     <members>
+        <member name="T:ModuleManager.UI.Converters.TreeViewSelectedItemToITreeViewData">
+            <summary>
+            Used to convert TreeViewSelectedItems to ITreeViewData.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Converters.TreeViewSelectedItemToITreeViewData.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert a TreeViewSelectedItem to ITreeViewData.
+            </summary>
+            <param name="value">Object passed in.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Parameter object.</param>
+            <param name="culture">Culture.</param>
+            <returns>An <see cref="T:ModuleManager.ModuleObjects.Interfaces.ITreeViewData"/> object.</returns>
+        </member>
+        <member name="M:ModuleManager.UI.Converters.TreeViewSelectedItemToITreeViewData.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">Object passed in.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Parameter object.</param>
+            <param name="culture">Culture.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:ModuleManager.UI.Converters.TypeNameToIconConverter">
             <summary>
             Converter to convert the string name of a member type to an icon.
@@ -39,6 +64,11 @@
             Gets or sets a collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.
             </summary>
         </member>
+        <member name="P:ModuleManager.UI.Interfaces.IAssemblyCollectionService.SelectedItem">
+            <summary>
+            Gets or sets an <see cref="T:ModuleManager.ModuleObjects.Interfaces.ITreeViewData"/> object hopefully.
+            </summary>
+        </member>
         <member name="T:ModuleManager.UI.Interfaces.IProgressBarService">
             <summary>
             A progress bar service.
@@ -72,6 +102,11 @@
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
             <summary>
             Gets or sets a collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.SelectedItem">
+            <summary>
+            Gets or sets an <see cref="T:ModuleManager.ModuleObjects.Interfaces.ITreeViewData"/> object hopefully.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.Services.ProgressBarService">

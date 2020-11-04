@@ -190,11 +190,6 @@
             Gets or sets the description of the module.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.IsEnabled">
-            <summary>
-            Gets or sets a value indicating whether the module is enabled or disabled.
-            </summary>
-        </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Members">
             <summary>
             Gets or sets all of the module members.
@@ -231,22 +226,22 @@
             </summary>
             <returns>A desired format for the module name, description and all members contained in module.</returns>
         </member>
-        <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMember">
+        <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMemberData">
             <summary>
             The base class for module members.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMember.Name">
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMemberData.Name">
             <summary>
             Gets or sets the name of the module.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMember.Description">
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMemberData.Description">
             <summary>
             Gets or sets the description of the module.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMember.TypeName">
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMemberData.TypeName">
             <summary>
             Gets or sets the name of the Type.
             </summary>
@@ -326,7 +321,7 @@
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleProperty.#ctor(System.Reflection.PropertyInfo,System.String,System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleProperty"/> class
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleProperty"/> class.
             </summary>
             <param name="propertyInfo">PropertyInfo for this ModuleProperty.</param>
             <param name="name">Property name.</param>
@@ -363,12 +358,7 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData">
             <summary>
-            Module object interface.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Name">
-            <summary>
-            Gets or sets the name of the assembly.
+            Assembly object interface.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.IsEnabled">
@@ -388,7 +378,7 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Loader">
             <summary>
-            Gets the AssemblyLoader to load/unload this assembly.
+            Gets or sets the AssemblyLoader to load/unload this assembly.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Assembly">
@@ -448,6 +438,12 @@
             </summary>
             <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
         </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
+            <summary>
+            Loads all assemblies in a collection.
+            </summary>
+            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.</param>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
             Load an assembly.
@@ -459,6 +455,46 @@
             Unload an assembly.
             </summary>
             <param name="assembly">Assembly to unload passed by reference.</param>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
+            <summary>
+            Module member object interface.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Description">
+            <summary>
+            Gets or sets the description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Members">
+            <summary>
+            Gets or sets all of the module members.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData">
+            <summary>
+            Module object interface.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.Description">
+            <summary>
+            Gets or sets the description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.TypeName">
+            <summary>
+            Gets or sets the name of the Type.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.ITreeViewData">
+            <summary>
+            The base interface for IAssemblyData and IModuleData.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.ITreeViewData.Name">
+            <summary>
+            Gets or sets the name of the assembly.
+            </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Loaders.AssemblyLoader">
             <summary>
@@ -677,6 +713,12 @@
             Loads all enabled assemblies and unloads the disabled ones.
             </summary>
             <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
+            <summary>
+            Loads all assemblies in a collection.
+            </summary>
+            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Loaders.AssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>

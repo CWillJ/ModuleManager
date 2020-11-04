@@ -8,7 +8,7 @@
     /// <summary>
     /// ModuleMethod object holds the MethodInfo, name, description, the parameters and the return type of a member.
     /// </summary>
-    public class ModuleMethod : ModuleMember
+    public class ModuleMethod : ModuleMemberData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMethod"/> class.

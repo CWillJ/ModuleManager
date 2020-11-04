@@ -7,15 +7,10 @@
     using ModuleManager.ModuleObjects.Loaders;
 
     /// <summary>
-    /// Module object interface.
+    /// Assembly object interface.
     /// </summary>
-    public interface IAssemblyData
+    public interface IAssemblyData : ITreeViewData
     {
-        /// <summary>
-        /// Gets or sets the name of the assembly.
-        /// </summary>
-        public string Name { get; set; }
-
         /// <summary>
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
         /// </summary>
@@ -32,10 +27,10 @@
         public ObservableCollection<ModuleData> Modules { get; set; }
 
         /// <summary>
-        /// Gets the AssemblyLoader to load/unload this assembly.
+        /// Gets or sets the AssemblyLoader to load/unload this assembly.
         /// </summary>
         [XmlIgnore]
-        public AssemblyLoader Loader { get; }
+        public AssemblyLoader Loader { get; set; }
 
         /// <summary>
         /// Gets or sets the actual Assembly of this AssemblyData.
