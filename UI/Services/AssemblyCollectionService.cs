@@ -12,7 +12,7 @@
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
         private ObservableCollection<AssemblyData> _assemblies;
-        private ITreeViewData _selectedItem;
+        private object _selectedItem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
@@ -20,7 +20,7 @@
         public AssemblyCollectionService()
         {
             _assemblies = new ObservableCollection<AssemblyData>();
-            _selectedItem = null;
+            _selectedItem = string.Empty;
         }
 
         /// <summary>
@@ -33,9 +33,9 @@
         }
 
         /// <summary>
-        /// Gets or sets an <see cref="ITreeViewData"/> object hopefully.
+        /// Gets or sets an <see cref="object"/> object hopefully.
         /// </summary>
-        public ITreeViewData SelectedItem
+        public object SelectedItem
         {
             get { return _selectedItem; }
             set { SetProperty(ref _selectedItem, value); }

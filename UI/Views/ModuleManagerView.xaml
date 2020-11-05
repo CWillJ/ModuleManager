@@ -19,6 +19,18 @@
         <local:ButtonsView Grid.Row="0" />
 
         <!--  Module View Area  -->
-        <local:ModuleAreaView Grid.Row="1" />
+        <Grid
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="20,20,20,20">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2.25*" />
+            </Grid.ColumnDefinitions>
+
+            <local:ModuleAreaView Grid.Column="0" />
+            <local:AssemblyDataView Grid.Column="1" />
+        </Grid>
     </Grid>
 </UserControl>

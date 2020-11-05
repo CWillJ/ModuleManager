@@ -15,8 +15,8 @@
         public ObservableCollection<AssemblyData> Assemblies { get; set; }
 
         /// <summary>
-        /// Gets or sets an <see cref="ITreeViewData"/> object hopefully.
+        /// Gets or sets an <see cref="object"/> object hopefully.
         /// </summary>
-        public ITreeViewData SelectedItem { get; set; }
+        public object SelectedItem { get; set; }
     }
 }

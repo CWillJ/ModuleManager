@@ -4,6 +4,7 @@
     xmlns:converters="clr-namespace:ModuleManager.UI.Converters">
 
     <converters:TypeNameToIconConverter x:Key="typeNameToIconConverter" />
+    <converters:TreeViewSelectedItemToITreeViewData x:Key="treeViewItemConverter"/>
 
     <!--  Member Level  -->
     <DataTemplate x:Key="memberLevel">
