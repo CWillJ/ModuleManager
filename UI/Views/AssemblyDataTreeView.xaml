@@ -1,8 +1,7 @@
 ﻿<UserControl
-    x:Class="ModuleManager.UI.Views.ModuleAreaView"
+    x:Class="ModuleManager.UI.Views.AssemblyDataTreeView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:ModuleManager.UI.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
@@ -15,7 +14,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="..\DataTemplates\AssemblyTreeViewDataTemplate.xaml" />
+                <ResourceDictionary Source="..\DataTemplates\AssemblyDataTreeDataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.ModuleObjects.Loaders
+﻿namespace ModuleManager.ModuleLoader.Services
 {
     using System;
     using System.Collections.ObjectModel;
@@ -6,8 +6,9 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using ModuleManager.ModuleLoader.Classes;
+    using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// Retrieves assemblies from dll files.

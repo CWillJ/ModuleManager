@@ -4,7 +4,6 @@
     using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.ModuleObjects.Loaders;
 
     /// <summary>
     /// AssemblyData will load and unload an assembly and stores data about an assembly.

@@ -16,14 +16,13 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="..\DataTemplates\DataTemplates.xaml" />
+                <ResourceDictionary Source="..\DataTemplates\AssemblyDataDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <templateSelectors:TemplateSelector x:Key="ModuleDataTemplateSelector" />
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <!--  Description Grid  MinWidth="550"  -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -45,6 +44,7 @@
 
         <Border
             Grid.Row="1"
+            MinWidth="550"
             MinHeight="275"
             Margin="10,0"
             Background="White"

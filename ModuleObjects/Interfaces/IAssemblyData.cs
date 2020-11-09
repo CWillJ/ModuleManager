@@ -4,7 +4,6 @@
     using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Loaders;
 
     /// <summary>
     /// Assembly object interface.

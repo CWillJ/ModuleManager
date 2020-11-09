@@ -4,8 +4,8 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Xml.Serialization;
+    using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
     using Telerik.Windows.Controls;
@@ -13,17 +13,17 @@
     /// <summary>
     /// View model for module area.
     /// </summary>
-    public class ModuleAreaViewModel : BindableBase
+    public class AssemblyDataTreeViewModel : BindableBase
     {
         private readonly IAssemblyLoaderService _assemblyLoaderService;
         private IAssemblyCollectionService _assemblyCollectionService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleAreaViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AssemblyDataTreeViewModel"/> class.
         /// </summary>
         /// <param name="assemblyLoaderService">ModuleInfoRetriever.</param>
         /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
-        public ModuleAreaViewModel(IAssemblyLoaderService assemblyLoaderService, IAssemblyCollectionService assemblyCollectionService)
+        public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IAssemblyCollectionService assemblyCollectionService)
         {
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");

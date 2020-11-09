@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.ModuleObjects.Loaders
+﻿namespace ModuleManager.ModuleLoader.Classes
 {
     using System;
     using System.Collections.ObjectModel;

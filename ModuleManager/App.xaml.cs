@@ -2,9 +2,9 @@
 {
     using System;
     using System.Windows;
+    using ModuleManager.ModuleLoader.Interfaces;
+    using ModuleManager.ModuleLoader.Services;
     using ModuleManager.ModuleObjects;
-    using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.ModuleObjects.Loaders;
     using ModuleManager.UI;
     using ModuleManager.Views;
     using Prism.Ioc;

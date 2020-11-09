@@ -1,7 +1,5 @@
 ﻿namespace ModuleManager.UI
 {
-    using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.ModuleObjects.Loaders;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Services;
     using ModuleManager.UI.Views;
