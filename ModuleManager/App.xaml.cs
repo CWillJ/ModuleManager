@@ -2,10 +2,16 @@
 {
     using System;
     using System.Windows;
+    using ModuleManager.ModuleLoader;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleLoader.Services;
     using ModuleManager.ModuleObjects;
+    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI;
+    using ModuleManager.UI.Interfaces;
+    using ModuleManager.UI.Services;
+    using ModuleManager.UI.Views;
     using ModuleManager.Views;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -82,6 +88,15 @@
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
+            containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
+            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+
+            containerRegistry.Register<IAssemblyData, AssemblyData>();
+            containerRegistry.Register<IModuleData, ModuleData>();
+            containerRegistry.Register<IModuleMemberData, ModuleMemberData>();
+
+            containerRegistry.RegisterForNavigation<ModuleManagerView>();
+            containerRegistry.RegisterForNavigation<ProgressBarView>();
         }
 
         /// <summary>
@@ -91,10 +106,6 @@
         protected override IModuleCatalog CreateModuleCatalog()
         {
             ModuleCatalog moduleCatalog = new ModuleCatalog();
-
-            moduleCatalog.AddModule<UIModule>();
-            moduleCatalog.AddModule<ModuleObjectsModule>();
-
             return moduleCatalog;
         }
     }

@@ -49,6 +49,6 @@
             ItemContainerStyle="{StaticResource RadTreeViewItemStyle}"
             ItemTemplate="{StaticResource assemblyLevel}"
             ItemsSource="{Binding AssemblyCollectionService.Assemblies, Mode=OneWay}"
-            SelectedItem="{Binding Path=AssemblyCollectionService.SelectedItem, Mode=TwoWay}" />
+            SelectedItem="{Binding AssemblyCollectionService.SelectedItem, Mode=TwoWay}" />
     </Grid>
 </UserControl>

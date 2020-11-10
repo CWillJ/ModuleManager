@@ -202,23 +202,6 @@
             </summary>
             <param name="assembly">Assembly to unload passed by reference.</param>
         </member>
-        <member name="T:ModuleManager.ModuleLoader.ModuleLoaderModule">
-            <summary>
-            ModuleLoaderModule handles how modules are loaded.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleLoader.ModuleLoaderModule.OnInitialized(Prism.Ioc.IContainerProvider)">
-            <summary>
-            Perform required initialization methods for this Module.
-            </summary>
-            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleLoader.ModuleLoaderModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
-            <summary>
-            Register types with the container that will be used by the application.
-            </summary>
-            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
-        </member>
         <member name="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService">
             <summary>
             Retrieves assemblies from dll files.

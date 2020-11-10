@@ -38,7 +38,7 @@
                 MinHeight="20"
                 Background="LightSteelBlue"
                 FontWeight="Bold"
-                Text="Description"
+                Text="{Binding AssemblyCollectionService.SelectedItemName}"
                 TextAlignment="Center" />
         </Border>
 

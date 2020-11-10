@@ -28,7 +28,7 @@
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
-            CheckedChangedCommand = new Prism.Commands.DelegateCommand(UpdateAssemblyEnable, CanExecute);
+            CheckedChangedCommand = new Prism.Commands.DelegateCommand<object>(UpdateAssemblyEnable);
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
@@ -49,7 +49,7 @@
         /// <summary>
         /// Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
         /// </summary>
-        public Prism.Commands.DelegateCommand CheckedChangedCommand { get; set; }
+        public Prism.Commands.DelegateCommand<object> CheckedChangedCommand { get; set; }
 
         /// <summary>
         /// LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
@@ -101,7 +101,7 @@
             return assemblies;
         }
 
-        private void UpdateAssemblyEnable()
+        private void UpdateAssemblyEnable(object obj)
         {
             RadWindow.Alert(@"We Got Here");
         }

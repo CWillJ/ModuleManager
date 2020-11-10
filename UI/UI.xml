@@ -4,31 +4,6 @@
         <name>UI</name>
     </assembly>
     <members>
-        <member name="T:ModuleManager.UI.Converters.TreeViewSelectedItemToITreeViewData">
-            <summary>
-            Used to convert TreeViewSelectedItems to ITreeViewData.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Converters.TreeViewSelectedItemToITreeViewData.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Convert a TreeViewSelectedItem to ITreeViewData.
-            </summary>
-            <param name="value">Object passed in.</param>
-            <param name="targetType">Target type.</param>
-            <param name="parameter">Parameter object.</param>
-            <param name="culture">Culture.</param>
-            <returns>An <see cref="T:ModuleManager.ModuleObjects.Interfaces.ITreeViewData"/> object.</returns>
-        </member>
-        <member name="M:ModuleManager.UI.Converters.TreeViewSelectedItemToITreeViewData.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="value">Object passed in.</param>
-            <param name="targetType">Target type.</param>
-            <param name="parameter">Parameter object.</param>
-            <param name="culture">Culture.</param>
-            <returns>Nothing.</returns>
-        </member>
         <member name="T:ModuleManager.UI.Converters.TypeNameToIconConverter">
             <summary>
             Converter to convert the string name of a member type to an icon.
@@ -106,7 +81,12 @@
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.SelectedItem">
             <summary>
-            Gets or sets an <see cref="T:System.Object"/> object hopefully.
+            Gets or sets the selected <see cref="T:System.Object"/> from the tree.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.SelectedItemName">
+            <summary>
+            Gets or sets name of the selected item.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.Services.ProgressBarService">
@@ -159,29 +139,6 @@
             <param name="item">Object.</param>
             <param name="container">Container.</param>
             <returns>A DataTemplate depending on the object passed in.</returns>
-        </member>
-        <member name="T:ModuleManager.UI.UIModule">
-            <summary>
-            The UI Module Class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.UIModule.#ctor(Prism.Regions.IRegionManager)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.UI.UIModule"/> class.
-            </summary>
-            <param name="regionManager">Region manager.</param>
-        </member>
-        <member name="M:ModuleManager.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
-            <summary>
-            Perform required initialization methods for this Module.
-            </summary>
-            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
-        </member>
-        <member name="M:ModuleManager.UI.UIModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
-            <summary>
-            Register types with the container that will be used by the application.
-            </summary>
-            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
         </member>
         <member name="T:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel">
             <summary>
@@ -439,6 +396,36 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>
