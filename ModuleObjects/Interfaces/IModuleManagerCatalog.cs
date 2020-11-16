@@ -6,7 +6,7 @@
     /// <summary>
     /// The interface for a ModuleCatalogService.
     /// </summary>
-    public interface IModuleManagerCatalog
+    public interface IModuleManagerCatalog : IModuleCatalog
     {
         /// <summary>
         /// Gets the instance of this <see cref="IModuleManagerCatalog"/>.

@@ -254,10 +254,17 @@
             The <see cref="T:Prism.Modularity.ModuleCatalog"/> holding the loaded modules.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.Instance">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor">
             <summary>
-            Gets the instance of this <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class.
             </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor(System.Collections.Generic.IEnumerable{Prism.Modularity.ModuleInfo})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class while providing an
+            initial list of <see cref="T:Prism.Modularity.ModuleInfo"/>s.
+            </summary>
+            <param name="modules">The initial list of modules.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.AddModule(System.Type)">
             <summary>
@@ -437,6 +444,40 @@
             Gets or sets the actual Assembly of this AssemblyData.
             </summary>
         </member>
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.TheModuleManagerCatalog">
+            <summary>
+            Gets or sets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.AddModule(System.Type)">
+            <summary>
+            Adds a module to the catalog from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">Module Type.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.AddModule(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Adds a module to the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="module">Module ModuleInfo.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.RemoveModule(System.Type)">
+            <summary>
+            Removes a module from the catalog from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">Module Type.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.RemoveModule(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Removes a module from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="module">Module ModuleInfo.</param>
+        </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
             <summary>
             Module member object interface.
@@ -491,6 +532,51 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.ITreeViewData.Name">
             <summary>
             Gets or sets the name of the assembly.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Services.ModuleCatalogService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> implementations.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Services.ModuleCatalogService"/> class.
+            </summary>
+            <param name="moduleManagerCatalog">The implementation of <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.</param>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Services.ModuleCatalogService.TheModuleManagerCatalog">
+            <summary>
+            Gets or sets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.AddModule(System.Type)">
+            <summary>
+            Adds a module to the catalog from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">Module Type.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.AddModule(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Adds a module to the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="module">Module ModuleInfo.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveModule(System.Type)">
+            <summary>
+            Removes a module from the catalog from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">Module Type.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveModule(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Removes a module from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="module">Module ModuleInfo.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveAllModules">
+            <summary>
+            Removes all modules from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
             </summary>
         </member>
     </members>

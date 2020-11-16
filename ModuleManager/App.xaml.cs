@@ -6,6 +6,7 @@
     using ModuleManager.ModuleLoader.Services;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
+    using ModuleManager.ModuleObjects.Services;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Services;
     using ModuleManager.UI.Views;
@@ -87,11 +88,12 @@
             containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
-            containerRegistry.RegisterSingleton<IModuleManagerCatalog, ModuleManagerCatalog>();
+            containerRegistry.RegisterSingleton<IModuleCatalogService, ModuleCatalogService>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
             containerRegistry.Register<IModuleData, ModuleData>();
             containerRegistry.Register<IModuleMemberData, ModuleMemberData>();
+            containerRegistry.Register<IModuleManagerCatalog, ModuleManagerCatalog>();
 
             containerRegistry.RegisterForNavigation<ModuleManagerView>();
             containerRegistry.RegisterForNavigation<ProgressBarView>();

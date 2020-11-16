@@ -11,22 +11,21 @@
     /// </summary>
     public class ModuleManagerCatalog : ModuleCatalog, IModuleManagerCatalog
     {
-        private static IModuleManagerCatalog _instance;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModuleManagerCatalog"/> class.
+        /// </summary>
+        public ModuleManagerCatalog()
+        {
+        }
 
         /// <summary>
-        /// Gets the instance of this <see cref="IModuleManagerCatalog"/>.
+        /// Initializes a new instance of the <see cref="ModuleManagerCatalog"/> class while providing an
+        /// initial list of <see cref="ModuleInfo"/>s.
         /// </summary>
-        public static IModuleManagerCatalog Instance
+        /// <param name="modules">The initial list of modules.</param>
+        public ModuleManagerCatalog(IEnumerable<ModuleInfo> modules)
+            : base(modules)
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new ModuleManagerCatalog();
-                }
-
-                return _instance;
-            }
         }
 
         /// <summary>
@@ -51,6 +50,7 @@
         {
             if (Modules.Contains(module))
             {
+                // Cannot set the Modules property
                 ////Modules = Modules.Where(mod => mod != module);
             }
         }

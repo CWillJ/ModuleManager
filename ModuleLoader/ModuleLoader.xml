@@ -207,14 +207,15 @@
             Retrieves assemblies from dll files.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor">
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService"/> class.
             </summary>
+            <param name="moduleCatalogService">The module catalog service.</param>
         </member>
-        <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.TheModuleManagerCatalog">
+        <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.ModuleCatalogService">
             <summary>
-            Gets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/> used here.
+            Gets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> used here.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllDirectory">

@@ -16,10 +16,13 @@
     /// </summary>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
+        private IModuleCatalogService _moduleCatalogService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        public AssemblyLoaderService()
+        /// <param name="moduleCatalogService">The module catalog service.</param>
+        public AssemblyLoaderService(IModuleCatalogService moduleCatalogService)
         {
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
@@ -27,13 +30,17 @@
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
-            TheModuleManagerCatalog = ModuleManagerCatalog.Instance;
+
+            _moduleCatalogService = moduleCatalogService;
         }
 
         /// <summary>
-        /// Gets the <see cref="IModuleManagerCatalog"/> used here.
+        /// Gets the <see cref="IModuleCatalogService"/> used here.
         /// </summary>
-        public IModuleManagerCatalog TheModuleManagerCatalog { get; }
+        public IModuleCatalogService ModuleCatalogService
+        {
+            get { return _moduleCatalogService; }
+        }
 
         /// <summary>
         /// Gets or sets DllDirectory is the directory path of the .dll files.
@@ -248,7 +255,7 @@
                 return null;
             }
 
-            TheModuleManagerCatalog.AddModule(type);
+            ModuleCatalogService.AddModule(type);
 
             return new ModuleData(
                 type,
