@@ -2,13 +2,10 @@
 {
     using System;
     using System.Windows;
-    using ModuleManager.ModuleLoader;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleLoader.Services;
-    using ModuleManager.ModuleObjects;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.UI;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Services;
     using ModuleManager.UI.Views;
@@ -90,6 +87,7 @@
             containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+            containerRegistry.RegisterSingleton<IModuleManagerCatalog, ModuleManagerCatalog>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
             containerRegistry.Register<IModuleData, ModuleData>();

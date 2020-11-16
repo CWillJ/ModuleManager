@@ -249,6 +249,34 @@
             </summary>
             <returns>A desired format for the module name, description and all members contained in module.</returns>
         </member>
+        <member name="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog">
+            <summary>
+            The <see cref="T:Prism.Modularity.ModuleCatalog"/> holding the loaded modules.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.Instance">
+            <summary>
+            Gets the instance of this <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.AddModule(System.Type)">
+            <summary>
+            Adds a module to the module catalog based on type.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> representing the ModuleInfo to add.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.RemoveModule(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Removes the module of the <see cref="T:Prism.Modularity.ModuleInfo"/> passed in.
+            </summary>
+            <param name="module">Module to remove's <see cref="T:Prism.Modularity.ModuleInfo"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.RemoveModule(System.Type)">
+            <summary>
+            Removes the module of the <see cref="T:System.Type"/> passed in.
+            </summary>
+            <param name="type">Module to remove's <see cref="T:System.Type"/>.</param>
+        </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMemberData">
             <summary>
             The base class for module members.
@@ -423,6 +451,22 @@
             <summary>
             Gets or sets all of the module members.
             </summary>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog">
+            <summary>
+            The interface for a ModuleCatalogService.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog.Instance">
+            <summary>
+            Gets the instance of this <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog.AddModule(System.Type)">
+            <summary>
+            Adds a module to the module catalog based on type.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> representing the ModuleInfo to add.</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData">
             <summary>

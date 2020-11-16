@@ -1,9 +1,7 @@
 ﻿namespace ModuleManager.UI.Services
 {
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
 

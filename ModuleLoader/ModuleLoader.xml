@@ -212,6 +212,11 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService"/> class.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.TheModuleManagerCatalog">
+            <summary>
+            Gets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/> used here.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllDirectory">
             <summary>
             Gets or sets DllDirectory is the directory path of the .dll files.

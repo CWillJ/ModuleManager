@@ -4,19 +4,22 @@
     using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
+    using Prism.Mvvm;
 
     /// <summary>
     /// AssemblyData will load and unload an assembly and stores data about an assembly.
     /// </summary>
-    public class AssemblyData : IAssemblyData
+    public class AssemblyData : BindableBase, IAssemblyData
     {
+        private bool _isEnabled;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
         /// </summary>
         public AssemblyData()
         {
             Name = string.Empty;
-            IsEnabled = false;
+            _isEnabled = false;
             FilePath = string.Empty;
             Modules = new ObservableCollection<ModuleData>();
             Loader = null;
@@ -32,7 +35,7 @@
         public AssemblyData(string name, string filePath, ObservableCollection<ModuleData> modules)
         {
             Name = name;
-            IsEnabled = false;
+            _isEnabled = false;
             FilePath = filePath;
             Modules = modules;
             Loader = null;
@@ -48,7 +51,19 @@
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
         /// Will load or unload this assembly if the IModuleInfoRetriever is not null.
         /// </summary>
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled
+        {
+            get
+            {
+                return _isEnabled;
+            }
+
+            set
+            {
+                _isEnabled = value;
+                ////SetProperty(ref _isEnabled, value);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the file path to assembly.

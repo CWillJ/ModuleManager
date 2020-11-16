@@ -2,7 +2,6 @@
 {
     using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// An Assembly Collection.

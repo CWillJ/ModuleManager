@@ -8,7 +8,6 @@
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
-    using Telerik.Windows.Controls;
 
     /// <summary>
     /// View model for module area.
@@ -28,8 +27,6 @@
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
-            CheckedChangedCommand = new Prism.Commands.DelegateCommand<object>(UpdateAssemblyEnable);
-
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
@@ -43,13 +40,8 @@
         public IAssemblyCollectionService AssemblyCollectionService
         {
             get { return _assemblyCollectionService; }
-            set { _assemblyCollectionService = value; }
+            set { SetProperty(ref _assemblyCollectionService, value); }
         }
-
-        /// <summary>
-        /// Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
-        /// </summary>
-        public Prism.Commands.DelegateCommand<object> CheckedChangedCommand { get; set; }
 
         /// <summary>
         /// LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
@@ -99,11 +91,6 @@
             _assemblyLoaderService.LoadUnload(ref assemblies);
 
             return assemblies;
-        }
-
-        private void UpdateAssemblyEnable(object obj)
-        {
-            RadWindow.Alert(@"We Got Here");
         }
 
         /// <summary>

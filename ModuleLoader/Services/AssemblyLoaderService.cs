@@ -9,6 +9,7 @@
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// Retrieves assemblies from dll files.
@@ -26,7 +27,13 @@
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
+            TheModuleManagerCatalog = ModuleManagerCatalog.Instance;
         }
+
+        /// <summary>
+        /// Gets the <see cref="IModuleManagerCatalog"/> used here.
+        /// </summary>
+        public IModuleManagerCatalog TheModuleManagerCatalog { get; }
 
         /// <summary>
         /// Gets or sets DllDirectory is the directory path of the .dll files.
@@ -240,6 +247,8 @@
             {
                 return null;
             }
+
+            TheModuleManagerCatalog.AddModule(type);
 
             return new ModuleData(
                 type,
