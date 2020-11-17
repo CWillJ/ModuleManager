@@ -309,9 +309,7 @@
             string name, description, dataType, propertyString;
             bool canRead, canWrite;
 
-            foreach (var property in type.GetProperties(BindingFlags.Public
-                                      | BindingFlags.Instance
-                                      | BindingFlags.DeclaredOnly))
+            foreach (var property in type.GetProperties())
             {
                 name = property.Name;
                 description = DescriptionRetriever.GetPropertyDescription(property);
