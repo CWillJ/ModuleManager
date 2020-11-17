@@ -11,7 +11,6 @@
     /// </summary>
     public class AssemblyData : BindableBase, IAssemblyData
     {
-        private bool _isEnabled;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
@@ -19,7 +18,7 @@
         public AssemblyData()
         {
             Name = string.Empty;
-            _isEnabled = false;
+            IsEnabled = false;
             FilePath = string.Empty;
             Modules = new ObservableCollection<ModuleData>();
             Loader = null;
@@ -35,7 +34,7 @@
         public AssemblyData(string name, string filePath, ObservableCollection<ModuleData> modules)
         {
             Name = name;
-            _isEnabled = false;
+            IsEnabled = false;
             FilePath = filePath;
             Modules = modules;
             Loader = null;
@@ -51,19 +50,7 @@
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
         /// Will load or unload this assembly if the IModuleInfoRetriever is not null.
         /// </summary>
-        public bool IsEnabled
-        {
-            get
-            {
-                return _isEnabled;
-            }
-
-            set
-            {
-                _isEnabled = value;
-                ////SetProperty(ref _isEnabled, value);
-            }
-        }
+        public bool IsEnabled { get; set; }
 
         /// <summary>
         /// Gets or sets the file path to assembly.

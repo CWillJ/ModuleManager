@@ -15,10 +15,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--  Load Save Buttons  -->
-        <local:ButtonsView Grid.Row="0" />
+        <!--  Load Save Buttons  <local:ButtonsView Grid.Row="0" /> -->
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="ButtonsRegion" />
 
-        <!--  Module View Area  -->
+        <!--  Module View Area
+            <local:AssemblyDataTreeView Grid.Column="0" />
+            <local:AssemblyDataView Grid.Column="1" />
+        -->
         <Grid
             Grid.Row="1"
             Grid.ColumnSpan="2"
@@ -29,8 +32,8 @@
                 <ColumnDefinition Width="2.25*" />
             </Grid.ColumnDefinitions>
 
-            <local:AssemblyDataTreeView Grid.Column="0" />
-            <local:AssemblyDataView Grid.Column="1" />
+            <ContentControl Grid.Column="0" prism:RegionManager.RegionName="AssemblyDataTreeRegion" />
+            <ContentControl Grid.Column="1" prism:RegionManager.RegionName="AssemblyDataRegion" />
         </Grid>
     </Grid>
 </UserControl>

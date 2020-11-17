@@ -7,6 +7,7 @@
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.ModuleObjects.Services;
+    using ModuleManager.UI;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Services;
     using ModuleManager.UI.Views;
@@ -106,6 +107,9 @@
         protected override IModuleCatalog CreateModuleCatalog()
         {
             ModuleCatalog moduleCatalog = new ModuleCatalog();
+
+            moduleCatalog.AddModule<UIModule>();
+
             return moduleCatalog;
         }
     }
