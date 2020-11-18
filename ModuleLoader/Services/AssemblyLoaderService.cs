@@ -10,6 +10,7 @@
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
+    using Prism.Modularity;
 
     /// <summary>
     /// Retrieves assemblies from dll files.
@@ -255,6 +256,7 @@
                 return null;
             }
 
+            // Check to see if it is a NextGen module
             ModuleCatalogService.AddModule(type);
 
             return new ModuleData(

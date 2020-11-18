@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using ModuleManager.ModuleObjects.Interfaces;
     using Prism.Modularity;
 
@@ -43,39 +42,11 @@
         }
 
         /// <summary>
-        /// Removes the module of the <see cref="ModuleInfo"/> passed in.
+        /// Does the actual work of loading the catalog.  The base implementation does nothing.
         /// </summary>
-        /// <param name="module">Module to remove's <see cref="ModuleInfo"/>.</param>
-        public void RemoveModule(ModuleInfo module)
+        protected override void InnerLoad()
         {
-            if (Modules.Contains(module))
-            {
-                // Cannot set the Modules property
-                ////Modules = Modules.Where(mod => mod != module);
-            }
-        }
-
-        /// <summary>
-        /// Removes the module of the <see cref="Type"/> passed in.
-        /// </summary>
-        /// <param name="type">Module to remove's <see cref="Type"/>.</param>
-        public void RemoveModule(Type type)
-        {
-            ModuleInfo module = new ModuleInfo
-            {
-                ModuleName = type.Name,
-                ModuleType = type.AssemblyQualifiedName,
-            };
-
-            if (Modules.Contains(module))
-            {
-                ////Modules = Modules.Where(mod => mod != module);
-            }
-        }
-
-        private bool ValidateModule()
-        {
-            return true;
+            return;
         }
     }
 }

@@ -11,7 +11,6 @@
     /// </summary>
     public class AssemblyData : BindableBase, IAssemblyData
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
         /// </summary>

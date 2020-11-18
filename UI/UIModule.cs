@@ -43,5 +43,4 @@
             containerRegistry.RegisterForNavigation<AssemblyDataView>();
         }
     }
-
 }

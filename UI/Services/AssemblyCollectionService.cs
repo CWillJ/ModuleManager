@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
 
@@ -10,6 +11,8 @@
     /// </summary>
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
+        private readonly IModuleCatalogService _moduleCatalogService;
+
         private ObservableCollection<AssemblyData> _assemblies;
         private object _selectedItem;
         private string _selectedItemName;
@@ -17,11 +20,14 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
-        public AssemblyCollectionService()
+        /// <param name="moduleCatalogService">The program's <see cref="IModuleCatalogService"/>.</param>
+        public AssemblyCollectionService(IModuleCatalogService moduleCatalogService)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";
+
+            _moduleCatalogService = moduleCatalogService;
         }
 
         /// <summary>
@@ -47,6 +53,7 @@
             {
                 SetProperty(ref _selectedItem, value);
                 SetSelectedItemName();
+                LoadModuleFromCatalog();
             }
         }
 
@@ -76,6 +83,17 @@
             else
             {
                 SelectedItemName = @"Description";
+            }
+        }
+
+        private void LoadModuleFromCatalog()
+        {
+            if (SelectedItem is AssemblyData assembly)
+            {
+                if (assembly.IsEnabled)
+                {
+                   //// _moduleCatalogService.TheModuleManagerCatalog.Initialize();
+                }
             }
         }
     }

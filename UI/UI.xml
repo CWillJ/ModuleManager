@@ -69,10 +69,11 @@
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/> implementations.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor">
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.AssemblyCollectionService"/> class.
             </summary>
+            <param name="moduleCatalogService">The program's <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
             <summary>

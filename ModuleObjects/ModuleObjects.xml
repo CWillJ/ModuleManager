@@ -272,17 +272,10 @@
             </summary>
             <param name="type"><see cref="T:System.Type"/> representing the ModuleInfo to add.</param>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.RemoveModule(Prism.Modularity.ModuleInfo)">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.InnerLoad">
             <summary>
-            Removes the module of the <see cref="T:Prism.Modularity.ModuleInfo"/> passed in.
+            Does the actual work of loading the catalog.  The base implementation does nothing.
             </summary>
-            <param name="module">Module to remove's <see cref="T:Prism.Modularity.ModuleInfo"/>.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.RemoveModule(System.Type)">
-            <summary>
-            Removes the module of the <see cref="T:System.Type"/> passed in.
-            </summary>
-            <param name="type">Module to remove's <see cref="T:System.Type"/>.</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMemberData">
             <summary>
