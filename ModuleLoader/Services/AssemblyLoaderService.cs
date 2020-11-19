@@ -10,7 +10,6 @@
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
-    using Prism.Modularity;
 
     /// <summary>
     /// Retrieves assemblies from dll files.
@@ -284,11 +283,10 @@
             foreach (var constructor in conInfo)
             {
                 constructorIndex = Array.IndexOf(conInfo, constructor);
+
                 name = type.Name;
                 description = DescriptionRetriever.GetConstructorDescription(constructor, constructorIndex);
-
-                parameters =
-                    DescriptionRetriever.GetParametersFromList(constructor, constructorIndex);
+                parameters = DescriptionRetriever.GetParametersFromList(constructor, constructorIndex);
 
                 constructors.Add(new ModuleConstructor(
                     constructor,
@@ -382,9 +380,7 @@
                 }
 
                 lastMethodName = name;
-
                 description = DescriptionRetriever.GetMethodDescription(method, methodIndex);
-
                 parameters = DescriptionRetriever.GetParametersFromList(method, methodIndex);
 
                 try
