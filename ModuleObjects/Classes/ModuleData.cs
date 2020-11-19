@@ -14,16 +14,8 @@
         /// Initializes a new instance of the <see cref="ModuleData"/> class.
         /// </summary>
         public ModuleData()
+            : this(null, string.Empty, string.Empty, new ObservableCollection<ModuleConstructor>(), new ObservableCollection<ModuleProperty>(), new ObservableCollection<ModuleMethod>())
         {
-            Name = string.Empty;
-            FullName = string.Empty;
-            Description = string.Empty;
-
-            Members = new ObservableCollection<ModuleMemberData>();
-            Constructors = new ObservableCollection<ModuleConstructor>();
-            Properties = new ObservableCollection<ModuleProperty>();
-            Methods = new ObservableCollection<ModuleMethod>();
-            Type = null;
         }
 
         /// <summary>
@@ -49,30 +41,7 @@
             FullName = type.FullName;
             Description = description;
 
-            Members = new ObservableCollection<ModuleMemberData>();
-            Constructors = new ObservableCollection<ModuleConstructor>();
-            Properties = properties;
-            Methods = methods;
-
-            foreach (var constructor in constructors)
-            {
-                if (!string.IsNullOrEmpty(constructor.Description) ||
-                    !constructor.Parameters[0].IsEmpty())
-                {
-                    Constructors.Add(constructor);
-                    Members.Add(constructor);
-                }
-            }
-
-            foreach (var property in Properties)
-            {
-                Members.Add(property);
-            }
-
-            foreach (var method in Methods)
-            {
-                Members.Add(method);
-            }
+            InitializeMembers(constructors, properties, methods);
         }
 
         /// <summary>
@@ -168,6 +137,86 @@
             }
 
             return s;
+        }
+
+        /// <summary>
+        /// This will add <see cref="ObservableCollection{ModuleConstructor}"/> to the Constructors and Members properties,
+        /// <see cref="ObservableCollection{ModuleProperty}"/> to the Properties and Members properties, and
+        /// <see cref="ObservableCollection{ModuleMethod}"/> to the Methods and Members properties.
+        /// </summary>
+        /// <param name="constructors">A <see cref="ObservableCollection{ModuleConstructor}"/>.</param>
+        /// <param name="properties">A <see cref="ObservableCollection{ModuleProperty}"/>.</param>
+        /// <param name="methods">A <see cref="ObservableCollection{ModuleMethod}"/>.</param>
+        private void InitializeMembers(ObservableCollection<ModuleConstructor> constructors, ObservableCollection<ModuleProperty> properties, ObservableCollection<ModuleMethod> methods)
+        {
+            if (Members == null)
+            {
+                Members = new ObservableCollection<ModuleMemberData>();
+            }
+
+            InitializeConstructors(constructors);
+            InitializeProperties(properties);
+            InitializeMethods(methods);
+        }
+
+        /// <summary>
+        /// Adds a <see cref="ObservableCollection{ModuleConstructor}"/> to the Constructors and Members properties.
+        /// </summary>
+        /// <param name="constructors">A <see cref="ObservableCollection{ModuleConstructor}"/>.</param>
+        private void InitializeConstructors(ObservableCollection<ModuleConstructor> constructors)
+        {
+            Constructors = new ObservableCollection<ModuleConstructor>();
+
+            if (constructors != null)
+            {
+                foreach (var constructor in constructors)
+                {
+                    if (!string.IsNullOrEmpty(constructor.Description) ||
+                        !constructor.Parameters[0].IsEmpty())
+                    {
+                        Constructors.Add(constructor);
+                        Members.Add(constructor);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds a <see cref="ObservableCollection{ModuleProperty}"/> to the Properties and Members properties.
+        /// </summary>
+        /// <param name="properties">A <see cref="ObservableCollection{ModuleProperty}"/>.</param>
+        private void InitializeProperties(ObservableCollection<ModuleProperty> properties)
+        {
+            Properties = new ObservableCollection<ModuleProperty>();
+
+            if (properties != null)
+            {
+                Properties = properties;
+
+                foreach (var property in Properties)
+                {
+                    Members.Add(property);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds a <see cref="ObservableCollection{ModuleMethod}"/> to the Methods and Members properties.
+        /// </summary>
+        /// <param name="methods">A <see cref="ObservableCollection{ModuleMethod}"/>.</param>
+        private void InitializeMethods(ObservableCollection<ModuleMethod> methods)
+        {
+            Methods = new ObservableCollection<ModuleMethod>();
+
+            if (methods != null)
+            {
+                Methods = methods;
+
+                foreach (var method in Methods)
+                {
+                    Members.Add(method);
+                }
+            }
         }
     }
 }

@@ -12,14 +12,8 @@
         /// Initializes a new instance of the <see cref="ModuleProperty"/> class.
         /// </summary>
         public ModuleProperty()
+            : this(null, string.Empty, string.Empty, string.Empty, false, false)
         {
-            PropertyInfo = null;
-            Name = string.Empty;
-            Description = string.Empty;
-            DataType = string.Empty;
-            CanRead = false;
-            CanWrite = false;
-            TypeName = GetType().Name;
         }
 
         /// <summary>

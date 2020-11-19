@@ -182,13 +182,13 @@
             <summary>
             Loads all enabled assemblies and unloads the disabled ones.
             </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
             Loads all assemblies in a collection.
             </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.</param>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
@@ -273,13 +273,13 @@
             <summary>
             Loads all enabled assemblies and unloads the disabled ones.
             </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
             Loads all assemblies in a collection.
             </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.</param>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>

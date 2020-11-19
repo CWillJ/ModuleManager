@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.ModuleLoader.Interfaces
 {
-    using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Retrieves assemblies from dll files.
@@ -52,13 +52,13 @@
         /// <summary>
         /// Loads all enabled assemblies and unloads the disabled ones.
         /// </summary>
-        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects passed by reference.</param>
+        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> passed by reference.</param>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
         /// Loads all assemblies in a collection.
         /// </summary>
-        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects.</param>
+        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> objects.</param>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>

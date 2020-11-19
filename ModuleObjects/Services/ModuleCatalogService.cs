@@ -20,7 +20,7 @@
         /// <param name="moduleManagerCatalog">The implementation of <see cref="IModuleManagerCatalog"/>.</param>
         public ModuleCatalogService(IModuleManagerCatalog moduleManagerCatalog)
         {
-            _moduleManagerCatalog = moduleManagerCatalog;
+            _moduleManagerCatalog = new ModuleManagerCatalog();
         }
 
         /// <summary>
@@ -39,6 +39,7 @@
         public void AddModule(Type type)
         {
             TheModuleManagerCatalog.AddModule(type);
+            return;
         }
 
         /// <summary>

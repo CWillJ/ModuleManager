@@ -12,11 +12,8 @@
         /// Initializes a new instance of the <see cref="MemberParameter"/> class.
         /// </summary>
         public MemberParameter()
+            : this(string.Empty, @"None", string.Empty)
         {
-            Type = null;
-            TypeName = string.Empty;
-            Name = @"None";
-            Description = string.Empty;
         }
 
         /// <summary>

@@ -52,7 +52,7 @@
             // Save the current module setup, checkboxes and all, to an xml file.
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
 
-            // Load/unload the current assembly/module selection base on the checkboxes.
+            // Invokes the ClassLibrary1.Class2.Method2 method.
             TestCommand = new Prism.Commands.DelegateCommand(TestMethod, CanExecute);
         }
 

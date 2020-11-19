@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.UI.Interfaces
 {
-    using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// An Assembly Collection.
@@ -9,7 +9,7 @@
     public interface IAssemblyCollectionService
     {
         /// <summary>
-        /// Gets or sets a collection of <see cref="AssemblyData"/> objects.
+        /// Gets or sets a <see cref="ObservableCollection{AssemblyData}"/> objects.
         /// </summary>
         public ObservableCollection<AssemblyData> Assemblies { get; set; }
 

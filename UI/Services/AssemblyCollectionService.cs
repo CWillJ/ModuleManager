@@ -1,6 +1,8 @@
 ﻿namespace ModuleManager.UI.Services
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI.Interfaces;
@@ -36,7 +38,7 @@
         public ObservableCollection<AssemblyData> Assemblies
         {
             get { return _assemblies; }
-            set { SetProperty(ref _assemblies, value); }
+            set { SetProperty(ref _assemblies, value, CollectionPropertyChanged); }
         }
 
         /// <summary>
@@ -92,8 +94,25 @@
             {
                 if (assembly.IsEnabled)
                 {
-                   //// _moduleCatalogService.TheModuleManagerCatalog.Initialize();
+                    //// _moduleCatalogService.TheModuleManagerCatalog.Initialize();
                 }
+            }
+        }
+
+        private void CollectionPropertyChanged()
+        {
+            foreach (AssemblyData item in Assemblies)
+            {
+                item.PropertyChanged += (s, e) => LoadUnload(e);
+            }
+        }
+
+        private void LoadUnload(PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == @"IsEnabled")
+            {
+                // This is where I will load/unload a module
+                Debug.WriteLine("someMethod  Hit");
             }
         }
     }

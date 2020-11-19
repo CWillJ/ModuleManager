@@ -15,7 +15,7 @@
     public class AssemblyDataTreeViewModel : BindableBase
     {
         private readonly IAssemblyLoaderService _assemblyLoaderService;
-        private IAssemblyCollectionService _assemblyCollectionService;
+        private readonly IAssemblyCollectionService _assemblyCollectionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyDataTreeViewModel"/> class.
@@ -40,13 +40,13 @@
         public IAssemblyCollectionService AssemblyCollectionService
         {
             get { return _assemblyCollectionService; }
-            set { SetProperty(ref _assemblyCollectionService, value); }
+            ////set { SetProperty(ref _assemblyCollectionService, value); }
         }
 
         /// <summary>
         /// LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
         /// </summary>
-        /// <returns>A collection of AssemblyData objects.</returns>
+        /// <returns>An <see cref="ObservableCollection{AssemblyData}"/>.</returns>
         private ObservableCollection<AssemblyData> LoadConfig()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));

@@ -53,11 +53,30 @@
             Gets or sets the actual Assembly of this AssemblyData.
             </summary>
         </member>
+        <member name="E:ModuleManager.ModuleObjects.Classes.AssemblyData.EnabledChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
             <summary>
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the assembly.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.RaiseEnabledChanged(System.String)">
+            <summary>
+            Raises this object's PropertyChanged event.
+            </summary>
+            <param name="propertyName">Name of the property used to notify listeners. This
+            value is optional and can be provided automatically when invoked from compilers
+            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.OnEnabledChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises this object's PropertyChanged event.
+            </summary>
+            <param name="args">The PropertyChangedEventArgs</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.AssemblyLoader">
             <summary>
@@ -249,6 +268,34 @@
             </summary>
             <returns>A desired format for the module name, description and all members contained in module.</returns>
         </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeMembers(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
+            <summary>
+            This will add <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Constructors and Members properties,
+            <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Properties and Members properties, and
+            <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Methods and Members properties.
+            </summary>
+            <param name="constructors">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+            <param name="properties">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+            <param name="methods">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeConstructors(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Constructors and Members properties.
+            </summary>
+            <param name="constructors">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeProperties(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Properties and Members properties.
+            </summary>
+            <param name="properties">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeMethods(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Methods and Members properties.
+            </summary>
+            <param name="methods">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog">
             <summary>
             The <see cref="T:Prism.Modularity.ModuleCatalog"/> holding the loaded modules.
@@ -406,6 +453,11 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the member description.</returns>
+        </member>
+        <member name="T:ModuleManager.ModuleObjects.Classes.TrulyObservableCollection`1">
+            <summary>
+            A collection that will handle when a collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects change.
+            </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData">
             <summary>

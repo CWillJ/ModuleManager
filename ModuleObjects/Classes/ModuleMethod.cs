@@ -14,14 +14,8 @@
         /// Initializes a new instance of the <see cref="ModuleMethod"/> class.
         /// </summary>
         public ModuleMethod()
+            : this(null, string.Empty, string.Empty, new ObservableCollection<MemberParameter>(), string.Empty, string.Empty)
         {
-            MethodInfo = null;
-            Name = string.Empty;
-            Description = string.Empty;
-            Parameters = new ObservableCollection<MemberParameter>();
-            ReturnType = @"Void";
-            ReturnDescription = string.Empty;
-            TypeName = GetType().Name;
         }
 
         /// <summary>

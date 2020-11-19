@@ -13,12 +13,8 @@
         /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.
         /// </summary>
         public ModuleConstructor()
+            : this(null, string.Empty, string.Empty, new ObservableCollection<MemberParameter>())
         {
-            ConstructorInfo = null;
-            Name = string.Empty;
-            Description = string.Empty;
-            Parameters = new ObservableCollection<MemberParameter>();
-            TypeName = GetType().Name;
         }
 
         /// <summary>
@@ -31,7 +27,16 @@
         public ModuleConstructor(ConstructorInfo constructorInfo, string className, string description, ObservableCollection<MemberParameter> parameters)
         {
             ConstructorInfo = constructorInfo;
-            Name = @"Constructor For " + className;
+
+            if (string.IsNullOrEmpty(className))
+            {
+                Name = className;
+            }
+            else
+            {
+                Name = @"Constructor For " + className;
+            }
+
             Description = description;
             Parameters = parameters;
             TypeName = GetType().Name;
