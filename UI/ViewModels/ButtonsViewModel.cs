@@ -19,22 +19,22 @@
     public class ButtonsViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IAssemblyCollectionService _assemblyCollectionService;
         private readonly IAssemblyLoaderService _assemblyLoaderService;
-        private IProgressBarService _progressBarService;
-        private IAssemblyCollectionService _assemblyCollectionService;
+        private readonly IProgressBarService _progressBarService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
-        /// <param name="regionManager">Region manager.</param>
-        /// <param name="assemblyLoaderService">The IModuleInfoRetriever.</param>
-        /// <param name="progressBarService">IProgressBarService.</param>
-        /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
+        /// <param name="regionManager">Injected <see cref="IRegionManager"/>.</param>
+        /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
+        /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
+        /// <param name="progressBarService">Injected <see cref="IProgressBarService"/>.</param>
         public ButtonsViewModel(
             IRegionManager regionManager,
+            IAssemblyCollectionService assemblyCollectionService,
             IAssemblyLoaderService assemblyLoaderService,
-            IProgressBarService progressBarService,
-            IAssemblyCollectionService assemblyCollectionService)
+            IProgressBarService progressBarService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
@@ -67,21 +67,11 @@
         public bool LoadingModules { get; set; }
 
         /// <summary>
-        /// Gets or sets the IProgressBarService.
-        /// </summary>
-        public IProgressBarService ProgressBarService
-        {
-            get { return _progressBarService; }
-            set { _progressBarService = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the IAssemblyCollectionService.
+        /// Gets the <see cref="IAssemblyCollectionService"/>.
         /// </summary>
         public IAssemblyCollectionService AssemblyCollectionService
         {
             get { return _assemblyCollectionService; }
-            set { _assemblyCollectionService = value; }
         }
 
         /// <summary>
@@ -131,9 +121,9 @@
 
             // Show progress bar
             AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
-            ProgressBarService.CurrentProgress = 0.0;
-            ProgressBarService.AssemblyName = string.Empty;
-            ProgressBarService.Text = string.Empty;
+            _progressBarService.CurrentProgress = 0.0;
+            _progressBarService.AssemblyName = string.Empty;
+            _progressBarService.Text = string.Empty;
 
             NavigateCommand.Execute("ProgressBarView");
 
@@ -154,8 +144,8 @@
 
             NavigateCommand.Execute("ModuleManagerView");
 
-            ProgressBarService.AssemblyName = string.Empty;
-            ProgressBarService.Text = string.Empty;
+            _progressBarService.AssemblyName = string.Empty;
+            _progressBarService.Text = string.Empty;
         }
 
         /// <summary>
@@ -165,9 +155,9 @@
         {
             while (LoadingModules)
             {
-                ProgressBarService.AssemblyName = _assemblyLoaderService.CurrentAssemblyName;
-                ProgressBarService.CurrentProgress = _assemblyLoaderService.PercentOfAssemblyLoaded;
-                ProgressBarService.Text = @"Loading Module: " + _assemblyLoaderService.CurrentTypeName;
+                _progressBarService.AssemblyName = _assemblyLoaderService.CurrentAssemblyName;
+                _progressBarService.CurrentProgress = _assemblyLoaderService.PercentOfAssemblyLoaded;
+                _progressBarService.Text = @"Loading Module: " + _assemblyLoaderService.CurrentTypeName;
             }
         }
 

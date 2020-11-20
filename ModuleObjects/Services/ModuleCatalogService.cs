@@ -7,9 +7,7 @@
     using ModuleManager.ModuleObjects.Interfaces;
     using Prism.Modularity;
 
-    /// <summary>
-    /// Service providing concrete <see cref="IModuleCatalogService"/> implementations.
-    /// </summary>
+    /// <inheritdoc cref="IModuleCatalogService"/>
     public class ModuleCatalogService : IModuleCatalogService
     {
         private IModuleManagerCatalog _moduleManagerCatalog;
@@ -23,38 +21,27 @@
             _moduleManagerCatalog = new ModuleManagerCatalog();
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="IModuleManagerCatalog"/>.
-        /// </summary>
+        /// <inheritdoc cref="IModuleCatalogService"/>
         public IModuleManagerCatalog TheModuleManagerCatalog
         {
             get { return _moduleManagerCatalog; }
             set { _moduleManagerCatalog = value; }
         }
 
-        /// <summary>
-        /// Adds a module to the catalog from a <see cref="Type"/>.
-        /// </summary>
-        /// <param name="type">Module Type.</param>
+        /// <inheritdoc cref="IModuleCatalogService"/>
         public void AddModule(Type type)
         {
             TheModuleManagerCatalog.AddModule(type);
             return;
         }
 
-        /// <summary>
-        /// Adds a module to the catalog from a <see cref="ModuleInfo"/>.
-        /// </summary>
-        /// <param name="module">Module ModuleInfo.</param>
+        /// <inheritdoc cref="IModuleCatalogService"/>
         public void AddModule(ModuleInfo module)
         {
             TheModuleManagerCatalog.AddModule(module);
         }
 
-        /// <summary>
-        /// Removes a module from the catalog from a <see cref="Type"/>.
-        /// </summary>
-        /// <param name="type">Module Type.</param>
+        /// <inheritdoc cref="IModuleCatalogService"/>
         public void RemoveModule(Type type)
         {
             ModuleInfo module = new ModuleInfo
@@ -71,10 +58,7 @@
             }
         }
 
-        /// <summary>
-        /// Removes a module from the catalog from a <see cref="ModuleInfo"/>.
-        /// </summary>
-        /// <param name="module">Module ModuleInfo.</param>
+        /// <inheritdoc cref="IModuleCatalogService"/>
         public void RemoveModule(ModuleInfo module)
         {
             if (TheModuleManagerCatalog.Modules.Contains(module))

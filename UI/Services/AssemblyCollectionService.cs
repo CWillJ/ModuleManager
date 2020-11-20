@@ -2,7 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Diagnostics;
+    using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI.Interfaces;
@@ -14,6 +14,7 @@
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
         private readonly IModuleCatalogService _moduleCatalogService;
+        private readonly IAssemblyLoaderService _assemblyLoaderService;
 
         private ObservableCollection<AssemblyData> _assemblies;
         private object _selectedItem;
@@ -23,27 +24,25 @@
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
         /// <param name="moduleCatalogService">The program's <see cref="IModuleCatalogService"/>.</param>
-        public AssemblyCollectionService(IModuleCatalogService moduleCatalogService)
+        /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
+        public AssemblyCollectionService(IModuleCatalogService moduleCatalogService, IAssemblyLoaderService asssemblyLoaderService)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";
 
             _moduleCatalogService = moduleCatalogService;
+            _assemblyLoaderService = asssemblyLoaderService;
         }
 
-        /// <summary>
-        /// Gets or sets a collection of <see cref="AssemblyData"/> objects.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
         public ObservableCollection<AssemblyData> Assemblies
         {
             get { return _assemblies; }
             set { SetProperty(ref _assemblies, value, CollectionPropertyChanged); }
         }
 
-        /// <summary>
-        /// Gets or sets the selected <see cref="object"/> from the tree.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
         public object SelectedItem
         {
             get
@@ -103,16 +102,19 @@
         {
             foreach (AssemblyData item in Assemblies)
             {
-                item.PropertyChanged += (s, e) => LoadUnload(e);
+                item.PropertyChanged += (s, e) => LoadUnload(s, e);
             }
         }
 
-        private void LoadUnload(PropertyChangedEventArgs e)
+        private void LoadUnload(object s, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == @"IsEnabled")
             {
-                // This is where I will load/unload a module
-                Debug.WriteLine("someMethod  Hit");
+                AssemblyData assembly = (AssemblyData)s;
+                int i = Assemblies.IndexOf(assembly);
+
+                _assemblyLoaderService.LoadUnload(ref assembly);
+                Assemblies[i] = assembly;
             }
         }
     }

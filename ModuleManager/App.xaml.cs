@@ -103,7 +103,7 @@
         /// <summary>
         /// Creates the module catalog.
         /// </summary>
-        /// <returns>New module catalog.</returns>
+        /// <returns>New <see cref="IModuleCatalog"/>.</returns>
         protected override IModuleCatalog CreateModuleCatalog()
         {
             ModuleCatalog moduleCatalog = new ModuleCatalog();

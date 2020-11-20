@@ -7,21 +7,20 @@
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
-    using Prism.Mvvm;
 
     /// <summary>
     /// View model for module area.
     /// </summary>
-    public class AssemblyDataTreeViewModel : BindableBase
+    public class AssemblyDataTreeViewModel
     {
-        private readonly IAssemblyLoaderService _assemblyLoaderService;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
+        private readonly IAssemblyLoaderService _assemblyLoaderService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyDataTreeViewModel"/> class.
         /// </summary>
-        /// <param name="assemblyLoaderService">ModuleInfoRetriever.</param>
-        /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
+        /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
+        /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
         public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IAssemblyCollectionService assemblyCollectionService)
         {
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
@@ -30,17 +29,16 @@
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
-                AssemblyCollectionService.Assemblies = LoadConfig();
+                _assemblyCollectionService.Assemblies = LoadConfig();
             }
         }
 
         /// <summary>
-        /// Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
+        /// Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
         /// </summary>
         public IAssemblyCollectionService AssemblyCollectionService
         {
             get { return _assemblyCollectionService; }
-            ////set { SetProperty(ref _assemblyCollectionService, value); }
         }
 
         /// <summary>
@@ -87,19 +85,13 @@
                 }
             }
 
+            // Load and get data.
             _assemblyLoaderService.LoadAll(ref assemblies);
+
+            // Unload all disabled assemblies.
             _assemblyLoaderService.LoadUnload(ref assemblies);
 
             return assemblies;
-        }
-
-        /// <summary>
-        /// Can always execute.
-        /// </summary>
-        /// <returns>True.</returns>
-        private bool CanExecute()
-        {
-            return true;
         }
     }
 }

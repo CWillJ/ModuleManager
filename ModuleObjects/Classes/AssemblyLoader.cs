@@ -31,8 +31,8 @@
         /// <summary>
         /// Overrides the Load method.
         /// </summary>
-        /// <param name="name">The assembly name.</param>
-        /// <returns>A loaded assembly.</returns>
+        /// <param name="name">The <see cref="AssemblyName"/> of the <see cref="Assembly"/> to be loaded.</param>
+        /// <returns>A loaded <see cref="Assembly"/>.</returns>
         protected override Assembly Load(AssemblyName name)
         {
             string assemblyPath = _resolver.ResolveAssemblyToPath(name);

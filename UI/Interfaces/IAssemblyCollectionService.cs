@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.UI.Interfaces
 {
-    using ModuleManager.ModuleObjects.Classes;
     using System.Collections.ObjectModel;
+    using ModuleManager.ModuleObjects.Classes;
 
     /// <summary>
     /// An Assembly Collection.

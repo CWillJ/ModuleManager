@@ -14,7 +14,7 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets all of the module members.
+        /// Gets or sets an <see cref="ObservableCollection{ModuleMemberData}"/> of the module members.
         /// </summary>
         public ObservableCollection<ModuleMemberData> Members { get; set; }
     }

@@ -19,7 +19,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberParameter"/> class.
         /// </summary>
-        /// <param name="type">MemberParameter type.</param>
+        /// <param name="type">The <see cref="Type"/> that holds this.</param>
         /// <param name="name">MemberParameter name.</param>
         /// <param name="description">MemberParameter description.</param>
         public MemberParameter(Type type, string name, string description)
@@ -61,13 +61,13 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the actuall Type of the MemberParameter.
+        /// Gets or sets the actuall <see cref="Type"/> of the <see cref="MemberParameter"/>.
         /// </summary>
         [XmlIgnore]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Check to see if the MemberParameter is empty.
+        /// Check to see if the <see cref="MemberParameter"/> is empty.
         /// </summary>
         /// <returns>Returns true if the name is not an empty string or null.</returns>
         public bool IsEmpty()

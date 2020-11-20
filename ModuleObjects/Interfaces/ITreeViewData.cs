@@ -6,7 +6,7 @@
     public interface ITreeViewData
     {
         /// <summary>
-        /// Gets or sets the name of the assembly.
+        /// Gets or sets the name.
         /// </summary>
         public string Name { get; set; }
     }

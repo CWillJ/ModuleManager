@@ -18,7 +18,7 @@
             Margin="25,10,5,5"
             HorizontalAlignment="Left"
             Background="IndianRed"
-            Command="{Binding LoadModulesCommand}"
+            Command="{Binding Path=LoadModulesCommand}"
             Content="Load Modules"
             FontSize="10"
             FontWeight="Bold" />
@@ -29,7 +29,7 @@
             Margin="25,10,5,5"
             HorizontalAlignment="Left"
             Background="IndianRed"
-            Command="{Binding SaveConfigCommand}"
+            Command="{Binding Path=SaveConfigCommand}"
             Content="Save Configuration"
             FontSize="10"
             FontWeight="Bold" />
@@ -41,7 +41,7 @@
             Margin="25,10,5,5"
             HorizontalAlignment="Left"
             Background="IndianRed"
-            Command="{Binding TestCommand}"
+            Command="{Binding Path=TestCommand}"
             Content="Test"
             FontSize="10"
             FontWeight="Bold" />

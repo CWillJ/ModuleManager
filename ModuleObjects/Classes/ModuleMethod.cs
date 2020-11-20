@@ -21,7 +21,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleMethod"/> class.
         /// </summary>
-        /// <param name="methodInfo">MethodInfo for this ModuleMethod.</param>
+        /// <param name="methodInfo"><see cref="MethodInfo"/>.</param>
         /// <param name="name">Method name.</param>
         /// <param name="description">Method description.</param>
         /// <param name="parameters">Method parameters.</param>

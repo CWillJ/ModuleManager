@@ -30,17 +30,14 @@
         {
         }
 
-        /// <summary>
-        /// Adds a module to the module catalog based on type.
-        /// </summary>
-        /// <param name="type"><see cref="Type"/> representing the ModuleInfo to add.</param>
+        /// <inheritdoc cref="IModuleManagerCatalog"/>
         public void AddModule(Type type)
         {
             AddModule(CreateModuleInfo(type));
         }
 
         /// <summary>
-        /// Does the actual work of loading the catalog.  The base implementation does nothing.
+        /// Does the actual work of loading the catalog. The base implementation does nothing.
         /// </summary>
         protected override void InnerLoad()
         {

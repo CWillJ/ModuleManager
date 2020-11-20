@@ -6,9 +6,7 @@
     using ModuleManager.ModuleObjects.Interfaces;
     using Prism.Mvvm;
 
-    /// <summary>
-    /// AssemblyData will load and unload an assembly and stores data about an assembly.
-    /// </summary>
+    /// <inheritdoc cref="IAssemblyData"/>
     public class AssemblyData : BindableBase, IAssemblyData
     {
         private bool _isEnabled;
@@ -26,7 +24,7 @@
         /// </summary>
         /// <param name="name">Name of the assembly.</param>
         /// <param name="filePath">File path to the assembly.</param>
-        /// <param name="modules">Collection of modules contained in the assembly.</param>
+        /// <param name="modules">An <see cref="ObservableCollection{ModuleData}"/> of modules.</param>
         public AssemblyData(string name, string filePath, ObservableCollection<ModuleData> modules)
         {
             Name = name;
@@ -37,40 +35,27 @@
             Assembly = null;
         }
 
-        /// <summary>
-        /// Gets or sets the name of the assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the assembly is enabled or disabled.
-        /// Will load or unload this assembly if the IModuleInfoRetriever is not null.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         public bool IsEnabled
         {
             get { return _isEnabled; }
             set { SetProperty(ref _isEnabled, value); }
         }
 
-        /// <summary>
-        /// Gets or sets the file path to assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         public string FilePath { get; set; }
 
-        /// <summary>
-        /// Gets or sets the collection of modules contained in the assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         public ObservableCollection<ModuleData> Modules { get; set; }
 
-        /// <summary>
-        /// Gets or sets the AssemblyLoader to load/unload this assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
         public AssemblyLoader Loader { get; set; }
 
-        /// <summary>
-        /// Gets or sets the actual Assembly of this AssemblyData.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
 

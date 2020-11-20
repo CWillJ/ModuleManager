@@ -11,9 +11,7 @@
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
 
-    /// <summary>
-    /// Retrieves assemblies from dll files.
-    /// </summary>
+    /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
         private IModuleCatalogService _moduleCatalogService;
@@ -42,9 +40,7 @@
             get { return _moduleCatalogService; }
         }
 
-        /// <summary>
-        /// Gets or sets DllDirectory is the directory path of the .dll files.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string DllDirectory { get; set; }
 
         /// <summary>
@@ -52,19 +48,13 @@
         /// </summary>
         public string DllFilePath { get; set; }
 
-        /// <summary>
-        /// Gets or sets CurrentAssemblyName is the name of the type being loaded.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string CurrentAssemblyName { get; set; }
 
-        /// <summary>
-        /// Gets or sets CurrentTypeName is the name of the type being loaded.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string CurrentTypeName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the current percentage of load compleation of the current assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public double PercentOfAssemblyLoaded { get; set; }
 
         /// <summary>
@@ -72,11 +62,7 @@
         /// </summary>
         public XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
-        /// <summary>
-        /// Initialized ModuleInfoRetriever's properties.
-        /// </summary>
-        /// <param name="moduleDirectory">Directory containing dll files.</param>
-        /// <param name="moduleFilePath">Name of the specific dll file.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void Initialize(string moduleDirectory, string moduleFilePath)
         {
             DllDirectory = moduleDirectory;
@@ -84,12 +70,7 @@
             DescriptionRetriever = new XmlDescriptionRetriever(moduleFilePath);
         }
 
-        /// <summary>
-        /// Creates an ObservableCollection of AssemblyData to organize
-        /// the information from the dll file and its related xml file.
-        /// </summary>
-        /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-        /// <returns>Returns an collection of AssemblyData objects.</returns>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
@@ -118,10 +99,7 @@
             return assemblies;
         }
 
-        /// <summary>
-        /// Loads all enabled assemblies and unloads the disabled ones.
-        /// </summary>
-        /// <param name="assembly">Assembly to load/unload passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadUnload(ref AssemblyData assembly)
         {
             if (assembly.IsEnabled)
@@ -134,10 +112,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads all enabled assemblies and unloads the disabled ones.
-        /// </summary>
-        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> objects passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assembly;
@@ -159,10 +134,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads all assemblies in a collection.
-        /// </summary>
-        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> objects.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assembly;
@@ -175,10 +147,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads an assembly.
-        /// </summary>
-        /// <param name="assembly">Assembly to load passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void Load(ref AssemblyData assembly)
         {
             if (!string.IsNullOrEmpty(assembly.FilePath))
@@ -227,10 +196,7 @@
             }
         }
 
-        /// <summary>
-        /// Unloads an assembly.
-        /// </summary>
-        /// <param name="assembly">Assembly to unload passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void Unload(ref AssemblyData assembly)
         {
             if (assembly.Loader == null)

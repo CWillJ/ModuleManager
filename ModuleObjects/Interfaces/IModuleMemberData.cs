@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
     /// <summary>
-    /// Module object interface.
+    /// Module member object interface.
     /// </summary>
     public interface IModuleMemberData : ITreeViewData
     {

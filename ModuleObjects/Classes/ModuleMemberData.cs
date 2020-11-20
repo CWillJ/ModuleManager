@@ -7,19 +7,13 @@
     /// </summary>
     public class ModuleMemberData : IModuleMemberData
     {
-        /// <summary>
-        /// Gets or sets the name of the module.
-        /// </summary>
+        /// <inheritdoc cref="IModuleMemberData"/>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the description of the module.
-        /// </summary>
+        /// <inheritdoc cref="IModuleMemberData"/>
         public string Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name of the Type.
-        /// </summary>
+        /// <inheritdoc cref="IModuleMemberData"/>
         public string TypeName { get; set; }
     }
 }

@@ -15,7 +15,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="UIModule"/> class.
         /// </summary>
-        /// <param name="regionManager">Region manager.</param>
+        /// <param name="regionManager">Injected <see cref="IRegionManager"/>.</param>
         public UIModule(IRegionManager regionManager)
         {
             _regionManager = regionManager;

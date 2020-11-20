@@ -21,18 +21,18 @@
         public string FilePath { get; set; }
 
         /// <summary>
-        /// Gets or sets a collection of modules contained in the assembly.
+        /// Gets or sets an <see cref="ObservableCollection{ModuleData}"/> of modules contained in the assembly.
         /// </summary>
         public ObservableCollection<ModuleData> Modules { get; set; }
 
         /// <summary>
-        /// Gets or sets the AssemblyLoader to load/unload this assembly.
+        /// Gets or sets the <see cref="AssemblyLoader"/> to load/unload this assembly.
         /// </summary>
         [XmlIgnore]
         public AssemblyLoader Loader { get; set; }
 
         /// <summary>
-        /// Gets or sets the actual Assembly of this AssemblyData.
+        /// Gets or sets the <see cref="System.Reflection.Assembly"/> of this AssemblyData.
         /// </summary>
         [XmlIgnore]
         public Assembly Assembly { get; set; }

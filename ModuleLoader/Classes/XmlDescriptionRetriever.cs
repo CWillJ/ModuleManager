@@ -40,7 +40,7 @@
         /// GetModuleDescription returns a clean string from the inner xml
         /// of the class description of the Type.
         /// </summary>
-        /// <param name="type">Type to get the string from.</param>
+        /// <param name="type"><see cref="Type"/> to get the string desctiption from.</param>
         /// <returns>String representation of the class description.</returns>
         public string GetModuleDescription(Type type)
         {
@@ -55,10 +55,9 @@
         }
 
         /// <summary>
-        /// GetMethodDescription returns a string from the inner xml of the method
-        /// description of the member.
+        /// Returns a string from the inner xml of the method description.
         /// </summary>
-        /// <param name="method">MethodInfo to get the string from.</param>
+        /// <param name="method"><see cref="MethodInfo"/> to get the string from.</param>
         /// <param name="index">Index used for methods/constructors with same name.</param>
         /// <returns>String representation of the method description.</returns>
         public string GetMethodDescription(MethodInfo method, int index = 0)
@@ -74,10 +73,9 @@
         }
 
         /// <summary>
-        /// GetConstructorDescription returns a string from the inner xml of the
-        /// constructor description of the member.
+        /// Returns a string from the inner xml of the constructor description.
         /// </summary>
-        /// <param name="constructor">ConstructorInfo to get the string from.</param>
+        /// <param name="constructor"><see cref="ConstructorInfo"/> to get the string from.</param>
         /// <param name="index">Index used for methods/constructors with same name.</param>
         /// <returns>String representation of the method description.</returns>
         public string GetConstructorDescription(ConstructorInfo constructor, int index = 0)
@@ -93,10 +91,9 @@
         }
 
         /// <summary>
-        /// GetProperyDescription will return a string from the inner xml of
-        /// the property desctiption.
+        /// Returns a string from the inner xml of the property desctiption.
         /// </summary>
-        /// <param name="property">PropertyInfo to get the description from.</param>
+        /// <param name="property"><see cref="PropertyInfo"/> to get the description from.</param>
         /// <returns>String representation of the property description.</returns>
         public string GetPropertyDescription(PropertyInfo property)
         {
@@ -111,10 +108,9 @@
         }
 
         /// <summary>
-        /// GetMemberParameterDescription returns a string from the inner xml of the
-        /// parameter description of the member.
+        /// Returns a string from the inner xml of the parameter description.
         /// </summary>
-        /// <param name="method">MemberInfo to get the string from.</param>
+        /// <param name="method"><see cref="MemberInfo"/> to get the string from.</param>
         /// <param name="parameterIndex">Integer index of parameter.</param>
         /// <param name="memberIndex">Integer index of member.</param>
         /// <returns>String representation of the parameter description.</returns>
@@ -131,12 +127,11 @@
         }
 
         /// <summary>
-        /// GetParametersFromList will return an ObservableCollection of MemberParameter
-        /// type from a list of ParameterInfo type.
+        /// Returns an <see cref="ObservableCollection{MemberParameter}"/> from a list of <see cref="ParameterInfo"/>.
         /// </summary>
-        /// <param name="method">The method to get the parameters from.</param>
+        /// <param name="method">The <see cref="MethodBase"/> to get the parameters from.</param>
         /// <param name="memberIndex">Integer index of member.</param>
-        /// <returns>An ObservableCollection of MemberParameter type.</returns>
+        /// <returns>An <see cref="ObservableCollection{MemberParameter}"/>.</returns>
         public ObservableCollection<MemberParameter> GetParametersFromList(MethodBase method, int memberIndex = 0)
         {
             ObservableCollection<MemberParameter> parameters = new ObservableCollection<MemberParameter>();
@@ -187,11 +182,10 @@
         }
 
         /// <summary>
-        /// GetMemberReturnDescription returns a string from the inner xml of the
-        /// return description of the member.
+        /// Returns a string desctiption of the return value of a <see cref="MethodBase"/>.
         /// </summary>
-        /// <param name="method">MethodBase to get the string from.</param>
-        /// <returns>String representation of the return description.</returns>
+        /// <param name="method"><see cref="MethodBase"/> to get the string desctiption of the return value from.</param>
+        /// <returns>String desctiption of the return value.</returns>
         public string GetMemberReturnDescription(MethodBase method)
         {
             XmlNode xmlNode = GetMemberXmlNode(method);
@@ -205,11 +199,11 @@
         }
 
         /// <summary>
-        /// GetParametersFromXml will return an ObservableCollection of MemberParameters.
+        /// Returns an <see cref="ObservableCollection{MemberParameter}"/>.
         /// </summary>
-        /// <param name="method">The MethodBase to get parameters from.</param>
+        /// <param name="method">The <see cref="MethodBase"/> to get parameters from.</param>
         /// <param name="memberIndex">Member index.</param>
-        /// <returns>An ObservableCollection of MemberParameters.</returns>
+        /// <returns>An <see cref="ObservableCollection{MemberParameter}"/>.</returns>
         public ObservableCollection<MemberParameter> GetParametersFromXml(
             MethodBase method,
             int memberIndex = 0)
@@ -261,11 +255,11 @@
         }
 
         /// <summary>
-        /// GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
+        /// Returns an <see cref="XmlNode"/> of the specified <see cref="MemberInfo"/>.
         /// </summary>
-        /// <param name="method">The MethodBase to get the XmlNode from.</param>
+        /// <param name="method">The <see cref="MethodBase"/> to get the <see cref="XmlNode"/> from.</param>
         /// <param name="nodeIndex">The specified node index to handle members with the same name.</param>
-        /// <returns>XmlNode.</returns>
+        /// <returns><see cref="XmlNode"/>.</returns>
         public XmlNode GetMemberXmlNode(MethodBase method, int nodeIndex = 0)
         {
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
@@ -303,10 +297,10 @@
         }
 
         /// <summary>
-        /// GetModuleXmlNode returns an XmlNode of the specified Type.
+        /// Returns an <see cref="XmlNode"/> of the specified <see cref="Type"/>.
         /// </summary>
-        /// <param name="type">The Type to get the XmlNode from.</param>
-        /// <returns>XmlNode.</returns>
+        /// <param name="type">The <see cref="Type"/> to get the <see cref="XmlNode"/> from.</param>
+        /// <returns><see cref="XmlNode"/> that holds info about the passed in <see cref="Type"/>.</returns>
         public XmlNode GetModuleXmlNode(Type type)
         {
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
@@ -329,10 +323,10 @@
         }
 
         /// <summary>
-        /// GetPropertyXmlNode returns an XmlNode of the specified property.
+        /// Returns an <see cref="XmlNode"/> of the specified <see cref="PropertyInfo"/>.
         /// </summary>
-        /// <param name="property">The property to get the XmlNode from.</param>
-        /// <returns>XmlNode.</returns>
+        /// <param name="property">The <see cref="PropertyInfo"/> to get the <see cref="XmlNode"/> from.</param>
+        /// <returns><see cref="XmlNode"/> that holds info about the passed in <see cref="PropertyInfo"/>.</returns>
         public XmlNode GetPropertyXmlNode(PropertyInfo property)
         {
             string xmlPath = DllFilePath.Substring(0, DllFilePath.LastIndexOf(".")) + @".XML";
@@ -360,12 +354,12 @@
         }
 
         /// <summary>
-        /// GetXmlNodeString will take an XmlNode, string xml tag, and an index and return the inner xml.
+        /// Takes an <see cref="XmlNode"/>, string xml tag, and an index and return the inner xml.
         /// </summary>
-        /// <param name="xmlNode">The member XmlNode.</param>
+        /// <param name="xmlNode">The member <see cref="XmlNode"/>.</param>
         /// <param name="xmlTag">This is the string of the xml tag.</param>
         /// <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
-        /// <returns>InnerXml of the XmlNode.</returns>
+        /// <returns>InnerXml of the <see cref="XmlNode"/>.</returns>
         public string GetXmlNodeString(XmlNode xmlNode, string xmlTag, int index = 0)
         {
             XmlNodeList xmlNodeList = xmlNode.SelectNodes(xmlTag);
@@ -376,8 +370,8 @@
         /// <summary>
         /// Returns the formatted text of the inner xml.
         /// </summary>
-        /// <param name="xmlNode">XmlNode to get text from.</param>
-        /// <returns>Formatted string of the XmlNode.InnerXml.</returns>
+        /// <param name="xmlNode">The <see cref="XmlNode"/> to get text from.</param>
+        /// <returns>Formatted string of the <see cref="XmlNode"/> InnerXml.</returns>
         public string GetXmlNodeText(XmlNode xmlNode)
         {
             string s = null;

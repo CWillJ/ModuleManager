@@ -13,21 +13,21 @@
             <summary>
             Convery string name of a member type to an icon.
             </summary>
-            <param name="value">Object passed in.</param>
-            <param name="targetType">Target type.</param>
-            <param name="parameter">Parameter object.</param>
-            <param name="culture">Culture.</param>
-            <returns>String path to an image icon.</returns>
+            <param name="value"><see cref="T:System.Object"/> passed in.</param>
+            <param name="targetType">Target <see cref="T:System.Type"/>.</param>
+            <param name="parameter">Parameter <see cref="T:System.Object"/>.</param>
+            <param name="culture"><see cref="T:System.Globalization.CultureInfo"/>.</param>
+            <returns><see cref="T:System.String"/> path to an image icon.</returns>
         </member>
         <member name="M:ModuleManager.UI.Converters.TypeNameToIconConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
             Not implemented.
             </summary>
-            <param name="value">Object passed in.</param>
-            <param name="targetType">Target type.</param>
-            <param name="parameter">Parameter object.</param>
-            <param name="culture">Culture.</param>
-            <returns>Nothing.</returns>
+            <param name="value"><see cref="T:System.Object"/> passed in.</param>
+            <param name="targetType">Target <see cref="T:System.Type"/>.</param>
+            <param name="parameter">Parameter <see cref="T:System.Object"/>.</param>
+            <param name="culture"><see cref="T:System.Globalization.CultureInfo"/>.</param>
+            <returns>Nothing, this is unused.</returns>
         </member>
         <member name="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService">
             <summary>
@@ -51,17 +51,17 @@
         </member>
         <member name="P:ModuleManager.UI.Interfaces.IProgressBarService.AssemblyName">
             <summary>
-            Gets or sets the name of the assembly currently being loaded.
+            Gets or sets a <see cref="T:System.String"/> of the name of the assembly currently being loaded.
             </summary>
         </member>
         <member name="P:ModuleManager.UI.Interfaces.IProgressBarService.CurrentProgress">
             <summary>
-            Gets or sets the current progress of a progress bar.
+            Gets or sets a <see cref="T:System.Double"/> for current progress of a progress bar.
             </summary>
         </member>
         <member name="P:ModuleManager.UI.Interfaces.IProgressBarService.Text">
             <summary>
-            Gets or sets the text of a progress bar.
+            Gets or sets a <see cref="T:System.String"/> of the text of a progress bar.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.Services.AssemblyCollectionService">
@@ -69,21 +69,18 @@
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/> implementations.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService)">
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService,ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.AssemblyCollectionService"/> class.
             </summary>
             <param name="moduleCatalogService">The program's <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>.</param>
+            <param name="asssemblyLoaderService">The <see cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
-            <summary>
-            Gets or sets a collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.SelectedItem">
-            <summary>
-            Gets or sets the selected <see cref="T:System.Object"/> from the tree.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.SelectedItemName">
             <summary>
@@ -101,32 +98,26 @@
             </summary>
         </member>
         <member name="P:ModuleManager.UI.Services.ProgressBarService.AssemblyName">
-            <summary>
-            Gets or sets the name of the assembly currently being loaded.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.UI.Services.ProgressBarService.Text">
-            <summary>
-            Gets or sets the text of the progress bar.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.UI.Interfaces.IProgressBarService"/>
         </member>
         <member name="P:ModuleManager.UI.Services.ProgressBarService.CurrentProgress">
-            <summary>
-            Gets or sets the current progress of the progress bar.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.UI.Interfaces.IProgressBarService"/>
         </member>
-        <member name="T:ModuleManager.UI.TemplateSelectors.TemplateSelector">
+        <member name="P:ModuleManager.UI.Services.ProgressBarService.Text">
+            <inheritdoc cref="T:ModuleManager.UI.Interfaces.IProgressBarService"/>
+        </member>
+        <member name="T:ModuleManager.UI.TemplateSelectors.DescriptionTemplateSelector">
             <summary>
             Used to selected a DataTemplate in the description.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.TemplateSelectors.TemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+        <member name="M:ModuleManager.UI.TemplateSelectors.DescriptionTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
             <summary>
             Used to select the DataTemplate for the description.
             </summary>
-            <param name="item">Object.</param>
-            <param name="container">Container.</param>
-            <returns>A DataTemplate depending on the object passed in.</returns>
+            <param name="item">A <see cref="T:System.Object"/> sent in.</param>
+            <param name="container">The <see cref="T:System.Windows.DependencyObject"/>.</param>
+            <returns>A <see cref="T:System.Windows.DataTemplate"/> depending on the object passed in.</returns>
         </member>
         <member name="T:ModuleManager.UI.TemplateSelectors.TreeViewItemTemplateSelector">
             <summary>
@@ -178,7 +169,7 @@
         </member>
         <member name="P:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.AssemblyCollectionService">
             <summary>
-            Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
+            Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.LoadConfig">
@@ -186,12 +177,6 @@
             LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
             </summary>
             <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
-        </member>
-        <member name="M:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.CanExecute">
-            <summary>
-            Can always execute.
-            </summary>
-            <returns>True.</returns>
         </member>
         <member name="T:ModuleManager.UI.ViewModels.AssemblyDataViewModel">
             <summary>
@@ -206,7 +191,7 @@
         </member>
         <member name="P:ModuleManager.UI.ViewModels.AssemblyDataViewModel.AssemblyCollectionService">
             <summary>
-            Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
+            Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.ViewModels.ButtonsViewModel">
@@ -214,14 +199,14 @@
             View model for the header buttons.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IProgressBarService,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.UI.Interfaces.IAssemblyCollectionService,ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IProgressBarService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
             <param name="regionManager">Region manager.</param>
+            <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
             <param name="assemblyLoaderService">The IModuleInfoRetriever.</param>
             <param name="progressBarService">IProgressBarService.</param>
-            <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
             <summary>
@@ -233,14 +218,9 @@
             Gets or sets a value indicating whether the application is currently loading modules.
             </summary>
         </member>
-        <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.ProgressBarService">
-            <summary>
-            Gets or sets the IProgressBarService.
-            </summary>
-        </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.AssemblyCollectionService">
             <summary>
-            Gets or sets the IAssemblyCollectionService.
+            Gets the <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>.
             </summary>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.NavigateCommand">
@@ -415,36 +395,6 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>
