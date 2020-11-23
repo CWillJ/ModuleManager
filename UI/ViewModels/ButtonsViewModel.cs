@@ -19,7 +19,7 @@
     public class ButtonsViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IAssemblyCollectionService _assemblyCollectionService;
+        private readonly IModuleManagerCollectionService _moduleManagerCollectionService;
         private readonly IAssemblyLoaderService _assemblyLoaderService;
         private readonly IProgressBarService _progressBarService;
 
@@ -27,12 +27,12 @@
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
         /// <param name="regionManager">Injected <see cref="IRegionManager"/>.</param>
-        /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
+        /// <param name="assemblyCollectionService">Injected <see cref="IModuleManagerCollectionService"/>.</param>
         /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
         /// <param name="progressBarService">Injected <see cref="IProgressBarService"/>.</param>
         public ButtonsViewModel(
             IRegionManager regionManager,
-            IAssemblyCollectionService assemblyCollectionService,
+            IModuleManagerCollectionService assemblyCollectionService,
             IAssemblyLoaderService assemblyLoaderService,
             IProgressBarService progressBarService)
         {
@@ -40,7 +40,7 @@
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
-            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _moduleManagerCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
 
             UseSaveFileDialog = false;
 
@@ -67,11 +67,11 @@
         public bool LoadingModules { get; set; }
 
         /// <summary>
-        /// Gets the <see cref="IAssemblyCollectionService"/>.
+        /// Gets the <see cref="IModuleManagerCollectionService"/>.
         /// </summary>
-        public IAssemblyCollectionService AssemblyCollectionService
+        public IModuleManagerCollectionService ModuleManagerCollectionService
         {
-            get { return _assemblyCollectionService; }
+            get { return _moduleManagerCollectionService; }
         }
 
         /// <summary>
@@ -120,7 +120,7 @@
             _assemblyLoaderService.DllDirectory = moduleDirectory;
 
             // Show progress bar
-            AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
+            ModuleManagerCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
             _progressBarService.CurrentProgress = 0.0;
             _progressBarService.AssemblyName = string.Empty;
             _progressBarService.Text = string.Empty;
@@ -137,7 +137,7 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            AssemblyCollectionService.Assemblies = await Task.Run(() => _assemblyLoaderService.GetAssemblies(dllFiles));
+            ModuleManagerCollectionService.Assemblies = await Task.Run(() => _assemblyLoaderService.GetAssemblies(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
@@ -228,8 +228,17 @@
                 }
             }
 
+            ////if (_moduleManagerCatalog.Serialize(saveFile))
+            ////{
+            ////    RadWindow.Alert(@"Configuration Saved");
+            ////}
+            ////else
+            ////{
+            ////    RadWindow.Alert(@"Cannot Save Modules to xml File");
+            ////}
+
             using StreamWriter wr = new StreamWriter(saveFile);
-            serializer.Serialize(wr, AssemblyCollectionService.Assemblies);
+            serializer.Serialize(wr, ModuleManagerCollectionService.Assemblies);
             wr.Close();
 
             RadWindow.Alert(@"Configuration Saved");
@@ -251,7 +260,7 @@
         {
             bool test = false;
 
-            foreach (var assembly in AssemblyCollectionService.Assemblies)
+            foreach (var assembly in ModuleManagerCollectionService.Assemblies)
             {
                 if (assembly.IsEnabled && (assembly.Assembly != null))
                 {

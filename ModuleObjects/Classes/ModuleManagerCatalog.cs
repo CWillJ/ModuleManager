@@ -3,15 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
     using Prism.Modularity;
 
     /// <summary>
     /// The <see cref="ModuleCatalog"/> holding the loaded modules.
     /// </summary>
-    public class ModuleManagerCatalog : ModuleCatalog, IModuleManagerCatalog
+    public class ModuleManagerCatalog : ModuleCatalogBase, IModuleManagerCatalog
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerCatalog"/> class.
@@ -22,10 +24,10 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerCatalog"/> class while providing an
-        /// initial list of <see cref="ModuleInfo"/>s.
+        /// initial list of <see cref="AssemblyData"/>s.
         /// </summary>
         /// <param name="modules">The initial list of modules.</param>
-        public ModuleManagerCatalog(IEnumerable<ModuleInfo> modules)
+        public ModuleManagerCatalog(IEnumerable<AssemblyData> modules)
             : base(modules)
         {
         }
@@ -34,6 +36,32 @@
         public void AddModule(Type type)
         {
             AddModule(CreateModuleInfo(type));
+        }
+
+        /// <summary>
+        /// Serializes the module catalog to an xml file.
+        /// </summary>
+        /// <param name="fileName">The full file path and name.</param>
+        /// <returns>True if can be serialized, false otherwise.</returns>
+        public bool SerializeToXML(string fileName)
+        {
+            Type assemblyType = typeof(IEnumerable<AssemblyData>);
+            XmlSerializer serializer;
+
+            try
+            {
+                serializer = new XmlSerializer(assemblyType);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            using StreamWriter wr = new StreamWriter(fileName);
+            serializer.Serialize(wr, Modules);
+            wr.Close();
+
+            return true;
         }
 
         /// <summary>

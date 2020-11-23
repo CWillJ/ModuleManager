@@ -290,15 +290,22 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor(System.Collections.Generic.IEnumerable{Prism.Modularity.ModuleInfo})">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor(System.Collections.Generic.IEnumerable{ModuleManager.ModuleObjects.Classes.AssemblyData})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class while providing an
-            initial list of <see cref="T:Prism.Modularity.ModuleInfo"/>s.
+            initial list of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>s.
             </summary>
             <param name="modules">The initial list of modules.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.AddModule(System.Type)">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.SerializeToXML(System.String)">
+            <summary>
+            Serializes the module catalog to an xml file.
+            </summary>
+            <param name="fileName">The full file path and name.</param>
+            <returns>True if can be serialized, false otherwise.</returns>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.InnerLoad">
             <summary>

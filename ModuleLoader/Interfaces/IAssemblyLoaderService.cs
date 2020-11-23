@@ -44,33 +44,33 @@
         public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles);
 
         /// <summary>
-        /// Loads all enabled <see cref="ModuleInfoData"/> and unloads the disabled ones.
+        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
         /// </summary>
-        /// <param name="assembly">An <see cref="ModuleInfoData"/> object passed by reference.</param>
+        /// <param name="assembly">An <see cref="AssemblyData"/> object passed by reference.</param>
         public void LoadUnload(ref AssemblyData assembly);
 
         /// <summary>
-        /// Loads all enabled <see cref="ModuleInfoData"/> and unloads the disabled ones.
+        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
         /// </summary>
         /// <param name="assemblies">A <see cref="ObservableCollection{ModuleInfoData}"/> passed by reference.</param>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
-        /// Loads all <see cref="ModuleInfoData"/> in a <see cref="ObservableCollection{ModuleInfoData}"/>.
+        /// Loads all <see cref="AssemblyData"/> in a <see cref="ObservableCollection{ModuleInfoData}"/>.
         /// </summary>
         /// <param name="assemblies">A <see cref="ObservableCollection{ModuleInfoData}"/> objects.</param>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
-        /// Load an <see cref="ModuleInfoData"/>.
+        /// Load an <see cref="AssemblyData"/>.
         /// </summary>
         /// <param name="assembly">Assembly to load passed by reference.</param>
         public void Load(ref AssemblyData assembly);
 
         /// <summary>
-        /// Unload an <see cref="ModuleInfoData"/>.
+        /// Unload an <see cref="AssemblyData"/>.
         /// </summary>
-        /// <param name="assembly"><see cref="ModuleInfoData"/> to unload passed by reference.</param>
+        /// <param name="assembly"><see cref="AssemblyData"/> to unload passed by reference.</param>
         public void Unload(ref AssemblyData assembly);
     }
 }

@@ -13,7 +13,7 @@
     /// </summary>
     public class AssemblyDataTreeViewModel
     {
-        private readonly IAssemblyCollectionService _assemblyCollectionService;
+        private readonly IModuleManagerCollectionService _assemblyCollectionService;
         private readonly IAssemblyLoaderService _assemblyLoaderService;
 
         /// <summary>
@@ -21,9 +21,9 @@
         /// </summary>
         /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
         /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
-        public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IAssemblyCollectionService assemblyCollectionService)
+        public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IModuleManagerCollectionService assemblyCollectionService)
         {
-            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             // Load previously saved module configuration if the ConfigFile exists
@@ -36,7 +36,7 @@
         /// <summary>
         /// Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
         /// </summary>
-        public IAssemblyCollectionService AssemblyCollectionService
+        public IModuleManagerCollectionService AssemblyCollectionService
         {
             get { return _assemblyCollectionService; }
         }

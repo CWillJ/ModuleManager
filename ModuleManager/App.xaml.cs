@@ -87,7 +87,7 @@
         {
             containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
-            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+            containerRegistry.RegisterSingleton<IModuleManagerCollectionService, ModuleManagerCollectionService>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
             containerRegistry.Register<IModuleData, ModuleData>();

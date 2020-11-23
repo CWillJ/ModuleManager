@@ -9,7 +9,6 @@
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService

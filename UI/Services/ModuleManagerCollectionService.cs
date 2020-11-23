@@ -1,16 +1,20 @@
 ﻿namespace ModuleManager.UI.Services
 {
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.IO;
+    using System.Xml.Serialization;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
 
     /// <summary>
-    /// Service providing concrete <see cref="IAssemblyCollectionService"/> implementations.
+    /// Service providing concrete <see cref="IModuleManagerCollectionService"/> implementations.
     /// </summary>
-    public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
+    public class ModuleManagerCollectionService : BindableBase, IModuleManagerCollectionService
     {
         private readonly IAssemblyLoaderService _assemblyLoaderService;
 
@@ -19,10 +23,10 @@
         private string _selectedItemName;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
+        /// Initializes a new instance of the <see cref="ModuleManagerCollectionService"/> class.
         /// </summary>
         /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
-        public AssemblyCollectionService(IAssemblyLoaderService asssemblyLoaderService)
+        public ModuleManagerCollectionService(IAssemblyLoaderService asssemblyLoaderService)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
@@ -31,14 +35,14 @@
             _assemblyLoaderService = asssemblyLoaderService;
         }
 
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        /// <inheritdoc cref="IModuleManagerCollectionService"/>
         public ObservableCollection<AssemblyData> Assemblies
         {
             get { return _assemblies; }
             set { SetProperty(ref _assemblies, value, CollectionPropertyChanged); }
         }
 
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        /// <inheritdoc cref="IModuleManagerCollectionService"/>
         public object SelectedItem
         {
             get
@@ -50,7 +54,6 @@
             {
                 SetProperty(ref _selectedItem, value);
                 SetSelectedItemName();
-                LoadModuleFromCatalog();
             }
         }
 
@@ -61,6 +64,32 @@
         {
             get { return _selectedItemName; }
             set { SetProperty(ref _selectedItemName, value); }
+        }
+
+        /// <summary>
+        /// Serializes the module catalog to an xml file.
+        /// </summary>
+        /// <param name="fileName">The full file path and name.</param>
+        /// <returns>True if can be serialized, false otherwise.</returns>
+        public bool SerializeToXML(string fileName)
+        {
+            Type assemblyType = typeof(IEnumerable<AssemblyData>);
+            XmlSerializer serializer;
+
+            try
+            {
+                serializer = new XmlSerializer(assemblyType);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            using StreamWriter wr = new StreamWriter(fileName);
+            serializer.Serialize(wr, Assemblies);
+            wr.Close();
+
+            return true;
         }
 
         private void SetSelectedItemName()
@@ -80,17 +109,6 @@
             else
             {
                 SelectedItemName = @"Description";
-            }
-        }
-
-        private void LoadModuleFromCatalog()
-        {
-            if (SelectedItem is AssemblyData assembly)
-            {
-                if (assembly.IsEnabled)
-                {
-                    //// _moduleCatalogService.TheModuleManagerCatalog.Initialize();
-                }
             }
         }
 
