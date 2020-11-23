@@ -14,13 +14,10 @@
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
-        private IModuleCatalogService _moduleCatalogService;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        /// <param name="moduleCatalogService">The module catalog service.</param>
-        public AssemblyLoaderService(IModuleCatalogService moduleCatalogService)
+        public AssemblyLoaderService()
         {
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
@@ -28,16 +25,6 @@
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
-
-            _moduleCatalogService = moduleCatalogService;
-        }
-
-        /// <summary>
-        /// Gets the <see cref="IModuleCatalogService"/> used here.
-        /// </summary>
-        public IModuleCatalogService ModuleCatalogService
-        {
-            get { return _moduleCatalogService; }
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
@@ -220,9 +207,6 @@
             {
                 return null;
             }
-
-            // Check to see if it is a NextGen module
-            ModuleCatalogService.AddModule(type);
 
             return new ModuleData(
                 type,

@@ -1,9 +1,11 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
+    using Prism.Modularity;
     using Prism.Mvvm;
 
     /// <inheritdoc cref="IAssemblyData"/>
@@ -52,6 +54,24 @@
         public ObservableCollection<ModuleData> Modules { get; set; }
 
         /// <inheritdoc cref="IAssemblyData"/>
+        public Collection<string> DependsOn { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        public InitializationMode InitializationMode { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        public string ModuleName { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        public string ModuleType { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        public string Ref { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        public ModuleState State { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
         public AssemblyLoader Loader { get; set; }
 
@@ -73,6 +93,42 @@
             }
 
             return s;
+        }
+
+        /// <summary>
+        /// Sets ModuleName and ModuleType if a module in the assembly implements the <see cref="IModule"/> interface.
+        /// </summary>
+        public void FindModuleInfoFromAssembly()
+        {
+            if (Assembly == null || Modules.Count == 0)
+            {
+                return;
+            }
+
+            foreach (ModuleData module in Modules)
+            {
+                if (module.Type == typeof(IModule) && module.Name == Name.Substring(Name.LastIndexOf(".")) + @"Module")
+                {
+                    ModuleName = module.Name;
+                    ModuleType = module.Type.FullName;
+                }
+            }
+        }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        public ModuleInfo GetModuleInfo()
+        {
+            Type type = null;
+
+            foreach (ModuleData moduleData in Modules)
+            {
+                if (moduleData.Name == ModuleName)
+                {
+                    type = moduleData.Type;
+                }
+            }
+
+            return new ModuleInfo(type);
         }
     }
 }

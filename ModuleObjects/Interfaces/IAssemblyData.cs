@@ -4,12 +4,18 @@
     using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
+    using Prism.Modularity;
 
     /// <summary>
     /// Assembly object interface.
     /// </summary>
-    public interface IAssemblyData : ITreeViewData
+    public interface IAssemblyData : IModuleInfo
     {
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether the assembly is enabled or disabled.
         /// </summary>
@@ -36,5 +42,11 @@
         /// </summary>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
+
+        /// <summary>
+        /// Used to return a <see cref="ModuleInfo"/> from the properties.
+        /// </summary>
+        /// <returns>A <see cref="ModuleInfo"/>.</returns>
+        public ModuleInfo GetModuleInfo();
     }
 }

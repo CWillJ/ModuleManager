@@ -168,46 +168,40 @@
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadUnload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Loads all enabled <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> and unloads the disabled ones.
+            Loads all enabled <see cref="!:ModuleInfoData"/> and unloads the disabled ones.
             </summary>
-            <param name="assembly">An <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> object passed by reference.</param>
+            <param name="assembly">An <see cref="!:ModuleInfoData"/> object passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
-            Loads all enabled <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> and unloads the disabled ones.
+            Loads all enabled <see cref="!:ModuleInfoData"/> and unloads the disabled ones.
             </summary>
             <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
-            Loads all <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> in a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            Loads all <see cref="!:ModuleInfoData"/> in a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
             </summary>
             <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Load an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
+            Load an <see cref="!:ModuleInfoData"/>.
             </summary>
             <param name="assembly">Assembly to load passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Unload an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
+            Unload an <see cref="!:ModuleInfoData"/>.
             </summary>
-            <param name="assembly"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to unload passed by reference.</param>
+            <param name="assembly"><see cref="!:ModuleInfoData"/> to unload passed by reference.</param>
         </member>
         <member name="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService)">
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService"/> class.
-            </summary>
-            <param name="moduleCatalogService">The module catalog service.</param>
-        </member>
-        <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.ModuleCatalogService">
-            <summary>
-            Gets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> used here.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllDirectory">

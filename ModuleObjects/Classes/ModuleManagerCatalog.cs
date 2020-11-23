@@ -46,11 +46,12 @@
 
         private static IModuleInfo CreateModuleInfo(Type type)
         {
+            #nullable enable
             string? moduleName = type.Name;
             List<string> dependsOn = new List<string>();
             bool onDemand = false;
 
-            CustomAttributeData moduleAttribute;
+            CustomAttributeData? moduleAttribute;
 
             try
             {

@@ -32,6 +32,24 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Modules">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.DependsOn">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.InitializationMode">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.ModuleName">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.ModuleType">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Ref">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.State">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
+        </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Loader">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
@@ -43,6 +61,14 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the assembly.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.FindModuleInfoFromAssembly">
+            <summary>
+            Sets ModuleName and ModuleType if a module in the assembly implements the <see cref="T:Prism.Modularity.IModule"/> interface.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.GetModuleInfo">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.AssemblyLoader">
             <summary>
@@ -408,6 +434,11 @@
             Assembly object interface.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.IsEnabled">
             <summary>
             Gets or sets a value indicating whether the assembly is enabled or disabled.
@@ -433,43 +464,20 @@
             Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.
             </summary>
         </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService">
+        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.GetModuleInfo">
             <summary>
-            Service providing concrete <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> implementations.
+            Used to return a <see cref="T:Prism.Modularity.ModuleInfo"/> from the properties.
             </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.TheModuleManagerCatalog">
-            <summary>
-            Gets or sets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.AddModule(System.Type)">
-            <summary>
-            Adds a module to the catalog from a <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">Module Type.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.AddModule(Prism.Modularity.ModuleInfo)">
-            <summary>
-            Adds a module to the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
-            </summary>
-            <param name="module">Module ModuleInfo.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.RemoveModule(System.Type)">
-            <summary>
-            Removes a module from the catalog from a <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">Module Type.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.RemoveModule(Prism.Modularity.ModuleInfo)">
-            <summary>
-            Removes a module from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
-            </summary>
-            <param name="module">Module ModuleInfo.</param>
+            <returns>A <see cref="T:Prism.Modularity.ModuleInfo"/>.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
             <summary>
             Module member object interface.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Name">
+            <summary>
+            Gets or sets the name.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Description">
@@ -498,6 +506,11 @@
             Module member object interface.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.Description">
             <summary>
             Gets or sets the description of the module.
@@ -506,45 +519,6 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.TypeName">
             <summary>
             Gets or sets the name of the Type.
-            </summary>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.ITreeViewData">
-            <summary>
-            The base interface for IAssemblyData and IModuleData.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.ITreeViewData.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Services.ModuleCatalogService">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Services.ModuleCatalogService"/> class.
-            </summary>
-            <param name="moduleManagerCatalog">The implementation of <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.</param>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Services.ModuleCatalogService.TheModuleManagerCatalog">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.AddModule(System.Type)">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.AddModule(Prism.Modularity.ModuleInfo)">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveModule(System.Type)">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveModule(Prism.Modularity.ModuleInfo)">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveAllModules">
-            <summary>
-            Removes all modules from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
             </summary>
         </member>
     </members>

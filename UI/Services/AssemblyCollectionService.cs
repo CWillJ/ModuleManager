@@ -4,7 +4,6 @@
     using System.ComponentModel;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
 
@@ -13,7 +12,6 @@
     /// </summary>
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
-        private readonly IModuleCatalogService _moduleCatalogService;
         private readonly IAssemblyLoaderService _assemblyLoaderService;
 
         private ObservableCollection<AssemblyData> _assemblies;
@@ -23,15 +21,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
-        /// <param name="moduleCatalogService">The program's <see cref="IModuleCatalogService"/>.</param>
         /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
-        public AssemblyCollectionService(IModuleCatalogService moduleCatalogService, IAssemblyLoaderService asssemblyLoaderService)
+        public AssemblyCollectionService(IAssemblyLoaderService asssemblyLoaderService)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";
 
-            _moduleCatalogService = moduleCatalogService;
             _assemblyLoaderService = asssemblyLoaderService;
         }
 
