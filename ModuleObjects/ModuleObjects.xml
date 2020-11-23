@@ -32,22 +32,7 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Modules">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.DependsOn">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.InitializationMode">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.ModuleName">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
-        </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.ModuleType">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Ref">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.State">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Loader">
@@ -61,14 +46,6 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the assembly.</returns>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.FindModuleInfoFromAssembly">
-            <summary>
-            Sets ModuleName and ModuleType if a module in the assembly implements the <see cref="T:Prism.Modularity.IModule"/> interface.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.GetModuleInfo">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.AssemblyLoader">
             <summary>
@@ -290,12 +267,17 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor(System.Collections.Generic.IEnumerable{ModuleManager.ModuleObjects.Classes.AssemblyData})">
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor(System.Collections.Generic.IEnumerable{Prism.Modularity.ModuleInfo})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class while providing an
             initial list of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>s.
             </summary>
             <param name="modules">The initial list of modules.</param>
+        </member>
+        <member name="E:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.PropertyChanged">
+            <summary>
+            Property changed event.
+            </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.AddModule(System.Type)">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>
@@ -461,6 +443,11 @@
             Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of modules contained in the assembly.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.ModuleType">
+            <summary>
+            Gets or sets the <see cref="T:System.Type"/> of the module in this assembly.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Loader">
             <summary>
             Gets or sets the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyLoader"/> to load/unload this assembly.
@@ -470,12 +457,6 @@
             <summary>
             Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.
             </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.GetModuleInfo">
-            <summary>
-            Used to return a <see cref="T:Prism.Modularity.ModuleInfo"/> from the properties.
-            </summary>
-            <returns>A <see cref="T:Prism.Modularity.ModuleInfo"/>.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
             <summary>

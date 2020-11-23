@@ -9,6 +9,7 @@
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
+    using Prism.Modularity;
     using Prism.Mvvm;
 
     /// <summary>
@@ -19,6 +20,7 @@
         private readonly IAssemblyLoaderService _assemblyLoaderService;
 
         private ObservableCollection<AssemblyData> _assemblies;
+        private ModuleManagerCatalog _assemblyCatalog;
         private object _selectedItem;
         private string _selectedItemName;
 
@@ -29,6 +31,7 @@
         public ModuleManagerCollectionService(IAssemblyLoaderService asssemblyLoaderService)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
+            _assemblyCatalog = new ModuleManagerCatalog();
             _selectedItem = null;
             _selectedItemName = @"Description";
 
@@ -40,6 +43,15 @@
         {
             get { return _assemblies; }
             set { SetProperty(ref _assemblies, value, CollectionPropertyChanged); }
+        }
+
+        /// <summary>
+        /// Gets or sets a <see cref="ModuleManagerCatalog"/>.
+        /// </summary>
+        public ModuleManagerCatalog AssemblyCatalog
+        {
+            get { return _assemblyCatalog; }
+            set { _assemblyCatalog = value; }
         }
 
         /// <inheritdoc cref="IModuleManagerCollectionService"/>
@@ -57,13 +69,23 @@
             }
         }
 
-        /// <summary>
-        /// Gets or sets name of the selected item.
-        /// </summary>
+        /// <inheritdoc cref="IModuleManagerCollectionService"/>
         public string SelectedItemName
         {
             get { return _selectedItemName; }
             set { SetProperty(ref _selectedItemName, value); }
+        }
+
+        /// <inheritdoc cref="IModuleManagerCollectionService"/>
+        public void AddModulesToCatalog()
+        {
+            foreach (AssemblyData assembly in Assemblies)
+            {
+                if (assembly.ModuleType != null)
+                {
+                    AssemblyCatalog.AddModule(assembly.ModuleType);
+                }
+            }
         }
 
         /// <summary>
@@ -73,7 +95,7 @@
         /// <returns>True if can be serialized, false otherwise.</returns>
         public bool SerializeToXML(string fileName)
         {
-            Type assemblyType = typeof(IEnumerable<AssemblyData>);
+            Type assemblyType = typeof(ObservableCollection<AssemblyData>);
             XmlSerializer serializer;
 
             try
@@ -130,6 +152,12 @@
                 _assemblyLoaderService.LoadUnload(ref assembly);
                 Assemblies[i] = assembly;
             }
+        }
+
+        private void PopulateModuleCatalog(AssemblyData assembly)
+        {
+            ObservableCollection<ModuleInfo> moduleCatalog = (ObservableCollection<ModuleInfo>)AssemblyCatalog.Modules;
+            moduleCatalog.Add(new ModuleInfo(assembly.ModuleType));
         }
     }
 }

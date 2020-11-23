@@ -8,23 +8,23 @@
     /// </summary>
     public class AssemblyDataViewModel : BindableBase
     {
-        private readonly IModuleManagerCollectionService _assemblyCollectionService;
+        private readonly IModuleManagerCollectionService _moduleManagerCollectionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyDataViewModel"/> class.
         /// </summary>
-        /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
-        public AssemblyDataViewModel(IModuleManagerCollectionService assemblyCollectionService)
+        /// <param name="moduleManagerCollectionService">Injected <see cref="IModuleManagerCollectionService"/>.</param>
+        public AssemblyDataViewModel(IModuleManagerCollectionService moduleManagerCollectionService)
         {
-            _assemblyCollectionService = assemblyCollectionService;
+            _moduleManagerCollectionService = moduleManagerCollectionService;
         }
 
         /// <summary>
         /// Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
         /// </summary>
-        public IModuleManagerCollectionService AssemblyCollectionService
+        public IModuleManagerCollectionService ModuleManagerCollectionService
         {
-            get { return _assemblyCollectionService; }
+            get { return _moduleManagerCollectionService; }
         }
     }
 }

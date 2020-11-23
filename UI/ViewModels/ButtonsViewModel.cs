@@ -27,12 +27,12 @@
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
         /// <param name="regionManager">Injected <see cref="IRegionManager"/>.</param>
-        /// <param name="assemblyCollectionService">Injected <see cref="IModuleManagerCollectionService"/>.</param>
+        /// <param name="moduleManagerCollectionService">Injected <see cref="IModuleManagerCollectionService"/>.</param>
         /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
         /// <param name="progressBarService">Injected <see cref="IProgressBarService"/>.</param>
         public ButtonsViewModel(
             IRegionManager regionManager,
-            IModuleManagerCollectionService assemblyCollectionService,
+            IModuleManagerCollectionService moduleManagerCollectionService,
             IAssemblyLoaderService assemblyLoaderService,
             IProgressBarService progressBarService)
         {
@@ -40,7 +40,7 @@
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
-            _moduleManagerCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
+            _moduleManagerCollectionService = moduleManagerCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
 
             UseSaveFileDialog = false;
 
@@ -146,6 +146,9 @@
 
             _progressBarService.AssemblyName = string.Empty;
             _progressBarService.Text = string.Empty;
+
+            // Add all modules to the module catalog
+            ModuleManagerCollectionService.AddModulesToCatalog();
         }
 
         /// <summary>

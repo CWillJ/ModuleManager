@@ -1,15 +1,15 @@
 ﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Classes;
-    using Prism.Modularity;
 
     /// <summary>
     /// Assembly object interface.
     /// </summary>
-    public interface IAssemblyData : IModuleInfo
+    public interface IAssemblyData
     {
         /// <summary>
         /// Gets or sets the name.
@@ -32,6 +32,12 @@
         public ObservableCollection<ModuleData> Modules { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="Type"/> of the module in this assembly.
+        /// </summary>
+        [XmlIgnore]
+        public Type ModuleType { get; set; }
+
+        /// <summary>
         /// Gets or sets the <see cref="AssemblyLoader"/> to load/unload this assembly.
         /// </summary>
         [XmlIgnore]
@@ -42,11 +48,5 @@
         /// </summary>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
-
-        /// <summary>
-        /// Used to return a <see cref="ModuleInfo"/> from the properties.
-        /// </summary>
-        /// <returns>A <see cref="ModuleInfo"/>.</returns>
-        public ModuleInfo GetModuleInfo();
     }
 }

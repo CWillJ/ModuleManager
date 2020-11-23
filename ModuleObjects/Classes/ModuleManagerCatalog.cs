@@ -3,9 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
     using Prism.Modularity;
@@ -13,8 +15,10 @@
     /// <summary>
     /// The <see cref="ModuleCatalog"/> holding the loaded modules.
     /// </summary>
-    public class ModuleManagerCatalog : ModuleCatalogBase, IModuleManagerCatalog
+    public class ModuleManagerCatalog : ModuleCatalog, IModuleManagerCatalog, INotifyPropertyChanged
     {
+        private ObservableCollection<AssemblyData> _assemblies;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleManagerCatalog"/> class.
         /// </summary>
@@ -27,10 +31,15 @@
         /// initial list of <see cref="AssemblyData"/>s.
         /// </summary>
         /// <param name="modules">The initial list of modules.</param>
-        public ModuleManagerCatalog(IEnumerable<AssemblyData> modules)
+        public ModuleManagerCatalog(IEnumerable<ModuleInfo> modules)
             : base(modules)
         {
         }
+
+        /// <summary>
+        /// Property changed event.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <inheritdoc cref="IModuleManagerCatalog"/>
         public void AddModule(Type type)

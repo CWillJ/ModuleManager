@@ -48,7 +48,7 @@
             BorderThickness="1"
             ItemContainerStyle="{StaticResource RadTreeViewItemStyle}"
             ItemTemplate="{StaticResource assemblyLevel}"
-            ItemsSource="{Binding AssemblyCollectionService.Assemblies, Mode=OneWay}"
-            SelectedItem="{Binding AssemblyCollectionService.SelectedItem, Mode=TwoWay}" />
+            ItemsSource="{Binding ModuleManagerCollectionService.Assemblies, Mode=OneWay}"
+            SelectedItem="{Binding ModuleManagerCollectionService.SelectedItem, Mode=TwoWay}" />
     </Grid>
 </UserControl>

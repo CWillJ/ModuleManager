@@ -13,32 +13,32 @@
     /// </summary>
     public class AssemblyDataTreeViewModel
     {
-        private readonly IModuleManagerCollectionService _assemblyCollectionService;
+        private readonly IModuleManagerCollectionService _moduleManagerCollectionService;
         private readonly IAssemblyLoaderService _assemblyLoaderService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyDataTreeViewModel"/> class.
         /// </summary>
         /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
-        /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
-        public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IModuleManagerCollectionService assemblyCollectionService)
+        /// <param name="moduleManagerCollectionService">Injected <see cref="IModuleManagerCollectionService"/>.</param>
+        public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IModuleManagerCollectionService moduleManagerCollectionService)
         {
-            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
+            _moduleManagerCollectionService = moduleManagerCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
-                _assemblyCollectionService.Assemblies = LoadConfig();
+                _moduleManagerCollectionService.Assemblies = LoadConfig();
             }
         }
 
         /// <summary>
         /// Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
         /// </summary>
-        public IModuleManagerCollectionService AssemblyCollectionService
+        public IModuleManagerCollectionService ModuleManagerCollectionService
         {
-            get { return _assemblyCollectionService; }
+            get { return _moduleManagerCollectionService; }
         }
 
         /// <summary>
@@ -90,6 +90,9 @@
 
             // Unload all disabled assemblies.
             _assemblyLoaderService.LoadUnload(ref assemblies);
+
+            // Add all modules to the module catalog
+            ModuleManagerCollectionService.AddModulesToCatalog();
 
             return assemblies;
         }

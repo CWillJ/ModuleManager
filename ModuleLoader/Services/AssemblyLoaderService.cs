@@ -9,15 +9,22 @@
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
+    using Prism.Modularity;
+    using Prism.Regions;
 
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
+        private readonly IRegionManager _regionManager;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        public AssemblyLoaderService()
+        /// <param name="regionManager">The given <see cref="IRegionManager"/>.</param>
+        public AssemblyLoaderService(IRegionManager regionManager)
         {
+            _regionManager = regionManager;
+
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
             CurrentAssemblyName = string.Empty;
@@ -176,6 +183,11 @@
 
                     if (tempModule != null)
                     {
+                        if (type.GetInterfaces().Contains(typeof(IModule)))
+                        {
+                            assembly.ModuleType = type;
+                        }
+
                         assembly.Modules.Add(tempModule);
                     }
                 }
@@ -193,6 +205,14 @@
             assembly.Loader.Unload();
             assembly.Loader = null;
             assembly.Assembly = null;
+        }
+
+        private void AddToRegionManager()
+        {
+        }
+
+        private void RemoveFromRegionManager()
+        {
         }
 
         /// <summary>
