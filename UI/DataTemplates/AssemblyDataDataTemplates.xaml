@@ -7,8 +7,8 @@
 
     <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
-    <templateSelectors:TemplateSelector x:Key="ModuleDataTemplateSelector" />
-    <templateSelectors:TreeViewItemTemplateSelector x:Key="treeViewItemTemplateSelector" />
+    <templateSelectors:DescriptionTemplateSelector x:Key="DescriptionTemplateSelector" />
+    <templateSelectors:TreeViewItemTemplateSelector x:Key="TreeViewItemTemplateSelector" />
 
     <!--  Member Parameter Data Template  -->
     <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
@@ -33,7 +33,7 @@
 
             <TextBlock FontWeight="Bold" Text="Parameters:" />
 
-            <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Parameters, Mode=OneWay}" />
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Parameters, Mode=OneWay}" />
         </StackPanel>
     </DataTemplate>
 
@@ -84,7 +84,7 @@
 
             <TextBlock FontWeight="Bold" Text="Parameters:" />
 
-            <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Parameters, Mode=OneWay}" />
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Parameters, Mode=OneWay}" />
 
             <TextBlock TextWrapping="Wrap">
                 <Run FontWeight="Bold" Text="Return: " />
@@ -114,11 +114,11 @@
                 <LineBreak />
             </TextBlock>
 
-            <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Constructors, Mode=OneWay}" />
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Constructors, Mode=OneWay}" />
 
-            <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Properties, Mode=OneWay}" />
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Properties, Mode=OneWay}" />
 
-            <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Methods, Mode=OneWay}" />
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Methods, Mode=OneWay}" />
         </StackPanel>
     </DataTemplate>
 
@@ -136,7 +136,7 @@
                 <LineBreak />
             </TextBlock>
 
-            <ItemsControl ItemTemplateSelector="{StaticResource ModuleDataTemplateSelector}" ItemsSource="{Binding Path=Modules, Mode=OneWay}" />
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Modules, Mode=OneWay}" />
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

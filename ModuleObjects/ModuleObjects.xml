@@ -5,9 +5,7 @@
     </assembly>
     <members>
         <member name="T:ModuleManager.ModuleObjects.Classes.AssemblyData">
-            <summary>
-            AssemblyData will load and unload an assembly and stores data about an assembly.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.#ctor">
             <summary>
@@ -20,38 +18,28 @@
             </summary>
             <param name="name">Name of the assembly.</param>
             <param name="filePath">File path to the assembly.</param>
-            <param name="modules">Collection of modules contained in the assembly.</param>
+            <param name="modules">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of modules.</param>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Name">
-            <summary>
-            Gets or sets the name of the assembly.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.IsEnabled">
-            <summary>
-            Gets or sets a value indicating whether the assembly is enabled or disabled.
-            Will load or unload this assembly if the IModuleInfoRetriever is not null.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.FilePath">
-            <summary>
-            Gets or sets the file path to assembly.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Modules">
-            <summary>
-            Gets or sets the collection of modules contained in the assembly.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.ModuleType">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Loader">
-            <summary>
-            Gets or sets the AssemblyLoader to load/unload this assembly.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Assembly">
-            <summary>
-            Gets or sets the actual Assembly of this AssemblyData.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
             <summary>
@@ -79,8 +67,8 @@
             <summary>
             Overrides the Load method.
             </summary>
-            <param name="name">The assembly name.</param>
-            <returns>A loaded assembly.</returns>
+            <param name="name">The <see cref="T:System.Reflection.AssemblyName"/> of the <see cref="T:System.Reflection.Assembly"/> to be loaded.</param>
+            <returns>A loaded <see cref="T:System.Reflection.Assembly"/>.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.MemberParameter">
             <summary>
@@ -96,7 +84,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> class.
             </summary>
-            <param name="type">MemberParameter type.</param>
+            <param name="type">The <see cref="P:ModuleManager.ModuleObjects.Classes.MemberParameter.Type"/> that holds this.</param>
             <param name="name">MemberParameter name.</param>
             <param name="description">MemberParameter description.</param>
         </member>
@@ -126,12 +114,12 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.MemberParameter.Type">
             <summary>
-            Gets or sets the actuall Type of the MemberParameter.
+            Gets or sets the actuall <see cref="P:ModuleManager.ModuleObjects.Classes.MemberParameter.Type"/> of the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.MemberParameter.IsEmpty">
             <summary>
-            Check to see if the MemberParameter is empty.
+            Check to see if the <see cref="T:ModuleManager.ModuleObjects.Classes.MemberParameter"/> is empty.
             </summary>
             <returns>Returns true if the name is not an empty string or null.</returns>
         </member>
@@ -143,7 +131,7 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor">
             <summary>
-            ModuleConstructor object holds the ConstructorInfo, class name, description and the parameters a constructor.
+            Holds the <see cref="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ConstructorInfo"/>, class name, description and the parameters a constructor.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleConstructor.#ctor">
@@ -155,19 +143,19 @@
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/> class.
             </summary>
-            <param name="constructorInfo">ConstructorInfo for this ModuleConstructor.</param>
+            <param name="constructorInfo"><see cref="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ConstructorInfo"/> for this <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleConstructor"/>.</param>
             <param name="className">Class name.</param>
             <param name="description">Constructor description.</param>
-            <param name="parameters">Constructor parameters.</param>
+            <param name="parameters">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>, constructor parameters.</param>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.Parameters">
             <summary>
-            Gets or sets the constructor parameters.
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>, the constructor parameters.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ConstructorInfo">
             <summary>
-            Gets or sets the actuall ConstructorInfo for this ModuleConstructor.
+            Gets or sets the actuall <see cref="P:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ConstructorInfo"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleConstructor.ToString">
@@ -177,9 +165,7 @@
             <returns>A desired format for the constructor name, description, and parameters.</returns>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleData">
-            <summary>
-            Module object holds the name, description, members, methods, constructors and properties of a module.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleData"/>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.#ctor">
             <summary>
@@ -191,17 +177,15 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleData"/> class specifying the name,
             description and methods.
             </summary>
-            <param name="type">Module type.</param>
+            <param name="type">Module <see cref="P:ModuleManager.ModuleObjects.Classes.ModuleData.Type"/>.</param>
             <param name="name">Module name.</param>
             <param name="description">Module description.</param>
-            <param name="constructors">A collection of module constructors.</param>
-            <param name="properties">A collection of module properties.</param>
-            <param name="methods">A collection of module methods.</param>
+            <param name="constructors">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of module constructors.</param>
+            <param name="properties">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of module properties.</param>
+            <param name="methods">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of module methods.</param>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Name">
-            <summary>
-            Gets or sets the module name.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.FullName">
             <summary>
@@ -209,33 +193,29 @@
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Description">
-            <summary>
-            Gets or sets the description of the module.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Members">
-            <summary>
-            Gets or sets all of the module members.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Constructors">
             <summary>
-            Gets or sets the module constructors.
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing the module constructors.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Properties">
             <summary>
-            Gets or sets the module properties.
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing the module properties.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Methods">
             <summary>
-            Gets or sets the module methods.
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing the module methods.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Type">
             <summary>
-            Gets or sets the actual Type of the ModuleData.
+            Gets or sets the <see cref="P:ModuleManager.ModuleObjects.Classes.ModuleData.Type"/> of the ModuleData.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.StoreModuleMembers">
@@ -248,6 +228,34 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the module name, description and all members contained in module.</returns>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeMembers(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
+            <summary>
+            This will add <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Constructors and Members properties,
+            <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Properties and Members properties, and
+            <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Methods and Members properties.
+            </summary>
+            <param name="constructors">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+            <param name="properties">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+            <param name="methods">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeConstructors(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleConstructor})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Constructors and Members properties.
+            </summary>
+            <param name="constructors">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeProperties(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleProperty})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Properties and Members properties.
+            </summary>
+            <param name="properties">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleData.InitializeMethods(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.ModuleMethod})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Methods and Members properties.
+            </summary>
+            <param name="methods">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog">
             <summary>
@@ -262,19 +270,28 @@
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor(System.Collections.Generic.IEnumerable{Prism.Modularity.ModuleInfo})">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class while providing an
-            initial list of <see cref="T:Prism.Modularity.ModuleInfo"/>s.
+            initial list of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>s.
             </summary>
             <param name="modules">The initial list of modules.</param>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.AddModule(System.Type)">
+        <member name="E:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.PropertyChanged">
             <summary>
-            Adds a module to the module catalog based on type.
+            Property changed event.
             </summary>
-            <param name="type"><see cref="T:System.Type"/> representing the ModuleInfo to add.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.AddModule(System.Type)">
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.SerializeToXML(System.String)">
+            <summary>
+            Serializes the module catalog to an xml file.
+            </summary>
+            <param name="fileName">The full file path and name.</param>
+            <returns>True if can be serialized, false otherwise.</returns>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.InnerLoad">
             <summary>
-            Does the actual work of loading the catalog.  The base implementation does nothing.
+            Does the actual work of loading the catalog. The base implementation does nothing.
             </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMemberData">
@@ -283,19 +300,13 @@
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMemberData.Name">
-            <summary>
-            Gets or sets the name of the module.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMemberData.Description">
-            <summary>
-            Gets or sets the description of the module.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData"/>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleMemberData.TypeName">
-            <summary>
-            Gets or sets the name of the Type.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData"/>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.ModuleMethod">
             <summary>
@@ -311,7 +322,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleMethod"/> class.
             </summary>
-            <param name="methodInfo">MethodInfo for this ModuleMethod.</param>
+            <param name="methodInfo"><see cref="P:ModuleManager.ModuleObjects.Classes.ModuleMethod.MethodInfo"/>.</param>
             <param name="name">Method name.</param>
             <param name="description">Method description.</param>
             <param name="parameters">Method parameters.</param>
@@ -412,6 +423,11 @@
             Assembly object interface.
             </summary>
         </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.IsEnabled">
             <summary>
             Gets or sets a value indicating whether the assembly is enabled or disabled.
@@ -424,56 +440,32 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Modules">
             <summary>
-            Gets or sets a collection of modules contained in the assembly.
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of modules contained in the assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.ModuleType">
+            <summary>
+            Gets or sets the <see cref="T:System.Type"/> of the module in this assembly.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Loader">
             <summary>
-            Gets or sets the AssemblyLoader to load/unload this assembly.
+            Gets or sets the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyLoader"/> to load/unload this assembly.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Assembly">
             <summary>
-            Gets or sets the actual Assembly of this AssemblyData.
+            Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.
             </summary>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService">
-            <summary>
-            Service providing concrete <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> implementations.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.TheModuleManagerCatalog">
-            <summary>
-            Gets or sets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.AddModule(System.Type)">
-            <summary>
-            Adds a module to the catalog from a <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">Module Type.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.AddModule(Prism.Modularity.ModuleInfo)">
-            <summary>
-            Adds a module to the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
-            </summary>
-            <param name="module">Module ModuleInfo.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.RemoveModule(System.Type)">
-            <summary>
-            Removes a module from the catalog from a <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">Module Type.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService.RemoveModule(Prism.Modularity.ModuleInfo)">
-            <summary>
-            Removes a module from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
-            </summary>
-            <param name="module">Module ModuleInfo.</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
             <summary>
             Module member object interface.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Name">
+            <summary>
+            Gets or sets the name.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Description">
@@ -483,17 +475,12 @@
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleData.Members">
             <summary>
-            Gets or sets all of the module members.
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of the module members.
             </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog">
             <summary>
             The interface for a ModuleCatalogService.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog.Instance">
-            <summary>
-            Gets the instance of this <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog.AddModule(System.Type)">
@@ -504,7 +491,12 @@
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData">
             <summary>
-            Module object interface.
+            Module member object interface.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.Name">
+            <summary>
+            Gets or sets the name.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.Description">
@@ -515,61 +507,6 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IModuleMemberData.TypeName">
             <summary>
             Gets or sets the name of the Type.
-            </summary>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.ITreeViewData">
-            <summary>
-            The base interface for IAssemblyData and IModuleData.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.ITreeViewData.Name">
-            <summary>
-            Gets or sets the name of the assembly.
-            </summary>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Services.ModuleCatalogService">
-            <summary>
-            Service providing concrete <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> implementations.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Services.ModuleCatalogService"/> class.
-            </summary>
-            <param name="moduleManagerCatalog">The implementation of <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.</param>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Services.ModuleCatalogService.TheModuleManagerCatalog">
-            <summary>
-            Gets or sets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.AddModule(System.Type)">
-            <summary>
-            Adds a module to the catalog from a <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">Module Type.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.AddModule(Prism.Modularity.ModuleInfo)">
-            <summary>
-            Adds a module to the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
-            </summary>
-            <param name="module">Module ModuleInfo.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveModule(System.Type)">
-            <summary>
-            Removes a module from the catalog from a <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">Module Type.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveModule(Prism.Modularity.ModuleInfo)">
-            <summary>
-            Removes a module from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
-            </summary>
-            <param name="module">Module ModuleInfo.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Services.ModuleCatalogService.RemoveAllModules">
-            <summary>
-            Removes all modules from the catalog from a <see cref="T:Prism.Modularity.ModuleInfo"/>.
             </summary>
         </member>
     </members>

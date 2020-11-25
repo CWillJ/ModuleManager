@@ -6,7 +6,6 @@
     using ModuleManager.ModuleLoader.Services;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
-    using ModuleManager.ModuleObjects.Services;
     using ModuleManager.UI;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Services;
@@ -88,8 +87,8 @@
         {
             containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
-            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
-            containerRegistry.RegisterSingleton<IModuleCatalogService, ModuleCatalogService>();
+            containerRegistry.RegisterSingleton<IModuleManagerCollectionService, ModuleManagerCollectionService>();
+            containerRegistry.RegisterSingleton<IModuleViewRegionService, ModuleViewRegionService>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
             containerRegistry.Register<IModuleData, ModuleData>();
@@ -103,7 +102,7 @@
         /// <summary>
         /// Creates the module catalog.
         /// </summary>
-        /// <returns>New module catalog.</returns>
+        /// <returns>New <see cref="IModuleCatalog"/>.</returns>
         protected override IModuleCatalog CreateModuleCatalog()
         {
             ModuleCatalog moduleCatalog = new ModuleCatalog();

@@ -3,19 +3,18 @@
     using System.Windows;
     using System.Windows.Controls;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
 
     /// <summary>
     /// Used to selected a DataTemplate in the description.
     /// </summary>
-    public class TemplateSelector : DataTemplateSelector
+    public class DescriptionTemplateSelector : DataTemplateSelector
     {
         /// <summary>
         /// Used to select the DataTemplate for the description.
         /// </summary>
-        /// <param name="item">Object.</param>
-        /// <param name="container">Container.</param>
-        /// <returns>A DataTemplate depending on the object passed in.</returns>
+        /// <param name="item">A <see cref="object"/> sent in.</param>
+        /// <param name="container">The <see cref="DependencyObject"/>.</param>
+        /// <returns>A <see cref="DataTemplate"/> depending on the object passed in.</returns>
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (container is FrameworkElement element && container != null && item != null)

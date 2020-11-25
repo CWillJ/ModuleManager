@@ -44,7 +44,7 @@
             <summary>
             Creates the module catalog.
             </summary>
-            <returns>New module catalog.</returns>
+            <returns>New <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
         </member>
         <member name="M:ModuleManager.App.InitializeComponent">
             <summary>
@@ -58,7 +58,7 @@
         </member>
         <member name="T:ModuleManager.ViewModels.ShellViewModel">
             <summary>
-            ModuleManagerViewModel will handle commands from the main view.
+            <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> will handle commands from the main view.
             </summary>
         </member>
         <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor(Prism.Regions.IRegionManager)">

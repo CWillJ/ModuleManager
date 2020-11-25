@@ -1,27 +1,24 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
+    using Prism.Modularity;
     using Prism.Mvvm;
 
-    /// <summary>
-    /// AssemblyData will load and unload an assembly and stores data about an assembly.
-    /// </summary>
+    /// <inheritdoc cref="IAssemblyData"/>
     public class AssemblyData : BindableBase, IAssemblyData
     {
+        private bool _isEnabled;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
         /// </summary>
         public AssemblyData()
+            : this(string.Empty, string.Empty, new ObservableCollection<ModuleData>())
         {
-            Name = string.Empty;
-            IsEnabled = false;
-            FilePath = string.Empty;
-            Modules = new ObservableCollection<ModuleData>();
-            Loader = null;
-            Assembly = null;
         }
 
         /// <summary>
@@ -29,47 +26,43 @@
         /// </summary>
         /// <param name="name">Name of the assembly.</param>
         /// <param name="filePath">File path to the assembly.</param>
-        /// <param name="modules">Collection of modules contained in the assembly.</param>
+        /// <param name="modules">An <see cref="ObservableCollection{ModuleData}"/> of modules.</param>
         public AssemblyData(string name, string filePath, ObservableCollection<ModuleData> modules)
         {
             Name = name;
-            IsEnabled = false;
+            _isEnabled = false;
             FilePath = filePath;
+            ModuleType = null;
             Modules = modules;
             Loader = null;
             Assembly = null;
         }
 
-        /// <summary>
-        /// Gets or sets the name of the assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the assembly is enabled or disabled.
-        /// Will load or unload this assembly if the IModuleInfoRetriever is not null.
-        /// </summary>
-        public bool IsEnabled { get; set; }
+        /// <inheritdoc cref="IAssemblyData"/>
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { SetProperty(ref _isEnabled, value); }
+        }
 
-        /// <summary>
-        /// Gets or sets the file path to assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         public string FilePath { get; set; }
 
-        /// <summary>
-        /// Gets or sets the collection of modules contained in the assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         public ObservableCollection<ModuleData> Modules { get; set; }
 
-        /// <summary>
-        /// Gets or sets the AssemblyLoader to load/unload this assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
+        [XmlIgnore]
+        public Type ModuleType { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
         public AssemblyLoader Loader { get; set; }
 
-        /// <summary>
-        /// Gets or sets the actual Assembly of this AssemblyData.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
 

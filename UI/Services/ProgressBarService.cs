@@ -22,31 +22,25 @@
             _currentProgress = 0.0;
         }
 
-        /// <summary>
-        /// Gets or sets the name of the assembly currently being loaded.
-        /// </summary>
+        /// <inheritdoc cref="IProgressBarService"/>
         public string AssemblyName
         {
             get { return _assemblyName; }
             set { SetProperty(ref _assemblyName, value); }
         }
 
-        /// <summary>
-        /// Gets or sets the text of the progress bar.
-        /// </summary>
-        public string Text
-        {
-            get { return _text; }
-            set { SetProperty(ref _text, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the current progress of the progress bar.
-        /// </summary>
+        /// <inheritdoc cref="IProgressBarService"/>
         public double CurrentProgress
         {
             get { return _currentProgress; }
             set { SetProperty(ref _currentProgress, value); }
+        }
+
+        /// <inheritdoc cref="IProgressBarService"/>
+        public string Text
+        {
+            get { return _text; }
+            set { SetProperty(ref _text, value); }
         }
     }
 }

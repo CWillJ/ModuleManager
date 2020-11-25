@@ -7,46 +7,44 @@
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
-    using Prism.Mvvm;
 
     /// <summary>
     /// View model for module area.
     /// </summary>
-    public class AssemblyDataTreeViewModel : BindableBase
+    public class AssemblyDataTreeViewModel
     {
+        private readonly IModuleManagerCollectionService _moduleManagerCollectionService;
         private readonly IAssemblyLoaderService _assemblyLoaderService;
-        private IAssemblyCollectionService _assemblyCollectionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyDataTreeViewModel"/> class.
         /// </summary>
-        /// <param name="assemblyLoaderService">ModuleInfoRetriever.</param>
-        /// <param name="assemblyCollectionService">IAssemblyCollectionService.</param>
-        public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IAssemblyCollectionService assemblyCollectionService)
+        /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
+        /// <param name="moduleManagerCollectionService">Injected <see cref="IModuleManagerCollectionService"/>.</param>
+        public AssemblyDataTreeViewModel(IAssemblyLoaderService assemblyLoaderService, IModuleManagerCollectionService moduleManagerCollectionService)
         {
-            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _moduleManagerCollectionService = moduleManagerCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             // Load previously saved module configuration if the ConfigFile exists
             if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
             {
-                AssemblyCollectionService.Assemblies = LoadConfig();
+                _moduleManagerCollectionService.Assemblies = LoadConfig();
             }
         }
 
         /// <summary>
-        /// Gets or sets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
+        /// Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
         /// </summary>
-        public IAssemblyCollectionService AssemblyCollectionService
+        public IModuleManagerCollectionService ModuleManagerCollectionService
         {
-            get { return _assemblyCollectionService; }
-            set { SetProperty(ref _assemblyCollectionService, value); }
+            get { return _moduleManagerCollectionService; }
         }
 
         /// <summary>
         /// LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
         /// </summary>
-        /// <returns>A collection of AssemblyData objects.</returns>
+        /// <returns>An <see cref="ObservableCollection{AssemblyData}"/>.</returns>
         private ObservableCollection<AssemblyData> LoadConfig()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
@@ -87,19 +85,16 @@
                 }
             }
 
+            // Load and get data.
             _assemblyLoaderService.LoadAll(ref assemblies);
+
+            // Unload all disabled assemblies.
             _assemblyLoaderService.LoadUnload(ref assemblies);
 
-            return assemblies;
-        }
+            // Add all modules to the module catalog
+            ModuleManagerCollectionService.AddModulesToCatalog();
 
-        /// <summary>
-        /// Can always execute.
-        /// </summary>
-        /// <returns>True.</returns>
-        private bool CanExecute()
-        {
-            return true;
+            return assemblies;
         }
     }
 }

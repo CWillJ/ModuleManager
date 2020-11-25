@@ -1,13 +1,12 @@
 ﻿namespace ModuleManager.ViewModels
 {
     using ModuleManager.UI.Views;
-    using Prism.Mvvm;
     using Prism.Regions;
 
     /// <summary>
-    /// ModuleManagerViewModel will handle commands from the main view.
+    /// <see cref="ShellViewModel"/> will handle commands from the main view.
     /// </summary>
-    public class ShellViewModel : BindableBase
+    public class ShellViewModel
     {
         private readonly IRegionManager _regionManager;
 

@@ -5,7 +5,7 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// ModuleConstructor object holds the ConstructorInfo, class name, description and the parameters a constructor.
+    /// Holds the <see cref="ConstructorInfo"/>, class name, description and the parameters a constructor.
     /// </summary>
     public class ModuleConstructor : ModuleMemberData
     {
@@ -13,37 +13,42 @@
         /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.
         /// </summary>
         public ModuleConstructor()
+            : this(null, string.Empty, string.Empty, new ObservableCollection<MemberParameter>())
         {
-            ConstructorInfo = null;
-            Name = string.Empty;
-            Description = string.Empty;
-            Parameters = new ObservableCollection<MemberParameter>();
-            TypeName = GetType().Name;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.
         /// </summary>
-        /// <param name="constructorInfo">ConstructorInfo for this ModuleConstructor.</param>
+        /// <param name="constructorInfo"><see cref="ConstructorInfo"/> for this <see cref="ModuleConstructor"/>.</param>
         /// <param name="className">Class name.</param>
         /// <param name="description">Constructor description.</param>
-        /// <param name="parameters">Constructor parameters.</param>
+        /// <param name="parameters">A <see cref="ObservableCollection{MemberParameter}"/>, constructor parameters.</param>
         public ModuleConstructor(ConstructorInfo constructorInfo, string className, string description, ObservableCollection<MemberParameter> parameters)
         {
             ConstructorInfo = constructorInfo;
-            Name = @"Constructor For " + className;
+
+            if (string.IsNullOrEmpty(className))
+            {
+                Name = className;
+            }
+            else
+            {
+                Name = @"Constructor For " + className;
+            }
+
             Description = description;
             Parameters = parameters;
             TypeName = GetType().Name;
         }
 
         /// <summary>
-        /// Gets or sets the constructor parameters.
+        /// Gets or sets an <see cref="ObservableCollection{MemberParameter}"/>, the constructor parameters.
         /// </summary>
         public ObservableCollection<MemberParameter> Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the actuall ConstructorInfo for this ModuleConstructor.
+        /// Gets or sets the actuall <see cref="ConstructorInfo"/>.
         /// </summary>
         [XmlIgnore]
         public ConstructorInfo ConstructorInfo { get; set; }

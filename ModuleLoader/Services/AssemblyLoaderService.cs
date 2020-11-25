@@ -9,42 +9,30 @@
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
+    using Prism.Modularity;
 
-    /// <summary>
-    /// Retrieves assemblies from dll files.
-    /// </summary>
+    /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
-        private IModuleCatalogService _moduleCatalogService;
+        private readonly IModuleViewRegionService _moduleViewRegionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        /// <param name="moduleCatalogService">The module catalog service.</param>
-        public AssemblyLoaderService(IModuleCatalogService moduleCatalogService)
+        /// <param name="moduleViewRegionService">The given <see cref="IModuleViewRegionService"/>.</param>
+        public AssemblyLoaderService(IModuleViewRegionService moduleViewRegionService)
         {
+            _moduleViewRegionService = moduleViewRegionService;
+
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
             CurrentAssemblyName = string.Empty;
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
-
-            _moduleCatalogService = moduleCatalogService;
         }
 
-        /// <summary>
-        /// Gets the <see cref="IModuleCatalogService"/> used here.
-        /// </summary>
-        public IModuleCatalogService ModuleCatalogService
-        {
-            get { return _moduleCatalogService; }
-        }
-
-        /// <summary>
-        /// Gets or sets DllDirectory is the directory path of the .dll files.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string DllDirectory { get; set; }
 
         /// <summary>
@@ -52,19 +40,13 @@
         /// </summary>
         public string DllFilePath { get; set; }
 
-        /// <summary>
-        /// Gets or sets CurrentAssemblyName is the name of the type being loaded.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string CurrentAssemblyName { get; set; }
 
-        /// <summary>
-        /// Gets or sets CurrentTypeName is the name of the type being loaded.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string CurrentTypeName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the current percentage of load compleation of the current assembly.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public double PercentOfAssemblyLoaded { get; set; }
 
         /// <summary>
@@ -72,11 +54,7 @@
         /// </summary>
         public XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
-        /// <summary>
-        /// Initialized ModuleInfoRetriever's properties.
-        /// </summary>
-        /// <param name="moduleDirectory">Directory containing dll files.</param>
-        /// <param name="moduleFilePath">Name of the specific dll file.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void Initialize(string moduleDirectory, string moduleFilePath)
         {
             DllDirectory = moduleDirectory;
@@ -84,12 +62,7 @@
             DescriptionRetriever = new XmlDescriptionRetriever(moduleFilePath);
         }
 
-        /// <summary>
-        /// Creates an ObservableCollection of AssemblyData to organize
-        /// the information from the dll file and its related xml file.
-        /// </summary>
-        /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-        /// <returns>Returns an collection of AssemblyData objects.</returns>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
@@ -112,16 +85,17 @@
                 Load(ref assembly);
                 Unload(ref assembly);
 
-                assemblies.Add(assembly);
+                // IF the ModuleType has not been set, it is not a NextGen module
+                if (assembly.ModuleType != null)
+                {
+                    assemblies.Add(assembly);
+                }
             }
 
             return assemblies;
         }
 
-        /// <summary>
-        /// Loads all enabled assemblies and unloads the disabled ones.
-        /// </summary>
-        /// <param name="assembly">Assembly to load/unload passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadUnload(ref AssemblyData assembly)
         {
             if (assembly.IsEnabled)
@@ -134,10 +108,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads all enabled assemblies and unloads the disabled ones.
-        /// </summary>
-        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assembly;
@@ -159,10 +130,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads all assemblies in a collection.
-        /// </summary>
-        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assembly;
@@ -175,10 +143,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads an assembly.
-        /// </summary>
-        /// <param name="assembly">Assembly to load passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void Load(ref AssemblyData assembly)
         {
             if (!string.IsNullOrEmpty(assembly.FilePath))
@@ -221,16 +186,27 @@
 
                     if (tempModule != null)
                     {
+                        Type[] typeInterfaces = type.GetInterfaces();
+                        string[] typeFullNames = new string[typeInterfaces.Length];
+
+                        for (int i = 0; i < typeInterfaces.Length; i++)
+                        {
+                            typeFullNames[i] = typeInterfaces[i].FullName;
+                        }
+
+                        if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule"))
+                        {
+                            assembly.ModuleType = type;
+                            _moduleViewRegionService.AddViewToRegion(type);
+                        }
+
                         assembly.Modules.Add(tempModule);
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// Unloads an assembly.
-        /// </summary>
-        /// <param name="assembly">Assembly to unload passed by reference.</param>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void Unload(ref AssemblyData assembly)
         {
             if (assembly.Loader == null)
@@ -241,6 +217,14 @@
             assembly.Loader.Unload();
             assembly.Loader = null;
             assembly.Assembly = null;
+        }
+
+        private void AddToRegionManager()
+        {
+        }
+
+        private void RemoveFromRegionManager()
+        {
         }
 
         /// <summary>
@@ -254,9 +238,6 @@
             {
                 return null;
             }
-
-            // Check to see if it is a NextGen module
-            ModuleCatalogService.AddModule(type);
 
             return new ModuleData(
                 type,

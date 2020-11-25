@@ -13,11 +13,11 @@
         /// <summary>
         /// Convery string name of a member type to an icon.
         /// </summary>
-        /// <param name="value">Object passed in.</param>
-        /// <param name="targetType">Target type.</param>
-        /// <param name="parameter">Parameter object.</param>
-        /// <param name="culture">Culture.</param>
-        /// <returns>String path to an image icon.</returns>
+        /// <param name="value"><see cref="object"/> passed in.</param>
+        /// <param name="targetType">Target <see cref="Type"/>.</param>
+        /// <param name="parameter">Parameter <see cref="object"/>.</param>
+        /// <param name="culture"><see cref="CultureInfo"/>.</param>
+        /// <returns><see cref="string"/> path to an image icon.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string iconDirectory = Directory.GetParent(
@@ -35,11 +35,11 @@
         /// <summary>
         /// Not implemented.
         /// </summary>
-        /// <param name="value">Object passed in.</param>
-        /// <param name="targetType">Target type.</param>
-        /// <param name="parameter">Parameter object.</param>
-        /// <param name="culture">Culture.</param>
-        /// <returns>Nothing.</returns>
+        /// <param name="value"><see cref="object"/> passed in.</param>
+        /// <param name="targetType">Target <see cref="Type"/>.</param>
+        /// <param name="parameter">Parameter <see cref="object"/>.</param>
+        /// <param name="culture"><see cref="CultureInfo"/>.</param>
+        /// <returns>Nothing, this is unused.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

@@ -29,48 +29,48 @@
         string DllDirectory { get; set; }
 
         /// <summary>
-        /// Initialized ModuleInfoRetriever's properties.
+        /// Initialize properties.
         /// </summary>
         /// <param name="moduleDirectory">Directory containing dll files.</param>
         /// <param name="moduleFilePath">Name of the specific dll file.</param>
         public void Initialize(string moduleDirectory, string moduleFilePath);
 
         /// <summary>
-        /// Creates an ObservableCollection of AssemblyData to organize
+        /// Creates an <see cref="ObservableCollection{ModuleInfoData}"/> to organize
         /// the information from the dll file and its related xml file.
         /// </summary>
         /// <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-        /// <returns>Returns an collection of AssemblyData objects.</returns>
+        /// <returns>Returns an <see cref="ObservableCollection{ModuleInfoData}"/>.</returns>
         public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles);
 
         /// <summary>
-        /// Loads all enabled assemblies and unloads the disabled ones.
+        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
         /// </summary>
         /// <param name="assembly">An <see cref="AssemblyData"/> object passed by reference.</param>
         public void LoadUnload(ref AssemblyData assembly);
 
         /// <summary>
-        /// Loads all enabled assemblies and unloads the disabled ones.
+        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
         /// </summary>
-        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects passed by reference.</param>
+        /// <param name="assemblies">A <see cref="ObservableCollection{ModuleInfoData}"/> passed by reference.</param>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
-        /// Loads all assemblies in a collection.
+        /// Loads all <see cref="AssemblyData"/> in a <see cref="ObservableCollection{ModuleInfoData}"/>.
         /// </summary>
-        /// <param name="assemblies">A collection of <see cref="AssemblyData"/> objects.</param>
+        /// <param name="assemblies">A <see cref="ObservableCollection{ModuleInfoData}"/> objects.</param>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
-        /// Load an assembly.
+        /// Load an <see cref="AssemblyData"/>.
         /// </summary>
         /// <param name="assembly">Assembly to load passed by reference.</param>
         public void Load(ref AssemblyData assembly);
 
         /// <summary>
-        /// Unload an assembly.
+        /// Unload an <see cref="AssemblyData"/>.
         /// </summary>
-        /// <param name="assembly">Assembly to unload passed by reference.</param>
+        /// <param name="assembly"><see cref="AssemblyData"/> to unload passed by reference.</param>
         public void Unload(ref AssemblyData assembly);
     }
 }

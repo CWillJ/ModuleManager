@@ -30,107 +30,101 @@
             GetModuleDescription returns a clean string from the inner xml
             of the class description of the Type.
             </summary>
-            <param name="type">Type to get the string from.</param>
+            <param name="type"><see cref="T:System.Type"/> to get the string desctiption from.</param>
             <returns>String representation of the class description.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetMethodDescription(System.Reflection.MethodInfo,System.Int32)">
             <summary>
-            GetMethodDescription returns a string from the inner xml of the method
-            description of the member.
+            Returns a string from the inner xml of the method description.
             </summary>
-            <param name="method">MethodInfo to get the string from.</param>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/> to get the string from.</param>
             <param name="index">Index used for methods/constructors with same name.</param>
             <returns>String representation of the method description.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetConstructorDescription(System.Reflection.ConstructorInfo,System.Int32)">
             <summary>
-            GetConstructorDescription returns a string from the inner xml of the
-            constructor description of the member.
+            Returns a string from the inner xml of the constructor description.
             </summary>
-            <param name="constructor">ConstructorInfo to get the string from.</param>
+            <param name="constructor"><see cref="T:System.Reflection.ConstructorInfo"/> to get the string from.</param>
             <param name="index">Index used for methods/constructors with same name.</param>
             <returns>String representation of the method description.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetPropertyDescription(System.Reflection.PropertyInfo)">
             <summary>
-            GetProperyDescription will return a string from the inner xml of
-            the property desctiption.
+            Returns a string from the inner xml of the property desctiption.
             </summary>
-            <param name="property">PropertyInfo to get the description from.</param>
+            <param name="property"><see cref="T:System.Reflection.PropertyInfo"/> to get the description from.</param>
             <returns>String representation of the property description.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetMemberParameterDescription(System.Reflection.MethodBase,System.Int32,System.Int32)">
             <summary>
-            GetMemberParameterDescription returns a string from the inner xml of the
-            parameter description of the member.
+            Returns a string from the inner xml of the parameter description.
             </summary>
-            <param name="method">MemberInfo to get the string from.</param>
+            <param name="method"><see cref="T:System.Reflection.MemberInfo"/> to get the string from.</param>
             <param name="parameterIndex">Integer index of parameter.</param>
             <param name="memberIndex">Integer index of member.</param>
             <returns>String representation of the parameter description.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetParametersFromList(System.Reflection.MethodBase,System.Int32)">
             <summary>
-            GetParametersFromList will return an ObservableCollection of MemberParameter
-            type from a list of ParameterInfo type.
+            Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from a list of <see cref="T:System.Reflection.ParameterInfo"/>.
             </summary>
-            <param name="method">The method to get the parameters from.</param>
+            <param name="method">The <see cref="T:System.Reflection.MethodBase"/> to get the parameters from.</param>
             <param name="memberIndex">Integer index of member.</param>
-            <returns>An ObservableCollection of MemberParameter type.</returns>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetMemberReturnDescription(System.Reflection.MethodBase)">
             <summary>
-            GetMemberReturnDescription returns a string from the inner xml of the
-            return description of the member.
+            Returns a string desctiption of the return value of a <see cref="T:System.Reflection.MethodBase"/>.
             </summary>
-            <param name="method">MethodBase to get the string from.</param>
-            <returns>String representation of the return description.</returns>
+            <param name="method"><see cref="T:System.Reflection.MethodBase"/> to get the string desctiption of the return value from.</param>
+            <returns>String desctiption of the return value.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetParametersFromXml(System.Reflection.MethodBase,System.Int32)">
             <summary>
-            GetParametersFromXml will return an ObservableCollection of MemberParameters.
+            Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
             </summary>
-            <param name="method">The MethodBase to get parameters from.</param>
+            <param name="method">The <see cref="T:System.Reflection.MethodBase"/> to get parameters from.</param>
             <param name="memberIndex">Member index.</param>
-            <returns>An ObservableCollection of MemberParameters.</returns>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetMemberXmlNode(System.Reflection.MethodBase,System.Int32)">
             <summary>
-            GetMemberXmlNode returns an XmlNode of the specified MemberInfo.
+            Returns an <see cref="T:System.Xml.XmlNode"/> of the specified <see cref="T:System.Reflection.MemberInfo"/>.
             </summary>
-            <param name="method">The MethodBase to get the XmlNode from.</param>
+            <param name="method">The <see cref="T:System.Reflection.MethodBase"/> to get the <see cref="T:System.Xml.XmlNode"/> from.</param>
             <param name="nodeIndex">The specified node index to handle members with the same name.</param>
-            <returns>XmlNode.</returns>
+            <returns><see cref="T:System.Xml.XmlNode"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetModuleXmlNode(System.Type)">
             <summary>
-            GetModuleXmlNode returns an XmlNode of the specified Type.
+            Returns an <see cref="T:System.Xml.XmlNode"/> of the specified <see cref="T:System.Type"/>.
             </summary>
-            <param name="type">The Type to get the XmlNode from.</param>
-            <returns>XmlNode.</returns>
+            <param name="type">The <see cref="T:System.Type"/> to get the <see cref="T:System.Xml.XmlNode"/> from.</param>
+            <returns><see cref="T:System.Xml.XmlNode"/> that holds info about the passed in <see cref="T:System.Type"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetPropertyXmlNode(System.Reflection.PropertyInfo)">
             <summary>
-            GetPropertyXmlNode returns an XmlNode of the specified property.
+            Returns an <see cref="T:System.Xml.XmlNode"/> of the specified <see cref="T:System.Reflection.PropertyInfo"/>.
             </summary>
-            <param name="property">The property to get the XmlNode from.</param>
-            <returns>XmlNode.</returns>
+            <param name="property">The <see cref="T:System.Reflection.PropertyInfo"/> to get the <see cref="T:System.Xml.XmlNode"/> from.</param>
+            <returns><see cref="T:System.Xml.XmlNode"/> that holds info about the passed in <see cref="T:System.Reflection.PropertyInfo"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetXmlNodeString(System.Xml.XmlNode,System.String,System.Int32)">
             <summary>
-            GetXmlNodeString will take an XmlNode, string xml tag, and an index and return the inner xml.
+            Takes an <see cref="T:System.Xml.XmlNode"/>, string xml tag, and an index and return the inner xml.
             </summary>
-            <param name="xmlNode">The member XmlNode.</param>
+            <param name="xmlNode">The member <see cref="T:System.Xml.XmlNode"/>.</param>
             <param name="xmlTag">This is the string of the xml tag.</param>
             <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
-            <returns>InnerXml of the XmlNode.</returns>
+            <returns>InnerXml of the <see cref="T:System.Xml.XmlNode"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Classes.XmlDescriptionRetriever.GetXmlNodeText(System.Xml.XmlNode)">
             <summary>
             Returns the formatted text of the inner xml.
             </summary>
-            <param name="xmlNode">XmlNode to get text from.</param>
-            <returns>Formatted string of the XmlNode.InnerXml.</returns>
+            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/> to get text from.</param>
+            <returns>Formatted string of the <see cref="T:System.Xml.XmlNode"/> InnerXml.</returns>
         </member>
         <member name="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService">
             <summary>
@@ -159,69 +153,87 @@
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Initialize(System.String,System.String)">
             <summary>
-            Initialized ModuleInfoRetriever's properties.
+            Initialize properties.
             </summary>
             <param name="moduleDirectory">Directory containing dll files.</param>
             <param name="moduleFilePath">Name of the specific dll file.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.GetAssemblies(System.String[])">
             <summary>
-            Creates an ObservableCollection of AssemblyData to organize
+            Creates an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to organize
             the information from the dll file and its related xml file.
             </summary>
             <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-            <returns>Returns an collection of AssemblyData objects.</returns>
+            <returns>Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadUnload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Loads all enabled assemblies and unloads the disabled ones.
+            Loads all enabled <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> and unloads the disabled ones.
             </summary>
             <param name="assembly">An <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> object passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
-            Loads all enabled assemblies and unloads the disabled ones.
+            Loads all enabled <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> and unloads the disabled ones.
             </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
-            Loads all assemblies in a collection.
+            Loads all <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> in a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
             </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.</param>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Load an assembly.
+            Load an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
             </summary>
             <param name="assembly">Assembly to load passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Unload an assembly.
+            Unload an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
             </summary>
-            <param name="assembly">Assembly to unload passed by reference.</param>
+            <param name="assembly"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to unload passed by reference.</param>
+        </member>
+        <member name="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager">
+            <summary>
+            Gets the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/> property.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.Region">
+            <summary>
+            Gets or sets the region to store the view in.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.AddViewToRegion(System.Type)">
+            <summary>
+            Adds the view to the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.
+            </summary>
+            <param name="view">The <see cref="T:System.Type"/> to add to the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RemoveViewFromRegion(System.Type)">
+            <summary>
+            Removes the view to the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.
+            </summary>
+            <param name="view">The <see cref="T:System.Type"/> to remove from the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.</param>
         </member>
         <member name="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService">
-            <summary>
-            Retrieves assemblies from dll files.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService)">
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService"/> class.
             </summary>
-            <param name="moduleCatalogService">The module catalog service.</param>
-        </member>
-        <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.ModuleCatalogService">
-            <summary>
-            Gets the <see cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleCatalogService"/> used here.
-            </summary>
+            <param name="moduleViewRegionService">The given <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>.</param>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllDirectory">
-            <summary>
-            Gets or sets DllDirectory is the directory path of the .dll files.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllFilePath">
             <summary>
@@ -229,19 +241,13 @@
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.CurrentAssemblyName">
-            <summary>
-            Gets or sets CurrentAssemblyName is the name of the type being loaded.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.CurrentTypeName">
-            <summary>
-            Gets or sets CurrentTypeName is the name of the type being loaded.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.PercentOfAssemblyLoaded">
-            <summary>
-            Gets or sets the current percentage of load compleation of the current assembly.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DescriptionRetriever">
             <summary>
@@ -249,49 +255,25 @@
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.Initialize(System.String,System.String)">
-            <summary>
-            Initialized ModuleInfoRetriever's properties.
-            </summary>
-            <param name="moduleDirectory">Directory containing dll files.</param>
-            <param name="moduleFilePath">Name of the specific dll file.</param>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.GetAssemblies(System.String[])">
-            <summary>
-            Creates an ObservableCollection of AssemblyData to organize
-            the information from the dll file and its related xml file.
-            </summary>
-            <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
-            <returns>Returns an collection of AssemblyData objects.</returns>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.LoadUnload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
-            <summary>
-            Loads all enabled assemblies and unloads the disabled ones.
-            </summary>
-            <param name="assembly">Assembly to load/unload passed by reference.</param>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
-            <summary>
-            Loads all enabled assemblies and unloads the disabled ones.
-            </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects passed by reference.</param>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
-            <summary>
-            Loads all assemblies in a collection.
-            </summary>
-            <param name="assemblies">A collection of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> objects.</param>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
-            <summary>
-            Loads an assembly.
-            </summary>
-            <param name="assembly">Assembly to load passed by reference.</param>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
-            <summary>
-            Unloads an assembly.
-            </summary>
-            <param name="assembly">Assembly to unload passed by reference.</param>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.GetSingleModule(System.Type)">
             <summary>
@@ -320,6 +302,28 @@
             </summary>
             <param name="type">The Type where the methods are coming from.</param>
             <returns>An ObservableCollection of ModuleMethod objects.</returns>
+        </member>
+        <member name="T:ModuleManager.ModuleLoader.Services.ModuleViewRegionService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/> implementations.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.ModuleViewRegionService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.Region">
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
+        </member>
+        <member name="P:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.RegionManager">
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.AddViewToRegion(System.Type)">
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.RemoveViewFromRegion(System.Type)">
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
         </member>
     </members>
 </doc>

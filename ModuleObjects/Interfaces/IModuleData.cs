@@ -6,15 +6,20 @@
     /// <summary>
     /// Module member object interface.
     /// </summary>
-    public interface IModuleData : ITreeViewData
+    public interface IModuleData
     {
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets the description of the module.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets all of the module members.
+        /// Gets or sets an <see cref="ObservableCollection{ModuleMemberData}"/> of the module members.
         /// </summary>
         public ObservableCollection<ModuleMemberData> Members { get; set; }
     }

@@ -8,24 +8,23 @@
     /// </summary>
     public class ProgressBarViewModel : BindableBase
     {
-        private IProgressBarService _progressBarService;
+        private readonly IProgressBarService _progressBarService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgressBarViewModel"/> class.
         /// </summary>
-        /// <param name="progressBarService">Progress bar service.</param>
+        /// <param name="progressBarService">Injected <see cref="IProgressBarService"/>.</param>
         public ProgressBarViewModel(IProgressBarService progressBarService)
         {
             _progressBarService = progressBarService;
         }
 
         /// <summary>
-        /// Gets or sets the IProgressBarService.
+        /// Gets the <see cref="IProgressBarService"/>.
         /// </summary>
         public IProgressBarService ProgressBarService
         {
             get { return _progressBarService; }
-            set { _progressBarService = value; }
         }
     }
 }

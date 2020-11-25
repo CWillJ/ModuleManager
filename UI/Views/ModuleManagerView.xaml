@@ -17,7 +17,6 @@
         <!--  Load Save Buttons  -->
         <ContentControl Grid.Row="0" prism:RegionManager.RegionName="ButtonsRegion" />
 
-        <!--  Module View Area  -->
         <Grid
             Grid.Row="1"
             Grid.ColumnSpan="2"
@@ -28,7 +27,10 @@
                 <ColumnDefinition Width="2.25*" />
             </Grid.ColumnDefinitions>
 
+            <!--  Assembly Data Tree  -->
             <ContentControl Grid.Column="0" prism:RegionManager.RegionName="AssemblyDataTreeRegion" />
+
+            <!--  Selected Item Description  -->
             <ContentControl Grid.Column="1" prism:RegionManager.RegionName="AssemblyDataRegion" />
         </Grid>
     </Grid>
