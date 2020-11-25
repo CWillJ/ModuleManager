@@ -10,20 +10,19 @@
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using Prism.Modularity;
-    using Prism.Regions;
 
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
-        private readonly IRegionManager _regionManager;
+        private readonly IModuleViewRegionService _moduleViewRegionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        /// <param name="regionManager">The given <see cref="IRegionManager"/>.</param>
-        public AssemblyLoaderService(IRegionManager regionManager)
+        /// <param name="moduleViewRegionService">The given <see cref="IModuleViewRegionService"/>.</param>
+        public AssemblyLoaderService(IModuleViewRegionService moduleViewRegionService)
         {
-            _regionManager = regionManager;
+            _moduleViewRegionService = moduleViewRegionService;
 
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
@@ -86,7 +85,11 @@
                 Load(ref assembly);
                 Unload(ref assembly);
 
-                assemblies.Add(assembly);
+                // IF the ModuleType has not been set, it is not a NextGen module
+                if (assembly.ModuleType != null)
+                {
+                    assemblies.Add(assembly);
+                }
             }
 
             return assemblies;
@@ -183,9 +186,18 @@
 
                     if (tempModule != null)
                     {
-                        if (type.GetInterfaces().Contains(typeof(IModule)))
+                        Type[] typeInterfaces = type.GetInterfaces();
+                        string[] typeFullNames = new string[typeInterfaces.Length];
+
+                        for (int i = 0; i < typeInterfaces.Length; i++)
+                        {
+                            typeFullNames[i] = typeInterfaces[i].FullName;
+                        }
+
+                        if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule"))
                         {
                             assembly.ModuleType = type;
+                            _moduleViewRegionService.AddViewToRegion(type);
                         }
 
                         assembly.Modules.Add(tempModule);
