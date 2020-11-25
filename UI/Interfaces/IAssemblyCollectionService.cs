@@ -6,7 +6,7 @@
     /// <summary>
     /// An Assembly Collection.
     /// </summary>
-    public interface IModuleManagerCollectionService
+    public interface IAssemblyCollectionService
     {
         /// <summary>
         /// Gets or sets a <see cref="ObservableCollection{AssemblyData}"/>.

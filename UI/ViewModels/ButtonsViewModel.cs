@@ -19,7 +19,7 @@
     public class ButtonsViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IModuleManagerCollectionService _moduleManagerCollectionService;
+        private readonly IAssemblyCollectionService _assemblyCollectionService;
         private readonly IAssemblyLoaderService _assemblyLoaderService;
         private readonly IProgressBarService _progressBarService;
 
@@ -27,12 +27,12 @@
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
         /// </summary>
         /// <param name="regionManager">Injected <see cref="IRegionManager"/>.</param>
-        /// <param name="moduleManagerCollectionService">Injected <see cref="IModuleManagerCollectionService"/>.</param>
+        /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
         /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
         /// <param name="progressBarService">Injected <see cref="IProgressBarService"/>.</param>
         public ButtonsViewModel(
             IRegionManager regionManager,
-            IModuleManagerCollectionService moduleManagerCollectionService,
+            IAssemblyCollectionService assemblyCollectionService,
             IAssemblyLoaderService assemblyLoaderService,
             IProgressBarService progressBarService)
         {
@@ -40,7 +40,7 @@
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
-            _moduleManagerCollectionService = moduleManagerCollectionService ?? throw new ArgumentNullException("ModuleManagerCollectionService");
+            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
 
             UseSaveFileDialog = false;
 
@@ -51,9 +51,6 @@
 
             // Save the current module setup, checkboxes and all, to an xml file.
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
-
-            // Invokes the ClassLibrary1.Class2.Method2 method.
-            TestCommand = new Prism.Commands.DelegateCommand(TestMethod, CanExecute);
         }
 
         /// <summary>
@@ -67,11 +64,11 @@
         public bool LoadingModules { get; set; }
 
         /// <summary>
-        /// Gets the <see cref="IModuleManagerCollectionService"/>.
+        /// Gets the <see cref="IAssemblyCollectionService"/>.
         /// </summary>
-        public IModuleManagerCollectionService ModuleManagerCollectionService
+        public IAssemblyCollectionService AssemblyCollectionService
         {
-            get { return _moduleManagerCollectionService; }
+            get { return _assemblyCollectionService; }
         }
 
         /// <summary>
@@ -88,11 +85,6 @@
         /// Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
         /// </summary>
         public Prism.Commands.DelegateCommand SaveConfigCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the TestCommand.
-        /// </summary>
-        public Prism.Commands.DelegateCommand TestCommand { get; set; }
 
         /// <summary>
         /// StoreModules will attempt to get all assemblies from a dll and store it
@@ -120,7 +112,7 @@
             _assemblyLoaderService.DllDirectory = moduleDirectory;
 
             // Show progress bar
-            ModuleManagerCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
+            AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
             _progressBarService.CurrentProgress = 0.0;
             _progressBarService.AssemblyName = string.Empty;
             _progressBarService.Text = string.Empty;
@@ -137,7 +129,7 @@
             thread.Start();
 
             // Run async to allow UI thread to update UI with the property changes above.
-            ModuleManagerCollectionService.Assemblies = await Task.Run(() => _assemblyLoaderService.GetAssemblies(dllFiles));
+            AssemblyCollectionService.Assemblies = await Task.Run(() => _assemblyLoaderService.GetAssemblies(dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
@@ -148,7 +140,7 @@
             _progressBarService.Text = string.Empty;
 
             // Add all modules to the module catalog
-            ModuleManagerCollectionService.AddModulesToCatalog();
+            AssemblyCollectionService.AddModulesToCatalog();
         }
 
         /// <summary>
@@ -241,7 +233,7 @@
             ////}
 
             using StreamWriter wr = new StreamWriter(saveFile);
-            serializer.Serialize(wr, ModuleManagerCollectionService.Assemblies);
+            serializer.Serialize(wr, AssemblyCollectionService.Assemblies);
             wr.Close();
 
             RadWindow.Alert(@"Configuration Saved");
@@ -256,31 +248,6 @@
             if (navigatePath != null)
             {
                 _regionManager.RequestNavigate("ContentRegion", navigatePath);
-            }
-        }
-
-        private async void TestMethod()
-        {
-            bool test = false;
-
-            foreach (var assembly in ModuleManagerCollectionService.Assemblies)
-            {
-                if (assembly.IsEnabled && (assembly.Assembly != null))
-                {
-                    test = true;
-
-                    // parameters for ClassLibrary1.Class2.Method2
-                    object[] parameters = { @"Here to test", (int)21 };
-
-                    string some = await Task.Run(() => assembly.Modules[1].Methods[1].Invoke(parameters).ToString());
-
-                    RadWindow.Alert(some);
-                }
-            }
-
-            if (!test)
-            {
-                RadWindow.Alert(@"No Assemblies Are Loaded");
             }
         }
 

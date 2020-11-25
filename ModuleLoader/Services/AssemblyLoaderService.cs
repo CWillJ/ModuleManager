@@ -194,6 +194,7 @@
                             typeFullNames[i] = typeInterfaces[i].FullName;
                         }
 
+                        // Looking only for modules that inherret from IExpansion Module
                         if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule"))
                         {
                             assembly.ModuleType = type;
@@ -217,14 +218,6 @@
             assembly.Loader.Unload();
             assembly.Loader = null;
             assembly.Assembly = null;
-        }
-
-        private void AddToRegionManager()
-        {
-        }
-
-        private void RemoveFromRegionManager()
-        {
         }
 
         /// <summary>

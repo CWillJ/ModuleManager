@@ -36,7 +36,7 @@
                 MinHeight="20"
                 Background="LightSteelBlue"
                 FontWeight="Bold"
-                Text="{Binding ModuleManagerCollectionService.SelectedItemName, Mode=OneWay}"
+                Text="{Binding AssemblyCollectionService.SelectedItemName, Mode=OneWay}"
                 TextAlignment="Center" />
         </Border>
 
@@ -51,7 +51,7 @@
             <ScrollViewer Margin="10,5,0,0" HorizontalScrollBarVisibility="Disabled">
                 <ContentControl
                     x:Name="MemberText"
-                    Content="{Binding ModuleManagerCollectionService.SelectedItem, Mode=OneWay}"
+                    Content="{Binding AssemblyCollectionService.SelectedItem, Mode=OneWay}"
                     ContentTemplateSelector="{StaticResource ModuleDataTemplateSelector}" />
             </ScrollViewer>
         </Border>

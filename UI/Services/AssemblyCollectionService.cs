@@ -12,9 +12,9 @@
     using Prism.Mvvm;
 
     /// <summary>
-    /// Service providing concrete <see cref="IModuleManagerCollectionService"/> implementations.
+    /// Service providing concrete <see cref="IAssemblyCollectionService"/> implementations.
     /// </summary>
-    public class ModuleManagerCollectionService : BindableBase, IModuleManagerCollectionService
+    public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
         private readonly IAssemblyLoaderService _assemblyLoaderService;
 
@@ -24,10 +24,10 @@
         private string _selectedItemName;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleManagerCollectionService"/> class.
+        /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
         /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
-        public ModuleManagerCollectionService(IAssemblyLoaderService asssemblyLoaderService)
+        public AssemblyCollectionService(IAssemblyLoaderService asssemblyLoaderService)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
             _assemblyCatalog = new ModuleManagerCatalog();
@@ -37,7 +37,7 @@
             _assemblyLoaderService = asssemblyLoaderService;
         }
 
-        /// <inheritdoc cref="IModuleManagerCollectionService"/>
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
         public ObservableCollection<AssemblyData> Assemblies
         {
             get { return _assemblies; }
@@ -53,7 +53,7 @@
             set { _assemblyCatalog = value; }
         }
 
-        /// <inheritdoc cref="IModuleManagerCollectionService"/>
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
         public object SelectedItem
         {
             get
@@ -68,14 +68,14 @@
             }
         }
 
-        /// <inheritdoc cref="IModuleManagerCollectionService"/>
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
         public string SelectedItemName
         {
             get { return _selectedItemName; }
             set { SetProperty(ref _selectedItemName, value); }
         }
 
-        /// <inheritdoc cref="IModuleManagerCollectionService"/>
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
         public void AddModulesToCatalog()
         {
             foreach (AssemblyData assembly in Assemblies)

@@ -33,17 +33,5 @@
             Content="Save Configuration"
             FontSize="10"
             FontWeight="Bold" />
-
-        <!--  For Testing ONLY  -->
-        <telerik:RadButton
-            Width="120"
-            Height="40"
-            Margin="25,10,5,5"
-            HorizontalAlignment="Left"
-            Background="IndianRed"
-            Command="{Binding Path=TestCommand}"
-            Content="Test"
-            FontSize="10"
-            FontWeight="Bold" />
     </StackPanel>
 </UserControl>
