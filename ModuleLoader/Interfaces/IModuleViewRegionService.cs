@@ -11,12 +11,12 @@
         /// <summary>
         /// Gets the <see cref="RegionManager"/> property.
         /// </summary>
-        public RegionManager RegionManager { get; }
+        public IRegionManager RegionManager { get; }
 
         /// <summary>
         /// Gets or sets the region to store the view in.
         /// </summary>
-        public string Region { get; set; }
+        public string RegionName { get; set; }
 
         /// <summary>
         /// Adds the view to the <see cref="RegionManager"/>.

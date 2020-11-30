@@ -27,9 +27,9 @@
         /// <param name="containerProvider">A <see cref="IContainerProvider"/> used for progam-wide type resolving.</param>
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RegisterViewWithRegion("ButtonsRegion", typeof(ButtonsView));
-            _regionManager.RegisterViewWithRegion("AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
-            _regionManager.RegisterViewWithRegion("AssemblyDataRegion", typeof(AssemblyDataView));
+            _regionManager.RegisterViewWithRegion(@"ButtonsRegion", typeof(ButtonsView));
+            _regionManager.RegisterViewWithRegion(@"AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
+            _regionManager.RegisterViewWithRegion(@"AssemblyDataRegion", typeof(AssemblyDataView));
         }
 
         /// <summary>

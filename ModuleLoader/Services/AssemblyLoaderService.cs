@@ -6,23 +6,27 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Threading.Tasks;
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using Prism.Modularity;
+    using Prism.Regions;
 
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
         private readonly IModuleViewRegionService _moduleViewRegionService;
+        private readonly IRegionManager _regionManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
         /// <param name="moduleViewRegionService">The given <see cref="IModuleViewRegionService"/>.</param>
-        public AssemblyLoaderService(IModuleViewRegionService moduleViewRegionService)
+        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        public AssemblyLoaderService(IModuleViewRegionService moduleViewRegionService, IRegionManager regionManager)
         {
             _moduleViewRegionService = moduleViewRegionService;
+            _regionManager = regionManager;
 
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
@@ -181,7 +185,7 @@
                     CurrentTypeName = type.Name;
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
-                    Debug.WriteLine("Adding Module: " + CurrentTypeName + " From " + CurrentAssemblyName);
+                    Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
                     ModuleData tempModule = GetSingleModule(type);
 
                     if (tempModule != null)
@@ -194,8 +198,8 @@
                             typeFullNames[i] = typeInterfaces[i].FullName;
                         }
 
-                        // Looking only for modules that inherret from IExpansion Module
-                        if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule"))
+                        // Looking only for modules that inherret from IExpansionModule or ICoreModule
+                        if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule") || typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.ICoreModule"))
                         {
                             assembly.ModuleType = type;
                             _moduleViewRegionService.AddViewToRegion(type);
@@ -296,13 +300,31 @@
                 }
                 catch (FileNotFoundException)
                 {
-                    propertyString = property.ToString();
-                    dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
+                    Debug.WriteLine(@"Cannot Load Type For " + property.Name);
+
+                    try
+                    {
+                        propertyString = property.ToString();
+                        dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        dataType = string.Empty;
+                    }
                 }
                 catch (TypeLoadException)
                 {
-                    propertyString = property.ToString();
-                    dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
+                    Debug.WriteLine(@"Cannot Load Type For " + property.Name);
+
+                    try
+                    {
+                        propertyString = property.ToString();
+                        dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
+                    }
+                    catch (TypeLoadException)
+                    {
+                        dataType = string.Empty;
+                    }
                 }
 
                 properties.Add(new ModuleProperty(
@@ -365,8 +387,15 @@
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
 
-                    methodString = method.ToString();
-                    returnType = methodString.Substring(0, methodString.IndexOf(@" "));
+                    try
+                    {
+                        methodString = method.ToString();
+                        returnType = methodString.Substring(0, methodString.IndexOf(@" "));
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        returnType = string.Empty;
+                    }
                 }
                 catch (FileLoadException)
                 {

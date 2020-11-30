@@ -206,7 +206,7 @@
             Gets the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/> property.
             </summary>
         </member>
-        <member name="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.Region">
+        <member name="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionName">
             <summary>
             Gets or sets the region to store the view in.
             </summary>
@@ -226,11 +226,12 @@
         <member name="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService)">
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService,Prism.Regions.IRegionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService"/> class.
             </summary>
             <param name="moduleViewRegionService">The given <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>.</param>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllDirectory">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
@@ -308,12 +309,13 @@
             Service providing concrete <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/> implementations.
             </summary>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.#ctor">
+        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.#ctor(Prism.Regions.IRegionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.ModuleViewRegionService"/> class.
             </summary>
+            <param name="regionManager"><see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
-        <member name="P:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.Region">
+        <member name="P:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.RegionName">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.RegionManager">

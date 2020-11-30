@@ -9,22 +9,23 @@
     /// </summary>
     public class ModuleViewRegionService : IModuleViewRegionService
     {
-        private readonly RegionManager _regionManager;
+        private readonly IRegionManager _regionManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleViewRegionService"/> class.
         /// </summary>
-        public ModuleViewRegionService()
+        /// <param name="regionManager"><see cref="IRegionManager"/>.</param>
+        public ModuleViewRegionService(IRegionManager regionManager)
         {
-            _regionManager = new RegionManager();
-            Region = @"ButtonsRegion";
+            _regionManager = regionManager;
+            RegionName = @"AssemblyDataRegion";
         }
 
         /// <inheritdoc cref="IModuleViewRegionService"/>
-        public string Region { get; set; }
+        public string RegionName { get; set; }
 
         /// <inheritdoc cref="IModuleViewRegionService"/>
-        public RegionManager RegionManager
+        public IRegionManager RegionManager
         {
             get { return _regionManager; }
         }
@@ -32,7 +33,7 @@
         /// <inheritdoc cref="IModuleViewRegionService"/>
         public void AddViewToRegion(Type view)
         {
-            ////RegionManager.RegisterViewWithRegion(Region, view);
+            ////RegionManager.RegisterViewWithRegion(RegionName, view);
         }
 
         /// <inheritdoc cref="IModuleViewRegionService"/>
