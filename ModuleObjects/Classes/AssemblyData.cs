@@ -36,6 +36,12 @@
             Modules = modules;
             Loader = null;
             Assembly = null;
+
+            ViewTypes = new ObservableCollection<Type>();
+            if (Modules.Count > 0)
+            {
+                IssolateViewTypes();
+            }
         }
 
         /// <inheritdoc cref="IAssemblyData"/>
@@ -65,6 +71,44 @@
         /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        [XmlIgnore]
+        public ObservableCollection<Type> ViewTypes { get; set; }
+
+        /// <inheritdoc cref="IAssemblyData"/>
+        public void IssolateViewTypes()
+        {
+            if (Assembly == null)
+            {
+                return;
+            }
+
+            Type[] potentialViewTypes;
+
+            try
+            {
+                potentialViewTypes = Assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                potentialViewTypes = e.Types;
+            }
+
+            foreach (var viewType in potentialViewTypes)
+            {
+                if (viewType != null)
+                {
+                    PropertyInfo property = viewType.GetProperty("Tag");
+                    if (property != null)
+                    {
+                        ViewTypes.Add(viewType);
+                    }
+                }
+            }
+
+            return;
+        }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

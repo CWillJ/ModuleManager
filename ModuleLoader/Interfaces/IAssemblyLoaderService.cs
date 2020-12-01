@@ -46,8 +46,8 @@
         /// <summary>
         /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
         /// </summary>
-        /// <param name="assembly">An <see cref="AssemblyData"/> object passed by reference.</param>
-        public void LoadUnload(ref AssemblyData assembly);
+        /// <param name="assemblyData">An <see cref="AssemblyData"/> object passed by reference.</param>
+        public void LoadUnload(ref AssemblyData assemblyData);
 
         /// <summary>
         /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
@@ -64,13 +64,13 @@
         /// <summary>
         /// Load an <see cref="AssemblyData"/>.
         /// </summary>
-        /// <param name="assembly">Assembly to load passed by reference.</param>
-        public void Load(ref AssemblyData assembly);
+        /// <param name="assemblyData">Assembly to load passed by reference.</param>
+        public void Load(ref AssemblyData assemblyData);
 
         /// <summary>
         /// Unload an <see cref="AssemblyData"/>.
         /// </summary>
-        /// <param name="assembly"><see cref="AssemblyData"/> to unload passed by reference.</param>
-        public void Unload(ref AssemblyData assembly);
+        /// <param name="assemblyData"><see cref="AssemblyData"/> to unload passed by reference.</param>
+        public void Unload(ref AssemblyData assemblyData);
     }
 }

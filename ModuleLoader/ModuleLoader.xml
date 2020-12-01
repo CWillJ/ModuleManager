@@ -170,7 +170,7 @@
             <summary>
             Loads all enabled <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> and unloads the disabled ones.
             </summary>
-            <param name="assembly">An <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> object passed by reference.</param>
+            <param name="assemblyData">An <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> object passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.ModuleObjects.Classes.AssemblyData}@)">
             <summary>
@@ -188,50 +188,21 @@
             <summary>
             Load an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
             </summary>
-            <param name="assembly">Assembly to load passed by reference.</param>
+            <param name="assemblyData">Assembly to load passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
             Unload an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
             </summary>
-            <param name="assembly"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to unload passed by reference.</param>
-        </member>
-        <member name="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService">
-            <summary>
-            Service providing concrete <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/> implementations.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager">
-            <summary>
-            Gets the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/> property.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionName">
-            <summary>
-            Gets or sets the region to store the view in.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.AddViewToRegion(System.Type)">
-            <summary>
-            Adds the view to the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.
-            </summary>
-            <param name="view">The <see cref="T:System.Type"/> to add to the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RemoveViewFromRegion(System.Type)">
-            <summary>
-            Removes the view to the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.
-            </summary>
-            <param name="view">The <see cref="T:System.Type"/> to remove from the <see cref="P:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService.RegionManager"/>.</param>
+            <param name="assemblyData"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to unload passed by reference.</param>
         </member>
         <member name="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService,Prism.Regions.IRegionManager)">
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService"/> class.
             </summary>
-            <param name="moduleViewRegionService">The given <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>.</param>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllDirectory">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
@@ -303,29 +274,6 @@
             </summary>
             <param name="type">The Type where the methods are coming from.</param>
             <returns>An ObservableCollection of ModuleMethod objects.</returns>
-        </member>
-        <member name="T:ModuleManager.ModuleLoader.Services.ModuleViewRegionService">
-            <summary>
-            Service providing concrete <see cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/> implementations.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.#ctor(Prism.Regions.IRegionManager)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.ModuleViewRegionService"/> class.
-            </summary>
-            <param name="regionManager"><see cref="T:Prism.Regions.IRegionManager"/>.</param>
-        </member>
-        <member name="P:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.RegionName">
-            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
-        </member>
-        <member name="P:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.RegionManager">
-            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.AddViewToRegion(System.Type)">
-            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
-        </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.ModuleViewRegionService.RemoveViewFromRegion(System.Type)">
-            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IModuleViewRegionService"/>
         </member>
     </members>
 </doc>

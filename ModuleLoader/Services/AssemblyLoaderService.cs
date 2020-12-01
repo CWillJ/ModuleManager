@@ -6,28 +6,18 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Threading.Tasks;
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using Prism.Regions;
 
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
-        private readonly IModuleViewRegionService _moduleViewRegionService;
-        private readonly IRegionManager _regionManager;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        /// <param name="moduleViewRegionService">The given <see cref="IModuleViewRegionService"/>.</param>
-        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        public AssemblyLoaderService(IModuleViewRegionService moduleViewRegionService, IRegionManager regionManager)
+        public AssemblyLoaderService()
         {
-            _moduleViewRegionService = moduleViewRegionService;
-            _regionManager = regionManager;
-
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
             CurrentAssemblyName = string.Empty;
@@ -75,24 +65,24 @@
             }
 
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
-            AssemblyData assembly;
+            AssemblyData assemblyData;
 
             foreach (var dllFile in dllFiles)
             {
                 Initialize(dllFile.Substring(0, dllFile.LastIndexOf(".")), dllFile);
 
-                assembly = new AssemblyData
+                assemblyData = new AssemblyData
                 {
                     FilePath = dllFile,
                 };
 
-                Load(ref assembly);
-                Unload(ref assembly);
+                Load(ref assemblyData);
+                Unload(ref assemblyData);
 
                 // IF the ModuleType has not been set, it is not a NextGen module
-                if (assembly.ModuleType != null)
+                if (assemblyData.ModuleType != null)
                 {
-                    assemblies.Add(assembly);
+                    assemblies.Add(assemblyData);
                 }
             }
 
@@ -100,15 +90,15 @@
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
-        public void LoadUnload(ref AssemblyData assembly)
+        public void LoadUnload(ref AssemblyData assemblyData)
         {
-            if (assembly.IsEnabled)
+            if (assemblyData.IsEnabled)
             {
-                Load(ref assembly);
+                Load(ref assemblyData);
             }
             else
             {
-                Unload(ref assembly);
+                Unload(ref assemblyData);
             }
         }
 
@@ -148,31 +138,31 @@
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
-        public void Load(ref AssemblyData assembly)
+        public void Load(ref AssemblyData assemblyData)
         {
-            if (!string.IsNullOrEmpty(assembly.FilePath))
+            if (!string.IsNullOrEmpty(assemblyData.FilePath))
             {
-                Initialize(assembly.FilePath.Substring(0, assembly.FilePath.LastIndexOf(".")), assembly.FilePath);
+                Initialize(assemblyData.FilePath.Substring(0, assemblyData.FilePath.LastIndexOf(".")), assemblyData.FilePath);
             }
 
-            assembly.Loader = new AssemblyLoader(DllFilePath);
-            assembly.Assembly = assembly.Loader.LoadFromAssemblyPath(DllFilePath);
+            assemblyData.Loader = new AssemblyLoader(DllFilePath);
+            assemblyData.Assembly = assemblyData.Loader.LoadFromAssemblyPath(DllFilePath);
 
-            assembly.Name = assembly.Assembly.GetName().Name;
-            assembly.FilePath = DllFilePath;
+            assemblyData.Name = assemblyData.Assembly.GetName().Name;
+            assemblyData.FilePath = DllFilePath;
 
             Type[] types = null;
 
             try
             {
-                types = assembly.Assembly.GetTypes();
+                types = assemblyData.Assembly.GetTypes();
             }
             catch (ReflectionTypeLoadException ex)
             {
                 types = ex.Types.Where(t => t != null).ToArray();
             }
 
-            assembly.Modules.Clear();
+            assemblyData.Modules.Clear();
 
             int typeNumber = 0;
             foreach (var type in types)
@@ -181,7 +171,7 @@
 
                 if (type != null)
                 {
-                    CurrentAssemblyName = assembly.Name;
+                    CurrentAssemblyName = assemblyData.Name;
                     CurrentTypeName = type.Name;
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
@@ -201,27 +191,28 @@
                         // Looking only for modules that inherret from IExpansionModule or ICoreModule
                         if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule") || typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.ICoreModule"))
                         {
-                            assembly.ModuleType = type;
-                            _moduleViewRegionService.AddViewToRegion(type);
+                            assemblyData.ModuleType = type;
                         }
 
-                        assembly.Modules.Add(tempModule);
+                        assemblyData.Modules.Add(tempModule);
                     }
                 }
             }
+
+            assemblyData.IssolateViewTypes();
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
-        public void Unload(ref AssemblyData assembly)
+        public void Unload(ref AssemblyData assemblyData)
         {
-            if (assembly.Loader == null)
+            if (assemblyData.Loader == null)
             {
                 return;
             }
 
-            assembly.Loader.Unload();
-            assembly.Loader = null;
-            assembly.Assembly = null;
+            assemblyData.Loader.Unload();
+            assemblyData.Loader = null;
+            assemblyData.Assembly = null;
         }
 
         /// <summary>
@@ -284,7 +275,7 @@
         private ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
         {
             ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
-            string name, description, dataType, propertyString;
+            string name, description, dataType;
             bool canRead, canWrite;
 
             foreach (var property in type.GetProperties())
@@ -301,30 +292,12 @@
                 catch (FileNotFoundException)
                 {
                     Debug.WriteLine(@"Cannot Load Type For " + property.Name);
-
-                    try
-                    {
-                        propertyString = property.ToString();
-                        dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
-                    }
-                    catch (FileNotFoundException)
-                    {
-                        dataType = string.Empty;
-                    }
+                    dataType = string.Empty;
                 }
                 catch (TypeLoadException)
                 {
                     Debug.WriteLine(@"Cannot Load Type For " + property.Name);
-
-                    try
-                    {
-                        propertyString = property.ToString();
-                        dataType = propertyString.Substring(0, propertyString.IndexOf(@" "));
-                    }
-                    catch (TypeLoadException)
-                    {
-                        dataType = string.Empty;
-                    }
+                    dataType = string.Empty;
                 }
 
                 properties.Add(new ModuleProperty(
@@ -349,7 +322,7 @@
             ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
             ObservableCollection<MemberParameter> parameters;
             string lastMethodName = string.Empty;
-            string description, returnType, returnDescription, methodString;
+            string description, returnType, returnDescription;
             int methodIndex = 0;
 
             foreach (var method in type.GetMethods(BindingFlags.Public
@@ -386,30 +359,17 @@
                 catch (FileNotFoundException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
-
-                    try
-                    {
-                        methodString = method.ToString();
-                        returnType = methodString.Substring(0, methodString.IndexOf(@" "));
-                    }
-                    catch (FileNotFoundException)
-                    {
-                        returnType = string.Empty;
-                    }
+                    returnType = string.Empty;
                 }
                 catch (FileLoadException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
-
-                    methodString = method.ToString();
-                    returnType = methodString.Substring(0, methodString.IndexOf(@" "));
+                    returnType = string.Empty;
                 }
                 catch (TypeLoadException)
                 {
                     Debug.WriteLine("Cannot Load Return Type For " + method.Name);
-
-                    methodString = method.ToString();
-                    returnType = methodString.Substring(0, methodString.IndexOf(@" "));
+                    returnType = string.Empty;
                 }
 
                 returnDescription = DescriptionRetriever.GetMemberReturnDescription(method);

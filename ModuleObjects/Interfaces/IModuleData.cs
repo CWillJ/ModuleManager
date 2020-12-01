@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.ModuleObjects.Interfaces
 {
+    using System;
     using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
 
