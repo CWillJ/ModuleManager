@@ -9,6 +9,13 @@
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
+    using Telerik;
+    using Telerik.Windows;
+    using Telerik.Windows.Controls;
+    using Telerik.Windows.Controls.Input;
+    using Telerik.Windows.Controls.Navigation;
+    using Telerik.Windows.Data;
+    using Telerik.Windows.Input;
 
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
@@ -105,35 +112,35 @@
         /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
         {
-            AssemblyData assembly;
+            AssemblyData assemblyData;
 
             for (int i = 0; i < assemblies.Count; i++)
             {
-                assembly = assemblies[i];
+                assemblyData = assemblies[i];
 
-                if (assembly.IsEnabled)
+                if (assemblyData.IsEnabled)
                 {
-                    Load(ref assembly);
+                    Load(ref assemblyData);
                 }
                 else
                 {
-                    Unload(ref assembly);
+                    Unload(ref assemblyData);
                 }
 
-                assemblies[i] = assembly;
+                assemblies[i] = assemblyData;
             }
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies)
         {
-            AssemblyData assembly;
+            AssemblyData assemblyData;
 
             for (int i = 0; i < assemblies.Count; i++)
             {
-                assembly = assemblies[i];
-                Load(ref assembly);
-                assemblies[i] = assembly;
+                assemblyData = assemblies[i];
+                Load(ref assemblyData);
+                assemblies[i] = assemblyData;
             }
         }
 
@@ -145,6 +152,7 @@
                 Initialize(assemblyData.FilePath.Substring(0, assemblyData.FilePath.LastIndexOf(".")), assemblyData.FilePath);
             }
 
+            // May have to load all reference assemblies here
             assemblyData.Loader = new AssemblyLoader(DllFilePath);
             assemblyData.Assembly = assemblyData.Loader.LoadFromAssemblyPath(DllFilePath);
 
@@ -152,6 +160,7 @@
             assemblyData.FilePath = DllFilePath;
 
             Type[] types = null;
+            Type[] allTypes = null;
 
             try
             {
@@ -160,6 +169,7 @@
             catch (ReflectionTypeLoadException ex)
             {
                 types = ex.Types.Where(t => t != null).ToArray();
+                allTypes = ex.Types;
             }
 
             assemblyData.Modules.Clear();
@@ -175,8 +185,13 @@
                     CurrentTypeName = type.Name;
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
-                    Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
+                    ////Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
                     ModuleData tempModule = GetSingleModule(type);
+
+                    if (type.BaseType.Name == @"UserControl") // (type.GetProperty("Tag") != null)
+                    {
+                        assemblyData.ViewTypes.Add(type);
+                    }
 
                     if (tempModule != null)
                     {
@@ -198,8 +213,6 @@
                     }
                 }
             }
-
-            assemblyData.IssolateViewTypes();
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>

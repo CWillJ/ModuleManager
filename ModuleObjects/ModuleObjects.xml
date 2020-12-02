@@ -44,9 +44,6 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.ViewTypes">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.IssolateViewTypes">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
-        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
             <summary>
             Overrides the ToString method and formats the string output.
@@ -467,11 +464,6 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.ViewTypes">
             <summary>
             Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of view types.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.IssolateViewTypes">
-            <summary>
-            Adds all view <see cref="T:System.Type"/>s to the ViewTypes property.
             </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">

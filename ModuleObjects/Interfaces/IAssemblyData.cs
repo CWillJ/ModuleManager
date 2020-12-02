@@ -54,10 +54,5 @@
         /// </summary>
         [XmlIgnore]
         public ObservableCollection<Type> ViewTypes { get; set; }
-
-        /// <summary>
-        /// Adds all view <see cref="Type"/>s to the ViewTypes property.
-        /// </summary>
-        public void IssolateViewTypes();
     }
 }
