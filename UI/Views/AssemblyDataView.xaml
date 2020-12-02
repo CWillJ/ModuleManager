@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="..\DataTemplates\AssemblyDataDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <templateSelectors:DescriptionTemplateSelector x:Key="ModuleDataTemplateSelector" />
+            <templateSelectors:DescriptionTemplateSelector x:Key="DescriptionTemplateSelector" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -52,7 +52,7 @@
                 <ContentControl
                     x:Name="MemberText"
                     Content="{Binding AssemblyCollectionService.SelectedItem, Mode=OneWay}"
-                    ContentTemplateSelector="{StaticResource ModuleDataTemplateSelector}" />
+                    ContentTemplateSelector="{StaticResource DescriptionTemplateSelector}" />
             </ScrollViewer>
         </Border>
     </Grid>

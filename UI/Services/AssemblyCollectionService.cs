@@ -8,8 +8,11 @@
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
+    using ModuleManager.UI.Views;
+    using Prism.Ioc;
     using Prism.Modularity;
     using Prism.Mvvm;
+    using Prism.Regions;
 
     /// <summary>
     /// Service providing concrete <see cref="IAssemblyCollectionService"/> implementations.
@@ -17,6 +20,7 @@
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
         private readonly IAssemblyLoaderService _assemblyLoaderService;
+        private readonly IRegionManager _regionManager;
 
         private ObservableCollection<AssemblyData> _assemblies;
         private ModuleManagerCatalog _assemblyCatalog;
@@ -27,7 +31,8 @@
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
         /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
-        public AssemblyCollectionService(IAssemblyLoaderService asssemblyLoaderService)
+        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        public AssemblyCollectionService(IAssemblyLoaderService asssemblyLoaderService, IRegionManager regionManager)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
             _assemblyCatalog = new ModuleManagerCatalog();
@@ -35,6 +40,7 @@
             _selectedItemName = @"Description";
 
             _assemblyLoaderService = asssemblyLoaderService;
+            _regionManager = regionManager;
         }
 
         /// <inheritdoc cref="IAssemblyCollectionService"/>
@@ -65,6 +71,7 @@
             {
                 SetProperty(ref _selectedItem, value);
                 SetSelectedItemName();
+                UpdateDescriptionRegion();
             }
         }
 
@@ -130,6 +137,24 @@
             else
             {
                 SelectedItemName = @"Description";
+            }
+        }
+
+        private void UpdateDescriptionRegion()
+        {
+            if (SelectedItem is ModuleData moduleData)
+            {
+                if (moduleData.IsView)
+                {
+                    try
+                    {
+                        _regionManager.RegisterViewWithRegion(@"ModuleDataViewRegion", moduleData.Type);
+                    }
+                    catch (Exception)
+                    {
+                        _regionManager.RegisterViewWithRegion(@"ModuleDataViewRegion", typeof(CannotDisplayView));
+                    }
+                }
             }
         }
 

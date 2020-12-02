@@ -35,7 +35,6 @@
             Modules = modules;
             Loader = null;
             Assembly = null;
-            ViewTypes = new ObservableCollection<Type>();
         }
 
         /// <inheritdoc cref="IAssemblyData"/>
@@ -65,10 +64,6 @@
         /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
-
-        /// <inheritdoc cref="IAssemblyData"/>
-        [XmlIgnore]
-        public ObservableCollection<Type> ViewTypes { get; set; }
 
         /// <summary>
         /// Overrides the ToString method and formats the string output.

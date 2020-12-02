@@ -21,32 +21,39 @@
             {
                 if (item is AssemblyData)
                 {
-                    return element.FindResource("assemblyTemplate") as DataTemplate;
+                    return element.FindResource(@"assemblyTemplate") as DataTemplate;
                 }
 
-                if (item is ModuleData)
+                if (item is ModuleData moduleData)
                 {
-                    return element.FindResource("moduleTemplate") as DataTemplate;
+                    if (moduleData.Type.BaseType != null && moduleData.Type.BaseType.Name == @"UserControl")
+                    {
+                        return element.FindResource(@"viewTemplate") as DataTemplate;
+                    }
+                    else
+                    {
+                        return element.FindResource(@"moduleTemplate") as DataTemplate;
+                    }
                 }
 
                 if (item is ModuleConstructor)
                 {
-                    return element.FindResource("moduleConstructorTemplate") as DataTemplate;
+                    return element.FindResource(@"moduleConstructorTemplate") as DataTemplate;
                 }
 
                 if (item is ModuleProperty)
                 {
-                    return element.FindResource("modulePropertyTemplate") as DataTemplate;
+                    return element.FindResource(@"modulePropertyTemplate") as DataTemplate;
                 }
 
                 if (item is ModuleMethod)
                 {
-                    return element.FindResource("moduleMethodTemplate") as DataTemplate;
+                    return element.FindResource(@"moduleMethodTemplate") as DataTemplate;
                 }
 
                 if (item is MemberParameter)
                 {
-                    return element.FindResource("memberParameterTemplate") as DataTemplate;
+                    return element.FindResource(@"memberParameterTemplate") as DataTemplate;
                 }
             }
 

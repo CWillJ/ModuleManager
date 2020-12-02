@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.ModuleObjects.Classes
 {
+    using System.IO;
     using System.Reflection;
     using System.Runtime.Loader;
 
@@ -26,6 +27,30 @@
             : base(isCollectible: true)
         {
             _resolver = new AssemblyDependencyResolver(mainAssemblyToLoadPath);
+        }
+
+        /// <summary>
+        /// Loads all referenced assemblies from the <see cref="Assembly"/>.
+        /// </summary>
+        /// <param name="assembly">The <see cref="Assembly"/> to load all referenced assemblies from.</param>
+        public void LoadAllReferencedAssemblies(Assembly assembly)
+        {
+            if (assembly == null)
+            {
+                return;
+            }
+
+            foreach (var referencedAssembly in assembly.GetReferencedAssemblies())
+            {
+                try
+                {
+                    LoadFromAssemblyName(referencedAssembly);
+                }
+                catch (FileNotFoundException)
+                {
+                    // Don't load it
+                }
+            }
         }
 
         /// <summary>

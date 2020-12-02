@@ -48,11 +48,5 @@
         /// </summary>
         [XmlIgnore]
         public Assembly Assembly { get; set; }
-
-        /// <summary>
-        /// Gets or sets an <see cref="ObservableCollection{Type}"/> of view types.
-        /// </summary>
-        [XmlIgnore]
-        public ObservableCollection<Type> ViewTypes { get; set; }
     }
 }

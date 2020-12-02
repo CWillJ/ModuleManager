@@ -51,26 +51,6 @@
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
             string loadFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
 
-            ////RadOpenFileDialog openFileDialog = new RadOpenFileDialog
-            ////{
-            ////    InitialDirectory = Directory.GetCurrentDirectory(),
-            ////    Filter = "xml files (*.xml)|*.xml",
-            ////    Header = "Load Configuration File",
-            ////    RestoreDirectory = true,
-            ////};
-
-            ////openFileDialog.ShowDialog();
-
-            ////if (openFileDialog.DialogResult == true)
-            ////{
-            ////    loadFile = openFileDialog.FileName;
-            ////}
-
-            ////if (loadFile == string.Empty)
-            ////{
-            ////    return assemblies;
-            ////}
-
             using (StreamReader rd = new StreamReader(loadFile))
             {
                 try

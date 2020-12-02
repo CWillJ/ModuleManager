@@ -84,11 +84,12 @@
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/> implementations.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService)">
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService,Prism.Regions.IRegionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.AssemblyCollectionService"/> class.
             </summary>
             <param name="asssemblyLoaderService">The <see cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>.</param>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
@@ -383,6 +384,24 @@
             InitializeComponent
             </summary>
         </member>
+        <member name="T:ModuleManager.UI.Views.CannotDisplayView">
+            <summary>
+            Interaction logic for CannotDisplayView.xaml
+            </summary>
+            <summary>
+            CannotDisplayView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.CannotDisplayView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.UI.Views.CannotDisplayView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Views.CannotDisplayView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:ModuleManager.UI.Views.ModuleManagerView">
             <summary>
             Interaction logic for MainView.xaml.
@@ -417,6 +436,36 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

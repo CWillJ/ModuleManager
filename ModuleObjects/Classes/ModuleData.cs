@@ -49,6 +49,7 @@
             Description = description;
 
             InitializeMembers(constructors, properties, methods);
+            SetIsView();
         }
 
         /// <inheritdoc cref="IModuleData"/>
@@ -79,6 +80,11 @@
         /// Gets or sets an <see cref="ObservableCollection{ModuleMethod}"/> containing the module methods.
         /// </summary>
         public ObservableCollection<ModuleMethod> Methods { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether or not this module's type is a view.
+        /// </summary>
+        public bool IsView { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Type"/> of the ModuleData.
@@ -138,6 +144,19 @@
             }
 
             return s;
+        }
+
+        private void SetIsView()
+        {
+            // (Type.GetProperty("Tag") != null)
+            if (Type != null && Type.BaseType != null && (Type.BaseType.Name == @"UserControl" || Type.BaseType.Name == @"RadWindow"))
+            {
+                IsView = true;
+            }
+            else
+            {
+                IsView = false;
+            }
         }
 
         /// <summary>

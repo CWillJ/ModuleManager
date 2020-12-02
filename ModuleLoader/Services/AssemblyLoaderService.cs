@@ -9,13 +9,6 @@
     using ModuleManager.ModuleLoader.Classes;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using Telerik;
-    using Telerik.Windows;
-    using Telerik.Windows.Controls;
-    using Telerik.Windows.Controls.Input;
-    using Telerik.Windows.Controls.Navigation;
-    using Telerik.Windows.Data;
-    using Telerik.Windows.Input;
 
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
@@ -162,6 +155,7 @@
             Type[] types = null;
             Type[] allTypes = null;
 
+            // TODO: I need to be able to load all of these types. Ones I'm not getting now are Telerik RadWindow
             try
             {
                 types = assemblyData.Assembly.GetTypes();
@@ -188,11 +182,6 @@
                     ////Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
                     ModuleData tempModule = GetSingleModule(type);
 
-                    if (type.BaseType.Name == @"UserControl") // (type.GetProperty("Tag") != null)
-                    {
-                        assemblyData.ViewTypes.Add(type);
-                    }
-
                     if (tempModule != null)
                     {
                         Type[] typeInterfaces = type.GetInterfaces();
@@ -203,7 +192,7 @@
                             typeFullNames[i] = typeInterfaces[i].FullName;
                         }
 
-                        // Looking only for modules that inherret from IExpansionModule or ICoreModule
+                        // Looking only for modules that inherret from IExpansionModule or ICoreModule. Is this enough validation?
                         if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule") || typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.ICoreModule"))
                         {
                             assemblyData.ModuleType = type;

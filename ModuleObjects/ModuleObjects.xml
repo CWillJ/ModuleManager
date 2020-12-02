@@ -41,9 +41,6 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.Assembly">
             <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
         </member>
-        <member name="P:ModuleManager.ModuleObjects.Classes.AssemblyData.ViewTypes">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IAssemblyData"/>
-        </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyData.ToString">
             <summary>
             Overrides the ToString method and formats the string output.
@@ -65,6 +62,12 @@
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyLoader"/> class.
             </summary>
             <param name="mainAssemblyToLoadPath">The path to the assembly.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyLoader.LoadAllReferencedAssemblies(System.Reflection.Assembly)">
+            <summary>
+            Loads all referenced assemblies from the <see cref="T:System.Reflection.Assembly"/>.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to load all referenced assemblies from.</param>
         </member>
         <member name="M:ModuleManager.ModuleObjects.Classes.AssemblyLoader.Load(System.Reflection.AssemblyName)">
             <summary>
@@ -214,6 +217,11 @@
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Methods">
             <summary>
             Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing the module methods.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.IsView">
+            <summary>
+            Gets or sets a value indicating whether or not this module's type is a view.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleObjects.Classes.ModuleData.Type">
@@ -459,11 +467,6 @@
         <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.Assembly">
             <summary>
             Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.ModuleObjects.Interfaces.IAssemblyData.ViewTypes">
-            <summary>
-            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of view types.
             </summary>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleData">
