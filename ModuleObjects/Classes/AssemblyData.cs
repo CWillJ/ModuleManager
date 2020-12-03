@@ -16,7 +16,7 @@
         /// Initializes a new instance of the <see cref="AssemblyData"/> class.
         /// </summary>
         public AssemblyData()
-            : this(string.Empty, string.Empty, new ObservableCollection<ModuleData>())
+            : this(string.Empty, string.Empty, new ObservableCollection<TypeData>())
         {
         }
 
@@ -25,14 +25,14 @@
         /// </summary>
         /// <param name="name">Name of the assembly.</param>
         /// <param name="filePath">File path to the assembly.</param>
-        /// <param name="modules">An <see cref="ObservableCollection{ModuleData}"/> of modules.</param>
-        public AssemblyData(string name, string filePath, ObservableCollection<ModuleData> modules)
+        /// <param name="modules">An <see cref="ObservableCollection{TypeData}"/> of modules.</param>
+        public AssemblyData(string name, string filePath, ObservableCollection<TypeData> modules)
         {
             Name = name;
             _isEnabled = false;
             FilePath = filePath;
             ModuleType = null;
-            Modules = modules;
+            Types = modules;
             Loader = null;
             Assembly = null;
         }
@@ -51,7 +51,7 @@
         public string FilePath { get; set; }
 
         /// <inheritdoc cref="IAssemblyData"/>
-        public ObservableCollection<ModuleData> Modules { get; set; }
+        public ObservableCollection<TypeData> Types { get; set; }
 
         /// <inheritdoc cref="IAssemblyData"/>
         [XmlIgnore]
@@ -73,7 +73,7 @@
         {
             string s = Name + @" located: " + FilePath + "\n\n";
 
-            foreach (var module in Modules)
+            foreach (var module in Types)
             {
                 s += module.ToString() + "\n";
             }

@@ -51,7 +51,7 @@
         </member>
         <member name="P:ModuleManager.UI.Interfaces.IAssemblyCollectionService.SelectedItemName">
             <summary>
-            Gets or sets name of the selected item.
+            Gets or sets the <see cref="T:System.String"/> name of the selected item.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.Interfaces.IAssemblyCollectionService.AddModulesToCatalog">
@@ -115,6 +115,28 @@
             <param name="fileName">The full file path and name.</param>
             <returns>True if can be serialized, false otherwise.</returns>
         </member>
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.SetSelectedItemName">
+            <summary>
+            Sets the name of the selected item.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.UpdateDescriptionRegion">
+            <summary>
+            Registers the data region with the selected item if the selected item is a view type.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.CollectionPropertyChanged">
+            <summary>
+            The method that handles the AssemblyData collection changed event.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.LoadUnload(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Will load or unload the passed in <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> <see cref="T:System.Object"/>.
+            </summary>
+            <param name="s">The <see cref="T:System.Object"/>.</param>
+            <param name="e">The property changed arguments.</param>
+        </member>
         <member name="T:ModuleManager.UI.Services.ProgressBarService">
             <summary>
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IProgressBarService"/> implementations.
@@ -146,19 +168,6 @@
             <param name="item">A <see cref="T:System.Object"/> sent in.</param>
             <param name="container">The <see cref="T:System.Windows.DependencyObject"/>.</param>
             <returns>A <see cref="T:System.Windows.DataTemplate"/> depending on the object passed in.</returns>
-        </member>
-        <member name="T:ModuleManager.UI.TemplateSelectors.TreeViewItemTemplateSelector">
-            <summary>
-            Used to selected a DataTemplate in the view.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.TemplateSelectors.TreeViewItemTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
-            <summary>
-            Used to select the DataTemplate for tree view items.
-            </summary>
-            <param name="item">Object.</param>
-            <param name="container">Container.</param>
-            <returns>A DataTemplate depending on the object passed in.</returns>
         </member>
         <member name="T:ModuleManager.UI.UIModule">
             <summary>
@@ -436,36 +445,6 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

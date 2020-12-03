@@ -3,20 +3,20 @@
     /// <summary>
     /// Module member object interface.
     /// </summary>
-    public interface IModuleMemberData
+    public interface ITypeMemberData
     {
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the <see cref="string"/> name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the description of the module.
+        /// Gets or sets the <see cref="string"/> description of the module.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the Type.
+        /// Gets or sets the <see cref="string"/> name of the Type.
         /// </summary>
         public string TypeName { get; set; }
     }

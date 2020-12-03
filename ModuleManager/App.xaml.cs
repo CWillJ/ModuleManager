@@ -90,8 +90,8 @@
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
-            containerRegistry.Register<IModuleData, ModuleData>();
-            containerRegistry.Register<IModuleMemberData, ModuleMemberData>();
+            containerRegistry.Register<ITypeData, TypeData>();
+            containerRegistry.Register<ITypeMemberData, TypeMemberData>();
             containerRegistry.Register<IModuleManagerCatalog, ModuleManagerCatalog>();
 
             containerRegistry.RegisterForNavigation<ModuleManagerView>();

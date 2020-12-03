@@ -24,31 +24,31 @@
                     return element.FindResource(@"assemblyTemplate") as DataTemplate;
                 }
 
-                if (item is ModuleData moduleData)
+                if (item is TypeData typeData)
                 {
-                    if (moduleData.Type.BaseType != null && moduleData.Type.BaseType.Name == @"UserControl")
+                    if (typeData.Type.BaseType != null && typeData.Type.BaseType.Name == @"UserControl")
                     {
                         return element.FindResource(@"viewTemplate") as DataTemplate;
                     }
                     else
                     {
-                        return element.FindResource(@"moduleTemplate") as DataTemplate;
+                        return element.FindResource(@"typeTemplate") as DataTemplate;
                     }
                 }
 
-                if (item is ModuleConstructor)
+                if (item is TypeConstructor)
                 {
-                    return element.FindResource(@"moduleConstructorTemplate") as DataTemplate;
+                    return element.FindResource(@"typeConstructorTemplate") as DataTemplate;
                 }
 
-                if (item is ModuleProperty)
+                if (item is TypeProperty)
                 {
-                    return element.FindResource(@"modulePropertyTemplate") as DataTemplate;
+                    return element.FindResource(@"typePropertyTemplate") as DataTemplate;
                 }
 
-                if (item is ModuleMethod)
+                if (item is TypeMethod)
                 {
-                    return element.FindResource(@"moduleMethodTemplate") as DataTemplate;
+                    return element.FindResource(@"typeMethodTemplate") as DataTemplate;
                 }
 
                 if (item is MemberParameter)

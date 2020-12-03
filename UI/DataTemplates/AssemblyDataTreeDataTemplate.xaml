@@ -16,9 +16,9 @@
         </StackPanel>
     </DataTemplate>
 
-    <!--  ModuleData Level  -->
+    <!--  TypeData Level  -->
     <HierarchicalDataTemplate
-        x:Key="moduleLevel"
+        x:Key="typeLevel"
         ItemTemplate="{StaticResource memberLevel}"
         ItemsSource="{Binding Path=Members, Mode=OneWay}">
         <StackPanel Orientation="Horizontal">
@@ -32,8 +32,8 @@
     <!--  AssemblyData Level  -->
     <HierarchicalDataTemplate
         x:Key="assemblyLevel"
-        ItemTemplate="{StaticResource moduleLevel}"
-        ItemsSource="{Binding Path=Modules, Mode=OneWay}">
+        ItemTemplate="{StaticResource typeLevel}"
+        ItemsSource="{Binding Path=Types, Mode=OneWay}">
         <StackPanel Orientation="Horizontal">
             <CheckBox IsChecked="{Binding Path=IsEnabled, Mode=TwoWay}" />
             <TextBlock

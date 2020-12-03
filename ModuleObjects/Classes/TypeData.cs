@@ -5,34 +5,33 @@
     using System.Xml.Serialization;
     using ModuleManager.ModuleObjects.Interfaces;
 
-    /// <inheritdoc cref="IModuleData"/>
-    public class ModuleData : IModuleData
+    /// <inheritdoc cref="ITypeData"/>
+    public class TypeData : ITypeData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleData"/> class.
+        /// Initializes a new instance of the <see cref="TypeData"/> class.
         /// </summary>
-        public ModuleData()
-            : this(null, string.Empty, string.Empty, new ObservableCollection<ModuleConstructor>(), new ObservableCollection<ModuleProperty>(), new ObservableCollection<ModuleMethod>())
+        public TypeData()
+            : this(null, string.Empty, string.Empty, new ObservableCollection<TypeConstructor>(), new ObservableCollection<TypeProperty>(), new ObservableCollection<TypeMethod>())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleData"/> class specifying the name,
-        /// description and methods.
+        /// Initializes a new instance of the <see cref="TypeData"/> class.
         /// </summary>
-        /// <param name="type">Module <see cref="Type"/>.</param>
-        /// <param name="name">Module name.</param>
-        /// <param name="description">Module description.</param>
-        /// <param name="constructors">An <see cref="ObservableCollection{ModuleConstructor}"/> of module constructors.</param>
-        /// <param name="properties">An <see cref="ObservableCollection{ModuleProperty}"/> of module properties.</param>
-        /// <param name="methods">An <see cref="ObservableCollection{ModuleMethod}"/> of module methods.</param>
-        public ModuleData(
+        /// <param name="type">Module <see cref="System.Type"/>.</param>
+        /// <param name="name"><see cref="string"/> Module name.</param>
+        /// <param name="description"><see cref="string"/> Module description.</param>
+        /// <param name="constructors">An <see cref="ObservableCollection{TypeConstructor}"/> of type constructors.</param>
+        /// <param name="properties">An <see cref="ObservableCollection{TypeProperty}"/> of type properties.</param>
+        /// <param name="methods">An <see cref="ObservableCollection{TypeMethod}"/> of type methods.</param>
+        public TypeData(
             Type type,
             string name,
             string description,
-            ObservableCollection<ModuleConstructor> constructors,
-            ObservableCollection<ModuleProperty> properties,
-            ObservableCollection<ModuleMethod> methods)
+            ObservableCollection<TypeConstructor> constructors,
+            ObservableCollection<TypeProperty> properties,
+            ObservableCollection<TypeMethod> methods)
         {
             Type = type;
             Name = name;
@@ -52,34 +51,34 @@
             SetIsView();
         }
 
-        /// <inheritdoc cref="IModuleData"/>
+        /// <inheritdoc cref="ITypeData"/>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets this Module's Type's FullName.
+        /// Gets or sets this Module's Type's FullName <see cref="string"/>.
         /// </summary>
         public string FullName { get; set; }
 
-        /// <inheritdoc cref="IModuleData"/>
+        /// <inheritdoc cref="ITypeData"/>
         public string Description { get; set; }
 
-        /// <inheritdoc cref="IModuleData"/>
-        public ObservableCollection<ModuleMemberData> Members { get; set; }
+        /// <inheritdoc cref="ITypeData"/>
+        public ObservableCollection<TypeMemberData> Members { get; set; }
 
         /// <summary>
-        /// Gets or sets an <see cref="ObservableCollection{ModuleConstructor}"/> containing the module constructors.
+        /// Gets or sets an <see cref="ObservableCollection{TypeConstructor}"/> containing the type constructors.
         /// </summary>
-        public ObservableCollection<ModuleConstructor> Constructors { get; set; }
+        public ObservableCollection<TypeConstructor> Constructors { get; set; }
 
         /// <summary>
-        /// Gets or sets an <see cref="ObservableCollection{ModuleProperty}"/> containing the module properties.
+        /// Gets or sets an <see cref="ObservableCollection{TypeProperty}"/> containing the type properties.
         /// </summary>
-        public ObservableCollection<ModuleProperty> Properties { get; set; }
+        public ObservableCollection<TypeProperty> Properties { get; set; }
 
         /// <summary>
-        /// Gets or sets an <see cref="ObservableCollection{ModuleMethod}"/> containing the module methods.
+        /// Gets or sets an <see cref="ObservableCollection{TypeMethod}"/> containing the type methods.
         /// </summary>
-        public ObservableCollection<ModuleMethod> Methods { get; set; }
+        public ObservableCollection<TypeMethod> Methods { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether or not this module's type is a view.
@@ -87,13 +86,13 @@
         public bool IsView { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Type"/> of the ModuleData.
+        /// Gets or sets the <see cref="System.Type"/> of the TypeData.
         /// </summary>
         [XmlIgnore]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Store module constructors, properties and methods in the Members property.
+        /// Stores all <see cref="TypeConstructor"/>, <see cref="TypeProperty"/> and <see cref="TypeMethod"/> in the Members property.
         /// </summary>
         public void StoreModuleMembers()
         {
@@ -146,6 +145,9 @@
             return s;
         }
 
+        /// <summary>
+        /// Sets the IsView property.
+        /// </summary>
         private void SetIsView()
         {
             // (Type.GetProperty("Tag") != null)
@@ -160,18 +162,18 @@
         }
 
         /// <summary>
-        /// This will add <see cref="ObservableCollection{ModuleConstructor}"/> to the Constructors and Members properties,
-        /// <see cref="ObservableCollection{ModuleProperty}"/> to the Properties and Members properties, and
-        /// <see cref="ObservableCollection{ModuleMethod}"/> to the Methods and Members properties.
+        /// This will add <see cref="ObservableCollection{TypeConstructor}"/> to the Constructors and Members properties,
+        /// <see cref="ObservableCollection{TypeProperty}"/> to the Properties and Members properties, and
+        /// <see cref="ObservableCollection{TypeMethod}"/> to the Methods and Members properties.
         /// </summary>
-        /// <param name="constructors">An <see cref="ObservableCollection{ModuleConstructor}"/>.</param>
-        /// <param name="properties">An <see cref="ObservableCollection{ModuleProperty}"/>.</param>
-        /// <param name="methods">An <see cref="ObservableCollection{ModuleMethod}"/>.</param>
-        private void InitializeMembers(ObservableCollection<ModuleConstructor> constructors, ObservableCollection<ModuleProperty> properties, ObservableCollection<ModuleMethod> methods)
+        /// <param name="constructors">An <see cref="ObservableCollection{TypeConstructor}"/>.</param>
+        /// <param name="properties">An <see cref="ObservableCollection{TypeProperty}"/>.</param>
+        /// <param name="methods">An <see cref="ObservableCollection{TypeMethod}"/>.</param>
+        private void InitializeMembers(ObservableCollection<TypeConstructor> constructors, ObservableCollection<TypeProperty> properties, ObservableCollection<TypeMethod> methods)
         {
             if (Members == null)
             {
-                Members = new ObservableCollection<ModuleMemberData>();
+                Members = new ObservableCollection<TypeMemberData>();
             }
 
             InitializeConstructors(constructors);
@@ -180,12 +182,12 @@
         }
 
         /// <summary>
-        /// Adds a <see cref="ObservableCollection{ModuleConstructor}"/> to the Constructors and Members properties.
+        /// Adds a <see cref="ObservableCollection{TypeConstructor}"/> to the Constructors and Members properties.
         /// </summary>
-        /// <param name="constructors">A <see cref="ObservableCollection{ModuleConstructor}"/>.</param>
-        private void InitializeConstructors(ObservableCollection<ModuleConstructor> constructors)
+        /// <param name="constructors">A <see cref="ObservableCollection{TypeConstructor}"/>.</param>
+        private void InitializeConstructors(ObservableCollection<TypeConstructor> constructors)
         {
-            Constructors = new ObservableCollection<ModuleConstructor>();
+            Constructors = new ObservableCollection<TypeConstructor>();
 
             if (constructors != null)
             {
@@ -202,12 +204,12 @@
         }
 
         /// <summary>
-        /// Adds a <see cref="ObservableCollection{ModuleProperty}"/> to the Properties and Members properties.
+        /// Adds a <see cref="ObservableCollection{TypeProperty}"/> to the Properties and Members properties.
         /// </summary>
-        /// <param name="properties">A <see cref="ObservableCollection{ModuleProperty}"/>.</param>
-        private void InitializeProperties(ObservableCollection<ModuleProperty> properties)
+        /// <param name="properties">A <see cref="ObservableCollection{TypeProperty}"/>.</param>
+        private void InitializeProperties(ObservableCollection<TypeProperty> properties)
         {
-            Properties = new ObservableCollection<ModuleProperty>();
+            Properties = new ObservableCollection<TypeProperty>();
 
             if (properties != null)
             {
@@ -221,12 +223,12 @@
         }
 
         /// <summary>
-        /// Adds a <see cref="ObservableCollection{ModuleMethod}"/> to the Methods and Members properties.
+        /// Adds a <see cref="ObservableCollection{TypeMethod}"/> to the Methods and Members properties.
         /// </summary>
-        /// <param name="methods">An <see cref="ObservableCollection{ModuleMethod}"/>.</param>
-        private void InitializeMethods(ObservableCollection<ModuleMethod> methods)
+        /// <param name="methods">An <see cref="ObservableCollection{TypeMethod}"/>.</param>
+        private void InitializeMethods(ObservableCollection<TypeMethod> methods)
         {
-            Methods = new ObservableCollection<ModuleMethod>();
+            Methods = new ObservableCollection<TypeMethod>();
 
             if (methods != null)
             {

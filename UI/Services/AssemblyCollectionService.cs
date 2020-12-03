@@ -120,19 +120,22 @@
             return true;
         }
 
+        /// <summary>
+        /// Sets the name of the selected item.
+        /// </summary>
         private void SetSelectedItemName()
         {
-            if (SelectedItem is AssemblyData assembly)
+            if (SelectedItem is AssemblyData assemblyData)
             {
-                SelectedItemName = assembly.Name;
+                SelectedItemName = assemblyData.Name;
             }
-            else if (SelectedItem is ModuleData module)
+            else if (SelectedItem is TypeData typeData)
             {
-                SelectedItemName = module.Name;
+                SelectedItemName = typeData.Name;
             }
-            else if (SelectedItem is ModuleMemberData member)
+            else if (SelectedItem is TypeMemberData memberData)
             {
-                SelectedItemName = member.Name;
+                SelectedItemName = memberData.Name;
             }
             else
             {
@@ -140,15 +143,18 @@
             }
         }
 
+        /// <summary>
+        /// Registers the data region with the selected item if the selected item is a view type.
+        /// </summary>
         private void UpdateDescriptionRegion()
         {
-            if (SelectedItem is ModuleData moduleData)
+            if (SelectedItem is TypeData typeData)
             {
-                if (moduleData.IsView)
+                if (typeData.IsView)
                 {
                     try
                     {
-                        _regionManager.RegisterViewWithRegion(@"ModuleDataViewRegion", moduleData.Type);
+                        _regionManager.RegisterViewWithRegion(@"ModuleDataViewRegion", typeData.Type);
                     }
                     catch (Exception)
                     {
@@ -158,14 +164,22 @@
             }
         }
 
+        /// <summary>
+        /// The method that handles the AssemblyData collection changed event.
+        /// </summary>
         private void CollectionPropertyChanged()
         {
-            foreach (AssemblyData item in Assemblies)
+            foreach (AssemblyData assemblyData in Assemblies)
             {
-                item.PropertyChanged += (s, e) => LoadUnload(s, e);
+                assemblyData.PropertyChanged += (s, e) => LoadUnload(s, e);
             }
         }
 
+        /// <summary>
+        /// Will load or unload the passed in <see cref="AssemblyData"/> <see cref="object"/>.
+        /// </summary>
+        /// <param name="s">The <see cref="object"/>.</param>
+        /// <param name="e">The property changed arguments.</param>
         private void LoadUnload(object s, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == @"IsEnabled")

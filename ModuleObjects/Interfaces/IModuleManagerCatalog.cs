@@ -9,9 +9,9 @@
     public interface IModuleManagerCatalog : IModuleCatalog
     {
         /// <summary>
-        /// Adds a module to the module catalog based on type.
+        /// Adds a <see cref="ModuleInfo"/> to the module catalog based on <see cref="Type"/>.
         /// </summary>
-        /// <param name="type"><see cref="Type"/> representing the ModuleInfo to add.</param>
+        /// <param name="type">The <see cref="Type"/> representing the <see cref="ModuleInfo"/> to add.</param>
         public void AddModule(Type type);
     }
 }

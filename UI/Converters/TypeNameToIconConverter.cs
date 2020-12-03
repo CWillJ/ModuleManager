@@ -25,9 +25,9 @@
 
             return value.ToString() switch
             {
-                @"ModuleConstructor" => iconDirectory + @"Constructor Icon.png",
-                @"ModuleProperty" => iconDirectory + @"Property Icon.png",
-                @"ModuleMethod" => iconDirectory + @"Method Icon.png",
+                @"TypeConstructor" => iconDirectory + @"Constructor Icon.png",
+                @"TypeProperty" => iconDirectory + @"Property Icon.png",
+                @"TypeMethod" => iconDirectory + @"Method Icon.png",
                 _ => null
             };
         }

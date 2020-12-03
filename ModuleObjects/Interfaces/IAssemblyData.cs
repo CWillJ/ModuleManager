@@ -27,9 +27,9 @@
         public string FilePath { get; set; }
 
         /// <summary>
-        /// Gets or sets an <see cref="ObservableCollection{ModuleData}"/> of modules contained in the assembly.
+        /// Gets or sets an <see cref="ObservableCollection{TypeData}"/> of modules contained in the assembly.
         /// </summary>
-        public ObservableCollection<ModuleData> Modules { get; set; }
+        public ObservableCollection<TypeData> Types { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Type"/> of the module in this assembly.

@@ -5,15 +5,15 @@
     /// <summary>
     /// The base class for module members.
     /// </summary>
-    public class ModuleMemberData : IModuleMemberData
+    public class TypeMemberData : ITypeMemberData
     {
-        /// <inheritdoc cref="IModuleMemberData"/>
+        /// <inheritdoc cref="ITypeMemberData"/>
         public string Name { get; set; }
 
-        /// <inheritdoc cref="IModuleMemberData"/>
+        /// <inheritdoc cref="ITypeMemberData"/>
         public string Description { get; set; }
 
-        /// <inheritdoc cref="IModuleMemberData"/>
+        /// <inheritdoc cref="ITypeMemberData"/>
         public string TypeName { get; set; }
     }
 }

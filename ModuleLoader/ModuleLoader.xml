@@ -133,37 +133,42 @@
         </member>
         <member name="P:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.CurrentAssemblyName">
             <summary>
-            Gets or sets CurrentAssemblyName is the name of the assembly being loaded.
+            Gets or sets the <see cref="T:System.String"/> name of the assembly being loaded.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.CurrentTypeName">
             <summary>
-            Gets or sets CurrentTypeName is the name of the type being loaded.
+            Gets or sets the <see cref="T:System.String"/> name of the type being loaded.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.PercentOfAssemblyLoaded">
             <summary>
-            Gets or sets the current percentage of load compleation of the current assembly.
+            Gets or sets the current <see cref="T:System.Double"/> percentage of load compleation of the current assembly.
             </summary>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.DllDirectory">
             <summary>
-            Gets or sets DllDirectory is the directory path of the .dll files.
+            Gets or sets the <see cref="T:System.String"/> directory path of the .dll files.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.DllFilePath">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> path of the .dll file.
             </summary>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Initialize(System.String,System.String)">
             <summary>
             Initialize properties.
             </summary>
-            <param name="moduleDirectory">Directory containing dll files.</param>
-            <param name="moduleFilePath">Name of the specific dll file.</param>
+            <param name="modulesDirectory">Directory containing <see cref="T:System.String"/> dll files.</param>
+            <param name="assemblyFilePath">Name of the specific <see cref="T:System.String"/> dll file.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.GetAssemblies(System.String[])">
             <summary>
             Creates an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to organize
             the information from the dll file and its related xml file.
             </summary>
-            <param name="dllFiles">A string array containing the names of all dll files in the DllDirectory.</param>
+            <param name="dllFiles">A <see cref="T:System.String"/> array containing the names of all dll files in the DllDirectory.</param>
             <returns>Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.LoadUnload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
@@ -188,7 +193,7 @@
             <summary>
             Load an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
             </summary>
-            <param name="assemblyData">Assembly to load passed by reference.</param>
+            <param name="assemblyData"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to load passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
@@ -208,9 +213,7 @@
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllFilePath">
-            <summary>
-            Gets or sets DllFilePath is the path of the .dll file.
-            </summary>
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.CurrentAssemblyName">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
@@ -247,33 +250,33 @@
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.GetSingleModule(System.Type)">
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.GetTypeData(System.Type)">
             <summary>
-            Builds a singls module from the given Type.
+            Builds a singls <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> from the given <see cref="T:System.Type"/>.
             </summary>
-            <param name="type">Type from an assembly.</param>
-            <returns>A Module type.</returns>
+            <param name="type"><see cref="T:System.Type"/> from an assembly.</param>
+            <returns>A <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.AddConstructorsToCollection(System.Type)">
             <summary>
-            AddConstructorsToCollection get all constructors from a Type.
+            Get all <see cref="T:ModuleManager.ModuleObjects.Classes.TypeConstructor"/>s from a <see cref="T:System.Type"/>.
             </summary>
-            <param name="type">The Type where the members are coming from.</param>
-            <returns>An ObservableCollection of ModuleConstructor objects.</returns>
+            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.AddPropertiesToCollection(System.Type)">
             <summary>
-            AddPropertiesToCollection gets all properties from the passed in Type.
+            Gets all <see cref="T:ModuleManager.ModuleObjects.Classes.TypeProperty"/> from the passed in <see cref="T:System.Type"/>.
             </summary>
-            <param name="type">The Type where the members are coming from.</param>
-            <returns>An ObservableCollection of ModulePropery objects.</returns>
+            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.AddMethodsToCollection(System.Type)">
             <summary>
-            AddMethodsToCollection gets all methods from the passed in Type.
+            Gets all <see cref="T:ModuleManager.ModuleObjects.Classes.TypeMethod"/> from the passed in <see cref="T:System.Type"/>.
             </summary>
-            <param name="type">The Type where the methods are coming from.</param>
-            <returns>An ObservableCollection of ModuleMethod objects.</returns>
+            <param name="type">The <see cref="T:System.Type"/> where the methods are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
         </member>
     </members>
 </doc>

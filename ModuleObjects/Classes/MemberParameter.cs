@@ -19,9 +19,9 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberParameter"/> class.
         /// </summary>
-        /// <param name="type">The <see cref="Type"/> that holds this.</param>
-        /// <param name="name">MemberParameter name.</param>
-        /// <param name="description">MemberParameter description.</param>
+        /// <param name="type">The <see cref="System.Type"/> that holds this.</param>
+        /// <param name="name"><see cref="string"/> parameter name.</param>
+        /// <param name="description"><see cref="string"/> parameter description.</param>
         public MemberParameter(Type type, string name, string description)
         {
             Type = type;
@@ -34,9 +34,9 @@
         /// Initializes a new instance of the <see cref="MemberParameter"/> class.
         /// Used when the actual Type cannot be reached.
         /// </summary>
-        /// <param name="typeName">MemberParameter type.</param>
-        /// <param name="name">MemberParameter name.</param>
-        /// <param name="description">MemberParameter description.</param>
+        /// <param name="typeName">The <see cref="string"/> that holds this.</param>
+        /// <param name="name"><see cref="string"/> parameter name.</param>
+        /// <param name="description"><see cref="string"/> parameter description.</param>
         public MemberParameter(string typeName, string name, string description)
         {
             Type = null;
@@ -46,22 +46,22 @@
         }
 
         /// <summary>
-        /// Gets or sets the parameter type name.
+        /// Gets or sets the <see cref="string"/> parameter type name.
         /// </summary>
         public string TypeName { get; set; }
 
         /// <summary>
-        /// Gets or sets the parameter name.
+        /// Gets or sets the <see cref="string"/> parameter name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the parameter description.
+        /// Gets or sets the <see cref="string"/> parameter description.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the actuall <see cref="Type"/> of the <see cref="MemberParameter"/>.
+        /// Gets or sets the actuall <see cref="System.Type"/> of the <see cref="MemberParameter"/>.
         /// </summary>
         [XmlIgnore]
         public Type Type { get; set; }

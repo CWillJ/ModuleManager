@@ -29,9 +29,7 @@
         /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string DllDirectory { get; set; }
 
-        /// <summary>
-        /// Gets or sets DllFilePath is the path of the .dll file.
-        /// </summary>
+        /// <inheritdoc cref="IAssemblyLoaderService"/>
         public string DllFilePath { get; set; }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
@@ -46,14 +44,14 @@
         /// <summary>
         /// Gets or sets all xml descriptions.
         /// </summary>
-        public XmlDescriptionRetriever DescriptionRetriever { get; set; }
+        private XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
-        public void Initialize(string moduleDirectory, string moduleFilePath)
+        public void Initialize(string modulesDirectory, string assemblyFilePath)
         {
-            DllDirectory = moduleDirectory;
-            DllFilePath = moduleFilePath;
-            DescriptionRetriever = new XmlDescriptionRetriever(moduleFilePath);
+            DllDirectory = modulesDirectory;
+            DllFilePath = assemblyFilePath;
+            DescriptionRetriever = new XmlDescriptionRetriever(assemblyFilePath);
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
@@ -166,7 +164,7 @@
                 allTypes = ex.Types;
             }
 
-            assemblyData.Modules.Clear();
+            assemblyData.Types.Clear();
 
             int typeNumber = 0;
             foreach (var type in types)
@@ -180,7 +178,7 @@
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
                     ////Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
-                    ModuleData tempModule = GetSingleModule(type);
+                    TypeData tempModule = GetTypeData(type);
 
                     if (tempModule != null)
                     {
@@ -192,13 +190,12 @@
                             typeFullNames[i] = typeInterfaces[i].FullName;
                         }
 
-                        // Looking only for modules that inherret from IExpansionModule or ICoreModule. Is this enough validation?
                         if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule") || typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.ICoreModule"))
                         {
                             assemblyData.ModuleType = type;
                         }
 
-                        assemblyData.Modules.Add(tempModule);
+                        assemblyData.Types.Add(tempModule);
                     }
                 }
             }
@@ -218,18 +215,18 @@
         }
 
         /// <summary>
-        /// Builds a singls module from the given Type.
+        /// Builds a singls <see cref="TypeData"/> from the given <see cref="Type"/>.
         /// </summary>
-        /// <param name="type">Type from an assembly.</param>
-        /// <returns>A Module type.</returns>
-        private ModuleData GetSingleModule(Type type)
+        /// <param name="type"><see cref="Type"/> from an assembly.</param>
+        /// <returns>A <see cref="TypeData"/>.</returns>
+        private TypeData GetTypeData(Type type)
         {
             if (!type.IsPublic || type.IsInterface)
             {
                 return null;
             }
 
-            return new ModuleData(
+            return new TypeData(
                 type,
                 type.Name,
                 DescriptionRetriever.GetModuleDescription(type),
@@ -239,13 +236,13 @@
         }
 
         /// <summary>
-        /// AddConstructorsToCollection get all constructors from a Type.
+        /// Get all <see cref="TypeConstructor"/>s from a <see cref="Type"/>.
         /// </summary>
-        /// <param name="type">The Type where the members are coming from.</param>
-        /// <returns>An ObservableCollection of ModuleConstructor objects.</returns>
-        private ObservableCollection<ModuleConstructor> AddConstructorsToCollection(Type type)
+        /// <param name="type">The <see cref="Type"/> where the members are coming from.</param>
+        /// <returns>An <see cref="ObservableCollection{TypeConstructor}"/> objects.</returns>
+        private ObservableCollection<TypeConstructor> AddConstructorsToCollection(Type type)
         {
-            ObservableCollection<ModuleConstructor> constructors = new ObservableCollection<ModuleConstructor>();
+            ObservableCollection<TypeConstructor> constructors = new ObservableCollection<TypeConstructor>();
             ConstructorInfo[] conInfo = type.GetConstructors();
             ObservableCollection<MemberParameter> parameters;
             int constructorIndex;
@@ -259,7 +256,7 @@
                 description = DescriptionRetriever.GetConstructorDescription(constructor, constructorIndex);
                 parameters = DescriptionRetriever.GetParametersFromList(constructor, constructorIndex);
 
-                constructors.Add(new ModuleConstructor(
+                constructors.Add(new TypeConstructor(
                     constructor,
                     name,
                     description,
@@ -270,13 +267,13 @@
         }
 
         /// <summary>
-        /// AddPropertiesToCollection gets all properties from the passed in Type.
+        /// Gets all <see cref="TypeProperty"/> from the passed in <see cref="Type"/>.
         /// </summary>
-        /// <param name="type">The Type where the members are coming from.</param>
-        /// <returns>An ObservableCollection of ModulePropery objects.</returns>
-        private ObservableCollection<ModuleProperty> AddPropertiesToCollection(Type type)
+        /// <param name="type">The <see cref="Type"/> where the members are coming from.</param>
+        /// <returns>An <see cref="ObservableCollection{TypeProperty}"/> objects.</returns>
+        private ObservableCollection<TypeProperty> AddPropertiesToCollection(Type type)
         {
-            ObservableCollection<ModuleProperty> properties = new ObservableCollection<ModuleProperty>();
+            ObservableCollection<TypeProperty> properties = new ObservableCollection<TypeProperty>();
             string name, description, dataType;
             bool canRead, canWrite;
 
@@ -302,7 +299,7 @@
                     dataType = string.Empty;
                 }
 
-                properties.Add(new ModuleProperty(
+                properties.Add(new TypeProperty(
                     property,
                     name,
                     description,
@@ -315,13 +312,13 @@
         }
 
         /// <summary>
-        /// AddMethodsToCollection gets all methods from the passed in Type.
+        /// Gets all <see cref="TypeMethod"/> from the passed in <see cref="Type"/>.
         /// </summary>
-        /// <param name="type">The Type where the methods are coming from.</param>
-        /// <returns>An ObservableCollection of ModuleMethod objects.</returns>
-        private ObservableCollection<ModuleMethod> AddMethodsToCollection(Type type)
+        /// <param name="type">The <see cref="Type"/> where the methods are coming from.</param>
+        /// <returns>An <see cref="ObservableCollection{TypeMethod}"/> objects.</returns>
+        private ObservableCollection<TypeMethod> AddMethodsToCollection(Type type)
         {
-            ObservableCollection<ModuleMethod> methods = new ObservableCollection<ModuleMethod>();
+            ObservableCollection<TypeMethod> methods = new ObservableCollection<TypeMethod>();
             ObservableCollection<MemberParameter> parameters;
             string lastMethodName = string.Empty;
             string description, returnType, returnDescription;
@@ -376,7 +373,7 @@
 
                 returnDescription = DescriptionRetriever.GetMemberReturnDescription(method);
 
-                methods.Add(new ModuleMethod(
+                methods.Add(new TypeMethod(
                     method,
                     name,
                     description,

@@ -9,7 +9,6 @@
     <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
     <templateSelectors:DescriptionTemplateSelector x:Key="DescriptionTemplateSelector" />
-    <templateSelectors:TreeViewItemTemplateSelector x:Key="TreeViewItemTemplateSelector" />
 
     <!--  Member Parameter Data Template  -->
     <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
@@ -18,8 +17,8 @@
         </StackPanel>
     </DataTemplate>
 
-    <!--  Module Constructor Data Template  -->
-    <DataTemplate x:Key="moduleConstructorTemplate" DataType="{x:Type data:ModuleConstructor}">
+    <!--  Type Constructor Data Template  -->
+    <DataTemplate x:Key="typeConstructorTemplate" DataType="{x:Type data:TypeConstructor}">
         <StackPanel>
             <TextBlock
                 FontSize="14"
@@ -38,8 +37,8 @@
         </StackPanel>
     </DataTemplate>
 
-    <!--  Module Properties Data Template  -->
-    <DataTemplate x:Key="modulePropertyTemplate" DataType="{x:Type data:ModuleProperty}">
+    <!--  Type Properties Data Template  -->
+    <DataTemplate x:Key="typePropertyTemplate" DataType="{x:Type data:TypeProperty}">
         <StackPanel>
             <TextBlock
                 FontSize="14"
@@ -69,8 +68,8 @@
         </StackPanel>
     </DataTemplate>
 
-    <!--  Module Method Data Template  -->
-    <DataTemplate x:Key="moduleMethodTemplate" DataType="{x:Type data:ModuleMethod}">
+    <!--  Type Method Data Template  -->
+    <DataTemplate x:Key="typeMethodTemplate" DataType="{x:Type data:TypeMethod}">
         <StackPanel>
             <TextBlock
                 FontSize="14"
@@ -101,7 +100,7 @@
     </DataTemplate>
 
     <!--  View Data Template  -->
-    <DataTemplate x:Key="viewTemplate" DataType="{x:Type data:ModuleData}">
+    <DataTemplate x:Key="viewTemplate" DataType="{x:Type data:TypeData}">
         <Border
             MinWidth="100"
             MinHeight="100"
@@ -113,8 +112,8 @@
         </Border>
     </DataTemplate>
 
-    <!--  Module Data Template  -->
-    <DataTemplate x:Key="moduleTemplate" DataType="{x:Type data:ModuleData}">
+    <!--  Type Data Template  -->
+    <DataTemplate x:Key="typeTemplate" DataType="{x:Type data:TypeData}">
         <StackPanel>
 
             <TextBlock
@@ -150,7 +149,7 @@
                 <LineBreak />
             </TextBlock>
 
-            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Modules, Mode=OneWay}" />
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Types, Mode=OneWay}" />
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

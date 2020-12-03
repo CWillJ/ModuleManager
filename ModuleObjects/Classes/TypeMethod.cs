@@ -6,28 +6,28 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// ModuleMethod object holds the MethodInfo, name, description, the parameters and the return type of a member.
+    /// TypeMethod object holds the MethodInfo, name, description, the parameters and the return type of a member.
     /// </summary>
-    public class ModuleMethod : ModuleMemberData
+    public class TypeMethod : TypeMemberData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleMethod"/> class.
+        /// Initializes a new instance of the <see cref="TypeMethod"/> class.
         /// </summary>
-        public ModuleMethod()
+        public TypeMethod()
             : this(null, string.Empty, string.Empty, new ObservableCollection<MemberParameter>(), string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleMethod"/> class.
+        /// Initializes a new instance of the <see cref="TypeMethod"/> class.
         /// </summary>
-        /// <param name="methodInfo"><see cref="MethodInfo"/>.</param>
-        /// <param name="name">Method name.</param>
-        /// <param name="description">Method description.</param>
-        /// <param name="parameters">Method parameters.</param>
-        /// <param name="returnType">Method return type.</param>
-        /// <param name="returnDescription">Method return description.</param>
-        public ModuleMethod(MethodInfo methodInfo, string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
+        /// <param name="methodInfo"><see cref="System.Reflection.MethodInfo"/>.</param>
+        /// <param name="name"><see cref="string"/> method name.</param>
+        /// <param name="description"><see cref="string"/> method description.</param>
+        /// <param name="parameters"><see cref="ObservableCollection{MemberParameter}"/> method parameters.</param>
+        /// <param name="returnType"><see cref="string"/> method return type.</param>
+        /// <param name="returnDescription"><see cref="string"/> method return description.</param>
+        public TypeMethod(MethodInfo methodInfo, string name, string description, ObservableCollection<MemberParameter> parameters, string returnType, string returnDescription)
         {
             MethodInfo = methodInfo;
             Name = name;
@@ -49,22 +49,22 @@
         }
 
         /// <summary>
-        /// Gets or sets the method parameters.
+        /// Gets or sets the <see cref="ObservableCollection{MemberParameter}"/>s.
         /// </summary>
         public ObservableCollection<MemberParameter> Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the method return type.
+        /// Gets or sets the <see cref="string"/> method return type.
         /// </summary>
         public string ReturnType { get; set; }
 
         /// <summary>
-        /// Gets or sets the method return description.
+        /// Gets or sets the <see cref="string"/> method return description.
         /// </summary>
         public string ReturnDescription { get; set; }
 
         /// <summary>
-        /// Gets or sets the actual MethodInfo of the ModuleMethod.
+        /// Gets or sets the actual <see cref="System.Reflection.MethodInfo"/> of the TypeMethod.
         /// </summary>
         [XmlIgnore]
         public MethodInfo MethodInfo { get; set; }
@@ -72,7 +72,7 @@
         /// <summary>
         /// Invokes this method.
         /// </summary>
-        /// <param name="args">The arguments needed to invoke this method.</param>
+        /// <param name="args">The <see cref="object"/> array arguments needed to invoke this method.</param>
         /// <returns>An object that this method should return.</returns>
         public object Invoke(object[] args)
         {
@@ -88,8 +88,7 @@
         }
 
         /// <summary>
-        /// Overrides the ToString method and formats the string output
-        /// for the UI.
+        /// Overrides the ToString method and formats the string output.
         /// </summary>
         /// <returns>A desired format for the member description, parameters
         /// and return type.</returns>
@@ -140,9 +139,9 @@
         }
 
         /// <summary>
-        /// Used to test if the passed in object array matches this method's parameter types.
+        /// Used to test if the passed in <see cref="object"/> array matches this method's parameter types.
         /// </summary>
-        /// <param name="args">An array of objects that represent method parameters.</param>
+        /// <param name="args">An array of <see cref="object"/>s that represent method parameters.</param>
         /// <returns>True if the object array matches the method's parameter types.</returns>
         private bool TestParameters(object[] args)
         {

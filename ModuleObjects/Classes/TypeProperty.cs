@@ -4,28 +4,28 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// ModuleProperty object holds the PropertyInfo, name, description, data type and accessor level of a property.
+    /// TypeProperty object holds the PropertyInfo, name, description, data type and accessor level of a property.
     /// </summary>
-    public class ModuleProperty : ModuleMemberData
+    public class TypeProperty : TypeMemberData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleProperty"/> class.
+        /// Initializes a new instance of the <see cref="TypeProperty"/> class.
         /// </summary>
-        public ModuleProperty()
+        public TypeProperty()
             : this(null, string.Empty, string.Empty, string.Empty, false, false)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleProperty"/> class.
+        /// Initializes a new instance of the <see cref="TypeProperty"/> class.
         /// </summary>
-        /// <param name="propertyInfo">PropertyInfo for this ModuleProperty.</param>
-        /// <param name="name">Property name.</param>
-        /// <param name="description">Property description.</param>
-        /// <param name="dataType">Property data type.</param>
-        /// <param name="canRead">Property has a 'get' accessor.</param>
-        /// <param name="canWrite">Property has a 'set' accessor.</param>
-        public ModuleProperty(PropertyInfo propertyInfo, string name, string description, string dataType, bool canRead, bool canWrite)
+        /// <param name="propertyInfo"><see cref="System.Reflection.PropertyInfo"/> for this.</param>
+        /// <param name="name"><see cref="string"/> property name.</param>
+        /// <param name="description"><see cref="string"/> property description.</param>
+        /// <param name="dataType"><see cref="string"/> property data type.</param>
+        /// <param name="canRead"><see cref="string"/> property has a 'get' accessor.</param>
+        /// <param name="canWrite"><see cref="string"/> property has a 'set' accessor.</param>
+        public TypeProperty(PropertyInfo propertyInfo, string name, string description, string dataType, bool canRead, bool canWrite)
         {
             PropertyInfo = propertyInfo;
             Name = name;
@@ -37,7 +37,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the type of the property.
+        /// Gets or sets the <see cref="string"/> type of the property.
         /// </summary>
         public string DataType { get; set; }
 
@@ -52,7 +52,7 @@
         public bool CanWrite { get; set; }
 
         /// <summary>
-        /// Gets or sets the actual PropertyInfo for this ModuleProperty.
+        /// Gets or sets the actual <see cref="System.Reflection.PropertyInfo"/> for this.
         /// </summary>
         [XmlIgnore]
         public PropertyInfo PropertyInfo { get; set; }

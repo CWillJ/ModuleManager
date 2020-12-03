@@ -5,26 +5,26 @@
     using System.Xml.Serialization;
 
     /// <summary>
-    /// Holds the <see cref="ConstructorInfo"/>, class name, description and the parameters a constructor.
+    /// Holds the <see cref="ConstructorInfo"/>, class name, description and the parameters of a type's constructor.
     /// </summary>
-    public class ModuleConstructor : ModuleMemberData
+    public class TypeConstructor : TypeMemberData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.
+        /// Initializes a new instance of the <see cref="TypeConstructor"/> class.
         /// </summary>
-        public ModuleConstructor()
+        public TypeConstructor()
             : this(null, string.Empty, string.Empty, new ObservableCollection<MemberParameter>())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleConstructor"/> class.
+        /// Initializes a new instance of the <see cref="TypeConstructor"/> class.
         /// </summary>
-        /// <param name="constructorInfo"><see cref="ConstructorInfo"/> for this <see cref="ModuleConstructor"/>.</param>
-        /// <param name="className">Class name.</param>
-        /// <param name="description">Constructor description.</param>
+        /// <param name="constructorInfo"><see cref="System.Reflection.ConstructorInfo"/> for this <see cref="TypeConstructor"/>.</param>
+        /// <param name="className"><see cref="string"/> class name.</param>
+        /// <param name="description"><see cref="string"/> constructor description.</param>
         /// <param name="parameters">A <see cref="ObservableCollection{MemberParameter}"/>, constructor parameters.</param>
-        public ModuleConstructor(ConstructorInfo constructorInfo, string className, string description, ObservableCollection<MemberParameter> parameters)
+        public TypeConstructor(ConstructorInfo constructorInfo, string className, string description, ObservableCollection<MemberParameter> parameters)
         {
             ConstructorInfo = constructorInfo;
 
@@ -48,7 +48,7 @@
         public ObservableCollection<MemberParameter> Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the actuall <see cref="ConstructorInfo"/>.
+        /// Gets or sets the actuall <see cref="System.Reflection.ConstructorInfo"/>.
         /// </summary>
         [XmlIgnore]
         public ConstructorInfo ConstructorInfo { get; set; }

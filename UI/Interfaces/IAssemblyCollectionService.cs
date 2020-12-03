@@ -24,7 +24,7 @@
         public object SelectedItem { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the selected item.
+        /// Gets or sets the <see cref="string"/> name of the selected item.
         /// </summary>
         public string SelectedItemName { get; set; }
 
