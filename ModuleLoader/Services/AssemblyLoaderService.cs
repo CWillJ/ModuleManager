@@ -166,6 +166,7 @@
             catch (ReflectionTypeLoadException ex)
             {
                 types = ex.Types.Where(t => t != null).ToArray();
+                var bull = ex.LoaderExceptions;
             }
 
             assemblyData.Types.Clear();

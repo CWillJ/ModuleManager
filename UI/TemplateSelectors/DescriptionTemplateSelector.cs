@@ -24,16 +24,16 @@
                     return element.FindResource(@"assemblyTemplate") as DataTemplate;
                 }
 
-                if (item is TypeData typeData)
+                if (item is TypeData) //// typeData)
                 {
-                    if (typeData.Type.BaseType != null && typeData.Type.BaseType.Name == @"UserControl")
-                    {
-                        return element.FindResource(@"viewTemplate") as DataTemplate;
-                    }
-                    else
-                    {
+                    ////if (typeData.Type.BaseType != null && typeData.Type.BaseType.Name == @"UserControl")
+                    ////{
+                    ////    return element.FindResource(@"viewTemplate") as DataTemplate;
+                    ////}
+                    ////else
+                    ////{
                         return element.FindResource(@"typeTemplate") as DataTemplate;
-                    }
+                    ////}
                 }
 
                 if (item is TypeConstructor)
