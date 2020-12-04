@@ -143,17 +143,22 @@
                 Initialize(assemblyData.FilePath.Substring(0, assemblyData.FilePath.LastIndexOf(".")), assemblyData.FilePath);
             }
 
-            // May have to load all reference assemblies here
             assemblyData.Loader = new AssemblyLoader(DllFilePath);
             assemblyData.Assembly = assemblyData.Loader.LoadFromAssemblyPath(DllFilePath);
-
-            assemblyData.Name = assemblyData.Assembly.GetName().Name;
             assemblyData.FilePath = DllFilePath;
 
             Type[] types = null;
-            Type[] allTypes = null;
 
-            // TODO: I need to be able to load all of these types. Ones I'm not getting now are Telerik RadWindow
+            string name = assemblyData.Assembly.GetName().Name;
+            try
+            {
+                assemblyData.Name = name[(name.LastIndexOf(@".") + 1) ..];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                assemblyData.Name = name;
+            }
+
             try
             {
                 types = assemblyData.Assembly.GetTypes();
@@ -161,7 +166,6 @@
             catch (ReflectionTypeLoadException ex)
             {
                 types = ex.Types.Where(t => t != null).ToArray();
-                allTypes = ex.Types;
             }
 
             assemblyData.Types.Clear();

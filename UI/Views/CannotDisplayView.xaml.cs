@@ -3,7 +3,7 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for CannotDisplayView.xaml
+    /// Interaction logic for CannotDisplayView.xaml.
     /// </summary>
     public partial class CannotDisplayView : UserControl
     {

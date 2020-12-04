@@ -135,38 +135,6 @@
             </summary>
             <returns>A desired format for the parameter type and name.</returns>
         </member>
-        <member name="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog">
-            <summary>
-            The <see cref="T:Prism.Modularity.ModuleCatalog"/> holding the loaded modules.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.#ctor(System.Collections.Generic.IEnumerable{Prism.Modularity.ModuleInfo})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> class while providing an
-            initial list of <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>s.
-            </summary>
-            <param name="modules">The initial list of modules.</param>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.AddModule(System.Type)">
-            <inheritdoc cref="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog"/>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.InnerLoad">
-            <summary>
-            Does the actual work of loading the catalog. The base implementation does nothing.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog.CreateModuleInfo(System.Type)">
-            <summary>
-            Creates a <see cref="T:Prism.Modularity.ModuleInfo"/> from the <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">The <see cref="T:System.Type"/> to get the <see cref="T:Prism.Modularity.ModuleInfo"/> from.</param>
-            <returns>A <see cref="T:Prism.Modularity.ModuleInfo"/>.</returns>
-        </member>
         <member name="T:ModuleManager.ModuleObjects.Classes.TypeConstructor">
             <summary>
             Holds the <see cref="P:ModuleManager.ModuleObjects.Classes.TypeConstructor.ConstructorInfo"/>, class name, description and the parameters of a type's constructor.
@@ -466,17 +434,6 @@
             <summary>
             Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.
             </summary>
-        </member>
-        <member name="T:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog">
-            <summary>
-            The interface for a ModuleCatalogService.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.ModuleObjects.Interfaces.IModuleManagerCatalog.AddModule(System.Type)">
-            <summary>
-            Adds a <see cref="T:Prism.Modularity.ModuleInfo"/> to the module catalog based on <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">The <see cref="T:System.Type"/> representing the <see cref="T:Prism.Modularity.ModuleInfo"/> to add.</param>
         </member>
         <member name="T:ModuleManager.ModuleObjects.Interfaces.ITypeData">
             <summary>

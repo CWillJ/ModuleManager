@@ -39,11 +39,6 @@
             Gets or sets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
             </summary>
         </member>
-        <member name="P:ModuleManager.UI.Interfaces.IAssemblyCollectionService.AssemblyCatalog">
-            <summary>
-            Gets or sets a <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/> objects.
-            </summary>
-        </member>
         <member name="P:ModuleManager.UI.Interfaces.IAssemblyCollectionService.SelectedItem">
             <summary>
             Gets or sets an <see cref="T:System.Object"/> object hopefully.
@@ -52,11 +47,6 @@
         <member name="P:ModuleManager.UI.Interfaces.IAssemblyCollectionService.SelectedItemName">
             <summary>
             Gets or sets the <see cref="T:System.String"/> name of the selected item.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Interfaces.IAssemblyCollectionService.AddModulesToCatalog">
-            <summary>
-            Adds all modules stored in the <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> ModuleType properties.
             </summary>
         </member>
         <member name="T:ModuleManager.UI.Interfaces.IProgressBarService">
@@ -94,18 +84,10 @@
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
         </member>
-        <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.AssemblyCatalog">
-            <summary>
-            Gets or sets a <see cref="T:ModuleManager.ModuleObjects.Classes.ModuleManagerCatalog"/>.
-            </summary>
-        </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.SelectedItem">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.SelectedItemName">
-            <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
-        </member>
-        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.AddModulesToCatalog">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
         </member>
         <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.SerializeToXML(System.String)">
@@ -290,7 +272,7 @@
             <summary>
             Gets the directory selected by the user that should contain dll files.
             </summary>
-            <returns>String of the directory path.</returns>
+            <returns><see cref="T:System.String"/> of the directory path.</returns>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.SaveConfig">
             <summary>
@@ -395,7 +377,7 @@
         </member>
         <member name="T:ModuleManager.UI.Views.CannotDisplayView">
             <summary>
-            Interaction logic for CannotDisplayView.xaml
+            Interaction logic for CannotDisplayView.xaml.
             </summary>
             <summary>
             CannotDisplayView

@@ -138,9 +138,6 @@
 
             _progressBarService.AssemblyName = string.Empty;
             _progressBarService.Text = string.Empty;
-
-            // Add all modules to the module catalog
-            AssemblyCollectionService.AddModulesToCatalog();
         }
 
         /// <summary>
@@ -159,7 +156,7 @@
         /// <summary>
         /// Gets the directory selected by the user that should contain dll files.
         /// </summary>
-        /// <returns>String of the directory path.</returns>
+        /// <returns><see cref="string"/> of the directory path.</returns>
         private string GetModuleDirectory()
         {
             RadOpenFolderDialog folderBrowserDialog = new RadOpenFolderDialog();
@@ -222,15 +219,6 @@
                     return;
                 }
             }
-
-            ////if (_moduleManagerCatalog.Serialize(saveFile))
-            ////{
-            ////    RadWindow.Alert(@"Configuration Saved");
-            ////}
-            ////else
-            ////{
-            ////    RadWindow.Alert(@"Cannot Save Modules to xml File");
-            ////}
 
             using StreamWriter wr = new StreamWriter(saveFile);
             serializer.Serialize(wr, AssemblyCollectionService.Assemblies);

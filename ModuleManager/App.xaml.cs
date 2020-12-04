@@ -92,7 +92,6 @@
             containerRegistry.Register<IAssemblyData, AssemblyData>();
             containerRegistry.Register<ITypeData, TypeData>();
             containerRegistry.Register<ITypeMemberData, TypeMemberData>();
-            containerRegistry.Register<IModuleManagerCatalog, ModuleManagerCatalog>();
 
             containerRegistry.RegisterForNavigation<ModuleManagerView>();
             containerRegistry.RegisterForNavigation<ProgressBarView>();

@@ -105,7 +105,7 @@
             MinWidth="100"
             MinHeight="100"
             Margin="10"
-            Background="DarkSlateBlue"
+            Background="LightSteelBlue"
             BorderBrush="Black"
             BorderThickness="1">
             <ContentControl prism:RegionManager.RegionName="ModuleDataViewRegion" />

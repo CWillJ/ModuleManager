@@ -9,8 +9,6 @@
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Views;
-    using Prism.Ioc;
-    using Prism.Modularity;
     using Prism.Mvvm;
     using Prism.Regions;
 
@@ -23,7 +21,6 @@
         private readonly IRegionManager _regionManager;
 
         private ObservableCollection<AssemblyData> _assemblies;
-        private ModuleManagerCatalog _assemblyCatalog;
         private object _selectedItem;
         private string _selectedItemName;
 
@@ -35,7 +32,6 @@
         public AssemblyCollectionService(IAssemblyLoaderService asssemblyLoaderService, IRegionManager regionManager)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
-            _assemblyCatalog = new ModuleManagerCatalog();
             _selectedItem = null;
             _selectedItemName = @"Description";
 
@@ -48,15 +44,6 @@
         {
             get { return _assemblies; }
             set { SetProperty(ref _assemblies, value, CollectionPropertyChanged); }
-        }
-
-        /// <summary>
-        /// Gets or sets a <see cref="ModuleManagerCatalog"/>.
-        /// </summary>
-        public ModuleManagerCatalog AssemblyCatalog
-        {
-            get { return _assemblyCatalog; }
-            set { _assemblyCatalog = value; }
         }
 
         /// <inheritdoc cref="IAssemblyCollectionService"/>
@@ -80,18 +67,6 @@
         {
             get { return _selectedItemName; }
             set { SetProperty(ref _selectedItemName, value); }
-        }
-
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
-        public void AddModulesToCatalog()
-        {
-            foreach (AssemblyData assembly in Assemblies)
-            {
-                if (assembly.ModuleType != null)
-                {
-                    AssemblyCatalog.AddModule(assembly.ModuleType);
-                }
-            }
         }
 
         /// <summary>
@@ -190,12 +165,6 @@
                 _assemblyLoaderService.LoadUnload(ref assembly);
                 Assemblies[i] = assembly;
             }
-        }
-
-        private void PopulateModuleCatalog(AssemblyData assembly)
-        {
-            ObservableCollection<ModuleInfo> moduleCatalog = (ObservableCollection<ModuleInfo>)AssemblyCatalog.Modules;
-            moduleCatalog.Add(new ModuleInfo(assembly.ModuleType));
         }
     }
 }

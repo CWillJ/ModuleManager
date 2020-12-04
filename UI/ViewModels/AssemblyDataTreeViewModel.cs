@@ -71,9 +71,6 @@
             // Unload all disabled assemblies.
             _assemblyLoaderService.LoadUnload(ref assemblies);
 
-            // Add all modules to the module catalog
-            AssemblyCollectionService.AddModulesToCatalog();
-
             return assemblies;
         }
     }
