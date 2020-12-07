@@ -191,13 +191,13 @@
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Load(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Load an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
+            Load an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> by reference.
             </summary>
             <param name="assemblyData"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to load passed by reference.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <summary>
-            Unload an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/>.
+            Unload an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> by reference.
             </summary>
             <param name="assemblyData"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to unload passed by reference.</param>
         </member>

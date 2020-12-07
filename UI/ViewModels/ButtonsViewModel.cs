@@ -94,13 +94,11 @@
         {
             string moduleDirectory = GetModuleDirectory();
 
-            // If directory selection was cancled, exit this method.
             if (moduleDirectory == null)
             {
                 return;
             }
 
-            // add all the files of the assemblies you actually want info from
             string[] dllFiles = Directory.GetFiles(moduleDirectory, @"*.dll");
 
             if (dllFiles.Length == 0)
@@ -128,7 +126,6 @@
 
             thread.Start();
 
-            // Run async to allow UI thread to update UI with the property changes above.
             AssemblyCollectionService.Assemblies = await Task.Run(() => _assemblyLoaderService.GetAssemblies(dllFiles));
 
             // Kill progress bar
@@ -180,6 +177,12 @@
         /// </summary>
         private void SaveConfig()
         {
+            if (AssemblyCollectionService.Assemblies.Count == 0)
+            {
+                RadWindow.Alert(@"No Modules Detected");
+                return;
+            }
+
             Type assemblyType = typeof(ObservableCollection<AssemblyData>);
             XmlSerializer serializer;
             string saveFile;
@@ -194,7 +197,7 @@
                 return;
             }
 
-            saveFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
+            saveFile = Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml";
 
             if (UseSaveFileDialog)
             {

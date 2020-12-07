@@ -67,13 +67,13 @@
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
-        /// Load an <see cref="AssemblyData"/>.
+        /// Load an <see cref="AssemblyData"/> by reference.
         /// </summary>
         /// <param name="assemblyData"><see cref="AssemblyData"/> to load passed by reference.</param>
         public void Load(ref AssemblyData assemblyData);
 
         /// <summary>
-        /// Unload an <see cref="AssemblyData"/>.
+        /// Unload an <see cref="AssemblyData"/> by reference.
         /// </summary>
         /// <param name="assemblyData"><see cref="AssemblyData"/> to unload passed by reference.</param>
         public void Unload(ref AssemblyData assemblyData);

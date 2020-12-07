@@ -148,8 +148,8 @@
             assemblyData.FilePath = DllFilePath;
 
             Type[] types = null;
-
             string name = assemblyData.Assembly.GetName().Name;
+
             try
             {
                 assemblyData.Name = name[(name.LastIndexOf(@".") + 1) ..];
@@ -166,7 +166,6 @@
             catch (ReflectionTypeLoadException ex)
             {
                 types = ex.Types.Where(t => t != null).ToArray();
-                var bull = ex.LoaderExceptions;
             }
 
             assemblyData.Types.Clear();

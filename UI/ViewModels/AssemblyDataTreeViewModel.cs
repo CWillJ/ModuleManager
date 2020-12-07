@@ -26,8 +26,8 @@
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
-            // Load previously saved module configuration if the ConfigFile exists
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\ConfigFile.xml"))
+            // Load previously saved module configuration if the ModuleSaveFile exists
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml"))
             {
                 _assemblyCollectionService.Assemblies = LoadConfig();
             }
@@ -49,7 +49,7 @@
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
-            string loadFile = Directory.GetCurrentDirectory() + @"\ConfigFile.xml";
+            string loadFile = Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml";
 
             using (StreamReader rd = new StreamReader(loadFile))
             {

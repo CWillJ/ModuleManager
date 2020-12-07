@@ -43,7 +43,7 @@
             Grid.Row="1"
             MinWidth="100"
             MinHeight="275"
-            Background="White"
+            Background="LightGray"
             BorderBrush="Black"
             BorderThickness="1"
             ItemContainerStyle="{StaticResource RadTreeViewItemStyle}"

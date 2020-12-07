@@ -45,7 +45,7 @@
             MinWidth="550"
             MinHeight="275"
             Margin="10,0"
-            Background="White"
+            Background="LightGray"
             BorderBrush="Black"
             BorderThickness="1">
             <ScrollViewer Margin="10,5,0,0" HorizontalScrollBarVisibility="Disabled">
