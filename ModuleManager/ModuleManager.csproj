@@ -9,7 +9,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>ModuleManager.xml</DocumentationFile>
-    <OutputPath>C:\Users\wjohnson\source\repos\ModuleManager\bin\</OutputPath>
+    <OutputPath>\ModuleManager\bin\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

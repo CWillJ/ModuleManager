@@ -9,7 +9,7 @@
     using ModuleManager.UI.Interfaces;
 
     /// <summary>
-    /// View model for module area.
+    /// View model for the AssemblyData TreeView.
     /// </summary>
     public class AssemblyDataTreeViewModel
     {

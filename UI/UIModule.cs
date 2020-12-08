@@ -30,6 +30,7 @@
             _regionManager.RegisterViewWithRegion(@"ButtonsRegion", typeof(ButtonsView));
             _regionManager.RegisterViewWithRegion(@"AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
             _regionManager.RegisterViewWithRegion(@"AssemblyDataRegion", typeof(AssemblyDataView));
+            _regionManager.RegisterViewWithRegion(@"LoadedViewsRegion", typeof(LoadedViewsView));
         }
 
         /// <summary>

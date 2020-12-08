@@ -49,21 +49,6 @@
             Gets or sets the <see cref="T:System.String"/> name of the selected item.
             </summary>
         </member>
-        <member name="T:ModuleManager.UI.Interfaces.ILoadedViewsService">
-            <summary>
-            Manages the collection of loaded views.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.UI.Interfaces.ILoadedViewsService.LoadedViews">
-            <summary>
-            Gets or sets a collection of loaded view types.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Interfaces.ILoadedViewsService.LoadViewsFromAssemblyService">
-            <summary>
-            Loads all views from any loaded assemblies in the <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>.
-            </summary>
-        </member>
         <member name="T:ModuleManager.UI.Interfaces.IProgressBarService">
             <summary>
             A progress bar service.
@@ -134,42 +119,6 @@
             <param name="s">The <see cref="T:System.Object"/>.</param>
             <param name="e">The property changed arguments.</param>
         </member>
-        <member name="T:ModuleManager.UI.Services.LoadedViewsService">
-            <summary>
-            Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/> implementations.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.#ctor(ModuleManager.UI.Interfaces.IAssemblyCollectionService,Prism.Regions.IRegionManager,Prism.Ioc.IContainerProvider)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.LoadedViewsService"/> class.
-            </summary>
-            <param name="assemblyCollectionService">The <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>.</param>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-        </member>
-        <member name="P:ModuleManager.UI.Services.LoadedViewsService.LoadedViews">
-            <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.LoadViewsFromAssemblyService">
-            <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddTypeDataIfIsView(ModuleManager.ModuleObjects.Classes.TypeData)">
-            <summary>
-            Adds the <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>'s <see cref="T:System.Type"/> to LoadedViews property if IsView is true.
-            </summary>
-            <param name="typeData">The <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> to get the <see cref="T:System.Type"/> from to add to LoadedViews.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddViewFromType(System.Type)">
-            <summary>
-            Adds a view <see cref="T:System.Type"/> to the LoadedViews collection.
-            </summary>
-            <param name="type">The view <see cref="T:System.Type"/> to be added.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.RemoveViewFromType(System.Type)">
-            <summary>
-            Removes a view <see cref="T:System.Type"/> to the LoadedViews collection.
-            </summary>
-            <param name="type">The view <see cref="T:System.Type"/> to be removed.</param>
-        </member>
         <member name="T:ModuleManager.UI.Services.ProgressBarService">
             <summary>
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IProgressBarService"/> implementations.
@@ -227,7 +176,7 @@
         </member>
         <member name="T:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel">
             <summary>
-            View model for the AssemblyData TreeView.
+            View model for module area.
             </summary>
         </member>
         <member name="M:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.#ctor(ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
@@ -346,23 +295,6 @@
             </summary>
             <returns>True.</returns>
         </member>
-        <member name="T:ModuleManager.UI.ViewModels.LoadedViewsViewModel">
-            <summary>
-            View model for the loaded views.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.ViewModels.LoadedViewsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.UI.Interfaces.ILoadedViewsService)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.LoadedViewsViewModel"/> class.
-            </summary>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-            <param name="loadedViewsService">The program's <see cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>.</param>
-        </member>
-        <member name="P:ModuleManager.UI.ViewModels.LoadedViewsViewModel.LoadedViewsService">
-            <summary>
-            Gets a collection of view types.
-            </summary>
-        </member>
         <member name="T:ModuleManager.UI.ViewModels.ModuleManagerViewModel">
             <summary>
             MainView view model.
@@ -457,24 +389,6 @@
             </summary>
         </member>
         <member name="M:ModuleManager.UI.Views.CannotDisplayView.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:ModuleManager.UI.Views.LoadedViewsView">
-            <summary>
-            Interaction logic for LoadedViewsView.xaml.
-            </summary>
-            <summary>
-            LoadedViewsView
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Views.LoadedViewsView.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.UI.Views.LoadedViewsView"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Views.LoadedViewsView.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
