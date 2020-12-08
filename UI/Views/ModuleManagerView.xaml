@@ -24,10 +24,13 @@
             Grid.Row="0"
             Grid.Column="0"
             prism:RegionManager.RegionName="ButtonsRegion" />
-        <ContentControl
+
+        <!--
+            ContentControl
             Grid.Row="0"
             Grid.Column="1"
-            prism:RegionManager.RegionName="LoadedViewsRegion" />
+            prism:RegionManager.RegionName="LoadedViewsRegion" /
+        -->
 
         <Grid
             Grid.Row="1"

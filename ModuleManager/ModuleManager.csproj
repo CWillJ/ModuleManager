@@ -71,7 +71,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)..\bin\&quot;&#xD;&#xA;del * /q" />
+    <Exec Command="cd &quot;$(ProjectDir)..\&quot;&#xD;&#xA;if not exist bin mkdir bin&#xD;&#xA;cd bin&#xD;&#xA;del * /q" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

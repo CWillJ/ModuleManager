@@ -20,6 +20,7 @@
         /// </summary>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
         /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
         public LoadedViewsService(IAssemblyCollectionService assemblyCollectionService, IRegionManager regionManager, IContainerProvider containerProvider)
         {
             _assemblyCollectionService = assemblyCollectionService;
