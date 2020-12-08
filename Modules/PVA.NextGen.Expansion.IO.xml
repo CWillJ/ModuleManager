@@ -1,0 +1,476 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.IO</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.IO.Constants.IOConstants">
+            <summary>
+            Constant values pertaining to <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> devices.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOConstants.APIName">
+            <summary>
+            The <see cref="T:System.String"/> name used when accessing the IO API.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOConstants.ModuleName">
+            <summary>
+            The string name for the IO module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOConstants.MaxDevices">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOConstants.JsonFile">
+            <summary>
+            The file location for the IO device JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Constants.IOParameterNames">
+            <summary>
+            Constant values used to create <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> parameters in scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOParameterNames.Input">
+            <summary>
+            Name for an input parameter.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOParameterNames.Output">
+            <summary>
+            Name for an output parameter.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Constants.IOTokenNames">
+            <summary>
+            The navigation token names for IO Device views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOTokenNames.ConfigurationPage">
+            <summary>
+            Navigation token name for the configuration page.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOTokenNames.DeviceConfigurationView">
+            <summary>
+            Navigation token name for the configuration view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOTokenNames.ConnectionView">
+            <summary>
+            Navigation token name for the connection view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOTokenNames.FunctionTestView">
+            <summary>
+            Navigation token name for the function test view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOTokenNames.FunctionConfigurationView">
+            <summary>
+            Navigation token name for the function configuration view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Constants.IOTokenNames.DiscreteIODisplayNameEditorView">
+            <summary>
+            Navigation token name for the discrete inputs/outputs display name editor view.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Factories.IOParameterFactory">
+            <summary>
+            A factory used to create instances of common parameters for scripts.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Factories.IOParameterFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.Factories.IOParameterFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Factories.IOParameterFactory.CreateParameter(System.String,System.Object[])">
+            <summary>
+            Create an instance of a script parameter.
+            </summary>
+            <param name="name">The <see cref="T:System.String"/> name of the type of parameter to create.</param>
+            <param name="arguments">The arguments needed to create the parameter.</param>
+            <returns>The new <see cref="T:System.Object"/> instance of a parameter.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.IOModule">
+            <summary>
+            IOModule.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.IOModule.DriverTypes">
+            <summary>
+            Gets or sets the collection of all <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> types.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.IOModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.IOModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform required initialization methods for this Module.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter">
+            <summary>
+            A reference to a discrete input point from an <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter"/> class.
+            </summary>
+            <param name="deviceName">The name of the <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> this references.</param>
+            <param name="index">The address index of this IO point.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter.DeviceName">
+            <summary>
+            Gets or sets the name of the <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> this references.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter.Index">
+            <summary>
+            Gets or sets the address index of this IO point.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter.Equals(PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter)">
+            <summary>
+            Determines whether the specified <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter"/> is equal to the current <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter"/>.
+            </summary>
+            <param name="other">The <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter"/> to compare with the current <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter"/>.</param>
+            <returns><see langword="true"/> if the specified object is equal to the current object; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="obj">The object to compare with the current object.</param>
+            <returns><see langword="true"/> if the specified object is equal to the current object; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+            <returns>A hash code for the current object.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteOutputParameter">
+            <summary>
+            A reference to a discrete output from an <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Parameters.DiscreteOutputParameter.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteOutputParameter"/> class.
+            </summary>
+            <param name="deviceName">The name of the <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> this references.</param>
+            <param name="index">The address index of this IO point.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Parameters.DiscreteOutputParameter.DeviceName">
+            <summary>
+            Gets or sets the name of the <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> this references.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Parameters.DiscreteOutputParameter.Index">
+            <summary>
+            Gets or sets the address index of this IO point.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Services.IODeviceService">
+            <summary>
+            Service providing concrete <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> implementations.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Services.IODeviceService.#ctor(PVA.NextGen.Common.Interfaces.IDeviceFactory,PVA.NextGen.Common.Interfaces.IFunctionService,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.Services.IODeviceService"/> class.
+            </summary>
+            <param name="deviceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/>.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+            <param name="scriptService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Services.IODeviceService.AllDevices">
+            <summary>
+            Gets all devices of this types from all modules.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.ViewModels.DiscreteInputParameterViewModel">
+            <summary>
+            Interaction logic for the IO Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.DiscreteInputParameterViewModel.#ctor(PVA.NextGen.Common.Interfaces.IIODeviceService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.ViewModels.DiscreteInputParameterViewModel"/> class.
+            </summary>
+            <param name="ioDeviceService">The <see cref="T:PVA.NextGen.Common.Interfaces.IIODeviceService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/>.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.DiscreteInputParameterViewModel.IODeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.ViewModels.DiscreteOutputParameterViewModel">
+            <summary>
+            Interaction logic for the IO Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.DiscreteOutputParameterViewModel.#ctor(PVA.NextGen.Common.Interfaces.IIODeviceService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.ViewModels.DiscreteOutputParameterViewModel"/> class.
+            </summary>
+            <param name="ioDeviceService">The <see cref="T:PVA.NextGen.Common.Interfaces.IIODeviceService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/>.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.DiscreteOutputParameterViewModel.IODeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel">
+            <summary>
+            Interaction logic for the IO Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.IIODeviceService,PVA.NextGen.Common.Interfaces.IConnectionService,PVA.NextGen.CommonUI.Interfaces.IMessagingService,Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel"/> class.
+            </summary>
+            <param name="ioDeviceService">The <see cref="T:PVA.NextGen.Common.Interfaces.IIODeviceService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/>.</param>
+            <param name="connectionService">The <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/>.</param>
+            <param name="messagingService">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IMessagingService"/> used for displaying messages to the user.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.AvailableConnectionTypes">
+            <summary>
+            Gets the available <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> types by getting the intersect of connections available at load and connections the device supports.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.AddDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add a <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> to the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.RemoveDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove a <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> from the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.ChangeConnectionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to change the <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> of an <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.CanCreateDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for creating a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.CanEditDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.CanDeleteDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for deleting a device.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceConfigurationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel">
+            <summary>
+            Interaction logic for an IO Device Discrete Input/Output Display Name Editor view.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.#ctor(PVA.NextGen.Common.Interfaces.IIODeviceService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel"/> class.
+            </summary>
+            <param name="ioDeviceService">The <see cref="T:PVA.NextGen.Common.Interfaces.IIODeviceService"/> for this device type.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.ViewModels.IODeviceDiscreteIODisplayNameEditorViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Views.DiscreteInputParameterView">
+            <summary>
+            Presentation logic for Discrete Input Parameter View.
+            </summary>
+            <summary>
+            DiscreteInputParameterView
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Views.DiscreteInputParameterView.InputParameterProperty">
+            <summary>
+            A <see cref="T:System.Windows.DependencyProperty"/> used to set the <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter"/> to be edited.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Views.DiscreteInputParameterView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.Views.DiscreteInputParameterView"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Views.DiscreteInputParameterView.InputParameter">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteInputParameter"/> to be edited.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Views.DiscreteInputParameterView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Views.DiscreteOutputParameterView">
+            <summary>
+            Presentation logic for Discrete Output Parameter View.
+            </summary>
+            <summary>
+            DiscreteOutputParameterView
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.IO.Views.DiscreteOutputParameterView.OutputParameterProperty">
+            <summary>
+            A <see cref="T:System.Windows.DependencyProperty"/> used to set the <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteOutputParameter"/> to be edited.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Views.DiscreteOutputParameterView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.Views.DiscreteOutputParameterView"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Views.DiscreteOutputParameterView.OutputParameter">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Expansion.IO.Parameters.DiscreteOutputParameter"/> to be edited.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Views.DiscreteOutputParameterView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.IO.Views.IODeviceDiscreteIODisplayNameEditorView">
+            <summary>
+            Interaction logic for IODeviceDiscreteIODisplayNameEditorView.
+            </summary>
+            <summary>
+            IODeviceDiscreteIODisplayNameEditorView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Views.IODeviceDiscreteIODisplayNameEditorView.#ctor(PVA.NextGen.CommonUI.Interfaces.IIODeviceDiscreteIODisplayNameEditorViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.IO.Views.IODeviceDiscreteIODisplayNameEditorView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IIODeviceDiscreteIODisplayNameEditorViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.IO.Views.IODeviceDiscreteIODisplayNameEditorView.ViewModel">
+            <summary>
+            Gets the page's DataContext as an <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.IO.Views.IODeviceDiscreteIODisplayNameEditorView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

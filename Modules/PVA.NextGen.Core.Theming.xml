@@ -1,0 +1,469 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Theming</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Theming.Constants.ThemeConstants">
+            <summary>
+            Constant values pertaining to the <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/>.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.ModuleName">
+            <summary>
+            The string name of the theming module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.MaxThemes">
+            <summary>
+            The value indicating the maximum number of allowed themes.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.DefaultThemeName">
+            <summary>
+            The string value for the default theme.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.DefaultShade">
+            <summary>
+            The string value for the default shade.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.DefaultAccentColor">
+            <summary>
+            The string value for the default accent color.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.DefaultAnimationModifier">
+            <summary>
+            The string value for the default animation modifier.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.AvailableShades">
+            <summary>
+            The list of supported shades.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.AvailableAnimationModifiers">
+            <summary>
+            The list of supported animation modifiers.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemeConstants.JsonFile">
+            <summary>
+            The file location for the theme JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.Constants.ThemePermissions">
+            <summary>
+            Constant permission values used by the theming module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemePermissions.CanChangeTheme">
+            <summary>
+            Permission where user can change the theme.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemePermissions.CanCreateTheme">
+            <summary>
+            Permission where user can create a theme.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemePermissions.CanEditTheme">
+            <summary>
+            Permission where user can edit a theme.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Theming.Constants.ThemePermissions.CanDeleteTheme">
+            <summary>
+            Permission where user can delete a theme.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.Factories.ThemeFactory">
+            <summary>
+            Factory class for generating new Theme objects.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Factories.ThemeFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Theming.Factories.ThemeFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Factories.ThemeFactory.CreateTheme(PVA.NextGen.Common.Interfaces.ITheme,System.Int32,System.String)">
+            <summary>
+            Create an abstracted <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/>.
+            </summary>
+            <param name="theme">The <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> used to determine the class implementation.</param>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+            <returns>A newly created <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/>.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.Services.ThemeService">
+            <summary>
+            Service providing registration and retrieval of module-level resource dictionaries to modify themes.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.#ctor(PVA.NextGen.Common.Interfaces.IThemeFactory,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Theming.Services.ThemeService"/> class.
+            </summary>
+            <param name="themeFactory">The factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/>.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Services.ThemeService.ThemeDictionaries">
+            <summary>
+            Gets the dictionary providing lists of Resource Dictionary locations.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Services.ThemeService.Themes">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> objects provided by the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Services.ThemeService.ThemeTypes">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> types available to the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Services.ThemeService.SelectedTheme">
+            <summary>
+            Gets or sets the currently selected <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Services.ThemeService.AnimationModifiers">
+            <summary>
+            Gets the list of available animation modifiers.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Services.ThemeService.CanAddTheme">
+            <summary>
+            Gets a value indicating whether an <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> can be added.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Services.ThemeService.IsLoaded">
+            <summary>
+            Gets or sets a value indicating whether the initial loading of the default theme has completed.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.AddDictionary(System.String,System.Uri)">
+            <summary>
+            Adds a resource dictionary location to the existing lists by theme type.
+            </summary>
+            <param name="theme">The type of theme to which this resource dictionary applies.</param>
+            <param name="dictionaryLocation">The relative location of the resource dictionary.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.ApplyAnimationModifier">
+            <summary>
+            Applies the current theme's animation modifier.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.ApplyLogoSource">
+            <summary>
+            Applies the current theme's logo source.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.AddTheme(PVA.NextGen.Common.Interfaces.ITheme,System.Int32,System.String)">
+            <summary>
+            Add a new <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> to the service.
+            </summary>
+            <param name="theme">The <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> to be added.</param>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.RemoveTheme(PVA.NextGen.Common.Interfaces.ITheme)">
+            <summary>
+            Remove an <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> from the service.
+            </summary>
+            <param name="theme">The <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> to be removed.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.DuplicateTheme(PVA.NextGen.Common.Interfaces.ITheme)">
+            <summary>
+            Duplicates an existing <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> to the service.
+            </summary>
+            <param name="theme">The <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> to duplicate.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.SaveThemes">
+            <summary>
+            Save <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> objects to file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.LoadThemes">
+            <summary>
+            Load <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> objects from file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.SetDefaultTheme(PVA.NextGen.Common.Interfaces.ITheme)">
+            <summary>
+            Set an <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> as the default.
+            </summary>
+            <param name="defaultTheme">The <see cref="T:PVA.NextGen.Common.Interfaces.ITheme"/> to be the new default.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.ApplySetting(PVA.NextGen.Common.Classes.MutableKeyValuePair{System.String,System.Object})">
+            <summary>
+            Updates an individual setting to the selected theme.
+            </summary>
+            <param name="setting">The <see cref="T:PVA.NextGen.Common.Classes.MutableKeyValuePair`2"/> setting to set.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.ResetToDefaultSettings">
+            <summary>
+            Resets current settings and theme settings to defaults.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.ResetToDarkSettings">
+            <summary>
+            Resets current settings and theme settings to the dark theme defaults.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.ResetAnimationModifier">
+            <summary>
+            Resets the current theme's animation modifier to the default value and applies it.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Services.ThemeService.ResetLogoSource">
+            <summary>
+            Resets the current theme's logo source to the default value and applies it.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.ThemingModule">
+            <summary>
+            ThemingModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ThemingModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ThemingModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel">
+            <summary>
+            Interaction logic for the theme builder view.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.#ctor(PVA.NextGen.Common.Interfaces.IThemeService,Prism.Events.IEventAggregator,PVA.NextGen.CommonUI.Interfaces.IMessagingService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel"/> class.
+            </summary>
+            <param name="themeService">An <see cref="T:PVA.NextGen.Common.Interfaces.IThemeService"/> to retrieve module-specific custom styles.</param>\
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+            <param name="messagingService">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IMessagingService"/> used for displaying messages to the user.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.CanvasImage">
+            <summary>
+            Gets the string location for the canvas image.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.ThemeService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IThemeService"/> instance.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.CanChangeTheme">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for changing the theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.CanCreateTheme">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for creating a theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.CanEditTheme">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing a theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.CanDeleteTheme">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for deleting a theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.AddThemeCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand`1"/> for adding a new theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.RemoveThemeCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand`1"/> for deleting an existing theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.DuplicateThemeCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand`1"/> for duplicating an existing theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.UpdateSettingCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand`1"/> for updating a single setting on the current theme.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.UpdateAnimationModifierCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> for updating the current theme's animation modifier.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.UpdateLogoSourceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> for updating the current theme's logo source.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.UpdateIsDefaultCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand`1"/> for setting the current theme as the default.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.ResetToDefaultSettingsCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> for resetting the current theme's settings to default.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.ResetToDarkSettingsCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> for resetting the current theme's settings to default dark.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.ResetAnimationModifierCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> for resetting the current theme's animation modifier to the default value.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.ResetLogoSourceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> for resetting the current theme's logo source to the default value.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.TimerButtonCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> for when the timer button's action has been confirmed.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ViewModels.ThemeBuilderViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.ViewModels.ThemingViewModel">
+            <summary>
+            Interaction logic for ThemingView.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.ViewModels.ThemingViewModel.#ctor(PVA.NextGen.Common.Interfaces.IThemeService,Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Theming.ViewModels.ThemingViewModel"/> class.
+            </summary>
+            <param name="themeService">An <see cref="T:PVA.NextGen.Common.Interfaces.IThemeService"/> to retrieve module-specific custom styles.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemingViewModel.ThemeService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IThemeService"/> instance.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemingViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.ViewModels.ThemingViewModel.CanChangeTheme">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for changing the theme.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.Views.ThemeBuilderView">
+            <summary>
+            Interaction logic for ThemeBuilderView.xaml.
+            </summary>
+            <summary>
+            ThemeBuilderView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Views.ThemeBuilderView.#ctor(PVA.NextGen.CommonUI.Interfaces.IThemeBuilderViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Theming.Views.ThemeBuilderView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IThemeBuilderViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Views.ThemeBuilderView.ViewModel">
+            <summary>
+            Gets the view's DataContext as an <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Views.ThemeBuilderView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Theming.Views.ThemingView">
+            <summary>
+            Presentation logic for a ThemingView.
+            </summary>
+            <summary>
+            ThemingView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Views.ThemingView.#ctor(PVA.NextGen.CommonUI.Interfaces.IThemingViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Theming.Views.ThemingView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IThemingViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Theming.Views.ThemingView.ViewModel">
+            <summary>
+            Gets this view's DataContext as a <see cref="T:PVA.NextGen.CommonUI.Interfaces.IThemingViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Theming.Views.ThemingView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

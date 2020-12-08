@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.Heater</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.Heater.Constants.HeaterConstants">
+            <summary>
+            Constant values pertaining to <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/> devices.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterConstants.APIName">
+            <summary>
+            The <see cref="T:System.String"/> name used when accessing the Heaters API.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterConstants.ModuleName">
+            <summary>
+            The string name for the heater module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterConstants.MaxDevices">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterConstants.JsonFile">
+            <summary>
+            The file location for the heater JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Heater.Constants.HeaterTokenNames">
+            <summary>
+            The navigation token names for Heater views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterTokenNames.ConfigurationPage">
+            <summary>
+            Navigation token name for the configuration page.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterTokenNames.DeviceConfigurationView">
+            <summary>
+            Navigation token name for the configuration view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterTokenNames.ConnectionView">
+            <summary>
+            Navigation token name for the connection view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterTokenNames.FunctionTestView">
+            <summary>
+            Navigation token name for the function test view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Heater.Constants.HeaterTokenNames.FunctionConfigurationView">
+            <summary>
+            Navigation token name for the function configuration view.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Heater.HeaterModule">
+            <summary>
+            HeaterModule.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.HeaterModule.DriverTypes">
+            <summary>
+            Gets or sets the collection of all <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/> types.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.HeaterModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.HeaterModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Heater.Services.HeaterService">
+            <summary>
+            Service providing concrete <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/> implementations.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.Services.HeaterService.#ctor(PVA.NextGen.Common.Interfaces.IDeviceFactory,PVA.NextGen.Common.Interfaces.IFunctionService,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Heater.Services.HeaterService"/> class.
+            </summary>
+            <param name="deviceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/>.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+            <param name="scriptService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel">
+            <summary>
+            Interaction logic for the Heater Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.IHeaterService,PVA.NextGen.Common.Interfaces.IConnectionService,PVA.NextGen.CommonUI.Interfaces.IMessagingService,Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel"/> class.
+            </summary>
+            <param name="heaterService">The <see cref="T:PVA.NextGen.Common.Interfaces.IHeaterService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/>.</param>
+            <param name="connectionService">The <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/>.</param>
+            <param name="messagingService">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IMessagingService"/> used for displaying messages to the user.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.AvailableConnectionTypes">
+            <summary>
+            Gets the available <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> types by getting the intersect of connections available at load and connections the device supports.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.AddDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add a <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/> to the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.RemoveDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove a <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/> from the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.ChangeConnectionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to change the <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> of an <see cref="T:PVA.NextGen.Common.Interfaces.IHeater"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.CanCreateDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for creating a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.CanEditDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.CanDeleteDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for deleting a device.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Heater.ViewModels.HeaterConfigurationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+    </members>
+</doc>

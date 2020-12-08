@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Logging</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Logging.LoggingModule">
+            <summary>
+            LoggingModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Logging.LoggingModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Logging.LoggingModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Logging.Services.LoggingService">
+            <summary>
+            Service that provides logging throughout the application.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Logging.Services.LoggingService.WriteCrashDumpLog(System.Exception)">
+            <summary>
+            Write data relevant to an application crash to file.
+            </summary>
+            <param name="exception">The exception causing the crash.</param>
+        </member>
+    </members>
+</doc>

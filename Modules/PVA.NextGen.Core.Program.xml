@@ -1,0 +1,2060 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Program</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior">
+            <summary>
+            Implementation for <see cref="T:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior"/> class.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior.IsDragDropEnabledProperty">
+            <summary>
+            Dependency Property to attach to RadListBox to enable drag drop events through behaviors.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior.SetIsDragDropEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragDropEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragDropEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior.GetIsDragDropEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragDropEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <returns>Whether or not IsDragDropEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior.CanStartDrag(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the drag operation can be started.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drag source control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior.CanDrop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the current drag operation can be completed.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.AvailableSharedFunctionsDragDropBehavior.IsMovingItems(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns true if the dragged items should be removed from the source list, otherwise false.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the object should be copied, otherwise false and object will be cut.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Behaviors.ProgramCanvasDragDropBehavior">
+            <summary>
+            Implementation for <see cref="T:PVA.NextGen.Core.Program.Behaviors.ProgramCanvasDragDropBehavior"/> class.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Behaviors.ProgramCanvasDragDropBehavior.IsDragDropEnabledProperty">
+            <summary>
+            Dependency Property to attach to Program Canvas to enable drag drop events through behaviors.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramCanvasDragDropBehavior.GetIsDragDropEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not IsDragDropEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <returns>Whether or not IsDragDropEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramCanvasDragDropBehavior.SetIsDragDropEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragDropEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragDropEnabled property to.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior">
+            <summary>
+            Implementation for <see cref="T:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior"/> class.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.IsDragDropEnabledProperty">
+            <summary>
+            Dependency Property to attach to a program steps listbox to enable drag drop events through behaviors.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.IsDragReorderEnabledProperty">
+            <summary>
+            Dependency Property to attach to a program steps listbox to enable or disable drag reordering.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.SetIsDragDropEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragDropEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragDropEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.GetIsDragDropEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragDropEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <returns>Whether or not IsDragDropEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.SetIsDragReorderEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragReorderEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragReorderEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragReorderEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.GetIsDragReorderEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragReorderEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragReorderEnabled property is attached to.</param>
+            <returns>Whether or not IsDragReorderEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.CanStartDrag(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the drag operation can be started.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drag source control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.CanDrop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the current drag operation can be completed.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramShapesListDragDropBehavior.Drop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Dictates the behavior of the current drag operation on drop.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior">
+            <summary>
+            Implementation for <see cref="T:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior"/> class.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.IsDragDropEnabledProperty">
+            <summary>
+            Dependency Property to attach to a program steps listbox to enable drag drop events through behaviors.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.IsDragReorderEnabledProperty">
+            <summary>
+            Dependency Property to attach to a program steps listbox to enable or disable drag reordering.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.SetIsDragDropEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragDropEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragDropEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.GetIsDragDropEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragDropEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <returns>Whether or not IsDragDropEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.SetIsDragReorderEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragReorderEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragReorderEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragReorderEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.GetIsDragReorderEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragReorderEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragReorderEnabled property is attached to.</param>
+            <returns>Whether or not IsDragReorderEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.CanStartDrag(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the drag operation can be started.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drag source control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.CanDrop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the current drag operation can be completed.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Behaviors.ProgramStepsListDragDropBehavior.Drop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Dictates the behavior of the current drag operation on drop.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.DummyNode">
+            <summary>
+            Class used for an image shape in a <see cref="T:Telerik.Windows.Controls.RadDiagram"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.DummyNode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.DummyNode"/> class.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.ImageNode">
+            <summary>
+            Class used for an image shape in a <see cref="T:Telerik.Windows.Controls.RadDiagram"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ImageNode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.ImageNode"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ImageNode.ImageSource">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Media.ImageSource"/> of the image.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ImageNode.ScaleX">
+            <summary>
+            Gets or sets the scale x of the image.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ImageNode.ScaleY">
+            <summary>
+            Gets or sets the scale y of the image.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.MotionStep">
+            <summary>
+            An <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> whose function contains motion commands for an <see cref="T:PVA.NextGen.Common.Interfaces.IRobot"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.MotionStep.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.MotionStep"/> class.
+            </summary>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.MotionStep.PathGeometry">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Media.PathGeometry"/> that represents the motion of the step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.MotionStep.ArcPoint">
+            <summary>
+            Gets the arc point of the program step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.MotionStep.EndPoint">
+            <summary>
+            Gets the end point of the program step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.MotionStep.IsMove">
+            <summary>
+            Gets a value indicating whether the motion step is a move step, rather than a line or an arc.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.MotionStep.Compile">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.MotionStep.UpdateStartPoint(PVA.NextGen.Common.Parameters.CoordinateParameter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.MotionStep.MoveStartPoint(PVA.NextGen.Common.Parameters.CoordinateParameter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.MotionStep.UnlockFirstCoordinate">
+            <summary>
+            Method to unlock the first <see cref="T:PVA.NextGen.Common.Parameters.CoordinateParameter"/> in the step, most notibly for use when another motion step has been deleted.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.MotionStep.UpdatePathGeometry">
+            <summary>
+            Updates the value of the <see cref="P:PVA.NextGen.Core.Program.Classes.MotionStep.PathGeometry"/> property.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.NodeStyleSelector">
+            <summary>
+            Style selector for the Canvas View Diagram shapes.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.NodeStyleSelector.ProgramStepShapeStyle">
+            <summary>
+            Gets or sets the program step shape style.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.NodeStyleSelector.ProgramShapeShapeStyle">
+            <summary>
+            Gets or sets the program step collection shape style.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.NodeStyleSelector.ImageShapeStyle">
+            <summary>
+            Gets or sets the image shape style.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.NodeStyleSelector.DummyShapeStyle">
+            <summary>
+            Gets or sets the dummy shape style.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.NodeStyleSelector.SelectStyle(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Returns a style based on custom logic.
+            </summary>
+            <param name="item">Item to select style for.</param>
+            <param name="container">Container that holds the item.</param>
+            <returns><see cref="T:System.Windows.Style"/>.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.Program">
+            <summary>
+            A defined execution sequence for a product consisting of one or more <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.Program.#ctor(PVA.NextGen.Common.Interfaces.IProgramStepService,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.Program"/> class.
+            </summary>
+            <param name="stepService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> objects.</param>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.Index">
+            <summary>
+            Gets or sets the Index of the program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.Image">
+            <summary>
+            Gets or sets the image of the program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.ProgramElementAPI">
+            <summary>
+            Gets the dictionary of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> execute methods and outputs to expose to scripts.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.Steps">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> that make up this Program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.SelectedStep">
+            <summary>
+            Gets or sets the selected step of the program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.SelectedNodeViewModel">
+            <summary>
+            Gets or sets the selected <see cref="T:PVA.NextGen.Common.Classes.NodeViewModel"/> of the program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.StepService">
+            <summary>
+            Gets or sets the service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> objects.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.CreationDateTime">
+            <summary>
+            Gets or sets the time the program object was created.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.ModifiedDateTime">
+            <summary>
+            Gets or sets the time the program object was modified.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.CreatedUserName">
+            <summary>
+            Gets or sets the name of the user that created the program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.ModifiedUserName">
+            <summary>
+            Gets or sets the name of the user that most recently modified the program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.IsFavorite">
+            <summary>
+            Gets or sets a value indicating whether or not this program is a favorite.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.IsExecuting">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> is executing.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.ProductReferences">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Classes.ProductReference"/> associated with this <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.RunTime">
+            <summary>
+            Gets or sets the run time of the program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.Program.GraphSource">
+            <summary>
+            Gets or sets the collection of <see cref="T:System.String"/> names of associated <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.Program.UpdateModified">
+            <summary>
+            Update the modification information for this program.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.Program.UpdateGraphSourceNodes">
+            <summary>
+            A method to update and sync the <see cref="P:PVA.NextGen.Core.Program.Classes.Program.GraphSource"/> with the current <see cref="P:PVA.NextGen.Core.Program.Classes.Program.Steps"/>.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.ProgramImage">
+            <summary>
+            Class used for image-related object.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramImage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.ProgramImage"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramImage.Source">
+            <summary>
+            Gets or sets the image source.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramImage.Offset">
+            <summary>
+            Gets or sets the image offset.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramImage.Width">
+            <summary>
+            Gets or sets the image width.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramImage.Height">
+            <summary>
+            Gets or sets the image height.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramImage.Opacity">
+            <summary>
+            Gets or sets the image opacity.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.ProgramShape">
+            <summary>
+            An <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElement"/> of a defined <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> comprised of <see cref="T:PVA.NextGen.Common.Interfaces.IShapeStep"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramShape.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.ProgramShape"/> class.
+            </summary>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.EndPoint">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.Steps">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.Items">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IShapeStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.SelectedStep">
+            <summary>
+            Gets or sets the selected <see cref="T:PVA.NextGen.Common.Interfaces.IShapeStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.SelectedSteps">
+            <summary>
+            Gets or sets a collection of selected <see cref="T:PVA.NextGen.Common.Interfaces.IShapeStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.PreviousMotionStep">
+            <summary>
+            Gets or sets the previous motion step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.IsClosed">
+            <summary>
+            Gets or sets a value indicating whether the shape is closed.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.Name">
+            <summary>
+            Gets the value representing the class name of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramShape"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.StepMissing">
+            <summary>
+            Gets a value indicating whether any step is missing.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramShape.SourceDisplayName">
+            <summary>
+            Gets the source display name.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramShape.UpdateStartPoint(PVA.NextGen.Common.Parameters.CoordinateParameter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramShape.MoveStartPoint(PVA.NextGen.Common.Parameters.CoordinateParameter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramShape.Compile">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramShape.UpdatePathGeometry">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.ProgramStep">
+            <summary>
+            An <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElement"/> of a defined <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramStep.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.ProgramStep"/> class.
+            </summary>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.Index">
+            <summary>
+            Gets or sets the ID.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.Inputs">
+            <summary>
+            Gets or sets the dictionary collection of inputs which should be supplied to this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.Outputs">
+            <summary>
+            Gets the dictionary collection of outputs which are received from this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.InputTypes">
+            <summary>
+            Gets or sets the list of input <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.OutputTypes">
+            <summary>
+            Gets or sets the list of output <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.ProgramElementAPI">
+            <summary>
+            Gets the dictionary of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> execute methods and outputs to expose to scripts.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.NodeViewModel">
+            <summary>
+            Gets the <see cref="P:PVA.NextGen.Core.Program.Classes.ProgramStep.NodeViewModel"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.StartPoint">
+            <summary>
+            Gets or sets the start point of the program step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.EndPoint">
+            <summary>
+            Gets the end point of the program step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.Function">
+            <summary>
+            Gets <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> this step runs, if any.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.Icon">
+            <summary>
+            Gets or sets <see cref="T:System.String"/> icon of this step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.ExecutableReference">
+            <summary>
+            Gets or sets the reference to the <see cref="T:PVA.NextGen.Common.Interfaces.IExecutable"/> associated with this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.CanExecute">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> should be able to execute.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.DidExecute">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> has executed successfully.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.IsExecuting">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> is executing.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.OutputReferences">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Classes.StepOutputReference"/> from all previous steps and all <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.SelectedTool">
+            <summary>
+            Gets or sets the tool that is expected to be selected.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.DispensingTools">
+            <summary>
+            Gets or sets the collection of tool that are expected to be dispensing.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.Execute">
+            <summary>
+            Gets the execution <see cref="T:PVA.NextGen.Common.Delegates.ParamsFunc`1"/> for this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+            <returns>The <see cref="T:PVA.NextGen.Common.Delegates.ParamsFunc`1"/> for this <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</returns>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStep.RunTime">
+            <summary>
+            Gets or sets the run time of the step.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramStep.SetExecutable(PVA.NextGen.Common.Interfaces.IExecutable)">
+            <summary>
+            Set the <see cref="T:PVA.NextGen.Common.Interfaces.IExecutable"/> object on this wrapper class.
+            </summary>
+            <param name="executable">The <see cref="T:PVA.NextGen.Common.Interfaces.IExecutable"/> object for this wrapper class.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramStep.Compile">
+            <summary>
+            Compiles the <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/> object for use.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramStep.SetOutputReferences(PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <summary>
+            Sets the dictionary of <see cref="T:PVA.NextGen.Common.Classes.StepOutputReference"/> for this step and for each <see cref="T:PVA.NextGen.Common.Classes.StepInputReference"/>.
+            </summary>
+            <param name="outputReferences">The step's <see cref="T:PVA.NextGen.Common.Classes.StepOutputReference"/> dictionary.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramStep.UpdateStartPoint(PVA.NextGen.Common.Parameters.CoordinateParameter)">
+            <summary>
+            Updates the <see cref="P:PVA.NextGen.Core.Program.Classes.ProgramStep.StartPoint"/> property and returns the next start point.
+            </summary>
+            <param name="newStartPoint">The <see cref="T:PVA.NextGen.Common.Parameters.CoordinateParameter"/> to update the <see cref="P:PVA.NextGen.Core.Program.Classes.ProgramStep.StartPoint"/> to.</param>
+            <returns>The next start point.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramStep.MoveStartPoint(PVA.NextGen.Common.Parameters.CoordinateParameter)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.ProgramStepTemplateSelector">
+            <summary>
+            <see cref="T:System.Windows.Controls.DataTemplateSelector"/> for an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> in a listbox.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStepTemplateSelector.ProgramStepDataTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> used for an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProgramStepTemplateSelector.ProgramShapeDataTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> used for an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramShape"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProgramStepTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Select a template based on the provided item.
+            </summary>
+            <param name="item">The data object for which to select the template.</param>
+            <param name="container">The data-bound object.</param>
+            <returns>A <see cref="T:System.Windows.DataTemplate"/> if one is found for the supplied item; otherwise, null.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.ProviderReference">
+            <summary>
+            A reference to an <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProviderReference.#ctor(PVA.NextGen.Common.Interfaces.ISharedObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.ProviderReference"/> class.
+            </summary>
+            <param name="provider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> this object references.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProviderReference.Provider">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> this object references.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProviderReference.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Classes.ProviderReference.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ProviderReference.Equals(PVA.NextGen.Core.Program.Classes.ProviderReference)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Classes.ShapeStep">
+            <summary>
+            An <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> whose function is a line or arc command for an <see cref="T:PVA.NextGen.Common.Interfaces.IRobot"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Classes.ShapeStep.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Classes.ShapeStep"/> class.
+            </summary>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Constants.ProgramConstants">
+            <summary>
+            Constants used by the Program Module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.AllGroup">
+            <summary>
+            Name of group containing all available functions.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.FavoritesGroup">
+            <summary>
+            Name of group containing available functions defined by user as favorite.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.ModuleName">
+            <summary>
+            The string name for the program module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.MaxPrograms">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.ProgramDirectory">
+            <summary>
+            Directory Location for Program files.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.ProgramTemplateDirectory">
+            <summary>
+            Directory Location for Program templates.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.FavoritesFile">
+            <summary>
+            Directory Location for Program templates.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.NewProgramReferenceName">
+            <summary>
+            Constant prefix used for program objects.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.NewProgramDisplayName">
+            <summary>
+            Default Display Name used for program objects.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.ProgramShapeName">
+            <summary>
+            Default Icon path used for program shapes.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramConstants.ProgramShapeIcon">
+            <summary>
+            Default Icon path used for program shapes.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Constants.ProgramTokenNames">
+            <summary>
+            The navigation token names for Program views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Program.Constants.ProgramTokenNames.CreationPage">
+            <summary>
+            Navigation token name for the creation page.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Converters.ProgramStepDataConverter">
+            <summary>
+            Converter class to enable drag-drop between AvailableFunction RadListBox and IProgramStep RadListBox.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Converters.ProgramStepDataConverter.GetConvertToFormats">
+            <summary>
+            Provides list of datatypes handled by this converter.
+            </summary>
+            <returns><see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:System.String"/> datatypes this converter handles.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Converters.ProgramStepDataConverter.ConvertTo(System.Object,System.String)">
+            <summary>
+            Converts data from one type to another.
+            </summary>
+            <param name="data">The original data to be converted.</param>
+            <param name="format">The datatype the given data needs to be converted into.</param>
+            <returns>Original data converted into the given datatype.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Factories.ProgramServiceFactory">
+            <summary>
+            Factory class for generating new <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElementService`1"/> objects.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramServiceFactory.#ctor(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Factories.ProgramServiceFactory"/> class.
+            </summary>
+            <param name="strategyResolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that can access mappings of all registered types.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramServiceFactory.CreateProgramStepService">
+            <summary>
+            Creates a new <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepService"/> of the supplied type.
+            </summary>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepService"/>.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Factories.ProgramStepFactory">
+            <summary>
+            Factory class for creating <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> objects.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramStepFactory.SetStrategyResolver(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Sets the <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that will be statically accessible.
+            </summary>
+            <param name="strategyResolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> used throughout the application.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramStepFactory.CreateProgramStep``1(PVA.NextGen.Common.Interfaces.ISharedFunction,PVA.NextGen.Common.Interfaces.ISharedObject)">
+            <summary>
+            Creates <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> by type from an <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> and it's <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> source.
+            </summary>
+            <typeparam name="T">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to create.</typeparam>
+            <param name="function">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> of the program step.</param>
+            <param name="source">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> source of the step.</param>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramStepFactory.CreateProgramStep``1(PVA.NextGen.Common.Classes.FunctionReference)">
+            <summary>
+            Creates <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> by type from an <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> and it's <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> source.
+            </summary>
+            <typeparam name="T">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to create.</typeparam>
+            <param name="functionReference">The <see cref="T:PVA.NextGen.Common.Classes.FunctionReference"/> of the program step.</param>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramStepFactory.CreateProgramStep(PVA.NextGen.Common.Interfaces.ISharedFunction,PVA.NextGen.Common.Interfaces.ISharedObject)">
+            <summary>
+            Creates <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> from an <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> and it's <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> source.
+            </summary>
+            <param name="function">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> of the program step.</param>
+            <param name="source">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> source of the step.</param>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramStepFactory.CreateProgramStep(PVA.NextGen.Common.Classes.FunctionReference)">
+            <summary>
+            Creates <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> from an <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> and it's <see cref="T:PVA.NextGen.Common.Interfaces.ISharedObject"/> source.
+            </summary>
+            <param name="functionReference">The <see cref="T:PVA.NextGen.Common.Classes.FunctionReference"/> of the program step.</param>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramStepFactory.CreateProgramStepCollection(System.Collections.Generic.IEnumerable{PVA.NextGen.Common.Interfaces.IProgramStep})">
+            <summary>
+            Creates <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> from a collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+            <param name="programSteps">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>s of the program step collection.</param>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Factories.ProgramStepFactory.CreateProgramStepCollection``1(System.String,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Creates <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> by type from a collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+            <typeparam name="T">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to collection is limited to.</typeparam>
+            <param name="displayName">The new name of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</param>
+            <param name="steps">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>s of the program step collection.</param>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.ProgramModule">
+            <summary>
+            ProgramModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ProgramModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ProgramModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Services.ProgramManagementService">
+            <summary>
+            A service wrapping and providing additional functionality to an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElementService`1"/> for an <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.#ctor(PVA.NextGen.Common.Interfaces.IProgramService,PVA.NextGen.Common.Interfaces.IProductService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Services.ProgramManagementService"/> class.
+            </summary>
+            <param name="programService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> objects.</param>
+            <param name="productService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramManagementService.Programs">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> of this service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramManagementService.SelectedProgram">
+            <summary>
+            Gets or sets the currently selected <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.Add">
+            <summary>
+            Trigger the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElementService`1"/> for an <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to add a new instance to the service.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.Add``1">
+            <summary>
+            Trigger the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElementService`1"/> for an <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to add a new implementing instance to the service.
+            </summary>
+            <typeparam name="U">A type which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.</typeparam>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.Remove(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Trigger the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElementService`1"/> for an <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to remove the supplied instance from the service.
+            </summary>
+            <param name="program">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.SaveAll">
+            <summary>
+            Save all <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to appropriate directories.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.SaveOne(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Save a single <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to the appropriate directory.
+            </summary>
+            <param name="program">The program to save.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.LoadAll">
+            <summary>
+            Load all <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> from appropriate directories.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.LoadOne(System.String)">
+            <summary>
+            Load a single <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> from the appropriate directory.
+            </summary>
+            <param name="fileLocation">The location to load the file from.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.Execute(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Trigger the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElementService`1"/> for <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to execute the supplied program.
+            </summary>
+            <param name="program">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to execute.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.ResolveAllFunctions">
+            <summary>
+            Resolves all functions in steps for this all programs.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.Import">
+            <summary>
+            Import single <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> object from zipped file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.Export(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Export single <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> object to file.
+            </summary>
+            <param name="program">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to be saved.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.Clone(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Creates a clone of the given <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> object.
+            </summary>
+            <param name="program">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to be cloned.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.AddUndoState(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Adds current state of selected program to undo buffer.
+            </summary>
+            <param name="programStateToAdd">The currently selected <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.UndoState(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Moves back to the most recent program state.
+            </summary>
+            <param name="programToUndo">The currently selected <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.</param>
+            <returns><see cref="T:System.Int32"/> index of the selected program with the new state, -1 if state did not change.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.RedoState(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Moves forward to the most recent program state.
+            </summary>
+            <param name="programToRedo">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> index of the currently selected program.</param>
+            <returns><see cref="T:System.Int32"/> index of the selected program with the new state, -1 if state did not change.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.RegisterShutdownAction(System.String,PVA.NextGen.Common.Classes.ShutdownAction)">
+            <summary>
+            Register a <see cref="T:PVA.NextGen.Common.Classes.ShutdownAction"/> with the <see cref="T:PVA.NextGen.Common.Interfaces.IShutdownService"/>.
+            </summary>
+            <param name="name">The name of the action to register.</param>
+            <param name="action">The <see cref="T:PVA.NextGen.Common.Classes.ShutdownAction"/> to register.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramManagementService.DeregisterShutdownAction(System.String)">
+            <summary>
+            Deregister a <see cref="T:PVA.NextGen.Common.Classes.ShutdownAction"/> from the <see cref="T:PVA.NextGen.Common.Interfaces.IShutdownService"/>.
+            </summary>
+            <param name="name">The name of the action to deregister.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Services.ProgramService">
+            <summary>
+            Service providing <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> creation, modification and execution implementation.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.#ctor(PVA.NextGen.Common.Interfaces.IProgramServiceFactory,PVA.NextGen.Common.Interfaces.IProductService,PVA.NextGen.Common.Interfaces.IEvaluatorService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Services.ProgramService"/> class.
+            </summary>
+            <param name="programServiceFactory">Factory used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IProgramServiceFactory"/> to create new <see cref="T:PVA.NextGen.Common.Interfaces.IProgramElementService`1"/>.</param>
+            <param name="productService">Service used to resolve <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> for a loaded <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/>.</param>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramService.ProgramElements">
+            <summary>
+            Gets or sets <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of programs.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramService.ProgramElementServiceAPI">
+            <summary>
+            Gets the dictionary of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> execute methods and outputs to expose to scripts.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramService.DirectoryLocation">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> directory location where this service will save/load its <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.Add">
+            <summary>
+            Add a new <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to the service.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.Add``1">
+            <summary>
+            Add a new object that implements <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to the service.
+            </summary>
+            <typeparam name="U">A type which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.</typeparam>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.Remove(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Remove a <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> from the service.
+            </summary>
+            <param name="program">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to removed.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.SaveAll">
+            <summary>
+            Save <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> objects to file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.SaveOne(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Save a single <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to file.
+            </summary>
+            <param name="program">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to be saved.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.LoadAll">
+            <summary>
+            Load <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> objects from file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.LoadOne(System.String)">
+            <summary>
+            Load a single <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> from the appropriate directory.
+            </summary>
+            <param name="fileLocation">The location to load the file from.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.ResolveAllElements">
+            <summary>
+            Resolves all functions in steps for this all programs.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.ResolveElement(PVA.NextGen.Common.Interfaces.IProgram)">
+            <summary>
+            Resolves all functions in steps of <paramref name="program"/>.
+            </summary>
+            <param name="program">The program to resolve.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramService.Execute(PVA.NextGen.Common.Interfaces.IProgram,PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <summary>
+            Execute a given <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.
+            </summary>
+            <param name="program">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> to execute.</param>
+            <param name="programOutputs">The <see cref="T:PVA.NextGen.Common.Interfaces.IBindableDictionary`2"/> of outputs from previous <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Services.ProgramStepService">
+            <summary>
+            Service providing <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> creation, modification and execution implementation.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.#ctor(PVA.NextGen.Common.Interfaces.IEvaluatorService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Services.ProgramStepService"/> class.
+            </summary>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramStepService.ProgramElements">
+            <summary>
+            Gets or sets <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of steps.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramStepService.ProgramElementServiceAPI">
+            <summary>
+            Gets the dictionary of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> execute methods and outputs to expose to scripts.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Services.ProgramStepService.DirectoryLocation">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> directory location where this service will save/load its <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Add(PVA.NextGen.Common.Interfaces.IProgramStep)">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service.
+            </summary>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to add.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Add(PVA.NextGen.Common.Interfaces.ISharedFunction,PVA.NextGen.Common.Interfaces.ISharedObject)">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service.
+            </summary>
+            <param name="function">The function of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+            <param name="sourceObject">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> that is the source of the function.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Add(PVA.NextGen.Common.Classes.FunctionReference)">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service.
+            </summary>
+            <param name="functionReference">The function reference that represents the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Add``1(PVA.NextGen.Common.Interfaces.ISharedFunction,PVA.NextGen.Common.Interfaces.ISharedObject)">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service by type.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to create.</typeparam>
+            <param name="function">The function of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+            <param name="sourceObject">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> that is the source of the function.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Add``1(PVA.NextGen.Common.Classes.FunctionReference)">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service by type.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to create.</typeparam>
+            <param name="functionReference">The function reference that represents the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Remove(PVA.NextGen.Common.Interfaces.IProgramStep)">
+            <summary>
+            Remove a <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> from the service.
+            </summary>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to removed.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Insert(System.Int32,PVA.NextGen.Common.Interfaces.IProgramStep)">
+            <summary>
+            Inserts an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service.
+            </summary>
+            <param name="index">The index to insert at.</param>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to insert.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Insert(System.Int32,PVA.NextGen.Common.Interfaces.ISharedFunction,PVA.NextGen.Common.Interfaces.ISharedObject)">
+            <summary>
+            Inserts an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service.
+            </summary>
+            <param name="index">The index to insert at.</param>
+            <param name="function">The function of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+            <param name="sourceObject">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> that is the source of the function.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Insert(System.Int32,PVA.NextGen.Common.Classes.FunctionReference)">
+            <summary>
+            Inserts an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service.
+            </summary>
+            <param name="index">The index to insert at.</param>
+            <param name="functionReference">The function reference that represents the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Insert``1(System.Int32,PVA.NextGen.Common.Interfaces.ISharedFunction,PVA.NextGen.Common.Interfaces.ISharedObject)">
+            <summary>
+            Inserts an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service by type.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to create.</typeparam>
+            <param name="index">The index to insert at.</param>
+            <param name="function">The function of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+            <param name="sourceObject">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> that is the source of the function.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Insert``1(System.Int32,PVA.NextGen.Common.Classes.FunctionReference)">
+            <summary>
+            Inserts an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to the service by type.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to create.</typeparam>
+            <param name="index">The index to insert at.</param>
+            <param name="functionReference">The function reference that represents the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.MergeSteps(System.Collections.Generic.IEnumerable{PVA.NextGen.Common.Interfaces.IProgramStep})">
+            <summary>
+            Merge existing <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> in the service into an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.
+            </summary>
+            <param name="programSteps">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>s to merge.</param>
+            <returns>A value indicating whether the steps were successfully merged.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.MergeSteps``1(System.String,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Merge existing <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> in the service into an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> by type.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to create.</typeparam>
+            <param name="displayName">The new name of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</param>
+            <param name="programSteps">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>s to merge.</param>
+            <returns>A value indicating whether the steps were successfully merged.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.ConvertStepToStepCollection(PVA.NextGen.Common.Interfaces.IProgramStep,PVA.NextGen.Common.Interfaces.IProgramStep[])">
+            <summary>
+            Convert an existing <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> in the service into an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.
+            </summary>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to convert.</param>
+            <param name="additionalSteps">Additional steps that need to be added to the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</param>
+            <returns>A value indicating whether the step was successfully converted.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.ConvertStepToStepCollection``1(System.String,``0,``0[])">
+            <summary>
+            Convert an existing <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> in the service into an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> by type.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> is limited to.</typeparam>
+            <param name="displayName">The new name of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</param>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to convert.</param>
+            <param name="additionalSteps">Additional steps that need to be added to the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</param>
+            <returns>A value indicating whether the step was successfully converted.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.AddStepToStepCollection(PVA.NextGen.Common.Interfaces.IProgramStepCollection,PVA.NextGen.Common.Interfaces.IProgramStep)">
+            <summary>
+            Adds a step to an existing step collection.
+            </summary>
+            <param name="stepCollection">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection"/> to add the step to.</param>
+            <param name="step">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to add to the collection.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.AddStepToStepCollection``1(PVA.NextGen.Common.Interfaces.IProgramStepCollection{``0},``0)">
+            <summary>
+            Adds a step to an existing step collection.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> is limited to.</typeparam>
+            <param name="stepCollection">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection"/> to add the step to.</param>
+            <param name="step">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to add to the collection.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.InsertStepIntoStepCollection(System.Int32,PVA.NextGen.Common.Interfaces.IProgramStepCollection,PVA.NextGen.Common.Interfaces.IProgramStep)">
+            <summary>
+            Inserts a step to an existing step collection at a specific index.
+            </summary>
+            <param name="index">The index to insert at.</param>
+            <param name="stepCollection">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection"/> to add the step to.</param>
+            <param name="step">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to add to the collection.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.InsertStepIntoStepCollection``1(System.Int32,PVA.NextGen.Common.Interfaces.IProgramStepCollection{``0},``0)">
+            <summary>
+            Inserts a list of steps to an existing step collection at a specific index.
+            </summary>
+            <typeparam name="U">The type of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> is limited to.</typeparam>
+            <param name="index">The index to insert at.</param>
+            <param name="stepCollection">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection"/> to add the step to.</param>
+            <param name="step">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to add to the collection.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.SaveAll">
+            <summary>
+            Save <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> objects to file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.SaveOne(PVA.NextGen.Common.Interfaces.IProgramStep)">
+            <summary>
+            Save a single <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to file.
+            </summary>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to be saved.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.LoadAll">
+            <summary>
+            Load <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> objects from file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.LoadOne(System.String)">
+            <summary>
+            Load single <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> object from file.
+            </summary>
+            <param name="fileLocation">The <see cref="T:System.String"/> location of the file to be loaded.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.ResolveAllElements">
+            <summary>
+            Resolves all functions in steps for this program.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.Execute(PVA.NextGen.Common.Interfaces.IProgramStep,PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <summary>
+            Execute a given <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>.
+            </summary>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to execute.</param>
+            <param name="programOutputs">The <see cref="T:PVA.NextGen.Common.Interfaces.IBindableDictionary`2"/> of outputs from previous <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Services.ProgramStepService.ResolveElement(PVA.NextGen.Common.Interfaces.IProgramStep)">
+            <summary>
+            Resolves the function of an individual element.
+            </summary>
+            <param name="programStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> to resolve.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel">
+            <summary>
+            Interaction logic for the Program Canvas View.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.#ctor(Prism.Events.IEventAggregator,PVA.NextGen.CommonUI.Interfaces.IProgramCreationContentViewModel,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel"/> class.
+            </summary>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+            <param name="parentViewModel">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IProgramCreationContentViewModel"/> used to get <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> data.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ParentViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IProgramCreationContentViewModel"/> used to get <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> data.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.Bitmap">
+            <summary>
+            Gets or sets the bitmap.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ImageOffsetX">
+            <summary>
+            Gets or sets a temporary image offset x.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ImageOffsetY">
+            <summary>
+            Gets or sets a temporary image offset y.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ImageWidth">
+            <summary>
+            Gets or sets a temporary image width.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ImageHeight">
+            <summary>
+            Gets or sets a temporary image height.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ReverseLimitX">
+            <summary>
+            Gets the reverse limit X of the canvas.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ReverseLimitY">
+            <summary>
+            Gets the reverse limit Y of the canvas.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ForwardLimitX">
+            <summary>
+            Gets the forward limit X of the canvas.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ForwardLimitY">
+            <summary>
+            Gets the forward limit Y of the canvas.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.DragMode">
+            <summary>
+            Gets or sets the drag mode of the teachable points on the canvas.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.Dispense">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Common.Interfaces.IDispenseVisual"/> of the motion of the dispense.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.CanEditTools">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing the tool dispense visual parameters.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.IsBusy">
+            <summary>
+            Gets a value indicating whether the graph source of the canvas is busy (loading async).
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.IsSnappingEnabled">
+            <summary>
+            Gets or sets a value indicating whether or not snapping to points during drag is enabled.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.SnapDistance">
+            <summary>
+            Gets or sets the distance from a point that a dragged point will snap to it.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.Tools">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> devices.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ResetViewCommand">
+            <summary>
+            Gets a command that handles resetting the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.OpenImageEditorCommand">
+            <summary>
+            Gets a command that handles opening the <see cref="T:Telerik.Windows.Controls.RadImageEditor"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.OpenImageCommand">
+            <summary>
+            Gets a command that prompts a file selector for the <see cref="T:Telerik.Windows.Controls.RadImageEditor"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.SaveImageCommand">
+            <summary>
+            Gets a command that handles saving the current image in the <see cref="T:Telerik.Windows.Controls.RadImageEditor"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ClearImageCommand">
+            <summary>
+            Gets a command that handles removing the image from the selected program and updating the <see cref="T:Telerik.Windows.Controls.RadImageEditor"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ResetImageCommand">
+            <summary>
+            Gets a command that handles resetting the image from the selected program to the default image.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.UpdateMinimapCommand">
+            <summary>
+            Gets a command that updates the minimap after a point has been moved.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.UpdateOpacityCommand">
+            <summary>
+            Gets a command that updates the opacity of the image on the canvas.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.PreviousPathStepCommand">
+            <summary>
+            Gets a command that selects the motion command previous to the current program step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.NextDragModeCommand">
+            <summary>
+            Gets a command that selects the next drag mode.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ClearCacheCommand">
+            <summary>
+            Gets a command that selects the next drag mode.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.SelectSubStepCommand">
+            <summary>
+            Gets a command that selects the sub step of the currently selected program step, if applicable.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCanvasViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel">
+            <summary>
+            Interaction logic for Program Creation.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.#ctor(Prism.Events.IEventAggregator,PVA.NextGen.Common.Interfaces.IProgramManagementService,PVA.NextGen.Common.Interfaces.IProductService,PVA.NextGen.Common.Interfaces.IEvaluatorService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel"/> class.
+            </summary>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+            <param name="programManagementService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> objects.</param>
+            <param name="productService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> objects.</param>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.Index">
+            <summary>
+            Gets the Index of the page.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.Icon">
+            <summary>
+            Gets the Icon that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.AddProgramCommand">
+            <summary>
+            Gets AddProgramCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.DeleteProgramCommand">
+            <summary>
+            Gets DeleteProgramCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.RunAllCommand">
+            <summary>
+            Gets the command that runs all program lines.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.RunSelectedCommand">
+            <summary>
+            Gets the command that runs only the selected program lines.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.RunTeachToolCommand">
+            <summary>
+            Gets RunTeachToolCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.RunFiducialsCommand">
+            <summary>
+            Gets RunFiducialsCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.RunHeightChecksCommand">
+            <summary>
+            Gets RunHeightChecksCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.UndoCommand">
+            <summary>
+            Gets UndoCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.RedoCommand">
+            <summary>
+            Gets RedoCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ShiftCommand">
+            <summary>
+            Gets ShiftCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.RotateCommand">
+            <summary>
+            Gets RotateCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.MirrorCommand">
+            <summary>
+            Gets MirrorCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.CloneProgramCommand">
+            <summary>
+            Gets CloneProgramCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ImportProgramCommand">
+            <summary>
+            Gets ImportProgramCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ImportTemplateCommand">
+            <summary>
+            Gets ImportTemplateCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ExportProgramCommand">
+            <summary>
+            Gets ExportProgramCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.DeleteSelectedProgramStepsCommand">
+            <summary>
+            Gets DeleteSelectedProgramStepsCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.DeleteSelectedSubstepsCommand">
+            <summary>
+            Gets DeleteSelectedSubstepsCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.TransferSelectedProductsCommand">
+            <summary>
+            Gets TransferSelectedProducts.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.CategoryFilterCommand">
+            <summary>
+            Gets CategoryFilterCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ExecuteAvailableFunctionCommand">
+            <summary>
+            Gets ExecuteAvailableFunctionCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.OpenStepExpressionEvaluatorDialogCommand">
+            <summary>
+            Gets a delegate command used to open the Expression Evaluator Dialog for a ProgramStep.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ToggleFavoriteCommand">
+            <summary>
+            Gets a delegate command used to toggle favorite on available program steps.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.SelectAllStepsCommand">
+            <summary>
+            Gets a delegate command used to select all of program steps.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.CreateShapeCommand">
+            <summary>
+            Gets a delegate command used to create a step collection from the selected steps.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ExplodeShapeCommand">
+            <summary>
+            Gets a delegate command used to explode a shape into individual program steps.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.NextStepCommand">
+            <summary>
+            Gets a delegate command used to select the next step in an <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> or an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramShape"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.PreviousStepCommand">
+            <summary>
+            Gets a delegate command used to select the previous step in an <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> or an <see cref="T:PVA.NextGen.Common.Interfaces.IProgramShape"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ShowStepEditorCommand">
+            <summary>
+            Gets a delegate command used to open the IO Pane.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.HideStepEditorCommand">
+            <summary>
+            Gets a delegate command used to close the IO Pane.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.Programs">
+            <summary>
+            Gets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of Programs.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.SelectedProgram">
+            <summary>
+            Gets or sets SelectedProgram.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.SelectedSteps">
+            <summary>
+            Gets or sets the selected steps of the Listview.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.AvailableProducts">
+            <summary>
+            Gets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of available Products.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.AssociatedProducts">
+            <summary>
+            Gets or sets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of associated products of the selected program.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.GroupedFunctions">
+            <summary>
+            Gets or sets a collection of filtered <see cref="T:PVA.NextGen.Common.Classes.FunctionReference"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.FavoriteFunctions">
+            <summary>
+            Gets or sets a collection of <see cref="T:System.String"/> names of Favorite Functions.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.AvailableCategories">
+            <summary>
+            Gets collection of available function categories.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.AvailableProviders">
+            <summary>
+            Gets collection of available function providers.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.IsDragReorderEnabled">
+            <summary>
+            Gets or sets a value indicating whether or not the program steps display can be reordered.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.IsStepEditorVisible">
+            <summary>
+            Gets or sets a value indicating whether the Step Editor should be visible.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.CategoryFilter">
+            <summary>
+            Gets or sets a value indicating the current active function group filter.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ProviderFilter">
+            <summary>
+            Gets or sets a value indicating the current active function provider filter.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.CanCreateShape">
+            <summary>
+            Gets a value indicating whether the current selected steps can be made into a shape.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.CanExplodeShape">
+            <summary>
+            Gets a value indicating whether the current selected step is a shape that can be exploded.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.InsertProgramSteps(System.Int32,System.Collections.Generic.IEnumerable{PVA.NextGen.Common.Interfaces.IProgramStep})">
+            <summary>
+            Inserts program steps into Steps List.
+            </summary>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/>, if known. -1 indicates an unknown index.</param>
+            <param name="newSteps"><see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> objects to be inserted.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.InsertStepsIntoStepCollection(System.Int32,PVA.NextGen.Common.Interfaces.IProgramStepCollection,System.Collections.Generic.IEnumerable{PVA.NextGen.Common.Interfaces.IProgramStep})">
+            <summary>
+            Inserts a list of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> into an existing <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection"/>.
+            </summary>
+            <param name="index">The index to insert at, if known. -1 indicates an unknown index.</param>
+            <param name="stepCollection">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection"/> to insert the steps into.</param>
+            <param name="steps"><see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> objects to be inserted.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramCreationContentViewModel.InsertStepsIntoStepCollection``1(System.Int32,PVA.NextGen.Common.Interfaces.IProgramStepCollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Inserts a list of <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStep"/> into an existing <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection"/> by type.
+            </summary>
+            <typeparam name="U">The type parameter of the <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/>.</typeparam>
+            <param name="index">The index to insert at, if known. -1 indicates an unknown index.</param>
+            <param name="stepCollection">The <see cref="T:PVA.NextGen.Common.Interfaces.IProgramStepCollection`1"/> to insert the steps into.</param>
+            <param name="steps"><typeparamref name="U"/> objects to be inserted.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel">
+            <summary>
+            Interaction logic for the Program VirtualDevice View.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.#ctor(PVA.NextGen.CommonUI.Interfaces.INavigationService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel"/> class.
+            </summary>
+            <param name="navigationService">Service that provides adding and navigating to content throughout the application.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.ActiveView">
+            <summary>
+            Gets the active view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.IsPinned">
+            <summary>
+            Gets a value indicating whether the view is pinned.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.IsShown">
+            <summary>
+            Gets or sets a value indicating whether the content is visible.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.IsNavigatingForward">
+            <summary>
+            Gets a value indicating whether the navigation should occur forward.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.ToggleIsPinnedCommand">
+            <summary>
+            Gets a <see cref="T:Prism.Commands.DelegateCommand"/> used to toggle the pinned state of the virtual controller.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.PreviousPageCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to navigate to the previous page.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.NextPageCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to navigate to the next page.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.ViewCount">
+            <summary>
+            Gets the number of views contained in the "ContentRegion" region.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.ViewModels.ProgramVirtualDeviceViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Views.ProgramCanvasView">
+            <summary>
+            Interaction logic for ProgramCanvasView.xaml.
+            </summary>
+            <summary>
+            ProgramCanvasView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Views.ProgramCanvasView.#ctor(PVA.NextGen.CommonUI.Interfaces.IProgramCanvasViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Views.ProgramCanvasView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.Core.Program.Views.ProgramCanvasView"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Views.ProgramCanvasView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Views.ProgramCanvasView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Views.ProgramCreationContentView">
+            <summary>
+            Presentation logic for a Program Creation View.
+            </summary>
+            <summary>
+            ProgramCreationContentView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Views.ProgramCreationContentView.#ctor(PVA.NextGen.CommonUI.Interfaces.IProgramCreationContentViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Views.ProgramCreationContentView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.Core.Program.Views.ProgramCreationContentView"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Views.ProgramCreationContentView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Views.ProgramCreationContentView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Program.Views.ProgramVirtualDeviceView">
+            <summary>
+            Interaction logic for ProgramDeviceInteractionView.xaml.
+            </summary>
+            <summary>
+            ProgramVirtualDeviceView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Views.ProgramVirtualDeviceView.#ctor(PVA.NextGen.CommonUI.Interfaces.IProgramVirtualDeviceViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Program.Views.ProgramVirtualDeviceView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IProgramVirtualDeviceViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Program.Views.ProgramVirtualDeviceView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Program.Views.ProgramVirtualDeviceView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

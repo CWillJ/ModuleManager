@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Localization</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Localization.Classes.Localization">
+            <summary>
+            The localization settings for the application.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Classes.Localization.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Localization.Classes.Localization"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.Classes.Localization.Culture">
+            <summary>
+            Gets or sets the value for the culture.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Localization.Constants.LocalizationConstants">
+            <summary>
+            Constant values pertaining to the <see cref="T:PVA.NextGen.Common.Interfaces.ILocalization"/>.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Localization.Constants.LocalizationConstants.ModuleName">
+            <summary>
+            The string name of the localization module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Localization.Constants.LocalizationConstants.DefaultCulture">
+            <summary>
+            The string value for the default culture.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Localization.Constants.LocalizationConstants.JsonFile">
+            <summary>
+            The file location for the theme JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Localization.Constants.LocalizationPermissions">
+            <summary>
+            Constant permission values used by the localization module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Localization.Constants.LocalizationPermissions.CanEditCulture">
+            <summary>
+            Permission where user can edit the culture.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Localization.LocalizationModule">
+            <summary>
+            LocalizationModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.LocalizationModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.LocalizationModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Localization.Services.LocalizationService">
+            <summary>
+            Service providing registration and retrieval of module-level resource dictionaries to translate strings.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Services.LocalizationService.#ctor(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Localization.Services.LocalizationService"/> class.
+            </summary>
+            <param name="strategyResolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that can access mappings of all registered types.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.Services.LocalizationService.CultureDictionaries">
+            <summary>
+            Gets the dictionary providing lists of Resource Dictionaries.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.Services.LocalizationService.Cultures">
+            <summary>
+            Gets the list of available cultures.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.Services.LocalizationService.Localization">
+            <summary>
+            Gets the current <see cref="T:PVA.NextGen.Common.Interfaces.ILocalization"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Services.LocalizationService.AddDictionary(System.String,System.String)">
+            <summary>
+            Adds a resource dictionary to the existing lists by culture type.
+            </summary>
+            <param name="culture">The type of culture to which this resource dictionary applies.</param>
+            <param name="fileLocation">The relative location of the culture file.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Services.LocalizationService.SetCulture(System.String)">
+            <summary>
+            Set the current culture.
+            </summary>
+            <param name="culture">The string value to set the culture to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Services.LocalizationService.SaveLocalization">
+            <summary>
+            Save <see cref="T:PVA.NextGen.Common.Interfaces.ILocalization"/> to file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Services.LocalizationService.LoadLocalization">
+            <summary>
+            Load <see cref="T:PVA.NextGen.Common.Interfaces.ILocalization"/> from file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel">
+            <summary>
+            Interaction logic for LocalizationMenuView.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel.#ctor(PVA.NextGen.Common.Interfaces.ILocalizationService,Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel"/> class.
+            </summary>
+            <param name="localizationService">An <see cref="T:PVA.NextGen.Common.Interfaces.ILocalizationService"/> to retrieve module-specific localization dictionaries.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel.AvailableCultures">
+            <summary>
+            Gets the dictionary of available cultures.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel.SetCultureCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to set a culture.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel.Localization">
+            <summary>
+            Gets the current <see cref="T:PVA.NextGen.Common.Interfaces.ILocalization"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.ViewModels.LocalizationMenuViewModel.CanEditCulture">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing the culture.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Localization.Views.LocalizationMenuView">
+            <summary>
+            Presentation logic for a LocalizationMenuView.
+            </summary>
+            <summary>
+            LocalizationMenuView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Views.LocalizationMenuView.#ctor(PVA.NextGen.CommonUI.Interfaces.ILocalizationMenuViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Localization.Views.LocalizationMenuView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.ILocalizationMenuViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Localization.Views.LocalizationMenuView.ViewModel">
+            <summary>
+            Gets this view's DataContext as a <see cref="T:PVA.NextGen.CommonUI.Interfaces.ILocalizationMenuViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Localization.Views.LocalizationMenuView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

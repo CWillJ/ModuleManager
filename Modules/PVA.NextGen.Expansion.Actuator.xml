@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.Actuator</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.Actuator.ActuatorModule">
+            <summary>
+            ActuatorModule.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ActuatorModule.DeviceTypes">
+            <summary>
+            Gets or sets the collection of all <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/> types.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ActuatorModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ActuatorModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Actuator.Constants.ActuatorConstants">
+            <summary>
+            Constant values pertaining to <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/> devices.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Actuator.Constants.ActuatorConstants.ModuleName">
+            <summary>
+            The string name of the actuator module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Actuator.Constants.ActuatorConstants.MaxDevices">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Actuator.Constants.ActuatorConstants.JsonFile">
+            <summary>
+            The file location for the actuator JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Actuator.Constants.ActuatorTokenNames">
+            <summary>
+            The navigation token names for Actuator views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Actuator.Constants.ActuatorTokenNames.ConfigurationPage">
+            <summary>
+            Navigation token name for the configuration page.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Actuator.Constants.ActuatorTokenNames.DeviceConfigurationView">
+            <summary>
+            Navigation token name for the configuration view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Actuator.Constants.ActuatorTokenNames.FunctionTestView">
+            <summary>
+            Navigation token name for the function test view.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Actuator.Services.ActuatorService">
+            <summary>
+            Service providing concrete <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/> implementations.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.Services.ActuatorService.#ctor(PVA.NextGen.Common.Interfaces.IDeviceFactory,PVA.NextGen.Common.Interfaces.IFunctionService,PVA.NextGen.Common.Interfaces.ISharedFunctionProviderService,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Actuator.Services.ActuatorService"/> class.
+            </summary>
+            <param name="deviceFactory">The factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+            <param name="functionProviderService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunctionProvider"/> objects.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.Services.ActuatorService.Add(PVA.NextGen.Common.Interfaces.IDevice,System.Int32,System.String)">
+            <summary>
+            Add a new <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> to the service by type.
+            </summary>
+            <param name="device">The <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> type.</param>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel">
+            <summary>
+            Interaction logic for the Actuator Configuration Page.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.IActuatorService,Prism.Events.IEventAggregator,PVA.NextGen.Common.Interfaces.ISharedFunctionReceiver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel"/> class.
+            </summary>
+            <param name="actuatorService">The <see cref="T:PVA.NextGen.Common.Interfaces.IActuatorService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/>.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+            <param name="sharedFunctionReceiver">Receives all available <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> and their outputs.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.IODevices">
+            <summary>
+            Gets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunctionProvider"/> provided by <see cref="T:PVA.NextGen.Common.Interfaces.IIODevice"/> devices.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.Inputs">
+            <summary>
+            Gets or sets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of input <see cref="T:PVA.NextGen.Common.Interfaces.IDiscreteIOReference"/> and display names.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.Outputs">
+            <summary>
+            Gets or sets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of output <see cref="T:PVA.NextGen.Common.Interfaces.IDiscreteIOReference"/> and display names.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.AddDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add a <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/> to the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.RemoveDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove a <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/> from the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.CanCreateDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for creating a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.CanEditDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.CanDeleteDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for deleting a device.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.RemoveActuator(System.Object)">
+            <summary>
+            Remove an <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/> object from the <see cref="T:PVA.NextGen.Common.Interfaces.IActuatorService"/>.
+            </summary>
+            <param name="sender">The data-bound <see cref="T:System.Object"/> parameter sent by the list of <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Actuator.ViewModels.ActuatorConfigurationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+    </members>
+</doc>

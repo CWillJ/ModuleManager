@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.Sensor</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.Sensor.Constants.SensorConstants">
+            <summary>
+            Constant values pertaining to <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> devices.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorConstants.APIName">
+            <summary>
+            The <see cref="T:System.String"/> name used when accessing the Sensor API.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorConstants.ModuleName">
+            <summary>
+            The string name for the sensor module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorConstants.MaxDevices">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorConstants.JsonFile">
+            <summary>
+            The file location for the sensor JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Sensor.Constants.SensorParameterNames">
+            <summary>
+            Constant values used to create <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> parameters in scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorParameterNames.Sensor">
+            <summary>
+            Name for a sensor parameter.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Sensor.Constants.SensorTokenNames">
+            <summary>
+            The navigation token names for <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorTokenNames.ConfigurationPage">
+            <summary>
+            Navigation token name for the configuration page.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorTokenNames.DeviceConfigurationView">
+            <summary>
+            Navigation token name for the configuration view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorTokenNames.FunctionTestView">
+            <summary>
+            Navigation token name for the function test view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Sensor.Constants.SensorTokenNames.FunctionConfigurationView">
+            <summary>
+            Navigation token name for the function configuration view.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Sensor.SensorModule">
+            <summary>
+            SensorModule.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.SensorModule.DriverTypes">
+            <summary>
+            Gets or sets the collection of all <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> types.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.SensorModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.SensorModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Sensor.Services.SensorService">
+            <summary>
+            Service providing concrete <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> implementations.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.Services.SensorService.#ctor(PVA.NextGen.Common.Interfaces.IDeviceFactory,PVA.NextGen.Common.Interfaces.IFunctionService,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Sensor.Services.SensorService"/> class.
+            </summary>
+            <param name="deviceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+            <param name="scriptService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel">
+            <summary>
+            Interaction logic for the Sensor Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.ISensorService,Prism.Events.IEventAggregator,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel"/> class.
+            </summary>
+            <param name="sensorService">The <see cref="T:PVA.NextGen.Common.Interfaces.ISensorService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/>.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.AddDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add a <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> to the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.RemoveDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove a <see cref="T:PVA.NextGen.Common.Interfaces.ISensor"/> from the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.CanCreateDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for creating a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.CanEditDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.CanDeleteDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for deleting a device.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Sensor.ViewModels.SensorConfigurationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+    </members>
+</doc>

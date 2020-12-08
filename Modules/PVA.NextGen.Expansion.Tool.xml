@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.Tool</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.Tool.Classes.Tool">
+            <summary>
+            A virtual device comprised of multiple <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/> objects built from <see cref="T:PVA.NextGen.Common.Interfaces.IToolReady"/> devices.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Classes.Tool.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Tool.Classes.Tool"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Classes.Tool.Components">
+            <summary>
+            Gets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/> objects build from selected <see cref="T:PVA.NextGen.Common.Interfaces.IToolReady"/> devices.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Classes.Tool.MissingComponentCount">
+            <summary>
+            Gets or sets the total number of <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/> that cannot be resolved.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Classes.Tool.Dispense">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Common.Classes.DispenseVisual"/> for the tool.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Classes.Tool.Offset">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Common.Parameters.CoordinateParameter"/> offset.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.Classes.ToolComponent">
+            <summary>
+            An object that references a <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> used to build an <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Classes.ToolComponent.#ctor(PVA.NextGen.Common.Interfaces.IDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Tool.Classes.ToolComponent"/> class.
+            </summary>
+            <param name="device">The <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> this component references.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Classes.ToolComponent.DeviceReferenceName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> reference name of the <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Classes.ToolComponent.Device">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> this component references.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.Constants.ToolConstants">
+            <summary>
+            Constant values pertaining to <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> devices.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Tool.Constants.ToolConstants.APIName">
+            <summary>
+            The <see cref="T:System.String"/> name used when accessing the Tools API.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Tool.Constants.ToolConstants.ModuleName">
+            <summary>
+            The string name for the tool module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Tool.Constants.ToolConstants.MaxDevices">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Tool.Constants.ToolConstants.JsonFile">
+            <summary>
+            The file location for the tool JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.Constants.ToolViewTokenNames">
+            <summary>
+            The navigation token names for Tool views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Tool.Constants.ToolViewTokenNames.ConfigurationPage">
+            <summary>
+            Navigation token name for the configuration page.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.Factories.ToolParameterFactory">
+            <summary>
+            A factory used to create instances of tool parameters for scripts.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Factories.ToolParameterFactory.#ctor(PVA.NextGen.Common.Interfaces.IToolService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Tool.Factories.ToolParameterFactory"/> class.
+            </summary>
+            <param name="toolService">The <see cref="T:PVA.NextGen.Common.Interfaces.IToolService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Factories.ToolParameterFactory.CreateParameter(System.String,System.Object[])">
+            <summary>
+            Create an instance of a script parameter.
+            </summary>
+            <param name="name">The <see cref="T:System.String"/> name of the type of parameter to create.</param>
+            <param name="arguments">The arguments needed to create the parameter.</param>
+            <returns>The new <see cref="T:System.Object"/> instance of a parameter.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.Services.ToolService">
+            <summary>
+            Service providing concrete <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> implementations.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.#ctor(PVA.NextGen.Common.Interfaces.IDeviceFactory,PVA.NextGen.Common.Interfaces.IFunctionService,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Tool.Services.ToolService"/> class.
+            </summary>
+            <param name="deviceFactory">The factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+            <param name="scriptService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Services.ToolService.SelectedBuiltFunction">
+            <summary>
+            Gets or sets the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Services.ToolService.SelectedBuiltFunctionStep">
+            <summary>
+            Gets or sets the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Services.ToolService.AvailableComponents">
+            <summary>
+            Gets the collection of available <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Services.ToolService.AvailableFunctionSteps">
+            <summary>
+            Gets the collection of available <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.Add(PVA.NextGen.Common.Interfaces.IDevice,System.Int32,System.String)">
+            <summary>
+            Add a new <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> to the service by type.
+            </summary>
+            <param name="device">The <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> type.</param>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.AddComponent(PVA.NextGen.Common.Interfaces.ITool,PVA.NextGen.Common.Interfaces.IToolComponent)">
+            <summary>
+            Add a component to the provided <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.
+            </summary>
+            <param name="tool">The <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> to add to.</param>
+            <param name="componentToAdd">The <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/> to add.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.RemoveComponent(PVA.NextGen.Common.Interfaces.ITool,PVA.NextGen.Common.Interfaces.IToolComponent)">
+            <summary>
+            Remove a component from the provided <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.
+            </summary>
+            <param name="tool">The <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> to remove from.</param>
+            <param name="componentToRemove">The <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.AddBuiltFunction(PVA.NextGen.Common.Interfaces.IDevice,System.String,System.Boolean)">
+            <summary>
+            Add a function to a given <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.
+            </summary>
+            <param name="device">The <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> to add a function to.</param>
+            <param name="functionName">The <see cref="T:System.String"/> name of the function to add.</param>
+            <param name="isReadOnly">A <see cref="T:System.Boolean"/> indicating if the new <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> should be readonly.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.RemoveBuiltFunction(PVA.NextGen.Common.Interfaces.IDevice,PVA.NextGen.Common.Interfaces.IBuiltFunction)">
+            <summary>
+            Remove a function from a given <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.
+            </summary>
+            <param name="device">The <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> to remove from.</param>
+            <param name="function">The <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.AddBuiltFunctionStep(PVA.NextGen.Common.Interfaces.IBuiltFunction,PVA.NextGen.Common.Interfaces.IBuiltFunctionStep)">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> to an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+            <param name="builtFunction">The <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> to add a step to.</param>
+            <param name="builtFunctionStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> to add.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.InsertBuiltFunctionStep(PVA.NextGen.Common.Interfaces.IBuiltFunction,PVA.NextGen.Common.Interfaces.IBuiltFunctionStep,System.Int32)">
+            <summary>
+            Insert an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> to an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> at a specific index.
+            </summary>
+            <param name="builtFunction">The <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> to insert the step.</param>
+            <param name="builtFunctionStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> to insert.</param>
+            <param name="index">The <see cref="T:System.Int32"/> index to insert at.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.RemoveBuiltFunctionStep(PVA.NextGen.Common.Interfaces.IBuiltFunction,PVA.NextGen.Common.Interfaces.IBuiltFunctionStep)">
+            <summary>
+            Remove an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> from the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+            <param name="builtFunction">The <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> to remove a step from.</param>
+            <param name="builtFunctionStep">The <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.ResolveComponents">
+            <summary>
+            Resolve the components of all <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> objects.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Services.ToolService.OnSelectedDeviceChanged">
+            <summary>
+            Perform any actions required when <see cref="P:PVA.NextGen.Common.Interfaces.IDeviceService.SelectedDevice"/> changes.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.ToolModule">
+            <summary>
+            Tools Module.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ToolModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ToolModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel">
+            <summary>
+            Interaction logic for the Tool Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.IToolService,Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel"/> class.
+            </summary>
+            <param name="toolService">The <see cref="T:PVA.NextGen.Common.Interfaces.IToolService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.CanCreateDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for creating a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.CanEditDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.CanDeleteDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for deleting a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.ToolService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IToolService"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.AddToolCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add an <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> to the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.RemoveToolCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove an <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/> from the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.AddComponentCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add an <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/> to the selected <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.RemoveComponentCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove an <see cref="T:PVA.NextGen.Common.Interfaces.IToolComponent"/> from the selected <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.AddFunctionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> to the selected <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.RemoveFunctionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> from the selected <see cref="T:PVA.NextGen.Common.Interfaces.ITool"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.ExecuteFunctionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to execute all of the <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> steps in the <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.AddFunctionStepCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> to the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.RemoveFunctionStepCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> from the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.ExecuteFunctionStepCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to execute the script from a <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> from the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.ExecuteFunction(System.Object)">
+            <summary>
+            Execute the selected function step on the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+            <param name="sender">The selected object.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.ViewModels.ToolConfigurationContentViewModel.ExecuteFunctionStep(System.Object)">
+            <summary>
+            Execute the selected function step on the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+            <param name="sender">The selected object.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Tool.Views.ToolConfigurationContentView">
+            <summary>
+            Presentation logic for the Tool Configuration Content.
+            </summary>
+            <summary>
+            ToolConfigurationContentView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Views.ToolConfigurationContentView.#ctor(PVA.NextGen.CommonUI.Interfaces.IToolConfigurationContentViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Tool.Views.ToolConfigurationContentView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IToolConfigurationContentViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Tool.Views.ToolConfigurationContentView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Tool.Views.ToolConfigurationContentView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

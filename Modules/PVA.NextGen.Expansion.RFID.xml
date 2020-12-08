@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.RFID</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.RFID.Constants.RFIDConstants">
+            <summary>
+            Constant values pertaining to <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/> devices.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDConstants.APIName">
+            <summary>
+            The <see cref="T:System.String"/> name used when accessing the RFID API.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDConstants.ModuleName">
+            <summary>
+            The string name for the RFID module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDConstants.MaxDevices">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDConstants.JsonFile">
+            <summary>
+            The file location for the RFID JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.RFID.Constants.RFIDTokenNames">
+            <summary>
+            The navigation token names for RFID views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDTokenNames.ConfigurationPage">
+            <summary>
+            Navigation token name for the configuration page.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDTokenNames.DeviceConfigurationView">
+            <summary>
+            Navigation token name for the configuration view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDTokenNames.ConnectionView">
+            <summary>
+            Navigation token name for the connection view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDTokenNames.FunctionTestView">
+            <summary>
+            Navigation token name for the function test view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.RFID.Constants.RFIDTokenNames.FunctionConfigurationView">
+            <summary>
+            Navigation token name for the function configuration view.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.RFID.RFIDModule">
+            <summary>
+            RFIDModule.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.RFIDModule.DriverTypes">
+            <summary>
+            Gets or sets the collection of all <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/> types.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.RFIDModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.RFIDModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform required initialization methods for this Module.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.RFID.Services.RFIDService">
+            <summary>
+            Service providing concrete <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/> implementations.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.Services.RFIDService.#ctor(PVA.NextGen.Common.Interfaces.IDeviceFactory,PVA.NextGen.Common.Interfaces.IFunctionService,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.RFID.Services.RFIDService"/> class.
+            </summary>
+            <param name="deviceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/>.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+            <param name="scriptService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel">
+            <summary>
+            Interaction logic for the RFID Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.IRFIDService,PVA.NextGen.Common.Interfaces.IConnectionService,PVA.NextGen.CommonUI.Interfaces.IMessagingService,Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel"/> class.
+            </summary>
+            <param name="rfidService">The <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/>.</param>
+            <param name="connectionService">The <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDevice"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/>.</param>
+            <param name="messagingService">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IMessagingService"/> used for displaying messages to the user.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.AvailableConnectionTypes">
+            <summary>
+            Gets the available <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> types by getting the intersect of connections available at load and connections the device supports.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.AddDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add a <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/> to the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.RemoveDeviceCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove a <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/> from the service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.ChangeConnectionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to change the <see cref="T:PVA.NextGen.Common.Interfaces.IConnection"/> of an <see cref="T:PVA.NextGen.Common.Interfaces.IRFIDDevice"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.CanCreateDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for creating a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.CanEditDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for editing a device.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.CanDeleteDevice">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for deleting a device.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.RFID.ViewModels.RFIDDeviceConfigurationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+    </members>
+</doc>

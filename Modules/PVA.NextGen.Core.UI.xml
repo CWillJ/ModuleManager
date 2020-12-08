@@ -1,0 +1,769 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.UI</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.UI.Behaviors.PopulateDeviceParameterBehavior">
+            <summary>
+            An attached behavior that grabs the Device Parameter context before it is lost due to AutoWireViewModel.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Behaviors.PopulateDeviceParameterBehavior.DeviceParameterProperty">
+            <summary>
+            A <see cref="T:System.Boolean"/> attached <see cref="T:System.Windows.DependencyProperty"/> used to indicate that this control should keep Keyboard focus.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Behaviors.PopulateDeviceParameterBehavior.SetDeviceParameter(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Set the value of the <see cref="F:PVA.NextGen.Core.UI.Behaviors.PopulateDeviceParameterBehavior.DeviceParameterProperty"/>.
+            </summary>
+            <param name="dependencyObject">The <see cref="T:System.Windows.DependencyObject"/> on which to set the property.</param>
+            <param name="value">The value to set the property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Behaviors.PopulateDeviceParameterBehavior.GetDeviceParameter(System.Windows.DependencyObject)">
+            <summary>
+            Get the value of the <see cref="F:PVA.NextGen.Core.UI.Behaviors.PopulateDeviceParameterBehavior.DeviceParameterProperty"/>.
+            </summary>
+            <param name="dependencyObject">The <see cref="T:System.Windows.DependencyObject"/> on which to check the property.</param>
+            <returns>The <see cref="T:System.Boolean"/> value of the property.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Constants.MenuType">
+            <summary>
+            Sub Page Menu Types.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Constants.MenuType.VerticalHeader">
+            <summary>
+            Describes a Vertically Oriented Header Menu.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Constants.MenuType.HorizontalHeader">
+            <summary>
+            Describes a Horizontally Oriented Header Menu.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Constants.MenuType.VerticalSub">
+            <summary>
+            Describes a Vertically Oriented Sub Menu.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Constants.MenuType.HorizontalSub">
+            <summary>
+            Describes a Horizontally Oriented Sub Menu.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Constants.UIConstants">
+            <summary>
+            Constant values pertaining to the UI module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Constants.UIConstants.ModuleName">
+            <summary>
+            The string name for the UI module.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Constants.UIRegionNames">
+            <summary>
+            UI Region Names.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Constants.UIRegionNames.RootPageMainRegion">
+            <summary>
+            Root Page Region.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Constants.UITokenNames">
+            <summary>
+            UI Token Names.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Constants.UITokenNames.RootPageToken">
+            <summary>
+            Root Page Region.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Factories.PageFactory">
+            <summary>
+            Factory class for creating new <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/> objects.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Factories.PageFactory.#ctor(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Factories.PageFactory"/> class.
+            </summary>
+            <param name="resolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that can access mappings of all registered types.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Factories.PageFactory.CreatePage``1">
+            <summary>
+            Create a new Page.
+            </summary>
+            <typeparam name="T">The type of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/> to create.</typeparam>
+            <returns>The newly created <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/>.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Services.PageService">
+            <summary>
+            Service providing concrete <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/> implementations.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Services.PageService.#ctor(PVA.NextGen.CommonUI.Interfaces.IPageFactory,PVA.NextGen.CommonUI.Interfaces.INavigationService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Services.PageService"/> class.
+            </summary>
+            <param name="pageFactory">The factory class used to create new <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/> objects.</param>
+            <param name="navigationService">Service that provides adding and navigating to content throughout the application.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Services.PageService.BuildPagesFromStubs(PVA.NextGen.CommonUI.Interfaces.IPageView,System.String)">
+            <summary>
+            Build instances of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/> from stub files on disk.
+            </summary>
+            <param name="parentPage">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/> parent under which to inject the new pages.</param>
+            <param name="regionName">The region name in which to inject the new pages.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Services.PageService.CreatePage``1">
+            <summary>
+            Create a new Page.
+            </summary>
+            <typeparam name="T">The type of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/> to create.</typeparam>
+            <returns>The newly created <see cref="T:PVA.NextGen.CommonUI.Interfaces.IPageView"/>.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.UIModule">
+            <summary>
+            UIModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.UIModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel">
+            <summary>
+            Interaction logic for the Device Connection view.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.#ctor(PVA.NextGen.Common.Interfaces.IConnectedDeviceService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel"/> class.
+            </summary>
+            <param name="deviceService">The <see cref="T:PVA.NextGen.Common.Interfaces.IConnectedDeviceService"/> for this device type.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.ConnectCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to connect to an <see cref="T:PVA.NextGen.Common.Interfaces.IBarcodeDevice"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.DisconnectCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to disconnect from an <see cref="T:PVA.NextGen.Common.Interfaces.IBarcodeDevice"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceConnectionViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel">
+            <summary>
+            Interaction logic for Device Function Configuration.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.#ctor(PVA.NextGen.Common.Interfaces.IDeviceService,PVA.NextGen.Common.Interfaces.IFunctionService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel"/> class.
+            </summary>
+            <param name="deviceService">The <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.BuiltFunctions">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> available based on selected <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> driver type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.AvailableFunctionSteps">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> availabled based on the selected <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/> driver type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.SelectedBuiltFunction">
+            <summary>
+            Gets or sets the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.AddFunctionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> to the selected <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.RemoveFunctionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> from the selected <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.AddFunctionStepCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to add an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> to the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.RemoveFunctionStepCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to remove an <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/> from the selected <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.UpdateBuiltFunctionsCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to update the list of <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.UpdateAvailableFunctionStepsCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to update the list of <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunctionStep"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.ResolveBuiltFunctionsCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to resolve <see cref="T:PVA.NextGen.Common.Interfaces.IBuiltFunction"/> on existing devices.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionConfigurationViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel">
+            <summary>
+            Interaction logic for a Device Function Test view.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.#ctor(PVA.NextGen.Common.Interfaces.IDeviceService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel"/> class.
+            </summary>
+            <param name="deviceService">The <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.DeviceService">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.ExecuteFunctionCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to execute the selected function on the selected <see cref="T:PVA.NextGen.Common.Interfaces.IActuator"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceFunctionTestViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.ViewModels.DeviceParameterViewModel">
+            <summary>
+            Interaction logic for the IO Configuration Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.DeviceParameterViewModel.#ctor(PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.ViewModels.DeviceParameterViewModel"/> class.
+            </summary>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceParameterViewModel.DeviceParameter">
+            <summary>
+            Gets or sets the device parameter to be edited.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.DeviceParameterViewModel.Devices">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.Common.Interfaces.IDeviceService"/> for this device type.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel">
+            <summary>
+            Interaction logic for the application's Root Content.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.#ctor(PVA.NextGen.CommonUI.Interfaces.INavigationService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel"/> class.
+            </summary>
+            <param name="navigationService">Service that provides adding and navigating to content throughout the application.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.IsDirty">
+            <summary>
+            Gets or sets a value indicating whether there is an unsaved change.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.SubPages">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/> that have been injected into this page's main region.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.NavigateToSubPageCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to navigate to a new <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.HandleNavigationResultCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to handle the result of a navigation request.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.NavigateToSubPage(System.Object)">
+            <summary>
+            Navigate to an <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/>.
+            </summary>
+            <param name="sender">The data-bound <see cref="T:System.Object"/> parameter sent by the list of <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel">
+            <summary>
+            Interaction logic for a sub page.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.#ctor(PVA.NextGen.CommonUI.Interfaces.INavigationService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel"/> class.
+            </summary>
+            <param name="navigationService">Service that provides adding and navigating to content throughout the application.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.Index">
+            <summary>
+            Gets or sets the Index of the page.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.ReferenceName">
+            <summary>
+            Gets or sets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.Icon">
+            <summary>
+            Gets or sets the Icon that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.SubMenuType">
+            <summary>
+            Gets or sets the type of this Page's subpage menu.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.IsDirty">
+            <summary>
+            Gets or sets a value indicating whether there is an unsaved change.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.SubPages">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/> that have been injected into this page's main region.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.Content">
+            <summary>
+            Gets the collection of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentView"/> that have been injected into this page's main region.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.NavigateToSubPageCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to navigate to a new <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.HandleNavigationResultCommand">
+            <summary>
+            Gets the <see cref="T:Prism.Commands.DelegateCommand"/> used to handle the result of a navigation request.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.NavigateToSubPage(System.Object)">
+            <summary>
+            Navigate to an <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/>.
+            </summary>
+            <param name="sender">The data-bound <see cref="T:System.Object"/> parameter sent by the list of <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageView"/>.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.ViewModels.SubPageViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Views.DeviceConfigurationContentView">
+            <summary>
+            Presentation logic for Device Configuration View.
+            </summary>
+            <summary>
+            DeviceConfigurationContentView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceConfigurationContentView.#ctor(PVA.NextGen.CommonUI.Interfaces.IDeviceConfigurationContentViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Views.DeviceConfigurationContentView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IDeviceConfigurationContentViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.DeviceConfigurationContentView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceConfigurationContentView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Views.DeviceConnectionView">
+            <summary>
+            Interaction logic for DeviceConnectionView.
+            </summary>
+            <summary>
+            DeviceConnectionView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceConnectionView.#ctor(PVA.NextGen.CommonUI.Interfaces.IDeviceConnectionViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Views.DeviceConnectionView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IDeviceConnectionViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.DeviceConnectionView.ViewModel">
+            <summary>
+            Gets the page's DataContext as an <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceConnectionView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Views.DeviceFunctionConfigurationView">
+            <summary>
+            Presentation logic for Device Function Configuration.
+            </summary>
+            <summary>
+            DeviceFunctionConfigurationView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceFunctionConfigurationView.#ctor(PVA.NextGen.CommonUI.Interfaces.IDeviceFunctionConfigurationViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Views.DeviceFunctionConfigurationView"/> class.
+            </summary>
+            <param name="viewModel">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IDeviceFunctionConfigurationViewModel"/> that will serve as this view's DataContext.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.DeviceFunctionConfigurationView.ViewModel">
+            <summary>
+            Gets the view's DataContext as an <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceFunctionConfigurationView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Views.DeviceFunctionTestView">
+            <summary>
+            Presentation logic for DeviceFunctionTestView.
+            </summary>
+            <summary>
+            DeviceFunctionTestView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceFunctionTestView.#ctor(PVA.NextGen.CommonUI.Interfaces.IDeviceFunctionTestViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Views.DeviceFunctionTestView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.IDeviceFunctionTestViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.DeviceFunctionTestView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceFunctionTestView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Views.DeviceParameterView">
+            <summary>
+            Presentation logic for Discrete Input Parameter View.
+            </summary>
+            <summary>
+            DeviceParameterView
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Views.DeviceParameterView.DeviceParameterProperty">
+            <summary>
+            A <see cref="T:System.Windows.DependencyProperty"/> used to set the <see cref="P:PVA.NextGen.Core.UI.Views.DeviceParameterView.DeviceParameter"/> to be edited.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceParameterView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Views.DeviceParameterView"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.DeviceParameterView.DeviceParameter">
+            <summary>
+            Gets or sets the <see cref="P:PVA.NextGen.Core.UI.Views.DeviceParameterView.DeviceParameter"/> to be edited.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.DeviceParameterView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Views.RootPageView">
+            <summary>
+            Presentation logic for the Root Page.
+            </summary>
+            <summary>
+            RootPageView
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.UI.Views.RootPageView.IsPaneOpenProperty">
+            <summary>
+            Identifies the dependency property which indicates the status of the navigation pane.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.RootPageView.#ctor(PVA.NextGen.Core.UI.ViewModels.RootPageViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Views.RootPageView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.Core.UI.ViewModels.RootPageViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.RootPageView.IsPaneOpen">
+            <summary>
+            Gets or sets a value indicating whether or not the navigation pane is open.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.RootPageView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.RootPageView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.UI.Views.SubPageView">
+            <summary>
+            Presentation logic for a page.
+            </summary>
+            <summary>
+            SubPageView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.SubPageView.#ctor(PVA.NextGen.CommonUI.Interfaces.ISubPageViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.UI.Views.SubPageView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.CommonUI.Interfaces.ISubPageViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.UI.Views.SubPageView.ViewModel">
+            <summary>
+            Gets the page's DataContext as an <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.UI.Views.SubPageView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,364 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Product</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Product.Classes.Product">
+            <summary>
+            Class used for product related information and objects to be used in Production.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Classes.Product.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Product.Classes.Product"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.DisplayName">
+            <summary>
+            Gets or sets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.Index">
+            <summary>
+            Gets or sets the Index of the product.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.CreationDateTime">
+            <summary>
+            Gets or sets the DateTime the product was created.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.ModifiedDateTime">
+            <summary>
+            Gets or sets the DateTime the product was modified.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.CreatedUserName">
+            <summary>
+            Gets or sets the name of the user that created the product.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.ModifiedUserName">
+            <summary>
+            Gets or sets the name of the user that most recently modified the product.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.IsFavorite">
+            <summary>
+            Gets or sets a value indicating whether or not the product is a favorite.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.ProgramReferences">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Classes.ProgramReference"/> associated with this <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Classes.Product.ProcessReferences">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Classes.ProcessReference"/> associated with this <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Classes.Product.UpdateModified">
+            <summary>
+            Update the modification information for this product.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.Constants.ProductConstants">
+            <summary>
+            Constants used by the Product Module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.ProductConstants.ModuleName">
+            <summary>
+            The string name for the product module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.ProductConstants.MaxProducts">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.ProductConstants.ProductDirectory">
+            <summary>
+            Directory Location for Product files.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.ProductConstants.NewProductReferenceName">
+            <summary>
+            Constant prefix used for product objects.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.ProductConstants.NewProductDisplayName">
+            <summary>
+            Defualt Display Name used for product objects.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.Constants.ProductTokenNames">
+            <summary>
+            The navigation token names for Product views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.ProductTokenNames.CreationPage">
+            <summary>
+            Navigation token name for the creation page.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.Constants.SortingOptionConstants">
+            <summary>
+            Constants used by the Product Module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.SortingOptionConstants.SortProcessByName">
+            <summary>
+            The option to sort a collection by display name.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.SortingOptionConstants.SortProcessByCreated">
+            <summary>
+            The option to sort a collection by time created.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Product.Constants.SortingOptionConstants.SortProcessByFavorite">
+            <summary>
+            The option to sort a collection by favorites.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.Factories.ProductFactory">
+            <summary>
+            Factory class for generating new <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> objects/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Factories.ProductFactory.#ctor(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Product.Factories.ProductFactory"/> class.
+            </summary>
+            <param name="strategyResolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that can access mappings of all registered types.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Factories.ProductFactory.CreateProduct(System.Int32,System.String)">
+            <summary>
+            Create an abstracted <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>.
+            </summary>
+            <param name="index">The index of the <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>, if known. -1 indicates an unknown index.</param>
+            <param name="displayName">The name displayed for all operator-focused interfaces.</param>
+            <returns>A newly created <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.ProductModule">
+            <summary>
+            ProductModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.ProductModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.ProductModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.Services.ProductService">
+            <summary>
+            Service providing product creation, modification and execution implementation.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Services.ProductService.#ctor(PVA.NextGen.Common.Interfaces.IProductFactory,PVA.NextGen.Common.Interfaces.IProcessManagementService,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Product.Services.ProductService"/> class.
+            </summary>
+            <param name="productFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>.</param>
+            <param name="processManagementService">Service used to resolve <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> for a loaded <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/>.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Services.ProductService.Products">
+            <summary>
+            Gets or sets List of products.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Services.ProductService.AddProduct">
+            <summary>
+            Add a new <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> to the service.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Services.ProductService.RemoveProduct(PVA.NextGen.Common.Interfaces.IProduct)">
+            <summary>
+            Remove a <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> from the service.
+            </summary>
+            <param name="product">The <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> to removed.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Services.ProductService.SaveProducts">
+            <summary>
+            Save <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> objects to file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Services.ProductService.SaveSingleProduct(PVA.NextGen.Common.Interfaces.IProduct)">
+            <summary>
+            Savesingle <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> object to file.
+            </summary>
+            <param name="product">The <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> to be saved.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Services.ProductService.LoadProducts">
+            <summary>
+            Load <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> objects from file.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Services.ProductService.LoadSingleProduct">
+            <summary>
+            Load single <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> object from file.
+            </summary>
+            <returns><see cref="T:System.Boolean"/> true if product was loaded, false otherwise.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel">
+            <summary>
+            Interaction logic for Product Creation.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.IProductService,PVA.NextGen.Common.Interfaces.IProgramManagementService,PVA.NextGen.Common.Interfaces.IProcessManagementService,Prism.Events.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel"/> class.
+            </summary>
+            <param name="productService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProduct"/> objects.</param>
+            <param name="programManagementService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProgram"/> objects.</param>
+            <param name="processManagementService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> objects.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.ReferenceName">
+            <summary>
+            Gets the name that should be used internally.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.Index">
+            <summary>
+            Gets the Index of the page.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.DisplayName">
+            <summary>
+            Gets the name that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.Icon">
+            <summary>
+            Gets the Icon that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.NavigationToken">
+            <summary>
+            Gets or sets the token used for navigation and injection.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.AddProductCommand">
+            <summary>
+            Gets AddProductCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.DeleteProductCommand">
+            <summary>
+            Gets DeleteProductCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.ExportProductCommand">
+            <summary>
+            Gets ExportProductCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.ImportProductCommand">
+            <summary>
+            Gets ImportProductCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.TransferSelectedProcessesCommand">
+            <summary>
+            Gets TransferSelectedProcessesCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.Products">
+            <summary>
+            Gets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of Products.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.SelectedProduct">
+            <summary>
+            Gets or sets currently selected product.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.SelectedProgram">
+            <summary>
+            Gets or sets currently selected program of the selected product.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.AvailableProcesses">
+            <summary>
+            Gets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of available Processes.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.AssociatedProcesses">
+            <summary>
+            Gets or sets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of associated processes of the selected product.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Product.Views.ProductCreationContentView">
+            <summary>
+            Interaction logic for ProductCreationContentView page.
+            </summary>
+            <summary>
+            ProductCreationContentView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Views.ProductCreationContentView.#ctor(PVA.NextGen.Core.Product.ViewModels.ProductCreationContentViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Product.Views.ProductCreationContentView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.Core.Product.Views.ProductCreationContentView"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Product.Views.ProductCreationContentView.ViewModel">
+            <summary>
+            Gets the <see cref="T:PVA.NextGen.CommonUI.Interfaces.IContentViewModel"/> that serves at the view's DataContext.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Product.Views.ProductCreationContentView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>
