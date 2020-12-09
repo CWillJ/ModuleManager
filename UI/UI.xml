@@ -64,6 +64,18 @@
             Loads all views from any loaded assemblies in the <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>.
             </summary>
         </member>
+        <member name="M:ModuleManager.UI.Interfaces.ILoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <summary>
+            Adds all views from an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to the LoadedViews property.
+            </summary>
+            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to get the views from.</param>
+        </member>
+        <member name="M:ModuleManager.UI.Interfaces.ILoadedViewsService.RemoveViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <summary>
+            Removes all views in an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> from the LoadedViews property.
+            </summary>
+            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> that holds the views that needs to be removed.</param>
+        </member>
         <member name="T:ModuleManager.UI.Interfaces.IProgressBarService">
             <summary>
             A progress bar service.
@@ -153,11 +165,23 @@
         <member name="M:ModuleManager.UI.Services.LoadedViewsService.LoadViewsFromAssemblyService">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
         </member>
+        <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
+        </member>
+        <member name="M:ModuleManager.UI.Services.LoadedViewsService.RemoveViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
+        </member>
         <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddTypeDataIfIsView(ModuleManager.ModuleObjects.Classes.TypeData)">
             <summary>
             Adds the <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>'s <see cref="T:System.Type"/> to LoadedViews property if IsView is true.
             </summary>
             <param name="typeData">The <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> to get the <see cref="T:System.Type"/> from to add to LoadedViews.</param>
+        </member>
+        <member name="M:ModuleManager.UI.Services.LoadedViewsService.RemoveTypeDataIfIsView(ModuleManager.ModuleObjects.Classes.TypeData)">
+            <summary>
+            Removes the <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>'s <see cref="T:System.Type"/> from LoadedViews property if IsView is true.
+            </summary>
+            <param name="typeData">The <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> to get the <see cref="T:System.Type"/> from to remove from LoadedViews.</param>
         </member>
         <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddViewFromType(System.Type)">
             <summary>
@@ -167,7 +191,7 @@
         </member>
         <member name="M:ModuleManager.UI.Services.LoadedViewsService.RemoveViewFromType(System.Type)">
             <summary>
-            Removes a view <see cref="T:System.Type"/> to the LoadedViews collection.
+            Removes a view <see cref="T:System.Type"/> from the LoadedViews collection.
             </summary>
             <param name="type">The view <see cref="T:System.Type"/> to be removed.</param>
         </member>

@@ -24,6 +24,8 @@
             CurrentTypeName = string.Empty;
             PercentOfAssemblyLoaded = 0;
             DescriptionRetriever = new XmlDescriptionRetriever();
+
+            LoadedAssemblies = new ObservableCollection<AssemblyName>();
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
@@ -40,6 +42,8 @@
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
         public double PercentOfAssemblyLoaded { get; set; }
+
+        private ObservableCollection<AssemblyName> LoadedAssemblies { get; set; }
 
         /// <summary>
         /// Gets or sets all xml descriptions.
@@ -147,6 +151,10 @@
             assemblyData.Assembly = assemblyData.Loader.LoadFromAssemblyPath(DllFilePath);
             assemblyData.FilePath = DllFilePath;
 
+            CopyDllToCurrentDirectory(assemblyData.FilePath);
+
+            LoadReferencedAssembly(assemblyData.Assembly);
+
             Type[] types = null;
             string name = assemblyData.Assembly.GetName().Name;
 
@@ -159,14 +167,7 @@
                 assemblyData.Name = name;
             }
 
-            try
-            {
-                types = assemblyData.Assembly.GetTypes();
-            }
-            catch (ReflectionTypeLoadException ex)
-            {
-                types = ex.Types.Where(t => t != null).ToArray();
-            }
+            types = GetAllTypesFromAssembly(assemblyData.Assembly);
 
             assemblyData.Types.Clear();
 
@@ -216,6 +217,88 @@
             assemblyData.Loader.Unload();
             assemblyData.Loader = null;
             assemblyData.Assembly = null;
+        }
+
+        /// <summary>
+        /// Loads all referenced assemblies.
+        /// </summary>
+        /// <param name="assembly">The <see cref="Assembly"/> to get all referenced assemblies from.</param>
+        private void LoadReferencedAssembly(Assembly assembly)
+        {
+            foreach (AssemblyName name in assembly.GetReferencedAssemblies())
+            {
+                if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName == name.FullName))
+                {
+                    try
+                    {
+                        LoadReferencedAssembly(Assembly.Load(name));
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        FindInLibFolder(name.Name);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Tries to find the missing file from the Lib folder.
+        /// </summary>
+        /// <param name="fileName">The name of the dll file to load.</param>
+        private void FindInLibFolder(string fileName)
+        {
+            string directoryPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName;
+
+            string loadFilePath = Path.Combine(
+                directoryPath,
+                @"Lib",
+                fileName + @".dll");
+
+            AssemblyName assemblyName = Assembly.LoadFrom(CopyDllToCurrentDirectory(loadFilePath)).GetName();
+
+            Assembly.Load(assemblyName);
+        }
+
+        /// <summary>
+        /// This will get all the <see cref="Type"/>s from an <see cref="Assembly"/>.
+        /// THIS WILL THROW ERRORS AND NOT GET ALL OF THE TYPES IF THE DLL FILES ARE DIFFERENT FROM THE LOADED ASSEMBLIES!!!.
+        /// </summary>
+        /// <param name="assembly">The <see cref="Assembly"/> to get the <see cref="Type"/>s from.</param>
+        /// <returns>A <see cref="Type"/> array.</returns>
+        private Type[] GetAllTypesFromAssembly(Assembly assembly)
+        {
+            Type[] types;
+
+            try
+            {
+                types = assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                types = ex.Types.Where(t => t != null).ToArray();
+            }
+
+            return types;
+        }
+
+        /// <summary>
+        /// Copy the loaded assembly dll into the bin folder.
+        /// </summary>
+        /// <param name="assemblyDataFilePath">The <see cref="string"/> of the AssemblyData FilePath.</param>
+        /// <returns>A <see cref="string"/> value representing where the dll file was moved.</returns>
+        private string CopyDllToCurrentDirectory(string assemblyDataFilePath)
+        {
+            string sourceFile = assemblyDataFilePath;
+            string targetFile = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                assemblyDataFilePath[(assemblyDataFilePath.LastIndexOf(@"\") + 1) ..]);
+
+            if (!File.Exists(targetFile))
+            {
+                File.Copy(sourceFile, targetFile, true);
+            }
+
+            return targetFile;
         }
 
         /// <summary>

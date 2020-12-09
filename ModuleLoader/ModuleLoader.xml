@@ -250,6 +250,25 @@
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.LoadReferencedAssembly(System.Reflection.Assembly)">
+            <summary>
+            Loads all referenced assemblies.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to get all referenced assemblies from.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.FindInLibFolder(System.String)">
+            <summary>
+            Tries to find the missing file from the Lib folder.
+            </summary>
+            <param name="fileName">The name of the dll file to load.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.CopyDllToCurrentDirectory(System.String)">
+            <summary>
+            Copy the loaded assembly dll into the bin folder.
+            </summary>
+            <param name="assemblyDataFilePath">The <see cref="T:System.String"/> of the AssemblyData FilePath.</param>
+            <returns>A <see cref="T:System.String"/> value representing where the dll file was moved.</returns>
+        </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.GetTypeData(System.Type)">
             <summary>
             Builds a singls <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> from the given <see cref="T:System.Type"/>.

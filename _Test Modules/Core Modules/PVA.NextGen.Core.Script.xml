@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Script</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Script.Classes.ScriptedFunction">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IScriptedFunction"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Classes.ScriptedFunction.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Script.Classes.ScriptedFunction"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.ExecutableReference">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.Inputs">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.Outputs">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.InputTypes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.OutputTypes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.IsPollable">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.IsMappable">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.IsProgrammable">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.IsExecutable">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.Icon">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Classes.ScriptedFunction.Groups">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Classes.ScriptedFunction.SetExecutable(PVA.NextGen.Common.Interfaces.IExecutable)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Classes.ScriptedFunction.Compile">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Classes.ScriptedFunction.SetVariable(System.String,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.Constants.ScriptConstants">
+            <summary>
+            Constants used by the Scripting Module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.ModuleName">
+            <summary>
+            The string name for the script module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.FunctionFlags">
+            <summary>
+            Header Key listing which flags are true for this script.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.DisplayName">
+            <summary>
+            Header Key defining this script's display name.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.Icon">
+            <summary>
+            Header Key defining this script's icon data.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.Dependencies">
+            <summary>
+            Header Key listing this script's dependencies.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.EventScriptDirectory">
+            <summary>
+            Directory location for Event Scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.ProcessScriptDirectory">
+            <summary>
+            Directory location for Process Scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.Groups">
+            <summary>
+            Header Key listing the sorting groups this script belongs to.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.AnalogX">
+            <summary>
+            Name of analog x input.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.AnalogY">
+            <summary>
+            Name of analog y input.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptConstants.AnalogZ">
+            <summary>
+            Name of analog z input.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.Constants.ScriptPermissions">
+            <summary>
+            Constant permission values used by ScriptModule.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptPermissions.CanCreateScript">
+            <summary>
+            Permission where user can create a new script.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptPermissions.CanEditScript">
+            <summary>
+            Permission where user can edit an already existing script.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptPermissions.CanDeleteScript">
+            <summary>
+            Permission where user can create delete an already existing script.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptPermissions.CanRunScript">
+            <summary>
+            Permission where user can create run standard scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Script.Constants.ScriptPermissions.CanRunElevatedScript">
+            <summary>
+            Permission where user can create run elevated scripts.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.Factories.ScriptFactory">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IScriptFactory"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Factories.ScriptFactory.#ctor(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Script.Factories.ScriptFactory"/> class.
+            </summary>
+            <param name="resolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that can access mappings of all registered types.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Factories.ScriptFactory.CreateScript``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Factories.ScriptFactory.GetScriptTypes">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.ScriptModule">
+            <summary>
+            ScriptModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.ScriptModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.ScriptModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.Services.EvaluatorService">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IEvaluatorService"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.EvaluatorService.#ctor(PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.CommonUI.Interfaces.IMessagingService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Script.Services.EvaluatorService"/> class.
+            </summary>
+            <param name="scriptService">The service used to create scripts.</param>
+            <param name="messagingService">The <see cref="T:PVA.NextGen.CommonUI.Interfaces.IMessagingService"/> used for displaying messages to the user.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.EvaluatorService.Evaluate(PVA.NextGen.Common.Interfaces.ISimpleExpression,PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.EvaluatorService.ShowExpressionEvaluatorInDialog(PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object},PVA.NextGen.Common.Interfaces.ISimpleExpression,System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.Services.ScriptService">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IScriptService"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.ScriptService.#ctor(PVA.NextGen.Common.Interfaces.IScriptFactory,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Script.Services.ScriptService"/> class.
+            </summary>
+            <param name="scriptFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/>.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.ScriptService.CreateScript``1(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.ScriptService.CreateConfiguration(System.String,System.String)">
+            <summary>
+            Create a new <see cref="T:PVA.NextGen.Common.Interfaces.IConfigurationScript"/> object.
+            </summary>
+            <param name="language">The script language to use for this <see cref="T:PVA.NextGen.Common.Interfaces.IConfigurationScript"/>.</param>
+            <param name="location">The location of the script file for this <see cref="T:PVA.NextGen.Common.Interfaces.IConfigurationScript"/>.</param>
+            <returns>The newly created <see cref="T:PVA.NextGen.Common.Interfaces.IConfigurationScript"/>.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.ScriptService.GetScriptTypes">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Services.ScriptService.ProvideAPI(PVA.NextGen.Common.Interfaces.IScript)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel">
+            <inheritdoc cref="T:PVA.NextGen.CommonUI.Interfaces.IExpressionEvaluatorViewModel"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.#ctor(PVA.NextGen.Common.Interfaces.IEvaluatorService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel"/> class.
+            </summary>
+            <param name="evaluatorService">The service used to evaluate <see cref="T:PVA.NextGen.Common.Interfaces.ISimpleExpression"/> objects.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.ExpressionValue">
+            <summary>
+            Gets or sets the <see cref="T:PVA.NextGen.Common.Interfaces.ISimpleExpression"/> value that will be modified.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.ExpressionItems">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.RequestClose">
+            <summary>
+            Gets or sets a value indicating whether this view's parent dialog should close.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.DialogResult">
+            <summary>
+            Gets or sets the result of the user interaction with the buttons on shown in the dialog.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.Title">
+            <summary>
+            Gets or sets the title that will be shown in the Dialog title bar.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.IconData">
+            <summary>
+            Gets or sets the data of the icon that will be displayed in the Dialog title bar.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.IconColor">
+            <summary>
+            Gets or sets the color of the icon that will be displayed in the Dialog title bar.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.IsExpressionValid">
+            <summary>
+            Gets or sets a value indicating whether the expression is valid.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.ExpressionError">
+            <summary>
+            Gets or sets the string describing the error when the expression cannot be validated.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.CursorPosition">
+            <summary>
+            Gets or sets the position of the cursor in the textbox.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.SelectionLength">
+            <summary>
+            Gets or sets the length of the selection in the textbox.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.ExpectedDataType">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.CancelExpressionEditCommand">
+            <summary>
+            Gets a delegate command used to cancel editing the current expression.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.SaveExpressionCommand">
+            <summary>
+            Gets a delegate command used to try verifying and saving the current expression.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.VerifyExpressionCommand">
+            <summary>
+            Gets a delegate command used to verify the current expression.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.InsertStringCommand">
+            <summary>
+            Gets a delegate command used insert an item into the current expression.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.ViewModels.ExpressionEvaluatorViewModel.SetExpressionValue(PVA.NextGen.Common.Interfaces.ISimpleExpression)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Script.Views.ExpressionEvaluatorView">
+            <inheritdoc cref="T:PVA.NextGen.CommonUI.Interfaces.IExpressionEvaluatorView"/>
+            <summary>
+            ExpressionEvaluatorView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Views.ExpressionEvaluatorView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Script.Views.ExpressionEvaluatorView"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Script.Views.ExpressionEvaluatorView.ViewModel">
+            <summary>
+            Gets the view's DataContext as an <see cref="T:PVA.NextGen.CommonUI.Interfaces.IExpressionEvaluatorViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Script.Views.ExpressionEvaluatorView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

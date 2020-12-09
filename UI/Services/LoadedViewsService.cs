@@ -35,10 +35,25 @@
         {
             foreach (var assemblyData in _assemblyCollectionService.Assemblies)
             {
-                foreach (var typeData in assemblyData.Types)
-                {
-                    AddTypeDataIfIsView(typeData);
-                }
+                AddViewsFromAssemblyData(assemblyData);
+            }
+        }
+
+        /// <inheritdoc cref="ILoadedViewsService"/>
+        public void AddViewsFromAssemblyData(AssemblyData assemblyData)
+        {
+            foreach (var typeData in assemblyData.Types)
+            {
+                AddTypeDataIfIsView(typeData);
+            }
+        }
+
+        /// <inheritdoc cref="ILoadedViewsService"/>
+        public void RemoveViewsFromAssemblyData(AssemblyData assemblyData)
+        {
+            foreach (var typeData in assemblyData.Types)
+            {
+                RemoveTypeDataIfIsView(typeData);
             }
         }
 
@@ -46,7 +61,7 @@
         /// Adds the <see cref="TypeData"/>'s <see cref="Type"/> to LoadedViews property if IsView is true.
         /// </summary>
         /// <param name="typeData">The <see cref="TypeData"/> to get the <see cref="Type"/> from to add to LoadedViews.</param>
-        public void AddTypeDataIfIsView(TypeData typeData)
+        private void AddTypeDataIfIsView(TypeData typeData)
         {
             if (typeData.IsView)
             {
@@ -55,22 +70,34 @@
         }
 
         /// <summary>
+        /// Removes the <see cref="TypeData"/>'s <see cref="Type"/> from LoadedViews property if IsView is true.
+        /// </summary>
+        /// <param name="typeData">The <see cref="TypeData"/> to get the <see cref="Type"/> from to remove from LoadedViews.</param>
+        private void RemoveTypeDataIfIsView(TypeData typeData)
+        {
+            if (typeData.IsView)
+            {
+                RemoveViewFromType(typeData.Type);
+            }
+        }
+
+        /// <summary>
         /// Adds a view <see cref="Type"/> to the LoadedViews collection.
         /// </summary>
         /// <param name="type">The view <see cref="Type"/> to be added.</param>
-        public void AddViewFromType(Type type)
+        private void AddViewFromType(Type type)
         {
-            IRegion region = _regionManager.Regions[@"LoadedViewDisplayRegion"];
+            ////IRegion region = _regionManager.Regions[@"LoadedViewDisplayRegion"];
 
-            _regionManager.AddToRegion("LoadedViewDisplayRegion", type);
+            ////_regionManager.AddToRegion("LoadedViewDisplayRegion", type);
             LoadedViews.Add(type);
         }
 
         /// <summary>
-        /// Removes a view <see cref="Type"/> to the LoadedViews collection.
+        /// Removes a view <see cref="Type"/> from the LoadedViews collection.
         /// </summary>
         /// <param name="type">The view <see cref="Type"/> to be removed.</param>
-        public void RemoveViewFromType(Type type)
+        private void RemoveViewFromType(Type type)
         {
             LoadedViews.Remove(type);
         }
