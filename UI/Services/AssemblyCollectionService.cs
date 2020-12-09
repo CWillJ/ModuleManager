@@ -18,6 +18,7 @@
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
         private readonly IAssemblyLoaderService _assemblyLoaderService;
+        private readonly ILoadedViewsService _loadedViewsService;
         private readonly IRegionManager _regionManager;
 
         private ObservableCollection<AssemblyData> _assemblies;
@@ -27,16 +28,18 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
-        /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
         /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        public AssemblyCollectionService(IAssemblyLoaderService asssemblyLoaderService, IRegionManager regionManager)
+        /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
+        /// <param name="loadedViewsService">The <see cref="ILoadedViewsService"/>.</param>
+        public AssemblyCollectionService(IRegionManager regionManager, IAssemblyLoaderService asssemblyLoaderService, ILoadedViewsService loadedViewsService)
         {
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";
 
-            _assemblyLoaderService = asssemblyLoaderService;
             _regionManager = regionManager;
+            _assemblyLoaderService = asssemblyLoaderService;
+            _loadedViewsService = loadedViewsService;
         }
 
         /// <inheritdoc cref="IAssemblyCollectionService"/>
@@ -58,7 +61,7 @@
             {
                 SetProperty(ref _selectedItem, value);
                 SetSelectedItemName();
-                UpdateDescriptionRegion();
+                ////UpdateDescriptionRegion();
             }
         }
 
@@ -164,6 +167,29 @@
 
                 _assemblyLoaderService.LoadUnload(ref assembly);
                 Assemblies[i] = assembly;
+
+                UpdateLoadedViews(assembly);
+            }
+        }
+
+        /// <summary>
+        /// Will load/unload any views from the passed in <see cref="AssemblyData"/> based on the IsEnabled property.
+        /// </summary>
+        /// <param name="assemblyData">The <see cref="AssemblyData"/> to check load/unload views from.</param>
+        private void UpdateLoadedViews(AssemblyData assemblyData)
+        {
+            if (assemblyData == null)
+            {
+                return;
+            }
+
+            if (assemblyData.IsEnabled)
+            {
+                _loadedViewsService.AddViewsFromAssemblyData(assemblyData);
+            }
+            else
+            {
+                _loadedViewsService.RemoveViewsFromAssemblyData(assemblyData);
             }
         }
     }

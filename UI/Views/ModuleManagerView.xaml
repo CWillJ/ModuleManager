@@ -16,7 +16,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2.25*" />
         </Grid.ColumnDefinitions>
 
         <!--  Load Save Buttons  -->
@@ -25,12 +25,11 @@
             Grid.Column="0"
             prism:RegionManager.RegionName="ButtonsRegion" />
 
-        <!--
-            ContentControl
+        <!--  Loaded Views  -->
+        <ContentControl
             Grid.Row="0"
             Grid.Column="1"
-            prism:RegionManager.RegionName="LoadedViewsRegion" /
-        -->
+            prism:RegionManager.RegionName="LoadedViewsRegion" />
 
         <Grid
             Grid.Row="1"

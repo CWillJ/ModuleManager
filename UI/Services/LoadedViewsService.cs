@@ -4,40 +4,22 @@
     using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
-    using Prism.Ioc;
-    using Prism.Regions;
 
     /// <summary>
     /// Service providing concrete <see cref="ILoadedViewsService"/> implementations.
     /// </summary>
     public class LoadedViewsService : ILoadedViewsService
     {
-        private readonly IAssemblyCollectionService _assemblyCollectionService;
-        private IRegionManager _regionManager;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LoadedViewsService"/> class.
         /// </summary>
-        /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
-        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
-        public LoadedViewsService(IAssemblyCollectionService assemblyCollectionService, IRegionManager regionManager, IContainerProvider containerProvider)
+        public LoadedViewsService()
         {
-            _assemblyCollectionService = assemblyCollectionService;
-            _regionManager = regionManager;
+            LoadedViews = new ObservableCollection<object>();
         }
 
         /// <inheritdoc cref="ILoadedViewsService"/>
         public ObservableCollection<object> LoadedViews { get; set; }
-
-        /// <inheritdoc cref="ILoadedViewsService"/>
-        public void LoadViewsFromAssemblyService()
-        {
-            foreach (var assemblyData in _assemblyCollectionService.Assemblies)
-            {
-                AddViewsFromAssemblyData(assemblyData);
-            }
-        }
 
         /// <inheritdoc cref="ILoadedViewsService"/>
         public void AddViewsFromAssemblyData(AssemblyData assemblyData)

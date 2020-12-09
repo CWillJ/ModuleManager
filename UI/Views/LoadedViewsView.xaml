@@ -5,11 +5,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
     <Grid>
-        <ItemsControl prism:RegionManager.RegionName="LoadedViewDisplayRegion" />
+        <ScrollViewer
+            Margin="10,15,25,10"
+            Background="LightGray"
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Disabled">
+
+            <ItemsControl ItemsSource="{Binding Path=LoadedViewsService.LoadedViews}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -14,11 +14,6 @@
         public ObservableCollection<object> LoadedViews { get; set; }
 
         /// <summary>
-        /// Loads all views from any loaded assemblies in the <see cref="IAssemblyCollectionService"/>.
-        /// </summary>
-        public void LoadViewsFromAssemblyService();
-
-        /// <summary>
         /// Adds all views from an <see cref="AssemblyData"/> to the LoadedViews property.
         /// </summary>
         /// <param name="assemblyData">The <see cref="AssemblyData"/> to get the views from.</param>

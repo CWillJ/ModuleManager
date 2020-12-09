@@ -1,5 +1,7 @@
 ﻿namespace ModuleManager.UI
 {
+    using ModuleManager.UI.Interfaces;
+    using ModuleManager.UI.Services;
     using ModuleManager.UI.Views;
     using Prism.Ioc;
     using Prism.Modularity;
