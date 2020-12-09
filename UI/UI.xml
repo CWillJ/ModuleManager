@@ -54,11 +54,6 @@
             Manages the collection of loaded views.
             </summary>
         </member>
-        <member name="P:ModuleManager.UI.Interfaces.ILoadedViewsService.LoadedViews">
-            <summary>
-            Gets or sets a collection of loaded view types.
-            </summary>
-        </member>
         <member name="M:ModuleManager.UI.Interfaces.ILoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
             <summary>
             Adds all views from an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to the LoadedViews property.
@@ -153,13 +148,11 @@
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/> implementations.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.#ctor">
+        <member name="M:ModuleManager.UI.Services.LoadedViewsService.#ctor(Prism.Regions.IRegionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.LoadedViewsService"/> class.
             </summary>
-        </member>
-        <member name="P:ModuleManager.UI.Services.LoadedViewsService.LoadedViews">
-            <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
         <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>

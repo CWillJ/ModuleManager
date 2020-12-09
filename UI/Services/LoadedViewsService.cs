@@ -1,25 +1,31 @@
 ﻿namespace ModuleManager.UI.Services
 {
     using System;
-    using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.UI.Interfaces;
+    using Prism.Regions;
 
     /// <summary>
     /// Service providing concrete <see cref="ILoadedViewsService"/> implementations.
     /// </summary>
     public class LoadedViewsService : ILoadedViewsService
     {
+        private readonly IRegionManager _regionManager;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LoadedViewsService"/> class.
         /// </summary>
-        public LoadedViewsService()
+        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        public LoadedViewsService(IRegionManager regionManager)
         {
-            LoadedViews = new ObservableCollection<object>();
+            _regionManager = regionManager;
+            RegionName = @"LoadedViewsDisplayRegion";
+            ////ViewsRegion = _regionManager.Regions[@"LoadedViewsDisplayRegion"];
         }
 
-        /// <inheritdoc cref="ILoadedViewsService"/>
-        public ObservableCollection<object> LoadedViews { get; set; }
+        private string RegionName { get; set; }
+
+        private IRegion ViewsRegion { get; set; }
 
         /// <inheritdoc cref="ILoadedViewsService"/>
         public void AddViewsFromAssemblyData(AssemblyData assemblyData)
@@ -69,10 +75,9 @@
         /// <param name="type">The view <see cref="Type"/> to be added.</param>
         private void AddViewFromType(Type type)
         {
-            ////IRegion region = _regionManager.Regions[@"LoadedViewDisplayRegion"];
-
-            ////_regionManager.AddToRegion("LoadedViewDisplayRegion", type);
-            LoadedViews.Add(type);
+            IRegion region = _regionManager.Regions[RegionName];
+            region.Add(type);
+            ////_regionManager.RegisterViewWithRegion(RegionName, type);
         }
 
         /// <summary>
@@ -81,7 +86,8 @@
         /// <param name="type">The view <see cref="Type"/> to be removed.</param>
         private void RemoveViewFromType(Type type)
         {
-            LoadedViews.Remove(type);
+            IRegion region = _regionManager.Regions[RegionName];
+            region.Remove(type);
         }
     }
 }

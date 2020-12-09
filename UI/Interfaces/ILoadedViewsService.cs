@@ -1,6 +1,5 @@
 ﻿namespace ModuleManager.UI.Interfaces
 {
-    using System.Collections.ObjectModel;
     using ModuleManager.ModuleObjects.Classes;
 
     /// <summary>
@@ -8,11 +7,6 @@
     /// </summary>
     public interface ILoadedViewsService
     {
-        /// <summary>
-        /// Gets or sets a collection of loaded view types.
-        /// </summary>
-        public ObservableCollection<object> LoadedViews { get; set; }
-
         /// <summary>
         /// Adds all views from an <see cref="AssemblyData"/> to the LoadedViews property.
         /// </summary>
