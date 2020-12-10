@@ -649,6 +649,22 @@
             </summary>
             <param name="assemblyData">The <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> that holds the views that needs to be removed.</param>
         </member>
+        <member name="T:ModuleManager.Common.Interfaces.IModuleStartUpService">
+            <summary>
+            Used to inject views into the shell view on start up.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IModuleStartUpService.ViewInjectionActions">
+            <summary>
+            Gets a list of actions that perform view injection for a Core module.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleStartUpService.AddViewInjectionAction(System.Action)">
+            <summary>
+            Add a new <see cref="T:System.Action"/> to the list of View Registration actions.
+            </summary>
+            <param name="action">The <see cref="T:System.Action"/> to be added.</param>
+        </member>
         <member name="T:ModuleManager.Common.Interfaces.ITypeData">
             <summary>
             Module member object interface.
@@ -840,6 +856,22 @@
             Removes a view <see cref="T:System.Type"/> from the LoadedViews collection.
             </summary>
             <param name="type">The view <see cref="T:System.Type"/> to be removed.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Services.ModuleStartUpService">
+            <summary>
+            Implements <see cref="T:ModuleManager.Common.Interfaces.IModuleStartUpService"/> to inject views into the shell view on start up.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleStartUpService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ModuleStartUpService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ModuleStartUpService.ViewInjectionActions">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleStartUpService.AddViewInjectionAction(System.Action)">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

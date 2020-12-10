@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using ModuleManager.Classes;
+    using ModuleManager.Common.Interfaces;
     using ModuleManager.Views;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -50,13 +51,15 @@
             RegionManager.UpdateRegions();
 
             shell.Visibility = Visibility.Visible;
+
+            LoadCore();
         }
 
         /// <summary>
         /// Creates the shell or main window of the application.
         /// </summary>
         /// <returns>The shell of the application.</returns>
-        #nullable enable
+#nullable enable
         protected override Window? CreateShell()
         {
             // because RadWindow is not Window, cannot create here.
@@ -100,6 +103,16 @@
             ((AggregateModuleCatalog)moduleCatalog).AddCatalog(configurationCatalog);
 
             // Load any extra modules that this application will use to display views/data.
+        }
+
+        private void LoadCore()
+        {
+            var coreStartupService = Container.Resolve<IModuleStartUpService>();
+
+            foreach (Action registerModuleView in coreStartupService.ViewInjectionActions)
+            {
+                registerModuleView();
+            }
         }
     }
 }

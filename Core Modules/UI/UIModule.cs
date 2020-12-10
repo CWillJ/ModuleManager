@@ -26,11 +26,13 @@
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
 
-            regionManager.Regions[@"ContentRegion"].Add(containerProvider.Resolve<ModuleManagerView>(), @"ModuleManagerView");
-
             regionManager.RegisterViewWithRegion(@"ButtonsRegion", typeof(ButtonsView));
             regionManager.RegisterViewWithRegion(@"AssemblyDataRegion", typeof(AssemblyDataView));
             regionManager.RegisterViewWithRegion(@"AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
+
+            // Register module initialization actions with CoreStartupService.
+            var startupService = containerProvider.Resolve<IModuleStartUpService>();
+            startupService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
 
             LoadSavedModules(containerProvider.Resolve<IAssemblyCollectionService>(), containerProvider.Resolve<IAssemblyLoaderService>());
         }
@@ -43,6 +45,7 @@
         {
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+            containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
 
             containerRegistry.RegisterForNavigation<ButtonsView>();
             containerRegistry.RegisterForNavigation<AssemblyDataView>();
@@ -57,6 +60,12 @@
 
             containerRegistry.RegisterForNavigation<ModuleManagerView>();
             containerRegistry.RegisterForNavigation<ProgressBarView>();
+        }
+
+        private void InjectViewsIntoRegions(IContainerProvider containerProvider)
+        {
+            var regionManager = containerProvider.Resolve<IRegionManager>();
+            regionManager.Regions[@"ContentRegion"].Add(containerProvider.Resolve<ModuleManagerView>(), @"ModuleManagerView");
         }
 
         /// <summary>
