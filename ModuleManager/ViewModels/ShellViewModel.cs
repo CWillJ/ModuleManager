@@ -1,6 +1,6 @@
 ﻿namespace ModuleManager.ViewModels
 {
-    using ModuleManager.UI.Views;
+    ////using ModuleManager.Core.UI.Views;
     using Prism.Regions;
 
     /// <summary>
@@ -17,7 +17,7 @@
         public ShellViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            _regionManager.RegisterViewWithRegion("ContentRegion", typeof(ModuleManagerView));
+            ////_regionManager.RegisterViewWithRegion("ContentRegion", typeof(ModuleManagerView));
         }
     }
 }

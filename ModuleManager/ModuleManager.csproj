@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
+    <Authors>Product Development</Authors>
+    <Company>PVA</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,10 +24,6 @@
   <ItemGroup>
   	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
   	<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\UI\UI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +66,10 @@
     <Reference Include="Unity.Container">
       <HintPath>..\Lib\Unity.Container.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

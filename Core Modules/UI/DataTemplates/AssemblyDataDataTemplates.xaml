@@ -1,0 +1,155 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:data="clr-namespace:ModuleManager.Common.Classes;assembly=ModuleManager.Common"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:templateSelectors="clr-namespace:ModuleManager.Core.UI.TemplateSelectors">
+
+    <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+    <templateSelectors:DescriptionTemplateSelector x:Key="DescriptionTemplateSelector" />
+
+    <!--  Member Parameter Data Template  -->
+    <DataTemplate x:Key="memberParameterTemplate" DataType="{x:Type data:MemberParameter}">
+        <StackPanel>
+            <TextBlock Text="{Binding Mode=OneWay}" TextWrapping="Wrap" />
+        </StackPanel>
+    </DataTemplate>
+
+    <!--  Type Constructor Data Template  -->
+    <DataTemplate x:Key="typeConstructorTemplate" DataType="{x:Type data:TypeConstructor}">
+        <StackPanel>
+            <TextBlock
+                FontSize="14"
+                FontWeight="Bold"
+                Text="{Binding Path=Name, Mode=OneWay}"
+                TextWrapping="Wrap" />
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+
+            <TextBlock FontWeight="Bold" Text="Parameters:" />
+
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Parameters, Mode=OneWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <!--  Type Properties Data Template  -->
+    <DataTemplate x:Key="typePropertyTemplate" DataType="{x:Type data:TypeProperty}">
+        <StackPanel>
+            <TextBlock
+                FontSize="14"
+                FontWeight="Bold"
+                Text="{Binding Path=Name, Mode=OneWay}"
+                TextWrapping="Wrap" />
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap">
+                <Run FontWeight="Bold" Text="Data Type: " />
+                <Run Text="{Binding Path=DataType, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap">
+                <Run FontWeight="Bold" Text="Can  Read: " />
+                <Run Text="{Binding Path=CanRead, Mode=OneWay}" />
+                <LineBreak />
+                <Run FontWeight="Bold" Text="Can Write: " />
+                <Run Text="{Binding Path=CanWrite, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
+    <!--  Type Method Data Template  -->
+    <DataTemplate x:Key="typeMethodTemplate" DataType="{x:Type data:TypeMethod}">
+        <StackPanel>
+            <TextBlock
+                FontSize="14"
+                FontWeight="Bold"
+                Text="{Binding Path=Name, Mode=OneWay}"
+                TextWrapping="Wrap" />
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+
+            <TextBlock FontWeight="Bold" Text="Parameters:" />
+
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Parameters, Mode=OneWay}" />
+
+            <TextBlock TextWrapping="Wrap">
+                <Run FontWeight="Bold" Text="Return: " />
+                <LineBreak />
+                <Run Text="{Binding Path=ReturnType, Mode=OneWay}" />
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=ReturnDescription, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+
+        </StackPanel>
+    </DataTemplate>
+
+    <!--  View Data Template  -->
+    <DataTemplate x:Key="viewTemplate" DataType="{x:Type data:TypeData}">
+        <Border
+            MinWidth="100"
+            MinHeight="100"
+            Margin="10"
+            Background="LightSteelBlue"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <ContentControl prism:RegionManager.RegionName="ModuleDataViewRegion" />
+        </Border>
+    </DataTemplate>
+
+    <!--  Type Data Template  -->
+    <DataTemplate x:Key="typeTemplate" DataType="{x:Type data:TypeData}">
+        <StackPanel>
+
+            <TextBlock
+                FontSize="16"
+                FontWeight="Bold"
+                Text="{Binding Path=Name, Mode=OneWay}"
+                TextWrapping="Wrap" />
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=Description, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Constructors, Mode=OneWay}" />
+
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Properties, Mode=OneWay}" />
+
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Methods, Mode=OneWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <!--  Assembly Data Template  -->
+    <DataTemplate x:Key="assemblyTemplate" DataType="{x:Type data:AssemblyData}">
+        <StackPanel>
+            <TextBlock
+                FontSize="16"
+                FontWeight="Bold"
+                Text="{Binding Path=Name, Mode=OneWay}"
+                TextWrapping="Wrap" />
+
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="{Binding Path=FilePath, Mode=OneWay}" />
+                <LineBreak />
+            </TextBlock>
+
+            <ItemsControl ItemTemplateSelector="{StaticResource DescriptionTemplateSelector}" ItemsSource="{Binding Path=Types, Mode=OneWay}" />
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

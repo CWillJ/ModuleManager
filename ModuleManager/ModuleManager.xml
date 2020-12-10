@@ -46,10 +46,11 @@
             </summary>
             <returns>New <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
         </member>
-        <member name="M:ModuleManager.App.LoadSavedModules">
+        <member name="M:ModuleManager.App.ConfigureModuleCatalog(Prism.Modularity.IModuleCatalog)">
             <summary>
-            Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
+            Configures the <see cref="T:Prism.Modularity.IModuleCatalog"/> used by Prism.
             </summary>
+            <param name="moduleCatalog">The aggregate <see cref="T:Prism.Modularity.IModuleCatalog"/> used for storing all modules.</param>
         </member>
         <member name="M:ModuleManager.App.InitializeComponent">
             <summary>
@@ -60,6 +61,63 @@
             <summary>
             Application Entry Point.
             </summary>
+        </member>
+        <member name="T:ModuleManager.Classes.AggregateModuleCatalog">
+            <summary>
+            A basic aggregation of IModuleCatalogs for quickstart purposes.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.AggregateModuleCatalog"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.AggregateModuleCatalog.Catalogs">
+            <summary>
+            Gets the collection of catalogs.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Classes.AggregateModuleCatalog.Modules">
+            <summary>
+            Gets all the <see cref="T:Prism.Modularity.IModuleInfo"/> classes that are in the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.GetDependentModules(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Return the list of <see cref="T:Prism.Modularity.IModuleInfo"/> that the provided module depends on.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to get the dependent modules of.</param>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> dependencies of the provided module.
+            </returns>
+        </member>
+        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.CompleteListWithDependencies(System.Collections.Generic.IEnumerable{Prism.Modularity.IModuleInfo})">
+            <summary>
+            Gets the complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> with dependencies for the provided <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            of <see cref="T:Prism.Modularity.IModuleInfo"/>.
+            </summary>
+            <param name="modules">The modules to get the dependencies of.</param>
+            <returns>
+            A complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of provided <see cref="T:Prism.Modularity.IModuleInfo"/> and their dependencies.
+            </returns>
+        </member>
+        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.Initialize">
+            <summary>
+            Initializes the catalog, which may load and validate the modules.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.AddCatalog(Prism.Modularity.IModuleCatalog)">
+            <summary>
+            Adds the catalog to the list of catalogs.
+            </summary>
+            <param name="catalog">The catalog to add.</param>
+        </member>
+        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.AddModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Adds an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
+            <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
         </member>
         <member name="T:ModuleManager.ViewModels.ShellViewModel">
             <summary>
@@ -88,36 +146,6 @@
         <member name="M:ModuleManager.Views.ShellView.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

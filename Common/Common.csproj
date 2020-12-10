@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
+    <PackageId>ModuleManager.Common</PackageId>
+    <Authors>Product Development</Authors>
+    <Company>PVA</Company>
+    <Product>ModuleManager</Product>
+    <AssemblyName>ModuleManager.Common</AssemblyName>
+    <RootNamespace>ModuleManager.Common</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>ModuleManager.Common.xml</DocumentationFile>
+    <OutputPath>..\bin\</OutputPath>
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
+		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <Reference Include="Prism">
+      <HintPath>..\Lib\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf">
+      <HintPath>..\Lib\Prism.Unity.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions">
+      <HintPath>..\Lib\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container">
+      <HintPath>..\Lib\Unity.Container.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Constants\" />
+	</ItemGroup>
+
+</Project>

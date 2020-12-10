@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModuleManager.TestModules.ModuleA</name>
+    </assembly>
+    <members>
+        <member name="T:ModuleManager.ModuleA.ViewModels.ModuleAViewModel">
+            <summary>
+            Module A View Model.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleA.ViewModels.ModuleAViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleA.ViewModels.ModuleAViewModel"/> class.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.ModuleA.Views.ModuleAView">
+            <summary>
+            Interaction logic for ModuleAView.xaml.
+            </summary>
+            <summary>
+            ModuleAView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleA.Views.ModuleAView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

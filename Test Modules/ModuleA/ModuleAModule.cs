@@ -1,8 +1,19 @@
-﻿using System;
-
-namespace ModuleA
+﻿namespace ModuleManager.TestModules.ModuleA
 {
-    public class Class1
+    using System;
+    using Prism.Ioc;
+    using Prism.Modularity;
+
+    public class ModuleAModule : IModule
     {
+        public void OnInitialized(IContainerProvider containerProvider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
