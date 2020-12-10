@@ -6,8 +6,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
-    using ModuleManager.ModuleLoader.Interfaces;
-    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.Common.Classes;
+    using ModuleManager.Common.Interfaces;
     using ModuleManager.UI.Interfaces;
     using Prism.Mvvm;
     using Prism.Regions;

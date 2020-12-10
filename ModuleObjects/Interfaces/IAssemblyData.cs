@@ -1,10 +1,10 @@
-﻿namespace ModuleManager.ModuleObjects.Interfaces
+﻿namespace ModuleManager.Common.Interfaces
 {
     using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
     using System.Xml.Serialization;
-    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.Common.Classes;
 
     /// <summary>
     /// Assembly object interface.

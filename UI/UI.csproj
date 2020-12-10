@@ -21,6 +21,10 @@
 		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
 		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ModuleObjects\Common.csproj" />
+	</ItemGroup>
 	
 	<ItemGroup>
 		<Reference Include="CommonServiceLocator">
@@ -62,10 +66,6 @@
 		<Reference Include="Unity.Container">
 			<HintPath>..\Lib\Unity.Container.dll</HintPath>
 		</Reference>
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <ProjectReference Include="..\ModuleLoader\ModuleLoader.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>

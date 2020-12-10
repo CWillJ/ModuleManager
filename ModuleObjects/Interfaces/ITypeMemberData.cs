@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.ModuleObjects.Interfaces
+﻿namespace ModuleManager.Common.Interfaces
 {
     /// <summary>
     /// Module member object interface.

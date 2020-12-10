@@ -1,9 +1,9 @@
-﻿namespace ModuleManager.ModuleObjects.Classes
+﻿namespace ModuleManager.Common.Classes
 {
     using System;
     using System.Collections.ObjectModel;
     using System.Xml.Serialization;
-    using ModuleManager.ModuleObjects.Interfaces;
+    using ModuleManager.Common.Interfaces;
 
     /// <inheritdoc cref="ITypeData"/>
     public class TypeData : ITypeData

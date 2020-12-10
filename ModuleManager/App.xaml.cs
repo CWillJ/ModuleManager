@@ -5,10 +5,9 @@
     using System.IO;
     using System.Windows;
     using System.Xml.Serialization;
-    using ModuleManager.ModuleLoader.Interfaces;
-    using ModuleManager.ModuleLoader.Services;
-    using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.ModuleObjects.Interfaces;
+    using ModuleManager.Common.Classes;
+    using ModuleManager.Common.Interfaces;
+    using ModuleManager.Common.Services;
     using ModuleManager.UI;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Views;

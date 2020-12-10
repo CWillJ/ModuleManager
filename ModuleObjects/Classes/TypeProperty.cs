@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.ModuleObjects.Classes
+﻿namespace ModuleManager.Common.Classes
 {
     using System.Reflection;
     using System.Xml.Serialization;

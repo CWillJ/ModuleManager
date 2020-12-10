@@ -1,6 +1,6 @@
 ﻿namespace ModuleManager.UI.ViewModels
 {
-    using ModuleManager.ModuleLoader.Interfaces;
+    using ModuleManager.Common.Interfaces;
 
     /// <summary>
     /// View model for the loaded views.

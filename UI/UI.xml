@@ -74,12 +74,12 @@
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/> implementations.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(Prism.Regions.IRegionManager,ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService)">
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyLoaderService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.AssemblyCollectionService"/> class.
             </summary>
             <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-            <param name="asssemblyLoaderService">The <see cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>.</param>
+            <param name="asssemblyLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
@@ -114,7 +114,7 @@
         </member>
         <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.LoadUnload(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
             <summary>
-            Will load or unload the passed in <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> <see cref="T:System.Object"/>.
+            Will load or unload the passed in <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> <see cref="T:System.Object"/>.
             </summary>
             <param name="s">The <see cref="T:System.Object"/>.</param>
             <param name="e">The property changed arguments.</param>
@@ -211,13 +211,13 @@
             View model for the header buttons.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.UI.Interfaces.IAssemblyCollectionService,ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IProgressBarService)">
+        <member name="M:ModuleManager.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.UI.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IProgressBarService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
             <param name="regionManager">Injected <see cref="T:Prism.Regions.IRegionManager"/>.</param>
             <param name="assemblyCollectionService">Injected <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>.</param>
-            <param name="assemblyLoaderService">Injected <see cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>.</param>
+            <param name="assemblyLoaderService">Injected <see cref="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService"/>.</param>
             <param name="progressBarService">Injected <see cref="T:ModuleManager.UI.Interfaces.IProgressBarService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
@@ -293,11 +293,11 @@
             View model for the loaded views.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.LoadedViewsViewModel.#ctor(ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService)">
+        <member name="M:ModuleManager.UI.ViewModels.LoadedViewsViewModel.#ctor(ModuleManager.Common.Interfaces.ILoadedViewsService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.LoadedViewsViewModel"/> class.
             </summary>
-            <param name="loadedViewsService">The program's <see cref="T:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService"/>.</param>
+            <param name="loadedViewsService">The program's <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewsService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.LoadedViewsViewModel.LoadedViewsService">
             <summary>

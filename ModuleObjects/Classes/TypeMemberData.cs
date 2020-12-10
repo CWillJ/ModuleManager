@@ -1,6 +1,6 @@
-﻿namespace ModuleManager.ModuleObjects.Classes
+﻿namespace ModuleManager.Common.Classes
 {
-    using ModuleManager.ModuleObjects.Interfaces;
+    using ModuleManager.Common.Interfaces;
 
     /// <summary>
     /// The base class for module members.

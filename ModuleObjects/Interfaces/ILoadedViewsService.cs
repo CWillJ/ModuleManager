@@ -1,6 +1,6 @@
-﻿namespace ModuleManager.ModuleLoader.Interfaces
+﻿namespace ModuleManager.Common.Interfaces
 {
-    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.Common.Classes;
 
     /// <summary>
     /// Manages the collection of loaded views.

@@ -5,8 +5,8 @@
     using System.ComponentModel;
     using System.IO;
     using System.Xml.Serialization;
-    using ModuleManager.ModuleLoader.Interfaces;
-    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.Common.Classes;
+    using ModuleManager.Common.Interfaces;
     using ModuleManager.UI.Interfaces;
     using ModuleManager.UI.Views;
     using Prism.Mvvm;

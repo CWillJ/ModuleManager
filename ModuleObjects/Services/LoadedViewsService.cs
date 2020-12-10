@@ -1,8 +1,8 @@
-﻿namespace ModuleManager.ModuleLoader.Services
+﻿namespace ModuleManager.Common.Services
 {
     using System;
-    using ModuleManager.ModuleLoader.Interfaces;
-    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.Common.Classes;
+    using ModuleManager.Common.Interfaces;
     using Prism.Regions;
 
     /// <summary>
@@ -75,9 +75,16 @@
         /// <param name="type">The view <see cref="Type"/> to be added.</param>
         private void AddViewFromType(Type type)
         {
-            IRegion region = _regionManager.Regions[RegionName];
-            region.Add(type);
-            ////_regionManager.RegisterViewWithRegion(RegionName, type);
+            _regionManager.Regions[RegionName].Add(type);
+
+            try
+            {
+                _regionManager.RegisterViewWithRegion(RegionName, type);
+            }
+            catch (Exception e)
+            {
+                string s = e.ToString();
+            }
         }
 
         /// <summary>
@@ -86,11 +93,9 @@
         /// <param name="type">The view <see cref="Type"/> to be removed.</param>
         private void RemoveViewFromType(Type type)
         {
-            IRegion region = _regionManager.Regions[RegionName];
-
-            if (region.Views.Contains(type))
+            if (_regionManager.Regions[RegionName].Views.Contains(type))
             {
-                region.Remove(type);
+                _regionManager.Regions[RegionName].Remove(type);
             }
         }
     }

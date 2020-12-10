@@ -2,7 +2,7 @@
 {
     using System.Windows;
     using System.Windows.Controls;
-    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.Common.Classes;
 
     /// <summary>
     /// Used to selected a DataTemplate in the description.

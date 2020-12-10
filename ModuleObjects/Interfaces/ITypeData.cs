@@ -1,7 +1,7 @@
-﻿namespace ModuleManager.ModuleObjects.Interfaces
+﻿namespace ModuleManager.Common.Interfaces
 {
     using System.Collections.ObjectModel;
-    using ModuleManager.ModuleObjects.Classes;
+    using ModuleManager.Common.Classes;
 
     /// <summary>
     /// Module member object interface.
