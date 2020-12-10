@@ -201,13 +201,31 @@
             </summary>
             <param name="assemblyData"><see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to unload passed by reference.</param>
         </member>
+        <member name="T:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService">
+            <summary>
+            Manages the collection of loaded views.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <summary>
+            Adds all views from an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to the LoadedViews property.
+            </summary>
+            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to get the views from.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService.RemoveViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <summary>
+            Removes all views in an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> from the LoadedViews property.
+            </summary>
+            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> that holds the views that needs to be removed.</param>
+        </member>
         <member name="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
         </member>
-        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor">
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.#ctor(ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.AssemblyLoaderService"/> class.
             </summary>
+            <param name="loadedViewsService">The <see cref="T:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService"/>.</param>
         </member>
         <member name="P:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.DllDirectory">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
@@ -249,6 +267,12 @@
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.Unload(ModuleManager.ModuleObjects.Classes.AssemblyData@)">
             <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.UpdateLoadedViews(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <summary>
+            Will load/unload any views from the passed in <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> based on the IsEnabled property.
+            </summary>
+            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to check load/unload views from.</param>
         </member>
         <member name="M:ModuleManager.ModuleLoader.Services.AssemblyLoaderService.LoadReferencedAssembly(System.Reflection.Assembly)">
             <summary>
@@ -304,6 +328,47 @@
             </summary>
             <param name="type">The <see cref="T:System.Type"/> where the methods are coming from.</param>
             <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
+        </member>
+        <member name="T:ModuleManager.ModuleLoader.Services.LoadedViewsService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService"/> implementations.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.LoadedViewsService.#ctor(Prism.Regions.IRegionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.ModuleLoader.Services.LoadedViewsService"/> class.
+            </summary>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.LoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService"/>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.LoadedViewsService.RemoveViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
+            <inheritdoc cref="T:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService"/>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.LoadedViewsService.AddTypeDataIfIsView(ModuleManager.ModuleObjects.Classes.TypeData)">
+            <summary>
+            Adds the <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>'s <see cref="T:System.Type"/> to LoadedViews property if IsView is true.
+            </summary>
+            <param name="typeData">The <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> to get the <see cref="T:System.Type"/> from to add to LoadedViews.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.LoadedViewsService.RemoveTypeDataIfIsView(ModuleManager.ModuleObjects.Classes.TypeData)">
+            <summary>
+            Removes the <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>'s <see cref="T:System.Type"/> from LoadedViews property if IsView is true.
+            </summary>
+            <param name="typeData">The <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> to get the <see cref="T:System.Type"/> from to remove from LoadedViews.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.LoadedViewsService.AddViewFromType(System.Type)">
+            <summary>
+            Adds a view <see cref="T:System.Type"/> to the LoadedViews collection.
+            </summary>
+            <param name="type">The view <see cref="T:System.Type"/> to be added.</param>
+        </member>
+        <member name="M:ModuleManager.ModuleLoader.Services.LoadedViewsService.RemoveViewFromType(System.Type)">
+            <summary>
+            Removes a view <see cref="T:System.Type"/> from the LoadedViews collection.
+            </summary>
+            <param name="type">The view <see cref="T:System.Type"/> to be removed.</param>
         </member>
     </members>
 </doc>

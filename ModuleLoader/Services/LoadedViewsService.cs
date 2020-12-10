@@ -1,8 +1,8 @@
-﻿namespace ModuleManager.UI.Services
+﻿namespace ModuleManager.ModuleLoader.Services
 {
     using System;
+    using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleObjects.Classes;
-    using ModuleManager.UI.Interfaces;
     using Prism.Regions;
 
     /// <summary>
@@ -87,7 +87,11 @@
         private void RemoveViewFromType(Type type)
         {
             IRegion region = _regionManager.Regions[RegionName];
-            region.Remove(type);
+
+            if (region.Views.Contains(type))
+            {
+                region.Remove(type);
+            }
         }
     }
 }

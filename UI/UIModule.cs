@@ -30,9 +30,9 @@
         public void OnInitialized(IContainerProvider containerProvider)
         {
             _regionManager.RegisterViewWithRegion(@"ButtonsRegion", typeof(ButtonsView));
-            _regionManager.RegisterViewWithRegion(@"AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
             _regionManager.RegisterViewWithRegion(@"AssemblyDataRegion", typeof(AssemblyDataView));
             _regionManager.RegisterViewWithRegion(@"LoadedViewsRegion", typeof(LoadedViewsView));
+            _regionManager.RegisterViewWithRegion(@"AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
         }
 
         /// <summary>
@@ -41,9 +41,12 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for program-wide type registration.</param>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
+            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+
             containerRegistry.RegisterForNavigation<ButtonsView>();
-            containerRegistry.RegisterForNavigation<AssemblyDataTreeView>();
             containerRegistry.RegisterForNavigation<AssemblyDataView>();
+            containerRegistry.RegisterForNavigation<AssemblyDataTreeView>();
         }
     }
 }

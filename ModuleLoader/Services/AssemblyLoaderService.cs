@@ -13,11 +13,16 @@
     /// <inheritdoc cref="IAssemblyLoaderService"/>
     public class AssemblyLoaderService : IAssemblyLoaderService
     {
+        private readonly ILoadedViewsService _loadedViewsService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
         /// </summary>
-        public AssemblyLoaderService()
+        /// <param name="loadedViewsService">The <see cref="ILoadedViewsService"/>.</param>
+        public AssemblyLoaderService(ILoadedViewsService loadedViewsService)
         {
+            _loadedViewsService = loadedViewsService ?? throw new ArgumentNullException("LoadedViewsService");
+
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
             CurrentAssemblyName = string.Empty;
@@ -102,6 +107,8 @@
             {
                 Unload(ref assemblyData);
             }
+
+            UpdateLoadedViews(assemblyData);
         }
 
         /// <inheritdoc cref="IAssemblyLoaderService"/>
@@ -123,6 +130,7 @@
                 }
 
                 assemblies[i] = assemblyData;
+                UpdateLoadedViews(assemblyData);
             }
         }
 
@@ -217,6 +225,27 @@
             assemblyData.Loader.Unload();
             assemblyData.Loader = null;
             assemblyData.Assembly = null;
+        }
+
+        /// <summary>
+        /// Will load/unload any views from the passed in <see cref="AssemblyData"/> based on the IsEnabled property.
+        /// </summary>
+        /// <param name="assemblyData">The <see cref="AssemblyData"/> to check load/unload views from.</param>
+        private void UpdateLoadedViews(AssemblyData assemblyData)
+        {
+            if (assemblyData == null)
+            {
+                return;
+            }
+
+            if (assemblyData.IsEnabled)
+            {
+                _loadedViewsService.AddViewsFromAssemblyData(assemblyData);
+            }
+            else
+            {
+                _loadedViewsService.RemoveViewsFromAssemblyData(assemblyData);
+            }
         }
 
         /// <summary>

@@ -49,23 +49,6 @@
             Gets or sets the <see cref="T:System.String"/> name of the selected item.
             </summary>
         </member>
-        <member name="T:ModuleManager.UI.Interfaces.ILoadedViewsService">
-            <summary>
-            Manages the collection of loaded views.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Interfaces.ILoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
-            <summary>
-            Adds all views from an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to the LoadedViews property.
-            </summary>
-            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to get the views from.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Interfaces.ILoadedViewsService.RemoveViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
-            <summary>
-            Removes all views in an <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> from the LoadedViews property.
-            </summary>
-            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> that holds the views that needs to be removed.</param>
-        </member>
         <member name="T:ModuleManager.UI.Interfaces.IProgressBarService">
             <summary>
             A progress bar service.
@@ -91,13 +74,12 @@
             Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/> implementations.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(Prism.Regions.IRegionManager,ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.ILoadedViewsService)">
+        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.#ctor(Prism.Regions.IRegionManager,ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.AssemblyCollectionService"/> class.
             </summary>
             <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
             <param name="asssemblyLoaderService">The <see cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>.</param>
-            <param name="loadedViewsService">The <see cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.Services.AssemblyCollectionService.Assemblies">
             <inheritdoc cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>
@@ -136,53 +118,6 @@
             </summary>
             <param name="s">The <see cref="T:System.Object"/>.</param>
             <param name="e">The property changed arguments.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Services.AssemblyCollectionService.UpdateLoadedViews(ModuleManager.ModuleObjects.Classes.AssemblyData)">
-            <summary>
-            Will load/unload any views from the passed in <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> based on the IsEnabled property.
-            </summary>
-            <param name="assemblyData">The <see cref="T:ModuleManager.ModuleObjects.Classes.AssemblyData"/> to check load/unload views from.</param>
-        </member>
-        <member name="T:ModuleManager.UI.Services.LoadedViewsService">
-            <summary>
-            Service providing concrete <see cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/> implementations.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.#ctor(Prism.Regions.IRegionManager)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.UI.Services.LoadedViewsService"/> class.
-            </summary>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
-            <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.RemoveViewsFromAssemblyData(ModuleManager.ModuleObjects.Classes.AssemblyData)">
-            <inheritdoc cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddTypeDataIfIsView(ModuleManager.ModuleObjects.Classes.TypeData)">
-            <summary>
-            Adds the <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>'s <see cref="T:System.Type"/> to LoadedViews property if IsView is true.
-            </summary>
-            <param name="typeData">The <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> to get the <see cref="T:System.Type"/> from to add to LoadedViews.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.RemoveTypeDataIfIsView(ModuleManager.ModuleObjects.Classes.TypeData)">
-            <summary>
-            Removes the <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/>'s <see cref="T:System.Type"/> from LoadedViews property if IsView is true.
-            </summary>
-            <param name="typeData">The <see cref="T:ModuleManager.ModuleObjects.Classes.TypeData"/> to get the <see cref="T:System.Type"/> from to remove from LoadedViews.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.AddViewFromType(System.Type)">
-            <summary>
-            Adds a view <see cref="T:System.Type"/> to the LoadedViews collection.
-            </summary>
-            <param name="type">The view <see cref="T:System.Type"/> to be added.</param>
-        </member>
-        <member name="M:ModuleManager.UI.Services.LoadedViewsService.RemoveViewFromType(System.Type)">
-            <summary>
-            Removes a view <see cref="T:System.Type"/> from the LoadedViews collection.
-            </summary>
-            <param name="type">The view <see cref="T:System.Type"/> to be removed.</param>
         </member>
         <member name="T:ModuleManager.UI.Services.ProgressBarService">
             <summary>
@@ -244,23 +179,16 @@
             View model for the AssemblyData TreeView.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.#ctor(ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService,ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
+        <member name="M:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.#ctor(ModuleManager.UI.Interfaces.IAssemblyCollectionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel"/> class.
             </summary>
-            <param name="assemblyLoaderService">Injected <see cref="T:ModuleManager.ModuleLoader.Interfaces.IAssemblyLoaderService"/>.</param>
             <param name="assemblyCollectionService">Injected <see cref="T:ModuleManager.UI.Interfaces.IAssemblyCollectionService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.AssemblyCollectionService">
             <summary>
             Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
             </summary>
-        </member>
-        <member name="M:ModuleManager.UI.ViewModels.AssemblyDataTreeViewModel.LoadConfig">
-            <summary>
-            LoadConfig will load an ObservableCollection of AssemblyData from an xml file.
-            </summary>
-            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
         </member>
         <member name="T:ModuleManager.UI.ViewModels.AssemblyDataViewModel">
             <summary>
@@ -365,11 +293,11 @@
             View model for the loaded views.
             </summary>
         </member>
-        <member name="M:ModuleManager.UI.ViewModels.LoadedViewsViewModel.#ctor(ModuleManager.UI.Interfaces.ILoadedViewsService)">
+        <member name="M:ModuleManager.UI.ViewModels.LoadedViewsViewModel.#ctor(ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.UI.ViewModels.LoadedViewsViewModel"/> class.
             </summary>
-            <param name="loadedViewsService">The program's <see cref="T:ModuleManager.UI.Interfaces.ILoadedViewsService"/>.</param>
+            <param name="loadedViewsService">The program's <see cref="T:ModuleManager.ModuleLoader.Interfaces.ILoadedViewsService"/>.</param>
         </member>
         <member name="P:ModuleManager.UI.ViewModels.LoadedViewsViewModel.LoadedViewsService">
             <summary>
@@ -526,36 +454,6 @@
         <member name="M:ModuleManager.UI.Views.ProgressBarView.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

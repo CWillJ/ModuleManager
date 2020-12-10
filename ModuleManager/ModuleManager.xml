@@ -46,6 +46,11 @@
             </summary>
             <returns>New <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
         </member>
+        <member name="M:ModuleManager.App.LoadSavedModules">
+            <summary>
+            Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
+            </summary>
+        </member>
         <member name="M:ModuleManager.App.InitializeComponent">
             <summary>
             InitializeComponent

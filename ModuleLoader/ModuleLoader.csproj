@@ -18,4 +18,16 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\ModuleObjects\ModuleObjects.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Prism">
+			<HintPath>..\Lib\Prism.dll</HintPath>
+		</Reference>
+		<Reference Include="Prism.Unity.Wpf">
+			<HintPath>..\Lib\Prism.Unity.Wpf.dll</HintPath>
+		</Reference>
+		<Reference Include="Prism.Wpf">
+			<HintPath>..\Lib\Prism.Wpf.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 </Project>

@@ -1,14 +1,16 @@
 ﻿namespace ModuleManager
 {
     using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
     using System.Windows;
+    using System.Xml.Serialization;
     using ModuleManager.ModuleLoader.Interfaces;
     using ModuleManager.ModuleLoader.Services;
     using ModuleManager.ModuleObjects.Classes;
     using ModuleManager.ModuleObjects.Interfaces;
     using ModuleManager.UI;
     using ModuleManager.UI.Interfaces;
-    using ModuleManager.UI.Services;
     using ModuleManager.UI.Views;
     using ModuleManager.Views;
     using Prism.Ioc;
@@ -56,6 +58,8 @@
             RegionManager.SetRegionManager(MainWindow, Container.Resolve<IRegionManager>());
             RegionManager.UpdateRegions();
 
+            LoadSavedModules();
+
             shell.Visibility = Visibility.Visible;
         }
 
@@ -86,8 +90,6 @@
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
-            containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
-            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
             containerRegistry.RegisterSingleton<ILoadedViewsService, LoadedViewsService>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
@@ -109,6 +111,52 @@
             moduleCatalog.AddModule<UIModule>();
 
             return moduleCatalog;
+        }
+
+        /// <summary>
+        /// Loads an <see cref="ObservableCollection{AssemblyData}"/> from an xml file.
+        /// </summary>
+        private void LoadSavedModules()
+        {
+            // Load previously saved module configuration only if the ModuleSaveFile exists
+            if (!File.Exists(Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml"))
+            {
+                return;
+            }
+
+            var assemblyLoaderService = Container.Resolve<IAssemblyLoaderService>();
+            var assemblyCollectionService = Container.Resolve<IAssemblyCollectionService>();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
+            ObservableCollection<AssemblyData>? assemblies = new ObservableCollection<AssemblyData>();
+            string loadFile = Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml";
+
+            using (StreamReader rd = new StreamReader(loadFile))
+            {
+                try
+                {
+                    assemblies = serializer.Deserialize(rd) as ObservableCollection<AssemblyData>;
+                }
+                catch (InvalidOperationException)
+                {
+                    // There is something wrong with the xml file.
+                    // Return an empty collection of assemblies.
+                    return;
+                }
+            }
+
+            if (assemblies == null)
+            {
+                return;
+            }
+
+            // Load and get data.
+            assemblyLoaderService.LoadAll(ref assemblies);
+
+            // Unload all disabled assemblies.
+            assemblyLoaderService.LoadUnload(ref assemblies);
+
+            assemblyCollectionService.Assemblies = assemblies;
         }
     }
 }

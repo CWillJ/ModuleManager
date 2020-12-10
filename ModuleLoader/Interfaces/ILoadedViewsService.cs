@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.UI.Interfaces
+﻿namespace ModuleManager.ModuleLoader.Interfaces
 {
     using ModuleManager.ModuleObjects.Classes;
 
