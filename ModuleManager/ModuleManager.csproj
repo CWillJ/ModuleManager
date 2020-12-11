@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>ModuleManager.xml</DocumentationFile>
-    <OutputPath>..\bin\</OutputPath>
+    <DocumentationFile>..\Documentation\ModuleManager.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -71,13 +71,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)..\&quot;&#xD;&#xA;if not exist bin mkdir bin&#xD;&#xA;cd bin&#xD;&#xA;del * /q" />
-  </Target>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetDir)*$(TargetExt)&quot; &quot;$(ProjectDir)..\bin\&quot;" />
-  </Target>
 
 </Project>

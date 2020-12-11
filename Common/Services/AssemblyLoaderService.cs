@@ -83,7 +83,7 @@
                 };
 
                 Load(ref assemblyData);
-                Unload(ref assemblyData);
+                ////Unload(ref assemblyData);
 
                 // IF the ModuleType has not been set, it is not a NextGen module
                 if (assemblyData.ModuleType != null)
@@ -189,20 +189,14 @@
                     CurrentTypeName = type.Name;
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
-                    ////Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
+                    Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
                     TypeData tempModule = GetTypeData(type);
 
                     if (tempModule != null)
                     {
                         Type[] typeInterfaces = type.GetInterfaces();
-                        string[] typeFullNames = new string[typeInterfaces.Length];
 
-                        for (int i = 0; i < typeInterfaces.Length; i++)
-                        {
-                            typeFullNames[i] = typeInterfaces[i].FullName;
-                        }
-
-                        if (typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.IExpansionModule") || typeFullNames.Contains(@"PVA.NextGen.Common.Interfaces.ICoreModule"))
+                        if (typeInterfaces.Contains(typeof(IModuleManagerTestModule)) || typeInterfaces.Contains(typeof(IModuleManagerCoreModule)))
                         {
                             assemblyData.ModuleType = type;
                         }

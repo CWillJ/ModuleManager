@@ -6,7 +6,6 @@
     using System.Xml.Serialization;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
-    using ModuleManager.Common.Services;
     using ModuleManager.Core.UI.Interfaces;
     using ModuleManager.Core.UI.Services;
     using ModuleManager.Core.UI.Views;
@@ -44,15 +43,10 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
-            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
-            containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
 
             containerRegistry.RegisterForNavigation<ButtonsView>();
             containerRegistry.RegisterForNavigation<AssemblyDataView>();
             containerRegistry.RegisterForNavigation<AssemblyDataTreeView>();
-
-            containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
-            containerRegistry.RegisterSingleton<ILoadedViewsService, LoadedViewsService>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
             containerRegistry.Register<ITypeData, TypeData>();

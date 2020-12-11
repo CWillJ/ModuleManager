@@ -9,6 +9,6 @@
     mc:Ignorable="d">
 
     <Grid Background="BurlyWood">
-        <TextBlock Text="Module A View" />
+        <TextBlock Text="{Binding Path=Text}" />
     </Grid>
 </UserControl>

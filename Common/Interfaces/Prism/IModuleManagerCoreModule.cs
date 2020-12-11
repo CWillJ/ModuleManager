@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Core.UI.Interfaces
+﻿namespace ModuleManager.Common.Interfaces
 {
     using Prism.Modularity;
 

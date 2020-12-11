@@ -4,6 +4,35 @@
         <name>ModuleManager.Common</name>
     </assembly>
     <members>
+        <member name="T:ModuleManager.Common.Classes.AssemblyLoader">
+            <summary>
+            The class that loads and unloads assemblies.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyLoader"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyLoader"/> class.
+            </summary>
+            <param name="mainAssemblyToLoadPath">The path to the assembly.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.LoadAllReferencedAssemblies(System.Reflection.Assembly)">
+            <summary>
+            Loads all referenced assemblies from the <see cref="T:System.Reflection.Assembly"/>.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to load all referenced assemblies from.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.Load(System.Reflection.AssemblyName)">
+            <summary>
+            Overrides the Load method.
+            </summary>
+            <param name="name">The <see cref="T:System.Reflection.AssemblyName"/> of the <see cref="T:System.Reflection.Assembly"/> to be loaded.</param>
+            <returns>A loaded <see cref="T:System.Reflection.Assembly"/>.</returns>
+        </member>
         <member name="T:ModuleManager.Common.Classes.AssemblyData">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyData"/>
         </member>
@@ -46,35 +75,6 @@
             Overrides the ToString method and formats the string output.
             </summary>
             <returns>A desired format for the assembly.</returns>
-        </member>
-        <member name="T:ModuleManager.Common.Classes.AssemblyLoader">
-            <summary>
-            The class that loads and unloads assemblies.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyLoader"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyLoader"/> class.
-            </summary>
-            <param name="mainAssemblyToLoadPath">The path to the assembly.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.LoadAllReferencedAssemblies(System.Reflection.Assembly)">
-            <summary>
-            Loads all referenced assemblies from the <see cref="T:System.Reflection.Assembly"/>.
-            </summary>
-            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to load all referenced assemblies from.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.Load(System.Reflection.AssemblyName)">
-            <summary>
-            Overrides the Load method.
-            </summary>
-            <param name="name">The <see cref="T:System.Reflection.AssemblyName"/> of the <see cref="T:System.Reflection.Assembly"/> to be loaded.</param>
-            <returns>A loaded <see cref="T:System.Reflection.Assembly"/>.</returns>
         </member>
         <member name="T:ModuleManager.Common.Classes.MemberParameter">
             <summary>
@@ -557,6 +557,82 @@
             Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.
             </summary>
         </member>
+        <member name="T:ModuleManager.Common.Interfaces.ITypeData">
+            <summary>
+            Module member object interface.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ITypeData.Name">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ITypeData.Description">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ITypeData.Members">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of the module members.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.ITypeMemberData">
+            <summary>
+            Module member object interface.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ITypeMemberData.Name">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ITypeMemberData.Description">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ITypeMemberData.TypeName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the Type.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IModuleManagerCoreModule">
+            <summary>
+            Interface that implements <see cref="T:Prism.Modularity.IModule"/>. Used to define this application's core modules.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IModuleManagerTestModule">
+            <summary>
+            Interface that implements <see cref="T:Prism.Modularity.IModule"/>. Used to define this application's test modules.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService">
+            <summary>
+            An Assembly Collection.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.Assemblies">
+            <summary>
+            Gets or sets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.SelectedItem">
+            <summary>
+            Gets or sets an <see cref="T:System.Object"/> object hopefully.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.SelectedItemName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the selected item.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyCollectionService.PopulateAssemblyCollection(System.String[])">
+            <summary>
+            Uses the <see cref="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService"/> to populate the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            </summary>
+            <param name="dllFiles">A <see cref="T:System.String"/> array that contains all dll files to load.</param>
+        </member>
         <member name="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService">
             <summary>
             Retrieves assemblies from dll files.
@@ -649,45 +725,69 @@
             </summary>
             <param name="assemblyData">The <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> that holds the views that needs to be removed.</param>
         </member>
-        <member name="T:ModuleManager.Common.Interfaces.ITypeData">
+        <member name="T:ModuleManager.Common.Interfaces.IModuleStartUpService">
             <summary>
-            Module member object interface.
+            Used to inject views into the shell view on start up.
             </summary>
         </member>
-        <member name="P:ModuleManager.Common.Interfaces.ITypeData.Name">
+        <member name="P:ModuleManager.Common.Interfaces.IModuleStartUpService.ViewInjectionActions">
             <summary>
-            Gets or sets the <see cref="T:System.String"/> name.
+            Gets a list of actions that perform view injection for a Core module.
             </summary>
         </member>
-        <member name="P:ModuleManager.Common.Interfaces.ITypeData.Description">
+        <member name="M:ModuleManager.Common.Interfaces.IModuleStartUpService.AddViewInjectionAction(System.Action)">
             <summary>
-            Gets or sets the <see cref="T:System.String"/> description of the module.
+            Add a new <see cref="T:System.Action"/> to the list of View Registration actions.
+            </summary>
+            <param name="action">The <see cref="T:System.Action"/> to be added.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Services.AssemblyCollectionService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/> implementations.
             </summary>
         </member>
-        <member name="P:ModuleManager.Common.Interfaces.ITypeData.Members">
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyLoaderService)">
             <summary>
-            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of the module members.
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.AssemblyCollectionService"/> class.
+            </summary>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
+            <param name="asssemblyLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.Assemblies">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.SelectedItem">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.SelectedItemName">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.PopulateAssemblyCollection(System.String[])">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.SerializeToXML(System.String)">
+            <summary>
+            Serializes the module catalog to an xml file.
+            </summary>
+            <param name="fileName">The full file path and name.</param>
+            <returns>True if can be serialized, false otherwise.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.SetSelectedItemName">
+            <summary>
+            Sets the name of the selected item.
             </summary>
         </member>
-        <member name="T:ModuleManager.Common.Interfaces.ITypeMemberData">
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.CollectionPropertyChanged">
             <summary>
-            Module member object interface.
+            The method that handles the AssemblyData collection changed event.
             </summary>
         </member>
-        <member name="P:ModuleManager.Common.Interfaces.ITypeMemberData.Name">
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.LoadUnload(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
             <summary>
-            Gets or sets the <see cref="T:System.String"/> name.
+            Will load or unload the passed in <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> <see cref="T:System.Object"/>.
             </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Interfaces.ITypeMemberData.Description">
-            <summary>
-            Gets or sets the <see cref="T:System.String"/> description of the module.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Interfaces.ITypeMemberData.TypeName">
-            <summary>
-            Gets or sets the <see cref="T:System.String"/> name of the Type.
-            </summary>
+            <param name="s">The <see cref="T:System.Object"/>.</param>
+            <param name="e">The property changed arguments.</param>
         </member>
         <member name="T:ModuleManager.Common.Services.AssemblyLoaderService">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService"/>
@@ -840,6 +940,22 @@
             Removes a view <see cref="T:System.Type"/> from the LoadedViews collection.
             </summary>
             <param name="type">The view <see cref="T:System.Type"/> to be removed.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Services.ModuleStartUpService">
+            <summary>
+            Implements <see cref="T:ModuleManager.Common.Interfaces.IModuleStartUpService"/> to inject views into the shell view on start up.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleStartUpService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ModuleStartUpService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ModuleStartUpService.ViewInjectionActions">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleStartUpService.AddViewInjectionAction(System.Action)">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

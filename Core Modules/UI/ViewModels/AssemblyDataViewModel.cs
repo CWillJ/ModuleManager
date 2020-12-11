@@ -1,6 +1,6 @@
 ﻿namespace ModuleManager.Core.UI.ViewModels
 {
-    using ModuleManager.Core.UI.Interfaces;
+    using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
 
     /// <summary>

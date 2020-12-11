@@ -33,7 +33,7 @@
                 HorizontalScrollBarVisibility="Visible"
                 VerticalScrollBarVisibility="Disabled">
 
-                <ItemsControl prism:RegionManager.RegionName="LoadedViewsDisplayRegion">
+                <ItemsControl prism:RegionManager.RegionName="LoadedViewsRegion">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" />

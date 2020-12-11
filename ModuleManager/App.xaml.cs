@@ -1,9 +1,11 @@
 ﻿namespace ModuleManager
 {
     using System;
+    using System.IO;
     using System.Windows;
     using ModuleManager.Classes;
     using ModuleManager.Common.Interfaces;
+    using ModuleManager.Common.Services;
     using ModuleManager.Views;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -53,13 +55,14 @@
             shell.Visibility = Visibility.Visible;
 
             LoadCore();
+            ////LoadTestModules();
         }
 
         /// <summary>
         /// Creates the shell or main window of the application.
         /// </summary>
         /// <returns>The shell of the application.</returns>
-#nullable enable
+        #nullable enable
         protected override Window? CreateShell()
         {
             // because RadWindow is not Window, cannot create here.
@@ -81,6 +84,10 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for container type registration.</param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
+            containerRegistry.RegisterSingleton<ILoadedViewsService, LoadedViewsService>();
+            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+            containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
         }
 
         /// <summary>
@@ -103,13 +110,32 @@
             ((AggregateModuleCatalog)moduleCatalog).AddCatalog(configurationCatalog);
 
             // Load any extra modules that this application will use to display views/data.
+            DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(Container)
+            { ModulePath = Path.Combine(Directory.GetCurrentDirectory(), @"Test Modules") };
+            ((AggregateModuleCatalog)moduleCatalog).AddCatalog(directoryCatalog);
         }
 
+        /// <summary>
+        /// Loads the core modules for this project.
+        /// </summary>
         private void LoadCore()
         {
-            var coreStartupService = Container.Resolve<IModuleStartUpService>();
+            var moduleStartupService = Container.Resolve<IModuleStartUpService>();
 
-            foreach (Action registerModuleView in coreStartupService.ViewInjectionActions)
+            foreach (Action registerModuleView in moduleStartupService.ViewInjectionActions)
+            {
+                registerModuleView();
+            }
+        }
+
+        /// <summary>
+        /// Loads the test modules that this project will display.
+        /// </summary>
+        private void LoadTestModules()
+        {
+            var moduleStartupService = Container.Resolve<IModuleStartUpService>();
+
+            foreach (Action registerModuleView in moduleStartupService.ViewInjectionActions)
             {
                 registerModuleView();
             }

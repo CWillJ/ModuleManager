@@ -52,6 +52,16 @@
             </summary>
             <param name="moduleCatalog">The aggregate <see cref="T:Prism.Modularity.IModuleCatalog"/> used for storing all modules.</param>
         </member>
+        <member name="M:ModuleManager.App.LoadCore">
+            <summary>
+            Loads the core modules for this project.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.LoadTestModules">
+            <summary>
+            Loads the test modules that this project will display.
+            </summary>
+        </member>
         <member name="M:ModuleManager.App.InitializeComponent">
             <summary>
             InitializeComponent
@@ -118,6 +128,27 @@
             </summary>
             <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
             <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
+        </member>
+        <member name="T:ModuleManager.Classes.DirectoryLoaderModuleCatalog">
+            <summary>
+            A <see cref="T:Prism.Modularity.ModuleCatalog"/> that loads modules from a directory.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.DirectoryLoaderModuleCatalog.#ctor(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Classes.DirectoryLoaderModuleCatalog"/> class.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Classes.DirectoryLoaderModuleCatalog.ModulePath">
+            <summary>
+            Gets or sets the directory containing modules to search for.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Classes.DirectoryLoaderModuleCatalog.InnerLoad">
+            <summary>
+            Drives the main logic of building the child domain and searching for the assemblies.
+            </summary>
         </member>
         <member name="T:ModuleManager.ViewModels.ShellViewModel">
             <summary>

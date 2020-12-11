@@ -94,7 +94,7 @@
         {
             string moduleDirectory = GetModuleDirectory();
 
-            if (moduleDirectory == null)
+            if (string.IsNullOrEmpty(moduleDirectory))
             {
                 return;
             }

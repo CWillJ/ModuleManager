@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Core.UI.Services
+﻿namespace ModuleManager.Common.Services
 {
     using System;
     using System.Collections.ObjectModel;
@@ -7,8 +7,6 @@
     using System.Xml.Serialization;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
-    using ModuleManager.Core.UI.Interfaces;
-    using ModuleManager.Core.UI.Views;
     using Prism.Mvvm;
     using Prism.Regions;
 
@@ -58,7 +56,6 @@
             {
                 SetProperty(ref _selectedItem, value);
                 SetSelectedItemName();
-                ////UpdateDescriptionRegion();
             }
         }
 
@@ -67,6 +64,12 @@
         {
             get { return _selectedItemName; }
             set { SetProperty(ref _selectedItemName, value); }
+        }
+
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        public void PopulateAssemblyCollection(string[] dllFiles)
+        {
+            Assemblies = _assemblyLoaderService.GetAssemblies(dllFiles);
         }
 
         /// <summary>
@@ -115,27 +118,6 @@
             else
             {
                 SelectedItemName = @"Description";
-            }
-        }
-
-        /// <summary>
-        /// Registers the data region with the selected item if the selected item is a view type.
-        /// </summary>
-        private void UpdateDescriptionRegion()
-        {
-            if (SelectedItem is TypeData typeData)
-            {
-                if (typeData.IsView)
-                {
-                    try
-                    {
-                        _regionManager.RegisterViewWithRegion(@"ModuleDataViewRegion", typeData.Type);
-                    }
-                    catch (Exception)
-                    {
-                        _regionManager.RegisterViewWithRegion(@"ModuleDataViewRegion", typeof(CannotDisplayView));
-                    }
-                }
             }
         }
 

@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>ModuleManager.Core.UI.xml</DocumentationFile>
-    <OutputPath>..\bin\</OutputPath>
+    <DocumentationFile>..\..\Documentation\ModuleManager.Core.UI.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -75,6 +75,6 @@
 	</ItemGroup>
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="if not exist &quot;$(SolutionDir)\bin\netcoreapp3.1\Core\UI&quot; mkdir &quot;$(SolutionDir)\bin\netcoreapp3.1\Core\UI&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)\bin\netcoreapp3.1\Core\UI&quot;" />
+	  <Exec Command="set destination=&quot;$(SolutionDir)$(SolutionName)\$(OutDir)Core\UI&quot;&#xD;&#xA;if not exist &quot;%25destination%25&quot; mkdir &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).xml&quot; &quot;%25destination%25&quot;" />
 	</Target>
 </Project>

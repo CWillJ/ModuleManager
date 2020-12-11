@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.Core.UI.ViewModels
 {
     using System;
-    using ModuleManager.Core.UI.Interfaces;
+    using ModuleManager.Common.Interfaces;
 
     /// <summary>
     /// View model for the AssemblyData TreeView.

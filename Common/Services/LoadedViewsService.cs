@@ -19,7 +19,7 @@
         public LoadedViewsService(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            RegionName = @"LoadedViewsDisplayRegion";
+            RegionName = @"LoadedViewsRegion";
             ////ViewsRegion = _regionManager.Regions[@"LoadedViewsDisplayRegion"];
         }
 
