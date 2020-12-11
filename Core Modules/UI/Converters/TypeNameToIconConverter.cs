@@ -20,14 +20,15 @@
         /// <returns><see cref="string"/> path to an image icon.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string iconDirectory = Directory.GetParent(
-                Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName + @"\UI\Icons\";
+            string iconDirectory = Path.Combine(
+                Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(
+                    Directory.GetCurrentDirectory()).FullName).FullName).FullName).FullName, @"Core Modules\UI\Icons");
 
             return value.ToString() switch
             {
-                @"TypeConstructor" => iconDirectory + @"Constructor Icon.png",
-                @"TypeProperty" => iconDirectory + @"Property Icon.png",
-                @"TypeMethod" => iconDirectory + @"Method Icon.png",
+                @"TypeConstructor" => Path.Combine(iconDirectory, @"Constructor Icon.png"),
+                @"TypeProperty" => Path.Combine(iconDirectory, @"Property Icon.png"),
+                @"TypeMethod" => Path.Combine(iconDirectory, @"Method Icon.png"),
                 _ => null
             };
         }

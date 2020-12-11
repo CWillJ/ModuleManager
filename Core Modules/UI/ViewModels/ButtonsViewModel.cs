@@ -20,7 +20,6 @@
     {
         private readonly IRegionManager _regionManager;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
-        private readonly IAssemblyLoaderService _assemblyLoaderService;
         private readonly IProgressBarService _progressBarService;
 
         /// <summary>
@@ -28,16 +27,13 @@
         /// </summary>
         /// <param name="regionManager">Injected <see cref="IRegionManager"/>.</param>
         /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
-        /// <param name="assemblyLoaderService">Injected <see cref="IAssemblyLoaderService"/>.</param>
         /// <param name="progressBarService">Injected <see cref="IProgressBarService"/>.</param>
         public ButtonsViewModel(
             IRegionManager regionManager,
             IAssemblyCollectionService assemblyCollectionService,
-            IAssemblyLoaderService assemblyLoaderService,
             IProgressBarService progressBarService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
-            _assemblyLoaderService = assemblyLoaderService ?? throw new ArgumentNullException("ModuleInfoRetriever");
 
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
@@ -92,7 +88,8 @@
         /// </summary>
         private async void StoreModules()
         {
-            string moduleDirectory = GetModuleDirectory();
+            ////string moduleDirectory = GetModuleDirectory();
+            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"TestModules");
 
             if (string.IsNullOrEmpty(moduleDirectory))
             {
@@ -107,7 +104,7 @@
                 return;
             }
 
-            _assemblyLoaderService.DllDirectory = moduleDirectory;
+            AssemblyCollectionService.DataLoader.DllDirectory = moduleDirectory;
 
             // Show progress bar
             AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
@@ -126,7 +123,7 @@
 
             thread.Start();
 
-            AssemblyCollectionService.Assemblies = await Task.Run(() => _assemblyLoaderService.GetAssemblies(dllFiles));
+            await Task.Run(() => AssemblyCollectionService.PopulateAssemblyCollection(moduleDirectory, dllFiles));
 
             // Kill progress bar
             LoadingModules = false;
@@ -144,9 +141,9 @@
         {
             while (LoadingModules)
             {
-                _progressBarService.AssemblyName = _assemblyLoaderService.CurrentAssemblyName;
-                _progressBarService.CurrentProgress = _assemblyLoaderService.PercentOfAssemblyLoaded;
-                _progressBarService.Text = @"Loading Module: " + _assemblyLoaderService.CurrentTypeName;
+                _progressBarService.AssemblyName = AssemblyCollectionService.DataLoader.CurrentAssemblyName;
+                _progressBarService.CurrentProgress = AssemblyCollectionService.DataLoader.PercentOfAssemblyLoaded;
+                _progressBarService.Text = @"Loading Module: " + AssemblyCollectionService.DataLoader.CurrentTypeName;
             }
         }
 

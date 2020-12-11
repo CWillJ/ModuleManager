@@ -8,16 +8,12 @@
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
-    using Prism.Regions;
 
     /// <summary>
     /// Service providing concrete <see cref="IAssemblyCollectionService"/> implementations.
     /// </summary>
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
-        private readonly IAssemblyLoaderService _assemblyLoaderService;
-        private readonly IRegionManager _regionManager;
-
         private ObservableCollection<AssemblyData> _assemblies;
         private object _selectedItem;
         private string _selectedItemName;
@@ -25,17 +21,17 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
-        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        /// <param name="asssemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
-        public AssemblyCollectionService(IRegionManager regionManager, IAssemblyLoaderService asssemblyLoaderService)
+        public AssemblyCollectionService()
         {
-            _regionManager = regionManager;
-            _assemblyLoaderService = asssemblyLoaderService ?? throw new ArgumentNullException("AssemblyLoaderService");
+            DataLoader = new AssemblyDataLoader();
 
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";
         }
+
+        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        public AssemblyDataLoader DataLoader { get; }
 
         /// <inheritdoc cref="IAssemblyCollectionService"/>
         public ObservableCollection<AssemblyData> Assemblies
@@ -67,9 +63,10 @@
         }
 
         /// <inheritdoc cref="IAssemblyCollectionService"/>
-        public void PopulateAssemblyCollection(string[] dllFiles)
+        public void PopulateAssemblyCollection(string dllDirectory, string[] dllFiles)
         {
-            Assemblies = _assemblyLoaderService.GetAssemblies(dllFiles);
+            DataLoader.DllDirectory = dllDirectory;
+            Assemblies = DataLoader.GetAssemblies(dllFiles);
         }
 
         /// <summary>
@@ -144,7 +141,7 @@
                 AssemblyData assembly = (AssemblyData)s;
                 int i = Assemblies.IndexOf(assembly);
 
-                _assemblyLoaderService.LoadUnload(ref assembly);
+                DataLoader.LoadUnload(ref assembly);
                 Assemblies[i] = assembly;
             }
         }

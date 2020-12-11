@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Common.Services
+﻿namespace ModuleManager.Common.Classes
 {
     using System;
     using System.Collections.ObjectModel;
@@ -6,21 +6,21 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
 
-    /// <inheritdoc cref="IAssemblyLoaderService"/>
-    public class AssemblyLoaderService : IAssemblyLoaderService
+    /// <summary>
+    /// Retrieves assemblies from dll files.
+    /// </summary>
+    public class AssemblyDataLoader
     {
-        private readonly ILoadedViewsService _loadedViewsService;
+        ////private readonly ILoadedViewsService _loadedViewsService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AssemblyLoaderService"/> class.
+        /// Initializes a new instance of the <see cref="AssemblyDataLoader"/> class.
         /// </summary>
-        /// <param name="loadedViewsService">The <see cref="ILoadedViewsService"/>.</param>
-        public AssemblyLoaderService(ILoadedViewsService loadedViewsService)
+        public AssemblyDataLoader()
         {
-            _loadedViewsService = loadedViewsService ?? throw new ArgumentNullException("LoadedViewsService");
+            ////_loadedViewsService = loadedViewsService ?? throw new ArgumentNullException("LoadedViewsService");
 
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
@@ -32,19 +32,29 @@
             LoadedAssemblies = new ObservableCollection<AssemblyName>();
         }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> directory path of the .dll files.
+        /// </summary>
         public string DllDirectory { get; set; }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> path of the .dll file.
+        /// </summary>
         public string DllFilePath { get; set; }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> name of the assembly being loaded.
+        /// </summary>
         public string CurrentAssemblyName { get; set; }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> name of the type being loaded.
+        /// </summary>
         public string CurrentTypeName { get; set; }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Gets or sets the current <see cref="double"/> percentage of load compleation of the current assembly.
+        /// </summary>
         public double PercentOfAssemblyLoaded { get; set; }
 
         private ObservableCollection<AssemblyName> LoadedAssemblies { get; set; }
@@ -54,7 +64,11 @@
         /// </summary>
         private XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Initialize properties.
+        /// </summary>
+        /// <param name="modulesDirectory">Directory containing <see cref="string"/> dll files.</param>
+        /// <param name="assemblyFilePath">Name of the specific <see cref="string"/> dll file.</param>
         public void Initialize(string modulesDirectory, string assemblyFilePath)
         {
             DllDirectory = modulesDirectory;
@@ -62,7 +76,12 @@
             DescriptionRetriever = new XmlDescriptionRetriever(assemblyFilePath);
         }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Creates an <see cref="ObservableCollection{AssemblyData}"/> to organize
+        /// the information from the dll file and its related xml file.
+        /// </summary>
+        /// <param name="dllFiles">A <see cref="string"/> array containing the names of all dll files in the DllDirectory.</param>
+        /// <returns>Returns an <see cref="ObservableCollection{AssemblyData}"/>.</returns>
         public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
@@ -95,7 +114,10 @@
             return assemblies;
         }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
+        /// </summary>
+        /// <param name="assemblyData">An <see cref="AssemblyData"/> object passed by reference.</param>
         public void LoadUnload(ref AssemblyData assemblyData)
         {
             if (assemblyData.IsEnabled)
@@ -107,10 +129,13 @@
                 Unload(ref assemblyData);
             }
 
-            UpdateLoadedViews(assemblyData);
+            ////UpdateLoadedViews(assemblyData);
         }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
+        /// </summary>
+        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> passed by reference.</param>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assemblyData;
@@ -129,11 +154,14 @@
                 }
 
                 assemblies[i] = assemblyData;
-                UpdateLoadedViews(assemblyData);
+                ////UpdateLoadedViews(assemblyData);
             }
         }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Loads all <see cref="AssemblyData"/> in a <see cref="ObservableCollection{AssemblyData}"/>.
+        /// </summary>
+        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> objects.</param>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assemblyData;
@@ -146,7 +174,10 @@
             }
         }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Load an <see cref="AssemblyData"/> by reference.
+        /// </summary>
+        /// <param name="assemblyData"><see cref="AssemblyData"/> to load passed by reference.</param>
         public void Load(ref AssemblyData assemblyData)
         {
             if (!string.IsNullOrEmpty(assemblyData.FilePath))
@@ -207,7 +238,10 @@
             }
         }
 
-        /// <inheritdoc cref="IAssemblyLoaderService"/>
+        /// <summary>
+        /// Unload an <see cref="AssemblyData"/> by reference.
+        /// </summary>
+        /// <param name="assemblyData"><see cref="AssemblyData"/> to unload passed by reference.</param>
         public void Unload(ref AssemblyData assemblyData)
         {
             if (assemblyData.Loader == null)
@@ -220,26 +254,26 @@
             assemblyData.Assembly = null;
         }
 
-        /// <summary>
-        /// Will load/unload any views from the passed in <see cref="AssemblyData"/> based on the IsEnabled property.
-        /// </summary>
-        /// <param name="assemblyData">The <see cref="AssemblyData"/> to check load/unload views from.</param>
-        private void UpdateLoadedViews(AssemblyData assemblyData)
-        {
-            if (assemblyData == null)
-            {
-                return;
-            }
-
-            if (assemblyData.IsEnabled)
-            {
-                _loadedViewsService.AddViewsFromAssemblyData(assemblyData);
-            }
-            else
-            {
-                _loadedViewsService.RemoveViewsFromAssemblyData(assemblyData);
-            }
-        }
+        //// /// <summary>
+        //// /// Will load/unload any views from the passed in <see cref="AssemblyData"/> based on the IsEnabled property.
+        //// /// </summary>
+        //// /// <param name="assemblyData">The <see cref="AssemblyData"/> to check load/unload views from.</param>
+        //// private void UpdateLoadedViews(AssemblyData assemblyData)
+        //// {
+        ////     if (assemblyData == null)
+        ////     {
+        ////         return;
+        ////     }
+        ////
+        ////     if (assemblyData.IsEnabled)
+        ////     {
+        ////         _loadedViewsService.AddViewsFromAssemblyData(assemblyData);
+        ////     }
+        ////     else
+        ////     {
+        ////         _loadedViewsService.RemoveViewsFromAssemblyData(assemblyData);
+        ////     }
+        //// }
 
         /// <summary>
         /// Loads all referenced assemblies.

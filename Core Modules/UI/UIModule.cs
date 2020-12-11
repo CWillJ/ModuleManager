@@ -33,7 +33,7 @@
             var startupService = containerProvider.Resolve<IModuleStartUpService>();
             startupService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
 
-            LoadSavedModules(containerProvider.Resolve<IAssemblyCollectionService>(), containerProvider.Resolve<IAssemblyLoaderService>());
+            LoadSavedModules(containerProvider.Resolve<IAssemblyCollectionService>());
         }
 
         /// <summary>
@@ -66,8 +66,7 @@
         /// Loads an <see cref="ObservableCollection{AssemblyData}"/> from an xml file.
         /// </summary>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
-        /// <param name="assemblyLoaderService">The <see cref="IAssemblyLoaderService"/>.</param>
-        private void LoadSavedModules(IAssemblyCollectionService assemblyCollectionService, IAssemblyLoaderService assemblyLoaderService)
+        private void LoadSavedModules(IAssemblyCollectionService assemblyCollectionService)
         {
             // Load previously saved module configuration only if the ModuleSaveFile exists
             if (!File.Exists(Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml"))
@@ -99,10 +98,10 @@
             }
 
             // Load and get data.
-            assemblyLoaderService.LoadAll(ref assemblies);
+            assemblyCollectionService.DataLoader.LoadAll(ref assemblies);
 
             // Unload all disabled assemblies.
-            assemblyLoaderService.LoadUnload(ref assemblies);
+            assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
 
             assemblyCollectionService.Assemblies = assemblies;
         }

@@ -84,8 +84,7 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for container type registration.</param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IAssemblyLoaderService, AssemblyLoaderService>();
-            containerRegistry.RegisterSingleton<ILoadedViewsService, LoadedViewsService>();
+            ////containerRegistry.RegisterSingleton<ILoadedViewsService, LoadedViewsService>();
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
             containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
         }
@@ -111,7 +110,7 @@
 
             // Load any extra modules that this application will use to display views/data.
             DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(Container)
-            { ModulePath = Path.Combine(Directory.GetCurrentDirectory(), @"Test Modules") };
+            { ModulePath = Path.Combine(Directory.GetCurrentDirectory(), @"TestModules") };
             ((AggregateModuleCatalog)moduleCatalog).AddCatalog(directoryCatalog);
         }
 

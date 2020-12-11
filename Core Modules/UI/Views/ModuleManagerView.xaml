@@ -26,21 +26,23 @@
             prism:RegionManager.RegionName="ButtonsRegion" />
 
         <!--  Loaded Views  -->
-        <Grid Grid.Row="0" Grid.Column="1">
-            <ScrollViewer
-                Margin="10,15,25,10"
-                Background="LightGray"
-                HorizontalScrollBarVisibility="Visible"
-                VerticalScrollBarVisibility="Disabled">
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            MinWidth="10"
+            MinHeight="10"
+            Margin="10,15,25,10"
+            Background="LightGray">
+            <ContentControl prism:RegionManager.RegionName="LoadedViewsRegion">
 
-                <ItemsControl prism:RegionManager.RegionName="LoadedViewsRegion">
+                <!--<ItemsControl prism:RegionManager.RegionName="LoadedViewsRegion">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
+                </ItemsControl>-->
+            </ContentControl>
         </Grid>
 
         <Grid

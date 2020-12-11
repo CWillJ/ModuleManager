@@ -98,12 +98,11 @@
             </summary>
             <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
         </member>
-        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedModules(ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IAssemblyLoaderService)">
+        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedModules(ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
             <summary>
             Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
             </summary>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
-            <param name="assemblyLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService"/>.</param>
         </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.AssemblyDataTreeViewModel">
             <summary>
@@ -142,13 +141,12 @@
             View model for the header buttons.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IAssemblyLoaderService,ModuleManager.Core.UI.Interfaces.IProgressBarService)">
+        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
             <param name="regionManager">Injected <see cref="T:Prism.Regions.IRegionManager"/>.</param>
             <param name="assemblyCollectionService">Injected <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
-            <param name="assemblyLoaderService">Injected <see cref="T:ModuleManager.Common.Interfaces.IAssemblyLoaderService"/>.</param>
             <param name="progressBarService">Injected <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.</param>
         </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
@@ -222,17 +220,6 @@
         <member name="T:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel">
             <summary>
             MainView view model.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel.#ctor(ModuleManager.Common.Interfaces.ILoadedViewsService)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel"/> class.
-            </summary>
-            <param name="loadedViewsService">The program's <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewsService"/>.</param>
-        </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel.LoadedViewsService">
-            <summary>
-            Gets a collection of view types.
             </summary>
         </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.ProgressBarViewModel">
