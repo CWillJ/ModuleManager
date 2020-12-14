@@ -7,6 +7,9 @@
     /// </summary>
     public partial class ModuleAView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModuleAView"/> class.
+        /// </summary>
         public ModuleAView()
         {
             InitializeComponent();

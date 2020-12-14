@@ -4,7 +4,7 @@
     using Prism.Mvvm;
 
     /// <summary>
-    /// View model for progress bar view.
+    /// ViewObject model for progress bar view.
     /// </summary>
     public class ProgressBarViewModel : BindableBase
     {

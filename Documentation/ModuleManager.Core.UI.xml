@@ -106,7 +106,7 @@
         </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.AssemblyDataTreeViewModel">
             <summary>
-            View model for the AssemblyData TreeView.
+            ViewObject model for the AssemblyData TreeView.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.AssemblyDataTreeViewModel.#ctor(ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
@@ -122,7 +122,7 @@
         </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.AssemblyDataViewModel">
             <summary>
-            View model for assembly data area.
+            ViewObject model for assembly data area.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.AssemblyDataViewModel.#ctor(ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
@@ -138,16 +138,17 @@
         </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.ButtonsViewModel">
             <summary>
-            View model for the header buttons.
+            ViewObject model for the header buttons.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService)">
+        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.IViewCollectionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ButtonsViewModel"/> class.
             </summary>
             <param name="regionManager">Injected <see cref="T:Prism.Regions.IRegionManager"/>.</param>
             <param name="assemblyCollectionService">Injected <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
             <param name="progressBarService">Injected <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.</param>
+            <param name="loadedViewsService">Injected <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
         </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
             <summary>
@@ -171,12 +172,22 @@
         </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.LoadModulesCommand">
             <summary>
-            Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
+            Gets or sets the LoadModulesCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
             </summary>
         </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.SaveConfigCommand">
             <summary>
-            Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
+            Gets or sets the SaveConfigCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.AddSelectedViewCommand">
+            <summary>
+            Gets or sets the AddSelectedViewCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.RemoveSelectedViewCommand">
+            <summary>
+            Gets or sets the RemoveSelectedViewCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.StoreModules">
@@ -207,9 +218,19 @@
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.Navigate(System.String)">
             <summary>
-            View navigation method.
+            ViewObject navigation method.
             </summary>
             <param name="navigatePath">The path of the view to navigate to.</param>
+        </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.AddSelectedView">
+            <summary>
+            Adds the selected TreeView item's view to the views region.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.RemoveSelectedView">
+            <summary>
+            Removes the selected view from the views region.
+            </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.CanExecute">
             <summary>
@@ -217,14 +238,32 @@
             </summary>
             <returns>True.</returns>
         </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.CanAdd">
+            <summary>
+            Can only add a view if the selected item is an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> that has a <see cref="T:ModuleManager.Common.Classes.TypeData"/>
+            that is a view or the selected item is a <see cref="T:ModuleManager.Common.Classes.TypeData"/> that is a view.
+            </summary>
+            <returns>True if the selected item can be added to the view collection, false if not.</returns>
+        </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel">
             <summary>
             MainView view model.
             </summary>
         </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel.#ctor(ModuleManager.Common.Interfaces.IViewCollectionService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel"/> class.
+            </summary>
+            <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel.ViewCollectionService">
+            <summary>
+            Gets the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
+            </summary>
+        </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.ProgressBarViewModel">
             <summary>
-            View model for progress bar view.
+            ViewObject model for progress bar view.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ProgressBarViewModel.#ctor(ModuleManager.Core.UI.Interfaces.IProgressBarService)">

@@ -59,7 +59,7 @@
         </member>
         <member name="M:ModuleManager.App.LoadTestModules">
             <summary>
-            Loads the test modules that this project will display.
+            Stores the test modules that this project will display.
             </summary>
         </member>
         <member name="M:ModuleManager.App.InitializeComponent">

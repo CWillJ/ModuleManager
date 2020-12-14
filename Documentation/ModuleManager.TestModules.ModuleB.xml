@@ -9,6 +9,12 @@
             Test module B.
             </summary>
         </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.#ctor(ModuleManager.Common.Interfaces.IViewCollectionService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleB.ModuleBModule"/> class.
+            </summary>
+            <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+        </member>
         <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.OnInitialized(Prism.Ioc.IContainerProvider)">
             <inheritdoc cref="T:Prism.Modularity.IModule"/>
         </member>
@@ -20,6 +26,11 @@
             Injects this modules views into the LoadedViewsRegion.
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="T:ModuleManager.TestModules.ModuleB.ViewModels.ModuleBViewModel">
+            <summary>
+            Module B View Model.
+            </summary>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleB.ViewModels.ModuleBViewModel.#ctor">
             <summary>
@@ -37,6 +48,11 @@
             </summary>
             <summary>
             ModuleBView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.Views.ModuleBView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleB.Views.ModuleBView"/> class.
             </summary>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleB.Views.ModuleBView.InitializeComponent">

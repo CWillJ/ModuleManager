@@ -9,18 +9,21 @@
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
+    using Prism.Ioc;
+    using Prism.Modularity;
     using Prism.Mvvm;
     using Prism.Regions;
     using Telerik.Windows.Controls;
 
     /// <summary>
-    /// View model for the header buttons.
+    /// ViewObject model for the header buttons.
     /// </summary>
     public class ButtonsViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
         private readonly IProgressBarService _progressBarService;
+        private readonly IViewCollectionService _loadedViewsService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonsViewModel"/> class.
@@ -28,15 +31,18 @@
         /// <param name="regionManager">Injected <see cref="IRegionManager"/>.</param>
         /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
         /// <param name="progressBarService">Injected <see cref="IProgressBarService"/>.</param>
+        /// <param name="loadedViewsService">Injected <see cref="IViewCollectionService"/>.</param>
         public ButtonsViewModel(
             IRegionManager regionManager,
             IAssemblyCollectionService assemblyCollectionService,
-            IProgressBarService progressBarService)
+            IProgressBarService progressBarService,
+            IViewCollectionService loadedViewsService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
 
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _loadedViewsService = loadedViewsService ?? throw new ArgumentNullException("LoadedViewsService");
 
             UseSaveFileDialog = false;
 
@@ -47,6 +53,9 @@
 
             // Save the current module setup, checkboxes and all, to an xml file.
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
+
+            AddSelectedViewCommand = new Prism.Commands.DelegateCommand(AddSelectedView, CanExecute);
+            RemoveSelectedViewCommand = new Prism.Commands.DelegateCommand(RemoveSelectedView, CanRemove);
         }
 
         /// <summary>
@@ -73,14 +82,24 @@
         public Prism.Commands.DelegateCommand<string> NavigateCommand { get; private set; }
 
         /// <summary>
-        /// Gets or sets the LoadModulesCommand as a ModuleManagerICommand.
+        /// Gets or sets the LoadModulesCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
         /// </summary>
         public Prism.Commands.DelegateCommand LoadModulesCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the SaveConfigCommand as a ModuleManagerICommand.
+        /// Gets or sets the SaveConfigCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
         /// </summary>
         public Prism.Commands.DelegateCommand SaveConfigCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the AddSelectedViewCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
+        /// </summary>
+        public Prism.Commands.DelegateCommand AddSelectedViewCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the RemoveSelectedViewCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
+        /// </summary>
+        public Prism.Commands.DelegateCommand RemoveSelectedViewCommand { get; set; }
 
         /// <summary>
         /// StoreModules will attempt to get all assemblies from a dll and store it
@@ -228,7 +247,7 @@
         }
 
         /// <summary>
-        /// View navigation method.
+        /// ViewObject navigation method.
         /// </summary>
         /// <param name="navigatePath">The path of the view to navigate to.</param>
         private void Navigate(string navigatePath)
@@ -240,10 +259,75 @@
         }
 
         /// <summary>
+        /// Adds the selected TreeView item's view to the views region.
+        /// </summary>
+        private void AddSelectedView()
+        {
+            foreach (var viewData in _loadedViewsService.Views)
+            {
+                _regionManager.Regions[@"LoadedViewsRegion"].Add(viewData);
+            }
+        }
+
+        /// <summary>
+        /// Removes the selected view from the views region.
+        /// </summary>
+        private void RemoveSelectedView()
+        {
+            ////_regionManager.Regions[@"LoadedViewsRegion"].Remove(containerProvider.Resolve<ModuleAView>());
+        }
+
+        /// <summary>
         /// Can always execute.
         /// </summary>
         /// <returns>True.</returns>
         private bool CanExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Can only add a view if the selected item is an <see cref="AssemblyData"/> that has a <see cref="TypeData"/>
+        /// that is a view or the selected item is a <see cref="TypeData"/> that is a view.
+        /// </summary>
+        /// <returns>True if the selected item can be added to the view collection, false if not.</returns>
+        private bool CanAdd()
+        {
+            if (AssemblyCollectionService.SelectedItem == null)
+            {
+                return false;
+            }
+
+            if (AssemblyCollectionService.SelectedItem is AssemblyData assemblyData)
+            {
+                foreach (TypeData typeData in assemblyData.Types)
+                {
+                    if (typeData.IsView)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+            else if (AssemblyCollectionService.SelectedItem is TypeData typeData)
+            {
+                if (typeData.IsView)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool CanRemove()
         {
             return true;
         }

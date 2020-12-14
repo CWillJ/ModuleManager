@@ -55,7 +55,7 @@
             shell.Visibility = Visibility.Visible;
 
             LoadCore();
-            ////LoadTestModules();
+            LoadTestModules();
         }
 
         /// <summary>
@@ -87,6 +87,7 @@
             ////containerRegistry.RegisterSingleton<ILoadedViewsService, LoadedViewsService>();
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
             containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
+            containerRegistry.RegisterSingleton<IViewCollectionService, ViewCollectionService>();
         }
 
         /// <summary>
@@ -128,13 +129,13 @@
         }
 
         /// <summary>
-        /// Loads the test modules that this project will display.
+        /// Stores the test modules that this project will display.
         /// </summary>
         private void LoadTestModules()
         {
             var moduleStartupService = Container.Resolve<IModuleStartUpService>();
 
-            foreach (Action registerModuleView in moduleStartupService.ViewInjectionActions)
+            foreach (Action registerModuleView in moduleStartupService.StoreViewActions)
             {
                 registerModuleView();
             }

@@ -3,7 +3,7 @@
     using Prism.Mvvm;
 
     /// <summary>
-    /// Module A View Model.
+    /// Module A ViewObject Model.
     /// </summary>
     public class ModuleAViewModel : BindableBase
     {
@@ -14,7 +14,7 @@
         /// </summary>
         public ModuleAViewModel()
         {
-            _text = @"Module A View";
+            _text = @"Module A ViewObject";
         }
 
         /// <summary>

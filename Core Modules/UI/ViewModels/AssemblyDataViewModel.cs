@@ -4,7 +4,7 @@
     using Prism.Mvvm;
 
     /// <summary>
-    /// View model for assembly data area.
+    /// ViewObject model for assembly data area.
     /// </summary>
     public class AssemblyDataViewModel : BindableBase
     {

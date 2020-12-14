@@ -254,27 +254,6 @@
             assemblyData.Assembly = null;
         }
 
-        //// /// <summary>
-        //// /// Will load/unload any views from the passed in <see cref="AssemblyData"/> based on the IsEnabled property.
-        //// /// </summary>
-        //// /// <param name="assemblyData">The <see cref="AssemblyData"/> to check load/unload views from.</param>
-        //// private void UpdateLoadedViews(AssemblyData assemblyData)
-        //// {
-        ////     if (assemblyData == null)
-        ////     {
-        ////         return;
-        ////     }
-        ////
-        ////     if (assemblyData.IsEnabled)
-        ////     {
-        ////         _loadedViewsService.AddViewsFromAssemblyData(assemblyData);
-        ////     }
-        ////     else
-        ////     {
-        ////         _loadedViewsService.RemoveViewsFromAssemblyData(assemblyData);
-        ////     }
-        //// }
-
         /// <summary>
         /// Loads all referenced assemblies.
         /// </summary>

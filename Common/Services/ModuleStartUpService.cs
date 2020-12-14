@@ -9,14 +9,25 @@
     /// </summary>
     public class ModuleStartUpService : IModuleStartUpService
     {
-        private readonly List<Action> _viewInjectionActions;
+        private readonly List<Action> _storeViewActions;
+        private readonly List<Action> _viewInjectionAction;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleStartUpService"/> class.
         /// </summary>
         public ModuleStartUpService()
         {
-            _viewInjectionActions = new List<Action>();
+            _storeViewActions = new List<Action>();
+            _viewInjectionAction = new List<Action>();
+        }
+
+        /// <inheritdoc/>
+        public List<Action> StoreViewActions
+        {
+            get
+            {
+                return _storeViewActions;
+            }
         }
 
         /// <inheritdoc/>
@@ -24,14 +35,20 @@
         {
             get
             {
-                return _viewInjectionActions;
+                return _viewInjectionAction;
             }
+        }
+
+        /// <inheritdoc/>
+        public void AddStoreViewAction(Action action)
+        {
+            _storeViewActions.Add(action);
         }
 
         /// <inheritdoc/>
         public void AddViewInjectionAction(Action action)
         {
-            _viewInjectionActions.Add(action);
+            _viewInjectionAction.Add(action);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.TestModules.ModuleB
 {
+    using System.Reflection;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.TestModules.ModuleB.Views;
     using Prism.Ioc;
@@ -11,11 +12,22 @@
     /// </summary>
     public class ModuleBModule : IModuleManagerTestModule
     {
+        private readonly IViewCollectionService _viewCollectionService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModuleBModule"/> class.
+        /// </summary>
+        /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
+        public ModuleBModule(IViewCollectionService viewCollectionService)
+        {
+            _viewCollectionService = viewCollectionService;
+        }
+
         /// <inheritdoc cref="IModule"/>
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var startUpService = containerProvider.Resolve<IModuleStartUpService>();
-            startUpService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
+            startUpService.AddStoreViewAction(() => InjectViewsIntoRegions(containerProvider));
         }
 
         /// <inheritdoc cref="IModule"/>
@@ -29,8 +41,7 @@
         /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
         private void InjectViewsIntoRegions(IContainerProvider containerProvider)
         {
-            var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.Regions[@"LoadedViewsRegion"].Add(containerProvider.Resolve<ModuleBView>(), @"ModuleBView");
+            _viewCollectionService.AddView(containerProvider.Resolve<ModuleBView>());
         }
     }
 }

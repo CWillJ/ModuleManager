@@ -4,7 +4,7 @@
     using ModuleManager.Common.Interfaces;
 
     /// <summary>
-    /// View model for the AssemblyData TreeView.
+    /// ViewObject model for the AssemblyData TreeView.
     /// </summary>
     public class AssemblyDataTreeViewModel
     {

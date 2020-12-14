@@ -11,11 +11,22 @@
     /// </summary>
     public class ModuleAModule : IModuleManagerTestModule
     {
+        private readonly IViewCollectionService _viewCollectionService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModuleAModule"/> class.
+        /// </summary>
+        /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
+        public ModuleAModule(IViewCollectionService viewCollectionService)
+        {
+            _viewCollectionService = viewCollectionService;
+        }
+
         /// <inheritdoc cref="IModule"/>
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var startUpService = containerProvider.Resolve<IModuleStartUpService>();
-            startUpService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
+            startUpService.AddStoreViewAction(() => StoreViews(containerProvider));
         }
 
         /// <inheritdoc cref="IModule"/>
@@ -24,13 +35,12 @@
         }
 
         /// <summary>
-        /// Injects this modules views into the LoadedViewsRegion.
+        /// Stores this modules views into the <see cref="IViewCollectionService"/>.
         /// </summary>
         /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
-        private void InjectViewsIntoRegions(IContainerProvider containerProvider)
+        private void StoreViews(IContainerProvider containerProvider)
         {
-            var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.Regions[@"LoadedViewsRegion"].Add(containerProvider.Resolve<ModuleAView>(), @"ModuleAView");
+            _viewCollectionService.AddView(containerProvider.Resolve<ModuleAView>());
         }
     }
 }
