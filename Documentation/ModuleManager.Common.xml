@@ -535,33 +535,6 @@
             </summary>
             <returns>A desired format for the member description.</returns>
         </member>
-        <member name="T:ModuleManager.Common.Classes.Data.ViewData">
-            <summary>
-            Stores a view object and ways to access that view.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.Data.ViewData.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.Data.ViewData.#ctor(System.Object,System.Type)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> class.
-            </summary>
-            <param name="viewObject">A view <see cref="T:System.Object"/>.</param>
-            <param name="viewType">The <see cref="T:System.Type"/> of the view.</param>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.Data.ViewData.ViewObject">
-            <summary>
-            Gets the <see cref="T:System.Object"/> of view objects.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.Data.ViewData.ViewType">
-            <summary>
-            Gets or sets the <see cref="T:System.String"/> of the assembly name.
-            </summary>
-        </member>
         <member name="T:ModuleManager.Common.Classes.XmlDescriptionRetriever">
             <summary>
             XmlDescriptionRetriever is used to get text form an xml file.
@@ -843,15 +816,20 @@
             Gets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
             </summary>
         </member>
+        <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.SelectedView">
+            <summary>
+            Gets or sets the selected <see cref="T:System.Object"/>.
+            </summary>
+        </member>
         <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.AddView(System.Object)">
             <summary>
-            Adds a view <see cref="T:System.Object"/> to the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> collection.
+            Adds a view <see cref="T:System.Object"/> to the collection.
             </summary>
             <param name="viewObject">The view <see cref="T:System.Object"/> to add to the collection.</param>
         </member>
         <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.RemoveView(System.Object)">
             <summary>
-            Removes a view <see cref="T:System.Object"/> from the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> collection if it exists.
+            Removes a view <see cref="T:System.Object"/> from the collection if it exists.
             </summary>
             <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the collection.</param>
         </member>
@@ -935,6 +913,9 @@
             </summary>
         </member>
         <member name="P:ModuleManager.Common.Services.ViewCollectionService.Views">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ViewCollectionService.SelectedView">
             <inheritdoc/>
         </member>
         <member name="M:ModuleManager.Common.Services.ViewCollectionService.AddView(System.Object)">

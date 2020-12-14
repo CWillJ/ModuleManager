@@ -263,9 +263,21 @@
         /// </summary>
         private void AddSelectedView()
         {
-            foreach (var viewData in _loadedViewsService.Views)
+            if (AssemblyCollectionService.SelectedItem is AssemblyData assemblyData && assemblyData.IsEnabled)
             {
-                _regionManager.Regions[@"LoadedViewsRegion"].Add(viewData);
+                foreach (TypeData typeData in assemblyData.Types)
+                {
+                    if (typeData.IsView)
+                    {
+                        foreach (var viewObject in _loadedViewsService.Views)
+                        {
+                            if (typeData.FullName == viewObject.GetType().FullName)
+                            {
+                                _regionManager.Regions[@"LoadedViewsRegion"].Add(viewObject);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -274,7 +286,10 @@
         /// </summary>
         private void RemoveSelectedView()
         {
-            ////_regionManager.Regions[@"LoadedViewsRegion"].Remove(containerProvider.Resolve<ModuleAView>());
+            if (_regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(_loadedViewsService.SelectedView))
+            {
+                _regionManager.Regions[@"LoadedViewsRegion"].Remove(_loadedViewsService.SelectedView);
+            }
         }
 
         /// <summary>

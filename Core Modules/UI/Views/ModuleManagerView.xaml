@@ -36,7 +36,7 @@
             Margin="10,15,25,10"
             prism:RegionManager.RegionName="LoadedViewsRegion"
             Background="LightGray"
-            SelectedItem="{Binding Path=ViewCollectionService.Views, Mode=OneWay}">
+            SelectedItem="{Binding Path=ViewCollectionService.SelectedView, Mode=TwoWay}">
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
