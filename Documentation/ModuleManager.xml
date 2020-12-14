@@ -155,12 +155,6 @@
             <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> will handle commands from the main view.
             </summary>
         </member>
-        <member name="M:ModuleManager.ViewModels.ShellViewModel.#ctor(Prism.Regions.IRegionManager)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> class.
-            </summary>
-            <param name="regionManager">Gets the <see cref="T:Prism.Regions.IRegionManager"/> to register shell region.</param>
-        </member>
         <member name="T:ModuleManager.Views.ShellView">
             <summary>
             Interaction logic for MainWindow.xaml.

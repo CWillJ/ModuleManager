@@ -1,13 +1,13 @@
-﻿namespace ModuleManager.TestModules.ModuleA.Views
+﻿namespace ModuleManager.TestModules.ModuleB.Views
 {
     using System.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for ModuleAView.xaml.
     /// </summary>
-    public partial class ModuleAView : UserControl
+    public partial class ModuleBView : UserControl
     {
-        public ModuleAView()
+        public ModuleBView()
         {
             InitializeComponent();
         }

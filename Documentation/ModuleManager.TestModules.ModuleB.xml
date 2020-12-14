@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModuleManager.TestModules.ModuleB</name>
+    </assembly>
+    <members>
+        <member name="T:ModuleManager.TestModules.ModuleB.ModuleBModule">
+            <summary>
+            Test module B.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <inheritdoc cref="T:Prism.Modularity.IModule"/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <inheritdoc cref="T:Prism.Modularity.IModule"/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.InjectViewsIntoRegions(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Injects this modules views into the LoadedViewsRegion.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ViewModels.ModuleBViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleB.ViewModels.ModuleBViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.TestModules.ModuleB.ViewModels.ModuleBViewModel.Text">
+            <summary>
+            Gets or sets the text of the view.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.TestModules.ModuleB.Views.ModuleBView">
+            <summary>
+            Interaction logic for ModuleAView.xaml.
+            </summary>
+            <summary>
+            ModuleBView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.Views.ModuleBView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -4,14 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <CodeAnalysisRuleSet>..\..\PVA.ruleset</CodeAnalysisRuleSet>
-    <AssemblyName>ModuleManager.TestModules.ModuleA</AssemblyName>
-    <RootNamespace>ModuleManager.TestModules.ModuleA</RootNamespace>
-    <Company>PVA</Company>
+    <AssemblyName>ModuleManager.TestModules.ModuleB</AssemblyName>
+    <RootNamespace>ModuleManager.TestModules.ModuleB</RootNamespace>
     <Authors>Product Development</Authors>
+    <Company>PVA</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\..\Documentation\ModuleManager.TestModules.ModuleA.xml</DocumentationFile>
+    <DocumentationFile>..\..\Documentation\ModuleManager.TestModules.ModuleB.xml</DocumentationFile>
     <OutputPath></OutputPath>
   </PropertyGroup>
 
@@ -64,10 +64,24 @@
 
 	<ItemGroup>
 	  <Folder Include="Models\" />
+	  <Folder Include="Models\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Common\Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\ModuleBView.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Views\ModuleBView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

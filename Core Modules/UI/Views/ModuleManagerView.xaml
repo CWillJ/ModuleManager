@@ -33,16 +33,17 @@
             MinHeight="10"
             Margin="10,15,25,10"
             Background="LightGray">
-            <ContentControl prism:RegionManager.RegionName="LoadedViewsRegion">
 
-                <!--<ItemsControl prism:RegionManager.RegionName="LoadedViewsRegion">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>-->
-            </ContentControl>
+            <!--<ContentControl prism:RegionManager.RegionName="LoadedViewsRegion" />-->
+
+            <ItemsControl prism:RegionManager.RegionName="LoadedViewsRegion">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
         </Grid>
 
         <Grid

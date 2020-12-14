@@ -1,20 +1,17 @@
-﻿namespace ModuleManager.TestModules.ModuleA.ViewModels
+﻿namespace ModuleManager.TestModules.ModuleB.ViewModels
 {
     using Prism.Mvvm;
 
-    /// <summary>
-    /// Module A View Model.
-    /// </summary>
-    public class ModuleAViewModel : BindableBase
+    public class ModuleBViewModel : BindableBase
     {
         private string _text;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleAViewModel"/> class.
+        /// Initializes a new instance of the <see cref="ModuleBViewModel"/> class.
         /// </summary>
-        public ModuleAViewModel()
+        public ModuleBViewModel()
         {
-            _text = @"Module A View";
+            _text = @"Module B View";
         }
 
         /// <summary>

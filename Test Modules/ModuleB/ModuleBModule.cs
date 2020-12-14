@@ -1,15 +1,15 @@
-﻿namespace ModuleManager.TestModules.ModuleA
+﻿namespace ModuleManager.TestModules.ModuleB
 {
     using ModuleManager.Common.Interfaces;
-    using ModuleManager.TestModules.ModuleA.Views;
+    using ModuleManager.TestModules.ModuleB.Views;
     using Prism.Ioc;
     using Prism.Modularity;
     using Prism.Regions;
 
     /// <summary>
-    /// Test module A.
+    /// Test module B.
     /// </summary>
-    public class ModuleAModule : IModuleManagerTestModule
+    public class ModuleBModule : IModuleManagerTestModule
     {
         /// <inheritdoc cref="IModule"/>
         public void OnInitialized(IContainerProvider containerProvider)
@@ -30,7 +30,7 @@
         private void InjectViewsIntoRegions(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.Regions[@"LoadedViewsRegion"].Add(containerProvider.Resolve<ModuleAView>(), @"ModuleAView");
+            regionManager.Regions[@"LoadedViewsRegion"].Add(containerProvider.Resolve<ModuleBView>(), @"ModuleBView");
         }
     }
 }

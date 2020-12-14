@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleA", "Test Modules\Mod
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core Modules", "Core Modules", "{9932F414-1E53-4218-8803-E312513FE557}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleB", "Test Modules\ModuleB\ModuleB.csproj", "{DC8E774C-030D-41B5-B474-0314D3735883}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,14 @@ Global
 		{6FF077B7-ACD3-4FD9-BFD2-EB74620A1EC8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FF077B7-ACD3-4FD9-BFD2-EB74620A1EC8}.Release|x64.ActiveCfg = Release|Any CPU
 		{6FF077B7-ACD3-4FD9-BFD2-EB74620A1EC8}.Release|x64.Build.0 = Release|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Debug|x64.Build.0 = Debug|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC8E774C-030D-41B5-B474-0314D3735883}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7AD78CA8-EE4E-4A42-B844-EB6A61ADC947} = {9932F414-1E53-4218-8803-E312513FE557}
 		{6FF077B7-ACD3-4FD9-BFD2-EB74620A1EC8} = {6D9F95EB-E3BC-4B7F-B9E4-46A45B4139DE}
+		{DC8E774C-030D-41B5-B474-0314D3735883} = {6D9F95EB-E3BC-4B7F-B9E4-46A45B4139DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A21F156-08D3-493D-831A-05B18C9DF0A7}
