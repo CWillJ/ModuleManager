@@ -28,7 +28,7 @@
             regionManager.RegisterViewWithRegion(@"ButtonsRegion", typeof(ButtonsView));
             regionManager.RegisterViewWithRegion(@"AssemblyDataRegion", typeof(AssemblyDataView));
             regionManager.RegisterViewWithRegion(@"AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
-            regionManager.RegisterViewWithRegion(@"LoadedViewsRegion", typeof(ViewDisplayView));
+            regionManager.RegisterViewWithRegion(@"ViewsRegion", typeof(ViewDisplayView));
 
             // Register module initialization actions with CoreStartupService.
             var startupService = containerProvider.Resolve<IModuleStartUpService>();

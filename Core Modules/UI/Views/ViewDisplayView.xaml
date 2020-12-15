@@ -9,7 +9,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
-    <!--  Loaded Views  -->
+    <!--  Loaded Views ItemsSource="{Binding Path=ViewCollectionService.ActiveViews}" -->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110" />
@@ -75,7 +75,7 @@
                 Background="LightGray"
                 BorderBrush="Black"
                 BorderThickness="1"
-                ItemsSource="{Binding Path=ViewCollectionService.ActiveViews}"
+                prism:RegionManager.RegionName="LoadedViewsRegion"
                 SelectedIndex="{Binding Path=ViewCollectionService.SelectedViewIndex, Mode=OneWayToSource}"
                 SelectedItem="{Binding Path=ViewCollectionService.SelectedView, Mode=TwoWay}">
                 <telerik:RadListBox.ItemsPanel>

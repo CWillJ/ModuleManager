@@ -4,22 +4,26 @@
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
+    using Prism.Regions;
 
     /// <summary>
     /// View model for the buttons view.
     /// </summary>
     public class ViewDisplayViewModel : BindableBase
     {
+        private readonly IRegionManager _regionManager;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
         private readonly IViewCollectionService _viewCollectionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDisplayViewModel"/> class.
         /// </summary>
+        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
         /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
-        public ViewDisplayViewModel(IAssemblyCollectionService assemblyCollectionService, IViewCollectionService viewCollectionService)
+        public ViewDisplayViewModel(IRegionManager regionManager, IAssemblyCollectionService assemblyCollectionService, IViewCollectionService viewCollectionService)
         {
+            _regionManager = regionManager;
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
 
@@ -60,8 +64,8 @@
                         {
                             if (typeData.FullName == viewObject.GetType().FullName)
                             {
-                                ViewCollectionService.ActiveViews.Add(viewObject);
-                                ////_regionManager.Regions[@"LoadedViewsRegion"].Add(viewObject);
+                                object instance = Activator.CreateInstance(viewObject.GetType());
+                                _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                             }
                         }
                     }
@@ -73,8 +77,8 @@
                 {
                     if (typeData.FullName == viewObject.GetType().FullName)
                     {
-                        ViewCollectionService.ActiveViews.Add(viewObject);
-                        ////_regionManager.Regions[@"LoadedViewsRegion"].Add(viewObject);
+                        object instance = Activator.CreateInstance(viewObject.GetType());
+                        _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                     }
                 }
             }
@@ -85,9 +89,9 @@
         /// </summary>
         private void RemoveSelectedView()
         {
-            if (ViewCollectionService.SelectedView != null && ViewCollectionService.ActiveViews.Contains(ViewCollectionService.SelectedView))
+            if (ViewCollectionService.SelectedView != null && _regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(ViewCollectionService.SelectedView))
             {
-                ViewCollectionService.ActiveViews.RemoveAt(ViewCollectionService.ActiveViews.Count - 1 - ViewCollectionService.SelectedViewIndex);
+                _regionManager.Regions[@"LoadedViewsRegion"].Remove(ViewCollectionService.SelectedView);
             }
         }
 
