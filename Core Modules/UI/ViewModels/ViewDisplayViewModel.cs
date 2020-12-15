@@ -87,7 +87,7 @@
         {
             if (ViewCollectionService.SelectedView != null && ViewCollectionService.ActiveViews.Contains(ViewCollectionService.SelectedView))
             {
-                ViewCollectionService.ActiveViews.RemoveAt(ViewCollectionService.SelectedViewIndex);
+                ViewCollectionService.ActiveViews.RemoveAt(ViewCollectionService.ActiveViews.Count - 1 - ViewCollectionService.SelectedViewIndex);
             }
         }
 

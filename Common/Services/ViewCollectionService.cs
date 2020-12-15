@@ -63,29 +63,15 @@
         /// <inheritdoc/>
         public string SelectedViewName
         {
-            get
-            {
-                return _selectedViewName;
-            }
-
-            set
-            {
-                SetProperty(ref _selectedViewName, value);
-            }
+            get { return _selectedViewName; }
+            set { SetProperty(ref _selectedViewName, value); }
         }
 
         /// <inheritdoc/>
         public int SelectedViewIndex
         {
-            get
-            {
-                return _selectedViewIndex;
-            }
-
-            set
-            {
-                SetProperty(ref _selectedViewIndex, value);
-            }
+            get { return _selectedViewIndex; }
+            set { SetProperty(ref _selectedViewIndex, value); }
         }
 
         /// <inheritdoc/>
