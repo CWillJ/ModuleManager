@@ -41,6 +41,7 @@
         private void StoreViews(IContainerProvider containerProvider)
         {
             _viewCollectionService.AddView(containerProvider.Resolve<ModuleAView>());
+            _viewCollectionService.AddView(containerProvider.Resolve<ModuleA2View>());
         }
     }
 }

@@ -28,6 +28,7 @@
             regionManager.RegisterViewWithRegion(@"ButtonsRegion", typeof(ButtonsView));
             regionManager.RegisterViewWithRegion(@"AssemblyDataRegion", typeof(AssemblyDataView));
             regionManager.RegisterViewWithRegion(@"AssemblyDataTreeRegion", typeof(AssemblyDataTreeView));
+            regionManager.RegisterViewWithRegion(@"LoadedViewsRegion", typeof(ViewDisplayView));
 
             // Register module initialization actions with CoreStartupService.
             var startupService = containerProvider.Resolve<IModuleStartUpService>();
@@ -43,10 +44,6 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
-
-            containerRegistry.RegisterForNavigation<ButtonsView>();
-            containerRegistry.RegisterForNavigation<AssemblyDataView>();
-            containerRegistry.RegisterForNavigation<AssemblyDataTreeView>();
 
             containerRegistry.Register<IAssemblyData, AssemblyData>();
             containerRegistry.Register<ITypeData, TypeData>();

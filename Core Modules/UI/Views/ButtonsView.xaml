@@ -6,13 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-    d:DesignHeight="100"
-    d:DesignWidth="600"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
     <StackPanel Orientation="Horizontal">
-        <telerik:RadButton
+        <!--<telerik:RadButton
             Width="120"
             Height="40"
             Margin="25,10,5,5"
@@ -21,39 +19,17 @@
             Command="{Binding Path=LoadModulesCommand}"
             Content="Load Modules"
             FontSize="10"
-            FontWeight="Bold" />
+            FontWeight="Bold" />-->
 
         <telerik:RadButton
             Width="120"
             Height="40"
-            Margin="25,10,5,5"
+            Margin="25,10,10,10"
             HorizontalAlignment="Left"
             Background="IndianRed"
             Command="{Binding Path=SaveConfigCommand}"
             Content="Save Configuration"
             FontSize="10"
-            FontWeight="Bold" />
-
-        <telerik:RadButton
-            Width="40"
-            Height="40"
-            Margin="25,10,5,5"
-            HorizontalAlignment="Left"
-            Background="IndianRed"
-            Command="{Binding Path=AddSelectedViewCommand}"
-            Content="+"
-            FontSize="12"
-            FontWeight="Bold" />
-
-        <telerik:RadButton
-            Width="40"
-            Height="40"
-            Margin="25,10,5,5"
-            HorizontalAlignment="Left"
-            Background="IndianRed"
-            Command="{Binding Path=RemoveSelectedViewCommand}"
-            Content="-"
-            FontSize="12"
             FontWeight="Bold" />
     </StackPanel>
 </UserControl>

@@ -8,14 +8,29 @@
     public interface IViewCollectionService
     {
         /// <summary>
-        /// Gets the <see cref="ObservableCollection{Object}"/>.
+        /// Gets the <see cref="ObservableCollection{Object}"/>of views.
         /// </summary>
         public ObservableCollection<object> Views { get; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="ObservableCollection{Object}"/> of active views.
+        /// </summary>
+        public ObservableCollection<object> ActiveViews { get; set; }
 
         /// <summary>
         /// Gets or sets the selected <see cref="object"/>.
         /// </summary>
         public object SelectedView { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected <see cref="string"/>.
+        /// </summary>
+        public string SelectedViewName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="int"/> index of the selected view object.
+        /// </summary>
+        public int SelectedViewIndex { get; set; }
 
         /// <summary>
         /// Adds a view <see cref="object"/> to the collection.

@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
@@ -15,40 +14,26 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2.25*" />
-        </Grid.ColumnDefinitions>
+        <Grid Margin="10,10,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!--  Load Save Buttons  -->
-        <ContentControl
-            Grid.Row="0"
-            Grid.Column="0"
-            prism:RegionManager.RegionName="ButtonsRegion" />
+            <!--  Load Save Buttons  -->
+            <ContentControl
+                Grid.Row="0"
+                Grid.Column="0"
+                prism:RegionManager.RegionName="ButtonsRegion" />
 
-        <!--  Loaded Views  -->
-        <ListBox
-            x:Name="displayedViewsListBox"
-            Grid.Row="0"
-            Grid.Column="1"
-            MinWidth="10"
-            MinHeight="10"
-            Margin="10,15,25,10"
-            prism:RegionManager.RegionName="LoadedViewsRegion"
-            Background="LightGray"
-            SelectedItem="{Binding Path=ViewCollectionService.SelectedView, Mode=TwoWay}">
+            <!--  Loaded Views  -->
+            <ContentControl
+                Grid.Row="0"
+                Grid.Column="1"
+                prism:RegionManager.RegionName="LoadedViewsRegion" />
+        </Grid>
 
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
-
-        <Grid
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Margin="20,20,20,20">
+        <Grid Grid.Row="1" Margin="20,20,20,20">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

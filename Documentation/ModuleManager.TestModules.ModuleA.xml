@@ -27,6 +27,21 @@
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
+        <member name="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel">
+            <summary>
+            Module A2 View Model.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel.Text">
+            <summary>
+            Gets or sets the text of the view.
+            </summary>
+        </member>
         <member name="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleAViewModel">
             <summary>
             Module A ViewObject Model.
@@ -40,6 +55,24 @@
         <member name="P:ModuleManager.TestModules.ModuleA.ViewModels.ModuleAViewModel.Text">
             <summary>
             Gets or sets the text of the view.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.TestModules.ModuleA.Views.ModuleA2View">
+            <summary>
+            Interaction logic for ModuleA2View.xaml.
+            </summary>
+            <summary>
+            ModuleA2View
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.Views.ModuleA2View.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleA.Views.ModuleA2View"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.Views.ModuleA2View.InitializeComponent">
+            <summary>
+            InitializeComponent
             </summary>
         </member>
         <member name="T:ModuleManager.TestModules.ModuleA.Views.ModuleAView">

@@ -813,12 +813,27 @@
         </member>
         <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.Views">
             <summary>
-            Gets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            Gets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>of views.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.ActiveViews">
+            <summary>
+            Gets or sets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of active views.
             </summary>
         </member>
         <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.SelectedView">
             <summary>
             Gets or sets the selected <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.SelectedViewName">
+            <summary>
+            Gets or sets the selected <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.SelectedViewIndex">
+            <summary>
+            Gets or sets the <see cref="T:System.Int32"/> index of the selected view object.
             </summary>
         </member>
         <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.AddView(System.Object)">
@@ -915,7 +930,16 @@
         <member name="P:ModuleManager.Common.Services.ViewCollectionService.Views">
             <inheritdoc/>
         </member>
+        <member name="P:ModuleManager.Common.Services.ViewCollectionService.ActiveViews">
+            <inheritdoc/>
+        </member>
         <member name="P:ModuleManager.Common.Services.ViewCollectionService.SelectedView">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ViewCollectionService.SelectedViewName">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ViewCollectionService.SelectedViewIndex">
             <inheritdoc/>
         </member>
         <member name="M:ModuleManager.Common.Services.ViewCollectionService.AddView(System.Object)">

@@ -8,16 +8,21 @@
     public class ViewCollectionService : BindableBase, IViewCollectionService
     {
         private readonly ObservableCollection<object> _views;
+        private ObservableCollection<object> _activeViews;
         private object _selectedView;
+        private string _selectedViewName;
+        private int _selectedViewIndex;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewCollectionService"/> class.
         /// </summary>
         public ViewCollectionService()
         {
-            ViewNameIndex = 0;
             _views = new ObservableCollection<object>();
+            _activeViews = new ObservableCollection<object>();
             _selectedView = null;
+            _selectedViewName = @"Loaded Views";
+            _selectedViewIndex = 0;
         }
 
         /// <inheritdoc/>
@@ -27,13 +32,61 @@
         }
 
         /// <inheritdoc/>
-        public object SelectedView
+        public ObservableCollection<object> ActiveViews
         {
-            get { return _selectedView; }
-            set { SetProperty(ref _selectedView, value); }
+            get { return _activeViews; }
+            set { SetProperty(ref _activeViews, value); }
         }
 
-        private int ViewNameIndex { get; set; }
+        /// <inheritdoc/>
+        public object SelectedView
+        {
+            get
+            {
+                return _selectedView;
+            }
+
+            set
+            {
+                SetProperty(ref _selectedView, value);
+                if (_selectedView != null)
+                {
+                    SelectedViewName = _selectedView.GetType().Name;
+                }
+                else
+                {
+                    SelectedViewName = @"Loaded Views";
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public string SelectedViewName
+        {
+            get
+            {
+                return _selectedViewName;
+            }
+
+            set
+            {
+                SetProperty(ref _selectedViewName, value);
+            }
+        }
+
+        /// <inheritdoc/>
+        public int SelectedViewIndex
+        {
+            get
+            {
+                return _selectedViewIndex;
+            }
+
+            set
+            {
+                SetProperty(ref _selectedViewIndex, value);
+            }
+        }
 
         /// <inheritdoc/>
         public void AddView(object viewObject)

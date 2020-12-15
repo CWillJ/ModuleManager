@@ -3,18 +3,18 @@
     using Prism.Mvvm;
 
     /// <summary>
-    /// Module A ViewObject Model.
+    /// Module A2 View Model.
     /// </summary>
-    public class ModuleAViewModel : BindableBase
+    public class ModuleA2ViewModel : BindableBase
     {
         private string _text;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleAViewModel"/> class.
+        /// Initializes a new instance of the <see cref="ModuleA2ViewModel"/> class.
         /// </summary>
-        public ModuleAViewModel()
+        public ModuleA2ViewModel()
         {
-            _text = @"Module A ViewObject 1";
+            _text = @"Module A ViewObject 2";
         }
 
         /// <summary>
