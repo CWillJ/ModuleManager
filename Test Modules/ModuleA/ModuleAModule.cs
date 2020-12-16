@@ -4,7 +4,6 @@
     using ModuleManager.TestModules.ModuleA.Views;
     using Prism.Ioc;
     using Prism.Modularity;
-    using Prism.Regions;
 
     /// <summary>
     /// Test module A.

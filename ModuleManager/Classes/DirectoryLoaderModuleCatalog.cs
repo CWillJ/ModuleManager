@@ -63,7 +63,10 @@
             // Create instances of assemblies
             foreach (var assembly in assemblyCollectionService.Assemblies)
             {
-                Items.Add(CreateModuleInfo(assembly.ModuleType));
+                if (assembly.ModuleType != null)
+                {
+                    Items.Add(CreateModuleInfo(assembly.ModuleType));
+                }
             }
         }
 
@@ -120,7 +123,6 @@
             {
                 InitializationMode = onDemand ? InitializationMode.OnDemand : InitializationMode.WhenAvailable,
                 Ref = new Uri(type.Assembly.Location, UriKind.RelativeOrAbsolute).AbsoluteUri,
-                ////Ref = type.Assembly.Location,
             };
 
             moduleInfo.DependsOn.AddRange(dependsOn);

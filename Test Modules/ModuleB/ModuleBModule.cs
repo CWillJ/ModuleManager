@@ -1,11 +1,9 @@
 ﻿namespace ModuleManager.TestModules.ModuleB
 {
-    using System.Reflection;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.TestModules.ModuleB.Views;
     using Prism.Ioc;
     using Prism.Modularity;
-    using Prism.Regions;
 
     /// <summary>
     /// Test module B.

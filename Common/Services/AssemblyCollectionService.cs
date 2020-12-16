@@ -8,6 +8,7 @@
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
+    using Prism.Regions;
 
     /// <summary>
     /// Service providing concrete <see cref="IAssemblyCollectionService"/> implementations.
@@ -21,9 +22,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
-        public AssemblyCollectionService()
+        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        public AssemblyCollectionService(IRegionManager regionManager)
         {
-            DataLoader = new AssemblyDataLoader();
+            DataLoader = new AssemblyDataLoader(regionManager);
 
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;

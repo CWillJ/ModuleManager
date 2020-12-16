@@ -53,10 +53,14 @@
             containerRegistry.RegisterForNavigation<ProgressBarView>();
         }
 
+        /// <summary>
+        /// Adds the main view of this module to the ContentRegion of the shell.
+        /// </summary>
+        /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
         private void InjectViewsIntoRegions(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.Regions[@"ContentRegion"].Add(containerProvider.Resolve<ModuleManagerView>(), @"ModuleManagerView");
+            regionManager.Regions[@"ContentRegion"].Add(containerProvider.Resolve<ModuleManagerView>());
         }
 
         /// <summary>
@@ -65,41 +69,40 @@
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
         private void LoadSavedModules(IAssemblyCollectionService assemblyCollectionService)
         {
-            // Load previously saved module configuration only if the ModuleSaveFile exists
-            if (!File.Exists(Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml"))
-            {
-                return;
-            }
-
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
-            string loadFile = Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml";
 
-            using (StreamReader rd = new StreamReader(loadFile))
+            // Load previously saved module configuration only if the ModuleSaveFile exists
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml"))
             {
-                try
+                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
+                string loadFile = Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml";
+
+                using (StreamReader rd = new StreamReader(loadFile))
                 {
-                    assemblies = serializer.Deserialize(rd) as ObservableCollection<AssemblyData>;
+                    try
+                    {
+                        assemblies = serializer.Deserialize(rd) as ObservableCollection<AssemblyData>;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        // There is something wrong with the xml file.
+                        // Return an empty collection of assemblies.
+                        return;
+                    }
                 }
-                catch (InvalidOperationException)
+
+                if (assemblies == null)
                 {
-                    // There is something wrong with the xml file.
-                    // Return an empty collection of assemblies.
                     return;
                 }
+
+                assemblyCollectionService.DataLoader.LoadAll(ref assemblies);
+                assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
+                assemblyCollectionService.Assemblies = assemblies;
             }
 
-            if (assemblies == null)
-            {
-                return;
-            }
-
-            // Load and get data.
-            assemblyCollectionService.DataLoader.LoadAll(ref assemblies);
-
-            // Unload all disabled assemblies.
+            assemblies = assemblyCollectionService.Assemblies;
             assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
-
             assemblyCollectionService.Assemblies = assemblies;
         }
     }

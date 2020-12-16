@@ -8,10 +8,8 @@
     public class ViewCollectionService : BindableBase, IViewCollectionService
     {
         private readonly ObservableCollection<object> _views;
-        private ObservableCollection<object> _activeViews;
         private object _selectedView;
         private string _selectedViewName;
-        private int _selectedViewIndex;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewCollectionService"/> class.
@@ -19,23 +17,14 @@
         public ViewCollectionService()
         {
             _views = new ObservableCollection<object>();
-            _activeViews = new ObservableCollection<object>();
             _selectedView = null;
             _selectedViewName = @"Loaded Views";
-            _selectedViewIndex = 0;
         }
 
         /// <inheritdoc/>
         public ObservableCollection<object> Views
         {
             get { return _views; }
-        }
-
-        /// <inheritdoc/>
-        public ObservableCollection<object> ActiveViews
-        {
-            get { return _activeViews; }
-            set { SetProperty(ref _activeViews, value); }
         }
 
         /// <inheritdoc/>
@@ -65,13 +54,6 @@
         {
             get { return _selectedViewName; }
             set { SetProperty(ref _selectedViewName, value); }
-        }
-
-        /// <inheritdoc/>
-        public int SelectedViewIndex
-        {
-            get { return _selectedViewIndex; }
-            set { SetProperty(ref _selectedViewIndex, value); }
         }
 
         /// <inheritdoc/>

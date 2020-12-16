@@ -7,20 +7,22 @@
     using System.Linq;
     using System.Reflection;
     using ModuleManager.Common.Interfaces;
+    using Prism.Regions;
 
     /// <summary>
     /// Retrieves assemblies from dll files.
     /// </summary>
     public class AssemblyDataLoader
     {
-        ////private readonly ILoadedViewsService _loadedViewsService;
+        private readonly IRegionManager _regionManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyDataLoader"/> class.
         /// </summary>
-        public AssemblyDataLoader()
+        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        public AssemblyDataLoader(IRegionManager regionManager)
         {
-            ////_loadedViewsService = loadedViewsService ?? throw new ArgumentNullException("LoadedViewsService");
+            _regionManager = regionManager;
 
             DllDirectory = string.Empty;
             DllFilePath = string.Empty;
@@ -102,9 +104,8 @@
                 };
 
                 Load(ref assemblyData);
-                ////Unload(ref assemblyData);
 
-                // IF the ModuleType has not been set, it is not a NextGen module
+                // IF the ModuleType has not been set, it does not have an IModule
                 if (assemblyData.ModuleType != null)
                 {
                     assemblies.Add(assemblyData);
@@ -128,8 +129,6 @@
             {
                 Unload(ref assemblyData);
             }
-
-            ////UpdateLoadedViews(assemblyData);
         }
 
         /// <summary>
@@ -143,18 +142,8 @@
             for (int i = 0; i < assemblies.Count; i++)
             {
                 assemblyData = assemblies[i];
-
-                if (assemblyData.IsEnabled)
-                {
-                    Load(ref assemblyData);
-                }
-                else
-                {
-                    Unload(ref assemblyData);
-                }
-
+                LoadUnload(ref assemblyData);
                 assemblies[i] = assemblyData;
-                ////UpdateLoadedViews(assemblyData);
             }
         }
 
@@ -185,7 +174,11 @@
                 Initialize(assemblyData.FilePath.Substring(0, assemblyData.FilePath.LastIndexOf(".")), assemblyData.FilePath);
             }
 
-            assemblyData.Loader = new AssemblyLoader(DllFilePath);
+            if (assemblyData.Loader == null)
+            {
+                assemblyData.Loader = new AssemblyLoader(DllFilePath);
+            }
+
             assemblyData.Assembly = assemblyData.Loader.LoadFromAssemblyPath(DllFilePath);
             assemblyData.FilePath = DllFilePath;
 
@@ -227,7 +220,7 @@
                     {
                         Type[] typeInterfaces = type.GetInterfaces();
 
-                        if (typeInterfaces.Contains(typeof(IModuleManagerTestModule)) || typeInterfaces.Contains(typeof(IModuleManagerCoreModule)))
+                        if ((assemblyData.ModuleType == null) && (typeInterfaces.Contains(typeof(IModuleManagerTestModule)) || typeInterfaces.Contains(typeof(IModuleManagerCoreModule))))
                         {
                             assemblyData.ModuleType = type;
                         }
@@ -244,13 +237,23 @@
         /// <param name="assemblyData"><see cref="AssemblyData"/> to unload passed by reference.</param>
         public void Unload(ref AssemblyData assemblyData)
         {
-            if (assemblyData.Loader == null)
+            if (_regionManager.Regions.ContainsRegionWithName(@"LoadedViewsRegion"))
             {
-                return;
+                foreach (TypeData typeData in assemblyData.Types)
+                {
+                    if (typeData.IsView)
+                    {
+                        foreach (var view in _regionManager.Regions[@"LoadedViewsRegion"].Views)
+                        {
+                            if (view.GetType().FullName == typeData.FullName)
+                            {
+                                _regionManager.Regions[@"LoadedViewsRegion"].Remove(view);
+                            }
+                        }
+                    }
+                }
             }
 
-            assemblyData.Loader.Unload();
-            assemblyData.Loader = null;
             assemblyData.Assembly = null;
         }
 

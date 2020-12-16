@@ -84,7 +84,6 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for container type registration.</param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            ////containerRegistry.RegisterSingleton<ILoadedViewsService, LoadedViewsService>();
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
             containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
             containerRegistry.RegisterSingleton<IViewCollectionService, ViewCollectionService>();

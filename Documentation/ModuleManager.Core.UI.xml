@@ -98,6 +98,12 @@
             </summary>
             <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
         </member>
+        <member name="M:ModuleManager.Core.UI.UIModule.InjectViewsIntoRegions(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Adds the main view of this module to the ContentRegion of the shell.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
         <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedModules(ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
             <summary>
             Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.

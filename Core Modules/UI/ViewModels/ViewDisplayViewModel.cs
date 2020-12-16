@@ -62,9 +62,10 @@
                     {
                         foreach (var viewObject in ViewCollectionService.Views)
                         {
-                            if (typeData.FullName == viewObject.GetType().FullName)
+                            Type type = viewObject.GetType();
+                            if (typeData.FullName == type.FullName)
                             {
-                                object instance = Activator.CreateInstance(viewObject.GetType());
+                                object instance = Activator.CreateInstance(type);
                                 _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                             }
                         }
@@ -151,7 +152,7 @@
         /// <returns>True if the view object exists in the active views collection.</returns>
         private bool CanRemove()
         {
-            if (ViewCollectionService.ActiveViews.Contains(ViewCollectionService.SelectedView))
+            if (_regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(ViewCollectionService.SelectedView))
             {
                 return true;
             }
