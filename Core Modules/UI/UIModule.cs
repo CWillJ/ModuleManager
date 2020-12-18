@@ -1,9 +1,7 @@
 ﻿namespace ModuleManager.Core.UI
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Xml.Serialization;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
@@ -68,24 +66,9 @@
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
 
             // Load previously saved module configuration only if the ModuleSaveFile exists
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml"))
+            if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"ModuleSaveFile.json")))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
-                string loadFile = Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml";
-
-                using (StreamReader rd = new StreamReader(loadFile))
-                {
-                    try
-                    {
-                        assemblies = serializer.Deserialize(rd) as ObservableCollection<AssemblyData>;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // There is something wrong with the xml file.
-                        // Return an empty collection of assemblies.
-                        return;
-                    }
-                }
+                assemblies = JsonExtensions.Load<ObservableCollection<AssemblyData>>(Path.Combine(Directory.GetCurrentDirectory(), @"ModuleSaveFile.json"));
 
                 if (assemblies == null)
                 {
@@ -108,27 +91,11 @@
         /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
         private void LoadSavedViewNames(ILoadedViewNamesService loadedViewNamesService)
         {
-            ObservableCollection<string> viewNames = new ObservableCollection<string>();
-
-            // Load previously saved module configuration only if the ModuleSaveFile exists
-            if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.xml")))
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.json");
+            if (File.Exists(filePath))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<string>));
-                string loadFile = Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.xml");
-
-                using (StreamReader rd = new StreamReader(loadFile))
-                {
-                    try
-                    {
-                        viewNames = serializer.Deserialize(rd) as ObservableCollection<string>;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // There is something wrong with the xml file.
-                        // Return an empty collection of assemblies.
-                        return;
-                    }
-                }
+                ObservableCollection<string> viewNames =
+                    JsonExtensions.Load<ObservableCollection<string>>(filePath);
 
                 if (viewNames == null)
                 {

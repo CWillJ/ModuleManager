@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Xml.Serialization;
     using ModuleManager.Common.Classes.Data;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Module type object.
@@ -96,7 +96,7 @@
         /// <summary>
         /// Gets or sets the <see cref="System.Type"/> of the TypeData.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public Type Type { get; set; }
 
         /// <summary>

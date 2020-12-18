@@ -1,12 +1,10 @@
 ﻿namespace ModuleManager.Core.UI.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Xml.Serialization;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
@@ -199,60 +197,10 @@
                 _loadedViewNamesService.LoadedViewNames.Add(viewObject.GetType().FullName);
             }
 
-            if (SaveSomething<ObservableCollection<AssemblyData>>(AssemblyCollectionService.Assemblies, @"ModuleSaveFile.xml")
-                && SaveSomething<ObservableCollection<string>>(_loadedViewNamesService.LoadedViewNames, @"LoadedViewsSaveFile.xml"))
-            {
-                RadWindow.Alert(@"Configuration Saved");
-            }
-        }
+            JsonExtensions.Save(AssemblyCollectionService.Assemblies, Path.Combine(Directory.GetCurrentDirectory(), @"ModuleSaveFile.json"));
+            JsonExtensions.Save(_loadedViewNamesService.LoadedViewNames, Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.json"));
 
-        private bool SaveSomething<T>(object whatToSave, string saveFileName)
-        {
-            Type fileSaveType = typeof(T);
-            XmlSerializer serializer;
-            string saveFile;
-
-            try
-            {
-                serializer = new XmlSerializer(fileSaveType);
-            }
-            catch (Exception e)
-            {
-                RadWindow.Alert(@"Cannot Save to xml File Due to:" + "\n" + e.ToString());
-                return false;
-            }
-
-            saveFile = Path.Combine(Directory.GetCurrentDirectory(), saveFileName);
-
-            if (UseSaveFileDialog)
-            {
-                RadSaveFileDialog saveFileDialog = new RadSaveFileDialog
-                {
-                    InitialDirectory = Directory.GetCurrentDirectory(),
-                    Filter = "xml files (*.xml)|*.xml",
-                    Header = "Save Configuration File",
-                    RestoreDirectory = true,
-                };
-
-                saveFileDialog.ShowDialog();
-
-                if (saveFileDialog.DialogResult == true)
-                {
-                    saveFile = saveFileDialog.FileName;
-                }
-
-                if (saveFile == string.Empty)
-                {
-                    RadWindow.Alert(@"Invalid File Path");
-                    return false;
-                }
-            }
-
-            using StreamWriter wr = new StreamWriter(saveFile);
-            serializer.Serialize(wr, whatToSave);
-            wr.Close();
-
-            return true;
+            RadWindow.Alert(@"Configuration Saved");
         }
 
         /// <summary>

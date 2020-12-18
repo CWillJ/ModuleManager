@@ -586,6 +586,34 @@
             Gets or sets the position of this view type in the region.
             </summary>
         </member>
+        <member name="T:ModuleManager.Common.Classes.JsonExtensions">
+            <summary>
+            Extension methods for generic objects.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.JsonExtensions.Copy``1(``0)">
+            <summary>
+            Deep copy an object using serialization.
+            </summary>
+            <typeparam name="T">The type of the object to be copied.</typeparam>
+            <param name="objectToBeCopied">The object to be copied.</param>
+            <returns>A new copy of the <typeparamref name="T"/> object.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.JsonExtensions.Save(System.Object,System.String)">
+            <summary>
+            Save an object to disk using serialization.
+            </summary>
+            <param name="objectToSave">The object to be saved.</param>
+            <param name="filePath">The <see cref="T:System.String"/> path to the file to be created or saved.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.JsonExtensions.Load``1(System.String)">
+            <summary>
+            Load an object from disk using deserialization.
+            </summary>
+            <typeparam name="T">The type of object to deserialize to.</typeparam>
+            <param name="filePath">The <see cref="T:System.String"/> path to the file to be loaded.</param>
+            <returns>The newly loaded object.</returns>
+        </member>
         <member name="T:ModuleManager.Common.Classes.XmlDescriptionRetriever">
             <summary>
             XmlDescriptionRetriever is used to get text form an xml file.
@@ -717,6 +745,18 @@
             <summary>
             Interface that implements <see cref="T:Prism.Modularity.IModule"/>. Used to define this application's test modules.
             </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleManagerTestModule.Unload(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Unloads this module from the container provider.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleManagerTestModule.ReLoad(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Reloads this module into the collection service.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
         <member name="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService">
             <summary>

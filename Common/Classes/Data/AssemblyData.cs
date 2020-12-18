@@ -3,7 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
-    using System.Xml.Serialization;
+    using Newtonsoft.Json;
     using Prism.Mvvm;
 
     /// <summary>
@@ -65,19 +65,19 @@
         /// <summary>
         /// Gets or sets the <see cref="Type"/> of the module in this assembly.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public Type ModuleType { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="AssemblyLoader"/> to load/unload this assembly.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public AssemblyLoader Loader { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="System.Reflection.Assembly"/> of this AssemblyData.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public Assembly Assembly { get; set; }
 
         /// <summary>
