@@ -10,28 +10,15 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
+            <RowDefinition Height="175" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="10,10,10,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <!--  Load Save Buttons  -->
-            <ContentControl
-                Grid.Row="0"
-                Grid.Column="0"
-                prism:RegionManager.RegionName="ButtonsRegion" />
-
-            <!--  Loaded Views  -->
-            <ContentControl
-                Grid.Row="0"
-                Grid.Column="1"
-                prism:RegionManager.RegionName="ViewsRegion" />
-        </Grid>
+        <!--  Buttons & Loaded Views  -->
+        <ContentControl
+            Grid.Row="0"
+            Margin="10,10,10,0"
+            prism:RegionManager.RegionName="ButtonViewsRegion" />
 
         <Grid Grid.Row="1" Margin="20,20,20,20">
 

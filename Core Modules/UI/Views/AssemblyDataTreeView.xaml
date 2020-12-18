@@ -46,7 +46,6 @@
             Background="LightGray"
             BorderBrush="Black"
             BorderThickness="1"
-            ItemContainerStyle="{StaticResource RadTreeViewItemStyle}"
             ItemTemplate="{StaticResource assemblyLevel}"
             ItemsSource="{Binding AssemblyCollectionService.Assemblies, Mode=OneWay}"
             SelectedItem="{Binding AssemblyCollectionService.SelectedItem, Mode=TwoWay}" />

@@ -22,21 +22,21 @@
             _currentProgress = 0.0;
         }
 
-        /// <inheritdoc cref="IProgressBarService"/>
+        /// <inheritdoc/>
         public string AssemblyName
         {
             get { return _assemblyName; }
             set { SetProperty(ref _assemblyName, value); }
         }
 
-        /// <inheritdoc cref="IProgressBarService"/>
+        /// <inheritdoc/>
         public double CurrentProgress
         {
             get { return _currentProgress; }
             set { SetProperty(ref _currentProgress, value); }
         }
 
-        /// <inheritdoc cref="IProgressBarService"/>
+        /// <inheritdoc/>
         public string Text
         {
             get { return _text; }

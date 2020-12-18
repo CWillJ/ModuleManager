@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.Core.UI.Interfaces
 {
     /// <summary>
-    /// A progress bar service.
+    /// Service providing concrete <see cref="IProgressBarService"/> implementations.
     /// </summary>
     public interface IProgressBarService
     {

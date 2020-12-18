@@ -31,7 +31,7 @@
         </member>
         <member name="T:ModuleManager.Core.UI.Interfaces.IProgressBarService">
             <summary>
-            A progress bar service.
+            Service providing concrete <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/> implementations.
             </summary>
         </member>
         <member name="P:ModuleManager.Core.UI.Interfaces.IProgressBarService.AssemblyName">
@@ -60,13 +60,13 @@
             </summary>
         </member>
         <member name="P:ModuleManager.Core.UI.Services.ProgressBarService.AssemblyName">
-            <inheritdoc cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>
+            <inheritdoc/>
         </member>
         <member name="P:ModuleManager.Core.UI.Services.ProgressBarService.CurrentProgress">
-            <inheritdoc cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>
+            <inheritdoc/>
         </member>
         <member name="P:ModuleManager.Core.UI.Services.ProgressBarService.Text">
-            <inheritdoc cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>
+            <inheritdoc/>
         </member>
         <member name="T:ModuleManager.Core.UI.TemplateSelectors.DescriptionTemplateSelector">
             <summary>
@@ -142,87 +142,6 @@
             Gets a collection of ModuleManager.ModuleObjects.Classes.AssemblyData.
             </summary>
         </member>
-        <member name="T:ModuleManager.Core.UI.ViewModels.ButtonsViewModel">
-            <summary>
-            View model for the buttons view.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ButtonsViewModel"/> class.
-            </summary>
-            <param name="regionManager">Injected <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-            <param name="assemblyCollectionService">Injected <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
-            <param name="progressBarService">Injected <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.</param>
-        </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.UseSaveFileDialog">
-            <summary>
-            Gets or sets a value indicating whether SaveFileDialog is used on save settings.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.LoadingModules">
-            <summary>
-            Gets or sets a value indicating whether the application is currently loading modules.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.AssemblyCollectionService">
-            <summary>
-            Gets the <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.NavigateCommand">
-            <summary>
-            Gets the Navigate command.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.LoadModulesCommand">
-            <summary>
-            Gets or sets the LoadModulesCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.SaveConfigCommand">
-            <summary>
-            Gets or sets the SaveConfigCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.StoreModules">
-            <summary>
-            StoreModules will attempt to get all assemblies from a dll and store it
-            as an AssemblyData in the AssemblyData collection.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.UpdateProgressBarText">
-            <summary>
-            Runs async to update the progress bar with current module text.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.GetModuleDirectory">
-            <summary>
-            Gets the directory selected by the user that should contain dll files.
-            </summary>
-            <returns><see cref="T:System.String"/> of the directory path.</returns>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.SaveConfig">
-            <summary>
-            SaveConfig will save an ObservableCollection of AssemblyData
-            to an xml file.
-            The boolean, UseSaveFileDialog will be tested to see if the
-            SaveFileDialog will be used or if the hardcoded file location
-            will be used.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.Navigate(System.String)">
-            <summary>
-            ViewObject navigation method.
-            </summary>
-            <param name="navigatePath">The path of the view to navigate to.</param>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ButtonsViewModel.CanExecute">
-            <summary>
-            Can always execute.
-            </summary>
-            <returns>True.</returns>
-        </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.ModuleManagerViewModel">
             <summary>
             MainView view model.
@@ -260,17 +179,48 @@
             View model for the buttons view.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IViewCollectionService)">
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel"/> class.
             </summary>
             <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+            <param name="progressBarService">The <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.AssemblyCollectionService">
+            <summary>
+            Gets the <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.
+            </summary>
         </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.ViewCollectionService">
             <summary>
             Gets the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.UseSaveFileDialog">
+            <summary>
+            Gets or sets a value indicating whether SaveFileDialog is used on save settings.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.LoadingModules">
+            <summary>
+            Gets or sets a value indicating whether the application is currently loading modules.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.NavigateCommand">
+            <summary>
+            Gets the Navigate command.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.LoadModulesCommand">
+            <summary>
+            Gets or sets the LoadModulesCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.SaveConfigCommand">
+            <summary>
+            Gets or sets the SaveConfigCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
             </summary>
         </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.AddSelectedViewCommand">
@@ -283,6 +233,37 @@
             Gets or sets the RemoveSelectedViewCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
             </summary>
         </member>
+        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.ViewDoubleClickCommand">
+            <summary>
+            Gets or sets the ViewDoubleClickCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.StoreModules">
+            <summary>
+            StoreModules will attempt to get all assemblies from a dll and store it
+            as an AssemblyData in the AssemblyData collection.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.UpdateProgressBarText">
+            <summary>
+            Runs async to update the progress bar with current module text.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.SaveConfig">
+            <summary>
+            SaveConfig will save an ObservableCollection of AssemblyData
+            to an xml file.
+            The boolean, UseSaveFileDialog will be tested to see if the
+            SaveFileDialog will be used or if the hardcoded file location
+            will be used.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.Navigate(System.String)">
+            <summary>
+            ViewObject navigation method.
+            </summary>
+            <param name="navigatePath">The path of the view to navigate to.</param>
+        </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.AddSelectedView">
             <summary>
             Adds all the selected assembly's views or the selected view to the views region.
@@ -291,6 +272,11 @@
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.RemoveSelectedView">
             <summary>
             Removes the selected view from the views region.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.DisplaySelectedView">
+            <summary>
+            Command for double clicking a view <see cref="T:System.Object"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.CanExecute">
@@ -344,24 +330,6 @@
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.Views.AssemblyDataView.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:ModuleManager.Core.UI.Views.ButtonsView">
-            <summary>
-            Interaction logic for LoadSaveButtons.xaml.
-            </summary>
-            <summary>
-            ButtonsView
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.Views.ButtonsView.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.Views.ButtonsView"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.Views.ButtonsView.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
