@@ -1,6 +1,8 @@
 ﻿namespace ModuleManager.Core.UI.ViewModels
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
@@ -58,7 +60,7 @@
             {
                 foreach (TypeData typeData in assemblyData.Types)
                 {
-                    if (typeData.IsView)
+                    if (typeData.ViewInfo != null)
                     {
                         foreach (var viewObject in ViewCollectionService.Views)
                         {
@@ -67,12 +69,13 @@
                             {
                                 object instance = Activator.CreateInstance(type);
                                 _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
+                                typeData.ViewInfo.NumberOfViewInstances++;
                             }
                         }
                     }
                 }
             }
-            else if (_assemblyCollectionService.SelectedItem is TypeData typeData && typeData.IsView)
+            else if (_assemblyCollectionService.SelectedItem is TypeData typeData && (typeData.ViewInfo != null))
             {
                 foreach (var viewObject in ViewCollectionService.Views)
                 {
@@ -80,6 +83,7 @@
                     {
                         object instance = Activator.CreateInstance(viewObject.GetType());
                         _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
+                        typeData.ViewInfo.NumberOfViewInstances++;
                     }
                 }
             }
@@ -92,6 +96,17 @@
         {
             if (ViewCollectionService.SelectedView != null && _regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(ViewCollectionService.SelectedView))
             {
+                foreach (AssemblyData assemblyData in _assemblyCollectionService.Assemblies)
+                {
+                    foreach (TypeData typeData in assemblyData.Types)
+                    {
+                        if (typeData.FullName == ViewCollectionService.SelectedView.GetType().FullName)
+                        {
+                            typeData.ViewInfo.NumberOfViewInstances--;
+                        }
+                    }
+                }
+
                 _regionManager.Regions[@"LoadedViewsRegion"].Remove(ViewCollectionService.SelectedView);
             }
         }
@@ -121,7 +136,7 @@
             {
                 foreach (TypeData typeData in assemblyData.Types)
                 {
-                    if (typeData.IsView)
+                    if (typeData.ViewInfo != null)
                     {
                         return true;
                     }
@@ -131,7 +146,7 @@
             }
             else if (_assemblyCollectionService.SelectedItem is TypeData typeData)
             {
-                if (typeData.IsView)
+                if (typeData.ViewInfo != null)
                 {
                     return true;
                 }

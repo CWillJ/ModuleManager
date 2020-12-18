@@ -3,10 +3,12 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Xml.Serialization;
-    using ModuleManager.Common.Interfaces;
+    using ModuleManager.Common.Classes.Data;
 
-    /// <inheritdoc cref="ITypeData"/>
-    public class TypeData : ITypeData
+    /// <summary>
+    /// Module type object.
+    /// </summary>
+    public class TypeData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeData"/> class.
@@ -51,7 +53,9 @@
             SetIsView();
         }
 
-        /// <inheritdoc cref="ITypeData"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> name.
+        /// </summary>
         public string Name { get; set; }
 
         /// <summary>
@@ -59,10 +63,14 @@
         /// </summary>
         public string FullName { get; set; }
 
-        /// <inheritdoc cref="ITypeData"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> description of the module.
+        /// </summary>
         public string Description { get; set; }
 
-        /// <inheritdoc cref="ITypeData"/>
+        /// <summary>
+        /// Gets or sets an <see cref="ObservableCollection{TypeMemberData}"/> of the module members.
+        /// </summary>
         public ObservableCollection<TypeMemberData> Members { get; set; }
 
         /// <summary>
@@ -81,9 +89,9 @@
         public ObservableCollection<TypeMethod> Methods { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether or not this module's type is a view.
+        /// Gets or sets a <see cref="ViewData"/> object that containts information about this view type.
         /// </summary>
-        public bool IsView { get; set; }
+        public ViewData ViewInfo { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="System.Type"/> of the TypeData.
@@ -153,11 +161,11 @@
             // (Type.GetProperty("Tag") != null)
             if (Type != null && Type.BaseType != null && (Type.BaseType.Name == @"UserControl" || Type.BaseType.Name == @"RadWindow"))
             {
-                IsView = true;
+                ViewInfo = new ViewData();
             }
             else
             {
-                IsView = false;
+                ViewInfo = null;
             }
         }
 

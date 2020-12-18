@@ -45,10 +45,6 @@
         {
             containerRegistry.RegisterSingleton<IProgressBarService, ProgressBarService>();
 
-            containerRegistry.Register<IAssemblyData, AssemblyData>();
-            containerRegistry.Register<ITypeData, TypeData>();
-            containerRegistry.Register<ITypeMemberData, TypeMemberData>();
-
             containerRegistry.RegisterForNavigation<ModuleManagerView>();
             containerRegistry.RegisterForNavigation<ProgressBarView>();
         }

@@ -4,7 +4,7 @@
     using ModuleManager.Common.Classes;
 
     /// <summary>
-    /// An Assembly Collection.
+    /// Service providing concrete <see cref="IAssemblyCollectionService"/> implementations.
     /// </summary>
     public interface IAssemblyCollectionService
     {

@@ -62,6 +62,11 @@
             Stores the test modules that this project will display.
             </summary>
         </member>
+        <member name="M:ModuleManager.App.ShowSavedViews">
+            <summary>
+            Displays all the saved views in the LoadedViewsRegion.
+            </summary>
+        </member>
         <member name="M:ModuleManager.App.InitializeComponent">
             <summary>
             InitializeComponent

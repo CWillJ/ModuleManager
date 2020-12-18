@@ -1,11 +1,13 @@
 ﻿namespace ModuleManager.Common.Classes
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using ModuleManager.Common.Classes.Data;
     using ModuleManager.Common.Interfaces;
     using Prism.Regions;
 
@@ -183,7 +185,6 @@
             assemblyData.FilePath = DllFilePath;
 
             CopyDllToCurrentDirectory(assemblyData.FilePath);
-
             LoadReferencedAssembly(assemblyData.Assembly);
 
             Type[] types = null;
@@ -200,6 +201,18 @@
 
             types = GetAllTypesFromAssembly(assemblyData.Assembly);
 
+            // Store ViewData and Type.FullName's.
+            Dictionary<string, ViewData> dictionary = new Dictionary<string, ViewData>();
+            foreach (TypeData typeData in assemblyData.Types)
+            {
+                if (typeData.ViewInfo != null)
+                {
+                    dictionary.Add(typeData.FullName, typeData.ViewInfo);
+                }
+            }
+
+            ObservableCollection<string> viewNameOrder = new ObservableCollection<string>();
+
             assemblyData.Types.Clear();
 
             int typeNumber = 0;
@@ -214,9 +227,9 @@
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
                     Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
-                    TypeData tempModule = GetTypeData(type);
+                    TypeData newTypeData = GetTypeData(type);
 
-                    if (tempModule != null)
+                    if (newTypeData != null)
                     {
                         Type[] typeInterfaces = type.GetInterfaces();
 
@@ -225,7 +238,13 @@
                             assemblyData.ModuleType = type;
                         }
 
-                        assemblyData.Types.Add(tempModule);
+                        // See if the newTypeData exists in the stored ViewData/Type.FullName collection. If so, store the ViewData in newTypeData.
+                        if (dictionary.ContainsKey(newTypeData.FullName))
+                        {
+                            newTypeData.ViewInfo = dictionary.GetValueOrDefault(newTypeData.FullName);
+                        }
+
+                        assemblyData.Types.Add(newTypeData);
                     }
                 }
             }
@@ -241,7 +260,7 @@
             {
                 foreach (TypeData typeData in assemblyData.Types)
                 {
-                    if (typeData.IsView)
+                    if (typeData.ViewInfo != null)
                     {
                         foreach (var view in _regionManager.Regions[@"LoadedViewsRegion"].Views)
                         {

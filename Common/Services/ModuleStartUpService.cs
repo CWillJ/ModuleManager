@@ -4,9 +4,7 @@
     using System.Collections.Generic;
     using ModuleManager.Common.Interfaces;
 
-    /// <summary>
-    /// Implements <see cref="IModuleStartUpService"/> to inject views into the shell view on start up.
-    /// </summary>
+    /// <inheritdoc cref="IModuleStartUpService"/>.
     public class ModuleStartUpService : IModuleStartUpService
     {
         private readonly List<Action> _storeViewActions;

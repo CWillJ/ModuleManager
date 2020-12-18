@@ -56,6 +56,9 @@
 
             LoadCore();
             LoadTestModules();
+
+            RegionManager.UpdateRegions();
+            ShowSavedViews();
         }
 
         /// <summary>
@@ -137,6 +140,39 @@
             foreach (Action registerModuleView in moduleStartupService.StoreViewActions)
             {
                 registerModuleView();
+            }
+        }
+
+        /// <summary>
+        /// Displays all the saved views in the LoadedViewsRegion.
+        /// </summary>
+        private void ShowSavedViews()
+        {
+            var regionManager = Container.Resolve<IRegionManager>();
+            var assemblyCollectionService = Container.Resolve<IAssemblyCollectionService>();
+            var viewCollectionService = Container.Resolve<IViewCollectionService>();
+
+            foreach (var assemblyData in assemblyCollectionService.Assemblies)
+            {
+                foreach (var typeData in assemblyData.Types)
+                {
+                    if (typeData.ViewInfo != null)
+                    {
+                        foreach (var viewObject in viewCollectionService.Views)
+                        {
+                            string test = viewObject.GetType().FullName;
+
+                            if ((viewObject != null) && (typeData.FullName == test))
+                            {
+                                for (int i = 0; i < typeData.ViewInfo.NumberOfViewInstances; i++)
+                                {
+                                    object instance = Activator.CreateInstance(viewObject.GetType());
+                                    regionManager.AddToRegion(@"LoadedViewsRegion", instance);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

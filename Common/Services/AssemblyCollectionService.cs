@@ -1,18 +1,13 @@
 ﻿namespace ModuleManager.Common.Services
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.IO;
-    using System.Xml.Serialization;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
     using Prism.Regions;
 
-    /// <summary>
-    /// Service providing concrete <see cref="IAssemblyCollectionService"/> implementations.
-    /// </summary>
+    /// <inheritdoc cref="IAssemblyCollectionService"/>
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
         private ObservableCollection<AssemblyData> _assemblies;
@@ -32,17 +27,17 @@
             _selectedItemName = @"Description";
         }
 
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        /// <inheritdoc/>
         public AssemblyDataLoader DataLoader { get; }
 
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        /// <inheritdoc/>
         public ObservableCollection<AssemblyData> Assemblies
         {
             get { return _assemblies; }
             set { SetProperty(ref _assemblies, value, CollectionPropertyChanged); }
         }
 
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        /// <inheritdoc/>
         public object SelectedItem
         {
             get
@@ -57,44 +52,18 @@
             }
         }
 
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        /// <inheritdoc/>
         public string SelectedItemName
         {
             get { return _selectedItemName; }
             set { SetProperty(ref _selectedItemName, value); }
         }
 
-        /// <inheritdoc cref="IAssemblyCollectionService"/>
+        /// <inheritdoc/>
         public void PopulateAssemblyCollection(string dllDirectory, string[] dllFiles)
         {
             DataLoader.DllDirectory = dllDirectory;
             Assemblies = DataLoader.GetAssemblies(dllFiles);
-        }
-
-        /// <summary>
-        /// Serializes the module catalog to an xml file.
-        /// </summary>
-        /// <param name="fileName">The full file path and name.</param>
-        /// <returns>True if can be serialized, false otherwise.</returns>
-        public bool SerializeToXML(string fileName)
-        {
-            Type assemblyType = typeof(ObservableCollection<AssemblyData>);
-            XmlSerializer serializer;
-
-            try
-            {
-                serializer = new XmlSerializer(assemblyType);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            using StreamWriter wr = new StreamWriter(fileName);
-            serializer.Serialize(wr, Assemblies);
-            wr.Close();
-
-            return true;
         }
 
         /// <summary>

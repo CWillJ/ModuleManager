@@ -1,19 +1,23 @@
 ﻿namespace ModuleManager.Common.Classes
 {
-    using ModuleManager.Common.Interfaces;
-
     /// <summary>
     /// The base class for module members.
     /// </summary>
-    public class TypeMemberData : ITypeMemberData
+    public class TypeMemberData
     {
-        /// <inheritdoc cref="ITypeMemberData"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> name.
+        /// </summary>
         public string Name { get; set; }
 
-        /// <inheritdoc cref="ITypeMemberData"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> description of the module.
+        /// </summary>
         public string Description { get; set; }
 
-        /// <inheritdoc cref="ITypeMemberData"/>
+        /// <summary>
+        /// Gets or sets the <see cref="string"/> name of the Type.
+        /// </summary>
         public string TypeName { get; set; }
     }
 }

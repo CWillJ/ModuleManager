@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// Used to inject views into the shell view on start up.
+    /// Implements <see cref="IModuleStartUpService"/> to inject views into the shell view on start up.
     /// </summary>
     public interface IModuleStartUpService
     {
