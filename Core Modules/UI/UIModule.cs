@@ -34,6 +34,7 @@
             startupService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
 
             LoadSavedModules(containerProvider.Resolve<IAssemblyCollectionService>());
+            LoadSavedViewNames(containerProvider.Resolve<ILoadedViewNamesService>());
         }
 
         /// <summary>
@@ -99,6 +100,43 @@
             assemblies = assemblyCollectionService.Assemblies;
             assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
             assemblyCollectionService.Assemblies = assemblies;
+        }
+
+        /// <summary>
+        /// Loads an <see cref="ObservableCollection{String}"/> from an xml file.
+        /// </summary>
+        /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
+        private void LoadSavedViewNames(ILoadedViewNamesService loadedViewNamesService)
+        {
+            ObservableCollection<string> viewNames = new ObservableCollection<string>();
+
+            // Load previously saved module configuration only if the ModuleSaveFile exists
+            if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.xml")))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<string>));
+                string loadFile = Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.xml");
+
+                using (StreamReader rd = new StreamReader(loadFile))
+                {
+                    try
+                    {
+                        viewNames = serializer.Deserialize(rd) as ObservableCollection<string>;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        // There is something wrong with the xml file.
+                        // Return an empty collection of assemblies.
+                        return;
+                    }
+                }
+
+                if (viewNames == null)
+                {
+                    return;
+                }
+
+                loadedViewNamesService.LoadedViewNames = viewNames;
+            }
         }
     }
 }

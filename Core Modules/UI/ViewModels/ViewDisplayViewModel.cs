@@ -23,6 +23,7 @@
         private readonly IAssemblyCollectionService _assemblyCollectionService;
         private readonly IViewCollectionService _viewCollectionService;
         private readonly IProgressBarService _progressBarService;
+        private readonly ILoadedViewNamesService _loadedViewNamesService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDisplayViewModel"/> class.
@@ -31,12 +32,19 @@
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
         /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
         /// <param name="progressBarService">The <see cref="IProgressBarService"/>.</param>
-        public ViewDisplayViewModel(IRegionManager regionManager, IAssemblyCollectionService assemblyCollectionService, IViewCollectionService viewCollectionService, IProgressBarService progressBarService)
+        /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
+        public ViewDisplayViewModel(
+            IRegionManager regionManager,
+            IAssemblyCollectionService assemblyCollectionService,
+            IViewCollectionService viewCollectionService,
+            IProgressBarService progressBarService,
+            ILoadedViewNamesService loadedViewNamesService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
+            _loadedViewNamesService = loadedViewNamesService ?? throw new ArgumentNullException("LoadedViewNamesService");
 
             UseSaveFileDialog = false;
 
@@ -184,9 +192,15 @@
                 return;
             }
 
-            ObservableCollection<string> s = new ObservableCollection<string>();
+            _loadedViewNamesService.LoadedViewNames.Clear();
 
-            if (SaveSomething<ObservableCollection<AssemblyData>>(AssemblyCollectionService.Assemblies, @"ModuleSaveFile.xml"))
+            foreach (var viewObject in _regionManager.Regions[@"LoadedViewsRegion"].Views)
+            {
+                _loadedViewNamesService.LoadedViewNames.Add(viewObject.GetType().FullName);
+            }
+
+            if (SaveSomething<ObservableCollection<AssemblyData>>(AssemblyCollectionService.Assemblies, @"ModuleSaveFile.xml")
+                && SaveSomething<ObservableCollection<string>>(_loadedViewNamesService.LoadedViewNames, @"LoadedViewsSaveFile.xml"))
             {
                 RadWindow.Alert(@"Configuration Saved");
             }

@@ -90,6 +90,7 @@
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
             containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
             containerRegistry.RegisterSingleton<IViewCollectionService, ViewCollectionService>();
+            containerRegistry.RegisterSingleton<ILoadedViewNamesService, LoadedViewNamesService>();
         }
 
         /// <summary>
@@ -149,31 +150,43 @@
         private void ShowSavedViews()
         {
             var regionManager = Container.Resolve<IRegionManager>();
-            var assemblyCollectionService = Container.Resolve<IAssemblyCollectionService>();
+            ////var assemblyCollectionService = Container.Resolve<IAssemblyCollectionService>();
             var viewCollectionService = Container.Resolve<IViewCollectionService>();
+            var loadedViewNamesService = Container.Resolve<ILoadedViewNamesService>();
 
-            foreach (var assemblyData in assemblyCollectionService.Assemblies)
+            foreach (string loadedView in loadedViewNamesService.LoadedViewNames)
             {
-                foreach (var typeData in assemblyData.Types)
+                foreach (var viewObject in viewCollectionService.Views)
                 {
-                    if (typeData.ViewInfo != null)
+                    string? viewName = viewObject.GetType().FullName;
+                    if ((viewObject != null) && (loadedView == viewName))
                     {
-                        foreach (var viewObject in viewCollectionService.Views)
-                        {
-                            string test = viewObject.GetType().FullName;
-
-                            if ((viewObject != null) && (typeData.FullName == test))
-                            {
-                                for (int i = 0; i < typeData.ViewInfo.NumberOfViewInstances; i++)
-                                {
-                                    object instance = Activator.CreateInstance(viewObject.GetType());
-                                    regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                                }
-                            }
-                        }
+                        object? instance = Activator.CreateInstance(viewObject.GetType());
+                        regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                     }
                 }
             }
+
+            ////foreach (var assemblyData in assemblyCollectionService.Assemblies)
+            ////{
+            ////    foreach (var typeData in assemblyData.Types)
+            ////    {
+            ////        if (typeData.ViewInfo != null)
+            ////        {
+            ////            foreach (var viewObject in viewCollectionService.Views)
+            ////            {
+            ////                if ((viewObject != null) && (typeData.FullName == viewObject.GetType().FullName))
+            ////                {
+            ////                    for (int i = 0; i < typeData.ViewInfo.NumberOfViewInstances; i++)
+            ////                    {
+            ////                        object? instance = Activator.CreateInstance(viewObject.GetType());
+            ////                        regionManager.AddToRegion(@"LoadedViewsRegion", instance);
+            ////                    }
+            ////                }
+            ////            }
+            ////        }
+            ////    }
+            ////}
         }
     }
 }

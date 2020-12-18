@@ -110,6 +110,12 @@
             </summary>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
         </member>
+        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedViewNames(ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
+            <summary>
+            Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
+            </summary>
+            <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>
+        </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.AssemblyDataTreeViewModel">
             <summary>
             ViewObject model for the AssemblyData TreeView.
@@ -179,7 +185,7 @@
             View model for the buttons view.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService)">
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel"/> class.
             </summary>
@@ -187,6 +193,7 @@
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
             <param name="progressBarService">The <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.</param>
+            <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>
         </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.AssemblyCollectionService">
             <summary>
