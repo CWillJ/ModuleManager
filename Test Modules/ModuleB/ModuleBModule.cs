@@ -3,7 +3,6 @@
     using ModuleManager.Common.Interfaces;
     using ModuleManager.TestModules.ModuleB.Views;
     using Prism.Ioc;
-    using Prism.Modularity;
 
     /// <summary>
     /// Test module B.
@@ -21,25 +20,55 @@
             _viewCollectionService = viewCollectionService;
         }
 
-        /// <inheritdoc cref="IModule"/>
+        /// <inheritdoc/>
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var startUpService = containerProvider.Resolve<IModuleStartUpService>();
-            startUpService.AddStoreViewAction(() => InjectViewsIntoRegions(containerProvider));
+            startUpService.AddStoreViewAction(() => StoreViews(containerProvider));
         }
 
-        /// <inheritdoc cref="IModule"/>
+        /// <inheritdoc/>
+        public void Unload(IContainerProvider containerProvider)
+        {
+            RemoveViewObject(containerProvider.Resolve<ModuleBView>());
+        }
+
+        /// <inheritdoc/>
+        public void ReLoad(IContainerProvider containerProvider)
+        {
+            StoreViews(containerProvider);
+        }
+
+        /// <inheritdoc/>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
         }
 
         /// <summary>
-        /// Injects this modules views into the LoadedViewsRegion.
+        /// Stores this modules views into the <see cref="IViewCollectionService"/>.
         /// </summary>
         /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
-        private void InjectViewsIntoRegions(IContainerProvider containerProvider)
+        private void StoreViews(IContainerProvider containerProvider)
         {
             _viewCollectionService.AddView(containerProvider.Resolve<ModuleBView>());
+        }
+
+        /// <summary>
+        /// Remove the view object from the service.
+        /// </summary>
+        /// <param name="viewObject">The view <see cref="object"/> to remove from the <see cref="IViewCollectionService"/>.</param>
+        /// <returns>True if the view object was removed, false otherwise.</returns>
+        private bool RemoveViewObject(object viewObject)
+        {
+            if (_viewCollectionService.Views.Contains(viewObject))
+            {
+                _viewCollectionService.RemoveView(viewObject);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -3,7 +3,6 @@
     using ModuleManager.Common.Interfaces;
     using ModuleManager.TestModules.ModuleA.Views;
     using Prism.Ioc;
-    using Prism.Modularity;
 
     /// <summary>
     /// Test module A.
@@ -21,14 +20,27 @@
             _viewCollectionService = viewCollectionService;
         }
 
-        /// <inheritdoc cref="IModule"/>
+        /// <inheritdoc/>
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var startUpService = containerProvider.Resolve<IModuleStartUpService>();
             startUpService.AddStoreViewAction(() => StoreViews(containerProvider));
         }
 
-        /// <inheritdoc cref="IModule"/>
+        /// <inheritdoc/>
+        public void Unload(IContainerProvider containerProvider)
+        {
+            RemoveViewObject(containerProvider.Resolve<ModuleAView>());
+            RemoveViewObject(containerProvider.Resolve<ModuleA2View>());
+        }
+
+        /// <inheritdoc/>
+        public void ReLoad(IContainerProvider containerProvider)
+        {
+            StoreViews(containerProvider);
+        }
+
+        /// <inheritdoc/>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
         }
@@ -41,6 +53,24 @@
         {
             _viewCollectionService.AddView(containerProvider.Resolve<ModuleAView>());
             _viewCollectionService.AddView(containerProvider.Resolve<ModuleA2View>());
+        }
+
+        /// <summary>
+        /// Remove the view object from the service.
+        /// </summary>
+        /// <param name="viewObject">The view <see cref="object"/> to remove from the <see cref="IViewCollectionService"/>.</param>
+        /// <returns>True if the view object was removed, false otherwise.</returns>
+        private bool RemoveViewObject(object viewObject)
+        {
+            if (_viewCollectionService.Views.Contains(viewObject))
+            {
+                _viewCollectionService.RemoveView(viewObject);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
