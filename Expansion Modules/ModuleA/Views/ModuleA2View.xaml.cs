@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.TestModules.ModuleA.Views
+﻿namespace ModuleManager.Expansion.ModuleA.Views
 {
     using System.Windows.Controls;
 

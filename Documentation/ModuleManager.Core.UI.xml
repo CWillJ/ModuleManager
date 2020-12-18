@@ -86,6 +86,12 @@
             The UI Module Class.
             </summary>
         </member>
+        <member name="M:ModuleManager.Core.UI.UIModule.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.UIModule"/> class.
+            </summary>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+        </member>
         <member name="M:ModuleManager.Core.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
             <summary>
             Perform required initialization methods for this Module.
@@ -185,12 +191,13 @@
             View model for the buttons view.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel"/> class.
             </summary>
             <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
             <param name="progressBarService">The <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.</param>
             <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>

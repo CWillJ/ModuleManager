@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.TestModules.ModuleB.Models
+﻿namespace ModuleManager.Expansion.ModuleB.Models
 {
     /// <summary>
     /// Keeps track of an integer.

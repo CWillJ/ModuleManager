@@ -1,6 +1,6 @@
-﻿namespace ModuleManager.TestModules.ModuleB.ViewModels
+﻿namespace ModuleManager.Expansion.ModuleB.ViewModels
 {
-    using ModuleManager.TestModules.ModuleB.Models;
+    using ModuleManager.Expansion.ModuleB.Models;
     using Prism.Mvvm;
 
     /// <summary>

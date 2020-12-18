@@ -1,7 +1,7 @@
-﻿namespace ModuleManager.TestModules.ModuleA
+﻿namespace ModuleManager.Expansion.ModuleA
 {
     using ModuleManager.Common.Interfaces;
-    using ModuleManager.TestModules.ModuleA.Views;
+    using ModuleManager.Expansion.ModuleA.Views;
     using Prism.Ioc;
 
     /// <summary>

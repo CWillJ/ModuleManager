@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Classes
+﻿namespace ModuleManager.Common.Classes
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
     /// </summary>
     public class AggregateModuleCatalog : IModuleCatalog
     {
-        private readonly List<IModuleCatalog> _catalogs = new List<IModuleCatalog>();
+        private List<IModuleCatalog> _catalogs = new List<IModuleCatalog>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateModuleCatalog"/> class.
@@ -22,14 +22,12 @@
         }
 
         /// <summary>
-        /// Gets the collection of catalogs.
+        /// Gets or sets the collection of catalogs.
         /// </summary>
-        public ReadOnlyCollection<IModuleCatalog> Catalogs
+        public List<IModuleCatalog> Catalogs
         {
-            get
-            {
-                return _catalogs.AsReadOnly();
-            }
+            get { return _catalogs; }
+            set { _catalogs = value; }
         }
 
         /// <summary>
@@ -103,6 +101,26 @@
         public IModuleCatalog AddModule(IModuleInfo moduleInfo)
         {
             return _catalogs[0].AddModule(moduleInfo);
+        }
+
+        /// <summary>
+        /// Removes an <see cref="IModuleInfo"/> from the <see cref="ModuleCatalog"/>.
+        /// </summary>
+        /// <param name="moduleInfo">The <see cref="IModuleInfo"/> to remove.</param>
+        /// <returns> The updated <see cref="IModuleCatalog"/>.</returns>
+        public IModuleCatalog RemoveModule(IModuleInfo moduleInfo)
+        {
+            var catalog = new ModuleCatalog();
+
+            foreach (var module in _catalogs[0].Modules)
+            {
+                if (moduleInfo != module)
+                {
+                    catalog.AddModule(module);
+                }
+            }
+
+            return catalog;
         }
     }
 }

@@ -3,7 +3,7 @@
     using System;
     using System.IO;
     using System.Windows;
-    using ModuleManager.Classes;
+    using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Common.Services;
     using ModuleManager.Views;
@@ -88,9 +88,11 @@
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+            containerRegistry.RegisterSingleton<IAssemblyDataLoaderService, AssemblyDataLoaderService>();
             containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
             containerRegistry.RegisterSingleton<IViewCollectionService, ViewCollectionService>();
             containerRegistry.RegisterSingleton<ILoadedViewNamesService, LoadedViewNamesService>();
+            containerRegistry.RegisterSingleton<IModuleCatalogService, ModuleCatalogService>();
         }
 
         /// <summary>
@@ -108,14 +110,16 @@
         /// <param name="moduleCatalog">The aggregate <see cref="IModuleCatalog"/> used for storing all modules.</param>
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
+            var moduleCatalogService = Container.Resolve<IModuleCatalogService>();
+
             // Load core modules for this application.
             ConfigurationModuleCatalog configurationCatalog = new ConfigurationModuleCatalog();
-            ((AggregateModuleCatalog)moduleCatalog).AddCatalog(configurationCatalog);
+            moduleCatalogService.ModuleCatalog.AddCatalog(configurationCatalog);
 
             // Load any extra modules that this application will use to display views/data.
-            DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(Container)
-            { ModulePath = Path.Combine(Directory.GetCurrentDirectory(), @"TestModules") };
-            ((AggregateModuleCatalog)moduleCatalog).AddCatalog(directoryCatalog);
+            DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(Container.Resolve<IAssemblyDataLoaderService>())
+            { ModulePath = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion") };
+            moduleCatalogService.ModuleCatalog.AddCatalog(directoryCatalog);
         }
 
         /// <summary>
@@ -166,27 +170,6 @@
                     }
                 }
             }
-
-            ////foreach (var assemblyData in assemblyCollectionService.Assemblies)
-            ////{
-            ////    foreach (var typeData in assemblyData.Types)
-            ////    {
-            ////        if (typeData.ViewInfo != null)
-            ////        {
-            ////            foreach (var viewObject in viewCollectionService.Views)
-            ////            {
-            ////                if ((viewObject != null) && (typeData.FullName == viewObject.GetType().FullName))
-            ////                {
-            ////                    for (int i = 0; i < typeData.ViewInfo.NumberOfViewInstances; i++)
-            ////                    {
-            ////                        object? instance = Activator.CreateInstance(viewObject.GetType());
-            ////                        regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-            ////                    }
-            ////                }
-            ////            }
-            ////        }
-            ////    }
-            ////}
         }
     }
 }

@@ -4,147 +4,6 @@
         <name>ModuleManager.Common</name>
     </assembly>
     <members>
-        <member name="T:ModuleManager.Common.Classes.AssemblyDataLoader">
-            <summary>
-            Retrieves assemblies from dll files.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.#ctor(Prism.Regions.IRegionManager)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyDataLoader"/> class.
-            </summary>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.AssemblyDataLoader.DllDirectory">
-            <summary>
-            Gets or sets the <see cref="T:System.String"/> directory path of the .dll files.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.AssemblyDataLoader.DllFilePath">
-            <summary>
-            Gets or sets the <see cref="T:System.String"/> path of the .dll file.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.AssemblyDataLoader.CurrentAssemblyName">
-            <summary>
-            Gets or sets the <see cref="T:System.String"/> name of the assembly being loaded.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.AssemblyDataLoader.CurrentTypeName">
-            <summary>
-            Gets or sets the <see cref="T:System.String"/> name of the type being loaded.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.AssemblyDataLoader.PercentOfAssemblyLoaded">
-            <summary>
-            Gets or sets the current <see cref="T:System.Double"/> percentage of load compleation of the current assembly.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Common.Classes.AssemblyDataLoader.DescriptionRetriever">
-            <summary>
-            Gets or sets all xml descriptions.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.Initialize(System.String,System.String)">
-            <summary>
-            Initialize properties.
-            </summary>
-            <param name="modulesDirectory">Directory containing <see cref="T:System.String"/> dll files.</param>
-            <param name="assemblyFilePath">Name of the specific <see cref="T:System.String"/> dll file.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.GetAssemblies(System.String[])">
-            <summary>
-            Creates an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to organize
-            the information from the dll file and its related xml file.
-            </summary>
-            <param name="dllFiles">A <see cref="T:System.String"/> array containing the names of all dll files in the DllDirectory.</param>
-            <returns>Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
-            <summary>
-            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
-            </summary>
-            <param name="assemblyData">An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> object passed by reference.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
-            <summary>
-            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
-            </summary>
-            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> passed by reference.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
-            <summary>
-            Loads all <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> in a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
-            </summary>
-            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.Load(ModuleManager.Common.Classes.AssemblyData@)">
-            <summary>
-            Load an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> by reference.
-            </summary>
-            <param name="assemblyData"><see cref="T:ModuleManager.Common.Classes.AssemblyData"/> to load passed by reference.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.Unload(ModuleManager.Common.Classes.AssemblyData@)">
-            <summary>
-            Unload an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> by reference.
-            </summary>
-            <param name="assemblyData"><see cref="T:ModuleManager.Common.Classes.AssemblyData"/> to unload passed by reference.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.LoadReferencedAssembly(System.Reflection.Assembly)">
-            <summary>
-            Loads all referenced assemblies.
-            </summary>
-            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to get all referenced assemblies from.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.FindInLibFolder(System.String)">
-            <summary>
-            Tries to find the missing file from the Lib folder.
-            </summary>
-            <param name="fileName">The name of the dll file to load.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.GetAllTypesFromAssembly(System.Reflection.Assembly)">
-            <summary>
-            This will get all the <see cref="T:System.Type"/>s from an <see cref="T:System.Reflection.Assembly"/>.
-            THIS WILL THROW ERRORS AND NOT GET ALL OF THE TYPES IF THE DLL FILES ARE DIFFERENT FROM THE LOADED ASSEMBLIES!!!.
-            </summary>
-            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to get the <see cref="T:System.Type"/>s from.</param>
-            <returns>A <see cref="T:System.Type"/> array.</returns>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.CopyDllToCurrentDirectory(System.String)">
-            <summary>
-            Copy the loaded assembly dll into the bin folder.
-            </summary>
-            <param name="assemblyDataFilePath">The <see cref="T:System.String"/> of the AssemblyData FilePath.</param>
-            <returns>A <see cref="T:System.String"/> value representing where the dll file was moved.</returns>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.GetTypeData(System.Type)">
-            <summary>
-            Builds a singls <see cref="T:ModuleManager.Common.Classes.TypeData"/> from the given <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type"><see cref="T:System.Type"/> from an assembly.</param>
-            <returns>A <see cref="T:ModuleManager.Common.Classes.TypeData"/>.</returns>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.AddConstructorsToCollection(System.Type)">
-            <summary>
-            Get all <see cref="T:ModuleManager.Common.Classes.TypeConstructor"/>s from a <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
-            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.AddPropertiesToCollection(System.Type)">
-            <summary>
-            Gets all <see cref="T:ModuleManager.Common.Classes.TypeProperty"/> from the passed in <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
-            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyDataLoader.AddMethodsToCollection(System.Type)">
-            <summary>
-            Gets all <see cref="T:ModuleManager.Common.Classes.TypeMethod"/> from the passed in <see cref="T:System.Type"/>.
-            </summary>
-            <param name="type">The <see cref="T:System.Type"/> where the methods are coming from.</param>
-            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
-        </member>
         <member name="T:ModuleManager.Common.Classes.AssemblyLoader">
             <summary>
             The class that loads and unloads assemblies.
@@ -614,6 +473,119 @@
             <param name="filePath">The <see cref="T:System.String"/> path to the file to be loaded.</param>
             <returns>The newly loaded object.</returns>
         </member>
+        <member name="T:ModuleManager.Common.Classes.AggregateModuleCatalog">
+            <summary>
+            A basic aggregation of IModuleCatalogs for quickstart purposes.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AggregateModuleCatalog"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AggregateModuleCatalog.Catalogs">
+            <summary>
+            Gets or sets the collection of catalogs.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AggregateModuleCatalog.Modules">
+            <summary>
+            Gets all the <see cref="T:Prism.Modularity.IModuleInfo"/> classes that are in the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.GetDependentModules(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Return the list of <see cref="T:Prism.Modularity.IModuleInfo"/> that the provided module depends on.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to get the dependent modules of.</param>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> dependencies of the provided module.
+            </returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.CompleteListWithDependencies(System.Collections.Generic.IEnumerable{Prism.Modularity.IModuleInfo})">
+            <summary>
+            Gets the complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> with dependencies for the provided <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            of <see cref="T:Prism.Modularity.IModuleInfo"/>.
+            </summary>
+            <param name="modules">The modules to get the dependencies of.</param>
+            <returns>
+            A complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of provided <see cref="T:Prism.Modularity.IModuleInfo"/> and their dependencies.
+            </returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.Initialize">
+            <summary>
+            Initializes the catalog, which may load and validate the modules.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.AddCatalog(Prism.Modularity.IModuleCatalog)">
+            <summary>
+            Adds the catalog to the list of catalogs.
+            </summary>
+            <param name="catalog">The catalog to add.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.AddModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Adds an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
+            <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.RemoveModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Removes an <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to remove.</param>
+            <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog">
+            <summary>
+            A <see cref="T:Prism.Modularity.ModuleCatalog"/> that loads modules from a directory.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog"/> class.
+            </summary>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.ModulePath">
+            <summary>
+            Gets or sets the directory containing modules to search for.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.CreateModuleInfo(System.Type)">
+            <summary>
+            Creates a <see cref="T:Prism.Modularity.IModuleInfo"/> from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to get a <see cref="T:Prism.Modularity.IModuleInfo"/> from.</param>
+            <returns>A <see cref="T:Prism.Modularity.IModuleInfo"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.AddModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Adds a <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
+            <returns>The <see cref="T:Prism.Modularity.IModuleCatalog"/> for easily adding multiple modules.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.AddModule(System.String)">
+            <summary>
+            Adds a <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="dllFilePath">The <see cref="T:System.String"/> to the dll file to get the <see cref="T:Prism.Modularity.IModuleInfo"/> from.</param>
+            <returns>The <see cref="T:Prism.Modularity.IModuleCatalog"/> for easily adding multiple modules.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.GetModuleInfoFromFile(System.String)">
+            <summary>
+            Get a <see cref="T:Prism.Modularity.IModuleInfo"/> from a <see cref="T:System.String"/> file path.
+            </summary>
+            <param name="dllFilePath">The <see cref="T:System.String"/> file path to the dll.</param>
+            <returns>A <see cref="T:Prism.Modularity.IModuleInfo"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.InnerLoad">
+            <summary>
+            Drives the main logic of building the child domain and searching for the assemblies.
+            </summary>
+        </member>
         <member name="T:ModuleManager.Common.Classes.XmlDescriptionRetriever">
             <summary>
             XmlDescriptionRetriever is used to get text form an xml file.
@@ -763,11 +735,6 @@
             Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/> implementations.
             </summary>
         </member>
-        <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.DataLoader">
-            <summary>
-            Gets the <see cref="T:ModuleManager.Common.Classes.AssemblyDataLoader"/>.
-            </summary>
-        </member>
         <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.Assemblies">
             <summary>
             Gets or sets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
@@ -785,10 +752,92 @@
         </member>
         <member name="M:ModuleManager.Common.Interfaces.IAssemblyCollectionService.PopulateAssemblyCollection(System.String,System.String[])">
             <summary>
-            Uses the <see cref="T:ModuleManager.Common.Classes.AssemblyDataLoader"/> to populate the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            Populates the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
             </summary>
             <param name="dllDirectory">A <see cref="T:System.String"/> of the directory path.</param>
             <param name="dllFiles">A <see cref="T:System.String"/> array that contains all dll files to load.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.DllDirectory">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> directory path of the .dll files.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.DllFilePath">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> path of the .dll file.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.CurrentAssemblyName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the assembly being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.CurrentTypeName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the type being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.PercentOfAssemblyLoaded">
+            <summary>
+            Gets or sets the current <see cref="T:System.Double"/> percentage of load compleation of the current assembly.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.Initialize(System.String,System.String)">
+            <summary>
+            Initialize properties.
+            </summary>
+            <param name="modulesDirectory">Directory containing <see cref="T:System.String"/> dll files.</param>
+            <param name="assemblyFilePath">Name of the specific <see cref="T:System.String"/> dll file.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.GetAssemblies(System.String[])">
+            <summary>
+            Creates an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to organize
+            the information from the dll file and its related xml file.
+            </summary>
+            <param name="dllFiles">A <see cref="T:System.String"/> array containing the names of all dll files in the DllDirectory.</param>
+            <returns>Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.GetAssembly(System.String)">
+            <summary>
+            Loads an assembly and creates an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/>.
+            </summary>
+            <param name="dllFile">The dll file to retrieve the assembly from.</param>
+            <returns>An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
+            <summary>
+            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
+            </summary>
+            <param name="assemblyData">An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> object passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <summary>
+            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
+            </summary>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <summary>
+            Loads all <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> in a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            </summary>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.Load(ModuleManager.Common.Classes.AssemblyData@)">
+            <summary>
+            Load an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> by reference.
+            </summary>
+            <param name="assemblyData"><see cref="T:ModuleManager.Common.Classes.AssemblyData"/> to load passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.Unload(ModuleManager.Common.Classes.AssemblyData@)">
+            <summary>
+            Unload an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> by reference.
+            </summary>
+            <param name="assemblyData"><see cref="T:ModuleManager.Common.Classes.AssemblyData"/> to unload passed by reference.</param>
         </member>
         <member name="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService">
             <summary>
@@ -799,6 +848,28 @@
             <summary>
             Gets or sets a collection of <see cref="T:System.String"/> view object names.
             </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IModuleCatalogService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IModuleCatalogService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IModuleCatalogService.ModuleCatalog">
+            <summary>
+            Gets the <see cref="T:ModuleManager.Common.Classes.AggregateModuleCatalog"/> used in this application.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.UnloadModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Unloads an <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to unload from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.ReloadModule(System.String)">
+            <summary>
+            Reloads an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="dllFilePath">The <see cref="T:System.String"/> of the dll file.</param>
         </member>
         <member name="T:ModuleManager.Common.Interfaces.IModuleStartUpService">
             <summary>
@@ -862,14 +933,12 @@
         <member name="T:ModuleManager.Common.Services.AssemblyCollectionService">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>
         </member>
-        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.#ctor(Prism.Regions.IRegionManager)">
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IModuleCatalogService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.AssemblyCollectionService"/> class.
             </summary>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-        </member>
-        <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.DataLoader">
-            <inheritdoc/>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+            <param name="moduleCatalogService"> The <see cref="T:ModuleManager.Common.Interfaces.IModuleCatalogService"/>.</param>
         </member>
         <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.Assemblies">
             <inheritdoc/>
@@ -900,6 +969,114 @@
             <param name="s">The <see cref="T:System.Object"/>.</param>
             <param name="e">The property changed arguments.</param>
         </member>
+        <member name="T:ModuleManager.Common.Services.AssemblyDataLoaderService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.#ctor(Prism.Regions.IRegionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.AssemblyDataLoaderService"/> class.
+            </summary>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.DllDirectory">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.DllFilePath">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.CurrentAssemblyName">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.CurrentTypeName">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.PercentOfAssemblyLoaded">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.DescriptionRetriever">
+            <summary>
+            Gets or sets all xml descriptions.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.Initialize(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetAssemblies(System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetAssembly(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.Load(ModuleManager.Common.Classes.AssemblyData@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.Unload(ModuleManager.Common.Classes.AssemblyData@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadReferencedAssembly(System.Reflection.Assembly)">
+            <summary>
+            Loads all referenced assemblies.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to get all referenced assemblies from.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.FindInLibFolder(System.String)">
+            <summary>
+            Tries to find the missing file from the Lib folder.
+            </summary>
+            <param name="fileName">The name of the dll file to load.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetAllTypesFromAssembly(System.Reflection.Assembly)">
+            <summary>
+            This will get all the <see cref="T:System.Type"/>s from an <see cref="T:System.Reflection.Assembly"/>.
+            THIS WILL THROW ERRORS AND NOT GET ALL OF THE TYPES IF THE DLL FILES ARE DIFFERENT FROM THE LOADED ASSEMBLIES!!!.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to get the <see cref="T:System.Type"/>s from.</param>
+            <returns>A <see cref="T:System.Type"/> array.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.CopyDllToCurrentDirectory(System.String)">
+            <summary>
+            Copy the loaded assembly dll into the bin folder.
+            </summary>
+            <param name="assemblyDataFilePath">The <see cref="T:System.String"/> of the AssemblyData FilePath.</param>
+            <returns>A <see cref="T:System.String"/> value representing where the dll file was moved.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetTypeData(System.Type)">
+            <summary>
+            Builds a singls <see cref="T:ModuleManager.Common.Classes.TypeData"/> from the given <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> from an assembly.</param>
+            <returns>A <see cref="T:ModuleManager.Common.Classes.TypeData"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.AddConstructorsToCollection(System.Type)">
+            <summary>
+            Get all <see cref="T:ModuleManager.Common.Classes.TypeConstructor"/>s from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.AddPropertiesToCollection(System.Type)">
+            <summary>
+            Gets all <see cref="T:ModuleManager.Common.Classes.TypeProperty"/> from the passed in <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.AddMethodsToCollection(System.Type)">
+            <summary>
+            Gets all <see cref="T:ModuleManager.Common.Classes.TypeMethod"/> from the passed in <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> where the methods are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
+        </member>
         <member name="T:ModuleManager.Common.Services.LoadedViewNamesService">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>
         </member>
@@ -910,6 +1087,31 @@
         </member>
         <member name="P:ModuleManager.Common.Services.LoadedViewNamesService.LoadedViewNames">
             <inheritdoc/>
+        </member>
+        <member name="T:ModuleManager.Common.Services.ModuleCatalogService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IModuleCatalogService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.#ctor(Prism.Modularity.IModuleCatalog,ModuleManager.Common.Interfaces.IAssemblyDataLoaderService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ModuleCatalogService"/> class.
+            </summary>
+            <param name="moduleCatalog">The application's <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
+            <param name="assemblyDataLoaderService">The application's <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ModuleCatalogService.ModuleCatalog">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.UnloadModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Unloads an <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to unload from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.ReloadModule(System.String)">
+            <summary>
+            Reloads an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="dllFilePath">The <see cref="T:System.String"/> of the dll file.</param>
         </member>
         <member name="T:ModuleManager.Common.Services.ModuleStartUpService">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.IModuleStartUpService"/>.

@@ -1,15 +1,17 @@
 ﻿namespace ModuleManager.Common.Services
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
-    using Prism.Regions;
 
     /// <inheritdoc cref="IAssemblyCollectionService"/>
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
+        private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
+        private readonly IModuleCatalogService _moduleCatalogService;
         private ObservableCollection<AssemblyData> _assemblies;
         private object _selectedItem;
         private string _selectedItemName;
@@ -17,18 +19,16 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
-        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        public AssemblyCollectionService(IRegionManager regionManager)
+        /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
+        /// <param name="moduleCatalogService"> The <see cref="IModuleCatalogService"/>.</param>
+        public AssemblyCollectionService(IAssemblyDataLoaderService assemblyDataLoaderService, IModuleCatalogService moduleCatalogService)
         {
-            DataLoader = new AssemblyDataLoader(regionManager);
-
+            _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _moduleCatalogService = moduleCatalogService ?? throw new ArgumentNullException("ModuleCatalogService");
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";
         }
-
-        /// <inheritdoc/>
-        public AssemblyDataLoader DataLoader { get; }
 
         /// <inheritdoc/>
         public ObservableCollection<AssemblyData> Assemblies
@@ -62,8 +62,8 @@
         /// <inheritdoc/>
         public void PopulateAssemblyCollection(string dllDirectory, string[] dllFiles)
         {
-            DataLoader.DllDirectory = dllDirectory;
-            Assemblies = DataLoader.GetAssemblies(dllFiles);
+            _assemblyDataLoaderService.DllDirectory = dllDirectory;
+            Assemblies = _assemblyDataLoaderService.GetAssemblies(dllFiles);
         }
 
         /// <summary>
@@ -112,8 +112,17 @@
                 AssemblyData assembly = (AssemblyData)s;
                 int i = Assemblies.IndexOf(assembly);
 
-                DataLoader.LoadUnload(ref assembly);
+                _assemblyDataLoaderService.LoadUnload(ref assembly);
                 Assemblies[i] = assembly;
+
+                if (Assemblies[i].IsEnabled)
+                {
+                    _moduleCatalogService.ReloadModule(Assemblies[i].FilePath);
+                }
+                else
+                {
+                    _moduleCatalogService.UnloadModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(Assemblies[i].ModuleType));
+                }
             }
         }
     }

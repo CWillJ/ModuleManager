@@ -1,4 +1,4 @@
-﻿namespace ModuleManager.Common.Classes
+﻿namespace ModuleManager.Common.Services
 {
     using System;
     using System.Collections.Generic;
@@ -7,22 +7,21 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using ModuleManager.Common.Classes;
     using ModuleManager.Common.Classes.Data;
     using ModuleManager.Common.Interfaces;
     using Prism.Regions;
 
-    /// <summary>
-    /// Retrieves assemblies from dll files.
-    /// </summary>
-    public class AssemblyDataLoader
+    /// <inheritdoc cref="IAssemblyDataLoaderService"/>
+    public class AssemblyDataLoaderService : IAssemblyDataLoaderService
     {
         private readonly IRegionManager _regionManager;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AssemblyDataLoader"/> class.
+        /// Initializes a new instance of the <see cref="AssemblyDataLoaderService"/> class.
         /// </summary>
         /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        public AssemblyDataLoader(IRegionManager regionManager)
+        public AssemblyDataLoaderService(IRegionManager regionManager)
         {
             _regionManager = regionManager;
 
@@ -36,29 +35,19 @@
             LoadedAssemblies = new ObservableCollection<AssemblyName>();
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="string"/> directory path of the .dll files.
-        /// </summary>
+        /// <inheritdoc/>
         public string DllDirectory { get; set; }
 
-        /// <summary>
-        /// Gets or sets the <see cref="string"/> path of the .dll file.
-        /// </summary>
+        /// <inheritdoc/>
         public string DllFilePath { get; set; }
 
-        /// <summary>
-        /// Gets or sets the <see cref="string"/> name of the assembly being loaded.
-        /// </summary>
+        /// <inheritdoc/>
         public string CurrentAssemblyName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the <see cref="string"/> name of the type being loaded.
-        /// </summary>
+        /// <inheritdoc/>
         public string CurrentTypeName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the current <see cref="double"/> percentage of load compleation of the current assembly.
-        /// </summary>
+        /// <inheritdoc/>
         public double PercentOfAssemblyLoaded { get; set; }
 
         private ObservableCollection<AssemblyName> LoadedAssemblies { get; set; }
@@ -68,11 +57,7 @@
         /// </summary>
         private XmlDescriptionRetriever DescriptionRetriever { get; set; }
 
-        /// <summary>
-        /// Initialize properties.
-        /// </summary>
-        /// <param name="modulesDirectory">Directory containing <see cref="string"/> dll files.</param>
-        /// <param name="assemblyFilePath">Name of the specific <see cref="string"/> dll file.</param>
+        /// <inheritdoc/>
         public void Initialize(string modulesDirectory, string assemblyFilePath)
         {
             DllDirectory = modulesDirectory;
@@ -80,12 +65,7 @@
             DescriptionRetriever = new XmlDescriptionRetriever(assemblyFilePath);
         }
 
-        /// <summary>
-        /// Creates an <see cref="ObservableCollection{AssemblyData}"/> to organize
-        /// the information from the dll file and its related xml file.
-        /// </summary>
-        /// <param name="dllFiles">A <see cref="string"/> array containing the names of all dll files in the DllDirectory.</param>
-        /// <returns>Returns an <see cref="ObservableCollection{AssemblyData}"/>.</returns>
+        /// <inheritdoc/>
         public ObservableCollection<AssemblyData> GetAssemblies(string[] dllFiles)
         {
             if (string.IsNullOrEmpty(DllDirectory))
@@ -98,14 +78,7 @@
 
             foreach (var dllFile in dllFiles)
             {
-                Initialize(dllFile.Substring(0, dllFile.LastIndexOf(".")), dllFile);
-
-                assemblyData = new AssemblyData
-                {
-                    FilePath = dllFile,
-                };
-
-                Load(ref assemblyData);
+                assemblyData = GetAssembly(dllFile);
 
                 // IF the ModuleType has not been set, it does not have an IModule
                 if (assemblyData.ModuleType != null)
@@ -117,10 +90,24 @@
             return assemblies;
         }
 
-        /// <summary>
-        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
-        /// </summary>
-        /// <param name="assemblyData">An <see cref="AssemblyData"/> object passed by reference.</param>
+        /// <inheritdoc/>
+        public AssemblyData GetAssembly(string dllFile)
+        {
+            AssemblyData assemblyData;
+
+            Initialize(dllFile.Substring(0, dllFile.LastIndexOf(".")), dllFile);
+
+            assemblyData = new AssemblyData
+            {
+                FilePath = dllFile,
+            };
+
+            Load(ref assemblyData);
+
+            return assemblyData;
+        }
+
+        /// <inheritdoc/>
         public void LoadUnload(ref AssemblyData assemblyData)
         {
             if (assemblyData.IsEnabled)
@@ -133,10 +120,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
-        /// </summary>
-        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> passed by reference.</param>
+        /// <inheritdoc/>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assemblyData;
@@ -149,10 +133,7 @@
             }
         }
 
-        /// <summary>
-        /// Loads all <see cref="AssemblyData"/> in a <see cref="ObservableCollection{AssemblyData}"/>.
-        /// </summary>
-        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> objects.</param>
+        /// <inheritdoc/>
         public void LoadAll(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assemblyData;
@@ -165,10 +146,7 @@
             }
         }
 
-        /// <summary>
-        /// Load an <see cref="AssemblyData"/> by reference.
-        /// </summary>
-        /// <param name="assemblyData"><see cref="AssemblyData"/> to load passed by reference.</param>
+        /// <inheritdoc/>
         public void Load(ref AssemblyData assemblyData)
         {
             if (!string.IsNullOrEmpty(assemblyData.FilePath))
@@ -250,10 +228,7 @@
             }
         }
 
-        /// <summary>
-        /// Unload an <see cref="AssemblyData"/> by reference.
-        /// </summary>
-        /// <param name="assemblyData"><see cref="AssemblyData"/> to unload passed by reference.</param>
+        /// <inheritdoc/>
         public void Unload(ref AssemblyData assemblyData)
         {
             if (_regionManager.Regions.ContainsRegionWithName(@"LoadedViewsRegion"))

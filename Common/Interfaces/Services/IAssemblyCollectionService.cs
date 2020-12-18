@@ -9,11 +9,6 @@
     public interface IAssemblyCollectionService
     {
         /// <summary>
-        /// Gets the <see cref="AssemblyDataLoader"/>.
-        /// </summary>
-        public AssemblyDataLoader DataLoader { get; }
-
-        /// <summary>
         /// Gets or sets a <see cref="ObservableCollection{AssemblyData}"/>.
         /// </summary>
         public ObservableCollection<AssemblyData> Assemblies { get; set; }
@@ -29,7 +24,7 @@
         public string SelectedItemName { get; set; }
 
         /// <summary>
-        /// Uses the <see cref="AssemblyDataLoader"/> to populate the <see cref="ObservableCollection{AssemblyData}"/>.
+        /// Populates the <see cref="ObservableCollection{AssemblyData}"/>.
         /// </summary>
         /// <param name="dllDirectory">A <see cref="string"/> of the directory path.</param>
         /// <param name="dllFiles">A <see cref="string"/> array that contains all dll files to load.</param>

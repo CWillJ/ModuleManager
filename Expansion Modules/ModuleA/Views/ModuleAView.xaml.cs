@@ -1,16 +1,16 @@
-﻿namespace ModuleManager.TestModules.ModuleB.Views
+﻿namespace ModuleManager.Expansion.ModuleA.Views
 {
     using System.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for ModuleAView.xaml.
     /// </summary>
-    public partial class ModuleBView : UserControl
+    public partial class ModuleAView : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleBView"/> class.
+        /// Initializes a new instance of the <see cref="ModuleAView"/> class.
         /// </summary>
-        public ModuleBView()
+        public ModuleAView()
         {
             InitializeComponent();
         }

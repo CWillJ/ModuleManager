@@ -19,6 +19,7 @@
     {
         private readonly IRegionManager _regionManager;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
+        private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
         private readonly IViewCollectionService _viewCollectionService;
         private readonly IProgressBarService _progressBarService;
         private readonly ILoadedViewNamesService _loadedViewNamesService;
@@ -28,18 +29,21 @@
         /// </summary>
         /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
+        /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
         /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
         /// <param name="progressBarService">The <see cref="IProgressBarService"/>.</param>
         /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
         public ViewDisplayViewModel(
             IRegionManager regionManager,
             IAssemblyCollectionService assemblyCollectionService,
+            IAssemblyDataLoaderService assemblyDataLoaderService,
             IViewCollectionService viewCollectionService,
             IProgressBarService progressBarService,
             ILoadedViewNamesService loadedViewNamesService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyDataLoaderService");
             _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
             _loadedViewNamesService = loadedViewNamesService ?? throw new ArgumentNullException("LoadedViewNamesService");
@@ -132,7 +136,7 @@
                 return;
             }
 
-            AssemblyCollectionService.DataLoader.DllDirectory = moduleDirectory;
+            _assemblyDataLoaderService.DllDirectory = moduleDirectory;
 
             // Show progress bar
             AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
@@ -169,9 +173,9 @@
         {
             while (LoadingModules)
             {
-                _progressBarService.AssemblyName = AssemblyCollectionService.DataLoader.CurrentAssemblyName;
-                _progressBarService.CurrentProgress = AssemblyCollectionService.DataLoader.PercentOfAssemblyLoaded;
-                _progressBarService.Text = @"Loading Module: " + AssemblyCollectionService.DataLoader.CurrentTypeName;
+                _progressBarService.AssemblyName = _assemblyDataLoaderService.CurrentAssemblyName;
+                _progressBarService.CurrentProgress = _assemblyDataLoaderService.PercentOfAssemblyLoaded;
+                _progressBarService.Text = @"Loading Module: " + _assemblyDataLoaderService.CurrentTypeName;
             }
         }
 

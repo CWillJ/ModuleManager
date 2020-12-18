@@ -15,6 +15,17 @@
     /// </summary>
     public class UIModule : IModuleManagerCoreModule
     {
+        private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UIModule"/> class.
+        /// </summary>
+        /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
+        public UIModule(IAssemblyDataLoaderService assemblyDataLoaderService)
+        {
+            _assemblyDataLoaderService = assemblyDataLoaderService;
+        }
+
         /// <summary>
         /// Perform required initialization methods for this Module.
         /// </summary>
@@ -75,13 +86,13 @@
                     return;
                 }
 
-                assemblyCollectionService.DataLoader.LoadAll(ref assemblies);
-                assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
+                _assemblyDataLoaderService.LoadAll(ref assemblies);
+                _assemblyDataLoaderService.LoadUnload(ref assemblies);
                 assemblyCollectionService.Assemblies = assemblies;
             }
 
             assemblies = assemblyCollectionService.Assemblies;
-            assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
+            _assemblyDataLoaderService.LoadUnload(ref assemblies);
             assemblyCollectionService.Assemblies = assemblies;
         }
 

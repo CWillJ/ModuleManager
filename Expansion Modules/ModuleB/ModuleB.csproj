@@ -1,17 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <CodeAnalysisRuleSet>..\..\PVA.ruleset</CodeAnalysisRuleSet>
-    <AssemblyName>ModuleManager.TestModules.ModuleA</AssemblyName>
-    <RootNamespace>ModuleManager.TestModules.ModuleA</RootNamespace>
+    <AssemblyName>ModuleManager.Expansion.ModuleB</AssemblyName>
+    <RootNamespace>ModuleManager.Expansion.ModuleB</RootNamespace>
     <Company>PVA</Company>
     <Authors>Product Development</Authors>
+    <PackageId>ModuleManager.Expansion.ModuleB</PackageId>
+    <Product>ModuleManager.Expansion.ModuleB</Product>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\..\Documentation\ModuleManager.TestModules.ModuleA.xml</DocumentationFile>
+    <DocumentationFile>..\..\Documentation\ModuleManager.Expansion.ModuleB.xml</DocumentationFile>
     <OutputPath></OutputPath>
   </PropertyGroup>
 
@@ -63,14 +65,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\..\Common\Common.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\ModuleBView.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Views\ModuleBView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
+
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="set destination=&quot;$(SolutionDir)$(SolutionName)\$(OutDir)TestModules&quot;&#xD;&#xA;if not exist &quot;%25destination%25&quot; mkdir &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).xml&quot; &quot;%25destination%25&quot;" />
+	  <Exec Command="set destination=&quot;$(SolutionDir)$(SolutionName)\$(OutDir)Expansion&quot;&#xD;&#xA;if not exist &quot;%25destination%25&quot; mkdir &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).xml&quot; &quot;%25destination%25&quot;" />
 	</Target>
 </Project>
