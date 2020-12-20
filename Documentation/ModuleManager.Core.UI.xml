@@ -86,11 +86,12 @@
             The UI Module Class.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.UIModule.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService)">
+        <member name="M:ModuleManager.Core.UI.UIModule.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.UIModule"/> class.
             </summary>
             <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+            <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
         </member>
         <member name="M:ModuleManager.Core.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
             <summary>
@@ -110,17 +111,21 @@
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
-        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedModules(ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
+        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedModules">
             <summary>
             Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
             </summary>
-            <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
         </member>
-        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedViewNames(ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
+        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedViewNames">
             <summary>
             Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
             </summary>
-            <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Core.UI.UIModule.StoreModules">
+            <summary>
+            StoreModules will attempt to get all assemblies from a dll and store it
+            as an AssemblyData in the AssemblyData collection.
+            </summary>
         </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.AssemblyDataTreeViewModel">
             <summary>

@@ -57,9 +57,14 @@
             Loads the core modules for this project.
             </summary>
         </member>
-        <member name="M:ModuleManager.App.LoadTestModules">
+        <member name="M:ModuleManager.App.LoadExpansion">
             <summary>
             Stores the test modules that this project will display.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.UnloadDisabledModules">
+            <summary>
+            Unloads all the disabled modules from the <see cref="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.App.ShowSavedViews">

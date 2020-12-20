@@ -1,5 +1,7 @@
 ﻿namespace ModuleManager.Common.Classes.Data
 {
+    using System.Collections.ObjectModel;
+
     /// <summary>
     /// An object that stores info about the view type.
     /// </summary>
@@ -9,19 +11,29 @@
         /// Initializes a new instance of the <see cref="ViewData"/> class.
         /// </summary>
         public ViewData()
+            : this(string.Empty, new ObservableCollection<object>())
         {
-            NumberOfViewInstances = 0;
-            ViewPosition = 0;
         }
 
         /// <summary>
-        /// Gets or sets the nubmer of view instances of this type.
+        /// Initializes a new instance of the <see cref="ViewData"/> class.
         /// </summary>
-        public int NumberOfViewInstances { get; set; }
+        /// <param name="assemblyName">The name of the assembly that contains these view objects.</param>
+        /// <param name="viewsObjects">The view objects that this assembly contains.</param>
+        public ViewData(string assemblyName, ObservableCollection<object> viewsObjects)
+        {
+            AssemblyName = assemblyName;
+            ViewObjects = viewsObjects;
+        }
 
         /// <summary>
-        /// Gets or sets the position of this view type in the region.
+        /// Gets or sets the <see cref="string"/> name of the assembly that contains the view objects.
         /// </summary>
-        public int ViewPosition { get; set; }
+        public string AssemblyName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="ObservableCollection{Object}"/> of view objects.
+        /// </summary>
+        public ObservableCollection<object> ViewObjects { get; set; }
     }
 }

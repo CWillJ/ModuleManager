@@ -1,13 +1,14 @@
 ﻿namespace ModuleManager.Common.Services
 {
     using System.Collections.ObjectModel;
+    using ModuleManager.Common.Classes.Data;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
 
     /// <inheritdoc cref="IViewCollectionService"/>
     public class ViewCollectionService : BindableBase, IViewCollectionService
     {
-        private readonly ObservableCollection<object> _views;
+        private readonly ObservableCollection<ViewData> _viewDataCollection;
         private object _selectedView;
         private string _selectedViewName;
 
@@ -16,15 +17,15 @@
         /// </summary>
         public ViewCollectionService()
         {
-            _views = new ObservableCollection<object>();
+            _viewDataCollection = new ObservableCollection<ViewData>();
             _selectedView = null;
-            _selectedViewName = @"Loaded Views";
+            _selectedViewName = @"Loaded ViewDataCollection";
         }
 
         /// <inheritdoc/>
-        public ObservableCollection<object> Views
+        public ObservableCollection<ViewData> ViewDataCollection
         {
-            get { return _views; }
+            get { return _viewDataCollection; }
         }
 
         /// <inheritdoc/>
@@ -44,7 +45,7 @@
                 }
                 else
                 {
-                    SelectedViewName = @"Loaded Views";
+                    SelectedViewName = @"Loaded ViewDataCollection";
                 }
             }
         }
@@ -59,19 +60,110 @@
         /// <inheritdoc/>
         public void AddView(object viewObject)
         {
-            Views.Add(viewObject);
+            string assemblyName = viewObject.GetType().Assembly.FullName;
+            bool wasAdded = false;
+
+            foreach (var view in ViewDataCollection)
+            {
+                if (view.AssemblyName == assemblyName)
+                {
+                    view.ViewObjects.Add(viewObject);
+                    wasAdded = true;
+                }
+            }
+
+            if (!wasAdded)
+            {
+                ViewDataCollection.Add(new ViewData(assemblyName, new ObservableCollection<object>() { viewObject }));
+            }
         }
 
         /// <inheritdoc/>
         public void RemoveView(object viewObject)
         {
-            foreach (var view in Views)
+            string assemblyName = viewObject.GetType().Assembly.FullName;
+
+            if (!ViewDataAssemblyNameContainsViewObject(assemblyName, viewObject))
             {
-                if (view == viewObject)
+                return;
+            }
+
+            foreach (var viewData in ViewDataCollection)
+            {
+                if (viewData.AssemblyName == assemblyName)
                 {
-                    Views.Remove(view);
+                    viewData.ViewObjects.Remove(viewData);
+
+                    if (viewData.ViewObjects.Count == 0)
+                    {
+                        ViewDataCollection.Remove(viewData);
+                    }
                 }
             }
+        }
+
+        /// <inheritdoc/>
+        public bool CollectionContainsAssemblyName(string assemblyName)
+        {
+            foreach (var viewData in ViewDataCollection)
+            {
+                if (viewData.AssemblyName == assemblyName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public bool ViewDataAssemblyNameContainsViewObject(string assemblyName, object viewObject)
+        {
+            foreach (var viewData in ViewDataCollection)
+            {
+                if (viewData.AssemblyName == assemblyName)
+                {
+                    foreach (var view in viewData.ViewObjects)
+                    {
+                        string viewName1 = view.GetType().FullName;
+                        string viewName2 = viewObject.GetType().FullName;
+                        if (viewName1 == viewName2)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public object GetViewObjectByName(string viewName)
+        {
+            foreach (var viewData in ViewDataCollection)
+            {
+                foreach (var viewObject in viewData.ViewObjects)
+                {
+                    string viewObjectNameFromCollection;
+
+                    if (viewObject == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        viewObjectNameFromCollection = viewObject.GetType().FullName;
+                    }
+
+                    if (viewObjectNameFromCollection == viewName)
+                    {
+                        return viewObject;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

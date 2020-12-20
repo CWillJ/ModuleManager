@@ -54,8 +54,14 @@
 
             shell.Visibility = Visibility.Visible;
 
+            // Load all AssemblyData's
             LoadCore();
-            LoadTestModules();
+
+            // Store views and actions
+            LoadExpansion();
+
+            // Unload all disabled AssemblyData's
+            UnloadDisabledModules();
 
             RegionManager.UpdateRegions();
             ShowSavedViews();
@@ -89,9 +95,11 @@
         {
             containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
             containerRegistry.RegisterSingleton<IAssemblyDataLoaderService, AssemblyDataLoaderService>();
-            containerRegistry.RegisterSingleton<IModuleStartUpService, ModuleStartUpService>();
             containerRegistry.RegisterSingleton<IViewCollectionService, ViewCollectionService>();
             containerRegistry.RegisterSingleton<ILoadedViewNamesService, LoadedViewNamesService>();
+
+            containerRegistry.RegisterSingleton<ICoreModuleStartUpService, CoreModuleStartUpService>();
+            containerRegistry.RegisterSingleton<IModuleLoadingService, ModuleLoadingService>();
             containerRegistry.RegisterSingleton<IModuleCatalogService, ModuleCatalogService>();
         }
 
@@ -127,9 +135,9 @@
         /// </summary>
         private void LoadCore()
         {
-            var moduleStartupService = Container.Resolve<IModuleStartUpService>();
+            var coreModuleStartUpService = Container.Resolve<ICoreModuleStartUpService>();
 
-            foreach (Action registerModuleView in moduleStartupService.ViewInjectionActions)
+            foreach (Action registerModuleView in coreModuleStartUpService.ViewInjectionActions)
             {
                 registerModuleView();
             }
@@ -138,13 +146,30 @@
         /// <summary>
         /// Stores the test modules that this project will display.
         /// </summary>
-        private void LoadTestModules()
+        private void LoadExpansion()
         {
-            var moduleStartupService = Container.Resolve<IModuleStartUpService>();
+            var moduleLoadingService = Container.Resolve<IModuleLoadingService>();
 
-            foreach (Action registerModuleView in moduleStartupService.StoreViewActions)
+            foreach (Action storeViewAction in moduleLoadingService.StoreViewActions)
             {
-                registerModuleView();
+                storeViewAction();
+            }
+        }
+
+        /// <summary>
+        /// Unloads all the disabled modules from the <see cref="DirectoryLoaderModuleCatalog"/>.
+        /// </summary>
+        private void UnloadDisabledModules()
+        {
+            var assemblyCollectionService = Container.Resolve<IAssemblyCollectionService>();
+            var moduleCatalogService = Container.Resolve<IModuleCatalogService>();
+
+            foreach (var assemblyData in assemblyCollectionService.Assemblies)
+            {
+                if (!assemblyData.IsEnabled)
+                {
+                    moduleCatalogService.UnloadModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(assemblyData.ModuleType));
+                }
             }
         }
 
@@ -154,20 +179,16 @@
         private void ShowSavedViews()
         {
             var regionManager = Container.Resolve<IRegionManager>();
-            ////var assemblyCollectionService = Container.Resolve<IAssemblyCollectionService>();
             var viewCollectionService = Container.Resolve<IViewCollectionService>();
             var loadedViewNamesService = Container.Resolve<ILoadedViewNamesService>();
 
             foreach (string loadedView in loadedViewNamesService.LoadedViewNames)
             {
-                foreach (var viewObject in viewCollectionService.Views)
+                object? instance = Activator.CreateInstance(viewCollectionService.GetViewObjectByName(loadedView).GetType());
+
+                if (instance != null)
                 {
-                    string? viewName = viewObject.GetType().FullName;
-                    if ((viewObject != null) && (loadedView == viewName))
-                    {
-                        object? instance = Activator.CreateInstance(viewObject.GetType());
-                        regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                    }
+                    regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                 }
             }
         }

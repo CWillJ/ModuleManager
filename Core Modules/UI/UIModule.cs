@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Threading.Tasks;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
@@ -16,14 +17,18 @@
     public class UIModule : IModuleManagerCoreModule
     {
         private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
+        private readonly IAssemblyCollectionService _assemblyCollectionService;
+        private readonly ILoadedViewNamesService _loadedViewNamesService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIModule"/> class.
         /// </summary>
         /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
-        public UIModule(IAssemblyDataLoaderService assemblyDataLoaderService)
+        /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
+        public UIModule(IAssemblyDataLoaderService assemblyDataLoaderService, IAssemblyCollectionService assemblyCollectionService)
         {
             _assemblyDataLoaderService = assemblyDataLoaderService;
+            _assemblyCollectionService = assemblyCollectionService;
         }
 
         /// <summary>
@@ -39,11 +44,12 @@
             regionManager.RegisterViewWithRegion(@"ButtonViewsRegion", typeof(ViewDisplayView));
 
             // Register module initialization actions with CoreStartupService.
-            var startupService = containerProvider.Resolve<IModuleStartUpService>();
+            var startupService = containerProvider.Resolve<ICoreModuleStartUpService>();
             startupService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
 
-            LoadSavedModules(containerProvider.Resolve<IAssemblyCollectionService>());
-            LoadSavedViewNames(containerProvider.Resolve<ILoadedViewNamesService>());
+            StoreModules();
+            LoadSavedModules();
+            LoadSavedViewNames();
         }
 
         /// <summary>
@@ -71,8 +77,7 @@
         /// <summary>
         /// Loads an <see cref="ObservableCollection{AssemblyData}"/> from an xml file.
         /// </summary>
-        /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
-        private void LoadSavedModules(IAssemblyCollectionService assemblyCollectionService)
+        private void LoadSavedModules()
         {
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
 
@@ -88,19 +93,18 @@
 
                 _assemblyDataLoaderService.LoadAll(ref assemblies);
                 _assemblyDataLoaderService.LoadUnload(ref assemblies);
-                assemblyCollectionService.Assemblies = assemblies;
+                _assemblyCollectionService.Assemblies = assemblies;
             }
 
-            assemblies = assemblyCollectionService.Assemblies;
+            assemblies = _assemblyCollectionService.Assemblies;
             _assemblyDataLoaderService.LoadUnload(ref assemblies);
-            assemblyCollectionService.Assemblies = assemblies;
+            _assemblyCollectionService.Assemblies = assemblies;
         }
 
         /// <summary>
         /// Loads an <see cref="ObservableCollection{String}"/> from an xml file.
         /// </summary>
-        /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
-        private void LoadSavedViewNames(ILoadedViewNamesService loadedViewNamesService)
+        private void LoadSavedViewNames()
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.json");
             if (File.Exists(filePath))
@@ -113,8 +117,32 @@
                     return;
                 }
 
-                loadedViewNamesService.LoadedViewNames = viewNames;
+                _loadedViewNamesService.LoadedViewNames = viewNames;
             }
+        }
+
+        /// <summary>
+        /// StoreModules will attempt to get all assemblies from a dll and store it
+        /// as an AssemblyData in the AssemblyData collection.
+        /// </summary>
+        private void StoreModules()
+        {
+            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion");
+
+            if (string.IsNullOrEmpty(moduleDirectory))
+            {
+                return;
+            }
+
+            string[] dllFiles = Directory.GetFiles(moduleDirectory, @"*.dll");
+
+            if (dllFiles.Length == 0)
+            {
+                return;
+            }
+
+            _assemblyDataLoaderService.DllDirectory = moduleDirectory;
+            _assemblyCollectionService.PopulateAssemblyCollection(moduleDirectory, dllFiles);
         }
     }
 }

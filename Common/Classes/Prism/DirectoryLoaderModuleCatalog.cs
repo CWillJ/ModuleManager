@@ -8,7 +8,6 @@
     using System.Linq;
     using System.Reflection;
     using ModuleManager.Common.Interfaces;
-    using Prism.Ioc;
     using Prism.Modularity;
 
     /// <summary>

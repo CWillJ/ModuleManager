@@ -121,7 +121,7 @@
         private async void StoreModules()
         {
             ////string moduleDirectory = GetModuleDirectory();
-            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"TestModules");
+            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion");
 
             if (string.IsNullOrEmpty(moduleDirectory))
             {
@@ -230,28 +230,28 @@
                 {
                     if (typeData.ViewInfo != null)
                     {
-                        foreach (var viewObject in ViewCollectionService.Views)
+                        var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
+
+                        if (viewObject != null)
                         {
                             Type type = viewObject.GetType();
-                            if (typeData.FullName == type.FullName)
-                            {
-                                object instance = Activator.CreateInstance(type);
-                                _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                                typeData.ViewInfo.NumberOfViewInstances++;
-                            }
+                            object instance = Activator.CreateInstance(type);
+                            _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                         }
                     }
                 }
             }
             else if (_assemblyCollectionService.SelectedItem is TypeData typeData && (typeData.ViewInfo != null))
             {
-                foreach (var viewObject in ViewCollectionService.Views)
+                if (typeData.ViewInfo != null)
                 {
-                    if (typeData.FullName == viewObject.GetType().FullName)
+                    var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
+
+                    if (viewObject != null)
                     {
-                        object instance = Activator.CreateInstance(viewObject.GetType());
+                        Type type = viewObject.GetType();
+                        object instance = Activator.CreateInstance(type);
                         _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                        typeData.ViewInfo.NumberOfViewInstances++;
                     }
                 }
             }
@@ -264,17 +264,6 @@
         {
             if (ViewCollectionService.SelectedView != null && _regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(ViewCollectionService.SelectedView))
             {
-                foreach (AssemblyData assemblyData in _assemblyCollectionService.Assemblies)
-                {
-                    foreach (TypeData typeData in assemblyData.Types)
-                    {
-                        if (typeData.FullName == ViewCollectionService.SelectedView.GetType().FullName)
-                        {
-                            typeData.ViewInfo.NumberOfViewInstances--;
-                        }
-                    }
-                }
-
                 _regionManager.Regions[@"LoadedViewsRegion"].Remove(ViewCollectionService.SelectedView);
             }
         }

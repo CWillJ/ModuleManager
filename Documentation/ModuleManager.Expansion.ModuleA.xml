@@ -18,12 +18,6 @@
         <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.OnInitialized(Prism.Ioc.IContainerProvider)">
             <inheritdoc/>
         </member>
-        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.Unload(Prism.Ioc.IContainerProvider)">
-            <inheritdoc/>
-        </member>
-        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.ReLoad(Prism.Ioc.IContainerProvider)">
-            <inheritdoc/>
-        </member>
         <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
             <inheritdoc/>
         </member>
@@ -33,12 +27,23 @@
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
-        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.RemoveViewObject(System.Object)">
+        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.Unload(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Unloads the views associated with this module.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.Reload(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Reloads the views associated with this module.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.RemoveViews(System.Object)">
             <summary>
             Remove the view object from the service.
             </summary>
             <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
-            <returns>True if the view object was removed, false otherwise.</returns>
         </member>
         <member name="T:ModuleManager.Expansion.ModuleA.ViewModels.ModuleA2ViewModel">
             <summary>

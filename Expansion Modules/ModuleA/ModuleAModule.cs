@@ -23,21 +23,12 @@
         /// <inheritdoc/>
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            var startUpService = containerProvider.Resolve<IModuleStartUpService>();
-            startUpService.AddStoreViewAction(() => StoreViews(containerProvider));
-        }
+            string moduleName = GetType().Name;
 
-        /// <inheritdoc/>
-        public void Unload(IContainerProvider containerProvider)
-        {
-            RemoveViewObject(containerProvider.Resolve<ModuleAView>());
-            RemoveViewObject(containerProvider.Resolve<ModuleA2View>());
-        }
-
-        /// <inheritdoc/>
-        public void ReLoad(IContainerProvider containerProvider)
-        {
-            StoreViews(containerProvider);
+            var moduleLoadingService = containerProvider.Resolve<IModuleLoadingService>();
+            moduleLoadingService.AddStoreViewAction(() => StoreViews(containerProvider));
+            moduleLoadingService.UnloadModule(moduleName, () => Unload(containerProvider));
+            moduleLoadingService.ReloadModule(moduleName, () => Reload(containerProvider));
         }
 
         /// <inheritdoc/>
@@ -56,21 +47,31 @@
         }
 
         /// <summary>
+        /// Unloads the views associated with this module.
+        /// </summary>
+        /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
+        private void Unload(IContainerProvider containerProvider)
+        {
+            RemoveViews(containerProvider.Resolve<ModuleAView>());
+            RemoveViews(containerProvider.Resolve<ModuleA2View>());
+        }
+
+        /// <summary>
+        /// Reloads the views associated with this module.
+        /// </summary>
+        /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
+        private void Reload(IContainerProvider containerProvider)
+        {
+            StoreViews(containerProvider);
+        }
+
+        /// <summary>
         /// Remove the view object from the service.
         /// </summary>
         /// <param name="viewObject">The view <see cref="object"/> to remove from the <see cref="IViewCollectionService"/>.</param>
-        /// <returns>True if the view object was removed, false otherwise.</returns>
-        private bool RemoveViewObject(object viewObject)
+        private void RemoveViews(object viewObject)
         {
-            if (_viewCollectionService.Views.Contains(viewObject))
-            {
-                _viewCollectionService.RemoveView(viewObject);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            _viewCollectionService.RemoveView(viewObject);
         }
     }
 }
