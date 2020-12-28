@@ -86,12 +86,13 @@
             The UI Module Class.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.UIModule.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
+        <member name="M:ModuleManager.Core.UI.UIModule.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.UIModule"/> class.
             </summary>
             <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
+            <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>
         </member>
         <member name="M:ModuleManager.Core.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
             <summary>

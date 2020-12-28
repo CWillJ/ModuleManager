@@ -17,12 +17,12 @@
         /// Unloads an <see cref="IModuleInfo"/> from the <see cref="IModuleCatalog"/>.
         /// </summary>
         /// <param name="moduleInfo">The <see cref="IModuleInfo"/> to unload from the <see cref="IModuleCatalog"/>.</param>
-        public void UnloadModule(IModuleInfo moduleInfo);
+        public void UnloadExpansionModule(IModuleInfo moduleInfo);
 
         /// <summary>
         /// Reloads an <see cref="IModuleInfo"/> to the <see cref="IModuleCatalog"/>.
         /// </summary>
         /// <param name="dllFilePath">The <see cref="string"/> of the dll file.</param>
-        public void ReloadModule(string dllFilePath);
+        public void ReloadExpansionModule(string dllFilePath);
     }
 }

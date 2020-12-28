@@ -122,6 +122,28 @@
                 Items.Add(CreateModuleInfo(assemblyData.ModuleType));
             }
 
+            Initialize();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Removes a <see cref="IModuleInfo"/> from the <see cref="IModuleCatalog"/>.
+        /// </summary>
+        /// <param name="moduleInfo">The <see cref="IModuleInfo"/> to remove from the list.</param>
+        /// <returns>The <see cref="IModuleCatalog"/> for easily removing multiple modules.</returns>
+        public IModuleCatalog RemoveModule(IModuleInfo moduleInfo)
+        {
+            foreach (var moduleCatalogItem in Items)
+            {
+                IModuleInfo something = (IModuleInfo)moduleCatalogItem;
+                if (something.ModuleName == moduleInfo.ModuleName)
+                {
+                    Items.Remove(moduleCatalogItem);
+                    break;
+                }
+            }
+
             return this;
         }
 

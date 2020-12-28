@@ -37,53 +37,37 @@
         /// the <see cref="IViewCollectionService"/>.
         /// </summary>
         /// <param name="moduleInfo">The <see cref="IModuleInfo"/> to unload from the <see cref="IModuleCatalog"/>.</param>
-        public void UnloadModule(IModuleInfo moduleInfo)
+        public void UnloadExpansionModule(IModuleInfo moduleInfo)
         {
             // Removes the module's views from the view collection (call module unload action)
-            _moduleLoadingService.UnloadActions[moduleInfo.ModuleName]();
+            ////_moduleLoadingService.UnloadActions[moduleInfo.ModuleName]();
 
-            // Removes the module from the catalog
-            DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(_assemblyDataLoaderService);
-
-            foreach (var module in ModuleCatalog.Catalogs[^1].Modules)
+            foreach (var catalog in ModuleCatalog.Catalogs)
             {
-                if (module.ModuleName == moduleInfo.ModuleName)
+                if (catalog is DirectoryLoaderModuleCatalog directoryLoaderModuleCatalog)
                 {
-                    // need to call the module's Unload method here
-                    var what1 = module.InitializationMode;
-                }
-                else
-                {
-                    directoryCatalog.AddModule(module);
+                    directoryLoaderModuleCatalog.RemoveModule(moduleInfo);
                 }
             }
-
-            ModuleCatalog.Catalogs[^1] = directoryCatalog;
         }
 
         /// <summary>
         /// Reloads an <see cref="IModuleInfo"/> to the <see cref="IModuleCatalog"/> and adds any associated views
-        /// to the <see cref="IViewCollectionService"/>.
+        /// to the <see cref="IViewCollectionService"/> NOT WORKING.
         /// </summary>
         /// <param name="dllFilePath">The <see cref="string"/> of the dll file.</param>
-        public void ReloadModule(string dllFilePath)
+        public void ReloadExpansionModule(string dllFilePath)
         {
-            // Remove the old DirectoryLoaderModuleCatalog
-            ModuleCatalog.Catalogs.RemoveAt(ModuleCatalog.Catalogs.Count - 1);
-
-            DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(_assemblyDataLoaderService);
-            IModuleInfo moduleInfo = directoryCatalog.GetModuleInfoFromFile(dllFilePath);
-            directoryCatalog.AddModule(moduleInfo);
-            ModuleCatalog.AddCatalog(directoryCatalog);
-
-            // Adds the module to the module catalog
-            ////DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(_assemblyDataLoaderService);
-            ////IModuleInfo moduleInfo = directoryCatalog.GetModuleInfoFromFile(dllFilePath);
-
-            ////ModuleCatalog.Catalogs[^1].AddModule(moduleInfo);
+            for (int i = 0; i < ModuleCatalog.Catalogs.Count; i++)
+            {
+                if (ModuleCatalog.Catalogs[i] is DirectoryLoaderModuleCatalog directoryLoaderModuleCatalog)
+                {
+                    directoryLoaderModuleCatalog.AddModule(dllFilePath);
+                }
+            }
 
             // Store the module's views back in the view collection (call module reload action)
-            _moduleLoadingService.ReloadActions[moduleInfo.ModuleName]();
+            ////_moduleLoadingService.ReloadActions[moduleInfo.ModuleName]();
         }
     }
 }

@@ -2,7 +2,6 @@
 {
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Threading.Tasks;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
@@ -25,10 +24,12 @@
         /// </summary>
         /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
-        public UIModule(IAssemblyDataLoaderService assemblyDataLoaderService, IAssemblyCollectionService assemblyCollectionService)
+        /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
+        public UIModule(IAssemblyDataLoaderService assemblyDataLoaderService, IAssemblyCollectionService assemblyCollectionService, ILoadedViewNamesService loadedViewNamesService)
         {
             _assemblyDataLoaderService = assemblyDataLoaderService;
             _assemblyCollectionService = assemblyCollectionService;
+            _loadedViewNamesService = loadedViewNamesService;
         }
 
         /// <summary>

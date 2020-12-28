@@ -168,7 +168,7 @@
             {
                 if (!assemblyData.IsEnabled)
                 {
-                    moduleCatalogService.UnloadModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(assemblyData.ModuleType));
+                    moduleCatalogService.UnloadExpansionModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(assemblyData.ModuleType));
                 }
             }
         }

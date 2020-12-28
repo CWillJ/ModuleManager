@@ -537,12 +537,11 @@
             <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
             <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
         </member>
-        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.RemoveModule(Prism.Modularity.IModuleInfo)">
-            <summary>
-            Removes an <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
-            </summary>
-            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to remove.</param>
-            <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.AddModuleToCatalog(Prism.Modularity.IModuleInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.RemoveModuleFromCatalog(Prism.Modularity.IModuleInfo)">
+            <inheritdoc/>
         </member>
         <member name="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog">
             <summary>
@@ -580,6 +579,13 @@
             </summary>
             <param name="dllFilePath">The <see cref="T:System.String"/> to the dll file to get the <see cref="T:Prism.Modularity.IModuleInfo"/> from.</param>
             <returns>The <see cref="T:Prism.Modularity.IModuleCatalog"/> for easily adding multiple modules.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.RemoveModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Removes a <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to remove from the list.</param>
+            <returns>The <see cref="T:Prism.Modularity.IModuleCatalog"/> for easily removing multiple modules.</returns>
         </member>
         <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.GetModuleInfoFromFile(System.String)">
             <summary>
@@ -714,6 +720,23 @@
             </summary>
             <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/> to get text from.</param>
             <returns>Formatted string of the <see cref="T:System.Xml.XmlNode"/> InnerXml.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IModuleManagerCatalog">
+            <summary>
+            Adds on to <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleManagerCatalog.AddModuleToCatalog(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Adds a <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add to the catalog.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleManagerCatalog.RemoveModuleFromCatalog(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Removes a <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to remove from the catalog.</param>
         </member>
         <member name="T:ModuleManager.Common.Interfaces.IModuleManagerCoreModule">
             <summary>
@@ -870,13 +893,13 @@
             Gets the <see cref="T:ModuleManager.Common.Classes.AggregateModuleCatalog"/> used in this application.
             </summary>
         </member>
-        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.UnloadModule(Prism.Modularity.IModuleInfo)">
+        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.UnloadExpansionModule(Prism.Modularity.IModuleInfo)">
             <summary>
             Unloads an <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
             </summary>
             <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to unload from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
         </member>
-        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.ReloadModule(System.String)">
+        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.ReloadExpansionModule(System.String)">
             <summary>
             Reloads an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
             </summary>
@@ -1164,17 +1187,17 @@
         <member name="P:ModuleManager.Common.Services.ModuleCatalogService.ModuleCatalog">
             <inheritdoc/>
         </member>
-        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.UnloadModule(Prism.Modularity.IModuleInfo)">
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.UnloadExpansionModule(Prism.Modularity.IModuleInfo)">
             <summary>
             Unloads an <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.IModuleCatalog"/> and removes the module's view from
             the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
             </summary>
             <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to unload from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
         </member>
-        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.ReloadModule(System.String)">
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.ReloadExpansionModule(System.String)">
             <summary>
             Reloads an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/> and adds any associated views
-            to the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
+            to the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/> NOT WORKING.
             </summary>
             <param name="dllFilePath">The <see cref="T:System.String"/> of the dll file.</param>
         </member>

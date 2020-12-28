@@ -117,11 +117,11 @@
 
                 if (Assemblies[i].IsEnabled)
                 {
-                    _moduleCatalogService.ReloadModule(Assemblies[i].FilePath);
+                    _moduleCatalogService.ReloadExpansionModule(Assemblies[i].FilePath);
                 }
                 else
                 {
-                    _moduleCatalogService.UnloadModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(Assemblies[i].ModuleType));
+                    _moduleCatalogService.UnloadExpansionModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(Assemblies[i].ModuleType));
                 }
             }
         }
