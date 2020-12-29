@@ -57,13 +57,27 @@
         /// <inheritdoc/>
         public void UnloadModule(string moduleName, Action action)
         {
-            _unloadActions.Add(moduleName, action);
+            try
+            {
+                _unloadActions.Add(moduleName, action);
+            }
+            catch
+            {
+                // The action already exists
+            }
         }
 
         /// <inheritdoc/>
         public void ReloadModule(string moduleName, Action action)
         {
-            _reloadActions.Add(moduleName, action);
+            try
+            {
+                _reloadActions.Add(moduleName, action);
+            }
+            catch
+            {
+                // The action already exists
+            }
         }
     }
 }

@@ -13,7 +13,7 @@
     /// <summary>
     /// The UI Module Class.
     /// </summary>
-    public class UIModule : IModuleManagerCoreModule
+    public class UIModule : ICoreModule
     {
         private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
         private readonly IAssemblyCollectionService _assemblyCollectionService;

@@ -3,13 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ModuleManager.Common.Interfaces;
     using Prism.Modularity;
 
     /// <summary>
     /// A basic aggregation of IModuleCatalogs for quickstart purposes.
     /// </summary>
-    public class AggregateModuleCatalog : IModuleManagerCatalog
+    public class AggregateModuleCatalog : IModuleCatalog
     {
         private List<IModuleCatalog> _catalogs = new List<IModuleCatalog>();
 
@@ -101,26 +100,6 @@
         public IModuleCatalog AddModule(IModuleInfo moduleInfo)
         {
             return _catalogs[0].AddModule(moduleInfo);
-        }
-
-        /// <inheritdoc/>
-        public void AddModuleToCatalog(IModuleInfo moduleInfo)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void RemoveModuleFromCatalog(IModuleInfo moduleInfo)
-        {
-            var catalog = new ModuleCatalog();
-
-            foreach (var module in _catalogs[0].Modules)
-            {
-                if (moduleInfo != module)
-                {
-                    catalog.AddModule(module);
-                }
-            }
         }
     }
 }

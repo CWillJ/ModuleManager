@@ -211,7 +211,7 @@
                     {
                         Type[] typeInterfaces = type.GetInterfaces();
 
-                        if ((assemblyData.ModuleType == null) && (typeInterfaces.Contains(typeof(IModuleManagerTestModule)) || typeInterfaces.Contains(typeof(IModuleManagerCoreModule))))
+                        if ((assemblyData.ModuleType == null) && (typeInterfaces.Contains(typeof(IExpansionModule)) || typeInterfaces.Contains(typeof(ICoreModule))))
                         {
                             assemblyData.ModuleType = type;
                         }

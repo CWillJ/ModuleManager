@@ -8,6 +8,7 @@
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
+    using Prism.Ioc;
     using Prism.Mvvm;
     using Prism.Regions;
     using Telerik.Windows.Controls;
@@ -18,6 +19,7 @@
     public class ViewDisplayViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IContainerExtension _containerExtension;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
         private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
         private readonly IViewCollectionService _viewCollectionService;
@@ -35,6 +37,7 @@
         /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
         public ViewDisplayViewModel(
             IRegionManager regionManager,
+            IContainerExtension containerExtension,
             IAssemblyCollectionService assemblyCollectionService,
             IAssemblyDataLoaderService assemblyDataLoaderService,
             IViewCollectionService viewCollectionService,
@@ -42,6 +45,7 @@
             ILoadedViewNamesService loadedViewNamesService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
+            _containerExtension = containerExtension ?? throw new ArgumentNullException("ContainerExtension");
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyDataLoaderService");
             _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
@@ -230,12 +234,14 @@
                 {
                     if (typeData.ViewInfo != null)
                     {
-                        var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
+                        Type viewType = Type.GetType(typeData.FullName);
 
-                        if (viewObject != null)
+                        ////var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
+
+                        if (viewType != null)
                         {
-                            Type type = viewObject.GetType();
-                            object instance = Activator.CreateInstance(type);
+                            ////Type type = viewObject.GetType();
+                            object instance = Activator.CreateInstance(viewType);
                             _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                         }
                     }

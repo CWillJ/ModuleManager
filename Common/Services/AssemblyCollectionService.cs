@@ -121,7 +121,7 @@
                 }
                 else
                 {
-                    _moduleCatalogService.UnloadExpansionModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(Assemblies[i].ModuleType));
+                    _moduleCatalogService.UnloadExpansionModule(Assemblies[i].ModuleType.Name);
                 }
             }
         }

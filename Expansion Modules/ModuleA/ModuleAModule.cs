@@ -7,7 +7,7 @@
     /// <summary>
     /// Test module A.
     /// </summary>
-    public class ModuleAModule : IModuleManagerTestModule
+    public class ModuleAModule : IExpansionModule
     {
         private readonly IViewCollectionService _viewCollectionService;
 

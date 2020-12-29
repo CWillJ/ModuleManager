@@ -3,12 +3,11 @@
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Expansion.ModuleB.Views;
     using Prism.Ioc;
-    using System;
 
     /// <summary>
     /// Test module B.
     /// </summary>
-    public class ModuleBModule : IModuleManagerTestModule
+    public class ModuleBModule : IExpansionModule
     {
         private readonly IViewCollectionService _viewCollectionService;
 

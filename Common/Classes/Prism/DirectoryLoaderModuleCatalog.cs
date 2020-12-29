@@ -112,32 +112,32 @@
         /// Adds a <see cref="IModuleInfo"/> to the <see cref="IModuleCatalog"/>.
         /// </summary>
         /// <param name="dllFilePath">The <see cref="string"/> to the dll file to get the <see cref="IModuleInfo"/> from.</param>
-        /// <returns>The <see cref="IModuleCatalog"/> for easily adding multiple modules.</returns>
-        public IModuleCatalog AddModule(string dllFilePath)
+        /// <returns>The <see cref="IModuleInfo"/> added to the catalog.</returns>
+        public IModuleInfo? AddModule(string dllFilePath)
         {
             AssemblyData assemblyData = _assemblyDataLoaderService.GetAssembly(dllFilePath);
 
             if (assemblyData.ModuleType != null)
             {
-                Items.Add(CreateModuleInfo(assemblyData.ModuleType));
+                IModuleInfo moduleInfo = CreateModuleInfo(assemblyData.ModuleType);
+                Items.Add(moduleInfo);
+                return moduleInfo;
             }
 
-            Initialize();
-
-            return this;
+            return null;
         }
 
         /// <summary>
         /// Removes a <see cref="IModuleInfo"/> from the <see cref="IModuleCatalog"/>.
         /// </summary>
-        /// <param name="moduleInfo">The <see cref="IModuleInfo"/> to remove from the list.</param>
+        /// <param name="moduleInfoName">The <see cref="string"/> of the <see cref="IModuleInfo"/> to remove from the list.</param>
         /// <returns>The <see cref="IModuleCatalog"/> for easily removing multiple modules.</returns>
-        public IModuleCatalog RemoveModule(IModuleInfo moduleInfo)
+        public IModuleCatalog RemoveModule(string moduleInfoName)
         {
             foreach (var moduleCatalogItem in Items)
             {
                 IModuleInfo something = (IModuleInfo)moduleCatalogItem;
-                if (something.ModuleName == moduleInfo.ModuleName)
+                if (something.ModuleName == moduleInfoName)
                 {
                     Items.Remove(moduleCatalogItem);
                     break;
@@ -145,17 +145,6 @@
             }
 
             return this;
-        }
-
-        /// <summary>
-        /// Get a <see cref="IModuleInfo"/> from a <see cref="string"/> file path.
-        /// </summary>
-        /// <param name="dllFilePath">The <see cref="string"/> file path to the dll.</param>
-        /// <returns>A <see cref="IModuleInfo"/>.</returns>
-        public IModuleInfo GetModuleInfoFromFile(string dllFilePath)
-        {
-            AssemblyData assemblyData = _assemblyDataLoaderService.GetAssembly(dllFilePath);
-            return CreateModuleInfo(assemblyData.ModuleType);
         }
 
         /// <summary>
@@ -170,7 +159,6 @@
 
             if (!Directory.Exists(ModulePath))
             {
-                return;
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Directory for module {0} not found", ModulePath));
             }
 

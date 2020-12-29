@@ -149,6 +149,9 @@
         private void LoadExpansion()
         {
             var moduleLoadingService = Container.Resolve<IModuleLoadingService>();
+            var moduleCatalogService = Container.Resolve<IModuleCatalogService>();
+
+            moduleCatalogService.ModuleCatalog.Initialize();
 
             foreach (Action storeViewAction in moduleLoadingService.StoreViewActions)
             {
@@ -168,7 +171,7 @@
             {
                 if (!assemblyData.IsEnabled)
                 {
-                    moduleCatalogService.UnloadExpansionModule(DirectoryLoaderModuleCatalog.CreateModuleInfo(assemblyData.ModuleType));
+                    moduleCatalogService.UnloadExpansionModule(assemblyData.ModuleType.Name);
                 }
             }
         }
