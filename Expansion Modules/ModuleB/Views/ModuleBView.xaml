@@ -15,8 +15,8 @@
             Height="40"
             Margin="25,10,10,10"
             HorizontalAlignment="Left"
-            Background="IndianRed"
-            Command="{Binding Path=SaveConfigCommand}"
+            Background="Gray"
+            Command="{Binding Path=IncrementCommand}"
             Content="{Binding Path=ButtonText}"
             FontSize="10"
             FontWeight="Bold" />

@@ -1,8 +1,12 @@
 ﻿namespace ModuleManager.Expansion.ModuleB
 {
     using ModuleManager.Common.Interfaces;
+    using ModuleManager.Expansion.ModuleB.ViewModels;
     using ModuleManager.Expansion.ModuleB.Views;
     using Prism.Ioc;
+    using Prism.Regions;
+    using System;
+    using System.Reflection;
 
     /// <summary>
     /// Test module B.
@@ -28,12 +32,13 @@
             var moduleLoadingService = containerProvider.Resolve<IModuleLoadingService>();
             moduleLoadingService.AddStoreViewAction(() => StoreViews(containerProvider));
             moduleLoadingService.UnloadModule(moduleName, () => Unload(containerProvider));
-            moduleLoadingService.ReloadModule(moduleName, () => Reload(containerProvider));
+            moduleLoadingService.ReloadModule(moduleName, () => StoreViews(containerProvider));
         }
 
         /// <inheritdoc/>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<object, ModuleBView>(typeof(ModuleBView).FullName);
         }
 
         /// <summary>
@@ -42,7 +47,14 @@
         /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
         private void StoreViews(IContainerProvider containerProvider)
         {
-            _viewCollectionService.AddView(containerProvider.Resolve<ModuleBView>());
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            var something1 = assembly.GetManifestResourceNames();
+            var something2 = assembly.GetTypes();
+            var something3 = assembly.GetType(@"ModuleManager.Expansion.ModuleB.Views.ModuleBView");
+
+            object instance = Activator.CreateInstance(something3);
+
+            _viewCollectionService.AddView(instance);
         }
 
         /// <summary>

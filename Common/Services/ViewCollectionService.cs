@@ -1,5 +1,6 @@
 ﻿namespace ModuleManager.Common.Services
 {
+    using System;
     using System.Collections.ObjectModel;
     using ModuleManager.Common.Classes.Data;
     using ModuleManager.Common.Interfaces;
@@ -60,15 +61,30 @@
         /// <inheritdoc/>
         public void AddView(object viewObject)
         {
-            string assemblyName = viewObject.GetType().Assembly.FullName;
+            Type viewType = viewObject.GetType();
+            string assemblyName = viewType.Assembly.FullName;
+            string viewName = viewType.FullName;
             bool wasAdded = false;
 
-            foreach (var view in ViewDataCollection)
+            foreach (var viewData in ViewDataCollection)
             {
-                if (view.AssemblyName == assemblyName)
+                if (viewData.AssemblyName == assemblyName)
                 {
-                    view.ViewObjects.Add(viewObject);
-                    wasAdded = true;
+                    foreach (var view1 in viewData.ViewObjects)
+                    {
+                        string view1Name = view1.GetType().FullName;
+                        if (viewName == view1Name)
+                        {
+                            viewData.ViewObjects[viewData.ViewObjects.IndexOf(view1)] = viewObject;
+                            wasAdded = true;
+                        }
+                    }
+
+                    if (!wasAdded)
+                    {
+                        viewData.ViewObjects.Add(viewObject);
+                        wasAdded = true;
+                    }
                 }
             }
 

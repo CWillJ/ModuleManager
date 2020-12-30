@@ -202,6 +202,7 @@
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel"/> class.
             </summary>
             <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
+            <param name="containerExtension">The <see cref="T:Prism.Ioc.IContainerExtension"/>.</param>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
             <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
@@ -253,11 +254,6 @@
             Gets or sets the RemoveSelectedViewCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
             </summary>
         </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.ViewDoubleClickCommand">
-            <summary>
-            Gets or sets the ViewDoubleClickCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
-            </summary>
-        </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.StoreModules">
             <summary>
             StoreModules will attempt to get all assemblies from a dll and store it
@@ -266,7 +262,7 @@
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.UpdateProgressBarText">
             <summary>
-            Runs async to update the progress bar with current module text.
+            The task that updates the <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.SaveConfig">
@@ -292,11 +288,6 @@
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.RemoveSelectedView">
             <summary>
             Removes the selected view from the views region.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.DisplaySelectedView">
-            <summary>
-            Command for double clicking a view <see cref="T:System.Object"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.CanExecute">

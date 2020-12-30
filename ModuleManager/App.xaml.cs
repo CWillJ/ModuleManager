@@ -149,9 +149,6 @@
         private void LoadExpansion()
         {
             var moduleLoadingService = Container.Resolve<IModuleLoadingService>();
-            var moduleCatalogService = Container.Resolve<IModuleCatalogService>();
-
-            moduleCatalogService.ModuleCatalog.Initialize();
 
             foreach (Action storeViewAction in moduleLoadingService.StoreViewActions)
             {

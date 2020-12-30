@@ -30,6 +30,7 @@
         /// Initializes a new instance of the <see cref="ViewDisplayViewModel"/> class.
         /// </summary>
         /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        /// <param name="containerExtension">The <see cref="IContainerExtension"/>.</param>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
         /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
         /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
@@ -46,6 +47,7 @@
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
             _containerExtension = containerExtension ?? throw new ArgumentNullException("ContainerExtension");
+
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyDataLoaderService");
             _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
@@ -59,7 +61,6 @@
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
             AddSelectedViewCommand = new Prism.Commands.DelegateCommand(AddSelectedView, CanExecute);
             RemoveSelectedViewCommand = new Prism.Commands.DelegateCommand(RemoveSelectedView, CanExecute);
-            ViewDoubleClickCommand = new Prism.Commands.DelegateCommand(DisplaySelectedView, CanExecute);
         }
 
         /// <summary>
@@ -114,11 +115,6 @@
         public Prism.Commands.DelegateCommand RemoveSelectedViewCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the ViewDoubleClickCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
-        /// </summary>
-        public Prism.Commands.DelegateCommand ViewDoubleClickCommand { get; set; }
-
-        /// <summary>
         /// StoreModules will attempt to get all assemblies from a dll and store it
         /// as an AssemblyData in the AssemblyData collection.
         /// </summary>
@@ -171,7 +167,7 @@
         }
 
         /// <summary>
-        /// Runs async to update the progress bar with current module text.
+        /// The task that updates the <see cref="IProgressBarService"/>.
         /// </summary>
         private void UpdateProgressBarText()
         {
@@ -234,14 +230,12 @@
                 {
                     if (typeData.ViewInfo != null)
                     {
-                        Type viewType = Type.GetType(typeData.FullName);
+                        var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
 
-                        ////var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
-
-                        if (viewType != null)
+                        if (viewObject != null)
                         {
-                            ////Type type = viewObject.GetType();
-                            object instance = Activator.CreateInstance(viewType);
+                            Type type = viewObject.GetType();
+                            object instance = Activator.CreateInstance(type);
                             _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
                         }
                     }
@@ -272,14 +266,6 @@
             {
                 _regionManager.Regions[@"LoadedViewsRegion"].Remove(ViewCollectionService.SelectedView);
             }
-        }
-
-        /// <summary>
-        /// Command for double clicking a view <see cref="object"/>.
-        /// </summary>
-        private void DisplaySelectedView()
-        {
-            return;
         }
 
         /// <summary>

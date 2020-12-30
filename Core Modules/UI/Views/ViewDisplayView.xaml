@@ -98,10 +98,7 @@
                 </telerik:RadListBox.ItemsPanel>
                 <telerik:RadListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid x:Name="someGrid">
-                            <Grid.InputBindings>
-                                <KeyBinding Key="A" Command="{Binding Path=ViewDoubleClickCommand}" />
-                            </Grid.InputBindings>
+                        <Grid>
                             <Border BorderBrush="Black" BorderThickness="2">
                                 <ContentControl Content="{Binding}" />
                             </Border>
