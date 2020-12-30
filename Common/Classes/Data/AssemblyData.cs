@@ -34,7 +34,6 @@
             FilePath = filePath;
             ModuleType = null;
             Types = modules;
-            Loader = null;
             Assembly = null;
         }
 
@@ -67,12 +66,6 @@
         /// </summary>
         [JsonIgnore]
         public Type ModuleType { get; set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="AssemblyLoader"/> to load/unload this assembly.
-        /// </summary>
-        [JsonIgnore]
-        public AssemblyLoader Loader { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="System.Reflection.Assembly"/> of this AssemblyData.

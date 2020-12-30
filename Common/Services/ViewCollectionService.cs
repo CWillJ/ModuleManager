@@ -77,6 +77,7 @@
                         {
                             viewData.ViewObjects[viewData.ViewObjects.IndexOf(view1)] = viewObject;
                             wasAdded = true;
+                            break;
                         }
                     }
 

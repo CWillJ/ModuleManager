@@ -1,12 +1,8 @@
 ﻿namespace ModuleManager.Expansion.ModuleB
 {
     using ModuleManager.Common.Interfaces;
-    using ModuleManager.Expansion.ModuleB.ViewModels;
     using ModuleManager.Expansion.ModuleB.Views;
     using Prism.Ioc;
-    using Prism.Regions;
-    using System;
-    using System.Reflection;
 
     /// <summary>
     /// Test module B.
@@ -47,14 +43,7 @@
         /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
         private void StoreViews(IContainerProvider containerProvider)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            var something1 = assembly.GetManifestResourceNames();
-            var something2 = assembly.GetTypes();
-            var something3 = assembly.GetType(@"ModuleManager.Expansion.ModuleB.Views.ModuleBView");
-
-            object instance = Activator.CreateInstance(something3);
-
-            _viewCollectionService.AddView(instance);
+            _viewCollectionService.AddView(containerProvider.Resolve<ModuleBView>());
         }
 
         /// <summary>

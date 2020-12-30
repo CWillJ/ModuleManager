@@ -76,11 +76,6 @@
             Gets or sets the <see cref="T:System.Type"/> of the module in this assembly.
             </summary>
         </member>
-        <member name="P:ModuleManager.Common.Classes.AssemblyData.Loader">
-            <summary>
-            Gets or sets the <see cref="T:ModuleManager.Common.Classes.AssemblyLoader"/> to load/unload this assembly.
-            </summary>
-        </member>
         <member name="P:ModuleManager.Common.Classes.AssemblyData.Assembly">
             <summary>
             Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.

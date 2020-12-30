@@ -35,6 +35,9 @@
     <Reference Include="Prism.Wpf">
       <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reflection.MetadataLoadContext">
+      <HintPath>..\Lib\System.Reflection.MetadataLoadContext.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Abstractions">
       <HintPath>..\Lib\Unity.Abstractions.dll</HintPath>
     </Reference>

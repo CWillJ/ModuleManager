@@ -7,6 +7,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Classes.Data;
     using ModuleManager.Common.Interfaces;
@@ -95,7 +96,7 @@
         {
             AssemblyData assemblyData;
 
-            Initialize(dllFile.Substring(0, dllFile.LastIndexOf(".")), dllFile);
+            Initialize(dllFile.Substring(0, dllFile.LastIndexOf(@"\")), dllFile);
 
             assemblyData = new AssemblyData
             {
@@ -151,15 +152,23 @@
         {
             if (!string.IsNullOrEmpty(assemblyData.FilePath))
             {
-                Initialize(assemblyData.FilePath.Substring(0, assemblyData.FilePath.LastIndexOf(".")), assemblyData.FilePath);
+                Initialize(assemblyData.FilePath.Substring(0, assemblyData.FilePath.LastIndexOf(@"\")), assemblyData.FilePath);
             }
 
-            if (assemblyData.Loader == null)
-            {
-                assemblyData.Loader = new AssemblyLoader(DllFilePath);
-            }
+            List<string> loadedAssemblies = new List<string>();
 
-            assemblyData.Assembly = assemblyData.Loader.LoadFromAssemblyPath(DllFilePath);
+            var assemblies = from Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()
+                             where !(assembly is System.Reflection.Emit.AssemblyBuilder)
+                                   && assembly.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder"
+                                   && !string.IsNullOrEmpty(assembly.Location)
+                             select assembly.Location;
+
+            loadedAssemblies.AddRange(assemblies);
+
+            var resolver = new PathAssemblyResolver(loadedAssemblies);
+            var metaDataLoader = new MetadataLoadContext(resolver);
+
+            assemblyData.Assembly = metaDataLoader.LoadFromAssemblyPath(DllFilePath);
             assemblyData.FilePath = DllFilePath;
 
             CopyDllToCurrentDirectory(assemblyData.FilePath);
@@ -209,9 +218,10 @@
 
                     if (newTypeData != null)
                     {
-                        Type[] typeInterfaces = type.GetInterfaces();
+                        Type typeExpansionInterface = type.GetInterface(@"IExpansionModule");
+                        Type typeCoreInterface = type.GetInterface(@"IExpansionModule");
 
-                        if ((assemblyData.ModuleType == null) && (typeInterfaces.Contains(typeof(IExpansionModule)) || typeInterfaces.Contains(typeof(ICoreModule))))
+                        if ((assemblyData.ModuleType == null) && ((typeExpansionInterface != null) || (typeCoreInterface != null)))
                         {
                             assemblyData.ModuleType = type;
                         }
@@ -267,7 +277,10 @@
                     }
                     catch (FileNotFoundException)
                     {
-                        FindInLibFolder(name.Name);
+                        if (!string.IsNullOrEmpty(name.Name))
+                        {
+                            FindInLibFolder(name.Name);
+                        }
                     }
                 }
             }
