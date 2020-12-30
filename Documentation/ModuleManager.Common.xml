@@ -4,35 +4,6 @@
         <name>ModuleManager.Common</name>
     </assembly>
     <members>
-        <member name="T:ModuleManager.Common.Classes.AssemblyLoader">
-            <summary>
-            The class that loads and unloads assemblies.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyLoader"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyLoader"/> class.
-            </summary>
-            <param name="mainAssemblyToLoadPath">The path to the assembly.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.LoadAllReferencedAssemblies(System.Reflection.Assembly)">
-            <summary>
-            Loads all referenced assemblies from the <see cref="T:System.Reflection.Assembly"/>.
-            </summary>
-            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to load all referenced assemblies from.</param>
-        </member>
-        <member name="M:ModuleManager.Common.Classes.AssemblyLoader.Load(System.Reflection.AssemblyName)">
-            <summary>
-            Overrides the Load method.
-            </summary>
-            <param name="name">The <see cref="T:System.Reflection.AssemblyName"/> of the <see cref="T:System.Reflection.Assembly"/> to be loaded.</param>
-            <returns>A loaded <see cref="T:System.Reflection.Assembly"/>.</returns>
-        </member>
         <member name="T:ModuleManager.Common.Classes.AssemblyData">
             <summary>
             Assembly object.
@@ -887,9 +858,9 @@
             Gets a list of unloading actions.
             </summary>
         </member>
-        <member name="P:ModuleManager.Common.Interfaces.IModuleLoadingService.ReloadActions">
+        <member name="P:ModuleManager.Common.Interfaces.IModuleLoadingService.LoadActions">
             <summary>
-            Gets a list of reloading actions.
+            Gets a list of loading actions.
             </summary>
         </member>
         <member name="M:ModuleManager.Common.Interfaces.IModuleLoadingService.AddStoreViewAction(System.Action)">
@@ -905,9 +876,9 @@
             <param name="moduleName">The <see cref="T:System.String"/> name of the module.</param>
             <param name="action">The <see cref="T:System.Collections.Generic.Dictionary`2"/> to be added.</param>
         </member>
-        <member name="M:ModuleManager.Common.Interfaces.IModuleLoadingService.ReloadModule(System.String,System.Action)">
+        <member name="M:ModuleManager.Common.Interfaces.IModuleLoadingService.LoadModule(System.String,System.Action)">
             <summary>
-            Add a new <see cref="T:System.Collections.Generic.Dictionary`2"/> to the list of ViewObject reloading actions.
+            Add a new <see cref="T:System.Collections.Generic.Dictionary`2"/> to the list of ViewObject loading actions.
             </summary>
             <param name="moduleName">The <see cref="T:System.String"/> name of the module.</param>
             <param name="action">The <see cref="T:System.Action"/> to be added.</param>
@@ -1180,7 +1151,7 @@
         <member name="P:ModuleManager.Common.Services.ModuleLoadingService.UnloadActions">
             <inheritdoc/>
         </member>
-        <member name="P:ModuleManager.Common.Services.ModuleLoadingService.ReloadActions">
+        <member name="P:ModuleManager.Common.Services.ModuleLoadingService.LoadActions">
             <inheritdoc/>
         </member>
         <member name="M:ModuleManager.Common.Services.ModuleLoadingService.AddStoreViewAction(System.Action)">
@@ -1189,7 +1160,7 @@
         <member name="M:ModuleManager.Common.Services.ModuleLoadingService.UnloadModule(System.String,System.Action)">
             <inheritdoc/>
         </member>
-        <member name="M:ModuleManager.Common.Services.ModuleLoadingService.ReloadModule(System.String,System.Action)">
+        <member name="M:ModuleManager.Common.Services.ModuleLoadingService.LoadModule(System.String,System.Action)">
             <inheritdoc/>
         </member>
         <member name="T:ModuleManager.Common.Services.ViewCollectionService">

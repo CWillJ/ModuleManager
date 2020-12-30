@@ -28,7 +28,7 @@
             var moduleLoadingService = containerProvider.Resolve<IModuleLoadingService>();
             moduleLoadingService.AddStoreViewAction(() => StoreViews(containerProvider));
             moduleLoadingService.UnloadModule(moduleName, () => Unload(containerProvider));
-            moduleLoadingService.ReloadModule(moduleName, () => StoreViews(containerProvider));
+            moduleLoadingService.LoadModule(moduleName, () => Load(containerProvider));
         }
 
         /// <inheritdoc/>
@@ -59,7 +59,7 @@
         /// Reloads the views associated with this module.
         /// </summary>
         /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
-        private void Reload(IContainerProvider containerProvider)
+        private void Load(IContainerProvider containerProvider)
         {
             StoreViews(containerProvider);
         }

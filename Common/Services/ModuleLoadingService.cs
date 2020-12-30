@@ -9,7 +9,7 @@
     {
         private readonly List<Action> _storeViewActions;
         private readonly Dictionary<string, Action> _unloadActions;
-        private readonly Dictionary<string, Action> _reloadActions;
+        private readonly Dictionary<string, Action> _loadActions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleLoadingService"/> class.
@@ -18,7 +18,7 @@
         {
             _storeViewActions = new List<Action>();
             _unloadActions = new Dictionary<string, Action>();
-            _reloadActions = new Dictionary<string, Action>();
+            _loadActions = new Dictionary<string, Action>();
         }
 
         /// <inheritdoc/>
@@ -40,11 +40,11 @@
         }
 
         /// <inheritdoc/>
-        public Dictionary<string, Action> ReloadActions
+        public Dictionary<string, Action> LoadActions
         {
             get
             {
-                return _reloadActions;
+                return _loadActions;
             }
         }
 
@@ -68,11 +68,11 @@
         }
 
         /// <inheritdoc/>
-        public void ReloadModule(string moduleName, Action action)
+        public void LoadModule(string moduleName, Action action)
         {
             try
             {
-                _reloadActions.Add(moduleName, action);
+                _loadActions.Add(moduleName, action);
             }
             catch
             {

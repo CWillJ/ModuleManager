@@ -33,7 +33,7 @@
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
-        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.Reload(Prism.Ioc.IContainerProvider)">
+        <member name="M:ModuleManager.Expansion.ModuleA.ModuleAModule.Load(Prism.Ioc.IContainerProvider)">
             <summary>
             Reloads the views associated with this module.
             </summary>

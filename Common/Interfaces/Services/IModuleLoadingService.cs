@@ -19,9 +19,9 @@
         Dictionary<string, Action> UnloadActions { get; }
 
         /// <summary>
-        /// Gets a list of reloading actions.
+        /// Gets a list of loading actions.
         /// </summary>
-        Dictionary<string, Action> ReloadActions { get; }
+        Dictionary<string, Action> LoadActions { get; }
 
         /// <summary>
         /// Add a new <see cref="Action"/> to the list of ViewObject Registration actions.
@@ -37,10 +37,10 @@
         void UnloadModule(string moduleName, Action action);
 
         /// <summary>
-        /// Add a new <see cref="Dictionary{String, Action}"/> to the list of ViewObject reloading actions.
+        /// Add a new <see cref="Dictionary{String, Action}"/> to the list of ViewObject loading actions.
         /// </summary>
         /// <param name="moduleName">The <see cref="string"/> name of the module.</param>
         /// <param name="action">The <see cref="Action"/> to be added.</param>
-        void ReloadModule(string moduleName, Action action);
+        void LoadModule(string moduleName, Action action);
     }
 }
