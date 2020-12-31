@@ -72,7 +72,7 @@
         private void InjectViewsIntoRegions(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.Regions[@"ContentRegion"].Add(containerProvider.Resolve<ModuleManagerView>());
+            regionManager.AddToRegion("ContentRegion", containerProvider.Resolve<ModuleManagerView>());
         }
 
         /// <summary>

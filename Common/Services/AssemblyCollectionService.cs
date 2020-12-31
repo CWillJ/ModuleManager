@@ -117,7 +117,7 @@
 
                 if (Assemblies[i].IsEnabled)
                 {
-                    _moduleCatalogService.ReloadExpansionModule(Assemblies[i].FilePath);
+                    _moduleCatalogService.LoadExpansionModule(Assemblies[i].FilePath);
                 }
                 else
                 {

@@ -47,12 +47,12 @@
         }
 
         /// <summary>
-        /// Unloads the views associated with this module.
+        /// Remove the view object from the service.
         /// </summary>
-        /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
-        private void Unload(IContainerProvider containerProvider)
+        /// <param name="viewObject">The view <see cref="object"/> to remove from the <see cref="IViewCollectionService"/>.</param>
+        private void RemoveViews(object viewObject)
         {
-            RemoveViews(containerProvider.Resolve<ModuleBView>());
+            _viewCollectionService.RemoveView(viewObject);
         }
 
         /// <summary>
@@ -65,12 +65,12 @@
         }
 
         /// <summary>
-        /// Remove the view object from the service.
+        /// Unloads the views associated with this module.
         /// </summary>
-        /// <param name="viewObject">The view <see cref="object"/> to remove from the <see cref="IViewCollectionService"/>.</param>
-        private void RemoveViews(object viewObject)
+        /// <param name="containerProvider">The <see cref="IContainerProvider"/>.</param>
+        private void Unload(IContainerProvider containerProvider)
         {
-            _viewCollectionService.RemoveView(viewObject);
+            RemoveViews(containerProvider.Resolve<ModuleBView>());
         }
     }
 }

@@ -16,8 +16,8 @@
             Margin="25,10,10,10"
             HorizontalAlignment="Left"
             Background="Gray"
-            Command="{Binding Path=IncrementCommand}"
-            Content="{Binding Path=ButtonText}"
+            Command="{Binding IncrementCommand}"
+            Content="{Binding Path=ButtonTextValue, Mode=OneWay}"
             FontSize="10"
             FontWeight="Bold" />
         <TextBlock Text="{Binding Path=Text}" />

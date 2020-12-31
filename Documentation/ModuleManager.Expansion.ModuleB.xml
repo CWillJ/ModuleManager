@@ -47,11 +47,11 @@
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
-        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.Unload(Prism.Ioc.IContainerProvider)">
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.RemoveViews(System.Object)">
             <summary>
-            Unloads the views associated with this module.
+            Remove the view object from the service.
             </summary>
-            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
         </member>
         <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.Load(Prism.Ioc.IContainerProvider)">
             <summary>
@@ -59,11 +59,11 @@
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
-        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.RemoveViews(System.Object)">
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.Unload(Prism.Ioc.IContainerProvider)">
             <summary>
-            Remove the view object from the service.
+            Unloads the views associated with this module.
             </summary>
-            <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
         <member name="T:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel">
             <summary>
@@ -80,7 +80,7 @@
             Gets or sets the text of the view.
             </summary>
         </member>
-        <member name="P:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.ButtonText">
+        <member name="P:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.ButtonTextValue">
             <summary>
             Gets or sets the text for a button.
             </summary>

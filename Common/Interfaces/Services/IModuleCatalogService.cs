@@ -25,6 +25,6 @@
         /// to the <see cref="IViewCollectionService"/> NOT WORKING.
         /// </summary>
         /// <param name="dllFilePath">The <see cref="string"/> of the dll file.</param>
-        public void ReloadExpansionModule(string dllFilePath);
+        public void LoadExpansionModule(string dllFilePath);
     }
 }

@@ -836,7 +836,7 @@
             </summary>
             <param name="moduleInfoName">The <see cref="T:System.String"/> of the <see cref="T:Prism.Modularity.IModuleInfo"/> to unload from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
         </member>
-        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.ReloadExpansionModule(System.String)">
+        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.LoadExpansionModule(System.String)">
             <summary>
             Reloads an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/> and adds any associated views
             to the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/> NOT WORKING.
@@ -1128,7 +1128,7 @@
         <member name="M:ModuleManager.Common.Services.ModuleCatalogService.UnloadExpansionModule(System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.ReloadExpansionModule(System.String)">
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.LoadExpansionModule(System.String)">
             <inheritdoc/>
         </member>
         <member name="M:ModuleManager.Common.Services.ModuleCatalogService.InitializeModule(Prism.Modularity.IModuleInfo)">
@@ -1166,10 +1166,11 @@
         <member name="T:ModuleManager.Common.Services.ViewCollectionService">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>
         </member>
-        <member name="M:ModuleManager.Common.Services.ViewCollectionService.#ctor">
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.#ctor(Prism.Regions.IRegionManager)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ViewCollectionService"/> class.
             </summary>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
         <member name="P:ModuleManager.Common.Services.ViewCollectionService.ViewDataCollection">
             <inheritdoc/>

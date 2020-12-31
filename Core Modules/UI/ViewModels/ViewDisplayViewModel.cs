@@ -19,7 +19,6 @@
     public class ViewDisplayViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IContainerExtension _containerExtension;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
         private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
         private readonly IViewCollectionService _viewCollectionService;
@@ -30,7 +29,6 @@
         /// Initializes a new instance of the <see cref="ViewDisplayViewModel"/> class.
         /// </summary>
         /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        /// <param name="containerExtension">The <see cref="IContainerExtension"/>.</param>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
         /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
         /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
@@ -38,7 +36,6 @@
         /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
         public ViewDisplayViewModel(
             IRegionManager regionManager,
-            IContainerExtension containerExtension,
             IAssemblyCollectionService assemblyCollectionService,
             IAssemblyDataLoaderService assemblyDataLoaderService,
             IViewCollectionService viewCollectionService,
@@ -46,7 +43,6 @@
             ILoadedViewNamesService loadedViewNamesService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
-            _containerExtension = containerExtension ?? throw new ArgumentNullException("ContainerExtension");
 
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
             _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyDataLoaderService");
@@ -275,63 +271,6 @@
         private bool CanExecute()
         {
             return true;
-        }
-
-        /// <summary>
-        /// Can only add a view if the selected item is an <see cref="AssemblyData"/> that has a <see cref="TypeData"/>
-        /// that is a view or the selected item is a <see cref="TypeData"/> that is a view.
-        /// </summary>
-        /// <returns>True if the selected item can be added to the view collection, false if not.</returns>
-        private bool CanAdd()
-        {
-            if (_assemblyCollectionService.SelectedItem == null)
-            {
-                return false;
-            }
-
-            if (_assemblyCollectionService.SelectedItem is AssemblyData assemblyData)
-            {
-                foreach (TypeData typeData in assemblyData.Types)
-                {
-                    if (typeData.ViewInfo != null)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-            else if (_assemblyCollectionService.SelectedItem is TypeData typeData)
-            {
-                if (typeData.ViewInfo != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Removes the selected view from the active views collection.
-        /// </summary>
-        /// <returns>True if the view object exists in the active views collection.</returns>
-        private bool CanRemove()
-        {
-            if (_regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(ViewCollectionService.SelectedView))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }

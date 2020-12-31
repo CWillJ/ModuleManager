@@ -9,7 +9,7 @@
     public class ModuleBViewModel : BindableBase
     {
         private string _text;
-        private string _buttonText;
+        private string _buttonTextValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModuleBViewModel"/> class.
@@ -17,7 +17,7 @@
         public ModuleBViewModel()
         {
             _text = @"Module B ViewObject";
-            _buttonText = @"Click Me";
+            _buttonTextValue = @"Click";
             ButtonCounter = new CountTracker();
 
             IncrementCommand = new Prism.Commands.DelegateCommand(IncrementButtonNumber, CanExecute);
@@ -35,10 +35,10 @@
         /// <summary>
         /// Gets or sets the text for a button.
         /// </summary>
-        public string ButtonText
+        public string ButtonTextValue
         {
-            get { return _buttonText; }
-            set { SetProperty(ref _buttonText, value); }
+            get { return _buttonTextValue; }
+            set { SetProperty(ref _buttonTextValue, value); }
         }
 
         /// <summary>
@@ -57,7 +57,7 @@
         public void IncrementButtonNumber()
         {
             ButtonCounter.AddOne();
-            ButtonText = ButtonCounter.Count.ToString();
+            ButtonTextValue = ButtonCounter.Count.ToString();
         }
 
         private bool CanExecute()

@@ -197,12 +197,11 @@
             View model for the buttons view.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,Prism.Ioc.IContainerExtension,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel"/> class.
             </summary>
             <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
-            <param name="containerExtension">The <see cref="T:Prism.Ioc.IContainerExtension"/>.</param>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
             <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
@@ -295,19 +294,6 @@
             Can always execute.
             </summary>
             <returns>True.</returns>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.CanAdd">
-            <summary>
-            Can only add a view if the selected item is an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> that has a <see cref="T:ModuleManager.Common.Classes.TypeData"/>
-            that is a view or the selected item is a <see cref="T:ModuleManager.Common.Classes.TypeData"/> that is a view.
-            </summary>
-            <returns>True if the selected item can be added to the view collection, false if not.</returns>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.CanRemove">
-            <summary>
-            Removes the selected view from the active views collection.
-            </summary>
-            <returns>True if the view object exists in the active views collection.</returns>
         </member>
         <member name="T:ModuleManager.Core.UI.Views.AssemblyDataTreeView">
             <summary>

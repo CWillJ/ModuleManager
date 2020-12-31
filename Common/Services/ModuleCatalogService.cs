@@ -55,7 +55,7 @@
         }
 
         /// <inheritdoc/>
-        public void ReloadExpansionModule(string dllFilePath)
+        public void LoadExpansionModule(string dllFilePath)
         {
             string moduleInfoName = string.Empty;
 
