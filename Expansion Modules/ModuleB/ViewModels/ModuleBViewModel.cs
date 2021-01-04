@@ -17,7 +17,7 @@
         public ModuleBViewModel()
         {
             _text = @"Module B ViewObject";
-            _buttonTextValue = @"Click";
+            _buttonTextValue = @"Click Me";
             ButtonCounter = new CountTracker();
 
             IncrementCommand = new Prism.Commands.DelegateCommand(IncrementButtonNumber, CanExecute);

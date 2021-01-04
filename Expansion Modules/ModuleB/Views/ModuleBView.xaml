@@ -16,7 +16,7 @@
             Margin="25,10,10,10"
             HorizontalAlignment="Left"
             Background="Gray"
-            Command="{Binding IncrementCommand}"
+            Command="{Binding Path=IncrementCommand}"
             Content="{Binding Path=ButtonTextValue, Mode=OneWay}"
             FontSize="10"
             FontWeight="Bold" />
