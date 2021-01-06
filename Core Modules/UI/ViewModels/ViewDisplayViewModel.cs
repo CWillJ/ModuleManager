@@ -226,14 +226,7 @@
                 {
                     if (typeData.ViewInfo != null)
                     {
-                        var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
-
-                        if (viewObject != null)
-                        {
-                            Type type = viewObject.GetType();
-                            object instance = Activator.CreateInstance(type);
-                            _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                        }
+                        AddViewToRegion(_viewCollectionService.GetViewObjectByName(typeData.FullName), @"LoadedViewsRegion");
                     }
                 }
             }
@@ -241,15 +234,23 @@
             {
                 if (typeData.ViewInfo != null)
                 {
-                    var viewObject = _viewCollectionService.GetViewObjectByName(typeData.FullName);
-
-                    if (viewObject != null)
-                    {
-                        Type type = viewObject.GetType();
-                        object instance = Activator.CreateInstance(type);
-                        _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                    }
+                    AddViewToRegion(_viewCollectionService.GetViewObjectByName(typeData.FullName), @"LoadedViewsRegion");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Adds the view <see cref="object"/> to the region.
+        /// </summary>
+        /// <param name="viewObject">The view <see cref="object"/> to be added.</param>
+        /// <param name="regionName">The <see cref="string"/> name of the region.</param>
+        private void AddViewToRegion(object viewObject, string regionName)
+        {
+            if (viewObject != null)
+            {
+                Type type = viewObject.GetType();
+                object instance = Activator.CreateInstance(type);
+                _regionManager.AddToRegion(regionName, instance);
             }
         }
 

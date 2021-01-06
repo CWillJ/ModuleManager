@@ -284,6 +284,13 @@
             Adds all the selected assembly's views or the selected view to the views region.
             </summary>
         </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.AddViewToRegion(System.Object,System.String)">
+            <summary>
+            Adds the view <see cref="T:System.Object"/> to the region.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to be added.</param>
+            <param name="regionName">The <see cref="T:System.String"/> name of the region.</param>
+        </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.RemoveSelectedView">
             <summary>
             Removes the selected view from the views region.

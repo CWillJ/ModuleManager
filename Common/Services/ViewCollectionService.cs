@@ -185,14 +185,13 @@
             if (_selectedView != null)
             {
                 SelectedViewName = _selectedView.GetType().Name;
-
-                _regionManager.Regions["SelectedViewRegion"].RemoveAll();
-                _regionManager.RegisterViewWithRegion("SelectedViewRegion", _selectedView.GetType());
+                ////_regionManager.Regions["SelectedViewRegion"].RemoveAll();
+                ////_regionManager.RegisterViewWithRegion("SelectedViewRegion", _selectedView.GetType());
             }
             else
             {
                 SelectedViewName = @"Loaded ViewDataCollection";
-                _regionManager.Regions["SelectedViewRegion"].RemoveAll();
+                ////_regionManager.Regions["SelectedViewRegion"].RemoveAll();
             }
         }
     }

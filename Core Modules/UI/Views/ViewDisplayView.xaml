@@ -13,7 +13,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
 
         <!--  Buttons  -->
@@ -109,7 +108,7 @@
             </telerik:RadListBox>
         </Grid>
 
-        <!--  Selected Views  -->
+        <!--  Selected Views column width 200
         <Grid
             Grid.Column="2"
             MinWidth="10"
@@ -139,7 +138,7 @@
                 BorderThickness="2">
                 <ContentControl prism:RegionManager.RegionName="SelectedViewRegion" />
             </Border>
+        </Grid>-->
 
-        </Grid>
     </Grid>
 </UserControl>
