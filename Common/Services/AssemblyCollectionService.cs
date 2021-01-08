@@ -73,15 +73,30 @@
         {
             if (SelectedItem is AssemblyData assemblyData)
             {
-                SelectedItemName = assemblyData.Name;
+                SelectedItemName = assemblyData.Name + " Assembly Description";
             }
             else if (SelectedItem is TypeData typeData)
             {
-                SelectedItemName = typeData.Name;
+                SelectedItemName = typeData.Name + " Type Description";
             }
             else if (SelectedItem is TypeMemberData memberData)
             {
-                SelectedItemName = memberData.Name;
+                if (SelectedItem is TypeConstructor)
+                {
+                    SelectedItemName = memberData.Name + " Constructor Description";
+                }
+                else if (SelectedItem is TypeProperty)
+                {
+                    SelectedItemName = memberData.Name + " Property Description";
+                }
+                else if (SelectedItem is TypeMethod)
+                {
+                    SelectedItemName = memberData.Name + " Method Description";
+                }
+                else
+                {
+                    SelectedItemName = memberData.Name + " Description";
+                }
             }
             else
             {

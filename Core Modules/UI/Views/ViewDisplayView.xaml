@@ -90,7 +90,7 @@
                 Background="LightGray"
                 BorderBrush="Black"
                 BorderThickness="1"
-                SelectedItem="{Binding Path=ViewCollectionService.SelectedView, Mode=TwoWay}">
+                SelectedItem="{Binding Path=ViewCollectionService.SelectedView, Mode=OneWayToSource}">
                 <telerik:RadListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
