@@ -1,0 +1,1215 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Process</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Process.Classes.Process">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IProcess"/>>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.Process.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Classes.Process"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.Index">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.CreationDateTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.ModifiedDateTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.CreatedUserName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.ModifiedUserName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.IsDefault">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.IsExecuting">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.ProcessElementAPI">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.Workflows">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.Process.WorkflowService">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.Process.UpdateModified">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.ProcessLane">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLane.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Classes.ProcessLane"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.ReferenceName">
+            <inheritdoc/>>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.Index">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.EntryCondition">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.Dependencies">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.IsExecuting">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.ProcessElementAPI">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.Steps">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.StepService">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessLane.OutputReferences">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior">
+            <summary>
+            Implementation for <see cref="T:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior"/> class.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.IsDragDropEnabledProperty">
+            <summary>
+            Dependency Property to attach to a process lane listbox to enable drag drop events through behaviors.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.SetIsDragDropEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragDropEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragDropEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.GetIsDragDropEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragDropEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <returns>Whether or not IsDragDropEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.CanStartDrag(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the drag operation can be started.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drag source control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.CanDrop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the current drag operation can be completed.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.Drop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Performs the drop operation.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.DragDropCompleted(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            When overridden in a derived class completes the drag operation. This method is called only in the context of the drag source control.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <remarks>
+            When the drag source and the drop target are the same control, this method is called after Drop.
+            This method is called only when the drag operation completed successfully. If this method is called, DragDropCanceled is not called.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessLaneDragDropBehavior.IsMovingItems(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns true if the dragged items should be removed from the source list, otherwise false.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the object should be copied, otherwise false and object will be cut.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.ProcessStepTemplateSelector">
+            <summary>
+            ProcessStepTemplateSelector class used to return requested template for process creation.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessStepTemplateSelector.ProgramTemplate">
+            <summary>
+            Gets or sets ProgramTemplate.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessStepTemplateSelector.ScriptTemplate">
+            <summary>
+            Gets or sets ScriptObjectTemplate.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessStepTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Returns DataTemplate type based on param type.
+            </summary>
+            <param name="item">The <see cref="T:System.Object"/> used to select return type.</param>
+            <param name="container">The <see cref="T:System.Windows.DependencyObject"/> .</param>
+            <returns>A <see cref="T:System.Windows.DataTemplate"/> based on input type.</returns>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.ProcessWorkflow">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Classes.ProcessWorkflow"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.Index">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.ActiveUsers">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.IsExecuting">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.ProcessElementAPI">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.Lanes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.LaneService">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.ProductSelector">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProcessWorkflow.ProductSelectorOutput">
+            <summary>
+            Gets or sets the output that selects the product.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior">
+            <summary>
+            Implementation for <see cref="T:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior"/> class.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior.IsDragDropEnabledProperty">
+            <summary>
+            Dependency Property to attach to a process Workflow listbox to enable drag drop events through behaviors.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior.SetIsDragDropEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragDropEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragDropEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior.GetIsDragDropEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragDropEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <returns>Whether or not IsDragDropEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior.CanStartDrag(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the drag operation can be started.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drag source control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior.CanDrop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the current drag operation can be completed.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior.Drop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Performs the drop operation.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProcessWorkflowDragDropBehavior.IsMovingItems(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns true if the dragged items should be removed from the source list, otherwise false.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the object should be copied, otherwise false and object will be cut.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.ProgramProcessStep">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IProgramProcessStep"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Classes.ProgramProcessStep"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.Program">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.ExecutableReference">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.OutputReferences">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.Index">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.ProgramIndex">
+            <summary>
+            Gets or sets this Program Step's index relative to the other program steps in this process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.IsExecuting">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.ProcessElementAPI">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.Inputs">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.Outputs">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.InputTypes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.OutputTypes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.Compile">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.SetExecutable(PVA.NextGen.Common.Interfaces.IExecutable)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ProgramProcessStep.SetOutputReferences(PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IScriptedProcessStep"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep"/> class.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.ExecutableReference">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.Index">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.IsExecuting">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.ProcessElementAPI">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.Inputs">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.Outputs">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.InputTypes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.OutputTypes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.OutputReferences">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.SetExecutable(PVA.NextGen.Common.Interfaces.IExecutable)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.Compile">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.SetOutputReferences(PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.ScriptedProcessStep.SetVariable(System.String,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior">
+            <summary>
+            Implementation for <see cref="T:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior"/> class.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior.IsDragDropEnabledProperty">
+            <summary>
+            Dependency Property to attach to a process options listbox to enable drag drop events through behaviors.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior.SetIsDragDropEnabled(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDragDropEnabled property.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <param name="value"><see cref="T:System.Boolean"/> value to set the IsDragDropEnabled property to.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior.GetIsDragDropEnabled(System.Windows.DependencyObject)">
+            <summary>
+            Gets whether or not the IsDragDropEnabled is set.
+            </summary>
+            <param name="obj"><see cref="T:System.Windows.DependencyObject"/> IsDragDropEnabled property is attached to.</param>
+            <returns>Whether or not IsDragDropEnabled is enabled.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior.CanStartDrag(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the drag operation can be started.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drag source control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior.CanDrop(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns a value specifying whether the current drag operation can be completed.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the drag operation can be completed, otherwise false.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Classes.StepPrototypeDragDropBehavior.IsMovingItems(Telerik.Windows.DragDrop.Behaviors.DragDropState)">
+            <summary>
+            Returns true if the dragged items should be removed from the source list, otherwise false.
+            </summary>
+            <param name="state"><see cref="T:Telerik.Windows.DragDrop.Behaviors.DragDropState"/> that provides context for the current operation.</param>
+            <returns>True if the object should be copied, otherwise false and object will be cut.</returns>
+            <remarks>
+            This method is called only in the context of the drop target control.
+            </remarks>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Constants.ProcessConstants">
+            <summary>
+            Constants used by the Process Module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.ModuleName">
+            <summary>
+            The string name for the process module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.MaxProcesses">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.MaxWorkflows">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> per process.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.MaxLanes">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> per Workflow.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.MaxSteps">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> per lane.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewProcessReferenceName">
+            <summary>
+            Constant prefix used for processes.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewProcessDisplayName">
+            <summary>
+            Default Display Name used for processes.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewWorkflowReferenceName">
+            <summary>
+            Constant prefix used for Workflows.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewWorkflowDisplayName">
+            <summary>
+            Default Display Name used for Workflows.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewLaneReferenceName">
+            <summary>
+            Constant prefix used for lanes.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewLaneDisplayName">
+            <summary>
+            Default Display Name used for lanes.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.ProcessScriptReferenceName">
+            <summary>
+            Reference Name used for process step script.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.ProcessScriptDisplayName">
+            <summary>
+            Display Name used for process step script.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewProcessScriptReferenceName">
+            <summary>
+            Constant prefix used for process step scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewProcessScriptDisplayName">
+            <summary>
+            Default Display Name used for process step scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.ProgramReferenceName">
+            <summary>
+            Reference Name used for process step program.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.ProgramDisplayName">
+            <summary>
+            Display Name used for process step program.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewProgramReferenceName">
+            <summary>
+            Constant prefix used for process step programs.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.NewProgramDisplayName">
+            <summary>
+            Default Display Name used for process step programs.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.ProcessDirectory">
+            <summary>
+            Directory Location for Process Folders.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessConstants.ProcessScriptDirectory">
+            <summary>
+            Directory Location for Process Scripts.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Constants.ProcessTokenNames">
+            <summary>
+            The navigation token names for Process views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessTokenNames.CreationPage">
+            <summary>
+            Navigation token name for the creation page.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Core.Process.Constants.ProcessTokenNames.ProcessCreationContentView">
+            <summary>
+            Navigation token name for the process creation view.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Factories.ProcessElementFactory">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IProcessElementFactory"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Factories.ProcessElementFactory.#ctor(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Factories.ProcessElementFactory"/> class.
+            </summary>
+            <param name="strategyResolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that can access mappings of all registered types.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Factories.ProcessElementFactory.CreateProcessElement``1(System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Factories.ProcessServiceFactory">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IProcessServiceFactory"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Factories.ProcessServiceFactory.#ctor(PVA.NextGen.Common.Interfaces.IStrategyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Factories.ProcessServiceFactory"/> class.
+            </summary>
+            <param name="strategyResolver">The <see cref="T:PVA.NextGen.Common.Interfaces.IStrategyResolver"/> that can access mappings of all registered types.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Factories.ProcessServiceFactory.CreateProcessElementService``1">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.ProcessModule">
+            <summary>
+            ProcessModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.ProcessModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.ProcessModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Services.ProcessLaneService">
+            <summary>
+            A service providing CRUD operations to <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessLaneService.#ctor(PVA.NextGen.Common.Interfaces.IProcessElementFactory,PVA.NextGen.Common.Interfaces.IProcessServiceFactory,PVA.NextGen.Common.Interfaces.IEvaluatorService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Services.ProcessLaneService"/> class.
+            </summary>
+            <param name="processElementFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+            <param name="processServiceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElementService`1"/>.</param>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessLaneService.ProcessElements">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessLaneService.DirectoryLocation">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> directory location where this service will save/load its <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessLaneService.ProcessElementServiceAPI">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessLaneService.Add">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> to the service.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessLaneService.Add``1">
+            <summary>
+            Add an element which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> to the service.
+            </summary>
+            <typeparam name="U">A type which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/>.</typeparam>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessLaneService.Remove(PVA.NextGen.Common.Interfaces.IProcessLane)">
+            <summary>
+            Remove an <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> from the service.
+            </summary>
+            <param name="lane">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessLaneService.Save">
+            <summary>
+            Save all <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> to the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessLaneService.Load">
+            <summary>
+            Load all <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> from the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessLaneService.Execute(PVA.NextGen.Common.Interfaces.IProcessLane,PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <summary>
+            Execute a given <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/>.
+            </summary>
+            <param name="processElement">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcessLane"/> to execute.</param>
+            <param name="processOutputs">The <see cref="T:PVA.NextGen.Common.Interfaces.IBindableDictionary`2"/> of outputs from previous <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Services.ProcessManagementService">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IProcessManagementService"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.#ctor(PVA.NextGen.Common.Interfaces.IProcessElementService{PVA.NextGen.Common.Interfaces.IProcess},PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IProcessElementFactory,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Services.ProcessManagementService"/> class.
+            </summary>
+            <param name="processService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="processElementFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessManagementService.Processes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessManagementService.StepPrototypes">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Add">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Add``1">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Remove(PVA.NextGen.Common.Interfaces.IProcess)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Save">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Load">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Import">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Export(PVA.NextGen.Common.Interfaces.IProcess)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.Execute(PVA.NextGen.Common.Interfaces.IProcess)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.UpdateDefault(PVA.NextGen.Common.Interfaces.IProcess)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.RegisterShutdownAction(System.String,PVA.NextGen.Common.Classes.ShutdownAction)">
+            <summary>
+            Register a <see cref="T:PVA.NextGen.Common.Classes.ShutdownAction"/> with the <see cref="T:PVA.NextGen.Common.Interfaces.IShutdownService"/>.
+            </summary>
+            <param name="name">The name of the action to register.</param>
+            <param name="action">The <see cref="T:PVA.NextGen.Common.Classes.ShutdownAction"/> to register.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessManagementService.DeregisterShutdownAction(System.String)">
+            <summary>
+            Deregister a <see cref="T:PVA.NextGen.Common.Classes.ShutdownAction"/> from the <see cref="T:PVA.NextGen.Common.Interfaces.IShutdownService"/>.
+            </summary>
+            <param name="name">The name of the action to deregister.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Services.ProcessService">
+            <summary>
+            A service providing CRUD operations to <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessService.#ctor(PVA.NextGen.Common.Interfaces.IProcessElementFactory,PVA.NextGen.Common.Interfaces.IProcessServiceFactory,PVA.NextGen.Common.Interfaces.IEvaluatorService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Services.ProcessService"/> class.
+            </summary>
+            <param name="processElementFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+            <param name="processServiceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElementService`1"/>.</param>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessService.ProcessElements">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> of this service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessService.DirectoryLocation">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> directory location where this service will save/load its <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/>.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessService.ProcessElementServiceAPI">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessService.Add">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> to the service.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessService.Add``1">
+            <summary>
+            Add an element which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> to the service.
+            </summary>
+            <typeparam name="U">A type which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/>.</typeparam>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessService.Remove(PVA.NextGen.Common.Interfaces.IProcess)">
+            <summary>
+            Remove an <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> from the service.
+            </summary>
+            <param name="process">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessService.Save">
+            <summary>
+            Save all <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> to the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessService.Load">
+            <summary>
+            Load all <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> from the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessService.Execute(PVA.NextGen.Common.Interfaces.IProcess,PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <summary>
+            Execute a given <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/>.
+            </summary>
+            <param name="processElement">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/> to execute.</param>
+            <param name="processOutputs">The <see cref="T:PVA.NextGen.Common.Interfaces.IBindableDictionary`2"/> of outputs from previous <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Services.ProcessStepService">
+            <summary>
+            A service providing CRUD operations to <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessStepService.#ctor(PVA.NextGen.Common.Interfaces.IProcessElementFactory,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IEvaluatorService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Services.ProcessStepService"/> class.
+            </summary>
+            <param name="processElementFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+            <param name="scriptService">The <see cref="T:PVA.NextGen.Common.Interfaces.IScriptService"/> providing <see cref="T:PVA.NextGen.Common.Interfaces.IExecutionScript"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessStepService.ProcessElements">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> of this service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessStepService.DirectoryLocation">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessStepService.ProcessElementServiceAPI">
+            <summary>
+            Gets the dictionary of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> execute methods and outputs to expose to scripts.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessStepService.ProcessScripts">
+            <summary>
+            Gets or sets the collection of all <see cref="T:PVA.NextGen.Common.Interfaces.IScriptReference"/> for Process Scripts.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessStepService.Add">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> to the service.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessStepService.Add``1">
+            <summary>
+            Add an element which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> to the service.
+            </summary>
+            <typeparam name="U">A type which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/>.</typeparam>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessStepService.Remove(PVA.NextGen.Common.Interfaces.IProcessStep)">
+            <summary>
+            Remove an <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> from the service.
+            </summary>
+            <param name="step">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessStepService.Save">
+            <summary>
+            Save all <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> to the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessStepService.Load">
+            <summary>
+            Load all <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> from the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessStepService.Execute(PVA.NextGen.Common.Interfaces.IProcessStep,PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <summary>
+            Execute a given <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/>.
+            </summary>
+            <param name="processElement">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcessStep"/> to execute.</param>
+            <param name="processOutputs">The <see cref="T:PVA.NextGen.Common.Interfaces.IBindableDictionary`2"/> of outputs from previous <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Services.ProcessWorkflowService">
+            <summary>
+            A service providing CRUD operations to <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/>.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.#ctor(PVA.NextGen.Common.Interfaces.IProcessElementFactory,PVA.NextGen.Common.Interfaces.IProcessServiceFactory,PVA.NextGen.Common.Interfaces.IEvaluatorService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Services.ProcessWorkflowService"/> class.
+            </summary>
+            <param name="processElementFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+            <param name="processServiceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElementService`1"/>.</param>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.ProcessElements">
+            <summary>
+            Gets or sets the collection of <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> of this service.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.DirectoryLocation">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.ProcessElementServiceAPI">
+            <summary>
+            Gets the dictionary of <see cref="T:PVA.NextGen.Common.Interfaces.ISharedFunction"/> execute methods and outputs to expose to scripts.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.Add">
+            <summary>
+            Add an <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> to the service.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.Add``1">
+            <summary>
+            Add an element which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> to the service.
+            </summary>
+            <typeparam name="U">A type which implements <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/>.</typeparam>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.Remove(PVA.NextGen.Common.Interfaces.IProcessWorkflow)">
+            <summary>
+            Remove an <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> from the service.
+            </summary>
+            <param name="workflow">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> to remove.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.Save">
+            <summary>
+            Save all <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> to the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.Load">
+            <summary>
+            Load all <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> from the appropriate directory.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Services.ProcessWorkflowService.Execute(PVA.NextGen.Common.Interfaces.IProcessWorkflow,PVA.NextGen.Common.Interfaces.IBindableDictionary{System.String,System.Object})">
+            <summary>
+            Execute a given <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/>.
+            </summary>
+            <param name="processElement">The <see cref="T:PVA.NextGen.Common.Interfaces.IProcessWorkflow"/> to execute.</param>
+            <param name="processOutputs">The <see cref="T:PVA.NextGen.Common.Interfaces.IBindableDictionary`2"/> of outputs from previous <see cref="T:PVA.NextGen.Common.Interfaces.IProcessElement"/>.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel">
+            <summary>
+            Interaction logic for Process Creation.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.#ctor(Prism.Events.IEventAggregator,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.IProcessManagementService,PVA.NextGen.Common.Interfaces.IEvaluatorService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel"/> class.
+            </summary>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+            <param name="scriptService">The <see cref="T:PVA.NextGen.Common.Interfaces.IScriptService"/> providing <see cref="T:PVA.NextGen.Common.Interfaces.IExecutionScript"/> objects.</param>
+            <param name="processManagementService">Service providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IProcess"/>.</param>
+            <param name="evaluatorService">Service used to compile and evaluate expression conditions.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.Index">
+            <summary>
+            Gets the Index of the page.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.Icon">
+            <summary>
+            Gets the Icon that should be displayed in all operator-focused interfaces.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.IsRunning">
+            <summary>
+            Gets or sets a value indicating whether the current process is running.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.IsExpressionEvaluatorOpen">
+            <summary>
+            Gets or sets a value indicating whether the expression evaluator is open.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.CanAccess">
+            <summary>
+            Gets the current user's <see cref="T:PVA.NextGen.Common.Enums.PermissionLevel"/> for access to the view.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.WorkflowStepOutputs">
+            <summary>
+            Gets or sets the available output values for the Workflow Product Selector.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.NavigationToken">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.AddLaneCommand">
+            <summary>
+            Gets a delegate command used to Add a Lane to the Workflow.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.AddWorkflowCommand">
+            <summary>
+            Gets a delegate command used to Add a Workflow to the Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.DeleteWorkflowCommand">
+            <summary>
+            Gets a delegate command used to Delete a Workflow from the Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.AddProcessCommand">
+            <summary>
+            Gets a delegate command used to Add a Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.DeleteProcessCommand">
+            <summary>
+            Gets a delegate command used to Delete a Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.ImportProcessCommand">
+            <summary>
+            Gets a delegate command used to Import a Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.ExportProcessCommand">
+            <summary>
+            Gets a delegate command used to Export a Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.ExecuteWorkflowCommand">
+            <summary>
+            Gets a delegate command used to execute a Workflow.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.DeleteLaneCommand">
+            <summary>
+            Gets a delegate command used to Delete a Lane from the Workflow.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.ExecuteLaneCommand">
+            <summary>
+            Gets a delegate command used to execute a Lane.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.UpdateOutputReferencesCommand">
+            <summary>
+            Gets a delegate command used to update the OutputReferences for a ProcessStep.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.UpdateProgramIndicesCommand">
+            <summary>
+            Gets a delegate command used to update the Indices of Program Steps.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.OpenStepExpressionEvaluatorDialogCommand">
+            <summary>
+            Gets a delegate command used to open the Expression Evaluator Dialog for a ProcessStep.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.OpenLaneExpressionEvaluatorDialogCommand">
+            <summary>
+            Gets a delegate command used to open the Expression Evaluator Dialog for a ProcessLane.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.AddStepCommand">
+            <summary>
+            Gets a delegate command used to Add a Step to the Lane.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.DeleteStepCommand">
+            <summary>
+            Gets a delegate command used to Delete a Step from the Lane.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.ToggleDefaultProcessCommand">
+            <summary>
+            Gets ToggleDefaultProcessCommand.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.Processes">
+            <summary>
+            Gets the collection of Processes loaded in the application.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.SetScriptCommand">
+            <summary>
+            Gets a delegate command used to set the script reference.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.SelectedProcess">
+            <summary>
+            Gets or sets the currently selected Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.Workflows">
+            <summary>
+            Gets the collection of Workflows in the selected Process.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.SelectedWorkflow">
+            <summary>
+            Gets or sets the selected Workflow.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.Lanes">
+            <summary>
+            Gets the collection of Lanes in the selected Workflow.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.SelectedLane">
+            <summary>
+            Gets or sets the selected Lane.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.SelectedStep">
+            <summary>
+            Gets or sets the selected Step.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.StepPrototypes">
+            <summary>
+            Gets the collection of Step prototypes used to create new Steps.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <summary>
+            Perform required actions to confirm the navigation request.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <param name="continuationCallback">The <see cref="T:System.Action`1"/> callback method used for navigation confirmation.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <summary>
+            Allows the newly displayed view to initialize itself.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <summary>
+            Indicates if this content is able to handle navigation requests.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+            <returns>A <see cref="T:System.Boolean"/> stating whether view can handle request.</returns>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <summary>
+            Performs actions to be performed whenever this content is navigated from.
+            </summary>
+            <param name="navigationContext">The <see cref="T:Prism.Regions.NavigationContext"/> payload.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Views.ProcessCreationContentView">
+            <inheritdoc cref="T:PVA.NextGen.CommonUI.Interfaces.IProcessCreationContentView"/>
+            <summary>
+            ProcessCreationContentView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ProcessCreationContentView.#ctor(PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Views.ProcessCreationContentView"/> class.
+            </summary>
+            <param name="viewModel">The instance of <see cref="T:PVA.NextGen.Core.Process.ViewModels.ProcessCreationContentViewModel"/> used for interaction logic.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Process.Views.ProcessCreationContentView.ViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ProcessCreationContentView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Views.ProcessLaneView">
+            <summary>
+            Presentation logic for ProcessLaneView.
+            </summary>
+            <summary>
+            ProcessLaneView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ProcessLaneView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Views.ProcessLaneView"/> class.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ProcessLaneView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Views.ProgramProcessStepView">
+            <summary>
+            Presentation logic for ProgramView.
+            </summary>
+            <summary>
+            ProgramProcessStepView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ProgramProcessStepView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Views.ProgramProcessStepView"/> class.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ProgramProcessStepView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Core.Process.Views.ScriptedProcessStepView">
+            <summary>
+            Presentation logic for ScriptView.
+            </summary>
+            <summary>
+            ScriptedProcessStepView
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ScriptedProcessStepView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Process.Views.ScriptedProcessStepView"/> class.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Process.Views.ScriptedProcessStepView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

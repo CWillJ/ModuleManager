@@ -1,0 +1,1200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModuleManager.Common</name>
+    </assembly>
+    <members>
+        <member name="T:ModuleManager.Common.Classes.AssemblyData">
+            <summary>
+            Assembly object.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AssemblyData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AssemblyData.#ctor(System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeData})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> class.
+            </summary>
+            <param name="name">Name of the assembly.</param>
+            <param name="filePath">File path to the assembly.</param>
+            <param name="modules">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of modules.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AssemblyData.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AssemblyData.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether the assembly is enabled or disabled.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AssemblyData.FilePath">
+            <summary>
+            Gets or sets the file path to assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AssemblyData.Types">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of modules contained in the assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AssemblyData.ModuleType">
+            <summary>
+            Gets or sets the <see cref="T:System.Type"/> of the module in this assembly.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AssemblyData.Assembly">
+            <summary>
+            Gets or sets the <see cref="T:System.Reflection.Assembly"/> of this AssemblyData.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AssemblyData.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the assembly.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.MemberParameter">
+            <summary>
+            An object designed to hold the type, name and string description of a member's parameter.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.MemberParameter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.MemberParameter"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.MemberParameter.#ctor(System.Type,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.MemberParameter"/> class.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> that holds this.</param>
+            <param name="name"><see cref="T:System.String"/> parameter name.</param>
+            <param name="description"><see cref="T:System.String"/> parameter description.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.MemberParameter.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.MemberParameter"/> class.
+            Used when the actual Type cannot be reached.
+            </summary>
+            <param name="typeName">The <see cref="T:System.String"/> that holds this.</param>
+            <param name="name"><see cref="T:System.String"/> parameter name.</param>
+            <param name="description"><see cref="T:System.String"/> parameter description.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.MemberParameter.TypeName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> parameter type name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.MemberParameter.Name">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> parameter name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.MemberParameter.Description">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> parameter description.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.MemberParameter.Type">
+            <summary>
+            Gets or sets the actuall <see cref="T:System.Type"/> of the <see cref="T:ModuleManager.Common.Classes.MemberParameter"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.MemberParameter.IsEmpty">
+            <summary>
+            Check to see if the <see cref="T:ModuleManager.Common.Classes.MemberParameter"/> is empty.
+            </summary>
+            <returns>Returns true if the name is not an empty string or null.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.MemberParameter.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output of parameter type and name.
+            </summary>
+            <returns>A desired format for the parameter type and name.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.TypeConstructor">
+            <summary>
+            Holds the <see cref="P:ModuleManager.Common.Classes.TypeConstructor.ConstructorInfo"/>, class name, description and the parameters of a type's constructor.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeConstructor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeConstructor"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeConstructor.#ctor(System.Reflection.ConstructorInfo,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.MemberParameter})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeConstructor"/> class.
+            </summary>
+            <param name="constructorInfo"><see cref="T:System.Reflection.ConstructorInfo"/> for this <see cref="T:ModuleManager.Common.Classes.TypeConstructor"/>.</param>
+            <param name="className"><see cref="T:System.String"/> class name.</param>
+            <param name="description"><see cref="T:System.String"/> constructor description.</param>
+            <param name="parameters">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>, constructor parameters.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeConstructor.Parameters">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>, the constructor parameters.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeConstructor.ConstructorInfo">
+            <summary>
+            Gets or sets the actuall <see cref="T:System.Reflection.ConstructorInfo"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeConstructor.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the constructor name, description, and parameters.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.TypeData">
+            <summary>
+            Module type object.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeData"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.#ctor(System.Type,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeMethod})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeData"/> class.
+            </summary>
+            <param name="type">Module <see cref="T:System.Type"/>.</param>
+            <param name="name"><see cref="T:System.String"/> Module name.</param>
+            <param name="description"><see cref="T:System.String"/> Module description.</param>
+            <param name="constructors">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of type constructors.</param>
+            <param name="properties">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of type properties.</param>
+            <param name="methods">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of type methods.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.Name">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.FullName">
+            <summary>
+            Gets or sets this Module's Type's FullName <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.Description">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.Members">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of the module members.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.Constructors">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing the type constructors.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.Properties">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing the type properties.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.Methods">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing the type methods.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.ViewInfo">
+            <summary>
+            Gets or sets a <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> object that containts information about this view type.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeData.Type">
+            <summary>
+            Gets or sets the <see cref="T:System.Type"/> of the TypeData.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.StoreModuleMembers">
+            <summary>
+            Stores all <see cref="T:ModuleManager.Common.Classes.TypeConstructor"/>, <see cref="T:ModuleManager.Common.Classes.TypeProperty"/> and <see cref="T:ModuleManager.Common.Classes.TypeMethod"/> in the Members property.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the module name, description and all members contained in module.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.SetIsView">
+            <summary>
+            Sets the IsView property.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.InitializeMembers(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeConstructor},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeProperty},System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeMethod})">
+            <summary>
+            This will add <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Constructors and Members properties,
+            <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Properties and Members properties, and
+            <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Methods and Members properties.
+            </summary>
+            <param name="constructors">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+            <param name="properties">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+            <param name="methods">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.InitializeConstructors(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeConstructor})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Constructors and Members properties.
+            </summary>
+            <param name="constructors">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.InitializeProperties(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeProperty})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Properties and Members properties.
+            </summary>
+            <param name="properties">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeData.InitializeMethods(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.TypeMethod})">
+            <summary>
+            Adds a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to the Methods and Members properties.
+            </summary>
+            <param name="methods">An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.TypeMemberData">
+            <summary>
+            The base class for module members.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeMemberData.Name">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeMemberData.Description">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> description of the module.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeMemberData.TypeName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the Type.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.TypeMethod">
+            <summary>
+            TypeMethod object holds the MethodInfo, name, description, the parameters and the return type of a member.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeMethod.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeMethod"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeMethod.#ctor(System.Reflection.MethodInfo,System.String,System.String,System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.MemberParameter},System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeMethod"/> class.
+            </summary>
+            <param name="methodInfo"><see cref="T:System.Reflection.MethodInfo"/>.</param>
+            <param name="name"><see cref="T:System.String"/> method name.</param>
+            <param name="description"><see cref="T:System.String"/> method description.</param>
+            <param name="parameters"><see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> method parameters.</param>
+            <param name="returnType"><see cref="T:System.String"/> method return type.</param>
+            <param name="returnDescription"><see cref="T:System.String"/> method return description.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeMethod.Parameters">
+            <summary>
+            Gets or sets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>s.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeMethod.ReturnType">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> method return type.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeMethod.ReturnDescription">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> method return description.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeMethod.MethodInfo">
+            <summary>
+            Gets or sets the actual <see cref="T:System.Reflection.MethodInfo"/> of the TypeMethod.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeMethod.Invoke(System.Object[])">
+            <summary>
+            Invokes this method.
+            </summary>
+            <param name="args">The <see cref="T:System.Object"/> array arguments needed to invoke this method.</param>
+            <returns>An object that this method should return.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeMethod.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the member description, parameters
+            and return type.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeMethod.TestParameters(System.Object[])">
+            <summary>
+            Used to test if the passed in <see cref="T:System.Object"/> array matches this method's parameter types.
+            </summary>
+            <param name="args">An array of <see cref="T:System.Object"/>s that represent method parameters.</param>
+            <returns>True if the object array matches the method's parameter types.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.TypeProperty">
+            <summary>
+            TypeProperty object holds the PropertyInfo, name, description, data type and accessor level of a property.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeProperty.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeProperty"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeProperty.#ctor(System.Reflection.PropertyInfo,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.TypeProperty"/> class.
+            </summary>
+            <param name="propertyInfo"><see cref="T:System.Reflection.PropertyInfo"/> for this.</param>
+            <param name="name"><see cref="T:System.String"/> property name.</param>
+            <param name="description"><see cref="T:System.String"/> property description.</param>
+            <param name="dataType"><see cref="T:System.String"/> property data type.</param>
+            <param name="canRead"><see cref="T:System.String"/> property has a 'get' accessor.</param>
+            <param name="canWrite"><see cref="T:System.String"/> property has a 'set' accessor.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeProperty.DataType">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> type of the property.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeProperty.CanRead">
+            <summary>
+            Gets or sets a value indicating whether this property has a get accessor.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeProperty.CanWrite">
+            <summary>
+            Gets or sets a value indicating whether this property has a set accessor.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.TypeProperty.PropertyInfo">
+            <summary>
+            Gets or sets the actual <see cref="T:System.Reflection.PropertyInfo"/> for this.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.TypeProperty.ToString">
+            <summary>
+            Overrides the ToString method and formats the string output.
+            </summary>
+            <returns>A desired format for the member description.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.Data.ViewData">
+            <summary>
+            An object that stores info about the view type.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.Data.ViewData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.Data.ViewData.#ctor(System.String,System.Collections.ObjectModel.ObservableCollection{System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> class.
+            </summary>
+            <param name="assemblyName">The name of the assembly that contains these view objects.</param>
+            <param name="viewsObjects">The view objects that this assembly contains.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.Data.ViewData.AssemblyName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the assembly that contains the view objects.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.Data.ViewData.ViewObjects">
+            <summary>
+            Gets or sets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of view objects.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.JsonExtensions">
+            <summary>
+            Extension methods for generic objects.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.JsonExtensions.Copy``1(``0)">
+            <summary>
+            Deep copy an object using serialization.
+            </summary>
+            <typeparam name="T">The type of the object to be copied.</typeparam>
+            <param name="objectToBeCopied">The object to be copied.</param>
+            <returns>A new copy of the <typeparamref name="T"/> object.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.JsonExtensions.Save(System.Object,System.String)">
+            <summary>
+            Save an object to disk using serialization.
+            </summary>
+            <param name="objectToSave">The object to be saved.</param>
+            <param name="filePath">The <see cref="T:System.String"/> path to the file to be created or saved.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.JsonExtensions.Load``1(System.String)">
+            <summary>
+            Load an object from disk using deserialization.
+            </summary>
+            <typeparam name="T">The type of object to deserialize to.</typeparam>
+            <param name="filePath">The <see cref="T:System.String"/> path to the file to be loaded.</param>
+            <returns>The newly loaded object.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.AggregateModuleCatalog">
+            <summary>
+            A basic aggregation of IModuleCatalogs for quickstart purposes.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.AggregateModuleCatalog"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AggregateModuleCatalog.Catalogs">
+            <summary>
+            Gets or sets the collection of catalogs.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.AggregateModuleCatalog.Modules">
+            <summary>
+            Gets all the <see cref="T:Prism.Modularity.IModuleInfo"/> classes that are in the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.GetDependentModules(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Return the list of <see cref="T:Prism.Modularity.IModuleInfo"/> that the provided module depends on.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to get the dependent modules of.</param>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> dependencies of the provided module.
+            </returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.CompleteListWithDependencies(System.Collections.Generic.IEnumerable{Prism.Modularity.IModuleInfo})">
+            <summary>
+            Gets the complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> with dependencies for the provided <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            of <see cref="T:Prism.Modularity.IModuleInfo"/>.
+            </summary>
+            <param name="modules">The modules to get the dependencies of.</param>
+            <returns>
+            A complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of provided <see cref="T:Prism.Modularity.IModuleInfo"/> and their dependencies.
+            </returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.Initialize">
+            <summary>
+            Initializes the catalog, which may load and validate the modules.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.AddCatalog(Prism.Modularity.IModuleCatalog)">
+            <summary>
+            Adds the catalog to the list of catalogs.
+            </summary>
+            <param name="catalog">The catalog to add.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.AggregateModuleCatalog.AddModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Adds an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
+            <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog">
+            <summary>
+            A <see cref="T:Prism.Modularity.ModuleCatalog"/> that loads modules from a directory.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog"/> class.
+            </summary>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.ModulePath">
+            <summary>
+            Gets or sets the directory containing modules to search for.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.CreateModuleInfo(System.Type)">
+            <summary>
+            Creates a <see cref="T:Prism.Modularity.IModuleInfo"/> from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to get a <see cref="T:Prism.Modularity.IModuleInfo"/> from.</param>
+            <returns>A <see cref="T:Prism.Modularity.IModuleInfo"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.AddModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Adds a <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
+            <returns>The <see cref="T:Prism.Modularity.IModuleCatalog"/> for easily adding multiple modules.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.AddModule(System.String)">
+            <summary>
+            Adds a <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="dllFilePath">The <see cref="T:System.String"/> to the dll file to get the <see cref="T:Prism.Modularity.IModuleInfo"/> from.</param>
+            <returns>The <see cref="T:Prism.Modularity.IModuleInfo"/> added to the catalog.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.RemoveModule(System.String)">
+            <summary>
+            Removes a <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfoName">The <see cref="T:System.String"/> of the <see cref="T:Prism.Modularity.IModuleInfo"/> to remove from the list.</param>
+            <returns>The <see cref="T:Prism.Modularity.IModuleCatalog"/> for easily removing multiple modules.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog.InnerLoad">
+            <summary>
+            Drives the main logic of building the child domain and searching for the assemblies.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Classes.XmlDescriptionRetriever">
+            <summary>
+            XmlDescriptionRetriever is used to get text form an xml file.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.XmlDescriptionRetriever"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Classes.XmlDescriptionRetriever"/> class.
+            </summary>
+            <param name="dllFilePath">The path to the dll file.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Classes.XmlDescriptionRetriever.DllFilePath">
+            <summary>
+            Gets or sets the file path to the dll file.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetModuleDescription(System.Type)">
+            <summary>
+            GetModuleDescription returns a clean string from the inner xml
+            of the class description of the Type.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> to get the string desctiption from.</param>
+            <returns>String representation of the class description.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetMethodDescription(System.Reflection.MethodInfo,System.Int32)">
+            <summary>
+            Returns a string from the inner xml of the method description.
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/> to get the string from.</param>
+            <param name="index">Index used for methods/constructors with same name.</param>
+            <returns>String representation of the method description.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetConstructorDescription(System.Reflection.ConstructorInfo,System.Int32)">
+            <summary>
+            Returns a string from the inner xml of the constructor description.
+            </summary>
+            <param name="constructor"><see cref="T:System.Reflection.ConstructorInfo"/> to get the string from.</param>
+            <param name="index">Index used for methods/constructors with same name.</param>
+            <returns>String representation of the method description.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetPropertyDescription(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns a string from the inner xml of the property desctiption.
+            </summary>
+            <param name="property"><see cref="T:System.Reflection.PropertyInfo"/> to get the description from.</param>
+            <returns>String representation of the property description.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetMemberParameterDescription(System.Reflection.MethodBase,System.Int32,System.Int32)">
+            <summary>
+            Returns a string from the inner xml of the parameter description.
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MemberInfo"/> to get the string from.</param>
+            <param name="parameterIndex">Integer index of parameter.</param>
+            <param name="memberIndex">Integer index of member.</param>
+            <returns>String representation of the parameter description.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetParametersFromList(System.Reflection.MethodBase,System.Int32)">
+            <summary>
+            Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from a list of <see cref="T:System.Reflection.ParameterInfo"/>.
+            </summary>
+            <param name="method">The <see cref="T:System.Reflection.MethodBase"/> to get the parameters from.</param>
+            <param name="memberIndex">Integer index of member.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetMemberReturnDescription(System.Reflection.MethodBase)">
+            <summary>
+            Returns a string desctiption of the return value of a <see cref="T:System.Reflection.MethodBase"/>.
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodBase"/> to get the string desctiption of the return value from.</param>
+            <returns>String desctiption of the return value.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetParametersFromXml(System.Reflection.MethodBase,System.Int32)">
+            <summary>
+            Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            </summary>
+            <param name="method">The <see cref="T:System.Reflection.MethodBase"/> to get parameters from.</param>
+            <param name="memberIndex">Member index.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetMemberXmlNode(System.Reflection.MethodBase,System.Int32)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XmlNode"/> of the specified <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+            <param name="method">The <see cref="T:System.Reflection.MethodBase"/> to get the <see cref="T:System.Xml.XmlNode"/> from.</param>
+            <param name="nodeIndex">The specified node index to handle members with the same name.</param>
+            <returns><see cref="T:System.Xml.XmlNode"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetModuleXmlNode(System.Type)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XmlNode"/> of the specified <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to get the <see cref="T:System.Xml.XmlNode"/> from.</param>
+            <returns><see cref="T:System.Xml.XmlNode"/> that holds info about the passed in <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetPropertyXmlNode(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XmlNode"/> of the specified <see cref="T:System.Reflection.PropertyInfo"/>.
+            </summary>
+            <param name="property">The <see cref="T:System.Reflection.PropertyInfo"/> to get the <see cref="T:System.Xml.XmlNode"/> from.</param>
+            <returns><see cref="T:System.Xml.XmlNode"/> that holds info about the passed in <see cref="T:System.Reflection.PropertyInfo"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetXmlNodeString(System.Xml.XmlNode,System.String,System.Int32)">
+            <summary>
+            Takes an <see cref="T:System.Xml.XmlNode"/>, string xml tag, and an index and return the inner xml.
+            </summary>
+            <param name="xmlNode">The member <see cref="T:System.Xml.XmlNode"/>.</param>
+            <param name="xmlTag">This is the string of the xml tag.</param>
+            <param name="index">Index of the XmlNodeList, defaults to 0. (used for more than one parameter).</param>
+            <returns>InnerXml of the <see cref="T:System.Xml.XmlNode"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Classes.XmlDescriptionRetriever.GetXmlNodeText(System.Xml.XmlNode)">
+            <summary>
+            Returns the formatted text of the inner xml.
+            </summary>
+            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/> to get text from.</param>
+            <returns>Formatted string of the <see cref="T:System.Xml.XmlNode"/> InnerXml.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.ICoreModule">
+            <summary>
+            Interface that implements <see cref="T:Prism.Modularity.IModule"/>. Used to define this application's core modules.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IExpansionModule">
+            <summary>
+            Interface that implements <see cref="T:Prism.Modularity.IModule"/>. Used to define this application's test modules.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.Assemblies">
+            <summary>
+            Gets or sets a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.SelectedItem">
+            <summary>
+            Gets or sets an <see cref="T:System.Object"/> object hopefully.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyCollectionService.SelectedItemName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the selected item.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyCollectionService.PopulateAssemblyCollection(System.String,System.String[])">
+            <summary>
+            Populates the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            </summary>
+            <param name="dllDirectory">A <see cref="T:System.String"/> of the directory path.</param>
+            <param name="dllFiles">A <see cref="T:System.String"/> array that contains all dll files to load.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.DllDirectory">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> directory path of the .dll files.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.DllFilePath">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> path of the .dll file.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.CurrentAssemblyName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the assembly being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.CurrentTypeName">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> name of the type being loaded.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.PercentOfAssemblyLoaded">
+            <summary>
+            Gets or sets the current <see cref="T:System.Double"/> percentage of load compleation of the current assembly.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.Initialize(System.String,System.String)">
+            <summary>
+            Initialize properties.
+            </summary>
+            <param name="modulesDirectory">Directory containing <see cref="T:System.String"/> dll files.</param>
+            <param name="assemblyFilePath">Name of the specific <see cref="T:System.String"/> dll file.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.GetAssemblies(System.String[])">
+            <summary>
+            Creates an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> to organize
+            the information from the dll file and its related xml file.
+            </summary>
+            <param name="dllFiles">A <see cref="T:System.String"/> array containing the names of all dll files in the DllDirectory.</param>
+            <returns>Returns an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.GetAssembly(System.String)">
+            <summary>
+            Loads an assembly and creates an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/>.
+            </summary>
+            <param name="dllFile">The dll file to retrieve the assembly from.</param>
+            <returns>An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
+            <summary>
+            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
+            </summary>
+            <param name="assemblyData">An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> object passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <summary>
+            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
+            </summary>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <summary>
+            Loads all <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> in a <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
+            </summary>
+            <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.Load(ModuleManager.Common.Classes.AssemblyData@)">
+            <summary>
+            Load an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> by reference.
+            </summary>
+            <param name="assemblyData"><see cref="T:ModuleManager.Common.Classes.AssemblyData"/> to load passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.Unload(ModuleManager.Common.Classes.AssemblyData@)">
+            <summary>
+            Unload an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> by reference.
+            </summary>
+            <param name="assemblyData"><see cref="T:ModuleManager.Common.Classes.AssemblyData"/> to unload passed by reference.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.ICoreModuleStartUpService">
+            <summary>
+            Implements <see cref="T:ModuleManager.Common.Interfaces.ICoreModuleStartUpService"/> to inject views into the shell view on start up.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ICoreModuleStartUpService.ViewInjectionActions">
+            <summary>
+            Gets a list of actions that perform view injection.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.ICoreModuleStartUpService.AddViewInjectionAction(System.Action)">
+            <summary>
+            Add a new <see cref="T:System.Action"/> to the list of ViewObject Registration actions.
+            </summary>
+            <param name="action">The <see cref="T:System.Action"/> to be added.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.ILoadedViewNamesService.LoadedViewNames">
+            <summary>
+            Gets or sets a collection of <see cref="T:System.String"/> view object names.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IModuleCatalogService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IModuleCatalogService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IModuleCatalogService.ModuleCatalog">
+            <summary>
+            Gets the <see cref="T:ModuleManager.Common.Classes.AggregateModuleCatalog"/> used in this application.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.UnloadExpansionModule(System.String)">
+            <summary>
+            Unloads an <see cref="T:Prism.Modularity.IModuleInfo"/> from the <see cref="T:Prism.Modularity.IModuleCatalog"/> and removes the module's view from
+            the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
+            </summary>
+            <param name="moduleInfoName">The <see cref="T:System.String"/> of the <see cref="T:Prism.Modularity.IModuleInfo"/> to unload from the <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleCatalogService.LoadExpansionModule(System.String)">
+            <summary>
+            Reloads an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.IModuleCatalog"/> and adds any associated views
+            to the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/> NOT WORKING.
+            </summary>
+            <param name="dllFilePath">The <see cref="T:System.String"/> of the dll file.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IModuleLoadingService">
+            <summary>
+            Implements <see cref="T:ModuleManager.Common.Interfaces.IModuleLoadingService"/> to inject views into the shell view on start up.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IModuleLoadingService.StoreViewActions">
+            <summary>
+            Gets a list of actions that store views.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IModuleLoadingService.UnloadActions">
+            <summary>
+            Gets a list of unloading actions.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IModuleLoadingService.LoadActions">
+            <summary>
+            Gets a list of loading actions.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleLoadingService.AddStoreViewAction(System.Action)">
+            <summary>
+            Add a new <see cref="T:System.Action"/> to the list of ViewObject Registration actions.
+            </summary>
+            <param name="action">The <see cref="T:System.Action"/> to be added.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleLoadingService.UnloadModule(System.String,System.Action)">
+            <summary>
+            Add a new <see cref="T:System.Action"/> to the list of ViewObject unloading actions.
+            </summary>
+            <param name="moduleName">The <see cref="T:System.String"/> name of the module.</param>
+            <param name="action">The <see cref="T:System.Collections.Generic.Dictionary`2"/> to be added.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IModuleLoadingService.LoadModule(System.String,System.Action)">
+            <summary>
+            Add a new <see cref="T:System.Collections.Generic.Dictionary`2"/> to the list of ViewObject loading actions.
+            </summary>
+            <param name="moduleName">The <see cref="T:System.String"/> name of the module.</param>
+            <param name="action">The <see cref="T:System.Action"/> to be added.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Interfaces.IViewCollectionService">
+            <summary>
+            Service providing concrete <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/> implementations.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.ViewDataCollection">
+            <summary>
+            Gets the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> containing an assembly name and a collection
+            of associated view objects.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.SelectedView">
+            <summary>
+            Gets or sets the selected <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Interfaces.IViewCollectionService.SelectedViewName">
+            <summary>
+            Gets or sets the selected <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.AddView(System.Object)">
+            <summary>
+            Adds a view <see cref="T:System.Object"/> to the collection.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to add to the collection.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.RemoveView(System.Object)">
+            <summary>
+            Removes a view <see cref="T:System.Object"/> from the collection if it exists.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the collection.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.CollectionContainsAssemblyName(System.String)">
+            <summary>
+            Return true if the assembly name is found in the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> collection.
+            </summary>
+            <param name="assemblyName">The <see cref="T:System.String"/> assembly name.</param>
+            <returns>True if the assembly name exists in the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> collection.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.ViewDataAssemblyNameContainsViewObject(System.String,System.Object)">
+            <summary>
+            Return true if, a) the assembly name exists in the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> colleciton and, b) the
+            view object exsists in the associated view object collection.
+            </summary>
+            <param name="assemblyName">The <see cref="T:System.String"/> name of the assembly to check.</param>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to check.</param>
+            <returns>True if both the assembly name and the view object exist in the <see cref="T:ModuleManager.Common.Classes.Data.ViewData"/> collection.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IViewCollectionService.GetViewObjectByName(System.String)">
+            <summary>
+            Gets a view object with the associated <see cref="T:System.String"/> name from the collection.
+            </summary>
+            <param name="viewName">The <see cref="T:System.String"/> name of the view object.</param>
+            <returns>The found view object or null if not found.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Services.AssemblyCollectionService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IModuleCatalogService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.AssemblyCollectionService"/> class.
+            </summary>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+            <param name="moduleCatalogService"> The <see cref="T:ModuleManager.Common.Interfaces.IModuleCatalogService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.Assemblies">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.SelectedItem">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyCollectionService.SelectedItemName">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.PopulateAssemblyCollection(System.String,System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.SetSelectedItemName">
+            <summary>
+            Sets the name of the selected item.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.CollectionPropertyChanged">
+            <summary>
+            The method that handles the AssemblyData collection changed event.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyCollectionService.LoadUnload(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Will load or unload the passed in <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> <see cref="T:System.Object"/>.
+            </summary>
+            <param name="s">The <see cref="T:System.Object"/>.</param>
+            <param name="e">The property changed arguments.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Services.AssemblyDataLoaderService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.#ctor(Prism.Regions.IRegionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.AssemblyDataLoaderService"/> class.
+            </summary>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.DllDirectory">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.DllFilePath">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.CurrentAssemblyName">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.CurrentTypeName">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.PercentOfAssemblyLoaded">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.AssemblyDataLoaderService.DescriptionRetriever">
+            <summary>
+            Gets or sets all xml descriptions.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.Initialize(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetAssemblies(System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetAssembly(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.Load(ModuleManager.Common.Classes.AssemblyData@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.Unload(ModuleManager.Common.Classes.AssemblyData@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadReferencedAssembly(System.Reflection.Assembly)">
+            <summary>
+            Loads all referenced assemblies.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to get all referenced assemblies from.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.FindInLibFolder(System.String)">
+            <summary>
+            Tries to find the missing file from the Lib folder.
+            </summary>
+            <param name="fileName">The name of the dll file to load.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetAllTypesFromAssembly(System.Reflection.Assembly)">
+            <summary>
+            This will get all the <see cref="T:System.Type"/>s from an <see cref="T:System.Reflection.Assembly"/>.
+            THIS WILL THROW ERRORS AND NOT GET ALL OF THE TYPES IF THE DLL FILES ARE DIFFERENT FROM THE LOADED ASSEMBLIES!!!.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to get the <see cref="T:System.Type"/>s from.</param>
+            <returns>A <see cref="T:System.Type"/> array.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.CopyDllToCurrentDirectory(System.String)">
+            <summary>
+            Copy the loaded assembly dll into the bin folder.
+            </summary>
+            <param name="assemblyDataFilePath">The <see cref="T:System.String"/> of the AssemblyData FilePath.</param>
+            <returns>A <see cref="T:System.String"/> value representing where the dll file was moved.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetTypeData(System.Type)">
+            <summary>
+            Builds a singls <see cref="T:ModuleManager.Common.Classes.TypeData"/> from the given <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> from an assembly.</param>
+            <returns>A <see cref="T:ModuleManager.Common.Classes.TypeData"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.AddConstructorsToCollection(System.Type)">
+            <summary>
+            Get all <see cref="T:ModuleManager.Common.Classes.TypeConstructor"/>s from a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.AddPropertiesToCollection(System.Type)">
+            <summary>
+            Gets all <see cref="T:ModuleManager.Common.Classes.TypeProperty"/> from the passed in <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> where the members are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
+        </member>
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.AddMethodsToCollection(System.Type)">
+            <summary>
+            Gets all <see cref="T:ModuleManager.Common.Classes.TypeMethod"/> from the passed in <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> where the methods are coming from.</param>
+            <returns>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> objects.</returns>
+        </member>
+        <member name="T:ModuleManager.Common.Services.CoreModuleStartUpService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.ICoreModuleStartUpService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.CoreModuleStartUpService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.CoreModuleStartUpService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Services.CoreModuleStartUpService.ViewInjectionActions">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.CoreModuleStartUpService.AddViewInjectionAction(System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ModuleManager.Common.Services.LoadedViewNamesService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.LoadedViewNamesService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.LoadedViewNamesService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Services.LoadedViewNamesService.LoadedViewNames">
+            <inheritdoc/>
+        </member>
+        <member name="T:ModuleManager.Common.Services.ModuleCatalogService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IModuleCatalogService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.#ctor(Prism.Ioc.IContainerExtension,Prism.Modularity.IModuleCatalog,ModuleManager.Common.Interfaces.IModuleLoadingService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ModuleCatalogService"/> class.
+            </summary>
+            <param name="containerExtension">The application's <see cref="T:Prism.Ioc.IContainerExtension"/>.</param>
+            <param name="moduleCatalog">The application's <see cref="T:Prism.Modularity.IModuleCatalog"/>.</param>
+            <param name="moduleLoadingService">The application's <see cref="T:ModuleManager.Common.Interfaces.IModuleLoadingService"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ModuleCatalogService.ModuleCatalog">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.UnloadExpansionModule(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.LoadExpansionModule(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleCatalogService.InitializeModule(Prism.Modularity.IModuleInfo)">
+            <summary>
+            Initializes an <see cref="T:Prism.Modularity.IModuleInfo"/> using steps from the Prism ModuleManager and ModuleInitializer.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to initialize.</param>
+        </member>
+        <member name="T:ModuleManager.Common.Services.ModuleLoadingService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IModuleLoadingService"/>.
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleLoadingService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ModuleLoadingService"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ModuleLoadingService.StoreViewActions">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ModuleLoadingService.UnloadActions">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ModuleLoadingService.LoadActions">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleLoadingService.AddStoreViewAction(System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleLoadingService.UnloadModule(System.String,System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ModuleLoadingService.LoadModule(System.String,System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ModuleManager.Common.Services.ViewCollectionService">
+            <inheritdoc cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.#ctor(Prism.Regions.IRegionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ViewCollectionService"/> class.
+            </summary>
+            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ViewCollectionService.ViewDataCollection">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ViewCollectionService.SelectedView">
+            <inheritdoc/>
+        </member>
+        <member name="P:ModuleManager.Common.Services.ViewCollectionService.SelectedViewName">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.AddView(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.RemoveView(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.CollectionContainsAssemblyName(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.ViewDataAssemblyNameContainsViewObject(System.String,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.GetViewObjectByName(System.String)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModuleManager.TestModules.ModuleA</name>
+    </assembly>
+    <members>
+        <member name="T:ModuleManager.TestModules.ModuleA.ModuleAModule">
+            <summary>
+            Test module A.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.#ctor(ModuleManager.Common.Interfaces.IViewCollectionService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleA.ModuleAModule"/> class.
+            </summary>
+            <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.Unload(Prism.Ioc.IContainerProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.ReLoad(Prism.Ioc.IContainerProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.StoreViews(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Stores this modules views into the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.RemoveViewObject(System.Object)">
+            <summary>
+            Remove the view object from the service.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+            <returns>True if the view object was removed, false otherwise.</returns>
+        </member>
+        <member name="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel">
+            <summary>
+            Module A2 View Model.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel.Text">
+            <summary>
+            Gets or sets the text of the view.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleAViewModel">
+            <summary>
+            Module A ViewObject Model.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ViewModels.ModuleAViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleAViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.TestModules.ModuleA.ViewModels.ModuleAViewModel.Text">
+            <summary>
+            Gets or sets the text of the view.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.TestModules.ModuleA.Views.ModuleA2View">
+            <summary>
+            Interaction logic for ModuleA2View.xaml.
+            </summary>
+            <summary>
+            ModuleA2View
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.Views.ModuleA2View.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleA.Views.ModuleA2View"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.Views.ModuleA2View.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ModuleManager.TestModules.ModuleA.Views.ModuleAView">
+            <summary>
+            Interaction logic for ModuleAView.xaml.
+            </summary>
+            <summary>
+            ModuleAView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.Views.ModuleAView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.TestModules.ModuleA.Views.ModuleAView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.Views.ModuleAView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

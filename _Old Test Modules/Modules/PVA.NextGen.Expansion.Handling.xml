@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Expansion.Handling</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Expansion.Handling.HandlingConstants">
+            <summary>
+            Constant values pertaining to <see cref="T:PVA.NextGen.Common.Interfaces.IHandler"/> devices.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.HandlingConstants.APIName">
+            <summary>
+            The <see cref="T:System.String"/> name used when accessing the Handling API.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.HandlingConstants.ModuleName">
+            <summary>
+            The string name for the handling module.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.HandlingConstants.MaxDevices">
+            <summary>
+            The number of IDs available for <see cref="T:PVA.NextGen.Common.Interfaces.IHandler"/> on the system.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.HandlingConstants.JsonFile">
+            <summary>
+            The file location for the handler JSON file.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Handling.Constants.HandlingParameterNames">
+            <summary>
+            Constant values used to create <see cref="T:PVA.NextGen.Common.Interfaces.IHandler"/> parameters in scripts.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.Constants.HandlingParameterNames.Conveyor">
+            <summary>
+            Name for a conveyor parameter.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Handling.Constants.HandlingTokenNames">
+            <summary>
+            The navigation token names for Handler views.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.Constants.HandlingTokenNames.ConfigurationPage">
+            <summary>
+            Navigation token name for the configuration page.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.Constants.HandlingTokenNames.DeviceConfigurationView">
+            <summary>
+            Navigation token name for the configuration view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.Constants.HandlingTokenNames.FunctionTestView">
+            <summary>
+            Navigation token name for the function test view.
+            </summary>
+        </member>
+        <member name="F:PVA.NextGen.Expansion.Handling.Constants.HandlingTokenNames.FunctionConfigurationView">
+            <summary>
+            Navigation token name for the function configuration view.
+            </summary>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Handling.HandlingModule">
+            <summary>
+            HandlingModule.
+            </summary>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.HandlingModule.DriverTypes">
+            <summary>
+            Gets or sets the collection of all <see cref="T:PVA.NextGen.Common.Interfaces.IHandler"/> types.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.HandlingModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.HandlingModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Handling.Services.HandlingService">
+            <inheritdoc cref="T:PVA.NextGen.Common.Interfaces.IHandlingService"/>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.Services.HandlingService.#ctor(PVA.NextGen.Common.Interfaces.IDeviceFactory,PVA.NextGen.Common.Interfaces.IFunctionService,PVA.NextGen.Common.Interfaces.IScriptService,PVA.NextGen.Common.Interfaces.ISharedServiceProvider,PVA.NextGen.Common.Interfaces.IShutdownService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Handling.Services.HandlingService"/> class.
+            </summary>
+            <param name="deviceFactory">Factory used for creating new <see cref="T:PVA.NextGen.Common.Interfaces.IDevice"/>.</param>
+            <param name="functionService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IFunction"/> objects.</param>
+            <param name="scriptService">The service used to create new <see cref="T:PVA.NextGen.Common.Interfaces.IScript"/> objects.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+            <param name="shutdownService">Service to handle controlled shutdown of modules.</param>
+        </member>
+        <member name="T:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel">
+            <inheritdoc cref="T:PVA.NextGen.CommonUI.Interfaces.IHandlingConfigurationContentViewModel"/>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.#ctor(PVA.NextGen.Common.Interfaces.IHandlingService,Prism.Events.IEventAggregator,PVA.NextGen.Common.Interfaces.ISharedServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel"/> class.
+            </summary>
+            <param name="handlingService">The <see cref="T:PVA.NextGen.Common.Interfaces.IHandlingService"/> providing CRUD operations for <see cref="T:PVA.NextGen.Common.Interfaces.IHandler"/>.</param>
+            <param name="eventAggregator">An <see cref="T:Prism.Events.IEventAggregator"/> containing events used throughout the program.</param>
+            <param name="sharedServiceProvider">The <see cref="T:PVA.NextGen.Common.Interfaces.ISharedServiceProvider"/> used to access other modules services.</param>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.ReferenceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.CanAccess">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.DeviceService">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.AddDeviceCommand">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.RemoveDeviceCommand">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.NavigationToken">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.CanCreateDevice">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.CanEditDevice">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.CanDeleteDevice">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.ConfirmNavigationRequest(Prism.Regions.NavigationContext,System.Action{System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.OnNavigatedTo(Prism.Regions.NavigationContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.IsNavigationTarget(Prism.Regions.NavigationContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Expansion.Handling.ViewModels.HandlingConfigurationContentViewModel.OnNavigatedFrom(Prism.Regions.NavigationContext)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

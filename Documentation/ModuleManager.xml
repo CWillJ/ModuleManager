@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModuleManager</name>
+    </assembly>
+    <members>
+        <member name="T:ModuleManager.App">
+            <summary>
+            Interaction logic for App.xaml.
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.OnStartup(System.Windows.StartupEventArgs)">
+            <summary>
+            Startup logic of the application. Raises the Startup event.
+            </summary>
+            <param name="args">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:ModuleManager.App.OnInitialized">
+            <summary>
+            Contains actions that should occur last.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.CreateShell">
+            <summary>
+            Creates the shell or main window of the application.
+            </summary>
+            <returns>The shell of the application.</returns>
+        </member>
+        <member name="M:ModuleManager.App.InitializeModules">
+            <summary>
+            Initializes the modules in the module catalog.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Used to register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for container type registration.</param>
+        </member>
+        <member name="M:ModuleManager.App.CreateModuleCatalog">
+            <summary>
+            Creates the module catalog.
+            </summary>
+            <returns>New <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
+        </member>
+        <member name="M:ModuleManager.App.ConfigureModuleCatalog(Prism.Modularity.IModuleCatalog)">
+            <summary>
+            Configures the <see cref="T:Prism.Modularity.IModuleCatalog"/> used by Prism.
+            </summary>
+            <param name="moduleCatalog">The aggregate <see cref="T:Prism.Modularity.IModuleCatalog"/> used for storing all modules.</param>
+        </member>
+        <member name="M:ModuleManager.App.LoadCore">
+            <summary>
+            Loads the core modules for this project.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.LoadExpansion">
+            <summary>
+            Stores the test modules that this project will display.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.UnloadDisabledModules">
+            <summary>
+            Unloads all the disabled modules from the <see cref="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.ShowSavedViews">
+            <summary>
+            Displays all the saved views in the LoadedViewsRegion.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.ViewModels.ShellViewModel">
+            <summary>
+            <see cref="T:ModuleManager.ViewModels.ShellViewModel"/> will handle commands from the main view.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Views.ShellView">
+            <summary>
+            Interaction logic for MainWindow.xaml.
+            </summary>
+            <summary>
+            ShellView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ShellView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Views.ShellView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Views.ShellView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

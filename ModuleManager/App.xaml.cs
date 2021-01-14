@@ -1,9 +1,11 @@
 ﻿namespace ModuleManager
 {
     using System;
+    using System.IO;
     using System.Windows;
-    using ModuleManager.ModuleObjects;
-    using ModuleManager.UI;
+    using ModuleManager.Common.Classes;
+    using ModuleManager.Common.Interfaces;
+    using ModuleManager.Common.Services;
     using ModuleManager.Views;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -49,14 +51,20 @@
 
             RegionManager.SetRegionManager(MainWindow, Container.Resolve<IRegionManager>());
             RegionManager.UpdateRegions();
-            ////shell.Visibility = Visibility.Hidden;
-
-            ////Container.Resolve<CommonParameterFactory>();
-
-            ////LoadCore();
-            ////LoadModules();
 
             shell.Visibility = Visibility.Visible;
+
+            // Load all AssemblyData's
+            LoadCore();
+
+            // Store views and actions
+            LoadExpansion();
+
+            // Unload all disabled AssemblyData's
+            UnloadDisabledModules();
+
+            RegionManager.UpdateRegions();
+            ShowSavedViews();
         }
 
         /// <summary>
@@ -85,20 +93,104 @@
         /// <param name="containerRegistry"><see cref="IContainerRegistry"/> used for container type registration.</param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IAssemblyCollectionService, AssemblyCollectionService>();
+            containerRegistry.RegisterSingleton<IAssemblyDataLoaderService, AssemblyDataLoaderService>();
+            containerRegistry.RegisterSingleton<IViewCollectionService, ViewCollectionService>();
+            containerRegistry.RegisterSingleton<ILoadedViewNamesService, LoadedViewNamesService>();
+
+            containerRegistry.RegisterSingleton<ICoreModuleStartUpService, CoreModuleStartUpService>();
+            containerRegistry.RegisterSingleton<IModuleLoadingService, ModuleLoadingService>();
+            containerRegistry.RegisterSingleton<IModuleCatalogService, ModuleCatalogService>();
         }
 
         /// <summary>
         /// Creates the module catalog.
         /// </summary>
-        /// <returns>New module catalog.</returns>
+        /// <returns>New <see cref="IModuleCatalog"/>.</returns>
         protected override IModuleCatalog CreateModuleCatalog()
         {
-            ModuleCatalog moduleCatalog = new ModuleCatalog();
+            return new AggregateModuleCatalog();
+        }
 
-            moduleCatalog.AddModule<UIModule>();
-            moduleCatalog.AddModule<ModuleObjectsModule>();
+        /// <summary>
+        /// Configures the <see cref="IModuleCatalog"/> used by Prism.
+        /// </summary>
+        /// <param name="moduleCatalog">The aggregate <see cref="IModuleCatalog"/> used for storing all modules.</param>
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            var moduleCatalogService = Container.Resolve<IModuleCatalogService>();
 
-            return moduleCatalog;
+            // Load core modules for this application.
+            ConfigurationModuleCatalog configurationCatalog = new ConfigurationModuleCatalog();
+            moduleCatalogService.ModuleCatalog.AddCatalog(configurationCatalog);
+
+            // Load any extra modules that this application will use to display views/data.
+            DirectoryLoaderModuleCatalog directoryCatalog = new DirectoryLoaderModuleCatalog(Container.Resolve<IAssemblyDataLoaderService>())
+            { ModulePath = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion") };
+            moduleCatalogService.ModuleCatalog.AddCatalog(directoryCatalog);
+        }
+
+        /// <summary>
+        /// Loads the core modules for this project.
+        /// </summary>
+        private void LoadCore()
+        {
+            var coreModuleStartUpService = Container.Resolve<ICoreModuleStartUpService>();
+
+            foreach (Action registerModuleView in coreModuleStartUpService.ViewInjectionActions)
+            {
+                registerModuleView();
+            }
+        }
+
+        /// <summary>
+        /// Stores the test modules that this project will display.
+        /// </summary>
+        private void LoadExpansion()
+        {
+            var moduleLoadingService = Container.Resolve<IModuleLoadingService>();
+
+            foreach (Action storeViewAction in moduleLoadingService.StoreViewActions)
+            {
+                storeViewAction();
+            }
+        }
+
+        /// <summary>
+        /// Unloads all the disabled modules from the <see cref="DirectoryLoaderModuleCatalog"/>.
+        /// </summary>
+        private void UnloadDisabledModules()
+        {
+            var assemblyCollectionService = Container.Resolve<IAssemblyCollectionService>();
+            var moduleCatalogService = Container.Resolve<IModuleCatalogService>();
+
+            foreach (var assemblyData in assemblyCollectionService.Assemblies)
+            {
+                if (!assemblyData.IsEnabled)
+                {
+                    moduleCatalogService.UnloadExpansionModule(assemblyData.ModuleType.Name);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Displays all the saved views in the LoadedViewsRegion.
+        /// </summary>
+        private void ShowSavedViews()
+        {
+            var regionManager = Container.Resolve<IRegionManager>();
+            var viewCollectionService = Container.Resolve<IViewCollectionService>();
+            var loadedViewNamesService = Container.Resolve<ILoadedViewNamesService>();
+
+            foreach (string loadedView in loadedViewNamesService.LoadedViewNames)
+            {
+                object? instance = Activator.CreateInstance(viewCollectionService.GetViewObjectByName(loadedView).GetType());
+
+                if (instance != null)
+                {
+                    regionManager.AddToRegion(@"LoadedViewsRegion", instance);
+                }
+            }
         }
     }
 }

@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModuleManager.Expansion.ModuleB</name>
+    </assembly>
+    <members>
+        <member name="T:ModuleManager.Expansion.ModuleB.Models.CountTracker">
+            <summary>
+            Keeps track of an integer.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.Models.CountTracker.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Expansion.ModuleB.Models.CountTracker"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Expansion.ModuleB.Models.CountTracker.Count">
+            <summary>
+            Gets or sets an <see cref="T:System.Int32"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.Models.CountTracker.AddOne">
+            <summary>
+            Adds 1 to the Count property.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Expansion.ModuleB.ModuleBModule">
+            <summary>
+            Test module B.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.#ctor(ModuleManager.Common.Interfaces.IViewCollectionService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Expansion.ModuleB.ModuleBModule"/> class.
+            </summary>
+            <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.StoreViews(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Stores this modules views into the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.RemoveViews(System.Object)">
+            <summary>
+            Remove the view object from the service.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.Load(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Reloads the views associated with this module.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ModuleBModule.Unload(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Unloads the views associated with this module.
+            </summary>
+            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="T:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel">
+            <summary>
+            Module B View Model.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.Text">
+            <summary>
+            Gets or sets the text of the view.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.ButtonTextValue">
+            <summary>
+            Gets or sets the text for a button.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.ButtonCounter">
+            <summary>
+            Gets or sets the <see cref="T:ModuleManager.Expansion.ModuleB.Models.CountTracker"/> object.
+            </summary>
+        </member>
+        <member name="P:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.IncrementCommand">
+            <summary>
+            Gets or sets the IncrementCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.ViewModels.ModuleBViewModel.IncrementButtonNumber">
+            <summary>
+            Command method for button.
+            </summary>
+        </member>
+        <member name="T:ModuleManager.Expansion.ModuleB.Views.ModuleBView">
+            <summary>
+            Interaction logic for ModuleAView.xaml.
+            </summary>
+            <summary>
+            ModuleBView
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.Views.ModuleBView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Expansion.ModuleB.Views.ModuleBView"/> class.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.Expansion.ModuleB.Views.ModuleBView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

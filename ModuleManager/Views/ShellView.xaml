@@ -13,7 +13,7 @@
     navigation:RadWindowInteropHelper.AllowTransparency="True"
     navigation:RadWindowInteropHelper.ShowInTaskbar="True"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    Background="LightGray"
+    Background="Gray"
     CanMove="True"
     Header="Module Manager"
     IsRestricted="True"

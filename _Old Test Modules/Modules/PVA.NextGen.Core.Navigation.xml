@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PVA.NextGen.Core.Navigation</name>
+    </assembly>
+    <members>
+        <member name="T:PVA.NextGen.Core.Navigation.Classes.NavigationToken">
+            <inheritdoc cref="T:PVA.NextGen.CommonUI.Interfaces.INavigationToken"/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Classes.NavigationToken.#ctor(PVA.NextGen.CommonUI.Classes.UINode@,PVA.NextGen.CommonUI.Classes.UINode@,System.String,System.String,PVA.NextGen.CommonUI.Interfaces.INavigationToken)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Navigation.Classes.NavigationToken"/> class.
+            </summary>
+            <param name="navigationNode">A reference to the <see cref="T:PVA.NextGen.CommonUI.Classes.UINode"/> to be used for navigation.</param>
+            <param name="injectionNode">A reference to the <see cref="T:PVA.NextGen.CommonUI.Classes.UINode"/> to be used for injection.</param>
+            <param name="regionName">The string of the region into which the associated view was injected.</param>
+            <param name="viewName">The string name of the associated view.</param>
+            <param name="parentToken">The parent <see cref="T:PVA.NextGen.CommonUI.Interfaces.INavigationToken"/> of this token.</param>
+        </member>
+        <member name="P:PVA.NextGen.Core.Navigation.Classes.NavigationToken.NavigationNode">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Navigation.Classes.NavigationToken.InjectionNode">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Navigation.Classes.NavigationToken.RegionName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Navigation.Classes.NavigationToken.ViewName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Navigation.Classes.NavigationToken.ParentToken">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Navigation.Classes.NavigationToken.SelectedSubPageIndex">
+            <inheritdoc/>
+        </member>
+        <member name="P:PVA.NextGen.Core.Navigation.Classes.NavigationToken.ViewModelIndex">
+            <inheritdoc/>
+        </member>
+        <member name="T:PVA.NextGen.Core.Navigation.NavigationModule">
+            <summary>
+            NavigationModule.
+            </summary>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.NavigationModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
+            <summary>
+            Register types with the container that will be used by the application.
+            </summary>
+            <param name="containerRegistry"><see cref="T:Prism.Ioc.IContainerRegistry"/> used for program-wide type registration.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.NavigationModule.OnInitialized(Prism.Ioc.IContainerProvider)">
+            <summary>
+            Perform any functionality after all type registration has taken place.
+            </summary>
+            <param name="containerProvider">A <see cref="T:Prism.Ioc.IContainerProvider"/> used for progam-wide type resolving.</param>
+        </member>
+        <member name="T:PVA.NextGen.Core.Navigation.Services.NavigationService">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.#ctor(PVA.NextGen.CommonUI.Classes.UINode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PVA.NextGen.Core.Navigation.Services.NavigationService"/> class.
+            </summary>
+            <param name="root">The base <see cref="T:PVA.NextGen.CommonUI.Classes.UINode"/> of the application.</param>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.AddContent(PVA.NextGen.CommonUI.Interfaces.INavigationToken,System.String,PVA.NextGen.CommonUI.Interfaces.IContentView,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.RemoveContent(PVA.NextGen.CommonUI.Interfaces.INavigationToken,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.RemoveContent(PVA.NextGen.CommonUI.Interfaces.IContentView)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.MoveContent(PVA.NextGen.CommonUI.Interfaces.INavigationToken,PVA.NextGen.CommonUI.Interfaces.INavigationToken,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.GetContent(PVA.NextGen.CommonUI.Interfaces.INavigationToken,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.GetSubPages(PVA.NextGen.CommonUI.Interfaces.INavigationToken,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.RequestNavigate(PVA.NextGen.CommonUI.Interfaces.INavigationToken,System.Action{Prism.Regions.NavigationResult},Prism.Regions.NavigationParameters)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.GetTokenByName(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PVA.NextGen.Core.Navigation.Services.NavigationService.CheckIsActive(PVA.NextGen.CommonUI.Interfaces.INavigationToken)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
