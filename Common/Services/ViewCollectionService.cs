@@ -5,12 +5,10 @@
     using ModuleManager.Common.Classes.Data;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
-    using Prism.Regions;
 
     /// <inheritdoc cref="IViewCollectionService"/>
     public class ViewCollectionService : BindableBase, IViewCollectionService
     {
-        private readonly IRegionManager _regionManager;
         private readonly ObservableCollection<ViewData> _viewDataCollection;
         private object _selectedView;
         private string _selectedViewName;
@@ -18,10 +16,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewCollectionService"/> class.
         /// </summary>
-        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        public ViewCollectionService(IRegionManager regionManager)
+        public ViewCollectionService()
         {
-            _regionManager = regionManager;
             _viewDataCollection = new ObservableCollection<ViewData>();
             _selectedView = null;
             _selectedViewName = @"Loaded ViewDataCollection";
@@ -185,13 +181,10 @@
             if (_selectedView != null)
             {
                 SelectedViewName = _selectedView.GetType().Name;
-                ////_regionManager.Regions["SelectedViewRegion"].RemoveAll();
-                ////_regionManager.RegisterViewWithRegion("SelectedViewRegion", _selectedView.GetType());
             }
             else
             {
                 SelectedViewName = @"Loaded ViewDataCollection";
-                ////_regionManager.Regions["SelectedViewRegion"].RemoveAll();
             }
         }
     }

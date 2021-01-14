@@ -54,13 +54,8 @@
 
             shell.Visibility = Visibility.Visible;
 
-            // Load all AssemblyData's
             LoadCore();
-
-            // Store views and actions
             LoadExpansion();
-
-            // Unload all disabled AssemblyData's
             UnloadDisabledModules();
 
             RegionManager.UpdateRegions();

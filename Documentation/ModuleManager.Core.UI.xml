@@ -338,24 +338,6 @@
             InitializeComponent
             </summary>
         </member>
-        <member name="T:ModuleManager.Core.UI.Views.CannotDisplayView">
-            <summary>
-            Interaction logic for CannotDisplayView.xaml.
-            </summary>
-            <summary>
-            CannotDisplayView
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.Views.CannotDisplayView.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.Views.CannotDisplayView"/> class.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.Views.CannotDisplayView.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
         <member name="T:ModuleManager.Core.UI.Views.ModuleManagerView">
             <summary>
             Interaction logic for MainView.xaml.

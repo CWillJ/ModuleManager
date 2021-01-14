@@ -1166,11 +1166,10 @@
         <member name="T:ModuleManager.Common.Services.ViewCollectionService">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>
         </member>
-        <member name="M:ModuleManager.Common.Services.ViewCollectionService.#ctor(Prism.Regions.IRegionManager)">
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ViewCollectionService"/> class.
             </summary>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
         <member name="P:ModuleManager.Common.Services.ViewCollectionService.ViewDataCollection">
             <inheritdoc/>

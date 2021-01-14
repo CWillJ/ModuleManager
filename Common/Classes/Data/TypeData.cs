@@ -158,7 +158,6 @@
         /// </summary>
         private void SetIsView()
         {
-            // (Type.GetProperty("Tag") != null)
             if (Type != null && Type.BaseType != null && (Type.BaseType.Name == @"UserControl" || Type.BaseType.Name == @"RadWindow"))
             {
                 ViewInfo = new ViewData();

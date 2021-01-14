@@ -107,38 +107,5 @@
                 </telerik:RadListBox.ItemTemplate>
             </telerik:RadListBox>
         </Grid>
-
-        <!--  Selected Views column width 200
-        <Grid
-            Grid.Column="2"
-            MinWidth="10"
-            MinHeight="10"
-            Margin="10,15,25,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Border
-                Grid.Row="0"
-                BorderBrush="Black"
-                BorderThickness="2">
-                <TextBlock
-                    MinHeight="20"
-                    Background="LightSteelBlue"
-                    FontWeight="Bold"
-                    Text="{Binding Path=ViewCollectionService.SelectedViewName, Mode=OneWay}"
-                    TextAlignment="Center" />
-            </Border>
-
-            <Border
-                Grid.Row="1"
-                Background="LightGray"
-                BorderBrush="Black"
-                BorderThickness="2">
-                <ContentControl prism:RegionManager.RegionName="SelectedViewRegion" />
-            </Border>
-        </Grid>-->
-
     </Grid>
 </UserControl>

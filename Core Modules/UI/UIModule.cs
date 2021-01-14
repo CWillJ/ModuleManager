@@ -45,8 +45,8 @@
             regionManager.RegisterViewWithRegion(@"ButtonViewsRegion", typeof(ViewDisplayView));
 
             // Register module initialization actions with CoreStartupService.
-            var startupService = containerProvider.Resolve<ICoreModuleStartUpService>();
-            startupService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
+            var coreModuleStartUpService = containerProvider.Resolve<ICoreModuleStartUpService>();
+            coreModuleStartUpService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
 
             StoreModules();
             LoadSavedModules();

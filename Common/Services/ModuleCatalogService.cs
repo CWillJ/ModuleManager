@@ -71,7 +71,7 @@
                 }
             }
 
-            // Store the module's views back in the view collection (call module reload action)
+            // Store the module's views back in the view collection (call module load action)
             if (!string.IsNullOrEmpty(moduleInfoName))
             {
                 _moduleLoadingService.LoadActions[moduleInfoName]();

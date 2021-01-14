@@ -8,7 +8,6 @@
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
-    using Prism.Ioc;
     using Prism.Mvvm;
     using Prism.Regions;
     using Telerik.Windows.Controls;
@@ -116,7 +115,6 @@
         /// </summary>
         private async void StoreModules()
         {
-            ////string moduleDirectory = GetModuleDirectory();
             string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion");
 
             if (string.IsNullOrEmpty(moduleDirectory))
