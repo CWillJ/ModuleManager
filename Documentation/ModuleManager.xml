@@ -57,9 +57,14 @@
             Loads the core modules for this project.
             </summary>
         </member>
-        <member name="M:ModuleManager.App.LoadTestModules">
+        <member name="M:ModuleManager.App.LoadExpansion">
             <summary>
             Stores the test modules that this project will display.
+            </summary>
+        </member>
+        <member name="M:ModuleManager.App.UnloadDisabledModules">
+            <summary>
+            Unloads all the disabled modules from the <see cref="T:ModuleManager.Common.Classes.DirectoryLoaderModuleCatalog"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.App.ShowSavedViews">
@@ -75,84 +80,6 @@
         <member name="M:ModuleManager.App.Main">
             <summary>
             Application Entry Point.
-            </summary>
-        </member>
-        <member name="T:ModuleManager.Classes.AggregateModuleCatalog">
-            <summary>
-            A basic aggregation of IModuleCatalogs for quickstart purposes.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.AggregateModuleCatalog"/> class.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.AggregateModuleCatalog.Catalogs">
-            <summary>
-            Gets the collection of catalogs.
-            </summary>
-        </member>
-        <member name="P:ModuleManager.Classes.AggregateModuleCatalog.Modules">
-            <summary>
-            Gets all the <see cref="T:Prism.Modularity.IModuleInfo"/> classes that are in the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.GetDependentModules(Prism.Modularity.IModuleInfo)">
-            <summary>
-            Return the list of <see cref="T:Prism.Modularity.IModuleInfo"/> that the provided module depends on.
-            </summary>
-            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to get the dependent modules of.</param>
-            <returns>
-            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> dependencies of the provided module.
-            </returns>
-        </member>
-        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.CompleteListWithDependencies(System.Collections.Generic.IEnumerable{Prism.Modularity.IModuleInfo})">
-            <summary>
-            Gets the complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Prism.Modularity.IModuleInfo"/> with dependencies for the provided <see cref="T:System.Collections.Generic.IEnumerable`1"/>
-            of <see cref="T:Prism.Modularity.IModuleInfo"/>.
-            </summary>
-            <param name="modules">The modules to get the dependencies of.</param>
-            <returns>
-            A complete <see cref="T:System.Collections.Generic.IEnumerable`1"/> of provided <see cref="T:Prism.Modularity.IModuleInfo"/> and their dependencies.
-            </returns>
-        </member>
-        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.Initialize">
-            <summary>
-            Initializes the catalog, which may load and validate the modules.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.AddCatalog(Prism.Modularity.IModuleCatalog)">
-            <summary>
-            Adds the catalog to the list of catalogs.
-            </summary>
-            <param name="catalog">The catalog to add.</param>
-        </member>
-        <member name="M:ModuleManager.Classes.AggregateModuleCatalog.AddModule(Prism.Modularity.IModuleInfo)">
-            <summary>
-            Adds an <see cref="T:Prism.Modularity.IModuleInfo"/> to the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
-            </summary>
-            <param name="moduleInfo">The <see cref="T:Prism.Modularity.IModuleInfo"/> to add.</param>
-            <returns> The updated <see cref="T:Prism.Modularity.IModuleCatalog"/>.</returns>
-        </member>
-        <member name="T:ModuleManager.Classes.DirectoryLoaderModuleCatalog">
-            <summary>
-            A <see cref="T:Prism.Modularity.ModuleCatalog"/> that loads modules from a directory.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.DirectoryLoaderModuleCatalog.#ctor(Prism.Ioc.IContainerProvider)">
-            <summary>
-            Initializes a new instance of the <see cref="T:ModuleManager.Classes.DirectoryLoaderModuleCatalog"/> class.
-            </summary>
-            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
-        </member>
-        <member name="P:ModuleManager.Classes.DirectoryLoaderModuleCatalog.ModulePath">
-            <summary>
-            Gets or sets the directory containing modules to search for.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Classes.DirectoryLoaderModuleCatalog.InnerLoad">
-            <summary>
-            Drives the main logic of building the child domain and searching for the assemblies.
             </summary>
         </member>
         <member name="T:ModuleManager.ViewModels.ShellViewModel">

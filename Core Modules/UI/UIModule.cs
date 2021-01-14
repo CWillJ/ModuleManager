@@ -1,9 +1,7 @@
 ﻿namespace ModuleManager.Core.UI
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Xml.Serialization;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
@@ -15,8 +13,25 @@
     /// <summary>
     /// The UI Module Class.
     /// </summary>
-    public class UIModule : IModuleManagerCoreModule
+    public class UIModule : ICoreModule
     {
+        private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
+        private readonly IAssemblyCollectionService _assemblyCollectionService;
+        private readonly ILoadedViewNamesService _loadedViewNamesService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UIModule"/> class.
+        /// </summary>
+        /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
+        /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
+        /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
+        public UIModule(IAssemblyDataLoaderService assemblyDataLoaderService, IAssemblyCollectionService assemblyCollectionService, ILoadedViewNamesService loadedViewNamesService)
+        {
+            _assemblyDataLoaderService = assemblyDataLoaderService;
+            _assemblyCollectionService = assemblyCollectionService;
+            _loadedViewNamesService = loadedViewNamesService;
+        }
+
         /// <summary>
         /// Perform required initialization methods for this Module.
         /// </summary>
@@ -30,11 +45,12 @@
             regionManager.RegisterViewWithRegion(@"ButtonViewsRegion", typeof(ViewDisplayView));
 
             // Register module initialization actions with CoreStartupService.
-            var startupService = containerProvider.Resolve<IModuleStartUpService>();
+            var startupService = containerProvider.Resolve<ICoreModuleStartUpService>();
             startupService.AddViewInjectionAction(() => InjectViewsIntoRegions(containerProvider));
 
-            LoadSavedModules(containerProvider.Resolve<IAssemblyCollectionService>());
-            LoadSavedViewNames(containerProvider.Resolve<ILoadedViewNamesService>());
+            StoreModules();
+            LoadSavedModules();
+            LoadSavedViewNames();
         }
 
         /// <summary>
@@ -56,87 +72,78 @@
         private void InjectViewsIntoRegions(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.Regions[@"ContentRegion"].Add(containerProvider.Resolve<ModuleManagerView>());
+            regionManager.AddToRegion("ContentRegion", containerProvider.Resolve<ModuleManagerView>());
         }
 
         /// <summary>
         /// Loads an <see cref="ObservableCollection{AssemblyData}"/> from an xml file.
         /// </summary>
-        /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
-        private void LoadSavedModules(IAssemblyCollectionService assemblyCollectionService)
+        private void LoadSavedModules()
         {
             ObservableCollection<AssemblyData> assemblies = new ObservableCollection<AssemblyData>();
 
             // Load previously saved module configuration only if the ModuleSaveFile exists
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml"))
+            if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"ModuleSaveFile.json")))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<AssemblyData>));
-                string loadFile = Directory.GetCurrentDirectory() + @"\ModuleSaveFile.xml";
-
-                using (StreamReader rd = new StreamReader(loadFile))
-                {
-                    try
-                    {
-                        assemblies = serializer.Deserialize(rd) as ObservableCollection<AssemblyData>;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // There is something wrong with the xml file.
-                        // Return an empty collection of assemblies.
-                        return;
-                    }
-                }
+                assemblies = JsonExtensions.Load<ObservableCollection<AssemblyData>>(Path.Combine(Directory.GetCurrentDirectory(), @"ModuleSaveFile.json"));
 
                 if (assemblies == null)
                 {
                     return;
                 }
 
-                assemblyCollectionService.DataLoader.LoadAll(ref assemblies);
-                assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
-                assemblyCollectionService.Assemblies = assemblies;
+                _assemblyDataLoaderService.LoadAll(ref assemblies);
+                _assemblyDataLoaderService.LoadUnload(ref assemblies);
+                _assemblyCollectionService.Assemblies = assemblies;
             }
 
-            assemblies = assemblyCollectionService.Assemblies;
-            assemblyCollectionService.DataLoader.LoadUnload(ref assemblies);
-            assemblyCollectionService.Assemblies = assemblies;
+            assemblies = _assemblyCollectionService.Assemblies;
+            _assemblyDataLoaderService.LoadUnload(ref assemblies);
+            _assemblyCollectionService.Assemblies = assemblies;
         }
 
         /// <summary>
         /// Loads an <see cref="ObservableCollection{String}"/> from an xml file.
         /// </summary>
-        /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
-        private void LoadSavedViewNames(ILoadedViewNamesService loadedViewNamesService)
+        private void LoadSavedViewNames()
         {
-            ObservableCollection<string> viewNames = new ObservableCollection<string>();
-
-            // Load previously saved module configuration only if the ModuleSaveFile exists
-            if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.xml")))
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.json");
+            if (File.Exists(filePath))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<string>));
-                string loadFile = Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.xml");
-
-                using (StreamReader rd = new StreamReader(loadFile))
-                {
-                    try
-                    {
-                        viewNames = serializer.Deserialize(rd) as ObservableCollection<string>;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // There is something wrong with the xml file.
-                        // Return an empty collection of assemblies.
-                        return;
-                    }
-                }
+                ObservableCollection<string> viewNames =
+                    JsonExtensions.Load<ObservableCollection<string>>(filePath);
 
                 if (viewNames == null)
                 {
                     return;
                 }
 
-                loadedViewNamesService.LoadedViewNames = viewNames;
+                _loadedViewNamesService.LoadedViewNames = viewNames;
             }
+        }
+
+        /// <summary>
+        /// StoreModules will attempt to get all assemblies from a dll and store it
+        /// as an AssemblyData in the AssemblyData collection.
+        /// </summary>
+        private void StoreModules()
+        {
+            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion");
+
+            if (string.IsNullOrEmpty(moduleDirectory))
+            {
+                return;
+            }
+
+            string[] dllFiles = Directory.GetFiles(moduleDirectory, @"*.dll");
+
+            if (dllFiles.Length == 0)
+            {
+                return;
+            }
+
+            _assemblyDataLoaderService.DllDirectory = moduleDirectory;
+            _assemblyCollectionService.PopulateAssemblyCollection(moduleDirectory, dllFiles);
         }
     }
 }

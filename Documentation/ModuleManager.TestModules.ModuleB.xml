@@ -36,16 +36,29 @@
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.OnInitialized(Prism.Ioc.IContainerProvider)">
-            <inheritdoc cref="T:Prism.Modularity.IModule"/>
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.Unload(Prism.Ioc.IContainerProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.ReLoad(Prism.Ioc.IContainerProvider)">
+            <inheritdoc/>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
-            <inheritdoc cref="T:Prism.Modularity.IModule"/>
+            <inheritdoc/>
         </member>
-        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.InjectViewsIntoRegions(Prism.Ioc.IContainerProvider)">
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.StoreViews(Prism.Ioc.IContainerProvider)">
             <summary>
-            Injects this modules views into the LoadedViewsRegion.
+            Stores this modules views into the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleB.ModuleBModule.RemoveViewObject(System.Object)">
+            <summary>
+            Remove the view object from the service.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+            <returns>True if the view object was removed, false otherwise.</returns>
         </member>
         <member name="T:ModuleManager.TestModules.ModuleB.ViewModels.ModuleBViewModel">
             <summary>

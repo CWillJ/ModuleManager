@@ -16,28 +16,29 @@
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.OnInitialized(Prism.Ioc.IContainerProvider)">
-            <inheritdoc cref="T:Prism.Modularity.IModule"/>
+            <inheritdoc/>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.Unload(Prism.Ioc.IContainerProvider)">
-            <summary>
-            Unloads this module from the container provider.
-            </summary>
-            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+            <inheritdoc/>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.ReLoad(Prism.Ioc.IContainerProvider)">
-            <summary>
-            Reloads this module into the collection service.
-            </summary>
-            <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+            <inheritdoc/>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.RegisterTypes(Prism.Ioc.IContainerRegistry)">
-            <inheritdoc cref="T:Prism.Modularity.IModule"/>
+            <inheritdoc/>
         </member>
         <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.StoreViews(Prism.Ioc.IContainerProvider)">
             <summary>
             Stores this modules views into the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
+        </member>
+        <member name="M:ModuleManager.TestModules.ModuleA.ModuleAModule.RemoveViewObject(System.Object)">
+            <summary>
+            Remove the view object from the service.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to remove from the <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
+            <returns>True if the view object was removed, false otherwise.</returns>
         </member>
         <member name="T:ModuleManager.TestModules.ModuleA.ViewModels.ModuleA2ViewModel">
             <summary>

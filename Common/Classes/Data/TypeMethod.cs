@@ -3,7 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Reflection;
-    using System.Xml.Serialization;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// TypeMethod object holds the MethodInfo, name, description, the parameters and the return type of a member.
@@ -66,7 +66,7 @@
         /// <summary>
         /// Gets or sets the actual <see cref="System.Reflection.MethodInfo"/> of the TypeMethod.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public MethodInfo MethodInfo { get; set; }
 
         /// <summary>

@@ -2,7 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.Reflection;
-    using System.Xml.Serialization;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Holds the <see cref="ConstructorInfo"/>, class name, description and the parameters of a type's constructor.
@@ -50,7 +50,7 @@
         /// <summary>
         /// Gets or sets the actuall <see cref="System.Reflection.ConstructorInfo"/>.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public ConstructorInfo ConstructorInfo { get; set; }
 
         /// <summary>

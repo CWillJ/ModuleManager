@@ -1,15 +1,14 @@
 ﻿namespace ModuleManager.Core.UI.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Xml.Serialization;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using ModuleManager.Core.UI.Interfaces;
+    using Prism.Ioc;
     using Prism.Mvvm;
     using Prism.Regions;
     using Telerik.Windows.Controls;
@@ -21,6 +20,7 @@
     {
         private readonly IRegionManager _regionManager;
         private readonly IAssemblyCollectionService _assemblyCollectionService;
+        private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
         private readonly IViewCollectionService _viewCollectionService;
         private readonly IProgressBarService _progressBarService;
         private readonly ILoadedViewNamesService _loadedViewNamesService;
@@ -30,18 +30,22 @@
         /// </summary>
         /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
         /// <param name="assemblyCollectionService">The <see cref="IAssemblyCollectionService"/>.</param>
+        /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
         /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
         /// <param name="progressBarService">The <see cref="IProgressBarService"/>.</param>
         /// <param name="loadedViewNamesService">The <see cref="ILoadedViewNamesService"/>.</param>
         public ViewDisplayViewModel(
             IRegionManager regionManager,
             IAssemblyCollectionService assemblyCollectionService,
+            IAssemblyDataLoaderService assemblyDataLoaderService,
             IViewCollectionService viewCollectionService,
             IProgressBarService progressBarService,
             ILoadedViewNamesService loadedViewNamesService)
         {
             _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
+
             _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyDataLoaderService");
             _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
             _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
             _loadedViewNamesService = loadedViewNamesService ?? throw new ArgumentNullException("LoadedViewNamesService");
@@ -53,7 +57,6 @@
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
             AddSelectedViewCommand = new Prism.Commands.DelegateCommand(AddSelectedView, CanExecute);
             RemoveSelectedViewCommand = new Prism.Commands.DelegateCommand(RemoveSelectedView, CanExecute);
-            ViewDoubleClickCommand = new Prism.Commands.DelegateCommand(DisplaySelectedView, CanExecute);
         }
 
         /// <summary>
@@ -108,18 +111,13 @@
         public Prism.Commands.DelegateCommand RemoveSelectedViewCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the ViewDoubleClickCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
-        /// </summary>
-        public Prism.Commands.DelegateCommand ViewDoubleClickCommand { get; set; }
-
-        /// <summary>
         /// StoreModules will attempt to get all assemblies from a dll and store it
         /// as an AssemblyData in the AssemblyData collection.
         /// </summary>
         private async void StoreModules()
         {
             ////string moduleDirectory = GetModuleDirectory();
-            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"TestModules");
+            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion");
 
             if (string.IsNullOrEmpty(moduleDirectory))
             {
@@ -134,7 +132,7 @@
                 return;
             }
 
-            AssemblyCollectionService.DataLoader.DllDirectory = moduleDirectory;
+            _assemblyDataLoaderService.DllDirectory = moduleDirectory;
 
             // Show progress bar
             AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
@@ -165,15 +163,15 @@
         }
 
         /// <summary>
-        /// Runs async to update the progress bar with current module text.
+        /// The task that updates the <see cref="IProgressBarService"/>.
         /// </summary>
         private void UpdateProgressBarText()
         {
             while (LoadingModules)
             {
-                _progressBarService.AssemblyName = AssemblyCollectionService.DataLoader.CurrentAssemblyName;
-                _progressBarService.CurrentProgress = AssemblyCollectionService.DataLoader.PercentOfAssemblyLoaded;
-                _progressBarService.Text = @"Loading Module: " + AssemblyCollectionService.DataLoader.CurrentTypeName;
+                _progressBarService.AssemblyName = _assemblyDataLoaderService.CurrentAssemblyName;
+                _progressBarService.CurrentProgress = _assemblyDataLoaderService.PercentOfAssemblyLoaded;
+                _progressBarService.Text = @"Loading Module: " + _assemblyDataLoaderService.CurrentTypeName;
             }
         }
 
@@ -199,60 +197,10 @@
                 _loadedViewNamesService.LoadedViewNames.Add(viewObject.GetType().FullName);
             }
 
-            if (SaveSomething<ObservableCollection<AssemblyData>>(AssemblyCollectionService.Assemblies, @"ModuleSaveFile.xml")
-                && SaveSomething<ObservableCollection<string>>(_loadedViewNamesService.LoadedViewNames, @"LoadedViewsSaveFile.xml"))
-            {
-                RadWindow.Alert(@"Configuration Saved");
-            }
-        }
+            JsonExtensions.Save(AssemblyCollectionService.Assemblies, Path.Combine(Directory.GetCurrentDirectory(), @"ModuleSaveFile.json"));
+            JsonExtensions.Save(_loadedViewNamesService.LoadedViewNames, Path.Combine(Directory.GetCurrentDirectory(), @"LoadedViewsSaveFile.json"));
 
-        private bool SaveSomething<T>(object whatToSave, string saveFileName)
-        {
-            Type fileSaveType = typeof(T);
-            XmlSerializer serializer;
-            string saveFile;
-
-            try
-            {
-                serializer = new XmlSerializer(fileSaveType);
-            }
-            catch (Exception e)
-            {
-                RadWindow.Alert(@"Cannot Save to xml File Due to:" + "\n" + e.ToString());
-                return false;
-            }
-
-            saveFile = Path.Combine(Directory.GetCurrentDirectory(), saveFileName);
-
-            if (UseSaveFileDialog)
-            {
-                RadSaveFileDialog saveFileDialog = new RadSaveFileDialog
-                {
-                    InitialDirectory = Directory.GetCurrentDirectory(),
-                    Filter = "xml files (*.xml)|*.xml",
-                    Header = "Save Configuration File",
-                    RestoreDirectory = true,
-                };
-
-                saveFileDialog.ShowDialog();
-
-                if (saveFileDialog.DialogResult == true)
-                {
-                    saveFile = saveFileDialog.FileName;
-                }
-
-                if (saveFile == string.Empty)
-                {
-                    RadWindow.Alert(@"Invalid File Path");
-                    return false;
-                }
-            }
-
-            using StreamWriter wr = new StreamWriter(saveFile);
-            serializer.Serialize(wr, whatToSave);
-            wr.Close();
-
-            return true;
+            RadWindow.Alert(@"Configuration Saved");
         }
 
         /// <summary>
@@ -278,30 +226,31 @@
                 {
                     if (typeData.ViewInfo != null)
                     {
-                        foreach (var viewObject in ViewCollectionService.Views)
-                        {
-                            Type type = viewObject.GetType();
-                            if (typeData.FullName == type.FullName)
-                            {
-                                object instance = Activator.CreateInstance(type);
-                                _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                                typeData.ViewInfo.NumberOfViewInstances++;
-                            }
-                        }
+                        AddViewToRegion(_viewCollectionService.GetViewObjectByName(typeData.FullName), @"LoadedViewsRegion");
                     }
                 }
             }
             else if (_assemblyCollectionService.SelectedItem is TypeData typeData && (typeData.ViewInfo != null))
             {
-                foreach (var viewObject in ViewCollectionService.Views)
+                if (typeData.ViewInfo != null)
                 {
-                    if (typeData.FullName == viewObject.GetType().FullName)
-                    {
-                        object instance = Activator.CreateInstance(viewObject.GetType());
-                        _regionManager.AddToRegion(@"LoadedViewsRegion", instance);
-                        typeData.ViewInfo.NumberOfViewInstances++;
-                    }
+                    AddViewToRegion(_viewCollectionService.GetViewObjectByName(typeData.FullName), @"LoadedViewsRegion");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Adds the view <see cref="object"/> to the region.
+        /// </summary>
+        /// <param name="viewObject">The view <see cref="object"/> to be added.</param>
+        /// <param name="regionName">The <see cref="string"/> name of the region.</param>
+        private void AddViewToRegion(object viewObject, string regionName)
+        {
+            if (viewObject != null)
+            {
+                Type type = viewObject.GetType();
+                object instance = Activator.CreateInstance(type);
+                _regionManager.AddToRegion(regionName, instance);
             }
         }
 
@@ -312,27 +261,8 @@
         {
             if (ViewCollectionService.SelectedView != null && _regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(ViewCollectionService.SelectedView))
             {
-                foreach (AssemblyData assemblyData in _assemblyCollectionService.Assemblies)
-                {
-                    foreach (TypeData typeData in assemblyData.Types)
-                    {
-                        if (typeData.FullName == ViewCollectionService.SelectedView.GetType().FullName)
-                        {
-                            typeData.ViewInfo.NumberOfViewInstances--;
-                        }
-                    }
-                }
-
                 _regionManager.Regions[@"LoadedViewsRegion"].Remove(ViewCollectionService.SelectedView);
             }
-        }
-
-        /// <summary>
-        /// Command for double clicking a view <see cref="object"/>.
-        /// </summary>
-        private void DisplaySelectedView()
-        {
-            return;
         }
 
         /// <summary>
@@ -342,63 +272,6 @@
         private bool CanExecute()
         {
             return true;
-        }
-
-        /// <summary>
-        /// Can only add a view if the selected item is an <see cref="AssemblyData"/> that has a <see cref="TypeData"/>
-        /// that is a view or the selected item is a <see cref="TypeData"/> that is a view.
-        /// </summary>
-        /// <returns>True if the selected item can be added to the view collection, false if not.</returns>
-        private bool CanAdd()
-        {
-            if (_assemblyCollectionService.SelectedItem == null)
-            {
-                return false;
-            }
-
-            if (_assemblyCollectionService.SelectedItem is AssemblyData assemblyData)
-            {
-                foreach (TypeData typeData in assemblyData.Types)
-                {
-                    if (typeData.ViewInfo != null)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-            else if (_assemblyCollectionService.SelectedItem is TypeData typeData)
-            {
-                if (typeData.ViewInfo != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Removes the selected view from the active views collection.
-        /// </summary>
-        /// <returns>True if the view object exists in the active views collection.</returns>
-        private bool CanRemove()
-        {
-            if (_regionManager.Regions[@"LoadedViewsRegion"].Views.Contains(ViewCollectionService.SelectedView))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }

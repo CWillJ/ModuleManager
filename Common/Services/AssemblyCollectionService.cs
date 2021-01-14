@@ -1,15 +1,17 @@
 ﻿namespace ModuleManager.Common.Services
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
-    using Prism.Regions;
 
     /// <inheritdoc cref="IAssemblyCollectionService"/>
     public class AssemblyCollectionService : BindableBase, IAssemblyCollectionService
     {
+        private readonly IAssemblyDataLoaderService _assemblyDataLoaderService;
+        private readonly IModuleCatalogService _moduleCatalogService;
         private ObservableCollection<AssemblyData> _assemblies;
         private object _selectedItem;
         private string _selectedItemName;
@@ -17,18 +19,16 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyCollectionService"/> class.
         /// </summary>
-        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
-        public AssemblyCollectionService(IRegionManager regionManager)
+        /// <param name="assemblyDataLoaderService">The <see cref="IAssemblyDataLoaderService"/>.</param>
+        /// <param name="moduleCatalogService"> The <see cref="IModuleCatalogService"/>.</param>
+        public AssemblyCollectionService(IAssemblyDataLoaderService assemblyDataLoaderService, IModuleCatalogService moduleCatalogService)
         {
-            DataLoader = new AssemblyDataLoader(regionManager);
-
+            _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _moduleCatalogService = moduleCatalogService ?? throw new ArgumentNullException("ModuleCatalogService");
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";
         }
-
-        /// <inheritdoc/>
-        public AssemblyDataLoader DataLoader { get; }
 
         /// <inheritdoc/>
         public ObservableCollection<AssemblyData> Assemblies
@@ -62,8 +62,8 @@
         /// <inheritdoc/>
         public void PopulateAssemblyCollection(string dllDirectory, string[] dllFiles)
         {
-            DataLoader.DllDirectory = dllDirectory;
-            Assemblies = DataLoader.GetAssemblies(dllFiles);
+            _assemblyDataLoaderService.DllDirectory = dllDirectory;
+            Assemblies = _assemblyDataLoaderService.GetAssemblies(dllFiles);
         }
 
         /// <summary>
@@ -73,15 +73,30 @@
         {
             if (SelectedItem is AssemblyData assemblyData)
             {
-                SelectedItemName = assemblyData.Name;
+                SelectedItemName = assemblyData.Name + " Assembly Description";
             }
             else if (SelectedItem is TypeData typeData)
             {
-                SelectedItemName = typeData.Name;
+                SelectedItemName = typeData.Name + " Type Description";
             }
             else if (SelectedItem is TypeMemberData memberData)
             {
-                SelectedItemName = memberData.Name;
+                if (SelectedItem is TypeConstructor)
+                {
+                    SelectedItemName = memberData.Name + " Constructor Description";
+                }
+                else if (SelectedItem is TypeProperty)
+                {
+                    SelectedItemName = memberData.Name + " Property Description";
+                }
+                else if (SelectedItem is TypeMethod)
+                {
+                    SelectedItemName = memberData.Name + " Method Description";
+                }
+                else
+                {
+                    SelectedItemName = memberData.Name + " Description";
+                }
             }
             else
             {
@@ -112,8 +127,17 @@
                 AssemblyData assembly = (AssemblyData)s;
                 int i = Assemblies.IndexOf(assembly);
 
-                DataLoader.LoadUnload(ref assembly);
+                _assemblyDataLoaderService.LoadUnload(ref assembly);
                 Assemblies[i] = assembly;
+
+                if (Assemblies[i].IsEnabled)
+                {
+                    _moduleCatalogService.LoadExpansionModule(Assemblies[i].FilePath);
+                }
+                else
+                {
+                    _moduleCatalogService.UnloadExpansionModule(Assemblies[i].ModuleType.Name);
+                }
             }
         }
     }

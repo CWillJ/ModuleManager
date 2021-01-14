@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.Common.Classes
 {
     using System.Reflection;
-    using System.Xml.Serialization;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// TypeProperty object holds the PropertyInfo, name, description, data type and accessor level of a property.
@@ -54,7 +54,7 @@
         /// <summary>
         /// Gets or sets the actual <see cref="System.Reflection.PropertyInfo"/> for this.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public PropertyInfo PropertyInfo { get; set; }
 
         /// <summary>

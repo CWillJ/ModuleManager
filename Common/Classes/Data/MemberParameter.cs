@@ -1,7 +1,7 @@
 ﻿namespace ModuleManager.Common.Classes
 {
     using System;
-    using System.Xml.Serialization;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// An object designed to hold the type, name and string description of a member's parameter.
@@ -63,7 +63,7 @@
         /// <summary>
         /// Gets or sets the actuall <see cref="System.Type"/> of the <see cref="MemberParameter"/>.
         /// </summary>
-        [XmlIgnore]
+        [JsonIgnore]
         public Type Type { get; set; }
 
         /// <summary>

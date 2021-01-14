@@ -1,30 +1,36 @@
 ﻿namespace ModuleManager.Common.Services
 {
+    using System;
     using System.Collections.ObjectModel;
+    using ModuleManager.Common.Classes.Data;
     using ModuleManager.Common.Interfaces;
     using Prism.Mvvm;
+    using Prism.Regions;
 
     /// <inheritdoc cref="IViewCollectionService"/>
     public class ViewCollectionService : BindableBase, IViewCollectionService
     {
-        private readonly ObservableCollection<object> _views;
+        private readonly IRegionManager _regionManager;
+        private readonly ObservableCollection<ViewData> _viewDataCollection;
         private object _selectedView;
         private string _selectedViewName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewCollectionService"/> class.
         /// </summary>
-        public ViewCollectionService()
+        /// <param name="regionManager">The <see cref="IRegionManager"/>.</param>
+        public ViewCollectionService(IRegionManager regionManager)
         {
-            _views = new ObservableCollection<object>();
+            _regionManager = regionManager;
+            _viewDataCollection = new ObservableCollection<ViewData>();
             _selectedView = null;
-            _selectedViewName = @"Loaded Views";
+            _selectedViewName = @"Loaded ViewDataCollection";
         }
 
         /// <inheritdoc/>
-        public ObservableCollection<object> Views
+        public ObservableCollection<ViewData> ViewDataCollection
         {
-            get { return _views; }
+            get { return _viewDataCollection; }
         }
 
         /// <inheritdoc/>
@@ -38,14 +44,7 @@
             set
             {
                 SetProperty(ref _selectedView, value);
-                if (_selectedView != null)
-                {
-                    SelectedViewName = _selectedView.GetType().Name;
-                }
-                else
-                {
-                    SelectedViewName = @"Loaded Views";
-                }
+                SelectedViewToDo();
             }
         }
 
@@ -59,18 +58,140 @@
         /// <inheritdoc/>
         public void AddView(object viewObject)
         {
-            Views.Add(viewObject);
+            Type viewType = viewObject.GetType();
+            string assemblyName = viewType.Assembly.FullName;
+            string viewName = viewType.FullName;
+            bool wasAdded = false;
+
+            foreach (var viewData in ViewDataCollection)
+            {
+                if (viewData.AssemblyName == assemblyName)
+                {
+                    foreach (var view1 in viewData.ViewObjects)
+                    {
+                        string view1Name = view1.GetType().FullName;
+                        if (viewName == view1Name)
+                        {
+                            viewData.ViewObjects[viewData.ViewObjects.IndexOf(view1)] = viewObject;
+                            wasAdded = true;
+                            break;
+                        }
+                    }
+
+                    if (!wasAdded)
+                    {
+                        viewData.ViewObjects.Add(viewObject);
+                        wasAdded = true;
+                    }
+                }
+            }
+
+            if (!wasAdded)
+            {
+                ViewDataCollection.Add(new ViewData(assemblyName, new ObservableCollection<object>() { viewObject }));
+            }
         }
 
         /// <inheritdoc/>
         public void RemoveView(object viewObject)
         {
-            foreach (var view in Views)
+            string assemblyName = viewObject.GetType().Assembly.FullName;
+
+            if (!ViewDataAssemblyNameContainsViewObject(assemblyName, viewObject))
             {
-                if (view == viewObject)
+                return;
+            }
+
+            foreach (var viewData in ViewDataCollection)
+            {
+                if (viewData.AssemblyName == assemblyName)
                 {
-                    Views.Remove(view);
+                    viewData.ViewObjects.Remove(viewData);
+
+                    if (viewData.ViewObjects.Count == 0)
+                    {
+                        ViewDataCollection.Remove(viewData);
+                    }
                 }
+            }
+        }
+
+        /// <inheritdoc/>
+        public bool CollectionContainsAssemblyName(string assemblyName)
+        {
+            foreach (var viewData in ViewDataCollection)
+            {
+                if (viewData.AssemblyName == assemblyName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public bool ViewDataAssemblyNameContainsViewObject(string assemblyName, object viewObject)
+        {
+            foreach (var viewData in ViewDataCollection)
+            {
+                if (viewData.AssemblyName == assemblyName)
+                {
+                    foreach (var view in viewData.ViewObjects)
+                    {
+                        string viewName1 = view.GetType().FullName;
+                        string viewName2 = viewObject.GetType().FullName;
+                        if (viewName1 == viewName2)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public object GetViewObjectByName(string viewName)
+        {
+            foreach (var viewData in ViewDataCollection)
+            {
+                foreach (var viewObject in viewData.ViewObjects)
+                {
+                    string viewObjectNameFromCollection;
+
+                    if (viewObject == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        viewObjectNameFromCollection = viewObject.GetType().FullName;
+                    }
+
+                    if (viewObjectNameFromCollection == viewName)
+                    {
+                        return viewObject;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private void SelectedViewToDo()
+        {
+            if (_selectedView != null)
+            {
+                SelectedViewName = _selectedView.GetType().Name;
+                ////_regionManager.Regions["SelectedViewRegion"].RemoveAll();
+                ////_regionManager.RegisterViewWithRegion("SelectedViewRegion", _selectedView.GetType());
+            }
+            else
+            {
+                SelectedViewName = @"Loaded ViewDataCollection";
+                ////_regionManager.Regions["SelectedViewRegion"].RemoveAll();
             }
         }
     }

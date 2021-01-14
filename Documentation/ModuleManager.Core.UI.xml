@@ -86,6 +86,14 @@
             The UI Module Class.
             </summary>
         </member>
+        <member name="M:ModuleManager.Core.UI.UIModule.#ctor(ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.UIModule"/> class.
+            </summary>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
+            <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
+            <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>
+        </member>
         <member name="M:ModuleManager.Core.UI.UIModule.OnInitialized(Prism.Ioc.IContainerProvider)">
             <summary>
             Perform required initialization methods for this Module.
@@ -104,17 +112,21 @@
             </summary>
             <param name="containerProvider">The <see cref="T:Prism.Ioc.IContainerProvider"/>.</param>
         </member>
-        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedModules(ModuleManager.Common.Interfaces.IAssemblyCollectionService)">
+        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedModules">
             <summary>
             Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
             </summary>
-            <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
         </member>
-        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedViewNames(ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
+        <member name="M:ModuleManager.Core.UI.UIModule.LoadSavedViewNames">
             <summary>
             Loads an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> from an xml file.
             </summary>
-            <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>
+        </member>
+        <member name="M:ModuleManager.Core.UI.UIModule.StoreModules">
+            <summary>
+            StoreModules will attempt to get all assemblies from a dll and store it
+            as an AssemblyData in the AssemblyData collection.
+            </summary>
         </member>
         <member name="T:ModuleManager.Core.UI.ViewModels.AssemblyDataTreeViewModel">
             <summary>
@@ -185,12 +197,13 @@
             View model for the buttons view.
             </summary>
         </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.#ctor(Prism.Regions.IRegionManager,ModuleManager.Common.Interfaces.IAssemblyCollectionService,ModuleManager.Common.Interfaces.IAssemblyDataLoaderService,ModuleManager.Common.Interfaces.IViewCollectionService,ModuleManager.Core.UI.Interfaces.IProgressBarService,ModuleManager.Common.Interfaces.ILoadedViewNamesService)">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel"/> class.
             </summary>
             <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
             <param name="assemblyCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyCollectionService"/>.</param>
+            <param name="assemblyDataLoaderService">The <see cref="T:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService"/>.</param>
             <param name="viewCollectionService">The <see cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>.</param>
             <param name="progressBarService">The <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.</param>
             <param name="loadedViewNamesService">The <see cref="T:ModuleManager.Common.Interfaces.ILoadedViewNamesService"/>.</param>
@@ -240,11 +253,6 @@
             Gets or sets the RemoveSelectedViewCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
             </summary>
         </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.ViewDoubleClickCommand">
-            <summary>
-            Gets or sets the ViewDoubleClickCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
-            </summary>
-        </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.StoreModules">
             <summary>
             StoreModules will attempt to get all assemblies from a dll and store it
@@ -253,7 +261,7 @@
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.UpdateProgressBarText">
             <summary>
-            Runs async to update the progress bar with current module text.
+            The task that updates the <see cref="T:ModuleManager.Core.UI.Interfaces.IProgressBarService"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.SaveConfig">
@@ -276,14 +284,16 @@
             Adds all the selected assembly's views or the selected view to the views region.
             </summary>
         </member>
+        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.AddViewToRegion(System.Object,System.String)">
+            <summary>
+            Adds the view <see cref="T:System.Object"/> to the region.
+            </summary>
+            <param name="viewObject">The view <see cref="T:System.Object"/> to be added.</param>
+            <param name="regionName">The <see cref="T:System.String"/> name of the region.</param>
+        </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.RemoveSelectedView">
             <summary>
             Removes the selected view from the views region.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.DisplaySelectedView">
-            <summary>
-            Command for double clicking a view <see cref="T:System.Object"/>.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.CanExecute">
@@ -291,19 +301,6 @@
             Can always execute.
             </summary>
             <returns>True.</returns>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.CanAdd">
-            <summary>
-            Can only add a view if the selected item is an <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> that has a <see cref="T:ModuleManager.Common.Classes.TypeData"/>
-            that is a view or the selected item is a <see cref="T:ModuleManager.Common.Classes.TypeData"/> that is a view.
-            </summary>
-            <returns>True if the selected item can be added to the view collection, false if not.</returns>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.CanRemove">
-            <summary>
-            Removes the selected view from the active views collection.
-            </summary>
-            <returns>True if the view object exists in the active views collection.</returns>
         </member>
         <member name="T:ModuleManager.Core.UI.Views.AssemblyDataTreeView">
             <summary>
