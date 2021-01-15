@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -17,58 +17,73 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
 
-	<ItemGroup>
-		<Analyzer Include="..\..\Lib\Analyzers\StyleCop.Analyzers.dll" />
-		<Analyzer Include="..\..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
-	</ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\Lib\Analyzers\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Reference Include="CommonServiceLocator">
-			<HintPath>..\..\Lib\CommonServiceLocator.dll</HintPath>
-		</Reference>
-		<Reference Include="Prism">
-			<HintPath>..\..\Lib\Prism.dll</HintPath>
-		</Reference>
-		<Reference Include="Prism.Unity.Wpf">
-			<HintPath>..\..\Lib\Prism.Unity.Wpf.dll</HintPath>
-		</Reference>
-		<Reference Include="Prism.Wpf">
-			<HintPath>..\..\Lib\Prism.Wpf.dll</HintPath>
-		</Reference>
-		<Reference Include="Telerik.Windows.Controls">
-			<HintPath>..\..\Lib\Telerik.Windows.Controls.dll</HintPath>
-		</Reference>
-		<Reference Include="Telerik.Windows.Controls.Data">
-			<HintPath>..\..\Lib\Telerik.Windows.Controls.Data.dll</HintPath>
-		</Reference>
-		<Reference Include="Telerik.Windows.Controls.FileDialogs">
-			<HintPath>..\..\Lib\Telerik.Windows.Controls.FileDialogs.dll</HintPath>
-		</Reference>
-		<Reference Include="Telerik.Windows.Controls.GridView">
-			<HintPath>..\..\Lib\Telerik.Windows.Controls.GridView.dll</HintPath>
-		</Reference>
-		<Reference Include="Telerik.Windows.Controls.Input">
-			<HintPath>..\..\Lib\Telerik.Windows.Controls.Input.dll</HintPath>
-		</Reference>
-		<Reference Include="Telerik.Windows.Controls.Navigation">
-			<HintPath>..\..\Lib\Telerik.Windows.Controls.Navigation.dll</HintPath>
-		</Reference>
-		<Reference Include="Telerik.Windows.Data">
-			<HintPath>..\..\Lib\Telerik.Windows.Data.dll</HintPath>
-		</Reference>
-		<Reference Include="Unity.Abstractions">
-			<HintPath>..\..\Lib\Unity.Abstractions.dll</HintPath>
-		</Reference>
-		<Reference Include="Unity.Container">
-			<HintPath>..\..\Lib\Unity.Container.dll</HintPath>
-		</Reference>
-	</ItemGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator">
+      <HintPath>..\..\Lib\CommonServiceLocator.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>..\..\Lib\Prism.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf">
+      <HintPath>..\..\Lib\Prism.Unity.Wpf.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>..\..\Lib\Prism.Wpf.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\Lib\Telerik.Windows.Controls.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data">
+      <HintPath>..\..\Lib\Telerik.Windows.Controls.Data.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.FileDialogs">
+      <HintPath>..\..\Lib\Telerik.Windows.Controls.FileDialogs.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView">
+      <HintPath>..\..\Lib\Telerik.Windows.Controls.GridView.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\Lib\Telerik.Windows.Controls.Input.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\..\Lib\Telerik.Windows.Controls.Navigation.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\..\Lib\Telerik.Windows.Data.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.Abstractions">
+      <HintPath>..\..\Lib\Unity.Abstractions.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.Container">
+      <HintPath>..\..\Lib\Unity.Container.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\Common.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="set destination=&quot;$(SolutionDir)$(SolutionName)\$(OutDir)Expansion&quot;&#xD;&#xA;if not exist &quot;%25destination%25&quot; mkdir &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).xml&quot; &quot;%25destination%25&quot;" />
-	</Target>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="set destination=&quot;$(SolutionDir)$(SolutionName)\$(OutDir)Expansion&quot;&#xD;&#xA;if not exist &quot;%25destination%25&quot; mkdir &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).xml&quot; &quot;%25destination%25&quot;" />
+  </Target>
 </Project>

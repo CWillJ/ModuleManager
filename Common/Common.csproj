@@ -17,33 +17,39 @@
     <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
-	<ItemGroup>
-		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
-		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
-	</ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
+  </ItemGroup>
 
-	<ItemGroup>
+  <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism">
       <HintPath>..\Lib\Prism.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism.Unity.Wpf">
       <HintPath>..\Lib\Prism.Unity.Wpf.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism.Wpf">
       <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="System.Reflection.MetadataLoadContext">
       <HintPath>..\Lib\System.Reflection.MetadataLoadContext.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Abstractions">
       <HintPath>..\Lib\Unity.Abstractions.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Container">
       <HintPath>..\Lib\Unity.Container.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
-
 </Project>

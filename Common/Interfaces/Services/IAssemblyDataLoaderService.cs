@@ -58,14 +58,14 @@
         /// <summary>
         /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
         /// </summary>
-        /// <param name="assemblyData">An <see cref="AssemblyData"/> object passed by reference.</param>
-        public void LoadUnload(ref AssemblyData assemblyData);
+        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> passed by reference.</param>
+        public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies);
 
         /// <summary>
         /// Loads all enabled <see cref="AssemblyData"/> and unloads the disabled ones.
         /// </summary>
-        /// <param name="assemblies">A <see cref="ObservableCollection{AssemblyData}"/> passed by reference.</param>
-        public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies);
+        /// <param name="assemblyData">An <see cref="AssemblyData"/> object passed by reference.</param>
+        public void LoadUnload(ref AssemblyData assemblyData);
 
         /// <summary>
         /// Loads all <see cref="AssemblyData"/> in a <see cref="ObservableCollection{AssemblyData}"/>.

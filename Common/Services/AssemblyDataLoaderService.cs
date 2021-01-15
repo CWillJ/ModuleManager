@@ -108,19 +108,6 @@
         }
 
         /// <inheritdoc/>
-        public void LoadUnload(ref AssemblyData assemblyData)
-        {
-            if (assemblyData.IsEnabled)
-            {
-                Load(ref assemblyData);
-            }
-            else
-            {
-                Unload(ref assemblyData);
-            }
-        }
-
-        /// <inheritdoc/>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assemblyData;
@@ -130,6 +117,19 @@
                 assemblyData = assemblies[i];
                 LoadUnload(ref assemblyData);
                 assemblies[i] = assemblyData;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void LoadUnload(ref AssemblyData assemblyData)
+        {
+            if (assemblyData.IsEnabled)
+            {
+                Load(ref assemblyData);
+            }
+            else
+            {
+                Unload(ref assemblyData);
             }
         }
 
@@ -196,8 +196,6 @@
                     dictionary.Add(typeData.FullName, typeData.ViewInfo);
                 }
             }
-
-            ObservableCollection<string> viewNameOrder = new ObservableCollection<string>();
 
             assemblyData.Types.Clear();
 
