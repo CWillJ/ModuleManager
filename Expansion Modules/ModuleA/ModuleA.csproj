@@ -1,20 +1,30 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <CodeAnalysisRuleSet>..\..\PVA.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <AssemblyName>ModuleManager.Expansion.ModuleA</AssemblyName>
     <RootNamespace>ModuleManager.Expansion.ModuleA</RootNamespace>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <CodeAnalysisRuleSet>..\..\PVA.ruleset</CodeAnalysisRuleSet>
     <Company>PVA</Company>
     <Authors>Product Development</Authors>
-    <PackageId>ModuleManager.Expansion.ModuleA</PackageId>
-    <Product>ModuleManager.Expansion.ModuleA</Product>
+    <Product>ModuleManager</Product>
+    <Platforms>x64</Platforms>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DocumentationFile>..\..\Documentation\ModuleManager.Expansion.ModuleA.xml</DocumentationFile>
-    <OutputPath></OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DocumentationFile>..\..\Documentation\ModuleManager.Expansion.ModuleA.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -83,7 +93,17 @@
     </ProjectReference>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="set destination=&quot;$(SolutionDir)$(SolutionName)\$(OutDir)Expansion&quot;&#xD;&#xA;if not exist &quot;%25destination%25&quot; mkdir &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;%25destination%25&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).xml&quot; &quot;%25destination%25&quot;" />
+  <Target Name="GetFilesToCopy" BeforeTargets="PostBuildEvent">
+    <ItemGroup>
+      <DllsToCopy Include="$(OutDir)\*.dll" />
+    </ItemGroup>
+    <ItemGroup>
+      <XmlsToCopy Include="$(OutDir)\*.xml" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CopyFiles" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="@(DllsToCopy)" DestinationFolder="..\..\ModuleManager\bin\$(Platform)\$(Configuration)\$(TargetFramework)\Expansion\ModuleA" />
+    <Copy SourceFiles="@(XmlsToCopy)" DestinationFolder="..\..\ModuleManager\bin\$(Platform)\$(Configuration)\$(TargetFramework)\Expansion\ModuleA" />
   </Target>
 </Project>

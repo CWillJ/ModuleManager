@@ -135,7 +135,7 @@
                 return;
             }
 
-            string[] dllFiles = Directory.GetFiles(moduleDirectory, @"*.dll");
+            string[] dllFiles = Directory.GetFiles(moduleDirectory, @"*.dll", SearchOption.AllDirectories);
 
             if (dllFiles.Length == 0)
             {

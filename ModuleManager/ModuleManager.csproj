@@ -4,14 +4,37 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>ModuleManager</AssemblyName>
+    <RootNamespace>ModuleManager</RootNamespace>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
-    <Authors>Product Development</Authors>
     <Company>PVA</Company>
+    <Authors>Product Development</Authors>
+    <Product>ModuleManager</Product>
+    <Platforms>x64</Platforms>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AssemblySearchPaths>$(AssemblySearchPaths);$(ReferencePath)</AssemblySearchPaths>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\Documentation\ModuleManager.xml</DocumentationFile>
-    <OutputPath></OutputPath>
+  <PropertyGroup>
+    <AssemblySearchPaths> $(AssemblySearchPaths); $(ReferencePath); </AssemblySearchPaths>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>ModuleManager.App</StartupObject>
+  </PropertyGroup>
+	
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|X64'">
+    <Optimize>false</Optimize>
+    <DocumentationFile>\Documentation\ModuleManager.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Optimize>false</Optimize>
+    <DocumentationFile>$(OutDir)\Documentation\ModuleManager.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -86,4 +109,15 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
+
+  <Target Name="GetFilesToCopy" BeforeTargets="PostBuildEvent" Condition="('$(RunPostBuildEvent)' != 'OnOutputUpdated' or '$(_AssemblyTimestampBeforeCompile)' != '$(_AssemblyTimestampAfterCompile)')">
+    <ItemGroup>
+      <ReferenceAssemblies Include="..\Lib\*.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CopyFiles" AfterTargets="PostBuildEvent" Condition="('$(RunPostBuildEvent)' != 'OnOutputUpdated' or '$(_AssemblyTimestampBeforeCompile)' != '$(_AssemblyTimestampAfterCompile)')">
+    <Copy SourceFiles="@(ReferenceAssemblies)" DestinationFolder="$(OutDir)" />
+    <Delete Files="$(OutDir)\ModuleManager.deps.json" />
+  </Target>
 </Project>

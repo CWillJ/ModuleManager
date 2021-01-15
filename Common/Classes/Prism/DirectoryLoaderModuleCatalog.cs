@@ -162,7 +162,7 @@
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Directory for module {0} not found", ModulePath));
             }
 
-            string[] dllFiles = Directory.GetFiles(ModulePath, @"*.dll");
+            string[] dllFiles = Directory.GetFiles(ModulePath, @"*.dll", SearchOption.AllDirectories);
             if (dllFiles.Length == 0)
             {
                 throw new InvalidOperationException("No .dll Files Found In " + ModulePath);
