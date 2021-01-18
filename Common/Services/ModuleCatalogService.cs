@@ -1,6 +1,7 @@
 ﻿namespace ModuleManager.Common.Services
 {
     using System;
+    using System.Diagnostics;
     using ModuleManager.Common.Classes;
     using ModuleManager.Common.Interfaces;
     using Prism.Ioc;
@@ -36,13 +37,9 @@
         public void UnloadExpansionModule(string moduleInfoName)
         {
             // Removes the module's views from the view collection (call module unload action)
-            try
+            if (_moduleLoadingService.UnloadActions.ContainsKey(moduleInfoName))
             {
                 _moduleLoadingService.UnloadActions[moduleInfoName]();
-            }
-            catch (System.Collections.Generic.KeyNotFoundException)
-            {
-                // It's not there, don't try to remove
             }
 
             foreach (var catalog in ModuleCatalog.Catalogs)
@@ -52,6 +49,8 @@
                     directoryLoaderModuleCatalog.RemoveModule(moduleInfoName);
                 }
             }
+
+            Debug.WriteLine("Module " + moduleInfoName + " Unloaded");
         }
 
         /// <inheritdoc/>
@@ -64,8 +63,8 @@
                 if (ModuleCatalog.Catalogs[i] is DirectoryLoaderModuleCatalog directoryLoaderModuleCatalog)
                 {
                     IModuleInfo moduleInfo = directoryLoaderModuleCatalog.AddModule(dllFilePath);
-                    moduleInfoName = moduleInfo.ModuleName;
 
+                    moduleInfoName = moduleInfo.ModuleName;
                     moduleInfo.State = ModuleState.ReadyForInitialization;
                     InitializeModule(moduleInfo);
                 }
@@ -76,6 +75,8 @@
             {
                 _moduleLoadingService.LoadActions[moduleInfoName]();
             }
+
+            Debug.WriteLine("Module " + moduleInfoName + " Loaded");
         }
 
         /// <summary>
@@ -90,7 +91,6 @@
             }
 
             moduleInfo.State = ModuleState.Initializing;
-
             Type moduleType = Type.GetType(moduleInfo.ModuleType);
             IModule moduleInstance = (IModule)_containerExtension.Resolve(moduleType);
 

@@ -233,11 +233,6 @@
             Gets the Navigate command.
             </summary>
         </member>
-        <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.LoadModulesCommand">
-            <summary>
-            Gets or sets the LoadModulesCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
-            </summary>
-        </member>
         <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.SaveConfigCommand">
             <summary>
             Gets or sets the SaveConfigCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
@@ -251,12 +246,6 @@
         <member name="P:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.RemoveSelectedViewCommand">
             <summary>
             Gets or sets the RemoveSelectedViewCommand as a <see cref="T:Prism.Commands.DelegateCommand"/>.
-            </summary>
-        </member>
-        <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.StoreModules">
-            <summary>
-            StoreModules will attempt to get all assemblies from a dll and store it
-            as an AssemblyData in the AssemblyData collection.
             </summary>
         </member>
         <member name="M:ModuleManager.Core.UI.ViewModels.ViewDisplayViewModel.UpdateProgressBarText">
@@ -390,36 +379,6 @@
         <member name="M:ModuleManager.Core.UI.Views.ViewDisplayView.InitializeComponent">
             <summary>
             InitializeComponent
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

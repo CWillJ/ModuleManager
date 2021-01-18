@@ -23,8 +23,8 @@
         /// <param name="moduleCatalogService"> The <see cref="IModuleCatalogService"/>.</param>
         public AssemblyCollectionService(IAssemblyDataLoaderService assemblyDataLoaderService, IModuleCatalogService moduleCatalogService)
         {
-            _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyCollectionService");
-            _moduleCatalogService = moduleCatalogService ?? throw new ArgumentNullException("ModuleCatalogService");
+            _assemblyDataLoaderService = assemblyDataLoaderService;
+            _moduleCatalogService = moduleCatalogService;
             _assemblies = new ObservableCollection<AssemblyData>();
             _selectedItem = null;
             _selectedItemName = @"Description";

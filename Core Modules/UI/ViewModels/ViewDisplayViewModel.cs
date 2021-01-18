@@ -41,18 +41,17 @@
             IProgressBarService progressBarService,
             ILoadedViewNamesService loadedViewNamesService)
         {
-            _regionManager = regionManager ?? throw new ArgumentNullException("RegionManager");
+            _regionManager = regionManager;
 
-            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
-            _assemblyDataLoaderService = assemblyDataLoaderService ?? throw new ArgumentNullException("AssemblyDataLoaderService");
-            _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
-            _progressBarService = progressBarService ?? throw new ArgumentNullException("ProgressBarService");
-            _loadedViewNamesService = loadedViewNamesService ?? throw new ArgumentNullException("LoadedViewNamesService");
+            _assemblyCollectionService = assemblyCollectionService;
+            _assemblyDataLoaderService = assemblyDataLoaderService;
+            _viewCollectionService = viewCollectionService;
+            _progressBarService = progressBarService;
+            _loadedViewNamesService = loadedViewNamesService;
 
             UseSaveFileDialog = false;
 
             NavigateCommand = new Prism.Commands.DelegateCommand<string>(Navigate);
-            LoadModulesCommand = new Prism.Commands.DelegateCommand(StoreModules, CanExecute);
             SaveConfigCommand = new Prism.Commands.DelegateCommand(SaveConfig, CanExecute);
             AddSelectedViewCommand = new Prism.Commands.DelegateCommand(AddSelectedView, CanExecute);
             RemoveSelectedViewCommand = new Prism.Commands.DelegateCommand(RemoveSelectedView, CanExecute);
@@ -90,11 +89,6 @@
         public Prism.Commands.DelegateCommand<string> NavigateCommand { get; private set; }
 
         /// <summary>
-        /// Gets or sets the LoadModulesCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
-        /// </summary>
-        public Prism.Commands.DelegateCommand LoadModulesCommand { get; set; }
-
-        /// <summary>
         /// Gets or sets the SaveConfigCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
         /// </summary>
         public Prism.Commands.DelegateCommand SaveConfigCommand { get; set; }
@@ -108,57 +102,6 @@
         /// Gets or sets the RemoveSelectedViewCommand as a <see cref="Prism.Commands.DelegateCommand"/>.
         /// </summary>
         public Prism.Commands.DelegateCommand RemoveSelectedViewCommand { get; set; }
-
-        /// <summary>
-        /// StoreModules will attempt to get all assemblies from a dll and store it
-        /// as an AssemblyData in the AssemblyData collection.
-        /// </summary>
-        private async void StoreModules()
-        {
-            string moduleDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Expansion");
-
-            if (string.IsNullOrEmpty(moduleDirectory))
-            {
-                return;
-            }
-
-            string[] dllFiles = Directory.GetFiles(moduleDirectory, @"*.dll", SearchOption.AllDirectories);
-
-            if (dllFiles.Length == 0)
-            {
-                RadWindow.Alert("No .dll Files Found In " + moduleDirectory);
-                return;
-            }
-
-            _assemblyDataLoaderService.DllDirectory = moduleDirectory;
-
-            // Show progress bar
-            AssemblyCollectionService.Assemblies = new ObservableCollection<AssemblyData>();
-            _progressBarService.CurrentProgress = 0.0;
-            _progressBarService.AssemblyName = string.Empty;
-            _progressBarService.Text = string.Empty;
-
-            NavigateCommand.Execute("ProgressBarView");
-
-            LoadingModules = true;
-
-            Thread thread = new Thread(new ThreadStart(UpdateProgressBarText))
-            {
-                IsBackground = true,
-            };
-
-            thread.Start();
-
-            await Task.Run(() => AssemblyCollectionService.PopulateAssemblyCollection(moduleDirectory, dllFiles));
-
-            // Kill progress bar
-            LoadingModules = false;
-
-            NavigateCommand.Execute("ModuleManagerView");
-
-            _progressBarService.AssemblyName = string.Empty;
-            _progressBarService.Text = string.Empty;
-        }
 
         /// <summary>
         /// The task that updates the <see cref="IProgressBarService"/>.

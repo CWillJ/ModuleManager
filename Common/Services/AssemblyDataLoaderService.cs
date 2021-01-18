@@ -210,7 +210,6 @@
                     CurrentTypeName = type.Name;
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
-                    Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
                     TypeData newTypeData = GetTypeData(type);
 
                     if (newTypeData != null)

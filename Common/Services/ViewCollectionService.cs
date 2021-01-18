@@ -102,11 +102,19 @@
             {
                 if (viewData.AssemblyName == assemblyName)
                 {
-                    viewData.ViewObjects.Remove(viewData);
+                    foreach (var viewObj in viewData.ViewObjects)
+                    {
+                        if (viewObj.GetType().FullName == viewObject.GetType().FullName)
+                        {
+                            viewData.ViewObjects.Remove(viewObj);
+                            break;
+                        }
+                    }
 
                     if (viewData.ViewObjects.Count == 0)
                     {
                         ViewDataCollection.Remove(viewData);
+                        break;
                     }
                 }
             }

@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <LangVersion>8.0</LangVersion>
-    <Nullable>enable</Nullable>
     <AssemblyName>ModuleManager.Expansion.ModuleA</AssemblyName>
     <RootNamespace>ModuleManager.Expansion.ModuleA</RootNamespace>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>

@@ -21,8 +21,8 @@
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string iconDirectory = Path.Combine(
-                Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(
-                    Directory.GetCurrentDirectory()).FullName).FullName).FullName).FullName, @"Core Modules\UI\Icons");
+                Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(
+                    Directory.GetCurrentDirectory()).FullName).FullName).FullName).FullName).FullName, @"Core Modules\UI\Icons");
 
             return value.ToString() switch
             {

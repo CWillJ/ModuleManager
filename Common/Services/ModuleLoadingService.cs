@@ -57,26 +57,18 @@
         /// <inheritdoc/>
         public void UnloadModule(string moduleName, Action action)
         {
-            try
+            if (!_unloadActions.TryGetValue(moduleName, out Action actionContained))
             {
                 _unloadActions.Add(moduleName, action);
-            }
-            catch
-            {
-                // The action already exists
             }
         }
 
         /// <inheritdoc/>
         public void LoadModule(string moduleName, Action action)
         {
-            try
+            if (!_loadActions.TryGetValue(moduleName, out Action actionContained))
             {
                 _loadActions.Add(moduleName, action);
-            }
-            catch
-            {
-                // The action already exists
             }
         }
     }
