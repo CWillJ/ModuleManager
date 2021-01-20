@@ -17,7 +17,7 @@
         /// <param name="viewCollectionService">The <see cref="IViewCollectionService"/>.</param>
         public ModuleManagerViewModel(IViewCollectionService viewCollectionService)
         {
-            _viewCollectionService = viewCollectionService ?? throw new ArgumentNullException("ViewCollectionService");
+            _viewCollectionService = viewCollectionService;
         }
 
         /// <summary>

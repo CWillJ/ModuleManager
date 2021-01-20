@@ -283,7 +283,7 @@
 
             if (method.Name == ".ctor")
             {
-                path = @"M:" + method.DeclaringType.FullName + @".#" + method.Name.Substring(1);
+                path = @"M:" + method.DeclaringType.FullName + @".#" + method.Name[1..];
             }
             else
             {

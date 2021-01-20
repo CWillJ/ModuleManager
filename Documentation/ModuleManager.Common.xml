@@ -763,17 +763,17 @@
             <param name="dllFile">The dll file to retrieve the assembly from.</param>
             <returns>An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/>.</returns>
         </member>
-        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
-            <summary>
-            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
-            </summary>
-            <param name="assemblyData">An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> object passed by reference.</param>
-        </member>
         <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
             <summary>
             Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
             </summary>
             <param name="assemblies">A <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> passed by reference.</param>
+        </member>
+        <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
+            <summary>
+            Loads all enabled <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> and unloads the disabled ones.
+            </summary>
+            <param name="assemblyData">An <see cref="T:ModuleManager.Common.Classes.AssemblyData"/> object passed by reference.</param>
         </member>
         <member name="M:ModuleManager.Common.Interfaces.IAssemblyDataLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
             <summary>
@@ -1016,10 +1016,10 @@
         <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.GetAssembly(System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
             <inheritdoc/>
         </member>
-        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
+        <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadUnload(ModuleManager.Common.Classes.AssemblyData@)">
             <inheritdoc/>
         </member>
         <member name="M:ModuleManager.Common.Services.AssemblyDataLoaderService.LoadAll(System.Collections.ObjectModel.ObservableCollection{ModuleManager.Common.Classes.AssemblyData}@)">
@@ -1166,11 +1166,10 @@
         <member name="T:ModuleManager.Common.Services.ViewCollectionService">
             <inheritdoc cref="T:ModuleManager.Common.Interfaces.IViewCollectionService"/>
         </member>
-        <member name="M:ModuleManager.Common.Services.ViewCollectionService.#ctor(Prism.Regions.IRegionManager)">
+        <member name="M:ModuleManager.Common.Services.ViewCollectionService.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:ModuleManager.Common.Services.ViewCollectionService"/> class.
             </summary>
-            <param name="regionManager">The <see cref="T:Prism.Regions.IRegionManager"/>.</param>
         </member>
         <member name="P:ModuleManager.Common.Services.ViewCollectionService.ViewDataCollection">
             <inheritdoc/>

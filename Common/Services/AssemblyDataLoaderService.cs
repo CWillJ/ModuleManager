@@ -108,19 +108,6 @@
         }
 
         /// <inheritdoc/>
-        public void LoadUnload(ref AssemblyData assemblyData)
-        {
-            if (assemblyData.IsEnabled)
-            {
-                Load(ref assemblyData);
-            }
-            else
-            {
-                Unload(ref assemblyData);
-            }
-        }
-
-        /// <inheritdoc/>
         public void LoadUnload(ref ObservableCollection<AssemblyData> assemblies)
         {
             AssemblyData assemblyData;
@@ -130,6 +117,19 @@
                 assemblyData = assemblies[i];
                 LoadUnload(ref assemblyData);
                 assemblies[i] = assemblyData;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void LoadUnload(ref AssemblyData assemblyData)
+        {
+            if (assemblyData.IsEnabled)
+            {
+                Load(ref assemblyData);
+            }
+            else
+            {
+                Unload(ref assemblyData);
             }
         }
 
@@ -197,8 +197,6 @@
                 }
             }
 
-            ObservableCollection<string> viewNameOrder = new ObservableCollection<string>();
-
             assemblyData.Types.Clear();
 
             int typeNumber = 0;
@@ -212,7 +210,6 @@
                     CurrentTypeName = type.Name;
                     PercentOfAssemblyLoaded = ((double)typeNumber / (double)types.Length) * 100;
 
-                    Debug.WriteLine(@"Adding Module: " + CurrentTypeName + @" From " + CurrentAssemblyName);
                     TypeData newTypeData = GetTypeData(type);
 
                     if (newTypeData != null)

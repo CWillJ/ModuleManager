@@ -16,7 +16,7 @@
         /// <param name="assemblyCollectionService">Injected <see cref="IAssemblyCollectionService"/>.</param>
         public AssemblyDataTreeViewModel(IAssemblyCollectionService assemblyCollectionService)
         {
-            _assemblyCollectionService = assemblyCollectionService ?? throw new ArgumentNullException("AssemblyCollectionService");
+            _assemblyCollectionService = assemblyCollectionService;
         }
 
         /// <summary>

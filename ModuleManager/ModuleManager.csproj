@@ -4,14 +4,36 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <LangVersion>8.0</LangVersion>
+    <AssemblyName>ModuleManager</AssemblyName>
+    <RootNamespace>ModuleManager</RootNamespace>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
-    <Authors>Product Development</Authors>
     <Company>PVA</Company>
+    <Authors>Product Development</Authors>
+    <Product>ModuleManager</Product>
+    <Platforms>x64</Platforms>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AssemblySearchPaths>$(AssemblySearchPaths);$(ReferencePath)</AssemblySearchPaths>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\Documentation\ModuleManager.xml</DocumentationFile>
-    <OutputPath></OutputPath>
+  <PropertyGroup>
+    <AssemblySearchPaths> $(AssemblySearchPaths); $(ReferencePath); </AssemblySearchPaths>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>ModuleManager.App</StartupObject>
+  </PropertyGroup>
+	
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|X64'">
+    <Optimize>false</Optimize>
+    <DocumentationFile>\Documentation\ModuleManager.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Optimize>false</Optimize>
+    <DocumentationFile>$(OutDir)\Documentation\ModuleManager.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,47 +51,72 @@
   <ItemGroup>
     <Reference Include="CommonServiceLocator">
       <HintPath>..\Lib\CommonServiceLocator.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism">
       <HintPath>..\Lib\Prism.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism.Unity.Wpf">
       <HintPath>..\Lib\Prism.Unity.Wpf.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism.Wpf">
       <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls">
       <HintPath>..\Lib\Telerik.Windows.Controls.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Data">
       <HintPath>..\Lib\Telerik.Windows.Controls.Data.dll</HintPath>
+	  <Private>false</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.FileDialogs">
       <HintPath>..\Lib\Telerik.Windows.Controls.FileDialogs.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.GridView">
       <HintPath>..\Lib\Telerik.Windows.Controls.GridView.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Input">
       <HintPath>..\Lib\Telerik.Windows.Controls.Input.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Navigation">
       <HintPath>..\Lib\Telerik.Windows.Controls.Navigation.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Data">
       <HintPath>..\Lib\Telerik.Windows.Data.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Abstractions">
       <HintPath>..\Lib\Unity.Abstractions.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Container">
       <HintPath>..\Lib\Unity.Container.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 
+  <Target Name="GetFilesToCopy" BeforeTargets="PostBuildEvent" Condition="('$(RunPostBuildEvent)' != 'OnOutputUpdated' or '$(_AssemblyTimestampBeforeCompile)' != '$(_AssemblyTimestampAfterCompile)')">
+    <ItemGroup>
+      <ReferenceAssemblies Include="..\Lib\*.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CopyFiles" AfterTargets="PostBuildEvent" Condition="('$(RunPostBuildEvent)' != 'OnOutputUpdated' or '$(_AssemblyTimestampBeforeCompile)' != '$(_AssemblyTimestampAfterCompile)')">
+    <Copy SourceFiles="@(ReferenceAssemblies)" DestinationFolder="$(OutDir)" />
+    <Delete Files="$(OutDir)\ModuleManager.deps.json" />
+  </Target>
 </Project>

@@ -1,49 +1,73 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
-    <PackageId>ModuleManager.Common</PackageId>
-    <Authors>Product Development</Authors>
-    <Company>PVA</Company>
-    <Product>ModuleManager</Product>
+    <UseWPF>true</UseWPF>
+    <LangVersion>8.0</LangVersion>
     <AssemblyName>ModuleManager.Common</AssemblyName>
     <RootNamespace>ModuleManager.Common</RootNamespace>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <CodeAnalysisRuleSet>..\PVA.ruleset</CodeAnalysisRuleSet>
+    <Company>PVA</Company>
+    <Authors>Product Development</Authors>
+    <Product>ModuleManager</Product>
+    <Platforms>x64</Platforms>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DocumentationFile>..\Documentation\ModuleManager.Common.xml</DocumentationFile>
-    <OutputPath></OutputPath>
-    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
-	<ItemGroup>
-		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
-		<Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
-	</ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DocumentationFile>..\Documentation\ModuleManager.Common.xml</DocumentationFile>
+  </PropertyGroup>
 
-	<ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\Lib\Analyzers\StyleCop.Analyzers.CodeFixes.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism">
       <HintPath>..\Lib\Prism.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism.Unity.Wpf">
       <HintPath>..\Lib\Prism.Unity.Wpf.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Prism.Wpf">
       <HintPath>..\Lib\Prism.Wpf.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="System.Reflection.MetadataLoadContext">
       <HintPath>..\Lib\System.Reflection.MetadataLoadContext.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Abstractions">
       <HintPath>..\Lib\Unity.Abstractions.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Container">
       <HintPath>..\Lib\Unity.Container.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 
+  <Target Name="GetFilesToCopy" BeforeTargets="PostBuildEvent">
+    <ItemGroup>
+      <DllsToCopy Include="$(OutDir)\*.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CopyFiles" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="@(DllsToCopy)" DestinationFolder="..\ModuleManager\bin\$(Platform)\$(Configuration)\$(TargetFramework)\" />
+  </Target>
 </Project>
